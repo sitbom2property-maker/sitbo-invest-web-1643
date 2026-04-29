@@ -1,0 +1,48 @@
+# Allow all bots including AI audit bots
+User-agent: *
+Allow: /
+
+# Explicit permissions for AI and audit bots
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Restrict access to specific paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://sitboinvest.ge/sitemap.xml
