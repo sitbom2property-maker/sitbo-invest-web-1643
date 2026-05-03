@@ -40,13 +40,13 @@ export function Nav() {
         ))}
       </div>
 
-      {/* CTA button — right */}
+      {/* WhatsApp button — right */}
       <div style={{ marginLeft: "auto", marginRight: "40px", display: "flex", gap: "12px", alignItems: "center" }}>
-        <Link href="/#discovery-tour">
-          <a style={{ fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "6px", padding: "9px 20px", textDecoration: "none", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-            Book a Tour
-          </a>
-        </Link>
+        <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "50%", background: "transparent", border: `1.5px solid ${C.teal}`, textDecoration: "none", cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = C.teal; (e.currentTarget as HTMLElement).style.boxShadow = `0 0 12px rgba(140,178,192,0.3)`; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }} onMouseEnter={e => (e.currentTarget.style.stroke = C.dark)} onMouseLeave={e => (e.currentTarget.style.stroke = C.teal)}>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </a>
       </div>
 
       {/* Mobile hamburger */}
