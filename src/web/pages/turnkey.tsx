@@ -23,12 +23,12 @@ function Nav() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
   const links = [
- label: "Catalog",            href: "/catalog" },
- label: "Services",           href: "/#about" },
- label: "Turnkey Renovation", href: "/turnkey" },
- label: "Invest",             href: "/invest" },
- label: "Mortgage",           href: "/mortgage" },
- label: "Discovery Tour",     href: "/#discovery-tour" },
+    { label: "Catalog",            href: "/catalog" },
+    { label: "Services",           href: "/#about" },
+    { label: "Turnkey Renovation", href: "/turnkey" },
+    { label: "Invest",             href: "/invest" },
+    { label: "Mortgage",           href: "/mortgage" },
+    { label: "Discovery Tour",     href: "/#discovery-tour" },
   ];
   return (<>
 
@@ -52,7 +52,8 @@ links.map(l => <Link key={l.label} href={l.href}><a onClick={() => setMenuOpen(f
         </div>
       )}
     </header>
-  );
+  
+  </>);
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
@@ -101,7 +102,8 @@ function Hero() {
 
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Two Columns ──────────────────────────────────────────────────────────────
@@ -165,7 +167,8 @@ col.dark ? "Calculate My ROI" : "Discuss My Project"}
         ))}
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Design Rule ──────────────────────────────────────────────────────────────
@@ -194,7 +197,8 @@ function DesignRule() {
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Calculator ───────────────────────────────────────────────────────────────
@@ -312,7 +316,8 @@ shown && (
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Remote Process ───────────────────────────────────────────────────────────
@@ -352,7 +357,8 @@ steps.map((s, i) => (
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Portfolio ────────────────────────────────────────────────────────────────
@@ -412,7 +418,8 @@ p.tags.map(tag => (
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Guarantees ───────────────────────────────────────────────────────────────
@@ -447,7 +454,8 @@ function Guarantees() {
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Market Stats ─────────────────────────────────────────────────────────────
@@ -533,7 +541,8 @@ function MarketStats() {
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Contact Form ─────────────────────────────────────────────────────────────
@@ -626,7 +635,8 @@ sent ? (
         </div>
       </div>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -646,5 +656,6 @@ export default function TurnkeyPage() {
       <ContactForm />
       <Footer />
     </div>
-  );
+  
+  </>);
 }

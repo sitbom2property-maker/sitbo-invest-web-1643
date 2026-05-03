@@ -34,7 +34,7 @@ function useReveal() {
         (e.target as HTMLElement).style.transform = "translateY(0)";
         io.unobserve(e.target);
       }
-    }), { threshold: 0.06 );
+    }), { threshold: 0.06 });
     els.forEach(el => {
       (el as HTMLElement).style.opacity = "0";
       (el as HTMLElement).style.transform = "translateY(20px)";
@@ -63,7 +63,8 @@ function Eyebrow({ children, light }: { children: React.ReactNode; light?: boole
       <div style={{ width: "24px", height: "1px", background: C.wine, flexShrink: 0 }} />
       <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: light ? "rgba(255,251,240,0.5)" : C.muted }}>{children}</span>
     </div>
-  );
+  
+  </>);
 }
 function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
@@ -116,7 +117,8 @@ photos.map((src, i) => (
         </div>
       )}
     </div>
-  );
+  
+  </>);
 }
 
 // ─── ROI Calculator ───────────────────────────────────────────────────────────
@@ -178,9 +180,9 @@ function ROICalc({ project }: { project: Project }) {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
 [
- label: "Annual Rental Income", value: fmt(annualRental), accent: false },
+    { label: "Annual Rental Income", value: fmt(annualRental), accent: false },
  label: `Rental over ${horizon} yrs`,  value: fmt(totalRental),  accent: false },
- label: "Est. Appreciation",   value: fmt(appreciation), accent: false },
+    { label: "Est. Appreciation",   value: fmt(appreciation), accent: false },
  label: `Total Return`,         value: fmt(totalReturn),  accent: true },
         ].map(item => (
           <div key={item.label} style={{
@@ -205,7 +207,8 @@ function ROICalc({ project }: { project: Project }) {
         * Indicative model. Assumes {yieldPct}% gross yield at {occupancy}% occupancy + 25% off-plan uplift + 8%/yr appreciation.
       </p>
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Map ──────────────────────────────────────────────────────────────────────
@@ -223,7 +226,8 @@ function MapEmbed({ project }: { project: Project }) {
         referrerPolicy="no-referrer-when-downgrade"
       />
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Diamond bullet ───────────────────────────────────────────────────────────
@@ -233,7 +237,8 @@ function Diamond() {
     <svg width="7" height="7" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "5px" }}>
       <rect x="5" y="0.5" width="6.36" height="6.36" rx="0" transform="rotate(45 5 0.5)" fill={C.wine} />
     </svg>
-  );
+  
+  </>);
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -261,7 +266,8 @@ export default function ProjectPage() {
           <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>← Back to home</a></Link>
         </div>
       </div>
-    );
+    
+  </>);
   }
 
   const p = project;
@@ -327,12 +333,12 @@ p.address} · {p.seaDistance}
                 <Eyebrow>Technical Specifications</Eyebrow>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
 [
- label: "Area",           value: p.area },
- label: "Ceiling Height", value: p.ceilingHeight },
- label: "Floors",         value: p.floors },
- label: "Buildings",      value: p.buildings },
- label: "Finishing",      value: p.finishing },
- label: "Developer",      value: p.developer },
+    { label: "Area",           value: p.area },
+    { label: "Ceiling Height", value: p.ceilingHeight },
+    { label: "Floors",         value: p.floors },
+    { label: "Buildings",      value: p.buildings },
+    { label: "Finishing",      value: p.finishing },
+    { label: "Developer",      value: p.developer },
                   ].map(s => (
                     <div key={s.label} style={{ background: C.light, padding: "16px 14px" }}>
                       <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 5px" }}>{s.label}</p>
@@ -364,7 +370,8 @@ p.features.map(f => (
                 <Eyebrow>Materials & Construction</Eyebrow>
                 <div style={{ background: C.parchment, borderRadius: "12px", padding: "20px 22px", display: "flex", flexDirection: "column", gap: "14px" }}>
 p.materials.split(". ").filter(Boolean).map((sentence, i) => {
-                    const colonIdx = sentence.indexOf(":");
+                    const colonIdx = sentence.indexOf(":"
+  </>);
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
                     return (<>
 
@@ -373,7 +380,8 @@ hasTitle ? (
                           <><strong style={{ color: C.dark }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
                         ) : sentence + (sentence.endsWith(".") ? "" : ".")}
                       </p>
-                    );
+                    
+  </>);
                   })}
                 </div>
               </div>
@@ -419,10 +427,10 @@ hasTitle ? (
 {/* Quick facts */}
                 <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.parchment, borderRadius: "12px", padding: "20px 18px" }}>
 [
- label: "Est. ROI",   value: p.yield },
- label: "From",       value: p.priceFrom },
- label: "Ready",      value: p.completion },
- label: "Sea",        value: p.seaDistance },
+    { label: "Est. ROI",   value: p.yield },
+    { label: "From",       value: p.priceFrom },
+    { label: "Ready",      value: p.completion },
+    { label: "Sea",        value: p.seaDistance },
                   ].map((row, i) => (
                     <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: i < 3 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>

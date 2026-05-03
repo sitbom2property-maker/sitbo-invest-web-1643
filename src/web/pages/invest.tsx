@@ -63,10 +63,10 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
       margin: "0 auto",
       padding: "0 clamp(16px, 4vw, 48px)",
       ...style,
-    }}>
-children}
+    }}>{children}
     </div>
-  );
+  
+  </>);
 }
 
 // ─── 12-col row ───────────────────────────────────────────────────────────────
@@ -78,10 +78,10 @@ function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: n
       gridTemplateColumns: "repeat(12, 1fr)",
       gap: `${gap}px`,
       ...style,
-    }}>
-children}
+    }}>{children}
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Column ───────────────────────────────────────────────────────────────────
@@ -94,10 +94,10 @@ function Col({
   const cols = isMobile ? 12 : (spanMd ?? span);
   return (<>
 
-    <div style={{ gridColumn: `span ${cols}`, ...style }}>
-children}
+    <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Eyebrow ──────────────────────────────────────────────────────────────────
@@ -106,11 +106,11 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
     <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
       <div style={{ width: "28px", height: "1px", background: C.wine, flexShrink: 0 }} />
-      <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>
-children}
+      <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{children}
       </span>
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Divider ─────────────────────────────────────────────────────────────────
@@ -137,9 +137,7 @@ const strategies = [
     risk: "Low–Medium",
     desc: "Fully furnished apartments listed on Airbnb, Booking.com, and local platforms. Managed remotely via SITBO. Strongest returns in seafront and boulevard locations.",
     ideal: "Investors seeking passive income from day one.",
-    icon: "🏖",
-  },
-
+    icon: "🏖" },
     tag: "Strategy 02",
     title: "Off-Plan Appreciation",
     yield: "25–30%",
@@ -147,9 +145,7 @@ const strategies = [
     risk: "Medium",
     desc: "Buy at pre-construction pricing, exit at handover. Batumi developers consistently price below completion value. Capital gain locked before tenants even arrive.",
     ideal: "Investors with 2–3 year horizon wanting capital growth.",
-    icon: "📈",
-  },
-
+    icon: "📈" },
     tag: "Strategy 03",
     title: "Residency Investment",
     yield: "Residency + rental",
@@ -157,9 +153,7 @@ const strategies = [
     risk: "Low",
     desc: "A $150,000+ qualifying purchase unlocks Georgian residency. Combine legal status with an income-generating asset — one of the most efficient residency-by-investment structures in Europe.",
     ideal: "Expats and digital nomads seeking legal status.",
-    icon: "🛂",
-  },
-
+    icon: "🛂" },
     tag: "Strategy 04",
     title: "TurnKey Renovation",
     yield: "+2–4% yield uplift",
@@ -167,8 +161,7 @@ const strategies = [
     risk: "Low",
     desc: "SITBO designs and delivers premium interiors that justify 20–40% above-market rental rates. Fixed estimates. No cost overruns. You don't manage a single contractor.",
     ideal: "Owners of raw units wanting premium positioning.",
-    icon: "🏛",
-  },
+    icon: "🏛" },
 ];
 
 const process = [
@@ -200,7 +193,8 @@ stat}
       </div>
       <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.5, margin: 0 }}>{desc}</p>
     </div>
-  );
+  
+  </>);
 }
 
 function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) {
@@ -259,7 +253,8 @@ open ? "Close" : "Learn more"}
         </svg>
       </div>
     </div>
-  );
+  
+  </>);
 }
 
 function ProcessStep({ step, index }: { step: typeof process[0]; index: number }) {
@@ -274,7 +269,8 @@ function ProcessStep({ step, index }: { step: typeof process[0]; index: number }
         <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
       </div>
     </div>
-  );
+  
+  </>);
 }
 
 function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
@@ -299,7 +295,8 @@ open && (
         <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: "0 0 20px", paddingRight: "32px" }}>{faq.a}</p>
       )}
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -703,5 +700,6 @@ faqs.map((faq, i) => (
       <Footer />
 
     </div>
-  );
+  
+  </>);
 }

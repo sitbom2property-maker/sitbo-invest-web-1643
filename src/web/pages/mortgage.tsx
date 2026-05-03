@@ -54,19 +54,19 @@ function useReveal() {
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (<>
 
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", ...style }}>
-children}
+    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", ...style }}>{children}
     </div>
-  );
+  
+  </>);
 }
 
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
   return (<>
 
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }}>
-children}
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }}>{children}
     </div>
-  );
+  
+  </>);
 }
 
 function Col({ span = 12, spanMd, children, style }: {
@@ -82,11 +82,11 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
     <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
       <div style={{ width: "28px", height: "1px", background: C.wine, flexShrink: 0 }} />
-      <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>
-children}
+      <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{children}
       </span>
     </div>
-  );
+  
+  </>);
 }
 
 function Divider() {
@@ -101,7 +101,8 @@ function TRow({ label, value }: { label: string; value: string }) {
       <span style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted }}>{label}</span>
       <span style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.dark, fontWeight: 600, textAlign: "right" }}>{value}</span>
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Process step ─────────────────────────────────────────────────────────────
@@ -117,7 +118,8 @@ function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; 
         <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{desc}</p>
       </div>
     </div>
-  );
+  
+  </>);
 }
 
 // ─── Calculator ───────────────────────────────────────────────────────────────
@@ -263,10 +265,10 @@ function MortgageCalculator() {
 {/* Results */}
         <Row gap={16}>
 [
- label: "Monthly Payment", value: fmt(monthlyPayment), accent: true },
- label: "Loan Amount",     value: fmt(loanUSD),        accent: false },
- label: "Total Interest",  value: fmt(totalInterest),  accent: false },
- label: "Total Cost",      value: fmt(totalPaid + downAmount), accent: false },
+    { label: "Monthly Payment", value: fmt(monthlyPayment), accent: true },
+    { label: "Loan Amount",     value: fmt(loanUSD),        accent: false },
+    { label: "Total Interest",  value: fmt(totalInterest),  accent: false },
+    { label: "Total Cost",      value: fmt(totalPaid + downAmount), accent: false },
           ].map((item, i) => (
             <Col key={item.label} span={3}>
               <div className="m-reveal" style={{
@@ -297,7 +299,8 @@ item.label}
         </Row>
       </Container>
     </section>
-  );
+  
+  </>);
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -601,5 +604,6 @@ export default function MortgagePage() {
       <Footer />
 
     </div>
-  );
+  
+  </>);
 }
