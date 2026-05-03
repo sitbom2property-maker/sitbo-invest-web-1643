@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -11,49 +12,6 @@ const C = {
   parch: "#F5F3ED",
   muted: "rgba(33,20,26,0.55)",
 };
-
-// ─── Nav (shared) ─────────────────────────────────────────────────────────────
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  const links = [
-    { label: "Catalog",            href: "/catalog" },
-    { label: "Services",           href: "/#about" },
-    { label: "Turnkey Renovation", href: "/turnkey" },
-    { label: "Invest",             href: "/invest" },
-    { label: "Mortgage",           href: "/mortgage" },
-    { label: "Discovery Tour",     href: "/#discovery-tour" },
-  ];
-  return (<>
-
-    <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, transition: "background 0.4s, box-shadow 0.4s", background: scrolled || menuOpen ? "rgba(33,20,26,0.97)" : "transparent", boxShadow: scrolled ? "0 2px 24px rgba(0,0,0,0.18)" : "none", backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", height: "68px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link href="/"><a style={{ textDecoration: "none" }}><img src="/logo-dark-bg.png" alt="SITBO" style={{ height: "18px", width: "auto" }} /></a></Link>
-        <nav style={{ display: "flex", gap: "28px", alignItems: "center" }} className="nav-desktop">
-          {links.map(l => (
-            <Link key={l.label} href={l.href}><a style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#FFFBF0", textDecoration: "none", opacity: 0.75, transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "1")} onMouseLeave={e => (e.currentTarget.style.opacity = "0.75")}>{l.label}</a></Link>
-          ))}
-          <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "6px", padding: "9px 20px", textDecoration: "none", transition: "opacity 0.3s" }}>Free Consultation</a>
-        </nav>
-        <button onClick={() => setMenuOpen(p => !p)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: "4px" }} className="nav-burger">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFBF0" strokeWidth="1.8" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
-          {menuOpen && (
-        <div style={{ background: "rgba(33,20,26,0.98)", borderTop: "1px solid rgba(140,178,192,0.1)", padding: "20px 24px 28px" }}>
-          {links.map(l => <Link key={l.label} href={l.href}><a onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.85rem", color: "#FFFBF0", textDecoration: "none", padding: "10px 0", borderBottom: "1px solid rgba(255,251,240,0.06)" }}>{l.label}</a></Link>)}
-          <a href="#contact-form" onClick={() => setMenuOpen(false)} style={{ display: "block", marginTop: "16px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px 24px", textDecoration: "none", textAlign: "center" }}>Free Consultation</a>
-        </div>
-      )}
-    </header>
-  
-  </>);
-}
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {

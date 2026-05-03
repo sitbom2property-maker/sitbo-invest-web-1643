@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -310,39 +311,7 @@ export default function MortgagePage() {
   return (<>
 
     <div style={{ background: C.light, minHeight: "100vh", color: C.dark }}>
-{/* ── Nav ──────────────────────────────────────────────────────────────── */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "64px",
-        display: "flex", alignItems: "center",
-        background: C.light, borderBottom: "1px solid rgba(33,20,26,0.08)",
-      }}>
-        <Container style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/">
-            <a style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-              <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
-            </a>
-          </Link>
-          <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-            {!isMobile && (
-              <>
-                <a href="#terms"    style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Terms</a>
-                <a href="#process"  style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Process</a>
-                <a href="#calculator" style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Calculator</a>
-              </>
-            )}
-            <Link href="/#contact">
-              <a style={{ fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "6px", padding: "9px 20px", textDecoration: "none" }}>
-                Consult
-              </a>
-            </Link>
-            <Link href="/">
-              <a style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal, textDecoration: "none", display: "flex", alignItems: "center", gap: "5px" }}>
-                <span>←</span> Home
-              </a>
-            </Link>
-          </div>
-        </Container>
-      </nav>
+      <Nav />
 
 {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section style={{ paddingTop: "64px" }}>

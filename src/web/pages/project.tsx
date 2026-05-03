@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -279,22 +280,7 @@ export default function ProjectPage() {
 {/* ── CSS fadeIn keyframe ── */}
       <style>{`@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }`}</style>
 
-{/* ── Nav ── */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "64px", display: "flex", alignItems: "center", background: C.light, borderBottom: "1px solid rgba(33,20,26,0.08)" }}>
-        <Container style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/"><a style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
-          </a></Link>
-          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <Link href="/catalog"><a style={{ fontFamily: "DM Sans", fontSize: "0.73rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
-              ← All Projects
-            </a></Link>
-            <Link href="/#contact"><a style={{ fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "6px", padding: "9px 20px", textDecoration: "none" }}>
-              Get Offer
-            </a></Link>
-          </div>
-        </Container>
-      </nav>
+      <Nav />
 
 {/* ── GALLERY — Full width ── */}
       <section style={{ paddingTop: "120px" }}>
