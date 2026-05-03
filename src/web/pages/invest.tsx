@@ -120,66 +120,37 @@ function Divider() {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const whyBatumi = [
- stat: "14.5%",  desc: "Max rental yield — top globally" },
- stat: "#1",     desc: "World rank for rental profitability (Global Property Guide)" },
- stat: "0%",     desc: "Property purchase tax for foreign buyers" },
- stat: "1 day",  desc: "Title transfer via blockchain registry" },
- stat: "$1,420", desc: "Average price per sqm — still far below European peers" },
- stat: "1.7M",   desc: "Tourists visited in 2025" },
+ { stat: "14.5%",  desc: "Max rental yield — top globally" },
+ { stat: "#1",     desc: "World rank for rental profitability (Global Property Guide)" },
+ { stat: "0%",     desc: "Property purchase tax for foreign buyers" },
+ { stat: "1 day",  desc: "Title transfer via blockchain registry" },
+ { stat: "$1,420", desc: "Average price per sqm — still far below European peers" },
+ { stat: "1.7M",   desc: "Tourists visited in 2025" },
 ];
 
 const strategies = [
-
-    tag: "Strategy 01",
-    title: "Short-Term Rental",
-    yield: "9–14.5%",
-    horizon: "Immediate cash flow",
-    risk: "Low–Medium",
-    desc: "Fully furnished apartments listed on Airbnb, Booking.com, and local platforms. Managed remotely via SITBO. Strongest returns in seafront and boulevard locations.",
-    ideal: "Investors seeking passive income from day one.",
-    icon: "🏖" },
-    tag: "Strategy 02",
-    title: "Off-Plan Appreciation",
-    yield: "25–30%",
-    horizon: "18–36 months",
-    risk: "Medium",
-    desc: "Buy at pre-construction pricing, exit at handover. Batumi developers consistently price below completion value. Capital gain locked before tenants even arrive.",
-    ideal: "Investors with 2–3 year horizon wanting capital growth.",
-    icon: "📈" },
-    tag: "Strategy 03",
-    title: "Residency Investment",
-    yield: "Residency + rental",
-    horizon: "Long-term",
-    risk: "Low",
-    desc: "A $150,000+ qualifying purchase unlocks Georgian residency. Combine legal status with an income-generating asset — one of the most efficient residency-by-investment structures in Europe.",
-    ideal: "Expats and digital nomads seeking legal status.",
-    icon: "🛂" },
-    tag: "Strategy 04",
-    title: "TurnKey Renovation",
-    yield: "+2–4% yield uplift",
-    horizon: "3–6 months fit-out",
-    risk: "Low",
-    desc: "SITBO designs and delivers premium interiors that justify 20–40% above-market rental rates. Fixed estimates. No cost overruns. You don't manage a single contractor.",
-    ideal: "Owners of raw units wanting premium positioning.",
-    icon: "🏛" },
+  { tag: "Strategy 01", title: "Short-Term Rental",      yield: "9–14.5%",          horizon: "Immediate cash flow",   risk: "Low–Medium", icon: "🏖", desc: "Fully furnished apartments listed on Airbnb, Booking.com, and local platforms. Managed remotely via SITBO. Strongest returns in seafront and boulevard locations.",    ideal: "Investors seeking passive income from day one." },
+  { tag: "Strategy 02", title: "Off-Plan Appreciation",  yield: "25–30%",            horizon: "18–36 months",          risk: "Medium",     icon: "📈", desc: "Buy at pre-construction pricing, exit at handover. Batumi developers consistently price below completion value. Capital gain locked before tenants even arrive.",          ideal: "Investors with 2–3 year horizon wanting capital growth." },
+  { tag: "Strategy 03", title: "Residency Investment",   yield: "Residency + rental",horizon: "Long-term",             risk: "Low",        icon: "🛂", desc: "A $150,000+ qualifying purchase unlocks Georgian residency. Combine legal status with an income-generating asset — one of the most efficient residency-by-investment structures in Europe.", ideal: "Expats and digital nomads seeking legal status." },
+  { tag: "Strategy 04", title: "TurnKey Renovation",     yield: "+2–4% yield uplift",horizon: "3–6 months fit-out",    risk: "Low",        icon: "🏛", desc: "SITBO designs and delivers premium interiors that justify 20–40% above-market rental rates. Fixed estimates. No cost overruns. You don't manage a single contractor.",      ideal: "Owners of raw units wanting premium positioning." },
 ];
 
 const process = [
- n: "01", title: "Discovery Call",       desc: "30-minute session to define your budget, goals, and timeline. We match you with the right strategy — no generic pitch." },
- n: "02", title: "Curated Shortlist",    desc: "We filter the market to 3–5 properties that fit your exact criteria. Legal status, yield projections, and floor plans included." },
- n: "03", title: "Site Tour",            desc: "Fly in for 2 days or join our Discovery Tour. View the units, meet the developers, and see the neighbourhood in person." },
- n: "04", title: "Legal & Due Diligence",desc: "Our lawyers verify title, check developer track record, and review all contracts. No hidden encumbrances." },
- n: "05", title: "Transaction",          desc: "Purchase registered on Georgia's blockchain land registry. Title transfer completed in 1 business day." },
- n: "06", title: "Asset Management",     desc: "We furnish, list, and manage. Monthly reports, rent collection, and maintenance handled end-to-end." },
+ { n: "01", title: "Discovery Call",       desc: "30-minute session to define your budget, goals, and timeline. We match you with the right strategy — no generic pitch." },
+ { n: "02", title: "Curated Shortlist",    desc: "We filter the market to 3–5 properties that fit your exact criteria. Legal status, yield projections, and floor plans included." },
+ { n: "03", title: "Site Tour",            desc: "Fly in for 2 days or join our Discovery Tour. View the units, meet the developers, and see the neighbourhood in person." },
+ { n: "04", title: "Legal & Due Diligence",desc: "Our lawyers verify title, check developer track record, and review all contracts. No hidden encumbrances." },
+ { n: "05", title: "Transaction",          desc: "Purchase registered on Georgia's blockchain land registry. Title transfer completed in 1 business day." },
+ { n: "06", title: "Asset Management",     desc: "We furnish, list, and manage. Monthly reports, rent collection, and maintenance handled end-to-end." },
 ];
 
 const faqs = [
- q: "Can foreigners buy property in Georgia?", a: "Yes. Foreign nationals have the same property rights as Georgian citizens — purchase, own, and transfer with zero restrictions." },
- q: "Is rental income taxed?", a: "Rental income is subject to a 5% flat tax in Georgia (20% if not separately declared). One of the lowest rates in Europe." },
- q: "What's the minimum budget to invest?", a: "Viable investments start from $60,000–$80,000 for a studio. Residency-qualifying investments require $150,000+." },
- q: "Do I need to be in Georgia to buy?", a: "No. We can handle the full process remotely, including notarised power of attorney. Many clients close deals without visiting first." },
- q: "What is the typical rental yield?", a: "Well-located, professionally managed units in Batumi yield 9–14.5% annually. TurnKey-finished units with premium positioning can exceed this." },
- q: "How long does the purchase take?", a: "From signed offer to registered title: 1–3 business days. Due diligence and property selection take 2–4 weeks typically." },
+ { q: "Can foreigners buy property in Georgia?", a: "Yes. Foreign nationals have the same property rights as Georgian citizens — purchase, own, and transfer with zero restrictions." },
+ { q: "Is rental income taxed?", a: "Rental income is subject to a 5% flat tax in Georgia (20% if not separately declared). One of the lowest rates in Europe." },
+ { q: "What's the minimum budget to invest?", a: "Viable investments start from $60,000–$80,000 for a studio. Residency-qualifying investments require $150,000+." },
+ { q: "Do I need to be in Georgia to buy?", a: "No. We can handle the full process remotely, including notarised power of attorney. Many clients close deals without visiting first." },
+ { q: "What is the typical rental yield?", a: "Well-located, professionally managed units in Batumi yield 9–14.5% annually. TurnKey-finished units with premium positioning can exceed this." },
+ { q: "How long does the purchase take?", a: "From signed offer to registered title: 1–3 business days. Due diligence and property selection take 2–4 weeks typically." },
 ];
 
 // ─── Components ──────────────────────────────────────────────────────────────
@@ -189,7 +160,7 @@ function StatCard({ stat, desc, delay = 0 }: { stat: string; desc: string; delay
 
     <div className="inv-reveal" style={{ transitionDelay: `${delay}ms`, borderTop: `2px solid ${C.wine}`, paddingTop: "20px" }}>
       <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>
-stat}
+        {stat}
       </div>
       <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.5, margin: 0 }}>{desc}</p>
     </div>
@@ -235,7 +206,7 @@ function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) 
         </div>
       </div>
 
-open && (
+          {open && (
         <div style={{ borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "16px", marginTop: "4px" }}>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.75)", lineHeight: 1.7, marginBottom: "12px" }}>{s.desc}</p>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.teal, lineHeight: 1.6, margin: 0 }}>
@@ -246,7 +217,7 @@ open && (
 
       <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "16px" }}>
         <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>
-open ? "Close" : "Learn more"}
+{open ? "Close" : "Learn more"}
         </span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}>
           <path d="M2 4l4 4 4-4" stroke={open ? C.teal : C.muted} strokeWidth="1.5" strokeLinecap="round" />
@@ -291,7 +262,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
           <path d="M4 7l5 5 5-5" stroke={C.wine} strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </button>
-open && (
+          {open && (
         <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: "0 0 20px", paddingRight: "32px" }}>{faq.a}</p>
       )}
     </div>
@@ -324,7 +295,7 @@ export default function InvestPage() {
             </a>
           </Link>
           <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-!isMobile && (
+{!isMobile && (
               <>
                 <a href="#why-batumi" style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Why Batumi</a>
                 <a href="#strategies" style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Strategies</a>
@@ -432,7 +403,7 @@ export default function InvestPage() {
 
 {/* Stats 6-col grid on desktop, full-width on mobile */}
           <Row gap={24}>
-whyBatumi.map((item, i) => (
+            {whyBatumi.map((item, i) => (
               <Col key={item.stat} span={4} style={{ marginBottom: isMobile ? "24px" : 0 }}>
                 <StatCard stat={item.stat} desc={item.desc} delay={i * 70} />
               </Col>
@@ -462,11 +433,11 @@ whyBatumi.map((item, i) => (
       <section style={{ background: C.dark, padding: "56px 0" }}>
         <Container>
           <Row gap={0}>
-[
- title: "0% Purchase Tax",          sub: "No stamp duty, no buyer's tax" },
- title: "Full Foreign Ownership",    sub: "Same rights as Georgian citizens" },
- title: "1-Day Registration",        sub: "Blockchain land registry" },
- title: "Residency from $150K",      sub: "Qualifying real estate investment" },
+{[
+ { title: "0% Purchase Tax",          sub: "No stamp duty, no buyer's tax" },
+ { title: "Full Foreign Ownership",    sub: "Same rights as Georgian citizens" },
+ { title: "1-Day Registration",        sub: "Blockchain land registry" },
+ { title: "Residency from $150K",      sub: "Qualifying real estate investment" },
             ].map((item, i) => (
               <Col key={item.title} span={3}>
                 <div className="inv-reveal" style={{
@@ -506,7 +477,7 @@ whyBatumi.map((item, i) => (
           </Row>
 
           <Row gap={20}>
-strategies.map((s, i) => (
+            {strategies.map((s, i) => (
               <Col key={s.tag} span={6}>
                 <StrategyCard s={s} index={i} />
               </Col>
@@ -541,12 +512,12 @@ strategies.map((s, i) => (
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
                   Price per sqm comparison · 2025
                 </p>
-[
- city: "Barcelona",  price: 6200, pct: 100 },
- city: "Lisbon",     price: 4800, pct: 77 },
- city: "Warsaw",     price: 3200, pct: 52 },
- city: "Tbilisi",    price: 1900, pct: 31 },
- city: "Batumi",     price: 1420, pct: 23, highlight: true },
+{[
+ { city: "Barcelona",  price: 6200, pct: 100 },
+ { city: "Lisbon",     price: 4800, pct: 77 },
+ { city: "Warsaw",     price: 3200, pct: 52 },
+ { city: "Tbilisi",    price: 1900, pct: 31 },
+ { city: "Batumi",     price: 1420, pct: 23, highlight: true },
                 ].map((row, i) => (
                   <div key={row.city} style={{ marginBottom: "16px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
@@ -565,12 +536,12 @@ strategies.map((s, i) => (
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
                   Average gross rental yield · 2025
                 </p>
-[
- city: "Paris",   yield: "2.8%", pct: 19 },
- city: "Berlin",  yield: "3.2%", pct: 22 },
- city: "Lisbon",  yield: "4.1%", pct: 28 },
- city: "Warsaw",  yield: "5.8%", pct: 40 },
- city: "Batumi",  yield: "9–14.5%", pct: 100, highlight: true },
+{[
+ { city: "Paris",   yield: "2.8%", pct: 19 },
+ { city: "Berlin",  yield: "3.2%", pct: 22 },
+ { city: "Lisbon",  yield: "4.1%", pct: 28 },
+ { city: "Warsaw",  yield: "5.8%", pct: 40 },
+ { city: "Batumi",  yield: "9–14.5%", pct: 100, highlight: true },
                 ].map((row) => (
                   <div key={row.city} style={{ marginBottom: "16px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
@@ -612,14 +583,14 @@ strategies.map((s, i) => (
           <Row gap={48}>
             <Col span={6}>
               <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-process.slice(0, 3).map((step, i) => (
+                {process.slice(0, 3).map((step, i) => (
                   <ProcessStep key={step.n} step={step} index={i} />
                 ))}
               </div>
             </Col>
             <Col span={6}>
               <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-process.slice(3).map((step, i) => (
+                {process.slice(3).map((step, i) => (
                   <ProcessStep key={step.n} step={step} index={i + 3} />
                 ))}
               </div>
@@ -646,12 +617,12 @@ process.slice(3).map((step, i) => (
 
           <Row>
             <Col span={8} style={{ margin: "0" }}>
-faqs.map((faq, i) => (
+              {faqs.map((faq, i) => (
                 <FAQItem key={faq.q} faq={faq} index={i} />
               ))}
             </Col>
             <Col span={4}>
-!isMobile && (
+              {!isMobile && (
                 <div className="inv-reveal" style={{ position: "sticky", top: "96px", background: C.dark, borderRadius: "16px", padding: "32px 28px" }}>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>Have more questions?</p>
                   <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>Talk to us directly.</h3>

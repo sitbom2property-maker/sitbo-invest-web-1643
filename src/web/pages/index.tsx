@@ -188,7 +188,8 @@ const insightSlides = [
     source: "Global Property Guide",
     sourceAccent: true,
     body: "According to Global Property Guide research, Georgia ranks first in the world for rental yields.",
-    badge: "#1" },
+    badge: "#1",
+  },
   {
     id: "t1", eyebrow: "Residency", headline: ["Residency permit", " from $150,000", " investment."], accentIndex: [1], source: "Georgian Law · 2024", sourceAccent: false, body: "Foreign investors can obtain Georgian residency with a qualifying real estate investment starting at $150,000.", badge: null,
   },
@@ -540,18 +541,10 @@ function Founder() {
           {/* 2×2 service grid */}
           <div className="founder-pillars">
             {[
-              {
-    { label: "Investment & Access",
-                desc: "Exclusive deals unavailable to the public, backed by honest projection analysis." },
-              {
-    { label: "Legal & Residency",
-                desc: "Full title due diligence and complete guidance through Georgia residency." },
-              {
-    { label: "Turnkey & Care",
-                desc: "From raw unit to fully furnished rental, with ongoing property management." },
-              {
-    { label: "Business & Setup",
-                desc: "Company registration, bank setup, and complete end-to-end relocation support." },
+              { label: "Investment & Access",  desc: "Exclusive deals unavailable to the public, backed by honest projection analysis." },
+              { label: "Legal & Residency",    desc: "Full title due diligence and complete guidance through Georgia residency." },
+              { label: "Turnkey & Care",       desc: "From raw unit to fully furnished rental, with ongoing property management." },
+              { label: "Business & Setup",     desc: "Company registration, bank setup, and complete end-to-end relocation support." },
             ].map((item) => (
               <div key={item.label} style={{ borderLeft: "2px solid #8CB2C0", paddingLeft: "18px", paddingTop: "4px", paddingBottom: "4px" }}>
                 <p style={{ color: C.dark, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "8px", fontWeight: 700 }}>{item.label}</p>
@@ -872,32 +865,26 @@ function DiscoveryTour() {
   }, [visible]);
 
   const inclusions = [
-    {
     { label: "VIP Arrival",
       desc: "Private transfer and 24/7 personal support from the moment you land",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
     },
-    {
     { label: "Premium Stay",
       desc: "Curated 5-star accommodation selected for your comfort",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="6 3 18 3 22 9 12 21 2 9"/><polyline points="2 9 12 9 22 9"/><line x1="12" y1="3" x2="6" y2="9"/><line x1="12" y1="3" x2="18" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>,
     },
-    {
     { label: "Off-Market Viewings",
       desc: "Exclusive properties not listed publicly, shown only to our clients",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
-    {
     { label: "Gastronomic Program",
       desc: "Batumi's finest restaurants and experiences, arranged for you",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 100 16 8 8 0 000-16z"/><line x1="2" y1="18" x2="22" y2="18"/><line x1="12" y1="18" x2="12" y2="22"/></svg>,
     },
-    {
     { label: "Investment Briefing",
       desc: "Private session with our senior advisor on market and returns",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
     },
-    {
     { label: "Legal Consultation",
       desc: "Full legal review of shortlisted properties before you decide",
       svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
@@ -1046,7 +1033,8 @@ function Payment() {
       ),
       title: "Official Bank Transfers (GEL)",
       body: "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. We provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
-      sub: "Secure, transparent, and 100% compliant with Georgian financial regulations." },
+      sub: "Secure, transparent, and 100% compliant with Georgian financial regulations.",
+    },
     {
       icon: (
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1055,7 +1043,8 @@ function Payment() {
       ),
       title: "Cryptocurrency & Digital Assets",
       body: "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. We facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
-      sub: "Full legal compliance. Blockchain-verified ownership transfer." },
+      sub: "Full legal compliance. Blockchain-verified ownership transfer.",
+    },
   ];
 
   const features = [
@@ -1066,7 +1055,8 @@ function Payment() {
         </svg>
       ),
       title: "Interest-Free Installments",
-      desc: "Pay in GEL over 18–48 months with a 10–30% down payment directly to the developer. No bank involvement, no interest." },
+      desc: "Pay in GEL over 18–48 months with a 10–30% down payment directly to the developer. No bank involvement, no interest.",
+    },
     {
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1074,7 +1064,8 @@ function Payment() {
         </svg>
       ),
       title: "Remote Transactions",
-      desc: "Complete the currency exchange, payment, and property registration without being physically present in Georgia." },
+      desc: "Complete the currency exchange, payment, and property registration without being physically present in Georgia.",
+    },
     {
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1082,7 +1073,8 @@ function Payment() {
         </svg>
       ),
       title: "SWIFT & International Support",
-      desc: "Full support for international bank transfers and remote bank account opening for non-residents." },
+      desc: "Full support for international bank transfers and remote bank account opening for non-residents.",
+    },
   ];
 
   return (
@@ -1172,10 +1164,7 @@ function Calculator() {
     const r = annualRate / 100 / 12;
     const n = years * 12;
     if (r === 0) return principal / n;
-    return (<>
-      <CookieConsent />
-      {principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1
-  </>);
+    return (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
   }
 
   const mortMonthly = annuity(mortAmount, NIR, mortYears);

@@ -189,7 +189,7 @@ function MortgageCalculator() {
         <Row style={{ marginBottom: "40px" }}>
           <Col span={12}>
             <div className="m-reveal" style={{ display: "flex", gap: "8px" }}>
-(["USD", "GEL", "EUR"] as const).map((c) => (
+              {(["USD", "GEL", "EUR"] as const).map((c) => (
                 <button key={c} onClick={() => setCurrency(c)} style={{
                   padding: "8px 24px", borderRadius: "6px",
                   border: `1px solid ${currency === c ? C.dark : "rgba(33,20,26,0.2)"}`,
@@ -264,7 +264,7 @@ function MortgageCalculator() {
 
 {/* Results */}
         <Row gap={16}>
-[
+          {[
     { label: "Monthly Payment", value: fmt(monthlyPayment), accent: true },
     { label: "Loan Amount",     value: fmt(loanUSD),        accent: false },
     { label: "Total Interest",  value: fmt(totalInterest),  accent: false },
@@ -283,7 +283,7 @@ function MortgageCalculator() {
                   color: item.accent ? C.teal : C.dark, marginBottom: "8px",
                 }}>{item.value}</div>
                 <div style={{ fontFamily: "DM Sans", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: item.accent ? "rgba(255,251,240,0.5)" : C.muted }}>
-item.label}
+                  {item.label}
                 </div>
               </div>
             </Col>
@@ -326,7 +326,7 @@ export default function MortgagePage() {
             </a>
           </Link>
           <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-!isMobile && (
+            {!isMobile && (
               <>
                 <a href="#terms"    style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Terms</a>
                 <a href="#process"  style={{ fontFamily: "DM Sans", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>Process</a>
@@ -383,11 +383,11 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal" style={{ transitionDelay: "120ms" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-[
- val: "30–40%", label: "Min. down payment" },
- val: "9–10%",  label: "From (nominal rate)" },
- val: "10 yr",  label: "Max loan term" },
- val: "$500K",  label: "Max loan amount" },
+                  {[
+    { val: "30–40%", label: "Min. down payment" },
+    { val: "9–10%",  label: "From (nominal rate)" },
+    { val: "10 yr",  label: "Max loan term" },
+    { val: "$500K",  label: "Max loan amount" },
                   ].map((s) => (
                     <div key={s.label} style={{ background: C.parchment, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
                       <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
@@ -478,7 +478,7 @@ export default function MortgagePage() {
                   Non-residents, expats, and foreigners from <strong style={{ color: C.light }}>90+ visa-free countries</strong>. Physical presence in Georgia is required. Income must be transparent — salary, self-employment, freelance, rental, dividends — with no negative records.
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: "12px" }}>
-["Salary / Employment", "Self-employed / ИП", "Freelance income", "Rental income", "Dividends"].map((item) => (
+{["Salary / Employment", "Self-employed / ИП", "Freelance income", "Rental income", "Dividends"].map((item) => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                       <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: C.teal, flexShrink: 0 }} />
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.65)" }}>{item}</span>
@@ -507,11 +507,11 @@ export default function MortgagePage() {
             </Col>
           </Row>
           <Row gap={20}>
-[
- icon: "⚠", title: "Currency Risk",      desc: "If your income is in rubles but the loan is in USD/GEL, exchange rate fluctuations affect your monthly payment directly." },
- icon: "🔍", title: "Strict Scoring",     desc: "TBC Bank runs thorough compliance checks — especially for Russian/Belarusian nationals. Transparency of income is non-negotiable." },
- icon: "📋", title: "Income Match",       desc: "Income currency should match the loan currency ideally. Mismatches push effective rates up (from 12.1% EIR)." },
- icon: "🏗", title: "New Builds Preferred", desc: "Banks favour new construction. Secondary market properties get stricter appraisals — often 15–20% below asking." },
+{[
+ { icon: "⚠", title: "Currency Risk",      desc: "If your income is in rubles but the loan is in USD/GEL, exchange rate fluctuations affect your monthly payment directly." },
+ { icon: "🔍", title: "Strict Scoring",     desc: "TBC Bank runs thorough compliance checks — especially for Russian/Belarusian nationals. Transparency of income is non-negotiable." },
+ { icon: "📋", title: "Income Match",       desc: "Income currency should match the loan currency ideally. Mismatches push effective rates up (from 12.1% EIR)." },
+ { icon: "🏗", title: "New Builds Preferred", desc: "Banks favour new construction. Secondary market properties get stricter appraisals — often 15–20% below asking." },
             ].map((item, i) => (
               <Col key={item.title} span={3}>
                 <div className="m-reveal" style={{

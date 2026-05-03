@@ -36,7 +36,7 @@ function Nav() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", height: "68px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/"><a style={{ textDecoration: "none" }}><img src="/logo-dark-bg.png" alt="SITBO" style={{ height: "18px", width: "auto" }} /></a></Link>
         <nav style={{ display: "flex", gap: "28px", alignItems: "center" }} className="nav-desktop">
-links.map(l => (
+          {links.map(l => (
             <Link key={l.label} href={l.href}><a style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#FFFBF0", textDecoration: "none", opacity: 0.75, transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "1")} onMouseLeave={e => (e.currentTarget.style.opacity = "0.75")}>{l.label}</a></Link>
           ))}
           <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "6px", padding: "9px 20px", textDecoration: "none", transition: "opacity 0.3s" }}>Free Consultation</a>
@@ -45,9 +45,9 @@ links.map(l => (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFBF0" strokeWidth="1.8" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
-menuOpen && (
+          {menuOpen && (
         <div style={{ background: "rgba(33,20,26,0.98)", borderTop: "1px solid rgba(140,178,192,0.1)", padding: "20px 24px 28px" }}>
-links.map(l => <Link key={l.label} href={l.href}><a onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.85rem", color: "#FFFBF0", textDecoration: "none", padding: "10px 0", borderBottom: "1px solid rgba(255,251,240,0.06)" }}>{l.label}</a></Link>)}
+          {links.map(l => <Link key={l.label} href={l.href}><a onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.85rem", color: "#FFFBF0", textDecoration: "none", padding: "10px 0", borderBottom: "1px solid rgba(255,251,240,0.06)" }}>{l.label}</a></Link>)}
           <a href="#contact-form" onClick={() => setMenuOpen(false)} style={{ display: "block", marginTop: "16px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px 24px", textDecoration: "none", textAlign: "center" }}>Free Consultation</a>
         </div>
       )}
@@ -109,26 +109,26 @@ function Hero() {
 // ─── Two Columns ──────────────────────────────────────────────────────────────
 function TwoColumns() {
   const cols = [
-
+    {
       tag: "For Perfectionists",
       title: "A Home That Reflects Your Vision",
       text: "We translate your personal style into a living space of uncompromising quality. Our process is designed for those who appreciate fine details and a seamless, stress-free experience.",
       items: [
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, label: "Bespoke Design", desc: "A unique project crafted around your lifestyle and aesthetic vision." },
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, label: "Master Craftsmanship", desc: "Meticulous attention to every seam, joint, and finish — no compromises." },
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, label: "Premium Materials", desc: "We source the best materials, including Italian tile and European fittings." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, label: "Bespoke Design", desc: "A unique project crafted around your lifestyle and aesthetic vision." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, label: "Master Craftsmanship", desc: "Meticulous attention to every seam, joint, and finish — no compromises." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, label: "Premium Materials", desc: "We source the best materials, including Italian tile and European fittings." },
       ],
       bg: C.light,
       dark: false,
     },
-
+    {
       tag: "For Investors",
       title: "A Renovation That Delivers Profit",
       text: "We create high-demand, low-maintenance rental properties that maximize your ROI. Our process is optimized for speed, durability, and market appeal in Batumi.",
       items: [
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>, label: "ROI-Driven Design", desc: "A proven aesthetic that attracts premium short-term tenants in Batumi." },
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, label: "Speed to Market", desc: "Fast-track delivery to minimize vacancy and start earning rental income sooner." },
- icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>, label: "Durable & Low-Maintenance", desc: "Vandal-proof, wear-resistant materials designed for Batumi's humid climate." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>, label: "ROI-Driven Design", desc: "A proven aesthetic that attracts premium short-term tenants in Batumi." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, label: "Speed to Market", desc: "Fast-track delivery to minimize vacancy and start earning rental income sooner." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>, label: "Durable & Low-Maintenance", desc: "Vandal-proof, wear-resistant materials designed for Batumi's humid climate." },
       ],
       bg: C.dark,
       dark: true,
@@ -139,7 +139,7 @@ function TwoColumns() {
 
     <section style={{ background: C.dark, padding: "0 10px 10px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
-cols.map(col => (
+        {cols.map(col => (
           <div key={col.tag} style={{ background: col.bg, borderRadius: "16px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
               <div style={{ width: "24px", height: "1px", background: C.wine }} />
@@ -148,7 +148,7 @@ cols.map(col => (
             <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: col.dark ? "rgba(255,251,240,0.55)" : "#666", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-col.items.map(item => (
+              {col.items.map(item => (
                 <div key={item.label} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
                   <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: col.dark ? "rgba(140,178,192,0.1)" : "rgba(140,178,192,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{item.icon}</div>
                   <div>
@@ -160,7 +160,7 @@ col.items.map(item => (
             </div>
             <div style={{ marginTop: "40px" }}>
               <a href="#contact-form" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.dark ? C.dark : C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-col.dark ? "Calculate My ROI" : "Discuss My Project"}
+                {col.dark ? "Calculate My ROI" : "Discuss My Project"}
               </a>
             </div>
           </div>
@@ -228,10 +228,10 @@ function Calculator() {
   const Radio = ({ name, value, current, label, onChange }: { name: string; value: string; current: string; label: string; onChange: (v: string) => void }) => (
     <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", fontFamily: "DM Sans", fontSize: "0.85rem", color: current === value ? C.dark : "#777", fontWeight: current === value ? 600 : 400, transition: "color 0.2s" }}>
       <span style={{ width: "18px", height: "18px", borderRadius: "50%", border: `2px solid ${current === value ? C.teal : "#ccc"}`, background: current === value ? C.teal : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
-current === value && <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.dark, display: "block" }} />}
+        {current === value && <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.dark, display: "block" }} />}
       </span>
       <input type="radio" name={name} value={value} checked={current === value} onChange={() => onChange(value)} style={{ display: "none" }} />
-label}
+{label}
     </label>
   );
 
@@ -294,7 +294,7 @@ label}
             Calculate My Estimate
           </button>
 
-shown && (
+          {shown && (
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>Estimated Cost Range</p>
@@ -323,10 +323,10 @@ shown && (
 // ─── Remote Process ───────────────────────────────────────────────────────────
 function RemoteProcess() {
   const steps = [
- n: "01", title: "Dedicated Manager", desc: "One point of contact, available 24/7 in your preferred messenger — WhatsApp, Telegram, or email." },
- n: "02", title: "Weekly Video Reports", desc: "Detailed video walkthroughs every week so you see everything as if you were standing on-site." },
- n: "03", title: "24/7 Project Portal", desc: "Real-time access to all documents, floor plans, photos, and financial reports in one place." },
- n: "04", title: "Live Video Calls", desc: "Schedule a live call from your property at any time. Inspect the work yourself, remotely." },
+ { n: "01", title: "Dedicated Manager", desc: "One point of contact, available 24/7 in your preferred messenger — WhatsApp, Telegram, or email." },
+ { n: "02", title: "Weekly Video Reports", desc: "Detailed video walkthroughs every week so you see everything as if you were standing on-site." },
+ { n: "03", title: "24/7 Project Portal", desc: "Real-time access to all documents, floor plans, photos, and financial reports in one place." },
+ { n: "04", title: "Live Video Calls", desc: "Schedule a live call from your property at any time. Inspect the work yourself, remotely." },
   ];
   return (<>
 
@@ -346,7 +346,7 @@ function RemoteProcess() {
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
-steps.map((s, i) => (
+            {steps.map((s, i) => (
               <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#ede9e0", padding: "40px 32px" }}>
                 <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
                 <p style={{ fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.88rem", color: C.dark, margin: "0 0 10px" }}>{s.title}</p>
@@ -365,12 +365,12 @@ steps.map((s, i) => (
 function Portfolio() {
   const [filter, setFilter] = useState<"all" | "life" | "invest">("all");
   const projects = [
- type: "invest", img: "/p1.jpg", title: "Studio, Batumi Centre", tags: ["48 Days", "$18,000", "+70% Rental Income", "ROI: 2.1 yrs"] },
- type: "life",   img: "/p2.jpg", title: "2BR Sea View Penthouse", tags: ["Bespoke Kitchen", "Italian Tile", "Sea View"] },
- type: "invest", img: "/p3.jpg", title: "1BR Near Boulevard", tags: ["38 Days", "$14,500", "+65% Rental Income", "ROI: 2.4 yrs"] },
- type: "life",   img: "/p4.jpg", title: "Designer Loft, Orbi City", tags: ["Custom Millwork", "Marble Surfaces", "Full Fit-Out"] },
- type: "invest", img: "/p5.jpg", title: "Studio, Technika", tags: ["52 Days", "$20,000", "+80% Rental Income", "ROI: 1.9 yrs"] },
- type: "life",   img: "/p6.jpg", title: "3BR Family Residence", tags: ["Author Supervision", "Premium Materials", "6 Month Project"] },
+ { type: "invest", img: "/p1.jpg", title: "Studio, Batumi Centre", tags: ["48 Days", "$18,000", "+70% Rental Income", "ROI: 2.1 yrs"] },
+ { type: "life",   img: "/p2.jpg", title: "2BR Sea View Penthouse", tags: ["Bespoke Kitchen", "Italian Tile", "Sea View"] },
+ { type: "invest", img: "/p3.jpg", title: "1BR Near Boulevard", tags: ["38 Days", "$14,500", "+65% Rental Income", "ROI: 2.4 yrs"] },
+ { type: "life",   img: "/p4.jpg", title: "Designer Loft, Orbi City", tags: ["Custom Millwork", "Marble Surfaces", "Full Fit-Out"] },
+ { type: "invest", img: "/p5.jpg", title: "Studio, Technika", tags: ["52 Days", "$20,000", "+80% Rental Income", "ROI: 1.9 yrs"] },
+ { type: "life",   img: "/p6.jpg", title: "3BR Family Residence", tags: ["Author Supervision", "Premium Materials", "6 Month Project"] },
   ];
   const visible = projects.filter(p => filter === "all" || p.type === filter);
   const placeholderColors = ["#8CB2C0","#683D47","#A8C5D0","#8B5E67","#6FA3B5","#7A4E57"];
@@ -391,15 +391,15 @@ function Portfolio() {
               </h2>
             </div>
             <div style={{ display: "flex", gap: "8px", background: "rgba(255,251,240,0.06)", borderRadius: "10px", padding: "4px" }}>
-([["all","All Projects"],["life","For Life"],["invest","For Investment"]] as const).map(([val, label]) => (
+{([["all","All Projects"],["life","For Life"],["invest","For Investment"]] as const).map(([val, label]) => (
                 <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "DM Sans", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.dark : "rgba(255,251,240,0.55)" }}>
-label}
+{label}
                 </button>
               ))}
             </div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "16px" }}>
-visible.map((p, i) => (
+            {visible.map((p, i) => (
               <div key={p.title} style={{ borderRadius: "12px", overflow: "hidden", background: placeholderColors[i % placeholderColors.length] + "33", border: "1px solid rgba(255,251,240,0.06)" }}>
                 <div style={{ height: "220px", background: placeholderColors[i % placeholderColors.length] + "44", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,240,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -407,7 +407,7 @@ visible.map((p, i) => (
                 <div style={{ padding: "24px" }}>
                   <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-p.tags.map(tag => (
+                    {p.tags.map(tag => (
                       <span key={tag} style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,251,240,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.12)" : "rgba(255,251,240,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
                     ))}
                   </div>
@@ -582,7 +582,7 @@ function ContactForm() {
             </p>
           </div>
 
-sent ? (
+          {sent ? (
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>Message Received</p>

@@ -87,7 +87,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", animation: "fadeIn 0.3s ease" }}
         />
 {/* Navigation arrows */}
-photos.length > 1 && (
+          {photos.length > 1 && (
           <>
             <button onClick={() => setActive(i => (i - 1 + photos.length) % photos.length)}
               style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,251,240,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
@@ -101,14 +101,14 @@ photos.length > 1 && (
         )}
 {/* Counter */}
         <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "20px", padding: "4px 12px", fontFamily: "DM Sans", fontSize: "0.72rem", color: C.light }}>
-active + 1} / {photos.length}
+          {active + 1} / {photos.length}
         </div>
       </div>
 
 {/* Thumbnails column */}
-photos.length > 1 && (
+        {photos.length > 1 && (
         <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto" }}>
-photos.map((src, i) => (
+          {photos.map((src, i) => (
             <div key={i} onClick={() => setActive(i)}
               style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "8px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
               <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: i === active ? 1 : 0.6, transition: "opacity 0.2s" }} />
@@ -179,11 +179,11 @@ function ROICalc({ project }: { project: Project }) {
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-[
+{[
     { label: "Annual Rental Income", value: fmt(annualRental), accent: false },
- label: `Rental over ${horizon} yrs`,  value: fmt(totalRental),  accent: false },
+ { label: `Rental over ${horizon} yrs`,  value: fmt(totalRental),  accent: false },
     { label: "Est. Appreciation",   value: fmt(appreciation), accent: false },
- label: `Total Return`,         value: fmt(totalReturn),  accent: true },
+ { label: `Total Return`,         value: fmt(totalReturn),  accent: true },
         ].map(item => (
           <div key={item.label} style={{
             background: item.accent ? C.dark : C.light,
@@ -248,7 +248,7 @@ export default function ProjectPage() {
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
-  const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" );
+  const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" });
 
   const idx    = projects.findIndex(p => p.slug === params.slug);
   const project = projects[idx];
@@ -317,11 +317,11 @@ export default function ProjectPage() {
               <div className="pr-reveal" style={{ marginBottom: "48px" }}>
                 <Eyebrow>Overview</Eyebrow>
                 <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
-p.name}
+{p.name}
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "center", gap: "6px", marginBottom: "20px" }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
-p.address} · {p.seaDistance}
+                  {p.address} · {p.seaDistance}
                 </p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.85 }}>{p.desc}</p>
               </div>
@@ -332,7 +332,7 @@ p.address} · {p.seaDistance}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>Technical Specifications</Eyebrow>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
-[
+{[
     { label: "Area",           value: p.area },
     { label: "Ceiling Height", value: p.ceilingHeight },
     { label: "Floors",         value: p.floors },
@@ -354,7 +354,7 @@ p.address} · {p.seaDistance}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>Key Features</Eyebrow>
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px 32px" }}>
-p.features.map(f => (
+                  {p.features.map(f => (
                     <div key={f} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
                       <Diamond />
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.5 }}>{f}</span>
@@ -369,19 +369,16 @@ p.features.map(f => (
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>Materials & Construction</Eyebrow>
                 <div style={{ background: C.parchment, borderRadius: "12px", padding: "20px 22px", display: "flex", flexDirection: "column", gap: "14px" }}>
-p.materials.split(". ").filter(Boolean).map((sentence, i) => {
-                    const colonIdx = sentence.indexOf(":"
-  </>);
+                  {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
+                    const colonIdx = sentence.indexOf(":");
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
                     return (<>
-
                       <p key={i} style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
-hasTitle ? (
+                        {hasTitle ? (
                           <><strong style={{ color: C.dark }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
                         ) : sentence + (sentence.endsWith(".") ? "" : ".")}
                       </p>
-                    
-  </>);
+                    </>);
                   })}
                 </div>
               </div>
@@ -426,7 +423,7 @@ hasTitle ? (
 
 {/* Quick facts */}
                 <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.parchment, borderRadius: "12px", padding: "20px 18px" }}>
-[
+{[
     { label: "Est. ROI",   value: p.yield },
     { label: "From",       value: p.priceFrom },
     { label: "Ready",      value: p.completion },
@@ -440,7 +437,7 @@ hasTitle ? (
                 </div>
 
 {/* Live Camera Card */}
-p.liveCameraUrl && (
+                  {p.liveCameraUrl && (
                   <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                     <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
@@ -474,7 +471,7 @@ p.liveCameraUrl && (
                   Located in one of Batumi's most sought-after areas, {p.name} combines prime positioning with developer-quality construction — delivering yields between {p.yield} annually.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-p.features.slice(0, 3).map(f => (
+                  {p.features.slice(0, 3).map(f => (
                     <div key={f} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
                       <Diamond />
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.mutedDark, lineHeight: 1.5 }}>{f}</span>
@@ -498,11 +495,11 @@ p.features.slice(0, 3).map(f => (
             </h3>
           </div>
           <div className="pr-reveal" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
-(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
+            {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
               src ? (
                 <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#F5F3ED", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                   <img src={src} alt={`Layout ${n + 1}`} style={{ width: "100%", display: "block", objectFit: "contain" }} />
-p.floorPlanLabels?.[n] && (
+                    {p.floorPlanLabels?.[n] && (
                     <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center" }}>
                       <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
                     </div>
@@ -530,7 +527,7 @@ p.floorPlanLabels?.[n] && (
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
             <Eyebrow>Location</Eyebrow>
             <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
-p.location}
+{p.location}
             </h3>
           </div>
           <div className="pr-reveal" style={{ transitionDelay: "80ms" }}>
@@ -546,7 +543,7 @@ p.location}
             <Eyebrow>Other Projects</Eyebrow>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px" }}>
-[prev, next].map((proj) => (
+{[prev, next].map((proj) => (
               <Link key={proj.slug} href={`/project/${proj.slug}`}>
                 <a style={{ display: "block", textDecoration: "none", borderRadius: "12px", overflow: "hidden", position: "relative", height: "200px", background: C.dark }}>
                   <img src={proj.cardImage} alt={proj.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s" }}
@@ -559,7 +556,7 @@ p.location}
                     <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
-proj.yield} ROI
+                    {proj.yield} ROI
                   </div>
                 </a>
               </Link>
@@ -594,7 +591,7 @@ proj.yield} ROI
       <Footer />
 
 {/* Modal */}
-modalSrc && (
+      {modalSrc && (
         <div onClick={() => setModalSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, backdropFilter: "blur(4px)", cursor: "pointer" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", maxWidth: "60vw", maxHeight: "70vh", cursor: "default" }}>
             <img src={modalSrc} alt="Layout preview" style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "12px" }} />
@@ -606,7 +603,7 @@ modalSrc && (
       )}
 
 {/* Offer Form Modal */}
-showOfferForm && (
+      {showOfferForm && (
         <div onClick={() => setShowOfferForm(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "500px", width: "90%", cursor: "default", border: `1px solid rgba(140,178,192,0.2)` }}>
             <button onClick={() => setShowOfferForm(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
@@ -659,5 +656,5 @@ showOfferForm && (
         </div>
       )}
     </div>
-  );
+  </>);
 }
