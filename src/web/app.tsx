@@ -5,8 +5,9 @@
    import ProjectPage from "./pages/project";
    import CatalogPage from "./pages/catalog";
    import TurnkeyPage from "./pages/turnkey";
+   import LegalPage from "./pages/legal";
    import { Provider } from "./components/provider";                                                                      
-   import { AgentFeedback, RunableBadge } from "@runablehq/website-runtime";                                                                            
+   import { AgentFeedback } from "@runablehq/website-runtime";                                                                            
                                                                                                                           
    function App() {                                                                                                       
      return (                                                                                                             
@@ -17,11 +18,11 @@
            <Route path="/invest" component={InvestPage} />
            <Route path="/project/:slug" component={ProjectPage} />
           <Route path="/catalog" component={CatalogPage} />
-          <Route path="/turnkey" component={TurnkeyPage} />                                                                           
+          <Route path="/turnkey" component={TurnkeyPage} />
+          <Route path="/legal" component={LegalPage} />
          </Switch>                                                                                                        
          {/* Do not remove — off by default, activated by parent iframe via postMessage */}                                                  
          {import.meta.env.DEV && <AgentFeedback />}                                                                       
-                                                                               
        </Provider>                                                                                                        
      );                                                                                                                   
    }                                                                                                                      
