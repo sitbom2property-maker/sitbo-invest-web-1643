@@ -1108,11 +1108,11 @@ function Payment() {
           ))}
         </div>
 
-        {/* Three features */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "32px", borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "40px" }}>
+        {/* Three features — in boxes */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px", borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "40px" }}>
           {features.map((f) => (
-            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", alignItems: "center", textAlign: "center" }}>
-              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", padding: "28px 24px", background: "rgba(255,251,240,0.07)", borderRadius: "14px", border: "1px solid rgba(255,251,240,0.1)", textAlign: "center", alignItems: "center" }}>
+              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.15)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {f.icon}
               </div>
               <div>
