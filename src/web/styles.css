@@ -15,6 +15,17 @@
   font-style: italic;
   font-display: swap;
 }
+
+/* ── DM Sans digits subset — overrides Jun for all numerals sitewide ─────── */
+/* Applies to any element using Jun or any other font: 0-9 % + , . / $ € -   */
+@font-face {
+  font-family: 'Jun';
+  src: url('/fonts/DMSans-digits.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0030-0039, U+0025, U+002B, U+002C, U+002E, U+002F, U+0024, U+20AC, U+002D;
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 
