@@ -283,9 +283,11 @@ function Nav() {
           ))}
         </div>
 
-        {/* Desktop CTA */}
-        <a href="#discovery-tour" className="btn-gold nav-desktop-cta" style={{ fontSize: "0.68rem", padding: "9px 20px", color: "#21141A", background: "#8CB2C0", borderRadius: "6px", transition: "opacity 0.3s" }}>
-          Book a Tour
+        {/* Desktop CTA — WhatsApp */}
+        <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" className="nav-desktop-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "50%", background: "transparent", border: `1.5px solid ${C.teal}`, textDecoration: "none", cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = C.teal; (e.currentTarget as HTMLElement).style.boxShadow = `0 0 12px rgba(140,178,192,0.3)`; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }} onMouseEnter={e => (e.currentTarget.style.stroke = "#21141A")} onMouseLeave={e => (e.currentTarget.style.stroke = C.teal)}>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
         </a>
 
         {/* Hamburger */}
@@ -314,9 +316,12 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="#discovery-tour" className="btn-gold" onClick={() => setMenuOpen(false)}
-            style={{ marginTop: "24px", textAlign: "center", color: "#21141A", background: "#8CB2C0" }}>
-            Book a Tour
+          <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" className="btn-gold" onClick={() => setMenuOpen(false)}
+            style={{ marginTop: "24px", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", color: C.light, background: "transparent", border: `1.5px solid ${C.teal}`, padding: "10px" }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            WhatsApp
           </a>
         </div>
       )}
