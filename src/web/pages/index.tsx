@@ -248,7 +248,7 @@ function Nav() {
     { label: "Catalog",         href: "/catalog" },
     { label: "Services",        href: "#about" },
     { label: "Turnkey Renovation", href: "/turnkey" },
-    { label: "Invest",          href: "/invest" },
+    { label: "Why Georgia",     href: "/invest" },
     { label: "Mortgage",        href: "/mortgage" },
     { label: "Discovery Tour",  href: "#discovery-tour" },
   ];
