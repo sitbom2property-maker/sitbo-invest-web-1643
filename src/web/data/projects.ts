@@ -66,7 +66,7 @@ export const projects: Project[] = [
       "Coworking",
       "Pets area",
     ],
-    materials: "Jet Grouting Technology: Advanced soil stabilization creates a rock-solid foundation, ensuring maximum structural integrity and zero deformation risk. Superior Protection: We use high-grade W30 waterproof concrete to prevent corrosion and significantly extend the building's lifespan. Seismic Resilience: Engineered to withstand magnitude 9.0 earthquakes, exceeding mandatory safety standards for ultimate peace of mind.",
+    materials: "Jet Grouting Technology: Advanced soil stabilization creates a rock-solid foundation, ensuring maximum structural integrity and zero deformation risk. Superior Protection: Used high-grade W30 waterproof concrete to prevent corrosion and significantly extend the building's lifespan. Seismic Resilience: Engineered to withstand magnitude 9.0 earthquakes, exceeding mandatory safety standards for ultimate peace of mind.",
     photos: ["/artex-5.jpg", "/artex-ext-1.jpg", "/artex-ext-2.png", "/artex-ext-3.png", "/artex-ext-4.png", "/artex-1.jpg", "/artex-2.jpg", "/artex-3.jpg", "/artex-4.jpg", "/artex-6.jpg", "/artex-7.jpg", "/artex-8.jpg", "/artex-9.jpg", "/artex-10.jpg"],
     cardImage: "/artex-1.jpg",
     lat: 41.6282308808277,

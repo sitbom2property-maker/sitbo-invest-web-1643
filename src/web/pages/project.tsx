@@ -308,6 +308,21 @@ export default function ProjectPage() {
                   {p.address} · {p.seaDistance}
                 </p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.85 }}>{p.desc}</p>
+
+                {/* Developer block */}
+                <div style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: "20px 22px", background: C.parchment, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}>
+                  {/* Logo placeholder */}
+                  <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>Logo</span>
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>Developer</p>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
+                      A construction company founded in 2015, which has established itself as a reliable partner in residential construction. It actively develops projects, including residential complexes in Batumi.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <Divider />
@@ -372,14 +387,18 @@ export default function ProjectPage() {
 {/* Payment */}
               <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
                 <Eyebrow>Payment & Installment</Eyebrow>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-                  <div style={{ background: C.parchment, borderRadius: "12px", padding: "20px 18px", borderTop: `2px solid ${C.wine}` }}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment Plan</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 600, color: C.dark, margin: 0 }}>{p.installment}</p>
+                {/* Bar visual: left block = down payment, right block = installment remainder */}
+                <div style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.parchment, border: `1px solid rgba(33,20,26,0.08)` }}>
+                  {/* Filled / down payment portion */}
+                  <div style={{ flex: "0 0 30%", background: C.dark, padding: "22px 20px" }}>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>30%</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>Down Payment</p>
                   </div>
-                  <div style={{ background: C.parchment, borderRadius: "12px", padding: "20px 18px", borderTop: `2px solid ${C.teal}` }}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment Plan</p>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark, margin: 0 }}>{p.pricePerSqm ?? p.priceFrom}</p>
+                  {/* Remainder / installment portion */}
+                  <div style={{ flex: 1, padding: "22px 20px" }}>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>70%</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
                   </div>
                 </div>
               </div>
@@ -436,37 +455,7 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-{/* ── ROI CALCULATOR ── */}
-      <section style={{ padding: "80px 0 0" }}>
-        <Container>
-          <Row gap={48}>
-            <Col span={7}>
-              <div className="pr-reveal">
-                <ROICalc project={p} />
-              </div>
-            </Col>
-            <Col span={5}>
-              <div className="pr-reveal" style={{ transitionDelay: "100ms", paddingTop: "8px" }}>
-                <Eyebrow>Why This Project</Eyebrow>
-                <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
-                  The investment case for {p.name}.
-                </h3>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.8, marginBottom: "20px" }}>
-                  Located in one of Batumi's most sought-after areas, {p.name} combines prime positioning with developer-quality construction — delivering yields between {p.yield} annually.
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                  {p.features.slice(0, 3).map(f => (
-                    <div key={f} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                      <Diamond />
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.mutedDark, lineHeight: 1.5 }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+
 
 {/* ── MAP ── */}
 {/* ── FLOOR PLANS ── */}
@@ -517,8 +506,41 @@ export default function ProjectPage() {
           <div className="pr-reveal" style={{ transitionDelay: "80ms" }}>
             <MapEmbed project={p} />
           </div>
+          {/* District description */}
+          <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.parchment, borderRadius: "12px", padding: "28px 28px" }}>
+            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>Новый Бульвар</h4>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
+              Современный район у моря с развитой инфраструктурой и красивым парком у набережной. Объект расположен на юго-западной окраине города Батуми, вдоль побережья Черного моря. Этот район является символом нового, современного Батуми с его инновационной архитектурой и зелеными зонами для отдыха.
+              <br /><br />
+              До Международного аэропорта Батуми можно добраться всего за 8 минут, что удобно для тех, кто часто путешествует. В непосредственной близости расположены важные социальные объекты: школа и дельфинарий находятся в 11 минутах езды, детский сад — в 12 минутах. Такое расположение делает жилой объект Артекс удобным для семей с детьми и для активной городской жизни резидентов.
+            </p>
+          </div>
         </Container>
       </section>
+
+{/* ── CTA FOOTER ── */}
+      <div style={{ background: C.dark, padding: "80px 0" }}>
+        <Container>
+          <Row>
+            <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
+              <div className="pr-reveal">
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
+                  Ready to invest in<br />
+                  <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
+                </h2>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
+                  We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.
+                </p>
+                <Link href="/#contact">
+                  <a style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                    Get a Free Offer
+                  </a>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
 
 {/* ── NEXT / PREV projects ── */}
       <section style={{ padding: "80px 0" }}>
@@ -548,30 +570,6 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
-
-{/* ── CTA FOOTER ── */}
-      <div style={{ background: C.dark, padding: "80px 0" }}>
-        <Container>
-          <Row>
-            <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
-              <div className="pr-reveal">
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
-                  Ready to invest in<br />
-                  <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
-                </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
-                  We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.
-                </p>
-                <Link href="/#contact">
-                  <a style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                    Get a Free Offer
-                  </a>
-                </Link>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
       <Footer />
 
 {/* Modal */}
