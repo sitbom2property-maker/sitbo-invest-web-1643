@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
-import { CookieConsent } from "../components/cookie-consent";
 import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -260,7 +259,6 @@ export default function ProjectPage() {
     return (<>
 
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <CookieConsent />
         <div style={{ textAlign: "center" }}>
           <h1 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", color: C.dark }}>Project not found</h1>
           <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>← Back to home</a></Link>

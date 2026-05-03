@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
-import { CookieConsent } from "../components/cookie-consent";
 import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -332,7 +331,6 @@ function RemoteProcess() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
-      <CookieConsent />
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>

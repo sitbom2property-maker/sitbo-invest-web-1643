@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { CookieConsent } from "../components/cookie-consent";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)

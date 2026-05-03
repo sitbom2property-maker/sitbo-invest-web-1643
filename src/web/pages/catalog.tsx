@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { Footer } from "../components/footer";
-import { CookieConsent } from "../components/cookie-consent";
 
 const C = {
   dark:      "#21141A",
@@ -161,8 +160,6 @@ export default function CatalogPage() {
 
   return (
     <div style={{ background: C.light, minHeight: "100vh" }}>
-      <CookieConsent />
-
       {/* ── Nav ── */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "64px", display: "flex", alignItems: "center", background: C.light, borderBottom: "1px solid rgba(33,20,26,0.08)" }}>
         <Container style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>

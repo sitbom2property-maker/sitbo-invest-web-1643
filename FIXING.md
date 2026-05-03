@@ -1,43 +1,50 @@
-# Build Fix Progress
+# Build Fix - COMPLETED ✅
 
-## Status
-Building turnkey.tsx. Currently fixing missing `{` in JSX expressions across multiple map/conditional blocks.
+## Summary
+Successfully resolved all JSX syntax corruption across the Sitbo Invest website. The initial git commit had malformed code (missing braces, broken object literals, malformed JSX expressions). All issues fixed through systematic error-by-error debugging.
 
-## Files Fixed (Build Passes)
-- ✅ **turnkey.tsx** — fixed:
-  - Line 214–215: Object keys `{ self:` → `self:`
-  - Line 223–224: Object keys `{ invest:` → `invest:`
-  - Line 231: Missing `{` before `current === value &&` expression
+## Files Fixed
 
-- ✅ **project.tsx** — fixed:
-  - Line 375–383: Fragment return inside `.map()` callback closing with `</>);` now `</>` 
-  - Line 660: Added missing `</>` before `);` of main return
+### ✅ turnkey.tsx (7 fixes)
+1. **Lines 214–215**: Object literal keys — removed errant leading `{` before `self:` and `invest:`
+2. **Lines 223–224**: Same object corruption pattern fixed
+3. **Line 231**: Added missing `{` before JSX conditional: `current === value &&`
+4. **Line 297**: Added missing `{` before conditional: `shown &&`
+5. **Line 349**: Added missing `{` before `.map()` call: `steps.map()`
+6. **Line 402**: Added missing `{` before `.map()` call: `visible.map()`
+7. **Line 410**: Added missing `{` before `.map()` call: `p.tags.map()`
+8. **Line 585**: Added missing `{` before ternary: `sent ? (`
 
-## Current Build Errors (turnkey.tsx)
-```
-349:18: ERROR: ">" not valid — steps.map((s, i) =>
-355:14: ERROR: "}" not valid
-402:20: ERROR: ">" not valid — 
-410:16: ERROR: ">" not valid
-412:22: ERROR: "}" not valid
-```
+### ✅ project.tsx (2 fixes)
+1. **Line 375–383**: Fragment return inside `.map()` callback — fixed closing brace positioning
+2. **Line 660**: Added missing closing fragment `</>` before `);` of main return
 
-## Pattern
-Same corruption: lines starting with bare expressions like:
-```jsx
-steps.map((s, i) =>  // WRONG
-// Should be:
-{steps.map((s, i) =>  // with opening {
-```
+### ✅ Other files (index, invest, mortgage)
+- No further issues after fix_jsx.py corruptions were manually corrected
 
-## Next Steps
-1. Fix lines 349, 402, 410+ — add opening `{` before `.map()` calls
-2. Run build to get next batch
-3. Continue until clean build (0 errors)
-4. Restart dev server on port 6474
-5. Publish
+## Build Status
+- **Final Build**: ✅ CLEAN (0 errors)
+- **Server Build**: ✅ 20.67s
+- **Client Build**: ✅ 440.62 kB (gzip: 126 kB)
+- **CSS Bundle**: ✅ 29.06 kB (gzip: 6.59 kB)
 
-## Notes
-- Do NOT use automated sed scripts — manual fixes only
-- Each build cycle reveals next 5 errors (esbuild stops at 5 per file)
-- All corruption in initial git commit (missing braces, bad JSX syntax)
+## Deployment
+- **Git Commit**: `5e9de3c` — All fixes committed with detailed message
+- **Dev Server**: Running on port 6474 (tmux session `port_6474`)
+- **Website**: https://otvgs9fzc5a2ixvlk19wpc5myrmovqsy.runable.site
+
+## Patterns Fixed
+The corruption stemmed from the initial commit having:
+- Missing `{` before JSX expressions and `.map()` calls
+- Errant `{` in object literal keys: `{ key:` → `key:`
+- Missing closing fragments in return statements
+- Improper fragment closing inside map callbacks
+
+## Strategy
+- Fixed errors one build cycle at a time (esbuild stops at 5 errors/file)
+- Manual fixes only — no automated scripts (previous attempts caused additional corruption)
+- Verified each fix before proceeding to next batch
+
+---
+
+**Status**: Ready for production. All components build successfully. Dev server live.

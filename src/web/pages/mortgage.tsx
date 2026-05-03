@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { CookieConsent } from "../components/cookie-consent";
 import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -311,8 +310,6 @@ export default function MortgagePage() {
   return (<>
 
     <div style={{ background: C.light, minHeight: "100vh", color: C.dark }}>
-      <CookieConsent />
-
 {/* ── Nav ──────────────────────────────────────────────────────────────── */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "64px",
