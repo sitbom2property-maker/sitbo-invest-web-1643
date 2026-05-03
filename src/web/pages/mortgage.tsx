@@ -107,9 +107,8 @@ function TRow({ label, value }: { label: string; value: string }) {
 
 // ─── Process step ─────────────────────────────────────────────────────────────
 function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; desc: string; delay?: number }) {
-  return (<>
-
-    <div className="m-reveal" style={{ transitionDelay: `${delay}ms`, display: "flex", gap: "20px", paddingBottom: "32px", borderBottom: "1px solid rgba(33,20,26,0.07)" }}>
+  return (
+    <div className="m-reveal" style={{ transitionDelay: `${delay}ms`, display: "flex", gap: "20px", padding: "28px 0", borderBottom: "1px solid rgba(33,20,26,0.07)", flex: 1 }}>
       <div style={{ flexShrink: 0, width: "44px", height: "44px", borderRadius: "50%", border: `1.5px solid ${C.wine}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <span style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 700, color: C.wine }}>{String(n).padStart(2, "0")}</span>
       </div>
@@ -118,8 +117,7 @@ function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; 
         <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{desc}</p>
       </div>
     </div>
-  
-  </>);
+  );
 }
 
 // ─── Calculator ───────────────────────────────────────────────────────────────
@@ -472,26 +470,25 @@ export default function MortgagePage() {
               </div>
             </Col>
           </Row>
-          <Row gap={20}>
-{[
- { icon: "⚠", title: "Currency Risk",      desc: "If your income is in rubles but the loan is in USD/GEL, exchange rate fluctuations affect your monthly payment directly." },
- { icon: "🔍", title: "Strict Scoring",     desc: "TBC Bank runs thorough compliance checks — especially for Russian/Belarusian nationals. Transparency of income is non-negotiable." },
- { icon: "📋", title: "Income Match",       desc: "Income currency should match the loan currency ideally. Mismatches push effective rates up (from 12.1% EIR)." },
- { icon: "🏗", title: "New Builds Preferred", desc: "Banks favour new construction. Secondary market properties get stricter appraisals — often 15–20% below asking." },
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", alignItems: "stretch" }}>
+            {[
+              { icon: "⚠", title: "Currency Risk",        desc: "If your income is in rubles but the loan is in USD/GEL, exchange rate fluctuations affect your monthly payment directly." },
+              { icon: "🔍", title: "Strict Scoring",       desc: "TBC Bank runs thorough compliance checks — especially for Russian/Belarusian nationals. Transparency of income is non-negotiable." },
+              { icon: "📋", title: "Income Match",         desc: "Income currency should match the loan currency ideally. Mismatches push effective rates up (from 12.1% EIR)." },
+              { icon: "🏗",  title: "New Builds Preferred", desc: "Banks favour new construction. Secondary market properties get stricter appraisals — often 15–20% below asking." },
             ].map((item, i) => (
-              <Col key={item.title} span={3}>
-                <div className="m-reveal" style={{
-                  transitionDelay: `${i * 70}ms`,
-                  background: C.light, borderRadius: "12px", padding: "28px 22px",
-                  borderTop: `2px solid ${C.wine}`,
-                }}>
-                  <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>{item.icon}</div>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", fontWeight: 700, color: C.dark, marginBottom: "8px" }}>{item.title}</p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
-                </div>
-              </Col>
+              <div key={item.title} className="m-reveal" style={{
+                transitionDelay: `${i * 70}ms`,
+                background: C.light, borderRadius: "12px", padding: "28px 22px",
+                borderTop: `2px solid ${C.wine}`,
+                display: "flex", flexDirection: "column",
+              }}>
+                <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>{item.icon}</div>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", fontWeight: 700, color: C.dark, marginBottom: "8px" }}>{item.title}</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+              </div>
             ))}
-          </Row>
+          </div>
         </Container>
       </section>
 
@@ -516,20 +513,12 @@ export default function MortgagePage() {
             </Col>
           </Row>
 
-          <Row gap={48}>
-            <Col span={6}>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <ProcessStep n={1} delay={0}   title="Enter Georgia"        desc="A personal visit is mandatory. Citizens of 90+ countries can stay visa-free for up to 1 year. Rare exceptions via notarised power of attorney." />
-                <ProcessStep n={2} delay={80}  title="Prepare Documents"    desc="Passport, proof of income (salary, business registration, freelance contracts, rental income). Open a Georgian bank account. Russians: ruble transfers direct from Russia are possible." />
-              </div>
-            </Col>
-            <Col span={6}>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <ProcessStep n={3} delay={160} title="Submit Application"   desc="In-branch at TBC or online for expats. Multi-step compliance review for Russian/Belarusian nationals. Approval in 2–5 business days with partner support." />
-                <ProcessStep n={4} delay={240} title="Valuation & Closing"  desc="Bank appraises the property — often below market. Signing at a notary. Down payment transfer completed (rubles accepted). Title registered on blockchain registry in 1 day." />
-              </div>
-            </Col>
-          </Row>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 48px" }}>
+            <ProcessStep n={1} delay={0}   title="Enter Georgia"        desc="A personal visit is mandatory. Citizens of 90+ countries can stay visa-free for up to 1 year. Rare exceptions via notarised power of attorney." />
+            <ProcessStep n={3} delay={160} title="Submit Application"   desc="In-branch at TBC or online for expats. Multi-step compliance review for Russian/Belarusian nationals. Approval in 2–5 business days with partner support." />
+            <ProcessStep n={2} delay={80}  title="Prepare Documents"    desc="Passport, proof of income (salary, business registration, freelance contracts, rental income). Open a Georgian bank account. Russians: ruble transfers direct from Russia are possible." />
+            <ProcessStep n={4} delay={240} title="Valuation & Closing"  desc="Bank appraises the property — often below market. Signing at a notary. Down payment transfer completed (rubles accepted). Title registered on blockchain registry in 1 day." />
+          </div>
         </Container>
       </section>
 
