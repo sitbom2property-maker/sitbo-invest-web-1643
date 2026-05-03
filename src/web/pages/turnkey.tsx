@@ -31,7 +31,7 @@ function Hero() {
             <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>Batumi · Georgia</span>
           </div>
 
-          <h1 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
+          <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
             Reality matches<br />
             <em style={{ fontStyle: "italic", color: C.teal }}>the render</em>
           </h1>
@@ -102,7 +102,7 @@ function TwoColumns() {
               <div style={{ width: "24px", height: "1px", background: C.wine }} />
               <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: col.dark ? "rgba(255,251,240,0.45)" : C.muted }}>{col.tag}</span>
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: col.dark ? "rgba(255,251,240,0.55)" : "#666", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
               {col.items.map(item => (
@@ -134,14 +134,14 @@ function DesignRule() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.wine, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(32px,5vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Cormorant Garamond, serif", fontWeight: 700, color: "rgba(255,251,240,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(255,251,240,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "28px" }}>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>Our Cornerstone</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
             Perfection is Planned.<br />
             <em style={{ fontStyle: "italic" }}>We Never Start Without a Design Project.</em>
           </h2>
@@ -201,7 +201,7 @@ function Calculator() {
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>Cost Estimator</span>
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
             Get a Preliminary Estimate
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, marginBottom: "40px" }}>
@@ -212,7 +212,7 @@ function Calculator() {
           <div style={{ marginBottom: "36px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
               <span style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark }}>Property Area</span>
-              <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark }}>{area} m²</span>
+              <span style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark }}>{area} m²</span>
             </div>
             <input type="range" min={25} max={200} value={area} onChange={e => setArea(+e.target.value)}
               style={{ width: "100%", accentColor: C.teal, height: "4px", cursor: "pointer" }} />
@@ -255,13 +255,13 @@ function Calculator() {
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>Estimated Cost Range</p>
-                <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
+                <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
                   ${low.toLocaleString()} – ${high.toLocaleString()}
                 </p>
               </div>
               <div style={{ background: C.wine, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>Estimated Timeline</p>
-                <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
+                <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
                 <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
@@ -296,7 +296,7 @@ function RemoteProcess() {
               <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>Remote Management</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
               Your Renovation, Under Your Control.<br />
               <em style={{ fontStyle: "italic", color: C.teal }}>From Anywhere.</em>
             </h2>
@@ -304,7 +304,7 @@ function RemoteProcess() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
             {steps.map((s, i) => (
               <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#ede9e0", padding: "40px 32px" }}>
-                <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
+                <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
                 <p style={{ fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.88rem", color: C.dark, margin: "0 0 10px" }}>{s.title}</p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "#777", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
               </div>
@@ -342,7 +342,7 @@ function Portfolio() {
                 <div style={{ width: "28px", height: "1px", background: C.wine }} />
                 <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>Our Work</span>
               </div>
-              <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
+              <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
                 Proof of <em style={{ fontStyle: "italic", color: C.teal }}>Perfection</em>
               </h2>
             </div>
@@ -361,7 +361,7 @@ function Portfolio() {
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,240,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div style={{ padding: "24px" }}>
-                  <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</p>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                     {p.tags.map(tag => (
                       <span key={tag} style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,251,240,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.12)" : "rgba(255,251,240,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
@@ -389,7 +389,7 @@ function Guarantees() {
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>For Perfectionists</span>
           </div>
-          <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
+          <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
             We Guarantee Your <em style={{ fontStyle: "italic", color: C.wine }}>Aesthetic Satisfaction</em>
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#666", lineHeight: 1.8 }}>
@@ -401,7 +401,7 @@ function Guarantees() {
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>For Investors</span>
           </div>
-          <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
+          <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
             Fixed Budget. Fixed Timeline. <em style={{ fontStyle: "italic", color: C.teal }}>In the Contract.</em>
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.8 }}>
@@ -424,7 +424,7 @@ function MarketStats() {
           <div style={{ width: "28px", height: "1px", background: C.wine }} />
           <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>Market Opportunity</span>
         </div>
-        <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "60px", maxWidth: "700px" }}>
+        <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "60px", maxWidth: "700px" }}>
           Why Batumi <em style={{ fontStyle: "italic", color: C.teal }}>Works</em> for Renovation & Rental
         </h2>
 
@@ -432,7 +432,7 @@ function MarketStats() {
 {/* Stat 1: Tourism Growth */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Annual Tourists (2025)</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -443,7 +443,7 @@ function MarketStats() {
 {/* Stat 2: Nightly Rates */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Peak Season (May–Oct)</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -454,7 +454,7 @@ function MarketStats() {
 {/* Stat 3: Payback Period */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Avg. Payback Period</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -465,7 +465,7 @@ function MarketStats() {
 {/* Stat 4: Price Appreciation */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Value Growth by Completion</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -476,7 +476,7 @@ function MarketStats() {
 {/* Stat 5: Market Price */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Per m² (2025–2026)</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -487,7 +487,7 @@ function MarketStats() {
 {/* Stat 6: Institutional Confidence */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Primary Market Data</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
@@ -530,7 +530,7 @@ function ContactForm() {
               <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>Free Consultation</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
               Ready to Create an Exceptional Space <em style={{ fontStyle: "italic", color: C.teal }}>in Batumi?</em>
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.75 }}>
@@ -541,7 +541,7 @@ function ContactForm() {
           {sent ? (
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>Message Received</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>Message Received</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>Arthur will be in touch within 24 hours.</p>
             </div>
           ) : (

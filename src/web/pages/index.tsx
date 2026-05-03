@@ -412,7 +412,7 @@ function FounderNote() {
               <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "DM Sans" }}>The Founder's Note</span>
             </div>
 
-            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
+            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Jun, serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
               "I close every deal{" "}
               <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>personally.</em>
               {" "}Seven years in Batumi. Twelve client mandates per quarter, maximum."
@@ -425,7 +425,7 @@ function FounderNote() {
               I've spent seven years in Batumi learning who to trust — and who to walk away from. When you hire SITBO, you hire that knowledge. I personally supervise every turnkey renovation and sign off on every purchase. We accept twelve client mandates per quarter. That's the math of actually caring.
             </p>
 
-            <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: 0 }}>
+            <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: 0 }}>
               — Arthur, Founder
             </p>
           </div>
@@ -455,7 +455,7 @@ function Philosophy() {
         {/* Headline */}
         <div style={{ display: "inline-block", marginBottom: "40px" }}>
           <h2 style={{
-            fontFamily: "Cormorant Garamond, serif",
+            fontFamily: "Jun, serif",
             fontSize: "clamp(2.8rem, 6vw, 5rem)",
             fontWeight: 400,
             color: "#FFFBF0",
@@ -502,7 +502,7 @@ function Philosophy() {
 function Founder() {
   return (
     <section id="about" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Cormorant Garamond, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>BATUMI</div>
+      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>BATUMI</div>
 
       {/* Big frame card */}
       <div style={{ background: "#FFFBF0", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "hidden", padding: "80px 0" }}>
@@ -515,7 +515,7 @@ function Founder() {
             <img src="/founder.png" alt="Arthur Arutuniyan"
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "top center", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
-              <p style={{ color: "#FFFBF0", fontFamily: "Cormorant Garamond, serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
+              <p style={{ color: "#FFFBF0", fontFamily: "Jun, serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
               <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "DM Sans", fontWeight: 600 }}>Founder & Sales Expert</p>
             </div>
           </div>
@@ -529,7 +529,7 @@ function Founder() {
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>About & Services</span>
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
               Market Expertise.<br /><em style={{ fontStyle: "italic", color: C.teal }}>Personal Service.</em>
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "#666", lineHeight: 1.85, marginBottom: "60px" }}>
@@ -572,7 +572,7 @@ function Analytics() {
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Market Intelligence · 2026</span>
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
             Batumi is now a Top-5 European<br />investment city.
           </h2>
           <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "DM Sans", marginBottom: isMobile ? "12px" : "24px" }}>— Forbes, 2025</p>
@@ -594,7 +594,7 @@ function Analytics() {
         {/* Triggers + Chart */}
         <div className="analytics-grid" style={{ marginTop: isMobile ? "20px" : "56px" }}>
           <div className="reveal">
-            <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
               Why investors choose<br /><em style={{ fontStyle: "italic", color: C.teal }}>Georgia right now.</em>
             </h3>
             {triggers.map((t) => (
@@ -663,7 +663,7 @@ function Portfolio() {
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Selected Projects</span>
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
               Premium projects,<br /><em style={{ fontStyle: "italic", color: C.teal }}>filtered by us.</em>
             </h2>
           </div>
@@ -733,7 +733,7 @@ function Portfolio() {
       {/* Alabbar quote */}
       <div className="reveal" style={{ padding: "56px 24px 25px", maxWidth: "860px", margin: "0 auto" }}>
         <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-          <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
             "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
@@ -789,7 +789,7 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px 24px", minHeight: "140px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
             <p style={{ color: "rgba(255,250,236,0.55)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>{project.tag}</p>
-            <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFBF0", margin: "0 0 8px" }}>{project.name}</h3>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFBF0", margin: "0 0 8px" }}>{project.name}</h3>
             <p style={{ color: "rgba(255,250,236,0.65)", fontSize: "0.75rem", fontFamily: "DM Sans", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
           </div>
         </div>
@@ -814,7 +814,7 @@ function Lifestyle() {
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>The Climate Paradise</span>
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
             Subtropical beauty.<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>Eternal bloom.</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: "32px" }}>
@@ -823,7 +823,7 @@ function Lifestyle() {
           <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>Eternal Bloom Calendar</p>
           {bloomCalendar.map((item, i) => (
             <div key={item.month} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
-              <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{item.month}</span>
+              <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{item.month}</span>
               <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,250,236,0.6)" }}>{item.bloom}</span>
             </div>
           ))}
@@ -916,13 +916,13 @@ function DiscoveryTour() {
               <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans", fontWeight: 600 }}>Private Property Tour</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               Sitbo Discovery{" "}
             </h2>
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               Experience.
             </h2>
-            <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
+            <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
               Arrive as a guest. Leave as an investor.
             </p>
           </div>
@@ -965,7 +965,7 @@ function DiscoveryTour() {
             transition: "opacity 0.9s ease 0.4s",
           }}>
             <div>
-              <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
+              <span style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
                 $2,000
               </span>
               <span style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>Deposit</span>
@@ -1085,7 +1085,7 @@ function Payment() {
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#aaa", fontFamily: "DM Sans" }}>Payment Methods</span>
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
             Flexible ways to<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>invest in Batumi.</em>
           </h2>
         </div>
@@ -1101,7 +1101,7 @@ function Payment() {
               <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
                 {card.icon}
               </div>
-              <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
+              <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#555", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#8CB2C0", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.25)", paddingTop: "16px" }}>{card.sub}</p>
             </div>
@@ -1190,12 +1190,12 @@ function Calculator() {
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", padding: "12px 0", borderBottom: "1px solid rgba(33,20,26,0.1)" }}>
       <div>
         <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</p>
-        <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
+        <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
       </div>
       {label2 && (
         <div>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label2}</p>
-          <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
+          <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
         </div>
       )}
     </div>
@@ -1211,7 +1211,7 @@ function Calculator() {
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
             <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", fontFamily: "DM Sans" }}>Payment Calculator</span>
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
             Plan your<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>investment.</em>
           </h2>
         </div>
@@ -1327,7 +1327,7 @@ function Calculator() {
               {mode === "installment" ? (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Monthly Payment</p>
-                  <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmtInst(instMonthly)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>0% interest · {instMonths} months</p>
@@ -1337,7 +1337,7 @@ function Calculator() {
               ) : mortTab === "amount" ? (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Monthly Contribution</p>
-                  <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(mortMonthly, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>Annuity payment</p>
@@ -1347,7 +1347,7 @@ function Calculator() {
               ) : (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Max Loan Amount</p>
-                  <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(maxLoan, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>Based on 50% income ratio</p>
@@ -1361,7 +1361,7 @@ function Calculator() {
             {/* ROI Preview */}
             <div style={{ background: "#FFFBF0", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>ROI Preview</p>
-              <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
                 Based on current market data for high-demand areas in Batumi.
               </p>
@@ -1415,7 +1415,7 @@ function Contact() {
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Private Consultation</span>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
           </div>
-          <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "16px" }}>
             Let's discuss<br /><em style={{ fontStyle: "italic", color: C.teal }}>your strategy.</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.muted, lineHeight: 1.7 }}>
@@ -1428,7 +1428,7 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", color: C.dark, marginBottom: "12px" }}>We'll be in touch shortly.</h3>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: C.dark, marginBottom: "12px" }}>We'll be in touch shortly.</h3>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.7 }}>
               Your inquiry has been received. Expect a personal call from Arthur within 24 hours.
             </p>

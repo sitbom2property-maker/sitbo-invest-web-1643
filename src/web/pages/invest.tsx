@@ -159,7 +159,7 @@ function StatCard({ stat, desc, delay = 0 }: { stat: string; desc: string; delay
   return (<>
 
     <div className="inv-reveal" style={{ transitionDelay: `${delay}ms`, borderTop: `2px solid ${C.wine}`, paddingTop: "20px" }}>
-      <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>
+      <div style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>
         {stat}
       </div>
       <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.5, margin: 0 }}>{desc}</p>
@@ -189,20 +189,20 @@ function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) 
         <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>{s.tag}</span>
         <span style={{ fontSize: "1.3rem", lineHeight: 1 }}>{s.icon}</span>
       </div>
-      <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.5rem", fontWeight: 600, color: open ? C.light : C.dark, marginBottom: "16px", lineHeight: 1.2 }}>{s.title}</h3>
+      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 600, color: open ? C.light : C.dark, marginBottom: "16px", lineHeight: 1.2 }}>{s.title}</h3>
 
       <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", marginBottom: "16px" }}>
         <div>
           <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Yield</div>
-          <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.teal : C.dark }}>{s.yield}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.teal : C.dark }}>{s.yield}</div>
         </div>
         <div>
           <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Horizon</div>
-          <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.horizon}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.horizon}</div>
         </div>
         <div>
           <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Risk</div>
-          <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.risk}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.risk}</div>
         </div>
       </div>
 
@@ -233,7 +233,7 @@ function ProcessStep({ step, index }: { step: typeof process[0]; index: number }
 
     <div className="inv-reveal" style={{ transitionDelay: `${index * 80}ms`, display: "flex", gap: "20px", paddingBottom: "32px", borderBottom: "1px solid rgba(33,20,26,0.07)" }}>
       <div style={{ flexShrink: 0, width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${C.wine}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "0.95rem", fontWeight: 700, color: C.wine }}>{step.n}</span>
+        <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 700, color: C.wine }}>{step.n}</span>
       </div>
       <div style={{ paddingTop: "10px" }}>
         <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{step.title}</p>
@@ -290,7 +290,7 @@ export default function InvestPage() {
               <div className="inv-reveal">
                 <Eyebrow>Real Estate Investment · Batumi, Georgia</Eyebrow>
                 <h1 style={{
-                  fontFamily: "Cormorant Garamond, serif",
+                  fontFamily: "Jun, serif",
                   fontSize: "clamp(2.8rem, 6vw, 5.2rem)",
                   fontWeight: 400, lineHeight: 1.05,
                   color: C.dark, marginBottom: "28px",
@@ -329,7 +329,7 @@ export default function InvestPage() {
                 background: C.dark, borderRadius: "12px", padding: "16px 20px",
                 boxShadow: "0 8px 32px rgba(33,20,26,0.18)",
               }}>
-                <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", fontWeight: 700, color: C.teal, lineHeight: 1 }}>14.5%</div>
+                <div style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.teal, lineHeight: 1 }}>14.5%</div>
                 <div style={{ fontFamily: "DM Sans", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", marginTop: "4px" }}>Max rental yield</div>
               </div>
             </Col>
@@ -347,7 +347,7 @@ export default function InvestPage() {
             <Col span={5}>
               <div className="inv-reveal">
                 <Eyebrow>Why Batumi</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   The numbers<br />speak first.
                 </h2>
               </div>
@@ -374,7 +374,7 @@ export default function InvestPage() {
           <Row style={{ marginTop: "80px" }}>
             <Col span={8} spanMd={8} style={{ margin: isMobile ? "0" : "0 auto" }}>
               <div className="inv-reveal" style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-                <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.2rem,2.5vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: C.dark, lineHeight: 1.5, marginBottom: "12px" }}>
+                <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.5vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: C.dark, lineHeight: 1.5, marginBottom: "12px" }}>
                   "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
                 </p>
                 <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal }}>
@@ -422,7 +422,7 @@ export default function InvestPage() {
             <Col span={6}>
               <div className="inv-reveal">
                 <Eyebrow>Investment Strategies</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   Four ways<br />to grow your<br />capital here.
                 </h2>
               </div>
@@ -455,7 +455,7 @@ export default function InvestPage() {
             <Col span={5}>
               <div className="inv-reveal">
                 <Eyebrow>Market Context</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "24px" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "24px" }}>
                   Still early.<br />Still cheap.
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.8, marginBottom: "20px" }}>
@@ -482,7 +482,7 @@ export default function InvestPage() {
                   <div key={row.city} style={{ marginBottom: "16px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>${row.price.toLocaleString()}</span>
+                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>${row.price.toLocaleString()}</span>
                     </div>
                     <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px" }}>
                       <div style={{ height: "100%", width: `${row.pct}%`, background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px", transition: "width 1s ease" }} />
@@ -506,7 +506,7 @@ export default function InvestPage() {
                   <div key={row.city} style={{ marginBottom: "16px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>{row.yield}</span>
+                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>{row.yield}</span>
                     </div>
                     <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px" }}>
                       <div style={{ height: "100%", width: `${row.pct}%`, background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px" }} />
@@ -526,7 +526,7 @@ export default function InvestPage() {
             <Col span={5}>
               <div className="inv-reveal">
                 <Eyebrow>How It Works</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   From first call<br />to passive income.
                 </h2>
               </div>
@@ -568,7 +568,7 @@ export default function InvestPage() {
             <Col span={5}>
               <div className="inv-reveal">
                 <Eyebrow>FAQ</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   Common<br />questions.
                 </h2>
               </div>
@@ -585,7 +585,7 @@ export default function InvestPage() {
               {!isMobile && (
                 <div className="inv-reveal" style={{ position: "sticky", top: "96px", background: C.dark, borderRadius: "16px", padding: "32px 28px" }}>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>Have more questions?</p>
-                  <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>Talk to us directly.</h3>
+                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>Talk to us directly.</h3>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, marginBottom: "24px" }}>Our team has closed hundreds of deals for non-resident investors. No pitch — just straight answers.</p>
                   <Link href="/#contact">
                     <a style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
@@ -606,7 +606,7 @@ export default function InvestPage() {
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="inv-reveal">
                 <Eyebrow>Ready to invest?</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,5vw,3.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "24px" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,5vw,3.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "24px" }}>
                   Your first property in Batumi<br />
                   <em style={{ fontStyle: "italic", color: C.teal }}>starts with one call.</em>
                 </h2>

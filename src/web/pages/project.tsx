@@ -147,7 +147,7 @@ function ROICalc({ project }: { project: Project }) {
 
     <div style={{ background: C.parchment, borderRadius: "16px", padding: "32px 28px" }}>
       <Eyebrow>Investment Calculator</Eyebrow>
-      <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", fontWeight: 400, color: C.dark, marginBottom: "28px" }}>
+      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.dark, marginBottom: "28px" }}>
         Model your returns
       </h3>
 
@@ -190,14 +190,14 @@ function ROICalc({ project }: { project: Project }) {
             borderRadius: "10px", padding: "18px 16px",
             borderTop: `2px solid ${item.accent ? C.teal : C.wine}`,
           }}>
-            <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.5rem", fontWeight: 700, color: item.accent ? C.teal : C.dark, lineHeight: 1 }}>{item.value}</div>
+            <div style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 700, color: item.accent ? C.teal : C.dark, lineHeight: 1 }}>{item.value}</div>
             <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: item.accent ? "rgba(255,251,240,0.45)" : C.muted, marginTop: "6px" }}>{item.label}</div>
           </div>
         ))}
       </div>
 
       <div style={{ marginTop: "16px", textAlign: "center", background: C.dark, borderRadius: "10px", padding: "16px" }}>
-        <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2.4rem", fontWeight: 700, color: C.teal }}>{roi.toFixed(0)}%</span>
+        <span style={{ fontFamily: "Jun, serif", fontSize: "2.4rem", fontWeight: 700, color: C.teal }}>{roi.toFixed(0)}%</span>
         <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", display: "block", marginTop: "2px" }}>
           Estimated Total ROI over {horizon} years
         </span>
@@ -261,7 +261,7 @@ export default function ProjectPage() {
 
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", color: C.dark }}>Project not found</h1>
+          <h1 style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.dark }}>Project not found</h1>
           <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>← Back to home</a></Link>
         </div>
       </div>
@@ -300,7 +300,7 @@ export default function ProjectPage() {
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: "48px" }}>
                 <Eyebrow>Overview</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "center", gap: "6px", marginBottom: "20px" }}>
@@ -379,7 +379,7 @@ export default function ProjectPage() {
                   </div>
                   <div style={{ background: C.parchment, borderRadius: "12px", padding: "20px 18px", borderTop: `2px solid ${C.teal}` }}>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment Plan</p>
-                    <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark, margin: 0 }}>{p.pricePerSqm ?? p.priceFrom}</p>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark, margin: 0 }}>{p.pricePerSqm ?? p.priceFrom}</p>
                   </div>
                 </div>
               </div>
@@ -393,10 +393,10 @@ export default function ProjectPage() {
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>Interested?</p>
-                  <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
+                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     Get a personal offer
                   </h3>
-                  <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{p.priceFrom}</p>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{p.priceFrom}</p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                     We'll prepare a detailed cost estimate and floor plan selection for this project.
                   </p>
@@ -448,7 +448,7 @@ export default function ProjectPage() {
             <Col span={5}>
               <div className="pr-reveal" style={{ transitionDelay: "100ms", paddingTop: "8px" }}>
                 <Eyebrow>Why This Project</Eyebrow>
-                <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
+                <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
                   The investment case for {p.name}.
                 </h3>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.8, marginBottom: "20px" }}>
@@ -474,7 +474,7 @@ export default function ProjectPage() {
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
             <Eyebrow>Floor Plans</Eyebrow>
-            <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
               Available Layouts
             </h3>
           </div>
@@ -510,7 +510,7 @@ export default function ProjectPage() {
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
             <Eyebrow>Location</Eyebrow>
-            <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
 {p.location}
             </h3>
           </div>
@@ -537,7 +537,7 @@ export default function ProjectPage() {
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
-                    <p style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
                     {proj.yield} ROI
@@ -555,7 +555,7 @@ export default function ProjectPage() {
           <Row>
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="pr-reveal">
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
                   Ready to invest in<br />
                   <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
@@ -594,7 +594,7 @@ export default function ProjectPage() {
               ✕
             </button>
 
-            <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
               Request Details
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>

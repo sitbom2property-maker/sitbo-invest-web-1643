@@ -111,7 +111,7 @@ function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; 
 
     <div className="m-reveal" style={{ transitionDelay: `${delay}ms`, display: "flex", gap: "20px", paddingBottom: "32px", borderBottom: "1px solid rgba(33,20,26,0.07)" }}>
       <div style={{ flexShrink: 0, width: "44px", height: "44px", borderRadius: "50%", border: `1.5px solid ${C.wine}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1rem", fontWeight: 700, color: C.wine }}>{String(n).padStart(2, "0")}</span>
+        <span style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 700, color: C.wine }}>{String(n).padStart(2, "0")}</span>
       </div>
       <div style={{ paddingTop: "8px" }}>
         <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{title}</p>
@@ -170,7 +170,7 @@ function MortgageCalculator() {
           <Col span={6}>
             <div className="m-reveal">
               <Eyebrow>Calculator</Eyebrow>
-              <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+              <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                 Calculate your<br />monthly payment.
               </h2>
             </div>
@@ -278,7 +278,7 @@ function MortgageCalculator() {
                 borderRadius: "12px", padding: "24px 20px", textAlign: "center",
               }}>
                 <div style={{
-                  fontFamily: "Cormorant Garamond, serif",
+                  fontFamily: "Jun, serif",
                   fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 700, lineHeight: 1,
                   color: item.accent ? C.teal : C.dark, marginBottom: "8px",
                 }}>{item.value}</div>
@@ -322,7 +322,7 @@ export default function MortgagePage() {
               <div className="m-reveal">
                 <Eyebrow>Real Estate Financing · Georgia</Eyebrow>
                 <h1 style={{
-                  fontFamily: "Cormorant Garamond, serif",
+                  fontFamily: "Jun, serif",
                   fontSize: "clamp(2.8rem, 6vw, 5rem)",
                   fontWeight: 400, lineHeight: 1.05,
                   color: C.dark, marginBottom: "28px", letterSpacing: "-0.01em",
@@ -356,7 +356,7 @@ export default function MortgagePage() {
     { val: "$500K",  label: "Max loan amount" },
                   ].map((s) => (
                     <div key={s.label} style={{ background: C.parchment, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
-                      <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
+                      <div style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
                       <div style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</div>
                     </div>
                   ))}
@@ -377,7 +377,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>TBC Bank · Key Terms</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   What to expect<br />from the bank.
                 </h2>
               </div>
@@ -397,7 +397,7 @@ export default function MortgagePage() {
             <Col span={6}>
               <div className="m-reveal" style={{ background: C.parchment, borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
                 <h3 style={{ fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "20px" }}>Down Payment (LTV)</h3>
-                <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
+                <div style={{ fontFamily: "Jun, serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, marginBottom: "16px" }}>
                   Of the bank's appraised value — which is often below market price. Plan accordingly.
                 </p>
@@ -466,7 +466,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>Important to Know</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2 }}>
                   Know the<br />risks first.
                 </h2>
               </div>
@@ -502,7 +502,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>Step by Step</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   How to get<br />approved.
                 </h2>
               </div>
@@ -545,7 +545,7 @@ export default function MortgagePage() {
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="m-reveal">
                 <Eyebrow>Ready to apply?</Eyebrow>
-                <h2 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
                   We work with TBC Bank<br />
                   <em style={{ fontStyle: "italic", color: C.teal }}>directly.</em>
                 </h2>
