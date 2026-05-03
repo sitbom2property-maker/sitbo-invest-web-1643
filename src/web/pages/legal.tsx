@@ -87,27 +87,19 @@ export default function LegalPage() {
       <div style={{ background: C.light, minHeight: "100vh" }}>
         <Nav />
 
-        {/* Hero */}
-        <section style={{ background: C.dark, paddingTop: "64px" }}>
-          <div style={{ maxWidth: "800px", margin: "0 auto", padding: "64px clamp(24px,4vw,48px) 56px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <div style={{ width: "24px", height: "1px", background: C.teal }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
-                Legal
-              </span>
-            </div>
-            <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, margin: "0 0 16px" }}>
-              Terms of Service &<br />Privacy Policy
-            </h1>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, margin: 0 }}>
-              Last updated: January 2025 · sitboinvest.ge operated by Sitbo Group
-            </p>
-          </div>
-        </section>
-
         {/* Content */}
-        <section style={{ padding: "72px 0 96px" }}>
+        <section style={{ background: C.light, padding: "72px 0 96px" }}>
           <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(24px,4vw,48px)" }}>
+            
+            {/* Page title */}
+            <div style={{ marginBottom: "64px" }}>
+              <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, margin: "0 0 12px" }}>
+                Terms of Service &amp; Privacy Policy
+              </h1>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
+                Last updated: January 2025 · sitboinvest.ge operated by Sitbo Group
+              </p>
+            </div>
             {sections.map((section, si) => (
               <div key={section.title} style={{ marginBottom: si < sections.length - 1 ? "72px" : 0 }}>
                 {/* Section title */}
