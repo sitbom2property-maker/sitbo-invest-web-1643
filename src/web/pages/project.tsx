@@ -122,7 +122,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
 }
 
 // ─── ROI Calculator ───────────────────────────────────────────────────────────
-function ROICalc({ project }: { project: Project }) {
+function ROICalc() {
   const [budget, setBudget]   = useState(150000);
   const [yieldPct, setYield]  = useState(11);
   const [horizon, setHorizon] = useState(5);
@@ -437,6 +437,10 @@ export default function ProjectPage() {
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 700, color: C.dark }}>{row.value}</span>
                     </div>
                   ))}
+                </div>
+
+                <div className="pr-reveal" style={{ transitionDelay: "120ms" }}>
+                  <ROICalc />
                 </div>
 
 {/* Live Camera Card */}
