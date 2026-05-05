@@ -48,7 +48,7 @@ const projects = [
     address: "New Boulevard St, 12", seaDistance: "12 minutes to the sea", seaMeters: "950 m",
     location: "New Boulevard, Batumi City Centre · Park frontage",
     desc: "Contemporary high-rise facing the new park avenue. Architecturally optimized layouts deliver strong rental yields driven by high demand from digital nomads and short-term tourists.",
-    yield: "9–1000%",
+    yield: "9–11%",
     developer: "Placeholder Developer",
     priceFrom: "From $75,000",
     completion: "Q2 2026",
