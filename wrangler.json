@@ -1,15 +1,20 @@
 {
-    "d1_databases": [
-      {
-        "binding": "DB",
-        "database_id": "42757ec5-421f-48c5-9c2a-e2ebb084314f",
-        "migrations_dir": "src/api/migrations"
-      }
-    ],
-    "r2_buckets": [
-      {
-        "binding": "BUCKET",
-        "bucket_name": "otvgs9fzc5a2ixvlk19wpc5myrmovqsy"
-      }
-    ]
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "42757ec5-421f-48c5-9c2a-e2ebb084314f",
+      "migrations_dir": "src/api/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "otvgs9fzc5a2ixvlk19wpc5myrmovqsy"
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
   }
+}
