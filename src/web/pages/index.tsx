@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { Reviews } from "../components/reviews";
+import { Partners } from "../components/partners";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -227,107 +229,6 @@ const cardImages = [
   "/ambassadori.png",
   "/gonio_final_v1.png",
 ];
-
-// ─── Nav ──────────────────────────────────────────────────────────────────────
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", h, { passive: true });
-    h(); // run once on mount
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-
-  // scrolled=false → light hero bg → dark teal logo + dark text
-  // scrolled=true  → dark sticky nav  → white logo + white text
-  const isDark = scrolled || menuOpen;
-
-  const links = [
-    { label: "Catalog",         href: "/catalog" },
-    { label: "Services",        href: "#about" },
-    { label: "Turnkey Renovation", href: "/turnkey" },
-    { label: "Why Georgia",     href: "/invest" },
-    { label: "Mortgage",        href: "/mortgage" },
-    { label: "Discovery Tour",  href: "#discovery-tour" },
-  ];
-
-  return (
-    <>
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "0 40px 0 0", height: "64px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        transition: "background 0.4s, border-color 0.4s",
-        background: isDark ? "#21141A" : "transparent",
-        backdropFilter: "none",
-        borderBottom: scrolled ? "1px solid rgba(140,178,192,0.2)" : "none",
-      }}>
-        {/* Logo — left, pushed inward */}
-        <a href="#" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, marginLeft: "45px" }}>
-          {/* dark teal logo on light bg, white logo on dark bg */}
-          <img
-            src={isDark ? "/logo-dark-bg.png" : "/logo-light-bg.png"}
-            alt="SITBO"
-            style={{ height: "19px", width: "auto", maxWidth: "90px", objectFit: "contain", display: "block", transition: "opacity 0.3s" }}
-          />
-        </a>
-
-        {/* Desktop links — absolutely centered */}
-        <div className="nav-desktop-links" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", height: "64px" }}>
-          {links.map((l) => (
-            <a key={l.label} className="nav-link" href={l.href}
-              style={{ color: isDark ? "#FFFBF0" : "#21141A", transition: "color 0.3s ease" }}
-            >{l.label}</a>
-          ))}
-        </div>
-
-        {/* Desktop CTA — WhatsApp */}
-        <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" className="nav-desktop-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "50%", background: "transparent", border: `1.5px solid ${C.teal}`, textDecoration: "none", cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = C.teal; (e.currentTarget as HTMLElement).style.boxShadow = `0 0 12px rgba(140,178,192,0.3)`; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }} onMouseEnter={e => (e.currentTarget.style.stroke = "#21141A")} onMouseLeave={e => (e.currentTarget.style.stroke = C.teal)}>
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </a>
-
-        {/* Hamburger */}
-        <button
-          className="nav-hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", flexDirection: "column", gap: "5px" }}
-        >
-          <span style={{ display: "block", width: "22px", height: "1.5px", background: isDark ? C.light : "#21141A", transition: "background 0.3s", transform: menuOpen ? "rotate(45deg) translate(4px,4px)" : "none" }} />
-          <span style={{ display: "block", width: "22px", height: "1.5px", background: isDark ? C.light : "#21141A", transition: "background 0.3s", transform: menuOpen ? "rotate(-45deg)" : "none" }} />
-          {!menuOpen && <span style={{ display: "block", width: "22px", height: "1.5px", background: isDark ? C.light : "#21141A", transition: "background 0.3s" }} />}
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div style={{
-          position: "fixed", top: "64px", left: 0, right: 0, zIndex: 99,
-          background: "#21141A",
-          padding: "24px", display: "flex", flexDirection: "column", gap: "0",
-          borderBottom: "1px solid rgba(140,178,192,0.2)",
-        }}>
-          {links.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-              style={{ color: C.light, fontFamily: "DM Sans", fontSize: "0.85rem", letterSpacing: "0.06em", textTransform: "uppercase", textDecoration: "none", padding: "16px 0", borderBottom: "1px solid rgba(140,178,192,0.1)" }}>
-              {l.label}
-            </a>
-          ))}
-          <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" className="btn-gold" onClick={() => setMenuOpen(false)}
-            style={{ marginTop: "24px", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", color: C.light, background: "transparent", border: `1.5px solid ${C.teal}`, padding: "10px" }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            WhatsApp
-          </a>
-        </div>
-      )}
-    </>
-  );
-}
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
@@ -1571,7 +1472,6 @@ function Index() {
   useReveal();
   return (
     <div style={{ minHeight: "100vh" }}>
-      <Nav />
       <Hero />
       <FounderNote />
       <Philosophy />
@@ -1580,6 +1480,8 @@ function Index() {
       <Portfolio />
       <DiscoveryTour />
       <Payment />
+      <Reviews />
+      <Partners />
       <Contact />
       <Footer />
       <SocialProofToast />

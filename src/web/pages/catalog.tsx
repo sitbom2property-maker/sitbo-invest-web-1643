@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { Footer } from "../components/footer";
-import { Nav } from "../components/nav";
 
 const C = {
   dark:      "#21141A",
@@ -161,11 +160,9 @@ export default function CatalogPage() {
 
   return (
     <div style={{ background: C.light, minHeight: "100vh" }}>
-      <Nav />
-
       {/* ── HERO ── */}
-      <section style={{ paddingTop: "64px", background: C.dark }}>
-        <Container style={{ paddingTop: "64px", paddingBottom: "56px" }}>
+      <section style={{ background: C.dark }}>
+        <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
@@ -201,7 +198,7 @@ export default function CatalogPage() {
       </section>
 
       {/* ── FILTER BAR ── */}
-      <div style={{ background: C.parchment, borderBottom: "1px solid rgba(33,20,26,0.07)", position: "sticky", top: "64px", zIndex: 50 }}>
+      <div style={{ background: C.parchment, borderBottom: "1px solid rgba(33,20,26,0.07)", position: "sticky", top: "80px", zIndex: 40 }}>
         <Container style={{ paddingTop: "14px", paddingBottom: "14px" }}>
           <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
 

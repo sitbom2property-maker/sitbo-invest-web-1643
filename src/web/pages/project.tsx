@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { Footer } from "../components/footer";
-import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -279,8 +278,6 @@ export default function ProjectPage() {
 
 {/* ── CSS fadeIn keyframe ── */}
       <style>{`@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }`}</style>
-
-      <Nav />
 
 {/* ── GALLERY — Full width ── */}
       <section style={{ paddingTop: "120px" }}>

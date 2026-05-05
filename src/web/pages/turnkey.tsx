@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { Footer } from "../components/footer";
-import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -600,7 +599,6 @@ export default function TurnkeyPage() {
   return (<>
 
     <div style={{ minHeight: "100vh", background: C.dark }}>
-      <Nav />
       <Hero />
       <TwoColumns />
       <DesignRule />

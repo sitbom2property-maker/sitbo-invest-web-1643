@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { Nav } from "../components/nav";
 import { Footer } from "../components/footer";
 
 const C = {
@@ -85,7 +84,6 @@ export default function LegalPage() {
   return (
     <>
       <div style={{ background: C.light, minHeight: "100vh" }}>
-        <Nav />
 
         {/* Content */}
         <section style={{ background: C.light, padding: "72px 0 96px" }}>

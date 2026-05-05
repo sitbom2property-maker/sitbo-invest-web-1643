@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Footer } from "../components/footer";
-import { Nav } from "../components/nav";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -278,10 +277,8 @@ export default function InvestPage() {
   return (<>
 
     <div style={{ background: C.light, minHeight: "100vh", color: C.dark }}>
-      <Nav />
-
 {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "64px" }}>
+      <section>
         <Container>
           <Row style={{ minHeight: "88vh", alignItems: "center", paddingTop: "48px", paddingBottom: "64px" }}>
 
