@@ -1,5 +1,30 @@
 {
-	"files.associations": {
-		"wrangler.json": "jsonc"
+	"name": "sitbo-invest-web-1643",
+	"routes": [
+	  {
+		"pattern": "sitboinvest.ge/*",
+		"zone_name": "sitboinvest.ge"
+	  },
+	  {
+		"pattern": "www.sitboinvest.ge/*",
+		"zone_name": "sitboinvest.ge"
+	  }
+	],
+	"d1_databases": [
+	  {
+		"binding": "DB",
+		"database_id": "42757ec5-421f-48c5-9c2a-e2ebb884314f",
+		"migrations_dir": "src/api/migrations"
+	  }
+	],
+	"r2_buckets": [
+	  {
+		"binding": "BUCKET",
+		"bucket_name": "otvgs9fzc5a2ixvlk19wpc5myrmovqsy"
+	  }
+	],
+	"assets": {
+	  "directory": "./dist",
+	  "not_found_handling": "single-page-application"
 	}
-}
+  }

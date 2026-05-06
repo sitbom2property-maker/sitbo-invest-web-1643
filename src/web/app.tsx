@@ -9,7 +9,6 @@ import LegalPage from "./pages/legal";
 import { Provider } from "./components/provider";
 import { Nav, NAV_HEIGHT } from "./components/nav";
 import { CookieConsent } from "./components/cookie-consent";
-import { AgentFeedback } from "@runablehq/website-runtime";
 
 function App() {
 	return (
@@ -28,7 +27,6 @@ function App() {
 			</div>
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
-			{import.meta.env.DEV && <AgentFeedback />}
 		</Provider>
 	);
 }

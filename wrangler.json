@@ -1,20 +1,20 @@
 {
   "name": "sitbo-invest-web-1643",
-  "d1_databases": [
+  "compatibility_date": "2026-05-06",
+  "main": "dist/sitbo_invest_web_1643/index.js",
+  "routes": [
     {
-      "binding": "DB",
-      "database_id": "42757ec5-421f-48c5-9c2a-e2ebb884314f",
-      "migrations_dir": "src/api/migrations"
-    }
-  ],
-  "r2_buckets": [
+      "pattern": "sitboinvest.ge/*",
+      "zone_name": "sitboinvest.ge"
+    },
     {
-      "binding": "BUCKET",
-      "bucket_name": "otvgs9fzc5a2ixvlk19wpc5myrmovqsy"
+      "pattern": "www.sitboinvest.ge/*",
+      "zone_name": "sitboinvest.ge"
     }
   ],
   "assets": {
-    "directory": "./dist",
+    "directory": "./dist/client",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   }
 }
