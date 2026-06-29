@@ -81,7 +81,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div style={{ maxWidth: "1100px", margin: "40px auto 0", paddingTop: "24px", borderTop: "1px solid rgba(140,178,192,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa", margin: 0 }}>© 2025 Sitbo Invest. All rights reserved.</p>
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa", margin: 0 }}>© 2026 Sitbo Invest. All rights reserved.</p>
         <Link href="/legal">
           <a style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
             onMouseEnter={e => (e.currentTarget.style.color = C.teal)}

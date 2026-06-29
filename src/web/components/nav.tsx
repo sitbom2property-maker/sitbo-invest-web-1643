@@ -2,14 +2,13 @@ import { useState, type CSSProperties } from "react";
 import { Link } from "wouter";
 
 const C = {
-  dark:      "#21141A",
-  teal:      "#8CB2C0",
-  light:     "#FFFBF0",
-  muted:     "#7a7a7a",
+  dark:  "#21141A",
+  teal:  "#8CB2C0",
+  light: "#FFFBF0",
 };
 
 export const NAV_HEIGHT = 80;
-const SIDE_PADDING = "32px";
+
 const LINK_STYLE: CSSProperties = {
   fontFamily: "DM Sans",
   fontSize: "14px",
@@ -24,12 +23,12 @@ export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { label: "Catalog",              href: "/catalog" },
-    { label: "Services",             href: "/#about" },
-    { label: "Turnkey Renovation",   href: "/turnkey" },
-    { label: "Why Georgia",          href: "/invest" },
-    { label: "Mortgage",             href: "/mortgage" },
-    { label: "Discovery Tour",       href: "/#discovery-tour" },
+    { label: "Catalog",            href: "/catalog" },
+    { label: "Services",           href: "/#about" },
+    { label: "Turnkey Renovation", href: "/turnkey" },
+    { label: "Why Georgia",        href: "/invest" },
+    { label: "Mortgage",           href: "/mortgage" },
+    { label: "Discovery Tour",     href: "/#discovery-tour" },
   ];
 
   return (
@@ -49,18 +48,20 @@ export function Nav() {
       <div
         style={{
           height: "100%",
-          padding: `0 ${SIDE_PADDING}`,
+          padding: "0 clamp(16px, 4vw, 32px)",
           display: "grid",
           gridTemplateColumns: "auto 1fr auto",
           alignItems: "center",
-          columnGap: "24px",
+          columnGap: "16px",
         }}
       >
+        {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", height: "100%" }}>
           <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
         </Link>
 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "24px", minWidth: 0 }}>
+        {/* Desktop nav links — hidden on mobile via .nav-desktop-links CSS class */}
+        <div className="nav-desktop-links" style={{ justifyContent: "center" }}>
           {links.map(l => (
             <Link
               key={l.label}
@@ -74,70 +75,125 @@ export function Nav() {
           ))}
         </div>
 
+        {/* Right column: WhatsApp CTA (desktop) + Hamburger (mobile) */}
         <div style={{ display: "flex", gap: "10px", alignItems: "center", justifySelf: "end" }}>
-          <a
-            href="https://wa.me/995555505288"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* WhatsApp icon — hidden on mobile via .nav-desktop-cta */}
+          <div className="nav-desktop-cta">
+            <a
+              href="https://wa.me/995555505288"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "38px",
+                height: "38px",
+                borderRadius: "999px",
+                background: "transparent",
+                border: `1px solid ${C.teal}`,
+                textDecoration: "none",
+                cursor: "pointer",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = C.teal;
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 10px rgba(140,178,192,0.28)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Hamburger — shown on mobile via .nav-hamburger CSS class */}
+          <button
+            className="nav-hamburger"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "38px",
-              height: "38px",
-              borderRadius: "999px",
-              background: "transparent",
-              border: `1px solid ${C.teal}`,
-              textDecoration: "none",
+              background: "none",
+              border: "none",
               cursor: "pointer",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.background = C.teal;
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 0 10px rgba(140,178,192,0.28)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
+              padding: "8px",
+              color: C.dark,
+              fontSize: "22px",
+              lineHeight: 1,
             }}
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke={C.teal}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ transition: "stroke 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.stroke = C.dark)}
-              onMouseLeave={e => (e.currentTarget.style.stroke = C.teal)}
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          </a>
+            {menuOpen ? "✕" : "☰"}
+          </button>
         </div>
       </div>
 
-      {/* Mobile hamburger */}
-      <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: "8px", marginRight: "20px", fontSize: "24px", color: C.dark }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-        ☰
-      </button>
-
-      {/* Mobile menu */}
+      {/* Mobile dropdown menu */}
       {menuOpen && (
-        <div style={{ position: "absolute", top: `${NAV_HEIGHT}px`, left: 0, right: 0, background: C.light, borderBottom: `1px solid rgba(33,20,26,0.08)`, padding: "16px", display: "flex", flexDirection: "column", gap: "8px", zIndex: 99 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: `${NAV_HEIGHT}px`,
+            left: 0,
+            right: 0,
+            background: C.light,
+            borderBottom: "1px solid rgba(33,20,26,0.08)",
+            boxShadow: "0 8px 24px rgba(33,20,26,0.08)",
+            padding: "8px 20px 20px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0",
+            zIndex: 99,
+          }}
+        >
           {links.map(l => (
             <Link
               key={l.label}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              style={{ ...LINK_STYLE, fontSize: "14px", color: "rgba(0,0,0,0.8)", padding: "10px 0", borderBottom: `1px solid rgba(33,20,26,0.06)` }}
+              style={{
+                ...LINK_STYLE,
+                fontSize: "13px",
+                color: "rgba(0,0,0,0.8)",
+                padding: "13px 0",
+                borderBottom: "1px solid rgba(33,20,26,0.06)",
+                display: "block",
+              }}
             >
               {l.label}
             </Link>
           ))}
+          <a
+            href="https://wa.me/995555505288"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              marginTop: "16px",
+              padding: "14px 20px",
+              background: C.teal,
+              borderRadius: "8px",
+              textDecoration: "none",
+              fontFamily: "DM Sans",
+              fontWeight: 600,
+              fontSize: "0.78rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: C.dark,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            WhatsApp
+          </a>
         </div>
       )}
     </nav>

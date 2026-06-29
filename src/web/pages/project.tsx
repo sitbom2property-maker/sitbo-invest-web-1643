@@ -248,12 +248,44 @@ export default function ProjectPage() {
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" });
+  const [offerLoading, setOfferLoading] = useState(false);
+  const [offerSent, setOfferSent] = useState(false);
+  const [offerError, setOfferError] = useState("");
 
   const idx    = projects.findIndex(p => p.slug === params.slug);
   const project = projects[idx];
 
   // Scroll to top on mount
   useEffect(() => { window.scrollTo(0, 0); }, [params.slug]);
+
+  const handleOfferSubmit = async () => {
+    if (!offerFormData.name.trim() || (!offerFormData.phone.trim() && !offerFormData.email.trim())) {
+      setOfferError("Please fill in your name and phone or email.");
+      return;
+    }
+    setOfferLoading(true);
+    setOfferError("");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: offerFormData.name,
+          contact: offerFormData.phone || offerFormData.email,
+          budget: project?.name ?? "",
+        }),
+      });
+      if (res.ok) {
+        setOfferSent(true);
+      } else {
+        setOfferError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setOfferError("Network error. Please try again.");
+    } finally {
+      setOfferLoading(false);
+    }
+  };
 
   if (!project) {
     return (<>
@@ -507,15 +539,6 @@ export default function ProjectPage() {
           <div className="pr-reveal" style={{ transitionDelay: "80ms" }}>
             <MapEmbed project={p} />
           </div>
-          {/* District description */}
-          <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.parchment, borderRadius: "12px", padding: "28px 28px" }}>
-            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>Новый Бульвар</h4>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
-              Современный район у моря с развитой инфраструктурой и красивым парком у набережной. Объект расположен на юго-западной окраине города Батуми, вдоль побережья Черного моря. Этот район является символом нового, современного Батуми с его инновационной архитектурой и зелеными зонами для отдыха.
-              <br /><br />
-              До Международного аэропорта Батуми можно добраться всего за 8 минут, что удобно для тех, кто часто путешествует. В непосредственной близости расположены важные социальные объекты: школа и дельфинарий находятся в 11 минутах езды, детский сад — в 12 минутах. Такое расположение делает жилой объект Артекс удобным для семей с детьми и для активной городской жизни резидентов.
-            </p>
-          </div>
         </Container>
       </section>
 
@@ -587,54 +610,43 @@ export default function ProjectPage() {
 
 {/* Offer Form Modal */}
       {showOfferForm && (
-        <div onClick={() => setShowOfferForm(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
+        <div onClick={() => { setShowOfferForm(false); setOfferSent(false); setOfferError(""); setOfferFormData({ name: "", phone: "", email: "" }); }} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "500px", width: "90%", cursor: "default", border: `1px solid rgba(140,178,192,0.2)` }}>
-            <button onClick={() => setShowOfferForm(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
+            <button onClick={() => { setShowOfferForm(false); setOfferSent(false); setOfferError(""); setOfferFormData({ name: "", phone: "", email: "" }); }} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
               ✕
             </button>
 
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
-              Request Details
-            </h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
-              Tell us about your interest in {project.name}. We'll prepare a personalized offer.
-            </p>
+            {offerSent ? (
+              <div style={{ textAlign: "center", padding: "20px 0 10px" }}>
+                <div style={{ width: "56px", height: "56px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                  <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
+                </div>
+                <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", color: C.light, marginBottom: "10px" }}>We'll be in touch.</h3>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.6 }}>Expect a personal call from Arthur within 24 hours.</p>
+              </div>
+            ) : (
+              <>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
+                  Request Details
+                </h2>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
+                  Tell us about your interest in {project.name}. We'll prepare a personalized offer.
+                </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={offerFormData.name}
-                onChange={e => setOfferFormData({ ...offerFormData, name: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={offerFormData.phone}
-                onChange={e => setOfferFormData({ ...offerFormData, phone: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={offerFormData.email}
-                onChange={e => setOfferFormData({ ...offerFormData, email: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <button onClick={() => { setShowOfferForm(false); setOfferFormData({ name: "", phone: "", email: "" }); }} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "8px", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Send Request
-              </button>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
-                Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
-              </p>
-            </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <input type="text" placeholder="Your Name" value={offerFormData.name} onChange={e => setOfferFormData({ ...offerFormData, name: e.target.value })} style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  <input type="tel" placeholder="Phone Number" value={offerFormData.phone} onChange={e => setOfferFormData({ ...offerFormData, phone: e.target.value })} style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  <input type="email" placeholder="Email Address" value={offerFormData.email} onChange={e => setOfferFormData({ ...offerFormData, email: e.target.value })} style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  {offerError && <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.teal, margin: 0 }}>{offerError}</p>}
+                  <button onClick={handleOfferSubmit} disabled={offerLoading} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: offerLoading ? "wait" : "pointer", marginTop: "8px", transition: "opacity 0.2s", opacity: offerLoading ? 0.7 : 1 }} onMouseEnter={e => { if (!offerLoading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = offerLoading ? "0.7" : "1"; }}>
+                    {offerLoading ? "Sending…" : "Send Request"}
+                  </button>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
+                    Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -114,9 +114,37 @@ export default function CatalogPage() {
   const [search, setSearch] = useState("");
   const [showBookCall, setShowBookCall] = useState(false);
   const [bookForm, setBookForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [bookLoading, setBookLoading] = useState(false);
+  const [bookSent, setBookSent] = useState(false);
+  const [bookError, setBookError] = useState("");
 
   // Scroll top on mount
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  const handleBookSubmit = async () => {
+    if (!bookForm.name.trim() || (!bookForm.phone.trim() && !bookForm.email.trim())) {
+      setBookError("Please fill in your name and phone or email.");
+      return;
+    }
+    setBookLoading(true);
+    setBookError("");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: bookForm.name, contact: bookForm.phone || bookForm.email, budget: bookForm.message }),
+      });
+      if (res.ok) {
+        setBookSent(true);
+      } else {
+        setBookError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setBookError("Network error. Please try again.");
+    } finally {
+      setBookLoading(false);
+    }
+  };
 
   const filtered = useMemo(() => {
     let list = [...projects];
@@ -277,34 +305,48 @@ export default function CatalogPage() {
 
       {/* Book a Call popup */}
       {showBookCall && (
-        <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
+        <div onClick={() => { setShowBookCall(false); setBookSent(false); setBookError(""); setBookForm({ name: "", phone: "", email: "", message: "" }); }} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.2)" }}>
-            <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>✕</button>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>Book a Call</h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>Leave your details and we'll reach out to schedule a convenient time.</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              {[
-                { key: "name", placeholder: "Your Name", type: "text" },
-                { key: "phone", placeholder: "Phone Number", type: "tel" },
-                { key: "email", placeholder: "Email Address", type: "email" },
-              ].map(f => (
-                <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as any)[f.key]}
-                  onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
-                  style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
-                  onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
-              ))}
-              <textarea placeholder="Your request (optional)" value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
-                style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
-              <button onClick={() => { setShowBookCall(false); setBookForm({ name: "", phone: "", email: "", message: "" }); }}
-                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%" }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Send Request
-              </button>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
-                Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
-              </p>
-            </div>
+            <button onClick={() => { setShowBookCall(false); setBookSent(false); setBookError(""); setBookForm({ name: "", phone: "", email: "", message: "" }); }} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>✕</button>
+
+            {bookSent ? (
+              <div style={{ textAlign: "center", padding: "20px 0 10px" }}>
+                <div style={{ width: "56px", height: "56px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                  <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
+                </div>
+                <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", color: C.light, marginBottom: "10px" }}>We'll be in touch.</h3>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.6 }}>Expect a personal call from Arthur within 24 hours.</p>
+              </div>
+            ) : (
+              <>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>Book a Call</h2>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>Leave your details and we'll reach out to schedule a convenient time.</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                  {[
+                    { key: "name", placeholder: "Your Name", type: "text" },
+                    { key: "phone", placeholder: "Phone Number", type: "tel" },
+                    { key: "email", placeholder: "Email Address", type: "email" },
+                  ].map(f => (
+                    <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as Record<string, string>)[f.key]}
+                      onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
+                      style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
+                      onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  ))}
+                  <textarea placeholder="Your request (optional)" value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
+                    style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
+                    onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  {bookError && <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.teal, margin: 0 }}>{bookError}</p>}
+                  <button onClick={handleBookSubmit} disabled={bookLoading}
+                    style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
+                    onMouseEnter={e => { if (!bookLoading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }} onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = bookLoading ? "0.7" : "1"; }}>
+                    {bookLoading ? "Sending…" : "Send Request"}
+                  </button>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
+                    Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

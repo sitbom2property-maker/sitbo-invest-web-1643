@@ -507,6 +507,8 @@ function ContactForm() {
   const [goal, setGoal] = useState("invest");
   const [desc, setDesc] = useState("");
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const inputStyle: React.CSSProperties = {
     width: "100%", background: "rgba(255,251,240,0.06)", border: "1px solid rgba(255,251,240,0.12)",
@@ -566,8 +568,23 @@ function ContactForm() {
                 <label style={labelStyle}>Briefly Describe Your Property (Optional)</label>
                 <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="e.g. 55 m², white frame, Orbi City, 12th floor..." rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               </div>
-              <button onClick={() => setSent(true)} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Request My Free Consultation
+              {error && <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.teal, margin: 0 }}>{error}</p>}
+              <button
+                onClick={async () => {
+                  if (!name.trim() || !contact.trim()) { setError("Please fill in your name and contact."); return; }
+                  setLoading(true); setError("");
+                  try {
+                    const res = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, contact, budget: (goal === "invest" ? "Investment" : "Self") + (desc ? " | " + desc : "") }) });
+                    if (res.ok) setSent(true); else setError("Something went wrong. Please try again.");
+                  } catch { setError("Network error. Please try again."); }
+                  finally { setLoading(false); }
+                }}
+                disabled={loading}
+                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: loading ? "wait" : "pointer", transition: "opacity 0.2s", opacity: loading ? 0.7 : 1 }}
+                onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}
+              >
+                {loading ? "Sending…" : "Request My Free Consultation"}
               </button>
             </div>
           )}
