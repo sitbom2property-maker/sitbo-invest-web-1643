@@ -583,19 +583,25 @@ function Portfolio() {
           ref={scrollRef}
           onScroll={handleScroll}
           className="portfolio-outer"
-          style={{ overflowX: "auto", overflowY: "visible", width: "100%", WebkitOverflowScrolling: "touch", marginTop: "30px" }}
+          style={{
+            overflowX: "auto",
+            overflowY: "visible",
+            width: "100%",
+            WebkitOverflowScrolling: "touch",
+            marginTop: "30px",
+            scrollSnapType: "x mandatory",
+            overscrollBehaviorX: "contain",
+          }}
         >
           <div
             className="portfolio-scroll"
             style={{
               display: "flex",
               gap: isMobile ? "16px" : "24px",
-              // On mobile: left pad = 20px, right pad leaves ~40px so next card peeks
               paddingLeft: isMobile ? "20px" : "30px",
               paddingRight: isMobile ? "40px" : "30px",
               paddingTop: "30px",
               paddingBottom: "30px",
-              scrollSnapType: "x mandatory",
               width: "max-content",
               minWidth: "100%",
             }}

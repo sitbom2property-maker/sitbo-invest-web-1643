@@ -642,6 +642,28 @@ input[type="range"]::-moz-range-track {
   animation-fill-mode: forwards;
 }
 
+/* ── Horizontal scrollers: hide scrollbar, smooth momentum ── */
+.portfolio-outer,
+.reviews-scroll {
+  scroll-behavior: smooth;
+}
+.portfolio-outer::-webkit-scrollbar,
+.reviews-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Smooth page-level scrolling ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Touch target size: minimum 44px for all buttons/links ── */
+@media (max-width: 767px) {
+  button, a {
+    min-height: 36px;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    MOBILE RESPONSIVENESS AUDIT — 10px Edge Rule
    All light cards: 10px margin from screen edges

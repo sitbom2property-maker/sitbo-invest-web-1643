@@ -70,17 +70,13 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 
 // ─── 12-col row ───────────────────────────────────────────────────────────────
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  return (<>
-
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(12, 1fr)",
-      gap: `${gap}px`,
-      ...style,
-    }}>{children}
-    </div>
-  
-  </>);
+  const isMobile = useIsMobile();
+  return (
+    <div style={isMobile
+      ? { display: "flex", flexDirection: "column", gap: `${gap}px`, ...style }
+      : { display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }
+    }>{children}</div>
+  );
 }
 
 // ─── Column ───────────────────────────────────────────────────────────────────
@@ -90,13 +86,12 @@ function Col({
   span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties;
 }) {
   const isMobile = useIsMobile();
-  const cols = isMobile ? 12 : (spanMd ?? span);
-  return (<>
-
-    <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}
-    </div>
-  
-  </>);
+  return (
+    <div style={isMobile
+      ? { width: "100%", minWidth: 0, ...style }
+      : { gridColumn: `span ${spanMd ?? span}`, ...style }
+    }>{children}</div>
+  );
 }
 
 // ─── Eyebrow ──────────────────────────────────────────────────────────────────

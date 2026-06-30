@@ -70,13 +70,17 @@ export function Reviews() {
             overflowX: "auto",
             paddingBottom: "8px",
             WebkitOverflowScrolling: "touch",
-          }}
+            scrollSnapType: "x mandatory",
+            overscrollBehaviorX: "contain",
+            scrollbarWidth: "none",
+          } as React.CSSProperties}
         >
           {visibleReviews.map((item) => (
             <article
               key={item.name}
               style={{
                 flex: "0 0 min(320px, 86vw)",
+                scrollSnapAlign: "start",
                 background: "#fff",
                 border: "1px solid rgba(33,20,26,0.08)",
                 borderRadius: "12px",
@@ -106,6 +110,7 @@ export function Reviews() {
             rel="noopener noreferrer"
             style={{
               flex: "0 0 min(320px, 86vw)",
+              scrollSnapAlign: "start",
               background: "#21141A",
               border: "1px solid rgba(33,20,26,0.12)",
               borderRadius: "12px",

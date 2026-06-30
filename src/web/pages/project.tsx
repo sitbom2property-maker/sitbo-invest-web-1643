@@ -49,11 +49,22 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
   return <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", ...style }}>{children}</div>;
 }
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  return <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }}>{children}</div>;
+  const isMobile = useIsMobile();
+  return (
+    <div style={isMobile
+      ? { display: "flex", flexDirection: "column", gap: `${gap}px`, ...style }
+      : { display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }
+    }>{children}</div>
+  );
 }
 function Col({ span = 12, spanMd, children, style }: { span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties }) {
   const isMobile = useIsMobile();
-  return <div style={{ gridColumn: `span ${isMobile ? 12 : (spanMd ?? span)}`, ...style }}>{children}</div>;
+  return (
+    <div style={isMobile
+      ? { width: "100%", minWidth: 0, ...style }
+      : { gridColumn: `span ${spanMd ?? span}`, ...style }
+    }>{children}</div>
+  );
 }
 function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (<>
@@ -106,10 +117,10 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
 
 {/* Thumbnails column */}
         {photos.length > 1 && (
-        <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto" }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto", WebkitOverflowScrolling: "touch", scrollSnapType: isMobile ? "x mandatory" : "none", overscrollBehaviorX: isMobile ? "contain" : "auto", scrollbarWidth: "none" }}>
           {photos.map((src, i) => (
             <div key={i} onClick={() => setActive(i)}
-              style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "8px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
+              style={{ flexShrink: 0, scrollSnapAlign: "start", width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "8px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
               <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: i === active ? 1 : 0.6, transition: "opacity 0.2s" }} />
             </div>
           ))}
@@ -312,14 +323,14 @@ export default function ProjectPage() {
       <style>{`@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }`}</style>
 
 {/* ── GALLERY — Full width ── */}
-      <section style={{ paddingTop: "120px" }}>
+      <section style={{ paddingTop: "clamp(16px, 4vw, 32px)" }}>
         <Container>
           <Gallery photos={p.photos} name={p.name} />
         </Container>
       </section>
 
 {/* ── MAIN CONTENT ── */}
-      <section style={{ padding: "64px 0 0" }}>
+      <section style={{ padding: "clamp(24px, 4vw, 56px) 0 0" }}>
         <Container>
           <Row gap={48}>
 
@@ -435,8 +446,8 @@ export default function ProjectPage() {
             </Col>
 
 {/* ── RIGHT col (4) — sticky sidebar ── */}
-            <Col span={4}>
-              <div style={{ position: "sticky", top: "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
+            <Col span={4} style={{ order: isMobile ? -1 : 0 }}>
+              <div style={{ position: isMobile ? "static" : "sticky", top: "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
@@ -490,9 +501,8 @@ export default function ProjectPage() {
 
 
 
-{/* ── MAP ── */}
 {/* ── FLOOR PLANS ── */}
-      <section style={{ padding: "80px 0 0" }}>
+      <section style={{ padding: "clamp(40px, 6vw, 80px) 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
             <Eyebrow>Floor Plans</Eyebrow>
@@ -528,7 +538,7 @@ export default function ProjectPage() {
       </section>
 
 {/* ── MAP ── */}
-      <section style={{ padding: "80px 0 0" }}>
+      <section style={{ padding: "clamp(36px, 5vw, 80px) 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
             <Eyebrow>Location</Eyebrow>
@@ -543,7 +553,7 @@ export default function ProjectPage() {
       </section>
 
 {/* ── CTA FOOTER ── */}
-      <div style={{ background: C.dark, padding: "80px 0" }}>
+      <div style={{ background: C.dark, padding: "clamp(48px, 7vw, 80px) 0" }}>
         <Container>
           <Row>
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
@@ -567,7 +577,7 @@ export default function ProjectPage() {
       </div>
 
 {/* ── NEXT / PREV projects ── */}
-      <section style={{ padding: "80px 0" }}>
+      <section style={{ padding: "clamp(40px, 6vw, 80px) 0" }}>
         <Container>
           <div style={{ marginBottom: "32px" }}>
             <Eyebrow>Other Projects</Eyebrow>
