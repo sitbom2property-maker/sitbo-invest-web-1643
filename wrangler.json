@@ -1,7 +1,7 @@
 {
   "name": "sitbo-invest-web-1643",
   "compatibility_date": "2026-05-06",
-  "main": "dist/sitbo_invest_web_1643/index.js",
+  "main": "src/worker.ts",
   "routes": [
     {
       "pattern": "sitboinvest.ge/*",
