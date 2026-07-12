@@ -48,7 +48,7 @@ export function Reviews() {
 
   return (
     <section style={{ background: "#FFFBF0", padding: "clamp(52px,7vw,90px) 0" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 10px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
           <div style={{ width: "26px", height: "1px", background: "#683D47" }} />
           <span style={{ fontFamily: "DM Sans", fontSize: "0.66rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)" }}>
@@ -70,17 +70,13 @@ export function Reviews() {
             overflowX: "auto",
             paddingBottom: "8px",
             WebkitOverflowScrolling: "touch",
-            scrollSnapType: "x mandatory",
-            overscrollBehaviorX: "contain",
-            scrollbarWidth: "none",
-          } as React.CSSProperties}
+          }}
         >
           {visibleReviews.map((item) => (
             <article
               key={item.name}
               style={{
                 flex: "0 0 min(320px, 86vw)",
-                scrollSnapAlign: "start",
                 background: "#fff",
                 border: "1px solid rgba(33,20,26,0.08)",
                 borderRadius: "12px",
@@ -110,7 +106,6 @@ export function Reviews() {
             rel="noopener noreferrer"
             style={{
               flex: "0 0 min(320px, 86vw)",
-              scrollSnapAlign: "start",
               background: "#21141A",
               border: "1px solid rgba(33,20,26,0.12)",
               borderRadius: "12px",

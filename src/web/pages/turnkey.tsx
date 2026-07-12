@@ -8,7 +8,7 @@ const C = {
   teal:  "#8CB2C0",
   wine:  "#683D47",
   light: "#FFFBF0",
-  parch: "#F5F3ED",
+  parch: "#FFFBF0",
   muted: "rgba(33,20,26,0.55)",
 };
 
@@ -21,7 +21,7 @@ function Hero() {
       <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/turnkey-web.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(33,20,26,0.95) 40%, rgba(33,20,26,0.7))" }} />
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 2, width: "100%", display: "flex", alignItems: "center", gap: "64px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", position: "relative", zIndex: 2, width: "100%", display: "flex", alignItems: "center", gap: "64px" }}>
 
 {/* Left: text */}
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
@@ -194,7 +194,7 @@ function Calculator() {
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
-      <div style={{ background: C.parch, borderRadius: "16px", padding: "clamp(48px,6vw,80px) clamp(24px,4vw,64px)" }}>
+      <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,6vw,80px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
@@ -288,7 +288,7 @@ function RemoteProcess() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
@@ -302,7 +302,7 @@ function RemoteProcess() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
             {steps.map((s, i) => (
-              <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#ede9e0", padding: "40px 32px" }}>
+              <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#FFFBF0", padding: "40px 32px" }}>
                 <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
                 <p style={{ fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.88rem", color: C.dark, margin: "0 0 10px" }}>{s.title}</p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "#777", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
@@ -334,7 +334,7 @@ function Portfolio() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.dark, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
@@ -383,7 +383,7 @@ function Guarantees() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
-        <div style={{ background: C.parch, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
+        <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>For Perfectionists</span>
@@ -418,7 +418,7 @@ function MarketStats() {
   return (<>
 
     <section style={{ background: C.dark, padding: "80px 10px" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
           <div style={{ width: "28px", height: "1px", background: C.wine }} />
           <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>Market Opportunity</span>
@@ -507,8 +507,6 @@ function ContactForm() {
   const [goal, setGoal] = useState("invest");
   const [desc, setDesc] = useState("");
   const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const inputStyle: React.CSSProperties = {
     width: "100%", background: "rgba(255,251,240,0.06)", border: "1px solid rgba(255,251,240,0.12)",
@@ -568,23 +566,8 @@ function ContactForm() {
                 <label style={labelStyle}>Briefly Describe Your Property (Optional)</label>
                 <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="e.g. 55 m², white frame, Orbi City, 12th floor..." rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               </div>
-              {error && <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.teal, margin: 0 }}>{error}</p>}
-              <button
-                onClick={async () => {
-                  if (!name.trim() || !contact.trim()) { setError("Please fill in your name and contact."); return; }
-                  setLoading(true); setError("");
-                  try {
-                    const res = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, contact, budget: (goal === "invest" ? "Investment" : "Self") + (desc ? " | " + desc : "") }) });
-                    if (res.ok) setSent(true); else setError("Something went wrong. Please try again.");
-                  } catch { setError("Network error. Please try again."); }
-                  finally { setLoading(false); }
-                }}
-                disabled={loading}
-                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: loading ? "wait" : "pointer", transition: "opacity 0.2s", opacity: loading ? 0.7 : 1 }}
-                onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}
-              >
-                {loading ? "Sending…" : "Request My Free Consultation"}
+              <button onClick={() => setSent(true)} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                Request My Free Consultation
               </button>
             </div>
           )}
