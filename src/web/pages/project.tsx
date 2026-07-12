@@ -131,96 +131,6 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
   </>);
 }
 
-// ─── ROI Calculator ───────────────────────────────────────────────────────────
-function ROICalc() {
-  const [budget, setBudget]   = useState(150000);
-  const [yieldPct, setYield]  = useState(11);
-  const [horizon, setHorizon] = useState(5);
-  const [occupancy, setOccupancy] = useState(75);
-
-  const annualRental = budget * (yieldPct / 100) * (occupancy / 100);
-  const totalRental  = annualRental * horizon;
-  // Off-plan appreciation assumption: 25% at handover, 8%/yr after
-  const appreciation = budget * 0.25 + budget * 0.08 * Math.max(0, horizon - 1);
-  const totalReturn  = totalRental + appreciation;
-  const roi          = (totalReturn / budget) * 100;
-
-  const fmt = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
-
-  const fieldLabel: React.CSSProperties = {
-    display: "block", fontFamily: "DM Sans", fontSize: "0.68rem",
-    letterSpacing: "0.1em", textTransform: "uppercase",
-    color: C.muted, marginBottom: "6px",
-  };
-
-  return (<>
-
-    <div style={{ background: C.parchment, borderRadius: "16px", padding: "32px 28px" }}>
-      <Eyebrow>Investment Calculator</Eyebrow>
-      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.dark, marginBottom: "28px" }}>
-        Model your returns
-      </h3>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "28px" }}>
-{/* Budget */}
-        <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>Investment Budget · <strong style={{ color: C.dark }}>{fmt(budget)}</strong></label>
-          <input type="range" min="50000" max="500000" step="5000" value={budget} onChange={e => setBudget(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Yield */}
-        <div>
-          <label style={fieldLabel}>Annual Yield · <strong style={{ color: C.dark }}>{yieldPct}%</strong></label>
-          <input type="range" min="8" max="15" step="0.5" value={yieldPct} onChange={e => setYield(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Occupancy */}
-        <div>
-          <label style={fieldLabel}>Occupancy · <strong style={{ color: C.dark }}>{occupancy}%</strong></label>
-          <input type="range" min="50" max="95" step="5" value={occupancy} onChange={e => setOccupancy(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Horizon */}
-        <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>Investment Horizon · <strong style={{ color: C.dark }}>{horizon} years</strong></label>
-          <input type="range" min="1" max="10" step="1" value={horizon} onChange={e => setHorizon(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-{[
-    { label: "Annual Rental Income", value: fmt(annualRental), accent: false },
- { label: `Rental over ${horizon} yrs`,  value: fmt(totalRental),  accent: false },
-    { label: "Est. Appreciation",   value: fmt(appreciation), accent: false },
- { label: `Total Return`,         value: fmt(totalReturn),  accent: true },
-        ].map(item => (
-          <div key={item.label} style={{
-            background: item.accent ? C.dark : C.light,
-            borderRadius: "10px", padding: "18px 16px",
-            borderTop: `2px solid ${item.accent ? C.teal : C.wine}`,
-          }}>
-            <div style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 700, color: item.accent ? C.teal : C.dark, lineHeight: 1 }}>{item.value}</div>
-            <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: item.accent ? "rgba(255,251,240,0.45)" : C.muted, marginTop: "6px" }}>{item.label}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ marginTop: "16px", textAlign: "center", background: C.dark, borderRadius: "10px", padding: "16px" }}>
-        <span style={{ fontFamily: "Jun, serif", fontSize: "2.4rem", fontWeight: 700, color: C.teal }}>{roi.toFixed(0)}%</span>
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", display: "block", marginTop: "2px" }}>
-          Estimated Total ROI over {horizon} years
-        </span>
-      </div>
-
-      <p style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: C.muted, marginTop: "12px", lineHeight: 1.5 }}>
-        * Indicative model. Assumes {yieldPct}% gross yield at {occupancy}% occupancy + 25% off-plan uplift + 8%/yr appreciation.
-      </p>
-    </div>
-  
-  </>);
-}
-
 // ─── Map ──────────────────────────────────────────────────────────────────────
 function MapEmbed({ project }: { project: Project }) {
   const mapUrl = `https://maps.google.com/maps?q=${project.lat},${project.lng}&z=15&output=embed`;
@@ -479,13 +389,9 @@ export default function ProjectPage() {
                   ))}
                 </div>
 
-                <div className="pr-reveal" style={{ transitionDelay: "120ms" }}>
-                  <ROICalc />
-                </div>
-
 {/* Live Camera Card */}
                   {p.liveCameraUrl && (
-                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
+                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "120ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                     <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
                     <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>Live Camera</span>
