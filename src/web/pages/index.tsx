@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
+import { projects, type Project } from "../data/projects";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -42,145 +43,6 @@ function useReveal() {
     return () => io.disconnect();
   }, []);
 }
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const projects = [
-  {
-    name: "Artex Parkline", tag: "New Boulevard · Park Front",
-    address: "New Boulevard St, 12", seaDistance: "12 minutes to the sea", seaMeters: "950 m",
-    location: "New Boulevard, Batumi City Centre · Park frontage",
-    desc: "Contemporary high-rise facing the new park avenue. Architecturally optimized layouts deliver strong rental yields driven by high demand from digital nomads and short-term tourists.",
-    yield: "9–11%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $75,000",
-    completion: "Q2 2026",
-    area: "32–85 m²",
-    ceilingHeight: "2.9 m",
-    floors: "22 floors",
-    buildings: "1 building",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Park-front location", "High rental demand", "Concierge & reception", "Rooftop terrace", "Boulevard views"],
-    materials: "Contemporary monolithic frame, energy-efficient double glazing, ventilated facade cladding.",
-    photos: ["/artex-parkline.png"],
-  },
-  {
-    name: "Queen's Residence", tag: "Gated Community",
-    address: "Adlia St, 53", seaDistance: "8 minutes to the sea", seaMeters: "620 m",
-    location: "Adlia St, 53 · 8 minutes to the sea",
-    desc: "A private, gated community offering the sophisticated infrastructure of a 5-star hotel. Architecturally optimized floor plans designed for maximum comfort and style — the perfect blend of exclusivity and coastal convenience.",
-    yield: "9–12.6%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $95,000",
-    completion: "Q1 2027",
-    area: "45–130 m²",
-    ceilingHeight: "3.1 m",
-    floors: "18 floors",
-    buildings: "4 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Gated private community", "5-star hotel infrastructure", "Reception & concierge", "Pool & wellness centre", "Personal Property Manager"],
-    materials: "Premium reinforced concrete frame, Italian facade cladding, smart home pre-wiring.",
-    photos: ["/queens-residence.png"],
-  },
-  {
-    name: "Silk Towers", tag: "First Line · Sea View",
-    address: "Black Sea Blvd, 1", seaDistance: "2 minutes to the beach", seaMeters: "150 m",
-    location: "Black Sea Boulevard, First Line · 2 min to beach",
-    desc: "Luxury living meets ecological innovation on the historic first line. Featuring the region's grandest casino and a 20,000 m² private park by Masu Planning — the last of its kind on the Batumi coastline.",
-    yield: "10–13%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $120,000",
-    completion: "Q4 2026",
-    area: "50–200 m²",
-    ceilingHeight: "3.2 m",
-    floors: "45 floors",
-    buildings: "2 towers",
-    finishing: "White frame, Turnkey, Designer",
-    installment: "40% down / 60% quarterly",
-    features: ["20,000 m² private park", "Region's largest casino", "Direct Black Sea access", "Masu Planning landscaping", "Swiss-grade construction"],
-    materials: "High-grade monolithic concrete, floor-to-ceiling glazing, Swiss engineering standards.",
-    photos: ["/silk-towers.png"],
-  },
-  {
-    name: "Rogantini Swiss Village", tag: "Chakvi · Alpine Quality",
-    address: "Chakvi village, 30 km from Batumi", seaDistance: "5 minutes to the beach", seaMeters: "400 m",
-    location: "Chakvi village, 30 km from Batumi · Mountain & Sea views",
-    desc: "A self-contained Swiss-standard village with breathtaking mountain and sea panoramas. From a private poker room and luxury spa to tennis courts and medical facilities — seclusion without compromise.",
-    yield: "8–11%",
-    developer: "Placeholder Developer",
-    priceFrom: "From €55,000",
-    completion: "Q3 2026",
-    area: "38–110 m²",
-    ceilingHeight: "2.85 m",
-    floors: "5 floors",
-    buildings: "12 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "25% down / 75% quarterly",
-    features: ["Swiss moisture-resistant concrete", "Private poker room & luxury spa", "Tennis courts & medical centre", "Beach shuttle service", "Mountain & sea panoramic views"],
-    materials: "Swiss-standard moisture-resistant reinforced concrete, alpine timber facade accents.",
-    photos: ["/rogantini.png"],
-  },
-  {
-    name: "Ambassadori Island", tag: "Off-Shore Island · Marina",
-    address: "Batumi Bay, off-shore island", seaDistance: "Waterfront", seaMeters: "0 m",
-    location: "Off-shore island, Batumi Bay · Private marina access",
-    desc: "An 87-hectare man-made archipelago redefining luxury through eco-futurism. With 49% green infrastructure, a premier yacht club, and an elite private university — a sustainable sanctuary where technology meets nature.",
-    yield: "12–14.5%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $180,000",
-    completion: "Q2 2027",
-    area: "60–350 m²",
-    ceilingHeight: "3.3 m",
-    floors: "30 floors",
-    buildings: "8 buildings",
-    finishing: "White frame, Turnkey, Designer",
-    installment: "35% down / 65% quarterly",
-    features: ["87-ha man-made archipelago", "49% green infrastructure", "Premier yacht club", "Elite private university", "High-end global brand retail"],
-    materials: "Eco-certified materials, solar infrastructure, smart building systems throughout.",
-    photos: ["/ambassadori.png"],
-  },
-  {
-    name: "Gonio Yachts & Marina", tag: "Gonio · Waterfront",
-    address: "Gonio, 15 km from Batumi", seaDistance: "Direct waterfront", seaMeters: "0 m",
-    location: "Gonio, 15 km from Batumi · Direct waterfront",
-    desc: "A private marina complex combining branded residences with resort hospitality infrastructure. Berths, a yacht club, and a waterfront promenade in one of Georgia's most scenic coastal settings.",
-    yield: "11–14%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $150,000",
-    completion: "Q1 2028",
-    area: "55–180 m²",
-    ceilingHeight: "3.0 m",
-    floors: "14 floors",
-    buildings: "3 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Private marina with berths", "Branded residences", "Yacht club membership", "Waterfront promenade", "Resort hospitality services"],
-    materials: "Marine-grade materials, teak decking, panoramic floor-to-ceiling facades.",
-    photos: ["/gonio_final_v1.png"],
-  },
-  {
-    name: "Hisni by Biograpi", tag: "Isani · Mixed-Use Towers",
-    address: "Tbilisi, Queen Ketevan Ave, 69", seaDistance: "5 min to Isani Metro", seaMeters: "350 m",
-    location: "Isani, Queen Ketevan Ave 69 · Near metro & Old Town",
-    desc: "A 36-storey multifunctional complex by Biograpi Living in historic Isani — four towers uniting residences, offices, and retail around an 8,000 m² green terrace.",
-    yield: "5–8%",
-    developer: "Biograpi Living",
-    priceFrom: "From $64,000",
-    completion: "Q4 2028",
-    area: "37–107 m²",
-    ceilingHeight: "2.95 m",
-    floors: "36 floors",
-    buildings: "4 towers",
-    finishing: "Green frame",
-    installment: "10% down / 60% post-handover (41 mo)",
-    features: ["8,000 m² green terrace", "25-meter pool", "24/7 concierge", "880-car parking", "Near Isani Metro"],
-    materials: "Fibroconcrete and terracotta facade panels, Meinhardt engineering, NBK German facade systems.",
-    photos: ["/hisni-by-biograpi.jpg"],
-  },
-];
-
-type Project = typeof projects[0];
 
 const stats = [
   { value: "1.7M",   label: "Tourists in 2025" },
@@ -238,16 +100,6 @@ const bloomCalendar = [
   { month: "Jul–Aug",  bloom: "Hydrangea, hibiscus, lavender" },
   { month: "Sep–Oct",  bloom: "Second bloom of roses & camellias" },
   { month: "Nov–Dec",  bloom: "Loquat, snowdrops, evergreen palms" },
-];
-
-const cardImages = [
-  "/artex-parkline.png",
-  "/queens-residence.png",
-  "/silk-towers.png",
-  "/rogantini.png",
-  "/ambassadori.png",
-  "/gonio_final_v1.png",
-  "/hisni-by-biograpi.jpg",
 ];
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
@@ -626,7 +478,7 @@ function Portfolio() {
               minWidth: "100%",
             }}
           >
-            {projects.map((p, i) => <ProjectCard key={p.name} project={p} index={i} isMobile={isMobile} />)}
+            {projects.map(p => <ProjectCard key={p.slug} project={p} isMobile={isMobile} />)}
           </div>
         </div>
 
@@ -681,13 +533,9 @@ function Portfolio() {
 }
 
 
-function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]; index: number; isMobile?: boolean }) {
+function ProjectCard({ project, isMobile }: { project: Project; isMobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const cardW = isMobile ? "260px" : "300px";
-  const slug = project.name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
 
   const firstSentence = project.desc.match(/^[^.!?]+[.!?]/)?.[0] ?? project.desc;
   const teaser = firstSentence.length > 110
@@ -695,13 +543,13 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
     : firstSentence;
 
   return (
-    <Link href={`/project/${slug}`}>
+    <Link href={`/project/${project.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
         <div className="property-card" style={{ width: cardW, minWidth: cardW, flexShrink: 0, scrollSnapAlign: "start", cursor: "pointer", borderRadius: "16px", overflow: "hidden", position: "relative" }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
-          <img src={cardImages[index]} alt={project.name}
+          <img src={project.cardImage} alt={project.name}
             style={{ width: "100%", height: "460px", objectFit: "cover", display: "block", transition: "transform 0.6s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
 
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />
@@ -768,7 +616,7 @@ function Lifestyle() {
 // ─── Turn Key ─────────────────────────────────────────────────────────────────
 // ─── Discovery Tour ───────────────────────────────────────────────────────────
 function DiscoveryTour() {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(769);
   const [visible, setVisible] = React.useState(false);
   const [countUp, setCountUp] = React.useState(0);
   const ref = React.useRef<HTMLElement>(null);
@@ -795,36 +643,38 @@ function DiscoveryTour() {
     return () => clearInterval(timer);
   }, [visible]);
 
+  const iconSize = isMobile ? 32 : 22;
+
   const inclusions = [
     { label: "VIP Arrival",
       desc: "Private transfer and 24/7 personal support from the moment you land",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
     },
     { label: "Premium Stay",
       desc: "Curated 5-star accommodation selected for your comfort",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="6 3 18 3 22 9 12 21 2 9"/><polyline points="2 9 12 9 22 9"/><line x1="12" y1="3" x2="6" y2="9"/><line x1="12" y1="3" x2="18" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="6 3 18 3 22 9 12 21 2 9"/><polyline points="2 9 12 9 22 9"/><line x1="12" y1="3" x2="6" y2="9"/><line x1="12" y1="3" x2="18" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>,
     },
     { label: "Off-Market Viewings",
       desc: "Exclusive properties not listed publicly, shown only to our clients",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
     { label: "Gastronomic Program",
       desc: "Batumi's finest restaurants and experiences, arranged for you",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 100 16 8 8 0 000-16z"/><line x1="2" y1="18" x2="22" y2="18"/><line x1="12" y1="18" x2="12" y2="22"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 100 16 8 8 0 000-16z"/><line x1="2" y1="18" x2="22" y2="18"/><line x1="12" y1="18" x2="12" y2="22"/></svg>,
     },
     { label: "Investment Briefing",
       desc: "Private session with our senior advisor on market and returns",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
     },
     { label: "Legal Consultation",
       desc: "Full legal review of shortlisted properties before you decide",
-      svg: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
     },
   ];
 
   return (
     <section ref={ref} id="discovery-tour" style={{
-      background: "#21141A", minHeight: "100vh",
+      background: "#21141A", minHeight: isMobile ? "auto" : "100vh",
       display: "flex", alignItems: "center",
       padding: "10px", position: "relative", overflow: "hidden",
     }}>
@@ -833,12 +683,12 @@ function DiscoveryTour() {
 
 
 
-      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFBF0", borderRadius: "16px", paddingTop: "clamp(60px,7vw,100px)", paddingBottom: "clamp(60px,7vw,100px)" }}>
+      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFBF0", borderRadius: "16px", paddingTop: isMobile ? "32px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "32px" : "clamp(60px,7vw,100px)" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(32px,4vw,64px)" }}>
 
           {/* HEADER: centered */}
           <div style={{
-            textAlign: "center", marginBottom: "clamp(48px,5vw,72px)",
+            textAlign: "center", marginBottom: isMobile ? "24px" : "clamp(48px,5vw,72px)",
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(30px)",
             transition: "opacity 0.9s ease, transform 0.9s ease",
@@ -862,26 +712,27 @@ function DiscoveryTour() {
           {/* 3x2 Services Grid */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
-            gap: isMobile ? "40px" : "52px 56px",
-            marginBottom: "clamp(48px,5vw,72px)",
+            gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : "1fr 1fr 1fr",
+            gap: isMobile ? "12px" : "52px 56px",
+            marginBottom: isMobile ? "20px" : "clamp(48px,5vw,72px)",
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(30px)",
             transition: "opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s",
           }}>
             {inclusions.map((item, i) => (
               <div key={item.label} style={{
-                textAlign: "center", padding: isMobile ? "0" : "0 8px",
+                textAlign: "center", padding: isMobile ? "16px" : "0 8px",
+                boxSizing: "border-box",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(20px)",
                 transition: "opacity 0.7s ease, transform 0.7s ease",
                 transitionDelay: `${0.2 + i * 0.07}s`,
               }}>
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "18px" }}>
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: isMobile ? "10px" : "18px" }}>
                   {item.svg}
                 </div>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 700, color: C.dark, margin: "0 0 10px", letterSpacing: "0.04em", textTransform: "uppercase" }}>{item.label}</p>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, margin: 0, lineHeight: 1.7 }}>{item.desc}</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.8rem" : "0.78rem", fontWeight: 700, color: C.dark, margin: isMobile ? "0 0 6px" : "0 0 10px", letterSpacing: "0.04em", textTransform: "uppercase" }}>{item.label}</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.75rem" : "0.78rem", color: C.muted, margin: 0, lineHeight: isMobile ? 1.45 : 1.7 }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -922,7 +773,7 @@ function DiscoveryTour() {
         </div>{/* /maxWidth container */}
 
         {/* ── Photo album 1:1 — full width inside card ── */}
-        <div style={{ position: "relative", overflow: "hidden", marginTop: "calc(clamp(40px,5vw,72px) + 30px)" }}>
+        <div style={{ position: "relative", overflow: "hidden", marginTop: isMobile ? "24px" : "calc(clamp(40px,5vw,72px) + 30px)" }}>
           {/* Left fade */}
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to right, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
           {/* Right fade */}
