@@ -159,6 +159,25 @@ const projects = [
     materials: "Marine-grade materials, teak decking, panoramic floor-to-ceiling facades.",
     photos: ["/gonio_final_v1.png"],
   },
+  {
+    name: "Hisni by Biograpi", tag: "Isani · Mixed-Use Towers",
+    address: "Tbilisi, Queen Ketevan Ave, 69", seaDistance: "5 min to Isani Metro", seaMeters: "350 m",
+    location: "Isani, Queen Ketevan Ave 69 · Near metro & Old Town",
+    desc: "A 36-storey multifunctional complex by Biograpi Living in historic Isani — four towers uniting residences, offices, and retail around an 8,000 m² green terrace.",
+    yield: "5–8%",
+    developer: "Biograpi Living",
+    priceFrom: "From $64,000",
+    completion: "Q4 2028",
+    area: "37–107 m²",
+    ceilingHeight: "2.95 m",
+    floors: "36 floors",
+    buildings: "4 towers",
+    finishing: "Green frame",
+    installment: "10% down / 60% post-handover (41 mo)",
+    features: ["8,000 m² green terrace", "25-meter pool", "24/7 concierge", "880-car parking", "Near Isani Metro"],
+    materials: "Fibroconcrete and terracotta facade panels, Meinhardt engineering, NBK German facade systems.",
+    photos: ["/hisni-by-biograpi.jpg"],
+  },
 ];
 
 type Project = typeof projects[0];
@@ -228,6 +247,7 @@ const cardImages = [
   "/rogantini.png",
   "/ambassadori.png",
   "/gonio_final_v1.png",
+  "/hisni-by-biograpi.jpg",
 ];
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
