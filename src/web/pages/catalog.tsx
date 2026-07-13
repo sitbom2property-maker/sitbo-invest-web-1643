@@ -201,9 +201,22 @@ export default function CatalogPage() {
             <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
               Property Catalog
             </h1>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
-              {projects.length} curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by SITBO.
-            </p>
+            <div style={{ maxWidth: "420px" }}>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, margin: "0 0 16px" }}>
+                {projects.length} curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by SITBO.
+              </p>
+              <Link href="/map">
+                <a style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 700,
+                  letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none",
+                  color: C.dark, background: C.teal, borderRadius: "8px", padding: "10px 16px",
+                }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  View on map
+                </a>
+              </Link>
+            </div>
           </div>
 
           {/* City tabs */}

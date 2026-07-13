@@ -8,6 +8,7 @@ const C = {
 
 const navLinks = [
   { label: "Catalog",            href: "/catalog" },
+  { label: "Map",                href: "/map" },
   { label: "Services",           href: "/#about" },
   { label: "Turnkey Renovation", href: "/turnkey" },
   { label: "Why Georgia",        href: "/invest" },

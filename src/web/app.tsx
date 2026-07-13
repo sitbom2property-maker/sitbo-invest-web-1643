@@ -4,6 +4,7 @@ import MortgagePage from "./pages/mortgage";
 import InvestPage from "./pages/invest";
 import ProjectPage from "./pages/project";
 import CatalogPage from "./pages/catalog";
+import MapPage from "./pages/map";
 import TurnkeyPage from "./pages/turnkey";
 import LegalPage from "./pages/legal";
 import { Provider } from "./components/provider";
@@ -21,6 +22,7 @@ function App() {
 					<Route path="/invest" component={InvestPage} />
 					<Route path="/project/:slug" component={ProjectPage} />
 					<Route path="/catalog" component={CatalogPage} />
+					<Route path="/map" component={MapPage} />
 					<Route path="/turnkey" component={TurnkeyPage} />
 					<Route path="/legal" component={LegalPage} />
 				</Switch>
