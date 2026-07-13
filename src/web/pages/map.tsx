@@ -82,6 +82,23 @@ function createPriceIcon(p: Project, active: boolean) {
   });
 }
 
+function MapResizeFix() {
+  const map = useMap();
+  useEffect(() => {
+    const fix = () => map.invalidateSize();
+    fix();
+    const t1 = window.setTimeout(fix, 50);
+    const t2 = window.setTimeout(fix, 250);
+    window.addEventListener("resize", fix);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.removeEventListener("resize", fix);
+    };
+  }, [map]);
+  return null;
+}
+
 function FitBounds({ items, selected }: { items: Project[]; selected: string | null }) {
   const map = useMap();
   const lastKey = useRef("");
@@ -91,6 +108,8 @@ function FitBounds({ items, selected }: { items: Project[]; selected: string | n
     const key = items.map((p) => p.slug).join("|") + (selected ?? "");
     if (key === lastKey.current) return;
     lastKey.current = key;
+
+    map.invalidateSize();
 
     if (selected) {
       const p = items.find((x) => x.slug === selected);
@@ -207,7 +226,7 @@ function SidebarCard({
 
 export default function MapPage() {
   const isMobile = useIsMobile();
-  const [city, setCity] = useState<(typeof CITIES)[number]>("All");
+  const [city, setCity] = useState<(typeof CITIES)[number]>("Batumi");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<"map" | "list">("map");
@@ -255,16 +274,15 @@ export default function MapPage() {
     [isMobile],
   );
 
-  const mapHeight = isMobile
-    ? "calc(100dvh - 80px - 52px)"
-    : "calc(100dvh - 80px)";
+  const showSidebar = !isMobile || mobileView === "list";
+  const showMap = !isMobile || mobileView === "map";
 
   const sidebar = (
     <aside
       style={{
         width: isMobile ? "100%" : "400px",
         flexShrink: 0,
-        height: isMobile ? mapHeight : "100%",
+        height: "100%",
         background: C.parchment,
         borderRight: isMobile ? "none" : "1px solid rgba(33,20,26,0.08)",
         display: "flex",
@@ -438,11 +456,11 @@ export default function MapPage() {
   );
 
   const mapPane = (
-    <div style={{ flex: 1, position: "relative", height: isMobile ? mapHeight : "100%", minWidth: 0 }}>
+    <div style={{ flex: 1, position: "relative", height: "100%", minWidth: 0, minHeight: 0, background: "#d9e2e6" }}>
       <MapContainer
         center={BATUMI_CENTER}
         zoom={12}
-        style={{ width: "100%", height: "100%", background: "#d9e2e6" }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", background: "#d9e2e6" }}
         zoomControl={!isMobile}
         scrollWheelZoom
       >
@@ -450,6 +468,7 @@ export default function MapPage() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · CARTO'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
+        <MapResizeFix />
         <FitBounds items={filtered} selected={selected} />
         {filtered.map((p) => (
           <Marker
@@ -618,10 +637,24 @@ export default function MapPage() {
   );
 
   return (
-    <div style={{ background: C.light, height: mapHeight, overflow: "hidden" }}>
+    <div
+      style={{
+        position: "fixed",
+        top: "80px",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: C.light,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        zIndex: 1,
+      }}
+    >
       {isMobile && (
         <div
           style={{
+            flexShrink: 0,
             height: "52px",
             display: "flex",
             alignItems: "center",
@@ -656,14 +689,14 @@ export default function MapPage() {
         </div>
       )}
 
-      <div style={{ display: "flex", height: isMobile ? mapHeight : "100%", overflow: "hidden" }}>
-        {(!isMobile || mobileView === "list") && sidebar}
-        {(!isMobile || mobileView === "map") && mapPane}
+      <div style={{ display: "flex", flex: 1, minHeight: 0, overflow: "hidden" }}>
+        {showSidebar && sidebar}
+        {showMap && mapPane}
       </div>
 
       <style>{`
         .sitbo-map-marker { background: transparent !important; border: none !important; }
-        .leaflet-container { font-family: 'DM Sans', sans-serif; }
+        .leaflet-container { font-family: 'DM Sans', sans-serif; width: 100% !important; height: 100% !important; }
         .leaflet-control-attribution { font-size: 10px; }
       `}</style>
     </div>
