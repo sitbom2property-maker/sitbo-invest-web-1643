@@ -1,8 +1,7 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import L from "leaflet";
 import { projects, type Project } from "../data/projects";
+import { NAV_HEIGHT } from "../components/nav";
 import "leaflet/dist/leaflet.css";
 
 const C = {
@@ -17,118 +16,9 @@ const C = {
 const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri"] as const;
 const BATUMI_CENTER: [number, number] = [41.6422, 41.6247];
 
-function useIsMobile(bp = 900) {
-  const [m, setM] = useState(() => (typeof window !== "undefined" ? window.innerWidth < bp : false));
-  useEffect(() => {
-    const h = () => setM(window.innerWidth < bp);
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
-  }, [bp]);
-  return m;
-}
-
 function formatPriceLabel(p: Project) {
-  if (p.priceUSD >= 1000) {
-    const k = Math.round(p.priceUSD / 1000);
-    return `from $${k}k`;
-  }
+  if (p.priceUSD >= 1000) return `from $${Math.round(p.priceUSD / 1000)}k`;
   return p.priceFrom.replace(/^From\s+/i, "from ");
-}
-
-function createPriceIcon(p: Project, active: boolean) {
-  const label = formatPriceLabel(p);
-  const bg = active ? C.dark : C.light;
-  const fg = active ? C.light : C.dark;
-  const border = active ? C.dark : "rgba(33,20,26,0.18)";
-  const shadow = active
-    ? "0 8px 24px rgba(33,20,26,0.35)"
-    : "0 4px 14px rgba(33,20,26,0.14)";
-
-  return L.divIcon({
-    className: "sitbo-map-marker",
-    html: `<div style="
-      transform: translate(-50%, -100%);
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      filter: drop-shadow(${shadow});
-    ">
-      <div style="
-        background: ${bg};
-        color: ${fg};
-        border: 1px solid ${border};
-        border-radius: 999px;
-        padding: 7px 12px;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        white-space: nowrap;
-        line-height: 1;
-        transition: background 0.2s, color 0.2s;
-      ">${label}</div>
-      <div style="
-        width: 10px;
-        height: 10px;
-        background: ${bg};
-        border: 1px solid ${border};
-        transform: rotate(45deg) translateY(-5px);
-        margin-top: -1px;
-      "></div>
-    </div>`,
-    iconSize: [0, 0],
-    iconAnchor: [0, 0],
-  });
-}
-
-function MapResizeFix() {
-  const map = useMap();
-  useEffect(() => {
-    const fix = () => map.invalidateSize();
-    fix();
-    const t1 = window.setTimeout(fix, 50);
-    const t2 = window.setTimeout(fix, 250);
-    window.addEventListener("resize", fix);
-    return () => {
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
-      window.removeEventListener("resize", fix);
-    };
-  }, [map]);
-  return null;
-}
-
-function FitBounds({ items, selected }: { items: Project[]; selected: string | null }) {
-  const map = useMap();
-  const lastKey = useRef("");
-
-  useEffect(() => {
-    if (!items.length) return;
-    const key = items.map((p) => p.slug).join("|") + (selected ?? "");
-    if (key === lastKey.current) return;
-    lastKey.current = key;
-
-    map.invalidateSize();
-
-    if (selected) {
-      const p = items.find((x) => x.slug === selected);
-      if (p) {
-        map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 14), { duration: 0.6 });
-        return;
-      }
-    }
-
-    if (items.length === 1) {
-      map.flyTo([items[0].lat, items[0].lng], 14, { duration: 0.55 });
-      return;
-    }
-
-    const bounds = L.latLngBounds(items.map((p) => [p.lat, p.lng] as [number, number]));
-    map.fitBounds(bounds.pad(0.18), { animate: true, duration: 0.55, maxZoom: 13 });
-  }, [items, selected, map]);
-
-  return null;
 }
 
 function SidebarCard({
@@ -156,15 +46,10 @@ function SidebarCard({
         background: active ? "rgba(140,178,192,0.12)" : C.light,
         cursor: "pointer",
         boxShadow: active ? "0 8px 24px rgba(33,20,26,0.08)" : "none",
-        transition: "border-color 0.2s, background 0.2s, box-shadow 0.2s",
       }}
     >
       <div style={{ position: "relative", height: "88px", borderRadius: "8px", overflow: "hidden" }}>
-        <img
-          src={p.cardImage}
-          alt={p.name}
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
+        <img src={p.cardImage} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
         <div
           style={{
             position: "absolute",
@@ -184,56 +69,48 @@ function SidebarCard({
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 0 }}>
-        <p
-          style={{
-            fontFamily: "DM Sans",
-            fontSize: "0.58rem",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: C.muted,
-            margin: "0 0 4px",
-          }}
-        >
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 4px" }}>
           {p.tag}
         </p>
-        <h3
-          style={{
-            fontFamily: "Jun, serif",
-            fontSize: "1.05rem",
-            fontWeight: 500,
-            color: C.dark,
-            margin: "0 0 6px",
-            lineHeight: 1.15,
-          }}
-        >
+        <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", fontWeight: 500, color: C.dark, margin: "0 0 6px", lineHeight: 1.15 }}>
           {p.name}
         </h3>
         <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", alignItems: "baseline" }}>
-          <span style={{ fontFamily: "Jun, serif", fontSize: "0.98rem", fontWeight: 700, color: C.dark }}>
-            {p.priceFrom}
-          </span>
-          <span style={{ fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 700, color: C.wine }}>
-            {p.yield} ROI
-          </span>
+          <span style={{ fontFamily: "Jun, serif", fontSize: "0.98rem", fontWeight: 700, color: C.dark }}>{p.priceFrom}</span>
+          <span style={{ fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 700, color: C.wine }}>{p.yield} ROI</span>
         </div>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: C.muted, margin: "6px 0 0" }}>
-          {p.seaDistance}
-        </p>
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: C.muted, margin: "6px 0 0" }}>{p.seaDistance}</p>
       </div>
     </button>
   );
 }
 
 export default function MapPage() {
-  const isMobile = useIsMobile();
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [shellH, setShellH] = useState(640);
   const [city, setCity] = useState<(typeof CITIES)[number]>("Batumi");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<"map" | "list">("map");
+  const [mapError, setMapError] = useState("");
+  const [mapReady, setMapReady] = useState(false);
+
   const listRef = useRef<HTMLDivElement>(null);
+  const mapElRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<import("leaflet").Map | null>(null);
+  const markersRef = useRef<import("leaflet").Marker[]>([]);
+  const LRef = useRef<typeof import("leaflet") | null>(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setMounted(true);
+    const sync = () => {
+      setIsMobile(window.innerWidth < 900);
+      setShellH(Math.max(420, window.innerHeight - NAV_HEIGHT));
+    };
+    sync();
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
   }, []);
 
   const filtered = useMemo(() => {
@@ -261,21 +138,159 @@ export default function MapPage() {
   }, []);
 
   const selectedProject = filtered.find((p) => p.slug === selected) ?? null;
+  const showSidebar = !isMobile || mobileView === "list";
+  const showMap = !isMobile || mobileView === "map";
 
   const selectProject = useCallback(
     (slug: string) => {
       setSelected(slug);
-      if (isMobile) setMobileView("map");
+      if (window.innerWidth < 900) setMobileView("map");
       requestAnimationFrame(() => {
-        const el = listRef.current?.querySelector(`[data-slug="${slug}"]`);
-        el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        listRef.current?.querySelector(`[data-slug="${slug}"]`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     },
-    [isMobile],
+    [],
   );
 
-  const showSidebar = !isMobile || mobileView === "list";
-  const showMap = !isMobile || mobileView === "map";
+  // Init Leaflet once (client-only, dynamic import — avoids blank crash)
+  useEffect(() => {
+    if (!mounted || !showMap || !mapElRef.current || mapRef.current) return;
+
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const leafletMod = await import("leaflet");
+        if (cancelled || !mapElRef.current) return;
+
+        const L = leafletMod.default ?? leafletMod;
+        LRef.current = L as typeof import("leaflet");
+
+        const map = L.map(mapElRef.current, {
+          zoomControl: true,
+          scrollWheelZoom: true,
+        }).setView(BATUMI_CENTER, 12);
+
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · CARTO',
+          maxZoom: 19,
+          subdomains: "abcd",
+        }).addTo(map);
+
+        // OSM fallback if CARTO tiles fail to paint
+        setTimeout(() => {
+          if (cancelled || !mapRef.current) return;
+          const tiles = mapElRef.current?.querySelectorAll(".leaflet-tile-loaded");
+          if (!tiles || tiles.length === 0) {
+            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+              maxZoom: 19,
+            }).addTo(map);
+          }
+        }, 2500);
+
+        mapRef.current = map;
+        setMapReady(true);
+        setTimeout(() => map.invalidateSize(), 50);
+        setTimeout(() => map.invalidateSize(), 300);
+      } catch (err) {
+        console.error(err);
+        setMapError("Map failed to load. Use the list or open Catalog.");
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [mounted, showMap]);
+
+  // Destroy map when leaving map pane on mobile
+  useEffect(() => {
+    if (showMap) return;
+    if (mapRef.current) {
+      mapRef.current.remove();
+      mapRef.current = null;
+      markersRef.current = [];
+      setMapReady(false);
+    }
+  }, [showMap]);
+
+  // Sync markers + bounds
+  useEffect(() => {
+    const map = mapRef.current;
+    const L = LRef.current;
+    if (!map || !L || !mapReady) return;
+
+    markersRef.current.forEach((m) => m.remove());
+    markersRef.current = [];
+
+    filtered.forEach((p) => {
+      const active = selected === p.slug;
+      const bg = active ? C.dark : C.light;
+      const fg = active ? C.light : C.dark;
+      const border = active ? C.dark : "rgba(33,20,26,0.18)";
+      const label = formatPriceLabel(p);
+
+      const icon = L.divIcon({
+        className: "sitbo-map-marker",
+        html: `<div style="transform:translate(-50%,-100%);display:inline-flex;flex-direction:column;align-items:center;cursor:pointer;filter:drop-shadow(0 4px 14px rgba(33,20,26,0.18))">
+          <div style="background:${bg};color:${fg};border:1px solid ${border};border-radius:999px;padding:7px 12px;font-family:DM Sans,sans-serif;font-size:12px;font-weight:700;white-space:nowrap;line-height:1">${label}</div>
+          <div style="width:10px;height:10px;background:${bg};border:1px solid ${border};transform:rotate(45deg) translateY(-5px);margin-top:-1px"></div>
+        </div>`,
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
+      });
+
+      const marker = L.marker([p.lat, p.lng], {
+        icon,
+        zIndexOffset: active ? 1000 : 0,
+      })
+        .addTo(map)
+        .on("click", () => selectProject(p.slug));
+
+      markersRef.current.push(marker);
+    });
+
+    map.invalidateSize();
+
+    if (selected) {
+      const p = filtered.find((x) => x.slug === selected);
+      if (p) {
+        map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 14), { duration: 0.55 });
+        return;
+      }
+    }
+
+    if (filtered.length === 1) {
+      map.setView([filtered[0].lat, filtered[0].lng], 14);
+      return;
+    }
+
+    if (filtered.length > 1) {
+      const bounds = L.latLngBounds(filtered.map((p) => [p.lat, p.lng] as [number, number]));
+      map.fitBounds(bounds.pad(0.2), { maxZoom: 13, animate: true });
+    } else {
+      map.setView(BATUMI_CENTER, 12);
+    }
+  }, [filtered, selected, mapReady, selectProject, shellH, showMap]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div style={{ minHeight: "60vh", background: C.parchment, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p style={{ fontFamily: "DM Sans", color: C.muted }}>Loading map…</p>
+      </div>
+    );
+  }
 
   const sidebar = (
     <aside
@@ -293,21 +308,10 @@ export default function MapPage() {
       <div style={{ padding: "16px 16px 12px", borderBottom: "1px solid rgba(33,20,26,0.07)", background: C.light }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", marginBottom: "12px" }}>
           <div>
-            <p
-              style={{
-                fontFamily: "DM Sans",
-                fontSize: "0.6rem",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: C.muted,
-                margin: "0 0 4px",
-              }}
-            >
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, margin: "0 0 4px" }}>
               Sitbo projects
             </p>
-            <h1 style={{ fontFamily: "Jun, serif", fontSize: "1.55rem", fontWeight: 500, color: C.dark, margin: 0, lineHeight: 1.1 }}>
-              Map
-            </h1>
+            <h1 style={{ fontFamily: "Jun, serif", fontSize: "1.55rem", fontWeight: 500, color: C.dark, margin: 0, lineHeight: 1.1 }}>Map</h1>
           </div>
           <Link href="/catalog">
             <a
@@ -359,309 +363,84 @@ export default function MapPage() {
           ))}
         </div>
 
-        <div style={{ position: "relative" }}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}
-          >
-            <circle cx="6.5" cy="6.5" r="5" stroke={C.muted} strokeWidth="1.4" />
-            <path d="M10 10l3.5 3.5" stroke={C.muted} strokeWidth="1.4" strokeLinecap="round" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search projects…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              fontFamily: "DM Sans",
-              fontSize: "0.82rem",
-              color: C.dark,
-              background: C.parchment,
-              border: "1px solid rgba(33,20,26,0.12)",
-              borderRadius: "8px",
-              padding: "10px 14px 10px 34px",
-              outline: "none",
-              width: "100%",
-              boxSizing: "border-box",
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search projects…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            fontFamily: "DM Sans",
+            fontSize: "0.82rem",
+            color: C.dark,
+            background: C.parchment,
+            border: "1px solid rgba(33,20,26,0.12)",
+            borderRadius: "8px",
+            padding: "10px 14px",
+            outline: "none",
+            width: "100%",
+            boxSizing: "border-box",
+          }}
+        />
         <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, margin: "10px 0 0" }}>
           {filtered.length} {filtered.length === 1 ? "project" : "projects"} on map
         </p>
       </div>
 
       <div ref={listRef} style={{ flex: 1, overflowY: "auto", padding: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
-        {filtered.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "48px 16px" }}>
-            <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", color: C.muted, marginBottom: "8px" }}>No projects found</p>
-            <button
-              type="button"
-              onClick={() => {
-                setCity("All");
-                setSearch("");
-              }}
-              style={{
-                fontFamily: "DM Sans",
-                fontSize: "0.72rem",
-                fontWeight: 600,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: C.light,
-                background: C.dark,
-                border: "none",
-                borderRadius: "8px",
-                padding: "10px 18px",
-                cursor: "pointer",
-              }}
-            >
-              Reset filters
-            </button>
-          </div>
-        ) : (
-          filtered.map((p) => (
-            <div key={p.slug} data-slug={p.slug}>
-              <SidebarCard p={p} active={selected === p.slug} onSelect={() => selectProject(p.slug)} />
-              {selected === p.slug && (
-                <Link href={`/project/${p.slug}`}>
-                  <a
-                    style={{
-                      display: "block",
-                      marginTop: "8px",
-                      textAlign: "center",
-                      fontFamily: "DM Sans",
-                      fontSize: "0.72rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      textDecoration: "none",
-                      color: C.light,
-                      background: C.dark,
-                      borderRadius: "8px",
-                      padding: "11px 14px",
-                    }}
-                  >
-                    Open project →
-                  </a>
-                </Link>
-              )}
-            </div>
-          ))
-        )}
-      </div>
-    </aside>
-  );
-
-  const mapPane = (
-    <div style={{ flex: 1, position: "relative", height: "100%", minWidth: 0, minHeight: 0, background: "#d9e2e6" }}>
-      <MapContainer
-        center={BATUMI_CENTER}
-        zoom={12}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", background: "#d9e2e6" }}
-        zoomControl={!isMobile}
-        scrollWheelZoom
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · CARTO'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-        />
-        <MapResizeFix />
-        <FitBounds items={filtered} selected={selected} />
         {filtered.map((p) => (
-          <Marker
-            key={`${p.slug}-${selected === p.slug}`}
-            position={[p.lat, p.lng]}
-            icon={createPriceIcon(p, selected === p.slug)}
-            eventHandlers={{
-              click: () => selectProject(p.slug),
-            }}
-            zIndexOffset={selected === p.slug ? 1000 : 0}
-          />
-        ))}
-      </MapContainer>
-
-      {selectedProject && !isMobile && (
-        <div
-          style={{
-            position: "absolute",
-            left: "16px",
-            bottom: "16px",
-            zIndex: 500,
-            width: "min(340px, calc(100% - 32px))",
-            background: C.light,
-            borderRadius: "14px",
-            overflow: "hidden",
-            boxShadow: "0 16px 40px rgba(33,20,26,0.18)",
-            border: "1px solid rgba(33,20,26,0.08)",
-          }}
-        >
-          <div style={{ position: "relative", height: "140px" }}>
-            <img
-              src={selectedProject.cardImage}
-              alt={selectedProject.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-            <button
-              type="button"
-              onClick={() => setSelected(null)}
-              aria-label="Close"
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                width: "28px",
-                height: "28px",
-                borderRadius: "50%",
-                border: "none",
-                background: "rgba(33,20,26,0.65)",
-                color: C.light,
-                cursor: "pointer",
-                fontSize: "16px",
-                lineHeight: 1,
-              }}
-            >
-              ×
-            </button>
-          </div>
-          <div style={{ padding: "14px 16px 16px" }}>
-            <p
-              style={{
-                fontFamily: "DM Sans",
-                fontSize: "0.58rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: C.muted,
-                margin: "0 0 4px",
-              }}
-            >
-              {selectedProject.city} · {selectedProject.tag}
-            </p>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.25rem", fontWeight: 500, color: C.dark, margin: "0 0 8px" }}>
-              {selectedProject.name}
-            </h2>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
-              <span style={{ fontFamily: "Jun, serif", fontWeight: 700, color: C.dark }}>{selectedProject.priceFrom}</span>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 700, color: C.wine }}>
-                {selectedProject.yield} ROI
-              </span>
-            </div>
-            <Link href={`/project/${selectedProject.slug}`}>
-              <a
-                style={{
-                  display: "block",
-                  textAlign: "center",
-                  fontFamily: "DM Sans",
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  color: C.light,
-                  background: C.dark,
-                  borderRadius: "8px",
-                  padding: "12px 14px",
-                }}
-              >
-                View details
-              </a>
-            </Link>
-          </div>
-        </div>
-      )}
-
-      {isMobile && selectedProject && mobileView === "map" && (
-        <div
-          style={{
-            position: "absolute",
-            left: "12px",
-            right: "12px",
-            bottom: "12px",
-            zIndex: 500,
-            background: C.light,
-            borderRadius: "14px",
-            overflow: "hidden",
-            boxShadow: "0 16px 40px rgba(33,20,26,0.22)",
-          }}
-        >
-          <button
-            type="button"
-            onClick={() => selectProject(selectedProject.slug)}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "96px 1fr",
-              gap: "12px",
-              width: "100%",
-              border: "none",
-              background: "transparent",
-              padding: "10px",
-              textAlign: "left",
-              cursor: "pointer",
-            }}
-          >
-            <img
-              src={selectedProject.cardImage}
-              alt=""
-              style={{ width: "96px", height: "76px", objectFit: "cover", borderRadius: "8px", display: "block" }}
-            />
-            <div>
-              <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", margin: "0 0 4px", color: C.dark }}>
-                {selectedProject.name}
-              </h3>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, margin: "0 0 8px" }}>
-                {selectedProject.priceFrom} · {selectedProject.yield} ROI
-              </p>
-              <Link href={`/project/${selectedProject.slug}`}>
+          <div key={p.slug} data-slug={p.slug}>
+            <SidebarCard p={p} active={selected === p.slug} onSelect={() => selectProject(p.slug)} />
+            {selected === p.slug && (
+              <Link href={`/project/${p.slug}`}>
                 <a
                   style={{
+                    display: "block",
+                    marginTop: "8px",
+                    textAlign: "center",
                     fontFamily: "DM Sans",
-                    fontSize: "0.68rem",
+                    fontSize: "0.72rem",
                     fontWeight: 700,
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: C.wine,
                     textDecoration: "none",
+                    color: C.light,
+                    background: C.dark,
+                    borderRadius: "8px",
+                    padding: "11px 14px",
                   }}
-                  onClick={(e) => e.stopPropagation()}
                 >
-                  Open →
+                  Open project →
                 </a>
               </Link>
-            </div>
-          </button>
-        </div>
-      )}
-    </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </aside>
   );
 
   return (
     <div
       style={{
-        position: "fixed",
-        top: "80px",
-        left: 0,
-        right: 0,
-        bottom: 0,
+        height: shellH,
+        minHeight: 420,
         background: C.light,
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        zIndex: 1,
       }}
     >
       {isMobile && (
         <div
           style={{
             flexShrink: 0,
-            height: "52px",
+            height: 52,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "8px",
-            background: C.light,
+            gap: 8,
             borderBottom: "1px solid rgba(33,20,26,0.08)",
+            background: C.light,
           }}
         >
           {(["map", "list"] as const).map((v) => (
@@ -676,7 +455,7 @@ export default function MapPage() {
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 padding: "8px 18px",
-                borderRadius: "999px",
+                borderRadius: 999,
                 border: `1px solid ${mobileView === v ? C.dark : "rgba(33,20,26,0.15)"}`,
                 background: mobileView === v ? C.dark : "transparent",
                 color: mobileView === v ? C.light : C.dark,
@@ -691,12 +470,107 @@ export default function MapPage() {
 
       <div style={{ display: "flex", flex: 1, minHeight: 0, overflow: "hidden" }}>
         {showSidebar && sidebar}
-        {showMap && mapPane}
+
+        {showMap && (
+          <div style={{ flex: 1, position: "relative", minWidth: 0, minHeight: 0, background: "#d9e2e6" }}>
+            <div ref={mapElRef} style={{ position: "absolute", inset: 0 }} />
+
+            {!mapReady && !mapError && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: C.parchment,
+                  zIndex: 2,
+                  fontFamily: "DM Sans",
+                  color: C.muted,
+                }}
+              >
+                Loading map…
+              </div>
+            )}
+
+            {mapError && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 12,
+                  background: C.parchment,
+                  zIndex: 2,
+                  padding: 24,
+                  textAlign: "center",
+                }}
+              >
+                <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", color: C.dark, margin: 0 }}>{mapError}</p>
+                <Link href="/catalog">
+                  <a style={{ fontFamily: "DM Sans", color: C.wine, fontWeight: 700 }}>Open catalog →</a>
+                </Link>
+              </div>
+            )}
+
+            {selectedProject && (
+              <div
+                style={{
+                  position: "absolute",
+                  left: 12,
+                  right: isMobile ? 12 : "auto",
+                  bottom: 12,
+                  zIndex: 500,
+                  width: isMobile ? "auto" : 320,
+                  background: C.light,
+                  borderRadius: 14,
+                  overflow: "hidden",
+                  boxShadow: "0 16px 40px rgba(33,20,26,0.2)",
+                  border: "1px solid rgba(33,20,26,0.08)",
+                }}
+              >
+                <div style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 12, padding: 10 }}>
+                  <img
+                    src={selectedProject.cardImage}
+                    alt=""
+                    style={{ width: 96, height: 76, objectFit: "cover", borderRadius: 8, display: "block" }}
+                  />
+                  <div>
+                    <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", margin: "0 0 4px", color: C.dark }}>
+                      {selectedProject.name}
+                    </h3>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, margin: "0 0 8px" }}>
+                      {selectedProject.priceFrom} · {selectedProject.yield} ROI
+                    </p>
+                    <Link href={`/project/${selectedProject.slug}`}>
+                      <a
+                        style={{
+                          fontFamily: "DM Sans",
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: C.wine,
+                          textDecoration: "none",
+                        }}
+                      >
+                        Open →
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <style>{`
         .sitbo-map-marker { background: transparent !important; border: none !important; }
-        .leaflet-container { font-family: 'DM Sans', sans-serif; width: 100% !important; height: 100% !important; }
+        .leaflet-container { width: 100%; height: 100%; font-family: 'DM Sans', sans-serif; background: #d9e2e6; }
         .leaflet-control-attribution { font-size: 10px; }
       `}</style>
     </div>
