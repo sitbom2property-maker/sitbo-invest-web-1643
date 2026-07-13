@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { Footer } from "../components/footer";
+import { ProjectsMap } from "../components/projects-map";
 
 const C = {
   dark:      "#21141A",
@@ -34,6 +35,10 @@ const SORT_OPTIONS = [
   { value: "price-asc",  label: "Price: Low → High" },
   { value: "price-desc", label: "Price: High → Low" },
   { value: "yield-desc", label: "Yield: Highest first" },
+] as const;
+const VIEW_OPTIONS = [
+  { value: "grid", label: "Grid" },
+  { value: "map", label: "Map" },
 ] as const;
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
@@ -105,6 +110,57 @@ function CatalogCard({ p }: { p: Project }) {
   );
 }
 
+function MapListCard({ p, active, onSelect }: { p: Project; active: boolean; onSelect: () => void }) {
+  return (
+    <Link href={`/project/${p.slug}`}>
+      <a
+        onMouseEnter={onSelect}
+        onFocus={onSelect}
+        style={{ display: "block", textDecoration: "none" }}
+      >
+        <article style={{
+          display: "grid",
+          gridTemplateColumns: "96px 1fr",
+          gap: "14px",
+          padding: "12px",
+          borderRadius: "12px",
+          background: active ? C.dark : C.light,
+          border: `1px solid ${active ? C.teal : "rgba(33,20,26,0.08)"}`,
+          boxShadow: active ? "0 14px 34px rgba(33,20,26,0.16)" : "0 4px 18px rgba(33,20,26,0.06)",
+          transition: "background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+          transform: active ? "translateY(-2px)" : "none",
+        }}>
+          <img src={p.cardImage} alt={p.name} style={{ width: "96px", height: "86px", objectFit: "cover", borderRadius: "9px" }} />
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "8px", marginBottom: "5px" }}>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: active ? "rgba(255,251,240,0.52)" : C.muted }}>
+                {p.city}
+              </span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", fontWeight: 700, color: active ? C.teal : C.wine }}>
+                {p.yield} ROI
+              </span>
+            </div>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.08rem", fontWeight: 500, color: active ? C.light : C.dark, margin: "0 0 5px", lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              {p.name}
+            </h3>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: active ? "rgba(255,251,240,0.6)" : C.muted, margin: "0 0 8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              {p.address}
+            </p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "8px" }}>
+              <strong style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: active ? C.light : C.dark }}>
+                {p.priceFrom}
+              </strong>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: active ? C.teal : C.muted }}>
+                {p.seaDistance}
+              </span>
+            </div>
+          </div>
+        </article>
+      </a>
+    </Link>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function CatalogPage() {
   const isMobile = useIsMobile();
@@ -112,6 +168,8 @@ export default function CatalogPage() {
   const [city, setCity]     = useState<typeof CITIES[number]>("All");
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
+  const [view, setView] = useState<typeof VIEW_OPTIONS[number]["value"]>("grid");
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(projects[0]?.slug ?? null);
   const [showBookCall, setShowBookCall] = useState(false);
   const [bookForm, setBookForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [bookLoading, setBookLoading] = useState(false);
@@ -179,6 +237,17 @@ export default function CatalogPage() {
     projects.forEach(p => { map[p.city] = (map[p.city] || 0) + 1; });
     return map;
   }, []);
+
+  useEffect(() => {
+    if (!filtered.length) {
+      setSelectedSlug(null);
+      return;
+    }
+
+    if (!filtered.some(project => project.slug === selectedSlug)) {
+      setSelectedSlug(filtered[0].slug);
+    }
+  }, [filtered, selectedSlug]);
 
   const inputStyle: React.CSSProperties = {
     fontFamily: "DM Sans", fontSize: "0.82rem", color: C.dark,
@@ -253,6 +322,32 @@ export default function CatalogPage() {
             <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, flexShrink: 0 }}>
               {filtered.length} {filtered.length === 1 ? "project" : "projects"}
             </span>
+
+            {/* View mode */}
+            <div style={{ display: "flex", padding: "3px", background: C.light, border: "1px solid rgba(33,20,26,0.1)", borderRadius: "9px", flexShrink: 0 }}>
+              {VIEW_OPTIONS.map(option => (
+                <button
+                  key={option.value}
+                  onClick={() => setView(option.value)}
+                  style={{
+                    fontFamily: "DM Sans",
+                    fontSize: "0.68rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: view === option.value ? C.light : C.muted,
+                    background: view === option.value ? C.dark : "transparent",
+                    border: "none",
+                    borderRadius: "7px",
+                    padding: "8px 13px",
+                    cursor: "pointer",
+                    transition: "background 0.2s, color 0.2s",
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
           </div>
         </Container>
       </div>
@@ -268,6 +363,39 @@ export default function CatalogPage() {
                 style={{ marginTop: "20px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
                 Reset filters
               </button>
+            </div>
+          ) : view === "map" ? (
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "minmax(0, 1.45fr) minmax(320px, 0.55fr)",
+              gap: "22px",
+              alignItems: "start",
+            }}>
+              <ProjectsMap projects={filtered} selectedSlug={selectedSlug} onSelect={setSelectedSlug} height={isMobile ? 520 : 680} />
+              <aside style={{
+                maxHeight: isMobile ? "none" : "680px",
+                overflowY: isMobile ? "visible" : "auto",
+                padding: isMobile ? "0" : "4px 8px 4px 0",
+              }}>
+                <div style={{ marginBottom: "14px" }}>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>
+                    Map selection
+                  </p>
+                  <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.7rem", fontWeight: 400, color: C.dark, margin: 0 }}>
+                    Projects on the coast
+                  </h2>
+                </div>
+                <div style={{ display: "grid", gap: "12px" }}>
+                  {filtered.map(p => (
+                    <MapListCard
+                      key={p.slug}
+                      p={p}
+                      active={selectedSlug === p.slug}
+                      onSelect={() => setSelectedSlug(p.slug)}
+                    />
+                  ))}
+                </div>
+              </aside>
             </div>
           ) : (
             <div style={{
