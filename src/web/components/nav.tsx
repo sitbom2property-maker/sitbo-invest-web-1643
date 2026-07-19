@@ -16,8 +16,13 @@ const LEFT_LINKS = [
 
 const RIGHT_LINKS = [
   { label: "Why Georgia", href: "/invest" },
-  { label: "About", href: "/#about" },
+  { label: "History Timeline", href: "/#history-timeline" },
   { label: "Blog & Guide", href: "/blog" },
+] as const;
+
+const MENU_CITY_CARDS = [
+  { name: "Batumi", image: "/lifestyle-coast.png", href: "/#history-timeline" },
+  { name: "Tbilisi", image: "/hisni-by-biograpi.jpg", href: "/#history-timeline" },
 ] as const;
 
 const ALL_LINKS = [...LEFT_LINKS, ...RIGHT_LINKS];
@@ -37,6 +42,7 @@ function useNavActive() {
   const isActive = (href: string) => {
     if (href === "/") return location === "/";
     if (href === "/#about") return location === "/" && hash === "#about";
+    if (href === "/#history-timeline") return location === "/" && hash === "#history-timeline";
     if (href === "/catalog") return location === "/catalog" || location.startsWith("/project/");
     if (href === "/blog") return location === "/blog" || location.startsWith("/blog/");
     return location === href || location.startsWith(`${href}/`);
@@ -324,29 +330,47 @@ export function Nav() {
             ×
           </button>
 
-          {ALL_LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(28px, 7vw, 42px)",
-                fontWeight: 400,
-                color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
-                textTransform: "none",
-                letterSpacing: 0,
-                textDecoration: "none",
-                transition: "color 0.2s ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
-              }
-            >
-              {l.label}
-            </Link>
-          ))}
+          <div className="nav-mobile-links">
+            {ALL_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  fontFamily: "Jun, Georgia, serif",
+                  fontSize: "clamp(26px, 6.5vw, 40px)",
+                  fontWeight: 400,
+                  color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                  textTransform: "none",
+                  letterSpacing: 0,
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  textAlign: "center",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
+                }
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="nav-mobile-cities">
+            {MENU_CITY_CARDS.map((city) => (
+              <Link
+                key={city.name}
+                href={city.href}
+                onClick={() => setMenuOpen(false)}
+                className="nav-mobile-city-card"
+                aria-label={`${city.name} — History Timeline`}
+              >
+                <img src={city.image} alt={city.name} />
+                <span>{city.name}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 

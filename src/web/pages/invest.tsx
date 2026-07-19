@@ -56,32 +56,32 @@ function useReveal() {
 
 // ─── Grid container ───────────────────────────────────────────────────────────
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
-  return (<>
-
+  return (
     <div style={{
       maxWidth: "1200px",
       margin: "0 auto",
-      padding: "0 clamp(24px, 4vw, 64px)",
+      padding: "0 clamp(16px, 4vw, 64px)",
+      width: "100%",
+      boxSizing: "border-box",
       ...style,
     }}>{children}
     </div>
-  
-  </>);
+  );
 }
 
 // ─── 12-col row ───────────────────────────────────────────────────────────────
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  return (<>
-
+  return (
     <div style={{
       display: "grid",
       gridTemplateColumns: "repeat(12, 1fr)",
       gap: `${gap}px`,
+      width: "100%",
+      minWidth: 0,
       ...style,
     }}>{children}
     </div>
-  
-  </>);
+  );
 }
 
 // ─── Column ───────────────────────────────────────────────────────────────────
@@ -92,12 +92,10 @@ function Col({
 }) {
   const isMobile = useIsMobile();
   const cols = isMobile ? 12 : (spanMd ?? span);
-  return (<>
-
-    <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}
+  return (
+    <div style={{ gridColumn: `span ${cols}`, minWidth: 0, maxWidth: "100%", ...style }}>{children}
     </div>
-  
-  </>);
+  );
 }
 
 // ─── Eyebrow ──────────────────────────────────────────────────────────────────
@@ -277,32 +275,61 @@ export default function InvestPage() {
 
   return (<>
 
-    <div style={{ background: C.light, minHeight: "100vh", color: C.dark }}>
+    <div className="invest-page" style={{ background: C.light, minHeight: "100vh", color: C.dark, overflowX: "hidden", width: "100%" }}>
+      <style>{`
+        .invest-page p, .invest-page h1, .invest-page h2, .invest-page h3 {
+          overflow-wrap: anywhere;
+          word-break: break-word;
+        }
+        @media (max-width: 767px) {
+          .invest-hero-cta {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+            width: 100% !important;
+          }
+          .invest-hero-cta a {
+            text-align: center !important;
+            padding: 14px 10px !important;
+            font-size: 0.68rem !important;
+            letter-spacing: 0.08em !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+          }
+          .invest-float-badge {
+            left: 12px !important;
+            right: auto !important;
+            bottom: 12px !important;
+          }
+          .invest-chart-wrap {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+          }
+        }
+      `}</style>
 {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section>
         <Container>
-          <Row style={{ minHeight: "88vh", alignItems: "center", paddingTop: "48px", paddingBottom: "64px" }}>
+          <Row style={{ minHeight: isMobile ? "auto" : "88vh", alignItems: "center", paddingTop: isMobile ? "24px" : "48px", paddingBottom: isMobile ? "40px" : "64px" }}>
 
 {/* Left: headline */}
             <Col span={7} spanMd={7} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <div className="inv-reveal">
-                <Eyebrow>Real Estate Investment · Batumi, Georgia</Eyebrow>
                 <h1 style={{
                   fontFamily: "Jun, serif",
-                  fontSize: "clamp(2.8rem, 6vw, 5.2rem)",
+                  fontSize: "clamp(2.2rem, 8vw, 5.2rem)",
                   fontWeight: 400, lineHeight: 1.05,
                   color: C.dark, marginBottom: "28px",
                   letterSpacing: "-0.01em",
+                  maxWidth: "100%",
                 }}>
                   Invest in one<br />
                   of Europe's<br />
                   <em style={{ fontStyle: "italic", color: C.teal }}>highest-yield</em><br />
                   markets.
                 </h1>
-                <p style={{ fontFamily: "DM Sans", fontSize: "clamp(0.9rem,1.8vw,1.05rem)", color: C.muted, lineHeight: 1.8, maxWidth: "460px", marginBottom: "40px" }}>
-                  Georgia ranks #1 in the world for rental yield profitability. 0% purchase tax. 1-day ownership transfer. Full rights for foreign buyers.
-                </p>
-                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                <div className="invest-hero-cta" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                   <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
                     Book a Consultation
                   </AppLink>
@@ -315,13 +342,15 @@ export default function InvestPage() {
 
 {/* Right: hero image + floating stat */}
             <Col span={5} spanMd={5} style={{ position: "relative" }}>
-              <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: "3/4", background: C.light }}>
+              <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: isMobile ? "4/5" : "3/4", background: C.light }}>
                 <img src="/hero2.png" alt="Batumi investment property"
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
               </div>
 {/* Floating badge */}
-              <div style={{
-                position: "absolute", bottom: "24px", left: "-20px",
+              <div
+                className="invest-float-badge"
+                style={{
+                position: "absolute", bottom: "24px", left: isMobile ? "12px" : "-20px",
                 background: C.dark, borderRadius: "12px", padding: "16px 20px",
                 boxShadow: "0 8px 32px rgba(33,20,26,0.18)",
               }}>
@@ -386,28 +415,33 @@ export default function InvestPage() {
       <Divider />
 
 {/* ── ADVANTAGES STRIP ─────────────────────────────────────────────────── */}
-      <section style={{ background: C.dark, padding: "56px 0" }}>
+      <section style={{ background: C.dark, padding: isMobile ? "40px 0" : "56px 0" }}>
         <Container>
-          <Row gap={0}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
+            gap: isMobile ? 0 : 0,
+            width: "100%",
+          }}>
 {[
  { title: "0% Purchase Tax",          sub: "No stamp duty, no buyer's tax" },
  { title: "Full Foreign Ownership",    sub: "Same rights as Georgian citizens" },
  { title: "1-Day Registration",        sub: "Blockchain land registry" },
  { title: "Residency from $150K",      sub: "Qualifying real estate investment" },
             ].map((item, i) => (
-              <Col key={item.title} span={3}>
-                <div className="inv-reveal" style={{
+                <div key={item.title} className="inv-reveal" style={{
                   transitionDelay: `${i * 80}ms`,
-                  padding: "24px",
-                  borderRight: i < 3 ? "1px solid rgba(140,178,192,0.1)" : "none",
+                  padding: isMobile ? "20px 12px" : "24px",
+                  borderRight: !isMobile && i < 3 ? "1px solid rgba(140,178,192,0.1)" : "none",
+                  borderBottom: isMobile && i < 2 ? "1px solid rgba(140,178,192,0.1)" : "none",
                   textAlign: "center",
+                  minWidth: 0,
                 }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", fontWeight: 700, color: C.light, marginBottom: "6px" }}>{item.title}</p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.45)", margin: 0 }}>{item.sub}</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.72rem" : "0.82rem", fontWeight: 700, color: C.light, marginBottom: "6px", lineHeight: 1.35 }}>{item.title}</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", margin: 0, lineHeight: 1.4 }}>{item.sub}</p>
                 </div>
-              </Col>
             ))}
-          </Row>
+          </div>
         </Container>
       </section>
 
@@ -445,26 +479,20 @@ export default function InvestPage() {
       <Divider />
 
 {/* ── MARKET CONTEXT ───────────────────────────────────────────────────── */}
-      <section style={{ padding: "96px 0", background: "#FFFBF0" }}>
+      <section style={{ padding: isMobile ? "64px 0" : "96px 0", background: "#FFFBF0" }}>
         <Container>
-          <Row gap={48}>
+          <Row gap={isMobile ? 32 : 48}>
             <Col span={5}>
               <div className="inv-reveal">
                 <Eyebrow>Market Context</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "24px" }}>
+                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: 0 }}>
                   Still early.<br />Still cheap.
                 </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.8, marginBottom: "20px" }}>
-                  At $1,420/sqm on average, Batumi trades at a fraction of comparable Black Sea and Mediterranean coastal cities. Warsaw is $3,200. Tbilisi is $1,900. Barcelona is $6,000+.
-                </p>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.8 }}>
-                  Infrastructure investment — new boulevard, airport expansion, direct flight routes — is compressing the discount. Early buyers capture both current yield and long-term appreciation.
-                </p>
               </div>
             </Col>
             <Col span={7}>
 {/* Comparison bars */}
-              <div className="inv-reveal" style={{ transitionDelay: "100ms" }}>
+              <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "100ms" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
                   Price per sqm comparison · 2025
                 </p>
@@ -474,21 +502,21 @@ export default function InvestPage() {
  { city: "Warsaw",     price: 3200, pct: 52 },
  { city: "Tbilisi",    price: 1900, pct: 31 },
  { city: "Batumi",     price: 1420, pct: 23, highlight: true },
-                ].map((row, i) => (
-                  <div key={row.city} style={{ marginBottom: "16px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
+                ].map((row) => (
+                  <div key={row.city} style={{ marginBottom: "16px", minWidth: 0 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: "6px" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>${row.price.toLocaleString()}</span>
+                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted, flexShrink: 0 }}>${row.price.toLocaleString()}</span>
                     </div>
-                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px" }}>
-                      <div style={{ height: "100%", width: `${row.pct}%`, background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px", transition: "width 1s ease" }} />
+                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px", overflow: "hidden" }}>
+                      <div style={{ height: "100%", width: `${row.pct}%`, maxWidth: "100%", background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px", transition: "width 1s ease" }} />
                     </div>
                   </div>
                 ))}
               </div>
 
 {/* Rental yield comparison */}
-              <div className="inv-reveal" style={{ transitionDelay: "200ms", marginTop: "40px" }}>
+              <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "200ms", marginTop: "40px" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
                   Average gross rental yield · 2025
                 </p>
@@ -499,13 +527,13 @@ export default function InvestPage() {
  { city: "Warsaw",  yield: "5.8%", pct: 40 },
  { city: "Batumi",  yield: "9–14.5%", pct: 100, highlight: true },
                 ].map((row) => (
-                  <div key={row.city} style={{ marginBottom: "16px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
+                  <div key={row.city} style={{ marginBottom: "16px", minWidth: 0 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: "6px" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted }}>{row.yield}</span>
+                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted, flexShrink: 0 }}>{row.yield}</span>
                     </div>
-                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px" }}>
-                      <div style={{ height: "100%", width: `${row.pct}%`, background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px" }} />
+                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px", overflow: "hidden" }}>
+                      <div style={{ height: "100%", width: `${row.pct}%`, maxWidth: "100%", background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px" }} />
                     </div>
                   </div>
                 ))}
