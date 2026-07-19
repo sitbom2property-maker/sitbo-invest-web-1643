@@ -445,7 +445,7 @@ function Hero() {
         </div>
 
         <a href="#founder-note" className="hero-scroll-hint">
-          Scroll to explore
+          SCROLL TO EXPLORE
         </a>
       </section>
     </>
