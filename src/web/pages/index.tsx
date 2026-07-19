@@ -553,62 +553,6 @@ function Divider() {
   return <div style={{ padding: "0 10px" }}><div className="gold-line" /></div>;
 }
 
-// ─── Philosophy ───────────────────────────────────────────────────────────────
-function Philosophy() {
-  return (
-    <section style={{ background: "#21141A", padding: "clamp(60px,12vw,350px) 10px", position: "relative", overflow: "hidden" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
-      <div className="reveal" style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-
-
-
-        {/* Headline */}
-        <div style={{ display: "inline-block", marginBottom: "40px" }}>
-          <h2 style={{
-            fontFamily: "Jun, serif",
-            fontSize: "clamp(2.8rem, 6vw, 5rem)",
-            fontWeight: 400,
-            color: "#FFFBF0",
-            lineHeight: 1.05,
-            letterSpacing: "-0.02em",
-            margin: 0,
-          }}>
-            All-in Ownership
-          </h2>
-          {/* 7D9FBB accent underline */}
-          <div style={{ height: "20px", background: "#8CB2C0", borderRadius: "2px", marginTop: "12px", width: "60%", margin: "12px auto 0" }} />
-        </div>
-
-        {/* Body */}
-        <p style={{
-          fontFamily: "DM Sans",
-          fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
-          color: "#FFFBF0",
-          lineHeight: 1.85,
-          maxWidth: "720px",
-          margin: "0 auto 24px",
-          opacity: 0.75,
-        }}>
-          At Sitbo, we don't just broker deals; we take full accountability for every asset we manage. Ownership is our mindset. We plan with a developer's precision, analyze like investment managers, and act like long-term stakeholders.
-        </p>
-        <p style={{
-          fontFamily: "DM Sans",
-          fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
-          color: "#FFFBF0",
-          lineHeight: 1.85,
-          maxWidth: "720px",
-          margin: "0 auto",
-          opacity: 0.75,
-        }}>
-          This means we anticipate market shifts, sweat the legal and financial details early, and align every partner to protect your capital. No shortcuts, no excuses — just total commitment to your investment from start to finish.
-        </p>
-
-      </div>
-      </div>
-    </section>
-  );
-}
-
 // ─── Founder ──────────────────────────────────────────────────────────────────
 function Founder() {
   return (
@@ -1671,7 +1615,6 @@ function Index() {
     <div className="home-page">
       <Hero />
       <FounderNote />
-      <Philosophy />
       <Analytics />
       <Lifestyle />
       <Portfolio />
