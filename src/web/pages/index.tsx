@@ -895,8 +895,9 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
 
 // ─── Lifestyle ────────────────────────────────────────────────────────────────
 function Lifestyle() {
+  const isMobile = useIsMobile();
   return (
-    <section style={{ background: "#21141A", padding: "120px 0", overflow: "hidden" }}>
+    <section style={{ background: "#21141A", padding: isMobile ? "80px 0" : "120px 0", overflow: "hidden" }}>
       <div className="lifestyle-grid" style={{ alignItems: "stretch" }}>
         {/* Left — photo bleeds to left edge */}
         <div className="reveal lifestyle-photo-col">
@@ -904,15 +905,24 @@ function Lifestyle() {
         </div>
 
         {/* Right — text + calendar, padded */}
-        <div className="reveal reveal-delay-2 lifestyle-text-col" style={{ padding: "0 clamp(24px,5vw,72px) 0 clamp(32px,4vw,64px)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>The Climate Paradise</span>
-          </div>
+        <div
+          className="reveal reveal-delay-2 lifestyle-text-col"
+          style={{
+            padding: "0 clamp(24px,5vw,72px) 0 clamp(32px,4vw,64px)",
+            // Mobile: shift whole text block down 30px
+            ...(isMobile ? { marginTop: 30 } : {}),
+          }}
+        >
+          {!isMobile && (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>The Climate Paradise</span>
+            </div>
+          )}
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
             Subtropical beauty.<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>Eternal bloom.</em>
           </h2>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: "32px" }}>
+          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
             Batumi enjoys a humid subtropical climate — 300+ sunny days, palm-lined boulevards, and a Black Sea breeze that never turns hostile. Unlike most European resort cities, Batumi blooms all year round.
           </p>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>Eternal Bloom Calendar</p>
