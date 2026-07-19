@@ -285,6 +285,10 @@ const HERO_STYLES = `
     bottom: 28px;
     transform: translateX(-50%);
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
     font-family: Manrope, sans-serif;
     font-size: 10px;
     font-weight: 500;
@@ -293,9 +297,25 @@ const HERO_STYLES = `
     color: rgba(255,255,255,0.72);
     text-decoration: none;
     white-space: nowrap;
+    animation: heroScrollPulse 2.4s ease-in-out infinite;
   }
   .hero-video-section .hero-scroll-hint:hover {
     color: #8CB2C0;
+  }
+  .hero-video-section .hero-scroll-hint .hero-scroll-arrow {
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin-top: 0;
+  }
+  .hero-video-section .hero-scroll-hint .hero-scroll-arrow svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  @keyframes heroScrollPulse {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 1; }
   }
   @media (max-width: 768px) {
     .hero-video-section {
@@ -444,8 +464,13 @@ function Hero() {
           </div>
         </div>
 
-        <a href="#founder-note" className="hero-scroll-hint">
-          SCROLL TO EXPLORE
+        <a href="#founder-note" className="hero-scroll-hint" aria-label="Scroll to explore">
+          <span>SCROLL TO EXPLORE</span>
+          <span className="hero-scroll-arrow" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
         </a>
       </section>
     </>
