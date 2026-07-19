@@ -413,13 +413,11 @@ function Hero() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Don&apos;t play
+              Ципички
               <br />
-              <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>roulette</em>
+              строят
               <br />
-              with real estate
-              <br />
-              in Georgia.
+              <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>империю</em>
             </h1>
 
             <p
