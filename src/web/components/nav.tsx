@@ -1,207 +1,356 @@
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
+import { Globe as GlobeIcon } from "lucide-react";
+import { LocaleModal } from "./LocaleModal";
 
-const C = {
-  dark:  "#21141A",
-  teal:  "#8CB2C0",
-  light: "#FFFBF0",
-};
+export const NAV_HEIGHT = 88;
+export const NAV_HEIGHT_MOBILE = 72;
 
-export const NAV_HEIGHT = 80;
+const MOBILE_BP = 1024;
 
-const LINK_STYLE: CSSProperties = {
-  fontFamily: "DM Sans",
-  fontSize: "14px",
-  fontWeight: 600,
-  letterSpacing: "0.16em",
-  textTransform: "uppercase",
-  textDecoration: "none",
-  whiteSpace: "nowrap",
-};
+const LEFT_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Properties", href: "/catalog" },
+  { label: "Services", href: "/services" },
+] as const;
 
-export function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const RIGHT_LINKS = [
+  { label: "Why Georgia", href: "/invest" },
+  { label: "About", href: "/#about" },
+  { label: "Blog & Guide", href: "/blog" },
+] as const;
+
+const ALL_LINKS = [...LEFT_LINKS, ...RIGHT_LINKS];
+
+function useNavActive() {
   const [location] = useLocation();
-  const isHome = location === "/";
+  const [hash, setHash] = useState(() =>
+    typeof window !== "undefined" ? window.location.hash : ""
+  );
 
-  const links = [
-    { label: "Catalog",            href: "/catalog" },
-    { label: "Services",           href: "/#about" },
-    { label: "Turnkey Renovation", href: "/turnkey" },
-    { label: "Why Georgia",        href: "/invest" },
-    { label: "Mortgage",           href: "/mortgage" },
-    { label: "Discovery Tour",     href: "/#discovery-tour" },
-  ];
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [location]);
 
+  const isActive = (href: string) => {
+    if (href === "/") return location === "/";
+    if (href === "/#about") return location === "/" && hash === "#about";
+    if (href === "/catalog") return location === "/catalog" || location.startsWith("/project/");
+    if (href === "/blog") return location === "/blog" || location.startsWith("/blog/");
+    return location === href || location.startsWith(`${href}/`);
+  };
+
+  return { isActive };
+}
+
+function useIsMobile(bp = MOBILE_BP) {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= bp : false
+  );
+  useEffect(() => {
+    const onResize = () => setMobile(window.innerWidth <= bp);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [bp]);
+  return mobile;
+}
+
+function NavItem({
+  href,
+  children,
+  isActive,
+  onNavigate,
+}: {
+  href: string;
+  children: ReactNode;
+  isActive?: boolean;
+  onNavigate?: () => void;
+}) {
   return (
-    <nav
+    <Link
+      href={href}
+      onClick={onNavigate}
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        height: `${NAV_HEIGHT}px`,
-        background: C.light,
-        borderBottom: "1px solid rgba(33,20,26,0.08)",
-        backdropFilter: "saturate(120%) blur(6px)",
+        fontFamily: "Manrope, sans-serif",
+        fontSize: 11,
+        fontWeight: 500,
+        letterSpacing: "0.22em",
+        color: "#FAF7F0",
+        textTransform: "uppercase",
+        textDecoration: "none",
+        whiteSpace: "nowrap",
+        transition: "opacity 0.2s",
+        padding: "0 4px",
+        opacity: isActive ? 1 : undefined,
+      }}
+      onMouseEnter={(e) => {
+        if (!isActive) e.currentTarget.style.opacity = "0.6";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.opacity = "1";
       }}
     >
-      <div
+      {children}
+    </Link>
+  );
+}
+
+function HamburgerIcon() {
+  return (
+    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden>
+      <path d="M0 1h22M0 8h22M0 15h22" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function Nav() {
+  const [location] = useLocation();
+  const isHome = location === "/";
+  const isMobile = useIsMobile();
+  const { isActive } = useNavActive();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+
+  const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--nav-height", `${navHeight}px`);
+    return () => document.documentElement.style.removeProperty("--nav-height");
+  }, [navHeight]);
+
+  useEffect(() => {
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [location]);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
+
+  const transparent = isHome && !scrolled && !menuOpen && !langOpen;
+  const showSolid = !transparent;
+
+  const navBackground = !showSolid
+    ? "transparent"
+    : isMobile
+      ? "rgba(33, 20, 26, 0.85)"
+      : "rgba(33, 20, 26, 0.92)";
+
+  const logoHeight = isMobile ? 22 : 26;
+
+  return (
+    <>
+      <nav
         style={{
-          height: "100%",
-          padding: "0 clamp(16px, 4vw, 32px)",
-          display: "grid",
-          gridTemplateColumns: "auto 1fr auto",
-          alignItems: "center",
-          columnGap: "16px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          width: "100%",
+          zIndex: 100,
+          height: navHeight,
+          transition: "background 0.3s ease, backdrop-filter 0.3s ease",
+          background: navBackground,
+          backdropFilter: showSolid ? "blur(14px)" : "none",
+          WebkitBackdropFilter: showSolid ? "blur(14px)" : "none",
+          borderBottom: showSolid ? "1px solid rgba(255,255,255,0.06)" : "none",
         }}
       >
-        {/* Logo — hidden on homepage */}
-        {isHome ? (
-          <div aria-hidden="true" style={{ width: "1px", height: "19px" }} />
-        ) : (
-          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", height: "100%" }}>
-            <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
-          </Link>
-        )}
-
-        {/* Desktop nav links — hidden on mobile via .nav-desktop-links CSS class */}
-        <div className="nav-desktop-links" style={{ justifyContent: "center" }}>
-          {links.map(l => (
-            <Link
-              key={l.label}
-              href={l.href}
-              style={{ ...LINK_STYLE, color: "rgba(0,0,0,0.8)", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "rgba(0,0,0,1)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,0,0,0.8)")}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Right column: WhatsApp CTA (desktop) + Hamburger (mobile) */}
-        <div style={{ display: "flex", gap: "10px", alignItems: "center", justifySelf: "end" }}>
-          {/* WhatsApp icon — hidden on mobile via .nav-desktop-cta */}
-          <div className="nav-desktop-cta">
-            <a
-              href="https://wa.me/995555505288"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "38px",
-                height: "38px",
-                borderRadius: "999px",
-                background: "transparent",
-                border: `1px solid ${C.teal}`,
-                textDecoration: "none",
-                cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = C.teal;
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 10px rgba(140,178,192,0.28)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "transparent";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
-            </a>
-          </div>
-
-          {/* Hamburger — shown on mobile via .nav-hamburger CSS class */}
+        <div
+          style={{
+            maxWidth: isMobile ? undefined : 1680,
+            height: "100%",
+            margin: "0 auto",
+            padding: isMobile ? "0 24px" : "0 56px",
+            display: "grid",
+            gridTemplateColumns: isMobile ? "auto 1fr auto" : "auto 1fr auto 1fr auto",
+            alignItems: "center",
+            gap: 0,
+            boxSizing: "border-box",
+          }}
+        >
           <button
-            className="nav-hamburger"
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            type="button"
+            onClick={() => setLangOpen(true)}
+            aria-label="Language"
+            aria-expanded={langOpen}
             style={{
               background: "none",
               border: "none",
+              color: "#FAF7F0",
               cursor: "pointer",
-              padding: "8px",
-              color: C.dark,
-              fontSize: "22px",
-              lineHeight: 1,
+              padding: 8,
+              display: "flex",
+              alignItems: "center",
+              opacity: 0.85,
+              justifySelf: "start",
+              transition: "opacity 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "1";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.85";
             }}
           >
-            {menuOpen ? "✕" : "☰"}
+            <GlobeIcon size={18} />
           </button>
-        </div>
-      </div>
 
-      {/* Mobile dropdown menu */}
-      {menuOpen && (
+          {!isMobile && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+                gap: 8,
+                paddingLeft: 64,
+                paddingRight: 48,
+              }}
+            >
+              {LEFT_LINKS.map((l) => (
+                <NavItem key={l.href} href={l.href} isActive={isActive(l.href)}>
+                  {l.label}
+                </NavItem>
+              ))}
+            </div>
+          )}
+
+          <Link
+            href="/"
+            aria-label="SITBO Invest — Home"
+            style={{
+              display: "block",
+              cursor: "pointer",
+              lineHeight: 0,
+              transition: "opacity 0.2s ease",
+              justifySelf: "center",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "0.75";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "1";
+            }}
+          >
+            <img
+              src="/logo-dark-bg.png"
+              alt="SITBO Invest"
+              style={{
+                height: logoHeight,
+                width: "auto",
+                display: "block",
+                objectFit: "contain",
+              }}
+            />
+          </Link>
+
+          {!isMobile && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+                gap: 8,
+                paddingLeft: 48,
+                paddingRight: 64,
+              }}
+            >
+              {RIGHT_LINKS.map((l) => (
+                <NavItem key={l.href} href={l.href} isActive={isActive(l.href)}>
+                  {l.label}
+                </NavItem>
+              ))}
+            </div>
+          )}
+
+          {isMobile ? (
+            <button
+              type="button"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+              style={{
+                display: "flex",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                justifySelf: "end",
+                alignItems: "center",
+              }}
+            >
+              <HamburgerIcon />
+            </button>
+          ) : (
+            <div style={{ width: 34, justifySelf: "end" }} aria-hidden="true" />
+          )}
+        </div>
+      </nav>
+
+      {menuOpen && isMobile && (
         <div
-          style={{
-            position: "absolute",
-            top: `${NAV_HEIGHT}px`,
-            left: 0,
-            right: 0,
-            background: C.light,
-            borderBottom: "1px solid rgba(33,20,26,0.08)",
-            boxShadow: "0 8px 24px rgba(33,20,26,0.08)",
-            padding: "8px 20px 20px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "0",
-            zIndex: 99,
-          }}
+          className="nav-mobile-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
         >
-          {links.map(l => (
+          <button
+            type="button"
+            className="nav-mobile-close"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            ×
+          </button>
+
+          {ALL_LINKS.map((l) => (
             <Link
-              key={l.label}
+              key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
               style={{
-                ...LINK_STYLE,
-                fontSize: "13px",
-                color: "rgba(0,0,0,0.8)",
-                padding: "13px 0",
-                borderBottom: "1px solid rgba(33,20,26,0.06)",
-                display: "block",
+                fontFamily: "Jun, Georgia, serif",
+                fontSize: "clamp(28px, 7vw, 42px)",
+                fontWeight: 400,
+                color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                textTransform: "none",
+                letterSpacing: 0,
+                textDecoration: "none",
+                transition: "color 0.2s ease",
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
+              }
             >
               {l.label}
             </Link>
           ))}
-          <a
-            href="https://wa.me/995555505288"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMenuOpen(false)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              marginTop: "16px",
-              padding: "14px 20px",
-              background: C.teal,
-              borderRadius: "8px",
-              textDecoration: "none",
-              fontFamily: "DM Sans",
-              fontWeight: 600,
-              fontSize: "0.78rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: C.dark,
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            WhatsApp
-          </a>
         </div>
       )}
-    </nav>
+
+      <LocaleModal open={langOpen} onClose={() => setLangOpen(false)} />
+    </>
   );
 }

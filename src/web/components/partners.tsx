@@ -28,7 +28,7 @@ const css = `
   .p-track { display: flex; gap: 20px; width: max-content; animation: marquee 50s linear infinite; padding: 16px 0; }
   .p-card {
     width: 280px; height: 120px; flex-shrink: 0;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     border-radius: 16px;
     border: 1px solid rgba(255,255,255,0.95);
@@ -43,7 +43,7 @@ const css = `
     border-color: rgba(140,178,192,0.6);
     transform: translateY(-3px);
   }
-  .p-card img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .p-card img { width: 100%; height: 100%; object-fit: contain; display: block; opacity: 1; }
   .p-fade-l { position: absolute; left: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to right, #FFFBF0 20%, transparent); pointer-events: none; z-index: 2; }
   .p-fade-r { position: absolute; right: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to left, #FFFBF0 20%, transparent); pointer-events: none; z-index: 2; }
 `;
@@ -52,14 +52,14 @@ export function Partners() {
   return (
     <section style={{ background: '#FFFBF0', padding: 'clamp(48px,6vw,96px) 0', overflow: 'hidden' }}>
       <style>{css}</style>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 40px 48px' }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
           <div style={{ width: '32px', height: '1px', background: 'rgba(33,20,26,0.3)' }} />
           <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(33,20,26,0.45)', margin: 0 }}>Trusted Partners</p>
         </div>
         <h2 style={{ fontFamily: 'Jun, serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>Developer & Banking Partners</h2>
       </div>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', marginTop: '48px' }}>
         <div className='p-fade-l' />
         <div className='p-fade-r' />
         <div className='p-track'>

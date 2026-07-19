@@ -5,7 +5,7 @@ const C = {
   dark:      "#21141A",
   teal:      "#8CB2C0",
   light:     "#FFFBF0",
-  parchment: "#F5F3ED",
+  parchment: "#FFFBF0",
   muted:     "#7a7a7a",
 };
 

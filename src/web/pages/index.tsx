@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
-import { projects, type Project } from "../data/projects";
+import { Footer } from "../components/footer";
+import { ConsultationForm } from "../components/ConsultationForm";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -11,7 +12,7 @@ import { projects, type Project } from "../data/projects";
 // #FFFBF0  → background light (warm off-white)
 const C = {
   light:     "#FFFBF0",
-  parchment: "#F5F3ED",
+  parchment: "#FFFBF0",
   teal:      "#8CB2C0",
   teal2:     "#8CB2C0",
   wine:      "#683D47",
@@ -43,6 +44,126 @@ function useReveal() {
     return () => io.disconnect();
   }, []);
 }
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const projects = [
+  {
+    name: "Artex Parkline", tag: "New Boulevard · Park Front",
+    address: "New Boulevard St, 12", seaDistance: "12 minutes to the sea", seaMeters: "950 m",
+    location: "New Boulevard, Batumi City Centre · Park frontage",
+    desc: "Contemporary high-rise facing the new park avenue. Architecturally optimized layouts deliver strong rental yields driven by high demand from digital nomads and short-term tourists.",
+    yield: "9–11%",
+    developer: "Placeholder Developer",
+    priceFrom: "From $75,000",
+    completion: "Q2 2026",
+    area: "32–85 m²",
+    ceilingHeight: "2.9 m",
+    floors: "22 floors",
+    buildings: "1 building",
+    finishing: "White frame, Turnkey",
+    installment: "30% down / 70% quarterly",
+    features: ["Park-front location", "High rental demand", "Concierge & reception", "Rooftop terrace", "Boulevard views"],
+    materials: "Contemporary monolithic frame, energy-efficient double glazing, ventilated facade cladding.",
+    photos: ["/artex-parkline.png"],
+  },
+  {
+    name: "Queen's Residence", tag: "Gated Community",
+    address: "Adlia St, 53", seaDistance: "8 minutes to the sea", seaMeters: "620 m",
+    location: "Adlia St, 53 · 8 minutes to the sea",
+    desc: "A private, gated community offering the sophisticated infrastructure of a 5-star hotel. Architecturally optimized floor plans designed for maximum comfort and style — the perfect blend of exclusivity and coastal convenience.",
+    yield: "9–12.6%",
+    developer: "Placeholder Developer",
+    priceFrom: "From $95,000",
+    completion: "Q1 2027",
+    area: "45–130 m²",
+    ceilingHeight: "3.1 m",
+    floors: "18 floors",
+    buildings: "4 buildings",
+    finishing: "White frame, Turnkey",
+    installment: "30% down / 70% quarterly",
+    features: ["Gated private community", "5-star hotel infrastructure", "Reception & concierge", "Pool & wellness centre", "Personal Property Manager"],
+    materials: "Premium reinforced concrete frame, Italian facade cladding, smart home pre-wiring.",
+    photos: ["/queens-residence.png"],
+  },
+  {
+    name: "Silk Towers", tag: "First Line · Sea View",
+    address: "Black Sea Blvd, 1", seaDistance: "2 minutes to the beach", seaMeters: "150 m",
+    location: "Black Sea Boulevard, First Line · 2 min to beach",
+    desc: "Luxury living meets ecological innovation on the historic first line. Featuring the region's grandest casino and a 20,000 m² private park by Masu Planning — the last of its kind on the Batumi coastline.",
+    yield: "10–13%",
+    developer: "Placeholder Developer",
+    priceFrom: "From $120,000",
+    completion: "Q4 2026",
+    area: "50–200 m²",
+    ceilingHeight: "3.2 m",
+    floors: "45 floors",
+    buildings: "2 towers",
+    finishing: "White frame, Turnkey, Designer",
+    installment: "40% down / 60% quarterly",
+    features: ["20,000 m² private park", "Region's largest casino", "Direct Black Sea access", "Masu Planning landscaping", "Swiss-grade construction"],
+    materials: "High-grade monolithic concrete, floor-to-ceiling glazing, Swiss engineering standards.",
+    photos: ["/silk-towers.png"],
+  },
+  {
+    name: "Rogantini Swiss Village", tag: "Chakvi · Alpine Quality",
+    address: "Chakvi village, 30 km from Batumi", seaDistance: "5 minutes to the beach", seaMeters: "400 m",
+    location: "Chakvi village, 30 km from Batumi · Mountain & Sea views",
+    desc: "A self-contained Swiss-standard village with breathtaking mountain and sea panoramas. From a private poker room and luxury spa to tennis courts and medical facilities — seclusion without compromise.",
+    yield: "8–11%",
+    developer: "Placeholder Developer",
+    priceFrom: "From €55,000",
+    completion: "Q3 2026",
+    area: "38–110 m²",
+    ceilingHeight: "2.85 m",
+    floors: "5 floors",
+    buildings: "12 buildings",
+    finishing: "White frame, Turnkey",
+    installment: "25% down / 75% quarterly",
+    features: ["Swiss moisture-resistant concrete", "Private poker room & luxury spa", "Tennis courts & medical centre", "Beach shuttle service", "Mountain & sea panoramic views"],
+    materials: "Swiss-standard moisture-resistant reinforced concrete, alpine timber facade accents.",
+    photos: ["/rogantini.png"],
+  },
+  {
+    name: "Ambassadori Island", tag: "Off-Shore Island · Marina",
+    address: "Batumi Bay, off-shore island", seaDistance: "Waterfront", seaMeters: "0 m",
+    location: "Off-shore island, Batumi Bay · Private marina access",
+    desc: "An 87-hectare man-made archipelago redefining luxury through eco-futurism. With 49% green infrastructure, a premier yacht club, and an elite private university — a sustainable sanctuary where technology meets nature.",
+    yield: "12–14.5%",
+    developer: "Placeholder Developer",
+    priceFrom: "From $180,000",
+    completion: "Q2 2027",
+    area: "60–350 m²",
+    ceilingHeight: "3.3 m",
+    floors: "30 floors",
+    buildings: "8 buildings",
+    finishing: "White frame, Turnkey, Designer",
+    installment: "35% down / 65% quarterly",
+    features: ["87-ha man-made archipelago", "49% green infrastructure", "Premier yacht club", "Elite private university", "High-end global brand retail"],
+    materials: "Eco-certified materials, solar infrastructure, smart building systems throughout.",
+    photos: ["/ambassadori.png"],
+  },
+  {
+    name: "Gonio Yachts & Marina", tag: "Gonio · Waterfront",
+    address: "Gonio, 15 km from Batumi", seaDistance: "Direct waterfront", seaMeters: "0 m",
+    location: "Gonio, 15 km from Batumi · Direct waterfront",
+    desc: "A private marina complex combining branded residences with resort hospitality infrastructure. Berths, a yacht club, and a waterfront promenade in one of Georgia's most scenic coastal settings.",
+    yield: "11–14%",
+    developer: "Placeholder Developer",
+    priceFrom: "From $150,000",
+    completion: "Q1 2028",
+    area: "55–180 m²",
+    ceilingHeight: "3.0 m",
+    floors: "14 floors",
+    buildings: "3 buildings",
+    finishing: "White frame, Turnkey",
+    installment: "30% down / 70% quarterly",
+    features: ["Private marina with berths", "Branded residences", "Yacht club membership", "Waterfront promenade", "Resort hospitality services"],
+    materials: "Marine-grade materials, teak decking, panoramic floor-to-ceiling facades.",
+    photos: ["/gonio_final_v1.png"],
+  },
+];
+
+type Project = typeof projects[0];
 
 const stats = [
   { value: "1.7M",   label: "Tourists in 2025" },
@@ -102,62 +223,402 @@ const bloomCalendar = [
   { month: "Nov–Dec",  bloom: "Loquat, snowdrops, evergreen palms" },
 ];
 
+const cardImages = [
+  "/artex-parkline.png",
+  "/queens-residence.png",
+  "/silk-towers.png",
+  "/rogantini.png",
+  "/ambassadori.png",
+  "/gonio_final_v1.png",
+];
+
+const HERO_STYLES = `
+  .hero-video-section .hero-gradient {
+    background: radial-gradient(ellipse at center, rgba(20,14,18,0.45) 0%, rgba(20,14,18,0.0) 70%);
+  }
+  .hero-video-section .hero-outline-btn:hover {
+    border-color: #8CB2C0 !important;
+    color: #8CB2C0 !important;
+  }
+  .hero-video-section .hero-eyebrow {
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+    .hero-video-section {
+      height: 100svh !important;
+      min-height: 640px !important;
+    }
+    .hero-video-section .hero-h1-video {
+      font-size: clamp(32px, 8vw, 44px) !important;
+    }
+    .hero-video-section .hero-cta-row {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 12px !important;
+      width: 100% !important;
+    }
+    .hero-video-section .hero-cta-row .hero-cta-primary,
+    .hero-video-section .hero-cta-row .hero-cta-secondary {
+      width: 100% !important;
+      max-width: 320px !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+      border-radius: 0 !important;
+      padding: 18px 32px !important;
+      font-family: Manrope, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      transform: none !important;
+    }
+    .hero-video-section .hero-cta-primary {
+      background: rgba(140, 178, 192, 0.25) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border: 1px solid rgba(140, 178, 192, 0.5) !important;
+      color: #FAF7F0 !important;
+    }
+    .hero-video-section .hero-cta-secondary {
+      background: transparent !important;
+      border: 1px solid rgba(250, 247, 240, 0.25) !important;
+      color: #FAF7F0 !important;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero-video-section .hero-content {
+      padding-bottom: 80px;
+    }
+  }
+`;
+
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!modalOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModalOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handler);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handler);
+    };
+  }, [modalOpen]);
+
   return (
-    <section id="hero" style={{ background: C.light, position: "relative", overflow: "hidden" }}>
-      {/* Mobile: stacked. Desktop: 2-col grid */}
-      <div className="hero-grid">
-        {/* Left */}
-        <div className="hero-text">
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "28px", opacity: 0.6 }}>
-            <div style={{ width: "28px", height: "1px", background: C.wine, flexShrink: 0 }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.dark, fontFamily: "DM Sans", fontWeight: 500 }}>
+    <>
+      <style>{HERO_STYLES}</style>
+      <section
+        id="hero"
+        className="hero-video-section snap-screen"
+        style={{
+          position: "relative",
+          width: "100vw",
+          height: "100vh",
+          minHeight: "100vh",
+          overflow: "hidden",
+          marginTop: "calc(-1 * var(--nav-height, 88px))",
+          marginLeft: "calc(-50vw + 50%)",
+        }}
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          disableRemotePlayback
+          controlsList="nodownload nofullscreen noremoteplayback"
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          <source src="/hero-video.webm" type="video/webm" />
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+
+        <div
+          className="hero-gradient"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          className="hero-content"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 2,
+            maxWidth: 720,
+            width: "90%",
+            textAlign: "center",
+            margin: "0 auto",
+          }}
+        >
+          <div>
+            <p
+              className="hero-eyebrow"
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: "0.65rem",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.75)",
+                margin: "0 0 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "32px",
+                  height: "1px",
+                  background: "#8CB2C0",
+                  flexShrink: 0,
+                }}
+              />
               Batumi · Georgia · Premium Investment
-            </span>
-          </div>
+            </p>
 
-          <h1 className="hero-h1">
-            Don't play<br />
-            <em style={{ fontStyle: "italic", color: C.teal }}>roulette</em><br />
-            with real estate<br />
-            in Georgia.
-          </h1>
+            <h1
+              className="hero-h1-video"
+              style={{
+                fontFamily: "Jun, Georgia, serif",
+                fontSize: "clamp(44px, 5.5vw, 84px)",
+                fontWeight: 400,
+                color: "#FFFFFF",
+                lineHeight: 1.05,
+                margin: "0 0 24px",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Don&apos;t play
+              <br />
+              <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>roulette</em>
+              <br />
+              with real estate
+              <br />
+              in Georgia.
+            </h1>
 
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", lineHeight: 1.7, color: C.muted, marginBottom: "56px" }}>
-            We limit our client intake to ensure 100% focus on your deal. Our expertise,{" "}
-            <span style={{ whiteSpace: "nowrap" }}>network, and off-market database are on your side.</span>
-          </p>
+            <p
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: "clamp(14px, 1.05vw, 16px)",
+                color: "rgba(255,255,255,0.85)",
+                lineHeight: 1.7,
+                opacity: 0.9,
+                marginTop: 32,
+                marginBottom: 40,
+                marginLeft: "auto",
+                marginRight: "auto",
+                maxWidth: 720,
+              }}
+            >
+              We limit our client intake to ensure 100% focus on your deal. Our expertise, network, and off-market database are on your side.
+            </p>
 
-          <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-            <a href="#contact" className="btn-gold" style={{ color: "#FFFBF0", background: "#8CB2C0" }}>Consult with an Expert</a>
-            <a href="#portfolio" className="btn-outline-gold" style={{ color: "#21141A", borderColor: "#21141A" }}>View Projects</a>
-          </div>
-
-          <a href="https://g.page/r/CR1_vKWcSyUNEAI/review" target="_blank" rel="noopener noreferrer"
-            style={{ marginTop: "40px", display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none", cursor: "pointer", flexWrap: "nowrap" }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-          >
-            <div style={{ display: "flex", gap: "2px", flexShrink: 0 }}>
-              {[...Array(5)].map((_, i) => <span key={i} style={{ color: "#21141A", fontSize: "13px" }}>★</span>)}
+            <div
+              className="hero-cta-row"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "16px",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                type="button"
+                className="btn-gold hero-cta-primary"
+                onClick={() => setModalOpen(true)}
+                style={{
+                  color: "#21141A",
+                  background: "#8CB2C0",
+                  textDecoration: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  font: "inherit",
+                }}
+              >
+                Consult with an Expert
+              </button>
+              <a
+                href="#portfolio"
+                className="btn-outline-gold hero-outline-btn hero-cta-secondary"
+                style={{
+                  color: "#FFFFFF",
+                  borderColor: "rgba(255,255,255,0.35)",
+                  background: "transparent",
+                  textDecoration: "none",
+                  transition: "border-color 0.2s, color 0.2s",
+                }}
+              >
+                View Projects
+              </a>
             </div>
-            <span style={{ fontSize: "0.7rem", color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>5 / 5 · Google Reviews</span>
-          </a>
-        </div>
 
-        {/* Right: image */}
-        <div className="hero-image-wrap">
-          <img src="/hero2.png" alt="Batumi premium real estate"
-            style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s ease" }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            <a
+              href="https://g.page/r/CR1_vKWcSyUNEAI/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                color: "rgba(255,255,255,0.65)",
+                textDecoration: "none",
+                fontFamily: "Manrope, sans-serif",
+                fontSize: "13px",
+                letterSpacing: "0.08em",
+                marginTop: "28px",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
+            >
+              ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {modalOpen && (
+        <>
+          <div
+            role="presentation"
+            onClick={() => setModalOpen(false)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(20,14,18,0.75)",
+              backdropFilter: "blur(6px)",
+              zIndex: 1000,
+              animation: "fadeIn 0.25s ease",
+            }}
           />
-        </div>
-      </div>
 
-      <div style={{ position: "absolute", width: "300px", height: "300px", borderRadius: "50%", border: "1px solid rgba(140,178,192,0.08)", top: "50%", left: "35%", transform: "translate(-50%,-50%)", pointerEvents: "none" }} />
-    </section>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="consultation-modal-title"
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1001,
+              background: "#21141A",
+              border: "1px solid rgba(140,178,192,0.15)",
+              padding: "clamp(32px, 5vw, 56px)",
+              width: "min(580px, 92vw)",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              animation: "slideUp 0.3s ease",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setModalOpen(false)}
+              aria-label="Close"
+              style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                background: "none",
+                border: "none",
+                color: "rgba(250,247,240,0.4)",
+                fontSize: "22px",
+                cursor: "pointer",
+                lineHeight: 1,
+                padding: "4px 8px",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#FAF7F0")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(250,247,240,0.4)")}
+            >
+              ×
+            </button>
+
+            <p
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: "0.62rem",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#8CB2C0",
+                margin: "0 0 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span style={{ width: "24px", height: "1px", background: "#8CB2C0", display: "inline-block" }} />
+              Private Consultation
+            </p>
+
+            <h2
+              id="consultation-modal-title"
+              style={{
+                fontFamily: "Jun, Georgia, serif",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                fontWeight: 400,
+                color: "#FAF7F0",
+                lineHeight: 1.15,
+                margin: "0 0 8px",
+              }}
+            >
+              Let&apos;s discuss
+            </h2>
+            <h2
+              style={{
+                fontFamily: "Jun, Georgia, serif",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: "#8CB2C0",
+                lineHeight: 1.15,
+                margin: "0 0 28px",
+              }}
+            >
+              your strategy.
+            </h2>
+
+            <p
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: "13px",
+                color: "rgba(250,247,240,0.45)",
+                margin: "0 0 32px",
+                lineHeight: 1.6,
+              }}
+            >
+              We take on a limited number of clients each quarter. No obligation, full transparency.
+            </p>
+
+            <ConsultationForm onSuccess={() => setModalOpen(false)} />
+          </div>
+        </>
+      )}
+    </>
   );
 }
 
@@ -165,21 +626,18 @@ function Hero() {
 function FounderNote() {
   const isMobile = useIsMobile();
   return (
-    <section style={{ background: "#21141A", padding: "10px" }}>
-      <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "clamp(208px,6vw,248px) clamp(24px,4vw,64px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
+    <section id="founder-note" className="snap-screen" style={{ background: "#21141A", padding: "10px" }}>
+      <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
 
           {/* Left: photo */}
-          <div className="reveal" style={{ position: "relative" }}>
-            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#e8e0d5" }}>
-              <img src="/founder.png" alt="Artur Sitbo" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", display: "block" }} />
-            </div>
-            {/* Avatar badge */}
-            <div style={{ position: "absolute", bottom: "-16px", left: "24px", display: "flex", alignItems: "center", gap: "12px", background: "#21141A", borderRadius: "8px", padding: "12px 20px" }}>
-              <div>
-                <p style={{ color: "#FFFBF0", fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.75rem", margin: 0 }}>ARTHUR ARUTYUNYAN</p>
-                <p style={{ color: "rgba(255,251,240,0.5)", fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "2px 0 0" }}>Founder</p>
-              </div>
+          <div className="reveal">
+            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFBF0" }}>
+              <img
+                src="/arthur-founder.jpg"
+                alt="Arthur Arutyunyan, Founder"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+              />
             </div>
           </div>
 
@@ -187,24 +645,37 @@ function FounderNote() {
           <div className="reveal reveal-delay-2">
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
               <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-              <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "DM Sans" }}>The Founder's Note</span>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "DM Sans" }}>
+                The Founder&apos;s Note
+              </span>
             </div>
 
             <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Jun, serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
-              "I close every deal{" "}
-              <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>personally.</em>
-              {" "}Seven years in Batumi. Twelve client mandates per quarter, maximum."
+              &ldquo;I close every deal personally.
+              <br />
+              Seven years in Batumi. Twelve
+              <br />
+              client mandates per quarter,
+              <br />
+              maximum.&rdquo;
             </blockquote>
 
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
-              Real estate in Georgia isn't a spreadsheet exercise. It's a network. Who's building honest, who's cutting corners, which developer will finish on time, which plot has title issues no broker will mention.
+              Every transaction carries my personal signature. Born and raised in Batumi, I have spent seven years mastering this market — uncovering the critical insights that never make it into public domain.
             </p>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "36px" }}>
-              I've spent seven years in Batumi learning who to trust — and who to walk away from. When you hire SITBO, you hire that knowledge. I personally supervise every turnkey renovation and sign off on every purchase. We accept twelve client mandates per quarter. That's the math of actually caring.
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
+              Real estate in Georgia isn&apos;t a spreadsheet exercise. It&apos;s a network. Who builds with integrity, who cuts corners, which developer finishes on time, and which plot has title issues no broker will ever mention.
+            </p>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "24px" }}>
+              I&apos;ve spent seven years in Batumi learning who to trust — and exactly who to walk away from. When you partner with SITBO, you deploy that exact leverage. I personally oversee every turnkey renovation and sign off on every purchase. To guarantee this level of developer precision, I intentionally limit my capacity to twelve client mandates per quarter.
+            </p>
+
+            <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
+              That&apos;s the math of total accountability.
             </p>
 
             <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: 0 }}>
-              — Arthur, Founder
+              — Arthur Arutyunyan, Founder
             </p>
           </div>
 
@@ -223,9 +694,7 @@ function Divider() {
 function Philosophy() {
   return (
     <section style={{ background: "#21141A", padding: "clamp(60px,12vw,350px) 10px", position: "relative", overflow: "hidden" }}>
-
-
-
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
       <div className="reveal" style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
 
 
@@ -272,6 +741,7 @@ function Philosophy() {
         </p>
 
       </div>
+      </div>
     </section>
   );
 }
@@ -279,19 +749,19 @@ function Philosophy() {
 // ─── Founder ──────────────────────────────────────────────────────────────────
 function Founder() {
   return (
-    <section id="about" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
+    <section id="about" className="scroll-mt-24" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>BATUMI</div>
 
       {/* Big frame card */}
       <div style={{ background: "#FFFBF0", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "hidden", padding: "80px 0" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(32px,4vw,64px)" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
       <div className="founder-grid">
 
         {/* Photo — 30–35% width, padded, aligned top */}
         <div className="reveal" style={{ alignSelf: "flex-start", marginLeft: "0" }}>
           <div style={{ position: "relative" }}>
-            <img src="/founder.png" alt="Arthur Arutuniyan"
-              style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "top center", display: "block" }} />
+            <img src="/arthur-founder.jpg" alt="Arthur Arutyunyan"
+              style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
               <p style={{ color: "#FFFBF0", fontFamily: "Jun, serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
               <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "DM Sans", fontWeight: 600 }}>Founder & Sales Expert</p>
@@ -344,7 +814,7 @@ function Analytics() {
   return (
     <section id="analytics" style={{ background: "#21141A", padding: "10px", overflow: "hidden" }}>
       <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(32px,4vw,64px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ marginBottom: isMobile ? "20px" : "56px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: isMobile ? "8px" : "16px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
@@ -434,7 +904,7 @@ function Portfolio() {
     <section id="portfolio" style={{ background: C.darkTeal, padding: "20px 0 20px" }}>
       {/* Big frame card */}
       <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "clamp(28px,4vw,64px) 20px clamp(28px,4vw,56px)", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
-      <div style={{ padding: "0 clamp(24px,4vw,56px)", maxWidth: "1100px", margin: "0 auto 8px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "20px" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
@@ -455,30 +925,24 @@ function Portfolio() {
           ref={scrollRef}
           onScroll={handleScroll}
           className="portfolio-outer"
-          style={{
-            overflowX: "auto",
-            overflowY: "visible",
-            width: "100%",
-            WebkitOverflowScrolling: "touch",
-            marginTop: "30px",
-            scrollSnapType: "x mandatory",
-            overscrollBehaviorX: "contain",
-          }}
+          style={{ overflowX: "auto", overflowY: "visible", width: "100%", WebkitOverflowScrolling: "touch", marginTop: "30px" }}
         >
           <div
             className="portfolio-scroll"
             style={{
               display: "flex",
               gap: isMobile ? "16px" : "24px",
+              // On mobile: left pad = 20px, right pad leaves ~40px so next card peeks
               paddingLeft: isMobile ? "20px" : "30px",
               paddingRight: isMobile ? "40px" : "30px",
               paddingTop: "30px",
               paddingBottom: "30px",
+              scrollSnapType: "x mandatory",
               width: "max-content",
               minWidth: "100%",
             }}
           >
-            {projects.map(p => <ProjectCard key={p.slug} project={p} isMobile={isMobile} />)}
+            {projects.map((p, i) => <ProjectCard key={p.name} project={p} index={i} isMobile={isMobile} />)}
           </div>
         </div>
 
@@ -515,7 +979,8 @@ function Portfolio() {
       </div>
 
       {/* Alabbar quote */}
-      <div className="reveal" style={{ padding: "56px 24px 25px", maxWidth: "860px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+      <div className="reveal" style={{ padding: "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
         <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
           <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
             "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
@@ -527,15 +992,20 @@ function Portfolio() {
           </div>
         </div>
       </div>
+      </div>
       </div>{/* /frame card */}
     </section>
   );
 }
 
 
-function ProjectCard({ project, isMobile }: { project: Project; isMobile?: boolean }) {
+function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]; index: number; isMobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const cardW = isMobile ? "260px" : "300px";
+  const slug = project.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
   const firstSentence = project.desc.match(/^[^.!?]+[.!?]/)?.[0] ?? project.desc;
   const teaser = firstSentence.length > 110
@@ -543,13 +1013,13 @@ function ProjectCard({ project, isMobile }: { project: Project; isMobile?: boole
     : firstSentence;
 
   return (
-    <Link href={`/project/${project.slug}`}>
+    <Link href={`/project/${slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
         <div className="property-card" style={{ width: cardW, minWidth: cardW, flexShrink: 0, scrollSnapAlign: "start", cursor: "pointer", borderRadius: "16px", overflow: "hidden", position: "relative" }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
-          <img src={project.cardImage} alt={project.name}
+          <img src={cardImages[index]} alt={project.name}
             style={{ width: "100%", height: "460px", objectFit: "cover", display: "block", transition: "transform 0.6s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
 
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />
@@ -616,7 +1086,7 @@ function Lifestyle() {
 // ─── Turn Key ─────────────────────────────────────────────────────────────────
 // ─── Discovery Tour ───────────────────────────────────────────────────────────
 function DiscoveryTour() {
-  const isMobile = useIsMobile(769);
+  const isMobile = useIsMobile();
   const [visible, setVisible] = React.useState(false);
   const [countUp, setCountUp] = React.useState(0);
   const ref = React.useRef<HTMLElement>(null);
@@ -643,32 +1113,30 @@ function DiscoveryTour() {
     return () => clearInterval(timer);
   }, [visible]);
 
-  const iconSize = isMobile ? 32 : 22;
-
   const inclusions = [
     { label: "VIP Arrival",
       desc: "Private transfer and 24/7 personal support from the moment you land",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
     },
     { label: "Premium Stay",
       desc: "Curated 5-star accommodation selected for your comfort",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="6 3 18 3 22 9 12 21 2 9"/><polyline points="2 9 12 9 22 9"/><line x1="12" y1="3" x2="6" y2="9"/><line x1="12" y1="3" x2="18" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
     { label: "Off-Market Viewings",
       desc: "Exclusive properties not listed publicly, shown only to our clients",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
     },
     { label: "Gastronomic Program",
       desc: "Batumi's finest restaurants and experiences, arranged for you",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 100 16 8 8 0 000-16z"/><line x1="2" y1="18" x2="22" y2="18"/><line x1="12" y1="18" x2="12" y2="22"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
     },
     { label: "Investment Briefing",
       desc: "Private session with our senior advisor on market and returns",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
     },
     { label: "Legal Consultation",
       desc: "Full legal review of shortlisted properties before you decide",
-      svg: <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
     },
   ];
 
@@ -683,8 +1151,8 @@ function DiscoveryTour() {
 
 
 
-      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFBF0", borderRadius: "16px", paddingTop: isMobile ? "32px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "32px" : "clamp(60px,7vw,100px)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(32px,4vw,64px)" }}>
+      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFBF0", borderRadius: "16px", paddingTop: isMobile ? "40px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "40px" : "clamp(60px,7vw,100px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
 
           {/* HEADER: centered */}
           <div style={{
@@ -712,27 +1180,60 @@ function DiscoveryTour() {
           {/* 3x2 Services Grid */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : "1fr 1fr 1fr",
-            gap: isMobile ? "12px" : "52px 56px",
-            marginBottom: isMobile ? "20px" : "clamp(48px,5vw,72px)",
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr",
+            gap: isMobile ? "8px" : "52px 56px",
+            marginBottom: isMobile ? "24px" : "clamp(48px,5vw,72px)",
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(30px)",
             transition: "opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s",
           }}>
             {inclusions.map((item, i) => (
               <div key={item.label} style={{
-                textAlign: "center", padding: isMobile ? "16px" : "0 8px",
-                boxSizing: "border-box",
+                textAlign: "left",
+                padding: isMobile ? "16px 14px" : "28px 24px",
+                background: isMobile ? "#ffffff" : "rgba(140,178,192,0.05)",
+                border: isMobile ? "none" : "1px solid rgba(140,178,192,0.15)",
+                borderRadius: isMobile ? "12px" : "16px",
+                boxShadow: isMobile ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(20px)",
-                transition: "opacity 0.7s ease, transform 0.7s ease",
+                transition: "opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                 transitionDelay: `${0.2 + i * 0.07}s`,
-              }}>
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: isMobile ? "10px" : "18px" }}>
-                  {item.svg}
+                cursor: "default",
+              }}
+              onMouseEnter={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(140,178,192,0.15)"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.4)"; }}
+              onMouseLeave={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.15)"; }}
+              >
+                <div style={{ marginBottom: isMobile ? "10px" : "20px" }}>
+                  {isMobile ? (
+                    React.cloneElement(item.svg, {
+                      width: 24,
+                      height: 24,
+                      stroke: "#8CB2C0",
+                      strokeWidth: 1,
+                    })
+                  ) : (
+                    <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: "rgba(140,178,192,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {React.cloneElement(item.svg, { width: 28, height: 28 })}
+                    </div>
+                  )}
                 </div>
-                <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.8rem" : "0.78rem", fontWeight: 700, color: C.dark, margin: isMobile ? "0 0 6px" : "0 0 10px", letterSpacing: "0.04em", textTransform: "uppercase" }}>{item.label}</p>
-                <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.75rem" : "0.78rem", color: C.muted, margin: 0, lineHeight: isMobile ? 1.45 : 1.7 }}>{item.desc}</p>
+                <p style={{
+                  fontFamily: "DM Sans",
+                  fontSize: isMobile ? "0.7rem" : "0.82rem",
+                  fontWeight: isMobile ? 600 : 700,
+                  color: isMobile ? "#21141A" : C.dark,
+                  margin: isMobile ? "0 0 4px" : "0 0 8px",
+                  letterSpacing: isMobile ? "0.12em" : "0.04em",
+                  textTransform: "uppercase",
+                }}>{item.label}</p>
+                <p style={{
+                  fontFamily: "DM Sans",
+                  fontSize: isMobile ? "0.72rem" : "0.8rem",
+                  color: isMobile ? "rgba(33,20,26,0.55)" : C.muted,
+                  margin: 0,
+                  lineHeight: isMobile ? 1.5 : 1.7,
+                }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -772,29 +1273,46 @@ function DiscoveryTour() {
 
         </div>{/* /maxWidth container */}
 
-        {/* ── Photo album 1:1 — full width inside card ── */}
-        <div style={{ position: "relative", overflow: "hidden", marginTop: isMobile ? "24px" : "calc(clamp(40px,5vw,72px) + 30px)" }}>
-          {/* Left fade */}
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to right, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          {/* Right fade */}
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "80px", background: "linear-gradient(to left, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <div style={{ overflowX: "auto", overflowY: "hidden", WebkitOverflowScrolling: "touch", scrollbarWidth: "none" } as React.CSSProperties}
-            onWheel={(e) => { e.currentTarget.scrollLeft += e.deltaY; }}>
-            <div style={{ display: "flex", gap: "4px", width: "max-content", padding: "0 4px" }}>
-              {[
-                "/turnkey-new.png",
-                "/turnkey-web.png",
-                "/lifestyle-coast.png",
-                "/founder.png",
-                "/interior-bedroom.png",
-                "/turnkey-new.png",
-                "/lifestyle-coast.png",
-              ].map((src, i) => (
-                <div key={i} style={{ width: isMobile ? "72vw" : "260px", flexShrink: 0, aspectRatio: "1/1", overflow: "hidden", borderRadius: "8px" }}>
-                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-              ))}
-            </div>
+        {/* ── Auto-scrolling photo gallery ── */}
+        <div style={{ position: "relative", overflow: "hidden", marginTop: isMobile ? "24px" : "clamp(48px,5vw,80px)" }}>
+          <style>{`
+            @keyframes gallery-scroll {
+              from { transform: translateX(0); }
+              to   { transform: translateX(-50%); }
+            }
+            .gallery-track {
+              display: flex;
+              gap: 8px;
+              width: max-content;
+              animation: gallery-scroll 30s linear infinite;
+            }
+          `}</style>
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to right, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to left, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div className="gallery-track">
+            {[
+              "/turnkey-new.png",
+              "/turnkey-web.png",
+              "/lifestyle-coast.png",
+              "/interior-bedroom.png",
+              "/hero2.png",
+              "/card1.png",
+              "/card2.png",
+              "/turnkey-new.png",
+              "/turnkey-web.png",
+              "/lifestyle-coast.png",
+              "/interior-bedroom.png",
+              "/hero2.png",
+              "/card1.png",
+              "/card2.png",
+            ].map((src, i) => (
+              <div key={i} style={{ width: "280px", height: "280px", flexShrink: 0, overflow: "hidden", borderRadius: "12px" }}>
+                <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease" }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -861,7 +1379,7 @@ function Payment() {
 
   return (
     <section id="payment" style={{ background: "#21141A", padding: "clamp(60px,8vw,220px) 10px clamp(50px,6vw,200px)" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         {/* Header */}
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
@@ -985,8 +1503,8 @@ function Calculator() {
   );
 
   return (
-    <section id="calculator" style={{ background: "#21141A", padding: "clamp(60px,8vw,120px) 10px" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <section id="calculator" className="scroll-mt-24" style={{ background: "#21141A", padding: "clamp(60px,8vw,120px) 10px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
 
         {/* Header */}
         <div className="reveal" style={{ marginBottom: "48px" }}>
@@ -1189,19 +1707,46 @@ function Contact() {
     finally { setLoading(false); }
   };
 
+  const contactLabelStyle: React.CSSProperties = {
+    display: "block",
+    color: "rgba(255,251,240,0.5)",
+    fontSize: "0.65rem",
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    fontFamily: "DM Sans",
+    marginBottom: "6px",
+  };
+  const contactInputStyle: React.CSSProperties = {
+    width: "100%",
+    boxSizing: "border-box",
+    background: "rgba(255,251,240,0.08)",
+    border: "1px solid rgba(255,251,240,0.15)",
+    color: "#FFFBF0",
+    fontFamily: "DM Sans",
+    fontSize: "0.9rem",
+    padding: "12px 14px",
+    outline: "none",
+    borderRadius: "0",
+  };
+
   return (
-    <section id="contact" style={{ background: "#FFFBF0", padding: "clamp(60px,8vw,120px) 10px" }}>
-      <div style={{ maxWidth: "680px", margin: "0 auto" }}>
+    <section id="contact" className="scroll-mt-24 border-t border-[rgba(140,178,192,0.15)] bg-[#21141A] py-[clamp(64px,8vw,120px)]">
+      <style>{`
+        #contact .contact-input::placeholder { color: rgba(255,251,240,0.35); }
+        #contact select.contact-input option { background: #21141A; color: #FFFBF0; }
+      `}</style>
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6">
+      <div className="mx-auto max-w-[680px]">
         <div className="reveal" style={{ textAlign: "center", marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Private Consultation</span>
-            <div style={{ width: "28px", height: "1px", background: C.wine }} />
+            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", fontFamily: "DM Sans" }}>Private Consultation</span>
+            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "16px" }}>
             Let's discuss<br /><em style={{ fontStyle: "italic", color: C.teal }}>your strategy.</em>
           </h2>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.muted, lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
             We take on a limited number of clients each quarter. No obligation, full transparency.
           </p>
         </div>
@@ -1211,8 +1756,8 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: C.dark, marginBottom: "12px" }}>We'll be in touch shortly.</h3>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.7 }}>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>We'll be in touch shortly.</h3>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
               Your inquiry has been received. Expect a personal call from Arthur within 24 hours.
             </p>
           </div>
@@ -1220,17 +1765,17 @@ function Contact() {
           <form onSubmit={handleSubmit} className="reveal reveal-delay-1" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <div className="form-row">
               <div>
-                <label style={{ display: "block", color: C.muted, fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>Your Name *</label>
-                <input className="form-input-light" type="text" placeholder="Full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+                <label style={contactLabelStyle}>Your Name *</label>
+                <input className="contact-input" type="text" placeholder="Full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required style={contactInputStyle} />
               </div>
               <div>
-                <label style={{ display: "block", color: C.muted, fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>WhatsApp / Phone *</label>
-                <input className="form-input-light" type="text" placeholder="+1 234 567 8900" value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} required />
+                <label style={contactLabelStyle}>WhatsApp / Phone *</label>
+                <input className="contact-input" type="text" placeholder="+1 234 567 8900" value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} required style={contactInputStyle} />
               </div>
             </div>
             <div>
-              <label style={{ display: "block", color: C.muted, fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>Investment Budget</label>
-              <select className="form-input-light" value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} style={{ background: "#FFFBF0", cursor: "pointer" }}>
+              <label style={contactLabelStyle}>Investment Budget</label>
+              <select className="contact-input" value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} style={{ ...contactInputStyle, cursor: "pointer" }}>
                 <option value="">Select your budget range</option>
                 <option value="50-100k">$50,000 – $100,000</option>
                 <option value="100-200k">$100,000 – $200,000</option>
@@ -1240,107 +1785,19 @@ function Contact() {
             </div>
             {error && <p style={{ color: C.teal, fontSize: "0.8rem", fontFamily: "DM Sans" }}>{error}</p>}
             <button type="submit" className="btn-gold" disabled={loading}
-              style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#FFFBF0", background: "#21141A" }}
-              onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.background = "#8CB2C0"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#21141A"; }}>
+              style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#21141A", background: "#8CB2C0" }}
+              onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}>
               {loading ? "Sending..." : "Request Private Consultation"}
             </button>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, textAlign: "center" }}>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.35)", textAlign: "center" }}>
               By submitting you agree to be contacted by a Sitbo Invest advisor. No spam, ever.
             </p>
           </form>
         )}
       </div>
+      </div>
     </section>
-  );
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
-  return (
-    <footer style={{ background: "#21141A", padding: "clamp(40px,6vw,80px) 10px clamp(32px,4vw,48px)", borderTop: "1px solid rgba(140,178,192,0.2)" }}>
-      <div className="footer-grid" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div>
-          <div style={{ marginBottom: "16px" }}>
-            <img src="/logo-dark-bg.png" alt="SITBO" style={{ height: "20px", width: "auto" }} />
-          </div>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "#aaa", lineHeight: 1.7, maxWidth: "240px" }}>
-            Premium real estate investment advisory in Batumi, Georgia. Off-market access, legal security, honest returns.
-          </p>
-        </div>
-        {[
-          { title: "Investment", links: ["Portfolio", "Off-Market", "Analytics", "ROI Calculator"] },
-          { title: "Services",   links: ["Legal Verification", "Renovation", "Management", "Residency", "Ambassador Club"] },
-        ].map((col) => (
-          <div key={col.title}>
-            <p style={{ color: C.teal, fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "12px" }}>{col.title}</p>
-            {col.links.map((link) => (
-              <a key={link} href="#contact"
-                style={{ display: "block", color: "#aaa", fontSize: "0.8rem", fontFamily: "DM Sans", marginBottom: "8px", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-              >{link}</a>
-            ))}
-          </div>
-        ))}
-
-        {/* Contact + Socials — один столбец */}
-        <div>
-          <p style={{ color: C.teal, fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "12px" }}>Contact</p>
-          <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: "8px", color: "#aaa", fontSize: "0.8rem", fontFamily: "DM Sans", marginBottom: "8px", textDecoration: "none", transition: "color 0.2s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            WhatsApp
-          </a>
-          <a href="mailto:sitboinvest@gmail.com"
-            style={{ display: "flex", alignItems: "center", gap: "8px", color: "#aaa", fontSize: "0.8rem", fontFamily: "DM Sans", marginBottom: "24px", textDecoration: "none", transition: "color 0.2s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            sitboinvest@gmail.com
-          </a>
-
-          <p style={{ color: C.teal, fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "12px" }}>Socials</p>
-          <a href="https://instagram.com/sitboinvest" target="_blank" rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: "8px", color: "#aaa", fontSize: "0.8rem", fontFamily: "DM Sans", marginBottom: "8px", textDecoration: "none", transition: "color 0.2s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            Instagram
-          </a>
-          <a href="https://t.me/sitboinvest" target="_blank" rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: "8px", color: "#aaa", fontSize: "0.8rem", fontFamily: "DM Sans", marginBottom: "8px", textDecoration: "none", transition: "color 0.2s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-            Telegram
-          </a>
-        </div>
-      </div>
-      <div style={{ maxWidth: "1100px", margin: "32px auto 0", paddingTop: "24px", borderTop: "1px solid rgba(140,178,192,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa" }}>© 2026 Sitbo Invest. All rights reserved.</p>
-        <a href="https://g.page/r/CR1_vKWcSyUNEAI/review" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa", textDecoration: "none", transition: "color 0.2s", display: "flex", alignItems: "center", gap: "6px" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#aaa"/>
-            <path d="M21.35 11.1h-9.17v2.73h5.24c-.23 1.23-1.42 3.61-5.24 3.61-3.15 0-5.72-2.6-5.72-5.83s2.57-5.83 5.72-5.83c1.8 0 3.01.77 3.7 1.43l2.52-2.43C16.7 3.43 14.54 2.5 12.18 2.5 6.84 2.5 2.5 6.84 2.5 12.18s4.34 9.68 9.68 9.68c5.59 0 9.29-3.92 9.29-9.44 0-.63-.07-1.12-.12-1.32z" fill="#4285F4"/>
-          </svg>
-          Leave us a Google Review ↗
-        </a>
-        <a href="https://maps.google.com/?q=Batumi,Georgia" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = C.teal)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#aaa")}
-        >Batumi, Georgia · International Investment Advisory ↗</a>
-      </div>
-    </footer>
   );
 }
 
@@ -1348,7 +1805,7 @@ function Footer() {
 function Index() {
   useReveal();
   return (
-    <div style={{ minHeight: "100vh" }}>
+    <div className="home-page">
       <Hero />
       <FounderNote />
       <Philosophy />
@@ -1367,20 +1824,79 @@ function Index() {
 }
 
 // ─── Social Proof Toast ───────────────────────────────────────────────────────
+type SocialProofMsg =
+  | { kind: "activity"; line: string }
+  | { kind: "consultation"; at: Date };
+
+function formatTimeAgo(date: Date, refMs = Date.now()): string {
+  const diff = refMs - date.getTime();
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes} min ago`;
+  if (hours < 24) return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  if (days < 7) return `${days} ${days === 1 ? "day" : "days"} ago`;
+  return "This week";
+}
+
+function randomConsultationAt(): Date {
+  const minutesAgo = Math.floor(Math.random() * 180) + 5;
+  return new Date(Date.now() - minutesAgo * 60000);
+}
+
+function SocialProofPulse() {
+  return (
+    <div style={{ position: "relative", width: 8, height: 8, flexShrink: 0 }}>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "50%",
+          background: "#8CB2C0",
+          animation: "sitboPulse 2s ease-out infinite",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "50%",
+          background: "#8CB2C0",
+        }}
+      />
+    </div>
+  );
+}
+
 function SocialProofToast() {
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [msg, setMsg] = useState({ icon: "", text: "" });
+  const [msg, setMsg] = useState<SocialProofMsg>({ kind: "activity", line: "" });
+  const [now, setNow] = useState(() => new Date());
+  const [isNarrow, setIsNarrow] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 640 : false
+  );
 
-  const viewers = () => Math.floor(Math.random() * 10) + 3; // 3–12
+  const viewers = () => Math.floor(Math.random() * 10) + 3;
 
-  const toasts = [
-    () => ({ icon: "👁", text: `${viewers()} people are viewing this right now` }),
-    () => ({ icon: "👁", text: `${viewers()} investors are browsing properties` }),
-    () => ({ icon: "📋", text: `A consultation was booked ${Math.floor(Math.random()*3)+1} hours ago` }),
-    () => ({ icon: "📋", text: `New inquiry received ${Math.floor(Math.random()*5)+1} hours ago` }),
-    () => ({ icon: "📋", text: `Last application submitted ${Math.floor(Math.random()*2)+1} hours ago` }),
+  const toasts: (() => SocialProofMsg)[] = [
+    () => ({ kind: "activity", line: `${viewers()} people are viewing this right now` }),
+    () => ({ kind: "activity", line: `${viewers()} investors are browsing properties` }),
+    () => ({ kind: "consultation", at: randomConsultationAt() }),
   ];
+
+  useEffect(() => {
+    const onResize = () => setIsNarrow(window.innerWidth <= 640);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -1391,40 +1907,93 @@ function SocialProofToast() {
       setLeaving(false);
       setVisible(true);
 
-      // hide after 4s
       timeout = setTimeout(() => {
         setLeaving(true);
         setTimeout(() => {
           setVisible(false);
-          // next toast in 6–12s
           timeout = setTimeout(show, 6000 + Math.random() * 6000);
         }, 400);
       }, 4000);
     };
 
-    // first toast after 5s
     timeout = setTimeout(show, 5000);
     return () => clearTimeout(timeout);
   }, []);
 
   if (!visible) return null;
 
+  const timeAgo = msg.kind === "consultation" ? formatTimeAgo(msg.at, now.getTime()) : null;
+
   return (
-    <div style={{
-      position: "fixed", bottom: "24px", left: "24px", zIndex: 999,
-      background: "#FFFBF0", border: "1px solid rgba(140,178,192,0.3)",
-      borderRadius: "12px", padding: "12px 16px",
-      boxShadow: "0 8px 32px rgba(14,55,57,0.15)",
-      display: "flex", alignItems: "center", gap: "10px",
-      fontFamily: "DM Sans", fontSize: "0.8rem", color: "#21141A",
-      maxWidth: "280px",
-      opacity: leaving ? 0 : 1,
-      transform: leaving ? "translateY(8px)" : "translateY(0)",
-      transition: "opacity 0.4s ease, transform 0.4s ease",
-      animation: leaving ? "none" : "toastIn 0.4s ease",
-    }}>
-      <span style={{ fontSize: "1rem", flexShrink: 0 }}>{msg.icon}</span>
-      <span style={{ lineHeight: 1.4 }}>{msg.text}</span>
+    <div
+      style={{
+        position: "fixed",
+        bottom: isNarrow ? 12 : 24,
+        left: isNarrow ? 12 : 24,
+        right: isNarrow ? 12 : undefined,
+        zIndex: 50,
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        padding: isNarrow ? "10px 14px" : "12px 18px 12px 16px",
+        background: "rgba(33, 20, 26, 0.88)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        border: "1px solid rgba(140, 178, 192, 0.2)",
+        borderRadius: 999,
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.24)",
+        fontFamily: "Manrope, sans-serif",
+        fontSize: isNarrow ? 11 : 12,
+        fontWeight: 400,
+        letterSpacing: "0.04em",
+        color: "#FAF7F0",
+        cursor: "default",
+        maxWidth: isNarrow ? "calc(100vw - 32px)" : 320,
+        opacity: leaving ? 0 : 1,
+        transform: leaving ? "translateY(8px)" : "translateY(0)",
+        transition: "opacity 0.4s ease, transform 0.4s ease",
+        animation: leaving ? "none" : "sitboBadgeFadeIn 0.6s ease-out 1.2s both",
+      }}
+    >
+      <SocialProofPulse />
+      {msg.kind === "consultation" ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 2, lineHeight: 1.3 }}>
+          <span
+            style={{
+              fontSize: isNarrow ? 11 : 12,
+              fontWeight: 500,
+              color: "#FAF7F0",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Last consultation request
+          </span>
+          <span
+            style={{
+              fontSize: isNarrow ? 9 : 10,
+              fontWeight: 400,
+              color: "#FAF7F0",
+              opacity: 0.55,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            {timeAgo}
+          </span>
+        </div>
+      ) : (
+        <span
+          style={{
+            fontSize: isNarrow ? 11 : 12,
+            fontWeight: 500,
+            color: "#FAF7F0",
+            letterSpacing: "0.02em",
+            lineHeight: 1.3,
+          }}
+        >
+          {msg.line}
+        </span>
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { AppLink } from "../components/app-link";
 import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -8,7 +9,7 @@ const C = {
   teal:      "#8CB2C0",
   wine:      "#683D47",
   light:     "#FFFBF0",
-  parchment: "#F5F3ED",
+  parchment: "#FFFBF0",
   muted:     "#7a7a7a",
   mutedDark: "#4a4a4a",
 };
@@ -53,32 +54,27 @@ function useReveal() {
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (<>
 
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", ...style }}>{children}
+    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", ...style }}>{children}
     </div>
   
   </>);
 }
 
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={isMobile
-      ? { display: "flex", flexDirection: "column", gap: `${gap}px`, ...style }
-      : { display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }
-    }>{children}</div>
-  );
+  return (<>
+
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }}>{children}
+    </div>
+  
+  </>);
 }
 
 function Col({ span = 12, spanMd, children, style }: {
   span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties;
 }) {
   const isMobile = useIsMobile();
-  return (
-    <div style={isMobile
-      ? { width: "100%", minWidth: 0, ...style }
-      : { gridColumn: `span ${spanMd ?? span}`, ...style }
-    }>{children}</div>
-  );
+  const cols = isMobile ? 12 : (spanMd ?? span);
+  return <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}</div>;
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -166,7 +162,7 @@ function MortgageCalculator() {
 
   return (<>
 
-    <section style={{ padding: "80px 0", background: C.parchment }}>
+    <section style={{ padding: "80px 0", background: C.light }}>
       <Container>
         <Row style={{ marginBottom: "48px" }}>
           <Col span={6}>
@@ -355,7 +351,7 @@ export default function MortgagePage() {
     { val: "10 yr",  label: "Max loan term" },
     { val: "$500K",  label: "Max loan amount" },
                   ].map((s) => (
-                    <div key={s.label} style={{ background: C.parchment, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
+                    <div key={s.label} style={{ background: C.light, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
                       <div style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
                       <div style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</div>
                     </div>
@@ -395,7 +391,7 @@ export default function MortgagePage() {
           <Row gap={24}>
 {/* Card 1: Down Payment */}
             <Col span={6}>
-              <div className="m-reveal" style={{ background: C.parchment, borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
+              <div className="m-reveal" style={{ background: C.light, borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
                 <h3 style={{ fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "20px" }}>Down Payment (LTV)</h3>
                 <div style={{ fontFamily: "Jun, serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, marginBottom: "16px" }}>
@@ -460,7 +456,7 @@ export default function MortgagePage() {
       <Divider />
 
 {/* ── RISKS ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: "80px 0", background: C.parchment }}>
+      <section style={{ padding: "80px 0", background: C.light }}>
         <Container>
           <Row style={{ marginBottom: "48px" }}>
             <Col span={5}>
@@ -544,11 +540,9 @@ export default function MortgagePage() {
                   No residency required. We guide you through the full process — documents, compliance, bank submission. Conditions change; we have live data.
                 </p>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <Link href="/#contact">
-                    <a style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                      Get a Free Consultation
-                    </a>
-                  </Link>
+                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                    Get a Free Consultation
+                  </AppLink>
                   <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                     WhatsApp Us
                   </a>
