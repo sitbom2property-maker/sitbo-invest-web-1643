@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
 import { Footer } from "../components/footer";
-import { ConsultationForm } from "../components/ConsultationForm";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -234,81 +233,98 @@ const cardImages = [
 
 const HERO_STYLES = `
   .hero-video-section .hero-gradient {
-    background: radial-gradient(ellipse at center, rgba(20,14,18,0.45) 0%, rgba(20,14,18,0.0) 70%);
+    background: linear-gradient(
+      to top,
+      rgba(20,14,18,0.72) 0%,
+      rgba(20,14,18,0.35) 42%,
+      rgba(20,14,18,0.08) 70%,
+      rgba(20,14,18,0.0) 100%
+    );
   }
   .hero-video-section .hero-outline-btn:hover {
     border-color: #8CB2C0 !important;
     color: #8CB2C0 !important;
   }
-  .hero-video-section .hero-eyebrow {
+  .hero-video-section .hero-roulette {
+    font-family: 'ZT Neue Ralewe', 'Jun', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+  .hero-video-section .hero-cta-row {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .hero-video-section .hero-cta-row .hero-cta-btn {
+    flex: 1 1 0;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: 16px 18px;
+    font-family: Manrope, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #FAF7F0;
+    background: transparent;
+    border: 1px solid rgba(250, 247, 240, 0.35);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .hero-video-section .hero-scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-family: Manrope, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .hero-video-section .hero-scroll-hint:hover {
+    color: #8CB2C0;
   }
   @media (max-width: 768px) {
     .hero-video-section {
       height: 100svh !important;
       min-height: 640px !important;
     }
-    .hero-video-section .hero-h1-video {
-      font-size: clamp(32px, 8vw, 44px) !important;
-    }
-    .hero-video-section .hero-cta-row {
-      flex-direction: column !important;
-      align-items: center !important;
-      gap: 12px !important;
-      width: 100% !important;
-    }
-    .hero-video-section .hero-cta-row .hero-cta-primary,
-    .hero-video-section .hero-cta-row .hero-cta-secondary {
-      width: 100% !important;
-      max-width: 320px !important;
-      text-align: center !important;
-      box-sizing: border-box !important;
-      border-radius: 0 !important;
-      padding: 18px 32px !important;
-      font-family: Manrope, sans-serif !important;
-      font-size: 12px !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.22em !important;
-      text-transform: uppercase !important;
-      transform: none !important;
-    }
-    .hero-video-section .hero-cta-primary {
-      background: rgba(140, 178, 192, 0.25) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
-      border: 1px solid rgba(140, 178, 192, 0.5) !important;
-      color: #FAF7F0 !important;
-    }
-    .hero-video-section .hero-cta-secondary {
-      background: transparent !important;
-      border: 1px solid rgba(250, 247, 240, 0.25) !important;
-      color: #FAF7F0 !important;
-    }
-  }
-  @media (max-width: 640px) {
     .hero-video-section .hero-content {
-      padding-bottom: 80px;
+      top: auto !important;
+      bottom: 108px !important;
+      transform: translate(-50%, 0) !important;
+      width: min(92%, 420px) !important;
+    }
+    .hero-video-section .hero-h1-video {
+      font-size: clamp(40px, 11vw, 56px) !important;
+      margin-bottom: 28px !important;
+    }
+    .hero-video-section .hero-cta-row .hero-cta-btn {
+      padding: 15px 12px !important;
+      font-size: 10px !important;
+      letter-spacing: 0.14em !important;
+    }
+    .hero-video-section .hero-scroll-hint {
+      bottom: 22px;
     }
   }
 `;
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (!modalOpen) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setModalOpen(false);
-    };
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handler);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handler);
-    };
-  }, [modalOpen]);
-
   return (
     <>
       <style>{HERO_STYLES}</style>
@@ -364,115 +380,45 @@ function Hero() {
           className="hero-content"
           style={{
             position: "absolute",
-            top: "50%",
+            top: "auto",
+            bottom: "18%",
             left: "50%",
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%, 0)",
             zIndex: 2,
-            maxWidth: 720,
+            maxWidth: 780,
             width: "90%",
             textAlign: "center",
             margin: "0 auto",
           }}
         >
           <div>
-            <p
-              className="hero-eyebrow"
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "0.65rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.75)",
-                margin: "0 0 20px",
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "32px",
-                  height: "1px",
-                  background: "#8CB2C0",
-                  flexShrink: 0,
-                }}
-              />
-              Batumi · Georgia · Premium Investment
-            </p>
-
             <h1
               className="hero-h1-video"
               style={{
                 fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(44px, 5.5vw, 84px)",
+                fontSize: "clamp(48px, 6.5vw, 92px)",
                 fontWeight: 400,
                 color: "#FFFFFF",
-                lineHeight: 1.05,
-                margin: "0 0 24px",
+                lineHeight: 1.02,
+                margin: "0 0 32px",
                 letterSpacing: "-0.01em",
               }}
             >
-              Ципички
+              Don&apos;t play
               <br />
-              строят
+              <em className="hero-roulette">roulette</em>
               <br />
-              <em style={{ color: "#8CB2C0", fontStyle: "italic" }}>империю</em>
+              with real estate
+              <br />
+              in Georgia.
             </h1>
 
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "clamp(14px, 1.05vw, 16px)",
-                color: "rgba(255,255,255,0.85)",
-                lineHeight: 1.7,
-                opacity: 0.9,
-                marginTop: 32,
-                marginBottom: 40,
-                marginLeft: "auto",
-                marginRight: "auto",
-                maxWidth: 720,
-              }}
-            >
-              We limit our client intake to ensure 100% focus on your deal. Our expertise, network, and off-market database are on your side.
-            </p>
-
-            <div
-              className="hero-cta-row"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "16px",
-                flexWrap: "wrap",
-              }}
-            >
-              <button
-                type="button"
-                className="btn-gold hero-cta-primary"
-                onClick={() => setModalOpen(true)}
-                style={{
-                  color: "#21141A",
-                  background: "#8CB2C0",
-                  textDecoration: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  font: "inherit",
-                }}
-              >
-                Consult with an Expert
-              </button>
-              <a
-                href="#portfolio"
-                className="btn-outline-gold hero-outline-btn hero-cta-secondary"
-                style={{
-                  color: "#FFFFFF",
-                  borderColor: "rgba(255,255,255,0.35)",
-                  background: "transparent",
-                  textDecoration: "none",
-                  transition: "border-color 0.2s, color 0.2s",
-                }}
-              >
+            <div className="hero-cta-row">
+              <a href="#portfolio" className="hero-outline-btn hero-cta-btn">
                 View Projects
+              </a>
+              <a href="#contact" className="hero-outline-btn hero-cta-btn">
+                Contact
               </a>
             </div>
 
@@ -487,135 +433,21 @@ function Hero() {
                 fontFamily: "Manrope, sans-serif",
                 fontSize: "13px",
                 letterSpacing: "0.08em",
-                marginTop: "28px",
+                marginTop: "24px",
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
             >
-              ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS ↗
+              ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS
             </a>
           </div>
         </div>
+
+        <a href="#founder-note" className="hero-scroll-hint">
+          SCROLL TO EXPLORE
+        </a>
       </section>
-
-      {modalOpen && (
-        <>
-          <div
-            role="presentation"
-            onClick={() => setModalOpen(false)}
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(20,14,18,0.75)",
-              backdropFilter: "blur(6px)",
-              zIndex: 1000,
-              animation: "fadeIn 0.25s ease",
-            }}
-          />
-
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="consultation-modal-title"
-            style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 1001,
-              background: "#21141A",
-              border: "1px solid rgba(140,178,192,0.15)",
-              padding: "clamp(32px, 5vw, 56px)",
-              width: "min(580px, 92vw)",
-              maxHeight: "90vh",
-              overflowY: "auto",
-              animation: "slideUp 0.3s ease",
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setModalOpen(false)}
-              aria-label="Close"
-              style={{
-                position: "absolute",
-                top: "20px",
-                right: "20px",
-                background: "none",
-                border: "none",
-                color: "rgba(250,247,240,0.4)",
-                fontSize: "22px",
-                cursor: "pointer",
-                lineHeight: 1,
-                padding: "4px 8px",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#FAF7F0")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(250,247,240,0.4)")}
-            >
-              ×
-            </button>
-
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "0.62rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "#8CB2C0",
-                margin: "0 0 20px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <span style={{ width: "24px", height: "1px", background: "#8CB2C0", display: "inline-block" }} />
-              Private Consultation
-            </p>
-
-            <h2
-              id="consultation-modal-title"
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                fontWeight: 400,
-                color: "#FAF7F0",
-                lineHeight: 1.15,
-                margin: "0 0 8px",
-              }}
-            >
-              Let&apos;s discuss
-            </h2>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: "#8CB2C0",
-                lineHeight: 1.15,
-                margin: "0 0 28px",
-              }}
-            >
-              your strategy.
-            </h2>
-
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "13px",
-                color: "rgba(250,247,240,0.45)",
-                margin: "0 0 32px",
-                lineHeight: 1.6,
-              }}
-            >
-              We take on a limited number of clients each quarter. No obligation, full transparency.
-            </p>
-
-            <ConsultationForm onSuccess={() => setModalOpen(false)} />
-          </div>
-        </>
-      )}
     </>
   );
 }

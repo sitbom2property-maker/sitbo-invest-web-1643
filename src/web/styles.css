@@ -16,6 +16,22 @@
   font-display: swap;
 }
 
+/* ── ZT Neue Ralewe (local) — hero accent word ───────────────────────────── */
+@font-face {
+  font-family: 'ZT Neue Ralewe';
+  src: url('/fonts/ZTNeueRalewe-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ZT Neue Ralewe';
+  src: url('/fonts/ZTNeueRalewe-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ── DM Sans digits subset — overrides Jun for all numerals sitewide ─────── */
 /* Applies to any element using Jun or any other font: 0-9 % + , . / $ € -   */
 @font-face {

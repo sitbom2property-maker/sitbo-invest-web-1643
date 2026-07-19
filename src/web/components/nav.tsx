@@ -157,7 +157,7 @@ export function Nav() {
       ? "rgba(33, 20, 26, 0.85)"
       : "rgba(33, 20, 26, 0.92)";
 
-  const logoHeight = isMobile ? 22 : 26;
+  const logoHeight = isMobile ? 11 : 13;
 
   return (
     <>
