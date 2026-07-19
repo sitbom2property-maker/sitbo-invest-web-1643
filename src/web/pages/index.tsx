@@ -540,7 +540,9 @@ function FounderNote() {
             <Link
               href="/services"
               style={{
-                display: "inline-block",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
                 fontFamily: "DM Sans, sans-serif",
                 fontSize: "0.72rem",
                 fontWeight: 600,
@@ -551,7 +553,7 @@ function FounderNote() {
                 padding: "14px 28px",
                 textDecoration: "none",
                 borderRadius: "8px",
-                transition: "background 0.2s",
+                transition: "background 0.2s, color 0.2s",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#8CB2C0";
@@ -563,6 +565,9 @@ function FounderNote() {
               }}
             >
               See What We Do
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h9M8 3.5 12.5 8 8 12.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Link>
           </div>
 
