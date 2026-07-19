@@ -313,8 +313,61 @@ select.form-input-light {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 28px;
+  padding: 72px 24px 32px;
+  box-sizing: border-box;
+  overflow-y: auto;
   animation: navOverlayIn 0.3s ease forwards;
+}
+
+.nav-mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-mobile-cities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(100%, 360px);
+  margin-top: 12px;
+}
+
+.nav-mobile-city-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid rgba(250, 247, 240, 0.12);
+}
+
+.nav-mobile-city-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.72);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.nav-mobile-city-card span {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  font-family: Jun, Georgia, serif;
+  font-size: 1.05rem;
+  color: #FAF7F0;
+  letter-spacing: 0.02em;
+}
+
+.nav-mobile-city-card:active img,
+.nav-mobile-city-card:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.85);
 }
 
 .nav-mobile-close {

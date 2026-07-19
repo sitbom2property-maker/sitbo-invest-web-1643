@@ -1631,6 +1631,137 @@ function Contact() {
   );
 }
 
+// ─── History Timeline ─────────────────────────────────────────────────────────
+function HistoryTimeline() {
+  const milestones = [
+    { year: "2019", text: "SITBO begins advisory work across Batumi's coastal corridor." },
+    { year: "2022", text: "Off-market pipeline expands — Gonio, Chakvi, Makhinjauri." },
+    { year: "2024", text: "Tbilisi entries added for clients seeking dual-city portfolios." },
+    { year: "2026", text: "Full turnkey + residency pathway under one mandate." },
+  ];
+
+  const cities = [
+    {
+      name: "Batumi",
+      tag: "Black Sea · Yield Core",
+      image: "/lifestyle-coast.png",
+      blurb: "Seafront liquidity, short-term rental demand, and infrastructure still compressing the discount.",
+    },
+    {
+      name: "Tbilisi",
+      tag: "Capital · Long Hold",
+      image: "/hisni-by-biograpi.jpg",
+      blurb: "Capital-city depth for investors balancing coastal yield with urban appreciation.",
+    },
+  ];
+
+  return (
+    <section
+      id="history-timeline"
+      className="scroll-mt-24"
+      style={{ background: "#21141A", padding: "clamp(64px, 10vw, 120px) 0" }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px, 4vw, 64px)" }}>
+        <div className="reveal" style={{ marginBottom: "clamp(36px, 6vw, 64px)", maxWidth: 640 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+            <div style={{ width: 28, height: 1, background: "#8CB2C0" }} />
+            <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(250,247,240,0.5)" }}>
+              History Timeline
+            </span>
+          </div>
+          <h2 style={{ fontFamily: "Jun, Georgia, serif", fontSize: "clamp(2rem, 5vw, 3.4rem)", fontWeight: 400, color: "#FAF7F0", lineHeight: 1.15, margin: "0 0 16px" }}>
+            Two cities.<br />One investment map.
+          </h2>
+          <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.95rem", color: "rgba(250,247,240,0.55)", lineHeight: 1.7, margin: 0 }}>
+            From Batumi&apos;s coastal yield to Tbilisi&apos;s capital depth — the milestones that shaped how SITBO places capital.
+          </p>
+        </div>
+
+        <div
+          className="reveal"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+            gap: 16,
+            marginBottom: "clamp(40px, 7vw, 72px)",
+          }}
+        >
+          {cities.map((city) => (
+            <article
+              key={city.name}
+              style={{
+                position: "relative",
+                borderRadius: 14,
+                overflow: "hidden",
+                minHeight: 280,
+                border: "1px solid rgba(250,247,240,0.1)",
+              }}
+            >
+              <img
+                src={city.image}
+                alt={city.name}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.62)" }}
+              />
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  height: "100%",
+                  minHeight: 280,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  padding: 24,
+                  background: "linear-gradient(to top, rgba(20,14,18,0.88) 0%, rgba(20,14,18,0.15) 65%, transparent 100%)",
+                }}
+              >
+                <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.62rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: 8 }}>
+                  {city.tag}
+                </span>
+                <h3 style={{ fontFamily: "Jun, Georgia, serif", fontSize: "clamp(1.8rem, 4vw, 2.4rem)", fontWeight: 400, color: "#FAF7F0", margin: "0 0 10px" }}>
+                  {city.name}
+                </h3>
+                <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.88rem", color: "rgba(250,247,240,0.7)", lineHeight: 1.6, margin: 0 }}>
+                  {city.blurb}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <ol
+          className="reveal"
+          style={{
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            display: "grid",
+            gap: 0,
+            borderTop: "1px solid rgba(250,247,240,0.1)",
+          }}
+        >
+          {milestones.map((m) => (
+            <li
+              key={m.year}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "88px 1fr",
+                gap: 16,
+                padding: "20px 0",
+                borderBottom: "1px solid rgba(250,247,240,0.08)",
+                alignItems: "start",
+              }}
+            >
+              <span style={{ fontFamily: "Jun, Georgia, serif", fontSize: "1.25rem", color: "#8CB2C0" }}>{m.year}</span>
+              <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.92rem", color: "rgba(250,247,240,0.72)", lineHeight: 1.6 }}>{m.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 // ─── App ──────────────────────────────────────────────────────────────────────
 function Index() {
   useReveal();
@@ -1639,6 +1770,7 @@ function Index() {
       <Hero />
       <FounderNote />
       <Philosophy />
+      <HistoryTimeline />
       <Analytics />
       <Lifestyle />
       <Portfolio />
