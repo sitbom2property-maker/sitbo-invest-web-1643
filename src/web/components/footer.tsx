@@ -48,15 +48,16 @@ function useFooterLayout() {
 }
 
 function FooterIcon({ name, size = 16 }: { name: string; size?: number }) {
+  const props = { size, strokeWidth: 1.5 as const, color: C.light, "aria-hidden": true as const };
   switch (name) {
     case "whatsapp":
-      return <MessageCircle size={size} strokeWidth={1.5} />;
+      return <MessageCircle {...props} />;
     case "email":
-      return <Mail size={size} strokeWidth={1.5} />;
+      return <Mail {...props} />;
     case "instagram":
-      return <Instagram size={size} strokeWidth={1.5} />;
+      return <Instagram {...props} />;
     case "telegram":
-      return <Send size={size} strokeWidth={1.5} />;
+      return <Send {...props} />;
     default:
       return null;
   }
@@ -201,7 +202,7 @@ export function Footer() {
               src="/logo-dark-bg.png"
               alt="SITBO Invest"
               style={{
-                height: 56,
+                height: isStacked ? 28 : 32,
                 width: "auto",
                 display: "block",
                 objectFit: "contain",
