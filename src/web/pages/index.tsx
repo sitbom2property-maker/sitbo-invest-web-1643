@@ -317,15 +317,37 @@ const HERO_STYLES = `
     0%, 100% { opacity: 0.25; }
     50% { opacity: 1; }
   }
+  .hero-video-section .hero-copy {
+    position: absolute;
+    left: 50%;
+    top: 22%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+    max-width: 780px;
+    width: 90%;
+    text-align: center;
+  }
+  .hero-video-section .hero-reviews {
+    position: absolute;
+    left: 50%;
+    bottom: 18%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+  }
   @media (max-width: 768px) {
     .hero-video-section {
       height: 100svh !important;
       min-height: 640px !important;
     }
-    .hero-video-section .hero-content {
-      top: auto !important;
+    .hero-video-section .hero-copy {
+      top: calc(var(--nav-height, 72px) + 28px) !important;
+      width: min(92%, 420px) !important;
+    }
+    .hero-video-section .hero-reviews {
       bottom: 108px !important;
-      transform: translate(-50%, 0) !important;
       width: min(92%, 420px) !important;
     }
     .hero-video-section .hero-h1-video {
@@ -396,73 +418,59 @@ function Hero() {
           }}
         />
 
-        <div
-          className="hero-content"
-          style={{
-            position: "absolute",
-            top: "auto",
-            bottom: "18%",
-            left: "50%",
-            transform: "translate(-50%, 0)",
-            zIndex: 2,
-            maxWidth: 780,
-            width: "90%",
-            textAlign: "center",
-            margin: "0 auto",
-          }}
-        >
-          <div>
-            <h1
-              className="hero-h1-video"
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(48px, 6.5vw, 92px)",
-                fontWeight: 400,
-                color: "#FFFFFF",
-                lineHeight: 1.02,
-                margin: "0 0 32px",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Don&apos;t play
-              <br />
-              <em className="hero-roulette">roulette</em>
-              <br />
-              with real estate
-              <br />
-              in Georgia.
-            </h1>
+        {/* Headline + CTAs — raised into the sky area */}
+        <div className="hero-copy">
+          <h1
+            className="hero-h1-video"
+            style={{
+              fontFamily: "Jun, Georgia, serif",
+              fontSize: "clamp(48px, 6.5vw, 92px)",
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.02,
+              margin: "0 0 32px",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Don&apos;t play
+            <br />
+            <em className="hero-roulette">roulette</em>
+            <br />
+            with real estate
+            <br />
+            in Georgia.
+          </h1>
 
-            <div className="hero-cta-row">
-              <a href="#portfolio" className="hero-outline-btn hero-cta-btn">
-                View Projects
-              </a>
-              <a href="#contact" className="hero-outline-btn hero-cta-btn">
-                Contact
-              </a>
-            </div>
-
-            <a
-              href="https://g.page/r/CR1_vKWcSyUNEAI/review"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                color: "rgba(255,255,255,0.65)",
-                textDecoration: "none",
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "13px",
-                letterSpacing: "0.08em",
-                marginTop: "24px",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
-            >
-              ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS
+          <div className="hero-cta-row">
+            <a href="#portfolio" className="hero-outline-btn hero-cta-btn">
+              View Projects
+            </a>
+            <a href="#contact" className="hero-outline-btn hero-cta-btn">
+              Contact
             </a>
           </div>
         </div>
+
+        {/* Google Reviews stay in the lower hero position */}
+        <a
+          className="hero-reviews"
+          href="https://g.page/r/CR1_vKWcSyUNEAI/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-block",
+            color: "rgba(255,255,255,0.65)",
+            textDecoration: "none",
+            fontFamily: "Manrope, sans-serif",
+            fontSize: "13px",
+            letterSpacing: "0.08em",
+            transition: "color 0.2s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
+        >
+          ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS
+        </a>
 
         <a href="#founder-note" className="hero-scroll-hint" aria-label="Scroll to explore">
           <span>SCROLL TO EXPLORE</span>
