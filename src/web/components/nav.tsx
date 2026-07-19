@@ -16,13 +16,8 @@ const LEFT_LINKS = [
 
 const RIGHT_LINKS = [
   { label: "Why Georgia", href: "/invest" },
-  { label: "History Timeline", href: "/#history-timeline" },
+  { label: "History Timeline", href: "/history" },
   { label: "Blog & Guide", href: "/blog" },
-] as const;
-
-const MENU_CITY_CARDS = [
-  { name: "Batumi", image: "/lifestyle-coast.png", href: "/#history-timeline" },
-  { name: "Tbilisi", image: "/hisni-by-biograpi.jpg", href: "/#history-timeline" },
 ] as const;
 
 const ALL_LINKS = [...LEFT_LINKS, ...RIGHT_LINKS];
@@ -42,7 +37,7 @@ function useNavActive() {
   const isActive = (href: string) => {
     if (href === "/") return location === "/";
     if (href === "/#about") return location === "/" && hash === "#about";
-    if (href === "/#history-timeline") return location === "/" && hash === "#history-timeline";
+    if (href === "/history") return location === "/history" || location.startsWith("/history/");
     if (href === "/catalog") return location === "/catalog" || location.startsWith("/project/");
     if (href === "/blog") return location === "/blog" || location.startsWith("/blog/");
     return location === href || location.startsWith(`${href}/`);
@@ -343,21 +338,6 @@ export function Nav() {
                 }
               >
                 {l.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="nav-mobile-cities">
-            {MENU_CITY_CARDS.map((city) => (
-              <Link
-                key={city.name}
-                href={city.href}
-                onClick={() => setMenuOpen(false)}
-                className="nav-mobile-city-card"
-                aria-label={`${city.name} — History Timeline`}
-              >
-                <img src={city.image} alt={city.name} />
-                <span>{city.name}</span>
               </Link>
             ))}
           </div>
