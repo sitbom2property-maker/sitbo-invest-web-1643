@@ -1,11 +1,16 @@
 import { Hono } from 'hono';
 import { cors } from "hono/cors"
+import authRouter from "./routes/auth";
+import propertiesRouter from "./routes/properties";
 
-const app = new Hono().basePath('api');
+const app = new Hono();
 
 app.use(cors({ origin: "*" }));
 
-app.get('/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
+app.get('/api/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
+
+app.route('/api/auth', authRouter);
+app.route('/api/properties', propertiesRouter);
 
 const SHEETS_WORKER = 'http://localhost:6475';
 const SHEETS_SECRET = 'sitbo-sheets-secret';
@@ -21,7 +26,7 @@ async function appendToSheets(row: string[]) {
 }
 
 // Lead form submission
-app.post('/leads', async (c) => {
+app.post('/api/leads', async (c) => {
   try {
     const body = await c.req.json();
     const { name, contact, budget } = body;

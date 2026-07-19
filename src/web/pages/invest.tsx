@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
+import { AppLink } from "../components/app-link";
 import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -8,7 +9,7 @@ const C = {
   teal:      "#8CB2C0",
   wine:      "#683D47",
   light:     "#FFFBF0",
-  parchment: "#F5F3ED",
+  parchment: "#FFFBF0",
   muted:     "#7a7a7a",
   mutedDark: "#4a4a4a",
 };
@@ -60,7 +61,7 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
     <div style={{
       maxWidth: "1200px",
       margin: "0 auto",
-      padding: "0 clamp(16px, 4vw, 48px)",
+      padding: "0 clamp(24px, 4vw, 64px)",
       ...style,
     }}>{children}
     </div>
@@ -70,13 +71,17 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 
 // ─── 12-col row ───────────────────────────────────────────────────────────────
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={isMobile
-      ? { display: "flex", flexDirection: "column", gap: `${gap}px`, ...style }
-      : { display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }
-    }>{children}</div>
-  );
+  return (<>
+
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(12, 1fr)",
+      gap: `${gap}px`,
+      ...style,
+    }}>{children}
+    </div>
+  
+  </>);
 }
 
 // ─── Column ───────────────────────────────────────────────────────────────────
@@ -86,12 +91,13 @@ function Col({
   span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties;
 }) {
   const isMobile = useIsMobile();
-  return (
-    <div style={isMobile
-      ? { width: "100%", minWidth: 0, ...style }
-      : { gridColumn: `span ${spanMd ?? span}`, ...style }
-    }>{children}</div>
-  );
+  const cols = isMobile ? 12 : (spanMd ?? span);
+  return (<>
+
+    <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}
+    </div>
+  
+  </>);
 }
 
 // ─── Eyebrow ──────────────────────────────────────────────────────────────────
@@ -297,11 +303,9 @@ export default function InvestPage() {
                   Georgia ranks #1 in the world for rental yield profitability. 0% purchase tax. 1-day ownership transfer. Full rights for foreign buyers.
                 </p>
                 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                  <Link href="/#contact">
-                    <a style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
-                      Book a Consultation
-                    </a>
-                  </Link>
+                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
+                    Book a Consultation
+                  </AppLink>
                   <a href="#strategies" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: "transparent", border: `1px solid ${C.dark}`, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
                     View Strategies
                   </a>
@@ -311,7 +315,7 @@ export default function InvestPage() {
 
 {/* Right: hero image + floating stat */}
             <Col span={5} spanMd={5} style={{ position: "relative" }}>
-              <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: "3/4", background: C.parchment }}>
+              <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: "3/4", background: C.light }}>
                 <img src="/hero2.png" alt="Batumi investment property"
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
               </div>
@@ -408,7 +412,7 @@ export default function InvestPage() {
       </section>
 
 {/* ── STRATEGIES ───────────────────────────────────────────────────────── */}
-      <section id="strategies" style={{ padding: "96px 0" }}>
+      <section id="strategies" className="scroll-mt-24" style={{ padding: "96px 0" }}>
         <Container>
           <Row style={{ marginBottom: "56px" }}>
             <Col span={6}>
@@ -441,7 +445,7 @@ export default function InvestPage() {
       <Divider />
 
 {/* ── MARKET CONTEXT ───────────────────────────────────────────────────── */}
-      <section style={{ padding: "96px 0", background: "#F5F3ED" }}>
+      <section style={{ padding: "96px 0", background: "#FFFBF0" }}>
         <Container>
           <Row gap={48}>
             <Col span={5}>
@@ -579,11 +583,9 @@ export default function InvestPage() {
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>Have more questions?</p>
                   <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>Talk to us directly.</h3>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, marginBottom: "24px" }}>Our team has closed hundreds of deals for non-resident investors. No pitch — just straight answers.</p>
-                  <Link href="/#contact">
-                    <a style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
-                      Book a Call
-                    </a>
-                  </Link>
+                  <AppLink href="/#contact" style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
+                    Book a Call
+                  </AppLink>
                 </div>
               )}
             </Col>
@@ -606,11 +608,9 @@ export default function InvestPage() {
                   30 minutes. No obligation. We'll assess your budget, goals, and timeline — then tell you exactly what's possible right now.
                 </p>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <Link href="/#contact">
-                    <a style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                      Book a Free Consultation
-                    </a>
-                  </Link>
+                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                    Book a Free Consultation
+                  </AppLink>
                   <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(140,178,192,0.35)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                     WhatsApp Us
                   </a>
