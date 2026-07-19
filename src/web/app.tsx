@@ -9,6 +9,7 @@ import ServicesPage from "./pages/Services";
 import LegalPage from "./pages/legal";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog-post";
+import HistoryPage from "./pages/history";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PropertyForm from "./pages/admin/PropertyForm";
@@ -29,6 +30,7 @@ function App() {
 					<Route path="/" component={Index} />
 					<Route path="/mortgage" component={MortgagePage} />
 					<Route path="/invest" component={InvestPage} />
+					<Route path="/history" component={HistoryPage} />
 					<Route path="/blog/:slug" component={BlogPostPage} />
 					<Route path="/blog" component={BlogPage} />
 					<Route path="/project/:slug" component={ProjectPage} />
