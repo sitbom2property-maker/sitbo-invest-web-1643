@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const C = {
   dark:  "#21141A",
@@ -21,6 +21,8 @@ const LINK_STYLE: CSSProperties = {
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [location] = useLocation();
+  const isHome = location === "/";
 
   const links = [
     { label: "Catalog",            href: "/catalog" },
@@ -55,10 +57,14 @@ export function Nav() {
           columnGap: "16px",
         }}
       >
-        {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", height: "100%" }}>
-          <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
-        </Link>
+        {/* Logo — hidden on homepage */}
+        {isHome ? (
+          <div aria-hidden="true" style={{ width: "1px", height: "19px" }} />
+        ) : (
+          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", height: "100%" }}>
+            <img src="/logo-light-bg.png" alt="SITBO" style={{ height: "19px", objectFit: "contain" }} />
+          </Link>
+        )}
 
         {/* Desktop nav links — hidden on mobile via .nav-desktop-links CSS class */}
         <div className="nav-desktop-links" style={{ justifyContent: "center" }}>
