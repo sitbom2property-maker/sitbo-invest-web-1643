@@ -647,12 +647,26 @@ function Analytics() {
       <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ marginBottom: isMobile ? "20px" : "56px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: isMobile ? "8px" : "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Market Intelligence · 2026</span>
-          </div>
+          {!isMobile && (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "28px", height: "1px", background: C.wine }} />
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Market Intelligence · 2026</span>
+            </div>
+          )}
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
-            Batumi is now a Top-5 European<br />investment city.
+            {isMobile ? (
+              <>
+                Batumi is now a Top-5
+                <br />
+                <span style={{ whiteSpace: "nowrap" }}>European investment city.</span>
+              </>
+            ) : (
+              <>
+                Batumi is now a Top-5 European
+                <br />
+                investment city.
+              </>
+            )}
           </h2>
           <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "DM Sans", marginBottom: isMobile ? "12px" : "24px" }}>— Forbes, 2025</p>
         </div>
