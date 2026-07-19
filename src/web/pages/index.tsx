@@ -524,22 +524,46 @@ function FounderNote() {
             </blockquote>
 
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
-              Every transaction carries my personal signature. Born and raised in Batumi, I have spent seven years mastering this market — uncovering the critical insights that never make it into public domain.
+              Every transaction carries my personal signature. Seven years mastering the Batumi market have taught me exactly who to trust and where the real value is hidden.
             </p>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
-              Real estate in Georgia isn&apos;t a spreadsheet exercise. It&apos;s a network. Who builds with integrity, who cuts corners, which developer finishes on time, and which plot has title issues no broker will ever mention.
+              Working with me means total security under my personal control. I manage everything under a full-cycle approach, act as your advisor, and will openly talk you out of a bad emotional purchase.
             </p>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "24px" }}>
-              I&apos;ve spent seven years in Batumi learning who to trust — and exactly who to walk away from. When you partner with SITBO, you deploy that exact leverage. I personally oversee every turnkey renovation and sign off on every purchase. To guarantee this level of developer precision, I intentionally limit my capacity to twelve client mandates per quarter.
-            </p>
-
-            <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
-              That&apos;s the math of total accountability.
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "28px" }}>
+              That&apos;s why 100% of my clients either come back for more or recommend me to their closest friends. To keep this focus, I never take on more than twelve clients a quarter.
             </p>
 
-            <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: 0 }}>
+            <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
               — Arthur Arutyunyan, Founder
             </p>
+
+            <Link
+              href="/services"
+              style={{
+                display: "inline-block",
+                fontFamily: "DM Sans, sans-serif",
+                fontSize: "0.72rem",
+                fontWeight: 600,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#FFFBF0",
+                background: "#21141A",
+                padding: "14px 28px",
+                textDecoration: "none",
+                borderRadius: "8px",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#8CB2C0";
+                e.currentTarget.style.color = "#21141A";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#21141A";
+                e.currentTarget.style.color = "#FFFBF0";
+              }}
+            >
+              Services
+            </Link>
           </div>
 
         </div>
