@@ -190,58 +190,13 @@ export function Nav() {
             margin: "0 auto",
             padding: isMobile ? "0 24px" : "0 56px",
             display: "grid",
-            gridTemplateColumns: isMobile ? "auto 1fr auto" : "auto 1fr auto 1fr auto",
+            gridTemplateColumns: isMobile ? "auto 1fr auto" : "auto 1fr auto",
             alignItems: "center",
-            gap: 0,
+            columnGap: isMobile ? 12 : 32,
             boxSizing: "border-box",
           }}
         >
-          <button
-            type="button"
-            onClick={() => setLangOpen(true)}
-            aria-label="Language"
-            aria-expanded={langOpen}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#FAF7F0",
-              cursor: "pointer",
-              padding: 8,
-              display: "flex",
-              alignItems: "center",
-              opacity: 0.85,
-              justifySelf: "start",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = "0.85";
-            }}
-          >
-            <GlobeIcon size={18} />
-          </button>
-
-          {!isMobile && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-around",
-                gap: 8,
-                paddingLeft: 64,
-                paddingRight: 48,
-              }}
-            >
-              {LEFT_LINKS.map((l) => (
-                <NavItem key={l.href} href={l.href} isActive={isActive(l.href)}>
-                  {l.label}
-                </NavItem>
-              ))}
-            </div>
-          )}
-
+          {/* Logo — left */}
           <Link
             href="/"
             aria-label="SITBO Invest — Home"
@@ -250,7 +205,7 @@ export function Nav() {
               cursor: "pointer",
               lineHeight: 0,
               transition: "opacity 0.2s ease",
-              justifySelf: "center",
+              justifySelf: "start",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.opacity = "0.75";
@@ -271,46 +226,81 @@ export function Nav() {
             />
           </Link>
 
-          {!isMobile && (
+          {/* Desktop nav links — center */}
+          {!isMobile ? (
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-around",
-                gap: 8,
-                paddingLeft: 48,
-                paddingRight: 64,
+                justifyContent: "center",
+                gap: 28,
+                flexWrap: "wrap",
               }}
             >
-              {RIGHT_LINKS.map((l) => (
+              {ALL_LINKS.map((l) => (
                 <NavItem key={l.href} href={l.href} isActive={isActive(l.href)}>
                   {l.label}
                 </NavItem>
               ))}
             </div>
+          ) : (
+            <div aria-hidden="true" />
           )}
 
-          {isMobile ? (
+          {/* Language + menu — right */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifySelf: "end",
+              gap: 4,
+            }}
+          >
             <button
               type="button"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((o) => !o)}
+              onClick={() => setLangOpen(true)}
+              aria-label="Language"
+              aria-expanded={langOpen}
               style={{
-                display: "flex",
                 background: "none",
                 border: "none",
+                color: "#FAF7F0",
                 cursor: "pointer",
                 padding: 8,
-                justifySelf: "end",
+                display: "flex",
                 alignItems: "center",
+                opacity: 0.85,
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "0.85";
               }}
             >
-              <HamburgerIcon />
+              <GlobeIcon size={18} />
             </button>
-          ) : (
-            <div style={{ width: 34, justifySelf: "end" }} aria-hidden="true" />
-          )}
+
+            {isMobile && (
+              <button
+                type="button"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((o) => !o)}
+                style={{
+                  display: "flex",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 8,
+                  alignItems: "center",
+                }}
+              >
+                <HamburgerIcon />
+              </button>
+            )}
+          </div>
         </div>
       </nav>
 
