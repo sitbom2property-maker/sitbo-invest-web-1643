@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from "react";
-import { useLocale, type UnitsCode } from "../context/LocaleContext";
+import { useLocale } from "../context/LocaleContext";
 import { LocaleSelect } from "./LocaleSelect";
 
 const LANGUAGE_OPTIONS = [
@@ -23,11 +23,6 @@ const CURRENCY_OPTIONS = [
   { code: "TRY", label: "TRY ₺" },
 ] as const;
 
-const UNITS_OPTIONS = [
-  { code: "sqm", label: "Square meters (m²)" },
-  { code: "sqft", label: "Square feet (ft²)" },
-] as const;
-
 const FIELD_LABEL: CSSProperties = {
   fontFamily: "Manrope, sans-serif",
   fontSize: 11,
@@ -45,18 +40,16 @@ type LocaleModalProps = {
 };
 
 export function LocaleModal({ open, onClose }: LocaleModalProps) {
-  const { language, currency, units, setLocale } = useLocale();
+  const { language, currency, setLocale } = useLocale();
   const [draftLang, setDraftLang] = useState(language);
   const [draftCurrency, setDraftCurrency] = useState(currency);
-  const [draftUnits, setDraftUnits] = useState<UnitsCode>(units);
 
   useEffect(() => {
     if (open) {
       setDraftLang(language);
       setDraftCurrency(currency);
-      setDraftUnits(units);
     }
-  }, [open, language, currency, units]);
+  }, [open, language, currency]);
 
   useEffect(() => {
     if (!open) {
@@ -80,7 +73,6 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
     setLocale({
       language: draftLang,
       currency: draftCurrency,
-      units: draftUnits,
     });
     onClose();
   };
@@ -126,15 +118,6 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
               value={draftCurrency}
               options={[...CURRENCY_OPTIONS]}
               onChange={setDraftCurrency}
-            />
-          </div>
-
-          <div>
-            <span style={FIELD_LABEL}>Units</span>
-            <LocaleSelect
-              value={draftUnits}
-              options={[...UNITS_OPTIONS]}
-              onChange={(code) => setDraftUnits(code as UnitsCode)}
             />
           </div>
 
