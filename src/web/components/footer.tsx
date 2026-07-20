@@ -115,35 +115,53 @@ function FooterColExternal({
   links: { label: string; href: string; icon: string; external?: boolean }[];
 }) {
   return (
-    <div>
+    <div style={{ minWidth: 0 }}>
       <h4 style={colTitleStyle}>{title}</h4>
       <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
-        {links.map((link) => (
-          <li key={link.href}>
-            <a
-              href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
-              style={{
-                ...linkStyle,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                opacity: 1,
-                color: "rgba(250, 247, 240, 0.75)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = C.light;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "rgba(250, 247, 240, 0.75)";
-              }}
-            >
-              <FooterIcon name={link.icon} size={16} />
-              <span style={{ minWidth: 0, wordBreak: "break-word" }}>{link.label}</span>
-            </a>
-          </li>
-        ))}
+        {links.map((link) => {
+          const isEmail = link.icon === "email";
+          // Soft break only after @ so the address doesn't split mid-word (…gmail.c / om)
+          const label = isEmail ? link.label.replace("@", "@\u200B") : link.label;
+
+          return (
+            <li key={link.href} style={{ minWidth: 0 }}>
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                style={{
+                  ...linkStyle,
+                  display: "inline-flex",
+                  alignItems: isEmail ? "flex-start" : "center",
+                  gap: 8,
+                  opacity: 1,
+                  color: "rgba(250, 247, 240, 0.75)",
+                  maxWidth: "100%",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = C.light;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(250, 247, 240, 0.75)";
+                }}
+              >
+                <span style={{ display: "inline-flex", flexShrink: 0, marginTop: isEmail ? 2 : 0 }}>
+                  <FooterIcon name={link.icon} size={16} />
+                </span>
+                <span
+                  style={{
+                    minWidth: 0,
+                    lineHeight: isEmail ? 1.35 : undefined,
+                    overflowWrap: isEmail ? "break-word" : undefined,
+                    wordBreak: "normal",
+                  }}
+                >
+                  {label}
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
