@@ -752,7 +752,7 @@ function Portfolio() {
   return (
     <section id="portfolio" style={{ background: C.darkTeal, padding: "20px 0 20px" }}>
       {/* Big frame card */}
-      <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "clamp(28px,4vw,64px) 20px clamp(28px,4vw,56px)", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
+      <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
