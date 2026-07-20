@@ -118,8 +118,16 @@ export default function CatalogPage() {
     { value: "default", label: t("catalog.sortDefault") },
     { value: "price-asc", label: t("catalog.sortPriceAsc") },
     { value: "price-desc", label: t("catalog.sortPriceDesc") },
-    { value: "yield-desc", label: "Yield" },
+    { value: "yield-desc", label: t("catalog.sortYield") },
   ];
+
+  const cityLabels: Record<typeof CITIES[number], string> = {
+    All: t("catalog.filterAll"),
+    Batumi: t("catalog.city.batumi"),
+    Tbilisi: t("catalog.city.tbilisi"),
+    "Chakvi / Gonio": t("catalog.city.chakviGonio"),
+    Makhinjauri: t("catalog.city.makhinjauri"),
+  };
 
   // Scroll top on mount
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -172,7 +180,7 @@ export default function CatalogPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
             <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
-              Georgia Real Estate
+              {t("catalog.eyebrow")}
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
@@ -196,7 +204,7 @@ export default function CatalogPage() {
                 color: city === c ? C.dark : "rgba(255,251,240,0.6)",
                 transition: "all 0.2s",
               }}>
-                {c} {counts[c] ? <span style={{ opacity: 0.7, fontWeight: 400 }}>({counts[c]})</span> : ""}
+                {cityLabels[c]} {counts[c] ? <span style={{ opacity: 0.7, fontWeight: 400 }}>({counts[c]})</span> : ""}
               </button>
             ))}
           </div>
@@ -215,7 +223,7 @@ export default function CatalogPage() {
                 <path d="M10 10l3.5 3.5" stroke={C.muted} strokeWidth="1.4" strokeLinecap="round"/>
               </svg>
               <input
-                type="text" placeholder="Search by name, area, city…"
+                type="text" placeholder={t("catalog.searchPlaceholder")}
                 value={search} onChange={e => setSearch(e.target.value)}
                 style={{ ...inputStyle, paddingLeft: "34px", width: "100%", boxSizing: "border-box" }}
               />
@@ -229,7 +237,7 @@ export default function CatalogPage() {
 
             {/* Results count */}
             <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, flexShrink: 0 }}>
-              {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+              {filtered.length} {filtered.length === 1 ? t("catalog.projectSingular") : t("catalog.projectPlural")}
             </span>
           </div>
         </Container>
@@ -240,11 +248,11 @@ export default function CatalogPage() {
         <Container>
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
-              <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>No projects found</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted }}>Try adjusting your filters</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
                 style={{ marginTop: "20px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
-                Reset filters
+                {t("cta.resetFilters")}
               </button>
             </div>
           ) : (
@@ -265,15 +273,15 @@ export default function CatalogPage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "48px", alignItems: "center" }}>
             <div>
               <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
-                Don't see what<br />you're looking for?
+                {t("catalog.cta.title")}
               </h2>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7 }}>
-                We work with off-market inventory not listed publicly. Tell us your budget and preferences — we'll find the right match.
+                {t("catalog.cta.body")}
               </p>
             </div>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Book a Call
+                {t("catalog.cta.bookCall")}
               </button>
             </div>
           </div>
@@ -285,29 +293,29 @@ export default function CatalogPage() {
         <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.2)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>✕</button>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>Book a Call</h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>Leave your details and we'll reach out to schedule a convenient time.</p>
+            <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
+            <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {[
-                { key: "name", placeholder: "Your Name", type: "text" },
-                { key: "phone", placeholder: "Phone Number", type: "tel" },
-                { key: "email", placeholder: "Email Address", type: "email" },
+                { key: "name", placeholder: t("catalog.bookCall.name"), type: "text" },
+                { key: "phone", placeholder: t("catalog.bookCall.phone"), type: "tel" },
+                { key: "email", placeholder: t("catalog.bookCall.email"), type: "email" },
               ].map(f => (
                 <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as any)[f.key]}
                   onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
                   style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
                   onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               ))}
-              <textarea placeholder="Your request (optional)" value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
+              <textarea placeholder={t("catalog.bookCall.message")} value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
                 style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               <button onClick={() => { setShowBookCall(false); setBookForm({ name: "", phone: "", email: "", message: "" }); }}
                 style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Send Request
+                {t("cta.sendRequest")}
               </button>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
-                Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
+                {t("catalog.bookCall.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
             </div>
           </div>

@@ -128,6 +128,7 @@ function ROICalc() {
   const [yieldPct, setYield]  = useState(11);
   const [horizon, setHorizon] = useState(5);
   const [occupancy, setOccupancy] = useState(75);
+  const t = useT();
 
   const annualRental = budget * (yieldPct / 100) * (occupancy / 100);
   const totalRental  = annualRental * horizon;
@@ -147,33 +148,33 @@ function ROICalc() {
   return (<>
 
     <div style={{ background: C.light, borderRadius: "16px", padding: "32px 28px" }}>
-      <Eyebrow>Investment Calculator</Eyebrow>
+      <Eyebrow>{t("project.roiCalc.eyebrow")}</Eyebrow>
       <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.dark, marginBottom: "28px" }}>
-        Model your returns
+        {t("project.roiCalc.title")}
       </h3>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "28px" }}>
 {/* Budget */}
         <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>Investment Budget · <strong style={{ color: C.dark }}>{fmt(budget)}</strong></label>
+          <label style={fieldLabel}>{t("project.roiCalc.budget")} · <strong style={{ color: C.dark }}>{fmt(budget)}</strong></label>
           <input type="range" min="50000" max="500000" step="5000" value={budget} onChange={e => setBudget(+e.target.value)}
             style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
         </div>
 {/* Yield */}
         <div>
-          <label style={fieldLabel}>Annual Yield · <strong style={{ color: C.dark }}>{yieldPct}%</strong></label>
+          <label style={fieldLabel}>{t("project.roiCalc.annualYield")} · <strong style={{ color: C.dark }}>{yieldPct}%</strong></label>
           <input type="range" min="8" max="15" step="0.5" value={yieldPct} onChange={e => setYield(+e.target.value)}
             style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
         </div>
 {/* Occupancy */}
         <div>
-          <label style={fieldLabel}>Occupancy · <strong style={{ color: C.dark }}>{occupancy}%</strong></label>
+          <label style={fieldLabel}>{t("project.roiCalc.occupancy")} · <strong style={{ color: C.dark }}>{occupancy}%</strong></label>
           <input type="range" min="50" max="95" step="5" value={occupancy} onChange={e => setOccupancy(+e.target.value)}
             style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
         </div>
 {/* Horizon */}
         <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>Investment Horizon · <strong style={{ color: C.dark }}>{horizon} years</strong></label>
+          <label style={fieldLabel}>{t("project.roiCalc.horizon")} · <strong style={{ color: C.dark }}>{horizon} {t("project.roiCalc.yearsSuffix")}</strong></label>
           <input type="range" min="1" max="10" step="1" value={horizon} onChange={e => setHorizon(+e.target.value)}
             style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
         </div>
@@ -181,10 +182,10 @@ function ROICalc() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
 {[
-    { label: "Annual Rental Income", value: fmt(annualRental), accent: false },
- { label: `Rental over ${horizon} yrs`,  value: fmt(totalRental),  accent: false },
-    { label: "Est. Appreciation",   value: fmt(appreciation), accent: false },
- { label: `Total Return`,         value: fmt(totalReturn),  accent: true },
+    { label: t("project.roiCalc.annualRentalIncome"), value: fmt(annualRental), accent: false },
+    { label: t("project.roiCalc.rentalOverYears", { years: horizon }), value: fmt(totalRental), accent: false },
+    { label: t("project.roiCalc.appreciation"), value: fmt(appreciation), accent: false },
+    { label: t("project.roiCalc.totalReturn"), value: fmt(totalReturn), accent: true },
         ].map(item => (
           <div key={item.label} style={{
             background: item.accent ? C.dark : C.light,
@@ -200,12 +201,12 @@ function ROICalc() {
       <div style={{ marginTop: "16px", textAlign: "center", background: C.dark, borderRadius: "10px", padding: "16px" }}>
         <span style={{ fontFamily: "Jun, serif", fontSize: "2.4rem", fontWeight: 700, color: C.teal }}>{roi.toFixed(0)}%</span>
         <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", display: "block", marginTop: "2px" }}>
-          Estimated Total ROI over {horizon} years
+          {t("project.roiCalc.estimatedTotalRoi", { years: horizon })}
         </span>
       </div>
 
       <p style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: C.muted, marginTop: "12px", lineHeight: 1.5 }}>
-        * Indicative model. Assumes {yieldPct}% gross yield at {occupancy}% occupancy + 25% off-plan uplift + 8%/yr appreciation.
+        {t("project.roiCalc.note", { yield: yieldPct, occupancy })}
       </p>
     </div>
   
@@ -324,7 +325,7 @@ export default function ProjectPage() {
 
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "36px" : "48px" }}>
-                <Eyebrow>Overview</Eyebrow>
+                <Eyebrow>{t("project.overview")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
@@ -341,13 +342,13 @@ export default function ProjectPage() {
                 >
                   {/* Logo placeholder */}
                   <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>Logo</span>
+                    <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>Developer</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
-                      A construction company founded in 2015, which has established itself as a reliable partner in residential construction. It actively develops projects, including residential complexes in Batumi.
+                      {t("project.developerBody")}
                     </p>
                   </div>
                 </div>
@@ -357,15 +358,15 @@ export default function ProjectPage() {
 
 {/* Specs grid */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
-                <Eyebrow>Technical Specifications</Eyebrow>
+                <Eyebrow>{t("project.specs")}</Eyebrow>
                 <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
 {[
-    { label: "Area",           value: p.area },
-    { label: "Ceiling Height", value: p.ceilingHeight },
-    { label: "Floors",         value: p.floors },
-    { label: "Buildings",      value: p.buildings },
-    { label: "Finishing",      value: p.finishing },
-    { label: "Developer",      value: p.developer },
+    { label: t("project.spec.area"), value: p.area },
+    { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
+    { label: t("project.spec.floors"), value: p.floors },
+    { label: t("project.spec.buildings"), value: p.buildings },
+    { label: t("project.spec.finishing"), value: p.finishing },
+    { label: t("project.developer"), value: p.developer },
                   ].map(s => (
                     <div key={s.label} style={{ background: C.light, padding: isMobile ? "14px 12px" : "16px 14px", minWidth: 0 }}>
                       <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 5px" }}>{s.label}</p>
@@ -379,7 +380,7 @@ export default function ProjectPage() {
 
 {/* Key Features */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
-                <Eyebrow>Key Features</Eyebrow>
+                <Eyebrow>{t("project.features")}</Eyebrow>
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px 32px" }}>
                   {p.features.map(f => (
                     <div key={f} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
@@ -394,7 +395,7 @@ export default function ProjectPage() {
 
 {/* Materials */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
-                <Eyebrow>Materials & Construction</Eyebrow>
+                <Eyebrow>{t("project.materials")}</Eyebrow>
                 <div style={{ background: C.light, borderRadius: "12px", padding: "20px 22px", display: "flex", flexDirection: "column", gap: "14px" }}>
                   {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
                     const colonIdx = sentence.indexOf(":");
@@ -414,18 +415,18 @@ export default function ProjectPage() {
 
 {/* Payment */}
               <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
-                <Eyebrow>Payment & Installment</Eyebrow>
+                <Eyebrow>{t("project.payment")}</Eyebrow>
                 {/* Bar visual: left block = down payment, right block = installment remainder */}
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: "0 0 30%", background: C.dark, padding: "22px 20px" }}>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>30%</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>Down Payment</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>70%</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment</p>
+                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
                   </div>
                 </div>
@@ -439,16 +440,16 @@ export default function ProjectPage() {
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>Interested?</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>{t("project.interested")}</p>
                   <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
-                    Get a personal offer
+                    {t("project.offerTitle")}
                   </h3>
                   <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
-                    We'll prepare a detailed cost estimate and floor plan selection for this project.
+                    {t("project.offerBody")}
                   </p>
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                    Request Details
+                    {t("project.offerModal.title")}
                   </button>
                 </div>
 
@@ -476,7 +477,7 @@ export default function ProjectPage() {
                   <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                     <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
-                    <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>Live Camera</span>
+                    <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
                   </a>
                 )}
 
@@ -494,16 +495,16 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
-            <Eyebrow>Floor Plans</Eyebrow>
+            <Eyebrow>{t("project.floorPlans")}</Eyebrow>
             <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
-              Available Layouts
+              {t("project.availableLayouts")}
             </h3>
           </div>
           <div className="pr-reveal" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
             {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
               src ? (
                 <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#FFFBF0", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-                  <img src={src} alt={`Layout ${n + 1}`} style={{ width: "100%", display: "block", objectFit: "contain" }} />
+                  <img src={src} alt={t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", display: "block", objectFit: "contain" }} />
                     {p.floorPlanLabels?.[n] && (
                     <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center" }}>
                       <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
@@ -517,7 +518,7 @@ export default function ProjectPage() {
                     <path d="M3 9h18M9 9v12M3 15h6"/>
                   </svg>
                   <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)" }}>
-                    Layout {n + 1} — Coming Soon
+                    {t("project.layoutComingSoon", { number: n + 1 })}
                   </span>
                 </div>
               )
@@ -530,7 +531,7 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
-            <Eyebrow>Location</Eyebrow>
+            <Eyebrow>{t("project.location")}</Eyebrow>
             <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
 {p.location}
             </h3>
@@ -540,11 +541,11 @@ export default function ProjectPage() {
           </div>
           {/* District description */}
           <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "12px", padding: "28px 28px" }}>
-            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>Новый Бульвар</h4>
+            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{t("project.district.newBoulevard.title")}</h4>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
-              Современный район у моря с развитой инфраструктурой и красивым парком у набережной. Объект расположен на юго-западной окраине города Батуми, вдоль побережья Черного моря. Этот район является символом нового, современного Батуми с его инновационной архитектурой и зелеными зонами для отдыха.
+              {t("project.district.newBoulevard.body")}
               <br /><br />
-              До Международного аэропорта Батуми можно добраться всего за 8 минут, что удобно для тех, кто часто путешествует. В непосредственной близости расположены важные социальные объекты: школа и дельфинарий находятся в 11 минутах езды, детский сад — в 12 минутах. Такое расположение делает жилой объект Артекс удобным для семей с детьми и для активной городской жизни резидентов.
+              {t("project.district.newBoulevard.body2")}
             </p>
           </div>
         </Container>
@@ -557,14 +558,14 @@ export default function ProjectPage() {
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="pr-reveal">
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
-                  Ready to invest in<br />
+                  {t("project.cta.title")}<br />
                   <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
-                  We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.
+                  {t("project.cta.body")}
                 </p>
                 <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                  Get a Free Offer
+                  {t("cta.getFreeOffer")}
                 </AppLink>
               </div>
             </Col>
@@ -576,7 +577,7 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 0" }}>
         <Container>
           <div style={{ marginBottom: "32px" }}>
-            <Eyebrow>Other Projects</Eyebrow>
+            <Eyebrow>{t("project.otherProjects")}</Eyebrow>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px" }}>
 {[prev, next].map((proj) => (
@@ -592,7 +593,7 @@ export default function ProjectPage() {
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
-                    {proj.yield} ROI
+                    {proj.yield} {t("catalog.roi")}
                   </div>
                 </a>
               </Link>
@@ -605,7 +606,7 @@ export default function ProjectPage() {
       {modalSrc && (
         <div onClick={() => setModalSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, backdropFilter: "blur(4px)", cursor: "pointer" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", maxWidth: "60vw", maxHeight: "70vh", cursor: "default" }}>
-            <img src={modalSrc} alt="Layout preview" style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "12px" }} />
+            <img src={modalSrc} alt={t("project.modal.layoutPreview")} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "12px" }} />
             <button onClick={() => setModalSrc(null)} style={{ position: "absolute", top: "-40px", right: "0", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "1px solid rgba(255,251,240,0.25)", color: "#FFFBF0", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
               ✕
             </button>
@@ -622,16 +623,16 @@ export default function ProjectPage() {
             </button>
 
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
-              Request Details
+              {t("project.offerModal.title")}
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
-              Tell us about your interest in {project.name}. We'll prepare a personalized offer.
+              {t("project.offerModal.body", { project: project.name })}
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <input
                 type="text"
-                placeholder="Your Name"
+                placeholder={t("project.offerModal.name")}
                 value={offerFormData.name}
                 onChange={e => setOfferFormData({ ...offerFormData, name: e.target.value })}
                 style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
@@ -640,7 +641,7 @@ export default function ProjectPage() {
               />
               <input
                 type="tel"
-                placeholder="Phone Number"
+                placeholder={t("project.offerModal.phone")}
                 value={offerFormData.phone}
                 onChange={e => setOfferFormData({ ...offerFormData, phone: e.target.value })}
                 style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
@@ -649,7 +650,7 @@ export default function ProjectPage() {
               />
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={t("project.offerModal.email")}
                 value={offerFormData.email}
                 onChange={e => setOfferFormData({ ...offerFormData, email: e.target.value })}
                 style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
@@ -657,10 +658,10 @@ export default function ProjectPage() {
                 onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
               />
               <button onClick={() => { setShowOfferForm(false); setOfferFormData({ name: "", phone: "", email: "" }); }} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "8px", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Send Request
+                {t("cta.sendRequest")}
               </button>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
-                Contact us directly at: <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
+                {t("project.offerModal.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useRoute } from "wouter";
 import { getPostBySlug, type BlogBlock } from "../data/blog-posts";
+import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -117,6 +118,8 @@ function BlockRenderer({ block }: { block: BlogBlock }) {
 }
 
 function CtaBlock({ isMobile }: { isMobile: boolean }) {
+  const t = useT();
+
   return (
     <div
       style={{
@@ -137,7 +140,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
           margin: "0 0 16px",
         }}
       >
-        Ready to invest in Batumi?
+        {t("blogPost.readyTitle")}
       </h2>
       <p
         style={{
@@ -149,7 +152,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
           maxWidth: "520px",
         }}
       >
-        Book a free 30-minute strategy call. No catalog, no pressure — just honest numbers.
+        {t("blogPost.readyBody")}
       </p>
       <div
         style={{
@@ -179,7 +182,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          Request a Consultation
+          {t("cta.requestConsultation")}
         </a>
         <a
           href="https://wa.me/995555505288"
@@ -218,6 +221,8 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
 }
 
 function AuthorBlock({ author }: { author: string }) {
+  const t = useT();
+
   return (
     <div
       style={{
@@ -257,7 +262,7 @@ function AuthorBlock({ author }: { author: string }) {
             margin: "0 0 6px",
           }}
         >
-          Written by
+          {t("blogPost.writtenBy")}
         </p>
         <p
           style={{
@@ -279,7 +284,7 @@ function AuthorBlock({ author }: { author: string }) {
             lineHeight: 1.6,
           }}
         >
-          Founder, SITBO Invest · Batumi real estate advisory
+          {t("blogPost.authorRole")}
         </p>
       </div>
     </div>
@@ -288,6 +293,7 @@ function AuthorBlock({ author }: { author: string }) {
 
 export default function BlogPostPage() {
   const isMobile = useIsMobile();
+  const t = useT();
   const [, params] = useRoute("/blog/:slug");
   const slug = params?.slug ?? "";
   const post = getPostBySlug(slug);
@@ -319,10 +325,10 @@ export default function BlogPostPage() {
                 margin: "0 0 16px",
               }}
             >
-              Article not found
+              {t("blogPost.notFoundTitle")}
             </h1>
             <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.9rem", color: C.muted, margin: "0 0 24px" }}>
-              This article may have been moved or removed.
+              {t("blogPost.notFoundBody")}
             </p>
             <Link
               href="/blog"
@@ -336,7 +342,7 @@ export default function BlogPostPage() {
                 letterSpacing: "0.06em",
               }}
             >
-              ← Back to Blog
+              {t("blogPost.backToBlog")}
             </Link>
           </div>
         </div>
@@ -363,7 +369,7 @@ export default function BlogPostPage() {
                 marginBottom: "28px",
               }}
             >
-              ← Back to Blog
+              {t("blogPost.backToBlog")}
             </Link>
             <div style={{ marginBottom: "24px" }}>
               <span

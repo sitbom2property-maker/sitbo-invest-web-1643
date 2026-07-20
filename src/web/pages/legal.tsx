@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useT } from "../i18n";
 
 const C = {
   dark:      "#21141A",
@@ -80,6 +81,8 @@ const sections = [
 ];
 
 export default function LegalPage() {
+  const t = useT();
+
   return (
     <>
       <div style={{ background: C.light, minHeight: "100vh" }}>
@@ -91,10 +94,10 @@ export default function LegalPage() {
             {/* Page title */}
             <div style={{ marginBottom: "64px" }}>
               <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, margin: "0 0 12px" }}>
-                Terms of Service &amp; Privacy Policy
+                {t("legal.title")}
               </h1>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
-                Last updated: January 2025 · sitboinvest.ge operated by Sitbo Group
+                {t("legal.updated")}
               </p>
             </div>
             {sections.map((section, si) => (
@@ -102,7 +105,7 @@ export default function LegalPage() {
                 {/* Section title */}
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px", paddingBottom: "20px", borderBottom: `2px solid ${C.teal}` }}>
                   <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,3vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
-                    {section.title}
+                    {si === 0 ? t("legal.privacyTitle") : t("legal.termsTitle")}
                   </h2>
                 </div>
 
@@ -135,7 +138,7 @@ export default function LegalPage() {
             <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(33,20,26,0.1)" }}>
               <Link href="/">
                 <a style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.teal, textDecoration: "none", letterSpacing: "0.06em" }}>
-                  ← Back to Home
+                  {t("legal.backHome")}
                 </a>
               </Link>
             </div>

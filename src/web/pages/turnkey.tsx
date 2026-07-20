@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
+import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -13,6 +14,8 @@ const C = {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
+  const t = useT();
+
   return (<>
 
     <section style={{ background: C.dark, minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "120px 10px 80px" }}>
@@ -26,24 +29,24 @@ function Hero() {
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>Batumi · Georgia</span>
+            <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.hero.eyebrow")}</span>
           </div>
 
           <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
-            Reality matches<br />
-            <em style={{ fontStyle: "italic", color: C.teal }}>the render</em>
+            {t("turnkey.hero.title")}<br />
+            <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.hero.titleEm")}</em>
           </h1>
 
           <p style={{ fontFamily: "DM Sans", fontSize: "clamp(0.9rem,1.3vw,1.05rem)", color: "rgba(255,251,240,0.65)", lineHeight: 1.75, marginBottom: "52px" }}>
-            We renovate for those who notice every millimetre. You don't need to mediate between the designer and the builder, or find someone to blame when the furniture doesn't fit the doorway. We take care of everything: from the first line on paper to selecting the textiles.
+            {t("turnkey.hero.body")}
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
             <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-              I'm Renovating For Myself
+              {t("turnkey.hero.ctaSelf")}
             </a>
             <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.25)", borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.borderColor = C.teal)} onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,251,240,0.25)")}>
-              I'm Renovating For Investment
+              {t("turnkey.hero.ctaInvest")}
             </a>
           </div>
         </div>
@@ -51,7 +54,7 @@ function Hero() {
 {/* Right: photo */}
         <div style={{ flex: "0 0 420px", maxWidth: "420px" }} className="hero-photo-col">
           <div style={{ borderRadius: "20px", overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,0.5)" }}>
-            <img src="/turnkey-hero-photo.png" alt="Turnkey renovation" style={{ width: "100%", display: "block", objectFit: "cover" }} />
+            <img src="/turnkey-hero-photo.png" alt={t("turnkey.hero.title")} style={{ width: "100%", display: "block", objectFit: "cover" }} />
           </div>
         </div>
 
@@ -63,11 +66,12 @@ function Hero() {
 
 // ─── Two Columns ──────────────────────────────────────────────────────────────
 function TwoColumns() {
+  const t = useT();
   const cols = [
     {
-      tag: "For Perfectionists",
-      title: "A Home That Reflects Your Vision",
-      text: "We translate your personal style into a living space of uncompromising quality. Our process is designed for those who appreciate fine details and a seamless, stress-free experience.",
+      tag: t("turnkey.forSelf.eyebrow"),
+      title: t("turnkey.forSelf.title"),
+      text: t("turnkey.forSelf.body"),
       items: [
  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, label: "Bespoke Design", desc: "A unique project crafted around your lifestyle and aesthetic vision." },
  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, label: "Master Craftsmanship", desc: "Meticulous attention to every seam, joint, and finish — no compromises." },
@@ -77,9 +81,9 @@ function TwoColumns() {
       dark: false,
     },
     {
-      tag: "For Investors",
-      title: "A Renovation That Delivers Profit",
-      text: "We create high-demand, low-maintenance rental properties that maximize your ROI. Our process is optimized for speed, durability, and market appeal in Batumi.",
+      tag: t("turnkey.forInvestors.eyebrow"),
+      title: t("turnkey.forInvestors.title"),
+      text: t("turnkey.forInvestors.body"),
       items: [
  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>, label: "ROI-Driven Design", desc: "A proven aesthetic that attracts premium short-term tenants in Batumi." },
  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, label: "Speed to Market", desc: "Fast-track delivery to minimize vacancy and start earning rental income sooner." },
@@ -115,7 +119,7 @@ function TwoColumns() {
             </div>
             <div style={{ marginTop: "40px" }}>
               <a href="#contact-form" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.dark ? C.dark : C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                {col.dark ? "Calculate My ROI" : "Discuss My Project"}
+                {col.dark ? t("turnkey.cta.calculateRoi") : t("turnkey.cta.discussProject")}
               </a>
             </div>
           </div>
@@ -128,6 +132,8 @@ function TwoColumns() {
 
 // ─── Design Rule ──────────────────────────────────────────────────────────────
 function DesignRule() {
+  const t = useT();
+
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
@@ -136,18 +142,18 @@ function DesignRule() {
         <div style={{ position: "relative", zIndex: 1, maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "28px" }}>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>Our Cornerstone</span>
+            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>{t("turnkey.design.eyebrow")}</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
-            Perfection is Planned.<br />
-            <em style={{ fontStyle: "italic" }}>We Never Start Without a Design Project.</em>
+            {t("turnkey.design.title")}<br />
+            <em style={{ fontStyle: "italic" }}>{t("turnkey.design.titleEm")}</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8, marginBottom: "12px" }}>
-            A complete, client-approved design project is our blueprint for success and your ultimate guarantee. It allows us to provide a <strong style={{ color: C.light }}>100% fixed budget and a precise timeline</strong> before a single wall is touched.
+            {t("turnkey.design.body1")}
           </p>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8 }}>
-            This eliminates unexpected costs, ensures every detail meets your expectations, and is the professional standard we proudly uphold on every project in Batumi.
+            {t("turnkey.design.body2")}
           </p>
         </div>
       </div>
@@ -163,6 +169,7 @@ function Calculator() {
   const [goal, setGoal] = useState<"self" | "invest">("invest");
   const [finish, setFinish] = useState<"comfort" | "premium" | "luxe">("premium");
   const [shown, setShown] = useState(false);
+  const t = useT();
 
   // price per sqm in USD
   const base: Record<string, Record<string, number>> = {
@@ -197,19 +204,19 @@ function Calculator() {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>Cost Estimator</span>
+            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.calculator.eyebrow")}</span>
           </div>
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
-            Get a Preliminary Estimate
+            {t("turnkey.calculator.title")}
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, marginBottom: "40px" }}>
-            A ballpark figure based on your inputs. The final fixed price is set by your approved design project.
+            {t("turnkey.calculator.body")}
           </p>
 
 {/* Area slider */}
           <div style={{ marginBottom: "36px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark }}>Property Area</span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark }}>{t("turnkey.calculator.area")}</span>
               <span style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark }}>{area} m²</span>
             </div>
             <input type="range" min={25} max={200} value={area} onChange={e => setArea(+e.target.value)}
@@ -222,48 +229,48 @@ function Calculator() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "32px", marginBottom: "36px" }}>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>Property Condition</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.condition")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <Radio name="cond" value="new" current={condition} label="New Build (White Frame)" onChange={v => setCondition(v as "new" | "old")} />
-                <Radio name="cond" value="old" current={condition} label="Old Build / Full Gutting" onChange={v => setCondition(v as "new" | "old")} />
+                <Radio name="cond" value="new" current={condition} label={t("turnkey.calculator.newBuild")} onChange={v => setCondition(v as "new" | "old")} />
+                <Radio name="cond" value="old" current={condition} label={t("turnkey.calculator.oldBuild")} onChange={v => setCondition(v as "new" | "old")} />
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>My Goal</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.goal")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <Radio name="goal" value="invest" current={goal} label="For Investment (ROI)" onChange={v => setGoal(v as "self" | "invest")} />
-                <Radio name="goal" value="self" current={goal} label="For Myself (Perfectionist)" onChange={v => setGoal(v as "self" | "invest")} />
+                <Radio name="goal" value="invest" current={goal} label={t("turnkey.calculator.goalInvest")} onChange={v => setGoal(v as "self" | "invest")} />
+                <Radio name="goal" value="self" current={goal} label={t("turnkey.calculator.goalSelf")} onChange={v => setGoal(v as "self" | "invest")} />
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>Finish Level</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.finish")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <Radio name="finish" value="comfort" current={finish} label="Comfort" onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
-                <Radio name="finish" value="premium" current={finish} label="Premium" onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
-                <Radio name="finish" value="luxe" current={finish} label="Luxe" onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
+                <Radio name="finish" value="comfort" current={finish} label={t("turnkey.calculator.comfort")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
+                <Radio name="finish" value="premium" current={finish} label={t("turnkey.calculator.premium")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
+                <Radio name="finish" value="luxe" current={finish} label={t("turnkey.calculator.luxe")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
               </div>
             </div>
           </div>
 
           <button onClick={() => setShown(true)} style={{ width: "100%", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "10px", padding: "16px", cursor: "pointer", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = C.teal)} onMouseLeave={e => (e.currentTarget.style.background = C.dark)}>
-            Calculate My Estimate
+            {t("turnkey.calculator.calculate")}
           </button>
 
           {shown && (
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>Estimated Cost Range</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
                 <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
                   ${low.toLocaleString()} – ${high.toLocaleString()}
                 </p>
               </div>
               <div style={{ background: C.wine, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>Estimated Timeline</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
                 <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
                 <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                  Book a Free Consultation for a Detailed Quote
+                  {t("turnkey.calculator.detailedQuote")}
                 </a>
               </div>
             </div>
@@ -277,11 +284,12 @@ function Calculator() {
 
 // ─── Remote Process ───────────────────────────────────────────────────────────
 function RemoteProcess() {
+  const t = useT();
   const steps = [
- { n: "01", title: "Dedicated Manager", desc: "One point of contact, available 24/7 in your preferred messenger — WhatsApp, Telegram, or email." },
- { n: "02", title: "Weekly Video Reports", desc: "Detailed video walkthroughs every week so you see everything as if you were standing on-site." },
- { n: "03", title: "24/7 Project Portal", desc: "Real-time access to all documents, floor plans, photos, and financial reports in one place." },
- { n: "04", title: "Live Video Calls", desc: "Schedule a live call from your property at any time. Inspect the work yourself, remotely." },
+ { n: "01", title: t("turnkey.remote.step1.title"), desc: t("turnkey.remote.step1.desc") },
+ { n: "02", title: t("turnkey.remote.step2.title"), desc: t("turnkey.remote.step2.desc") },
+ { n: "03", title: t("turnkey.remote.step3.title"), desc: t("turnkey.remote.step3.desc") },
+ { n: "04", title: t("turnkey.remote.step4.title"), desc: t("turnkey.remote.step4.desc") },
   ];
   return (<>
 
@@ -291,12 +299,12 @@ function RemoteProcess() {
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>Remote Management</span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.remote.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
-              Your Renovation, Under Your Control.<br />
-              <em style={{ fontStyle: "italic", color: C.teal }}>From Anywhere.</em>
+              {t("turnkey.remote.title")}<br />
+              <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.remote.titleEm")}</em>
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
@@ -318,6 +326,7 @@ function RemoteProcess() {
 // ─── Portfolio ────────────────────────────────────────────────────────────────
 function Portfolio() {
   const [filter, setFilter] = useState<"all" | "life" | "invest">("all");
+  const t = useT();
   const projects = [
  { type: "invest", img: "/p1.jpg", title: "Studio, Batumi Centre", tags: ["48 Days", "$18,000", "+70% Rental Income", "ROI: 2.1 yrs"] },
  { type: "life",   img: "/p2.jpg", title: "2BR Sea View Penthouse", tags: ["Bespoke Kitchen", "Italian Tile", "Sea View"] },
@@ -338,14 +347,14 @@ function Portfolio() {
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
                 <div style={{ width: "28px", height: "1px", background: C.wine }} />
-                <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>Our Work</span>
+                <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.portfolio.eyebrow")}</span>
               </div>
               <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
-                Proof of <em style={{ fontStyle: "italic", color: C.teal }}>Perfection</em>
+                {t("turnkey.portfolio.title")} <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.portfolio.titleEm")}</em>
               </h2>
             </div>
             <div style={{ display: "flex", gap: "8px", background: "rgba(255,251,240,0.06)", borderRadius: "10px", padding: "4px" }}>
-{([["all","All Projects"],["life","For Life"],["invest","For Investment"]] as const).map(([val, label]) => (
+{([["all", t("turnkey.portfolio.all")], ["life", t("turnkey.portfolio.forLife")], ["invest", t("turnkey.portfolio.forInvestment")]] as const).map(([val, label]) => (
                 <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "DM Sans", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.dark : "rgba(255,251,240,0.55)" }}>
 {label}
                 </button>
@@ -378,6 +387,8 @@ function Portfolio() {
 
 // ─── Guarantees ───────────────────────────────────────────────────────────────
 function Guarantees() {
+  const t = useT();
+
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
@@ -385,10 +396,10 @@ function Guarantees() {
         <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>For Perfectionists</span>
+            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.forSelf.eyebrow")}</span>
           </div>
           <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
-            We Guarantee Your <em style={{ fontStyle: "italic", color: C.wine }}>Aesthetic Satisfaction</em>
+            {t("turnkey.guarantee.self.title")}
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#666", lineHeight: 1.8 }}>
             We don't just guarantee the work — we guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, we'll redo it. That's our commitment to craftsmanship.
@@ -397,10 +408,10 @@ function Guarantees() {
         <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.15)", borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>For Investors</span>
+            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.forInvestors.eyebrow")}</span>
           </div>
           <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
-            Fixed Budget. Fixed Timeline. <em style={{ fontStyle: "italic", color: C.teal }}>In the Contract.</em>
+            {t("turnkey.guarantee.invest.title")}
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.8 }}>
             We put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.
@@ -414,16 +425,18 @@ function Guarantees() {
 
 // ─── Market Stats ─────────────────────────────────────────────────────────────
 function MarketStats() {
+  const t = useT();
+
   return (<>
 
     <section style={{ background: C.dark, padding: "80px 10px" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
           <div style={{ width: "28px", height: "1px", background: C.wine }} />
-          <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>Market Opportunity</span>
+          <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.market.eyebrow")}</span>
         </div>
         <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "60px", maxWidth: "700px" }}>
-          Why Batumi <em style={{ fontStyle: "italic", color: C.teal }}>Works</em> for Renovation & Rental
+          {t("turnkey.market.title")}
         </h2>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px" }}>
@@ -506,6 +519,7 @@ function ContactForm() {
   const [goal, setGoal] = useState("invest");
   const [desc, setDesc] = useState("");
   const [sent, setSent] = useState(false);
+  const t = useT();
 
   const inputStyle: React.CSSProperties = {
     width: "100%", background: "rgba(255,251,240,0.06)", border: "1px solid rgba(255,251,240,0.12)",
@@ -525,48 +539,48 @@ function ContactForm() {
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>Free Consultation</span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.contact.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
-              Ready to Create an Exceptional Space <em style={{ fontStyle: "italic", color: C.teal }}>in Batumi?</em>
+              {t("turnkey.contact.title")}
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.75 }}>
-              Let's discuss your project. No obligation. Arthur will personally respond within 24 hours.
+              {t("turnkey.contact.body")}
             </p>
           </div>
 
           {sent ? (
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>Message Received</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>Arthur will be in touch within 24 hours.</p>
+              <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>{t("turnkey.contact.successTitle")}</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.contact.successBody")}</p>
             </div>
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div>
-                  <label style={labelStyle}>Your Name</label>
+                  <label style={labelStyle}>{t("turnkey.contact.name")}</label>
                   <input value={name} onChange={e => setName(e.target.value)} placeholder="Arthur" style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Phone or Email</label>
+                  <label style={labelStyle}>{t("turnkey.contact.phoneOrEmail")}</label>
                   <input value={contact} onChange={e => setContact(e.target.value)} placeholder="+995 ..." style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
                 </div>
               </div>
               <div>
-                <label style={labelStyle}>My Project Is</label>
+                <label style={labelStyle}>{t("turnkey.contact.projectIs")}</label>
                 <select value={goal} onChange={e => setGoal(e.target.value)} style={{ ...inputStyle, appearance: "none" as "none" }}>
-                  <option value="invest">For Investment (Rental Income / Resale)</option>
-                  <option value="self">For Myself (Perfectionist Finish)</option>
+                  <option value="invest">{t("turnkey.contact.optionInvest")}</option>
+                  <option value="self">{t("turnkey.contact.optionSelf")}</option>
                 </select>
               </div>
               <div>
-                <label style={labelStyle}>Briefly Describe Your Property (Optional)</label>
-                <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="e.g. 55 m², white frame, Orbi City, 12th floor..." rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                <label style={labelStyle}>{t("turnkey.contact.describe")}</label>
+                <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder={t("turnkey.contact.describePlaceholder")} rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               </div>
               <button onClick={() => setSent(true)} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Request My Free Consultation
+                {t("turnkey.contact.submit")}
               </button>
             </div>
           )}
