@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { HISTORY_REGIONS, LIVE_REGION, type TimelineEvent } from "../data/history-regions";
+import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -81,6 +82,7 @@ export default function HistoryPage() {
   const trackRef = useRef<HTMLElement | null>(null);
   const progress = useScrollProgress(trackRef);
   const region = LIVE_REGION;
+  const t = useT();
   useRevealItems([region.id]);
 
   const activeIndex = Math.min(
@@ -340,28 +342,28 @@ export default function HistoryPage() {
       <header className="ht-hero">
         <div className="ht-eyebrow">
           <i />
-          <span>History Timeline · Georgia</span>
+          <span>{t("history.eyebrow")}</span>
         </div>
         <h1>
-          The story of<br />
-          <em>Batumi</em>
+          {t("history.title")}<br />
+          <em>{t("history.titleEm")}</em>
         </h1>
         <p>{region.intro}</p>
 
-        <div className="ht-regions" aria-label="Georgia regions">
+        <div className="ht-regions" aria-label={t("history.regionsLabel")}>
           {HISTORY_REGIONS.map((r) => (
             <span
               key={r.id}
               className={`ht-region-chip${r.status === "live" ? " ht-region-chip--live" : ""}`}
             >
               {r.name}
-              {r.status === "soon" ? " · Soon" : ""}
+              {r.status === "soon" ? ` · ${t("history.soon")}` : ""}
             </span>
           ))}
         </div>
       </header>
 
-      <section ref={trackRef} className="ht-track" aria-label={`${region.name} timeline`}>
+      <section ref={trackRef} className="ht-track" aria-label={t("history.timelineLabel", { region: region.name })}>
         <div className="ht-sticky">
           <strong>{region.name}</strong>
           <span>{region.tag}</span>
@@ -387,7 +389,7 @@ export default function HistoryPage() {
         </div>
 
         <p className="ht-footer-note">
-          Next up: Tbilisi — then the full map of Georgia&apos;s regions in one scrollable timeline.
+          {t("history.footerNote")}
         </p>
       </section>
 

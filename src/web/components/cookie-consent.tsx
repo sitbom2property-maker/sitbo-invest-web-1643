@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -8,6 +9,7 @@ const C = {
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
+  const t = useT();
 
   // Check if user has already made a choice
   useEffect(() => {
@@ -72,7 +74,7 @@ export function CookieConsent() {
             margin: "0 0 8px",
           }}
         >
-          Cookie Notice
+          {t("cookie.title")}
         </p>
         <p
           style={{
@@ -83,7 +85,7 @@ export function CookieConsent() {
             margin: "0 0 12px",
           }}
         >
-          We use cookies to improve your browsing experience.
+          {t("cookie.body")}
         </p>
 
         <div style={{ display: "flex", gap: "8px" }}>
@@ -106,7 +108,7 @@ export function CookieConsent() {
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.teal)}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,251,240,0.25)")}
           >
-            Decline
+            {t("cookie.decline")}
           </button>
           <button
             onClick={handleAcceptAll}
@@ -127,7 +129,7 @@ export function CookieConsent() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            Accept
+            {t("cookie.accept")}
           </button>
         </div>
       </div>

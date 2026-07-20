@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { AppLink } from "../components/app-link";
+import { useT, type MessageKey } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -88,123 +89,116 @@ const PAGE_STYLES = `
 
 type ServiceItem = {
   num: string;
-  title: string;
-  description: string;
-  bullets: string[];
+  titleKey: MessageKey;
+  descriptionKey: MessageKey;
+  bulletKeys: MessageKey[];
 };
 
 const SERVICES: ServiceItem[] = [
   {
     num: "01",
-    title: "Due Diligence",
-    description:
-      "Before any purchase, we conduct a full-layer investigation of the property, the developer, and the legal title. You receive a written conclusion — not a verbal opinion.",
-    bullets: [
-      "Title history and ownership chain verification",
-      "Developer track record: completed projects, delivery timelines, litigation history",
-      "Land plot category, encumbrances, and master plan compliance",
-      "Contract review: flagging dangerous clauses, requiring amendments before signing",
-      "Written due diligence report delivered to the client (3–5 pages)",
-      "Developers and projects we decline: unresolved litigation, delays exceeding 18 months, opaque land ownership structures",
+    titleKey: "services.item1.title",
+    descriptionKey: "services.item1.desc",
+    bulletKeys: [
+      "services.item1.bullet1",
+      "services.item1.bullet2",
+      "services.item1.bullet3",
+      "services.item1.bullet4",
+      "services.item1.bullet5",
+      "services.item1.bullet6",
     ],
   },
   {
     num: "02",
-    title: "Investment Advisory",
-    description:
-      "We analyse your objective first — yield, capital growth, residency, or diversification — then identify the assets that match it. No filler options.",
-    bullets: [
-      "Goal mapping: rental income / resale / residency / capital preservation",
-      "District comparison: Batumi centre, Gonio, Chakvi, Makhinjauri — yield vs risk vs liquidity",
-      "Access to off-market and first-release developer inventory only",
-      "ROI model per object: conservative, base, and optimistic scenarios",
-      "Capacity: twelve client mandates per quarter — your case receives full attention",
+    titleKey: "services.item2.title",
+    descriptionKey: "services.item2.desc",
+    bulletKeys: [
+      "services.item2.bullet1",
+      "services.item2.bullet2",
+      "services.item2.bullet3",
+      "services.item2.bullet4",
+      "services.item2.bullet5",
     ],
   },
   {
     num: "03",
-    title: "Turnkey Renovation",
-    description:
-      "We design, build, and furnish your property to rental-ready or resale standard. Full cost transparency before a single wall is touched.",
-    bullets: [
-      "Design concept tailored to target tenant profile (tourists, expats, long-term)",
-      "Detailed cost estimate provided before work begins",
-      "Weekly photo progress reports sent to the client",
-      "Full furnishing and fit-out included — ready to occupy on handover",
-      "Timeline: 45–90 days depending on scope",
+    titleKey: "services.item3.title",
+    descriptionKey: "services.item3.desc",
+    bulletKeys: [
+      "services.item3.bullet1",
+      "services.item3.bullet2",
+      "services.item3.bullet3",
+      "services.item3.bullet4",
+      "services.item3.bullet5",
     ],
   },
   {
     num: "04",
-    title: "Mortgage & Bank Negotiation",
-    description:
-      "Navigating Georgian mortgage products as a non-resident requires specific knowledge. We negotiate directly with bank officers to secure terms most advisors cannot access.",
-    bullets: [
-      "Bank selection: TBC Bank, Bank of Georgia, Credo Bank",
-      "Programme matching for non-resident buyers — a distinct expertise",
-      "Rate, deposit, and term negotiation on behalf of the client",
-      "Full documentation support for the bank submission process",
-      "We represent the client's interest exclusively",
+    titleKey: "services.item4.title",
+    descriptionKey: "services.item4.desc",
+    bulletKeys: [
+      "services.item4.bullet1",
+      "services.item4.bullet2",
+      "services.item4.bullet3",
+      "services.item4.bullet4",
+      "services.item4.bullet5",
     ],
   },
   {
     num: "05",
-    title: "Discovery Tour",
-    description:
-      "A structured two-to-three day programme in Batumi and the region. You see only pre-vetted properties. You meet the people who matter.",
-    bullets: [
-      "Properties shown: due diligence completed before your arrival",
-      "Meetings arranged: legal counsel, notary, developer where relevant",
-      "Transfer, accommodation, and programme logistics handled in full",
-      "Format: a working session with a decision outcome — not a sightseeing tour",
+    titleKey: "services.item5.title",
+    descriptionKey: "services.item5.desc",
+    bulletKeys: [
+      "services.item5.bullet1",
+      "services.item5.bullet2",
+      "services.item5.bullet3",
+      "services.item5.bullet4",
     ],
   },
   {
     num: "06",
-    title: "Property Management",
-    description:
-      "For clients who are not based in Georgia, we oversee the asset after purchase. Monthly reporting, zero involvement required from the owner.",
-    bullets: [
-      "Rental strategy: short-term (Airbnb / Booking) or long-term — client's choice",
-      "Management model selection: in-house oversight or management company",
-      "Monthly statement: occupancy, revenue, and operating costs",
-      "Maintenance coordination and tenant issue resolution",
-      "Designed for non-resident owners who require full hands-off operation",
+    titleKey: "services.item6.title",
+    descriptionKey: "services.item6.desc",
+    bulletKeys: [
+      "services.item6.bullet1",
+      "services.item6.bullet2",
+      "services.item6.bullet3",
+      "services.item6.bullet4",
+      "services.item6.bullet5",
     ],
   },
   {
     num: "07",
-    title: "Residency & Relocation Advisory",
-    description:
-      "Georgia offers one of the most accessible residency-by-investment frameworks in Europe. We connect the property purchase to the broader legal and financial picture.",
-    bullets: [
-      "Residency permit via real estate purchase from $100,000",
-      "Georgian tax residency structure: flat-rate framework and cross-border considerations",
-      "Georgian bank account opening — before and after purchase",
-      "Company registration in Georgia for relocating business owners",
-      "Verified referral network: legal, accounting, and tax advisory partners",
+    titleKey: "services.item7.title",
+    descriptionKey: "services.item7.desc",
+    bulletKeys: [
+      "services.item7.bullet1",
+      "services.item7.bullet2",
+      "services.item7.bullet3",
+      "services.item7.bullet4",
+      "services.item7.bullet5",
     ],
   },
 ];
 
 const LIMITS = [
   {
-    title: "No undisclosed developer fees",
-    text: "We do not accept referral payments from developers that would compromise our objectivity.",
+    titleKey: "services.limit1.title",
+    textKey: "services.limit1.text",
   },
   {
-    title: "No projects without clean title",
-    text: "If a property has unresolved legal encumbrances or disputed ownership, we do not present it.",
+    titleKey: "services.limit2.title",
+    textKey: "services.limit2.text",
   },
   {
-    title: "No recommendations without analysis",
-    text: "We do not suggest an asset before understanding your objective, timeline, and risk tolerance.",
+    titleKey: "services.limit3.title",
+    textKey: "services.limit3.text",
   },
   {
-    title: "No overloaded client roster",
-    text: "Twelve mandates per quarter is a structural decision, not a marketing line.",
+    titleKey: "services.limit4.title",
+    textKey: "services.limit4.text",
   },
-];
+] satisfies { titleKey: MessageKey; textKey: MessageKey }[];
 
 function useIsMobile(bp = 768) {
   const [mobile, setMobile] = useState(() =>
@@ -231,6 +225,7 @@ function AccordionItem({
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [maxHeight, setMaxHeight] = useState(isOpen ? 2000 : 0);
+  const t = useT();
 
   useEffect(() => {
     if (panelRef.current) {
@@ -281,7 +276,7 @@ function AccordionItem({
               fontWeight: 400,
             }}
           >
-            {service.title}
+            {t(service.titleKey)}
           </span>
         </div>
         <span
@@ -317,12 +312,12 @@ function AccordionItem({
               margin: "0 0 20px",
             }}
           >
-            {service.description}
+            {t(service.descriptionKey)}
           </p>
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {service.bullets.map((item) => (
+            {service.bulletKeys.map((itemKey) => (
               <li
-                key={item}
+                key={itemKey}
                 style={{
                   display: "flex",
                   gap: "12px",
@@ -339,7 +334,7 @@ function AccordionItem({
                     lineHeight: 1.7,
                   }}
                 >
-                  {item}
+                  {t(itemKey)}
                 </span>
               </li>
             ))}
@@ -353,6 +348,7 @@ function AccordionItem({
 export default function ServicesPage() {
   const isMobile = useIsMobile();
   const [openIndex, setOpenIndex] = useState(0);
+  const t = useT();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -381,7 +377,7 @@ export default function ServicesPage() {
               margin: "0 0 20px",
             }}
           >
-            What we do
+            {t("services.hero.eyebrow")}
           </p>
           <h1
             style={{
@@ -393,9 +389,9 @@ export default function ServicesPage() {
               margin: 0,
             }}
           >
-            Advisory built around
+            {t("services.hero.title")}
             <br />
-            <em style={{ fontStyle: "italic", color: C.teal }}>one principle.</em>
+            <em style={{ fontStyle: "italic", color: C.teal }}>{t("services.hero.titleEm")}</em>
           </h1>
           <p
             style={{
@@ -407,7 +403,7 @@ export default function ServicesPage() {
               lineHeight: 1.7,
             }}
           >
-            We take on twelve client mandates per quarter. Every engagement receives our full attention — no exceptions.
+            {t("services.hero.body")}
           </p>
         </section>
 
@@ -426,6 +422,7 @@ export default function ServicesPage() {
                 service={service}
                 isOpen={openIndex === index}
                 onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
+                isMobile={isMobile}
               />
             ))}
           </div>
@@ -450,7 +447,7 @@ export default function ServicesPage() {
                 margin: "0 0 16px",
               }}
             >
-              Our limits
+              {t("services.limits.eyebrow")}
             </p>
             <h2
               style={{
@@ -462,12 +459,12 @@ export default function ServicesPage() {
                 lineHeight: 1.15,
               }}
             >
-              Standards define the service.
+              {t("services.limits.title")}
             </h2>
             <div className="services-limits-grid">
               {LIMITS.map((item) => (
                 <div
-                  key={item.title}
+                  key={item.titleKey}
                   style={{
                     borderLeft: `1px solid rgba(140,178,192,0.25)`,
                     paddingLeft: "20px",
@@ -484,7 +481,7 @@ export default function ServicesPage() {
                       fontWeight: 600,
                     }}
                   >
-                    {item.title}
+                    {t(item.titleKey)}
                   </p>
                   <p
                     style={{
@@ -495,7 +492,7 @@ export default function ServicesPage() {
                       margin: 0,
                     }}
                   >
-                    {item.text}
+                    {t(item.textKey)}
                   </p>
                 </div>
               ))}
@@ -522,7 +519,7 @@ export default function ServicesPage() {
               lineHeight: 1.15,
             }}
           >
-            Ready to begin?
+            {t("services.cta.title")}
           </h2>
           <p
             style={{
@@ -534,7 +531,7 @@ export default function ServicesPage() {
               lineHeight: 1.7,
             }}
           >
-            Book a private consultation. No obligation, no pitch — just an honest assessment of your situation.
+            {t("services.cta.body")}
           </p>
           <AppLink
             href="/#contact"
@@ -553,7 +550,7 @@ export default function ServicesPage() {
               fontWeight: 600,
             }}
           >
-            Request Private Consultation
+            {t("cta.requestPrivateConsultation")}
           </AppLink>
         </section>
       </div>

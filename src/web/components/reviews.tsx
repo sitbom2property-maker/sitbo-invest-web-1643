@@ -1,49 +1,45 @@
-const reviews = [
+import { useT, type MessageKey } from "../i18n";
+
+const reviews: { quoteKey: MessageKey; nameKey: MessageKey; statusKey: MessageKey }[] = [
   {
-    quote:
-      "SITBO structured the deal exactly as promised. I entered with a clear exit strategy and started receiving rental income within the first season.",
-    name: "Alexey M.",
-    status: "Berlin, Germany",
+    quoteKey: "reviews.1.quote",
+    nameKey: "reviews.1.name",
+    statusKey: "reviews.1.status",
   },
   {
-    quote:
-      "The team filtered projects with real numbers, not sales noise. The process felt calm, transparent, and very premium.",
-    name: "Elena R.",
-    status: "Warsaw, Poland",
+    quoteKey: "reviews.2.quote",
+    nameKey: "reviews.2.name",
+    statusKey: "reviews.2.status",
   },
   {
-    quote:
-      "I appreciated the legal clarity and payment planning. Every milestone was documented and easy to track remotely.",
-    name: "David K.",
-    status: "London, UK",
+    quoteKey: "reviews.3.quote",
+    nameKey: "reviews.3.name",
+    statusKey: "reviews.3.status",
   },
   {
-    quote:
-      "From selection to closing, communication was disciplined and fast. It saved me weeks of on-ground due diligence.",
-    name: "Nino T.",
-    status: "Tbilisi, Georgia",
+    quoteKey: "reviews.4.quote",
+    nameKey: "reviews.4.name",
+    statusKey: "reviews.4.status",
   },
   {
-    quote:
-      "Their market perspective is practical: yield, liquidity, and risk in one view. Exactly what an investor needs.",
-    name: "Maria S.",
-    status: "Prague, Czechia",
+    quoteKey: "reviews.5.quote",
+    nameKey: "reviews.5.name",
+    statusKey: "reviews.5.status",
   },
   {
-    quote:
-      "The renovation and furnishing guidance was concise and profitable. We launched rentals with no operational chaos.",
-    name: "Igor P.",
-    status: "Riga, Latvia",
+    quoteKey: "reviews.6.quote",
+    nameKey: "reviews.6.name",
+    statusKey: "reviews.6.status",
   },
   {
-    quote:
-      "Quiet, professional execution. I never felt pressure to buy, only confidence in the final decision.",
-    name: "Sophie L.",
-    status: "Paris, France",
+    quoteKey: "reviews.7.quote",
+    nameKey: "reviews.7.name",
+    statusKey: "reviews.7.status",
   },
 ];
 
 export function Reviews() {
+  const t = useT();
   const visibleReviews = reviews.slice(0, 6);
 
   return (
@@ -52,14 +48,14 @@ export function Reviews() {
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
           <div style={{ width: "26px", height: "1px", background: "#683D47" }} />
           <span style={{ fontFamily: "DM Sans", fontSize: "0.66rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)" }}>
-            Investor Reviews
+            {t("reviews.eyebrow")}
           </span>
         </div>
 
         <h3 style={{ margin: "0 0 30px", fontFamily: "Jun, serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
-          Trusted by investors who
+          {t("reviews.headline")}
           <br />
-          <em style={{ fontStyle: "italic", color: "#8CB2C0" }}>optimize for quality.</em>
+          <em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("reviews.headlineEm")}</em>
         </h3>
 
         <div
@@ -74,7 +70,7 @@ export function Reviews() {
         >
           {visibleReviews.map((item) => (
             <article
-              key={item.name}
+              key={item.nameKey}
               style={{
                 flex: "0 0 min(320px, 86vw)",
                 background: "#fff",
@@ -89,13 +85,13 @@ export function Reviews() {
               }}
             >
               <p style={{ margin: "0 0 14px", fontFamily: "DM Sans", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(33,20,26,0.78)", fontStyle: "italic" }}>
-                "{item.quote}"
+                "{t(item.quoteKey)}"
               </p>
               <p style={{ margin: 0, fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 400, color: "#21141A" }}>
-                {item.name}
+                {t(item.nameKey)}
               </p>
               <p style={{ margin: "3px 0 0", fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(33,20,26,0.55)" }}>
-                {item.status}
+                {t(item.statusKey)}
               </p>
             </article>
           ))}
@@ -122,7 +118,7 @@ export function Reviews() {
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             <span style={{ fontFamily: "DM Sans", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFBF0" }}>
-              Read More
+              {t("reviews.readMore")}
             </span>
           </a>
         </div>

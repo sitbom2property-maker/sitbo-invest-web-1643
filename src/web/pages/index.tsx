@@ -165,20 +165,20 @@ const projects = [
 type Project = typeof projects[0];
 
 const stats = [
-  { value: "1.7M",   label: "Tourists in 2025" },
-  { value: "$1,420", label: "Avg. price/sqm" },
-  { value: "14.5%",  label: "Max rental yield" },
-  { value: "0%",     label: "Purchase tax" },
-];
+  { value: "1.7M",   labelKey: "home.analytics.stat.tourists" },
+  { value: "$1,420", labelKey: "home.analytics.stat.avgPrice" },
+  { value: "14.5%",  labelKey: "home.analytics.stat.maxYield" },
+  { value: "0%",     labelKey: "home.analytics.stat.purchaseTax" },
+] as const;
 
 const triggers = [
-  "Residency permit from $150,000 investment",
-  "25–30% profit on off-plan projects",
-  "1-day registration via blockchain",
-  "Top-5 European investment city — Forbes",
-  "No restrictions for foreign buyers",
-  "Free economic zone benefits",
-];
+  "home.analytics.trigger1.title",
+  "home.analytics.trigger2.title",
+  "home.analytics.trigger3.title",
+  "home.analytics.trigger4.title",
+  "home.analytics.trigger5.title",
+  "home.analytics.trigger6.title",
+] as const;
 
 // ─── Insight slider data ──────────────────────────────────────────────────────
 const insightSlides = [
@@ -213,14 +213,14 @@ const insightSlides = [
 ];
 
 const bloomCalendar = [
-  { month: "Jan–Feb",  bloom: "Camellia, mimosa, snowdrops" },
-  { month: "Mar",      bloom: "Magnolia, almond, daffodils, tulips" },
-  { month: "Apr",      bloom: "Wisteria, sakura, lilac, irises" },
-  { month: "May–Jun",  bloom: "Roses (100+ varieties), jasmine, oleander" },
-  { month: "Jul–Aug",  bloom: "Hydrangea, hibiscus, lavender" },
-  { month: "Sep–Oct",  bloom: "Second bloom of roses & camellias" },
-  { month: "Nov–Dec",  bloom: "Loquat, snowdrops, evergreen palms" },
-];
+  { monthKey: "home.lifestyle.bloom.janFeb.month", flowersKey: "home.lifestyle.bloom.janFeb.flowers" },
+  { monthKey: "home.lifestyle.bloom.mar.month", flowersKey: "home.lifestyle.bloom.mar.flowers" },
+  { monthKey: "home.lifestyle.bloom.apr.month", flowersKey: "home.lifestyle.bloom.apr.flowers" },
+  { monthKey: "home.lifestyle.bloom.mayJun.month", flowersKey: "home.lifestyle.bloom.mayJun.flowers" },
+  { monthKey: "home.lifestyle.bloom.julAug.month", flowersKey: "home.lifestyle.bloom.julAug.flowers" },
+  { monthKey: "home.lifestyle.bloom.sepOct.month", flowersKey: "home.lifestyle.bloom.sepOct.flowers" },
+  { monthKey: "home.lifestyle.bloom.novDec.month", flowersKey: "home.lifestyle.bloom.novDec.flowers" },
+] as const;
 
 const cardImages = [
   "/artex-parkline.png",
@@ -367,6 +367,7 @@ const HERO_STYLES = `
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
+  const t = useT();
   return (
     <>
       <style>{HERO_STYLES}</style>
@@ -432,21 +433,21 @@ function Hero() {
               letterSpacing: "-0.01em",
             }}
           >
-            Don&apos;t play
+            {t("home.hero.line1")}
             <br />
-            <em className="hero-roulette">roulette</em>
+            <em className="hero-roulette">{t("home.hero.line2")}</em>
             <br />
-            with real estate
+            {t("home.hero.line3")}
             <br />
-            in Georgia.
+            {t("home.hero.line4")}
           </h1>
 
           <div className="hero-cta-row">
             <a href="#portfolio" className="hero-outline-btn hero-cta-btn">
-              View Projects
+              {t("home.hero.ctaProjects")}
             </a>
             <a href="#contact" className="hero-outline-btn hero-cta-btn">
-              Contact
+              {t("home.hero.ctaContact")}
             </a>
           </div>
         </div>
@@ -469,11 +470,11 @@ function Hero() {
           onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
         >
-          ★★★★★ &nbsp; 5 / 5 · GOOGLE REVIEWS
+          {t("home.hero.googleReviews")}
         </a>
 
-        <a href="#founder-note" className="hero-scroll-hint" aria-label="Scroll to explore">
-          <span>SCROLL TO EXPLORE</span>
+        <a href="#founder-note" className="hero-scroll-hint" aria-label={t("home.hero.scroll")}>
+          <span>{t("home.hero.scrollLabel")}</span>
           <span className="hero-scroll-arrow" aria-hidden="true">
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -499,7 +500,7 @@ function FounderNote() {
             <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFBF0" }}>
               <img
                 src="/arthur-founder.jpg"
-                alt="Arthur Arutyunyan, Founder"
+                alt={t("home.founder.imageAlt")}
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
               />
             </div>
@@ -515,23 +516,17 @@ function FounderNote() {
             </div>
 
             <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Jun, serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
-              &ldquo;I close every deal personally.
-              <br />
-              Seven years in Batumi. Twelve
-              <br />
-              client mandates per quarter,
-              <br />
-              maximum.&rdquo;
+              &ldquo;{t("home.founder.quote")}&rdquo;
             </blockquote>
 
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
-              Every transaction carries my personal signature. Seven years mastering the Batumi market have taught me exactly who to trust and where the real value is hidden.
+              {t("home.founder.body1")}
             </p>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
-              Working with me means total security under my personal control. I manage everything under a full-cycle approach, act as your advisor, and will openly talk you out of a bad emotional purchase.
+              {t("home.founder.body2")}
             </p>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "28px" }}>
-              That&apos;s why 100% of my clients either come back for more or recommend me to their closest friends. To keep this focus, I never take on more than twelve clients a quarter.
+              {t("home.founder.body3")}
             </p>
 
             <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
@@ -600,9 +595,10 @@ function Divider() {
 
 // ─── Founder ──────────────────────────────────────────────────────────────────
 function Founder() {
+  const t = useT();
   return (
     <section id="about" className="scroll-mt-24" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>BATUMI</div>
+      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
 
       {/* Big frame card */}
       <div style={{ background: "#FFFBF0", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "hidden", padding: "80px 0" }}>
@@ -612,11 +608,11 @@ function Founder() {
         {/* Photo — 30–35% width, padded, aligned top */}
         <div className="reveal" style={{ alignSelf: "flex-start", marginLeft: "0" }}>
           <div style={{ position: "relative" }}>
-            <img src="/arthur-founder.jpg" alt="Arthur Arutyunyan"
+            <img src="/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
               <p style={{ color: "#FFFBF0", fontFamily: "Jun, serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
-              <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "DM Sans", fontWeight: 600 }}>Founder & Sales Expert</p>
+              <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "DM Sans", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
             </div>
           </div>
         </div>
@@ -627,23 +623,23 @@ function Founder() {
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>About & Services</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>{t("home.founder.aboutEyebrow")}</span>
             </div>
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
-              Market Expertise.<br /><em style={{ fontStyle: "italic", color: C.teal }}>Personal Service.</em>
+              {t("home.founder.aboutHeadline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.founder.aboutHeadlineEm")}</em>
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "#666", lineHeight: 1.85, marginBottom: "60px" }}>
-              From confusing paperwork to 'ghost' agents, the risks are real. With hundreds of successful deals behind us, we verify the legality, assess true value, and secure your ROI. Focus on the lifestyle; let us handle the complexity.
+              {t("home.founder.aboutBody")}
             </p>
           </div>
 
           {/* 2×2 service grid */}
           <div className="founder-pillars">
             {[
-              { label: "Investment & Access",  desc: "Exclusive deals unavailable to the public, backed by honest projection analysis." },
-              { label: "Legal & Residency",    desc: "Full title due diligence and complete guidance through Georgia residency." },
-              { label: "Turnkey & Care",       desc: "From raw unit to fully furnished rental, with ongoing property management." },
-              { label: "Business & Setup",     desc: "Company registration, bank setup, and complete end-to-end relocation support." },
+              { label: t("home.founder.pillar1.title"),  desc: t("home.founder.pillar1.desc") },
+              { label: t("home.founder.pillar2.title"),  desc: t("home.founder.pillar2.desc") },
+              { label: t("home.founder.pillar3.title"),  desc: t("home.founder.pillar3.desc") },
+              { label: t("home.founder.pillar4.title"),  desc: t("home.founder.pillar4.desc") },
             ].map((item) => (
               <div key={item.label} style={{ borderLeft: "2px solid #8CB2C0", paddingLeft: "18px", paddingTop: "4px", paddingBottom: "4px" }}>
                 <p style={{ color: C.dark, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "8px", fontWeight: 700 }}>{item.label}</p>
@@ -663,6 +659,7 @@ function Founder() {
 // ─── Analytics ────────────────────────────────────────────────────────────────
 function Analytics() {
   const isMobile = useIsMobile();
+  const t = useT();
   return (
     <section id="analytics" style={{ background: "#21141A", padding: "10px", overflow: "hidden" }}>
       <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
@@ -671,25 +668,25 @@ function Analytics() {
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Market Intelligence · 2026</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>{t("home.analytics.eyebrow")}</span>
             </div>
           )}
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
             {isMobile ? (
               <>
-                Batumi is now a Top-5
+                {t("home.analytics.headline")}
                 <br />
-                <span style={{ whiteSpace: "nowrap" }}>European investment city.</span>
+                <span style={{ whiteSpace: "nowrap" }}>{t("home.analytics.headlineEm")}</span>
               </>
             ) : (
               <>
-                Batumi is now a Top-5 European
+                {t("home.analytics.headline")}
                 <br />
-                investment city.
+                {t("home.analytics.headlineEm")}
               </>
             )}
           </h2>
-          <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "DM Sans", marginBottom: isMobile ? "12px" : "24px" }}>— Forbes, 2025</p>
+          <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "DM Sans", marginBottom: isMobile ? "12px" : "24px" }}>{t("home.analytics.source")}</p>
         </div>
 
         {/* Stats */}
@@ -700,7 +697,7 @@ function Analytics() {
               onMouseLeave={(e) => (e.currentTarget.style.borderBottomColor = "transparent")}
             >
               <p className="stat-number">{s.value}</p>
-              <p style={{ color: C.muted, fontSize: "0.78rem", fontFamily: "DM Sans", marginTop: "6px" }}>{s.label}</p>
+              <p style={{ color: C.muted, fontSize: "0.78rem", fontFamily: "DM Sans", marginTop: "6px" }}>{t(s.labelKey)}</p>
             </div>
           ))}
         </div>
@@ -709,25 +706,25 @@ function Analytics() {
         <div className="analytics-grid" style={{ marginTop: isMobile ? "20px" : "56px" }}>
           <div className="reveal">
             <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
-              Why investors choose<br /><em style={{ fontStyle: "italic", color: C.teal }}>Georgia right now.</em>
+              {t("home.analytics.whyTitle")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.analytics.whyTitleEm")}</em>
             </h3>
-            {triggers.map((t) => (
-              <div key={t} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px" }}>
+            {triggers.map((triggerKey) => (
+              <div key={triggerKey} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px" }}>
                 <div style={{ width: "6px", height: "6px", background: "#683D47", flexShrink: 0, marginTop: "6px", borderRadius: "50%" }} />
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{t}</p>
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{t(triggerKey)}</p>
               </div>
             ))}
           </div>
 
           <div className="reveal reveal-delay-2">
             <div style={{ background: "#FFFBF0", padding: "32px", maxWidth: "420px", border: "2px solid #21141A" }}>
-              <p style={{ color: "#21141A", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "DM Sans", fontWeight: 600, marginBottom: "24px" }}>Rental Yield Comparison</p>
+              <p style={{ color: "#21141A", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "DM Sans", fontWeight: 600, marginBottom: "24px" }}>{t("home.analytics.rentalYieldComparison")}</p>
               {[
-                { city: "Batumi (first line)", pct: 87, label: "8–14.5%" },
-                { city: "Tbilisi",   pct: 60, label: "5–8%" },
-                { city: "Dubai",     pct: 55, label: "5–7%" },
-                { city: "Istanbul",  pct: 50, label: "4–6%" },
-                { city: "Barcelona", pct: 40, label: "3–5%" },
+                { city: t("home.analytics.city.batumiFirstLine"), pct: 87, label: "8–14.5%" },
+                { city: t("home.analytics.city.tbilisi"),   pct: 60, label: "5–8%" },
+                { city: t("home.analytics.city.dubai"),     pct: 55, label: "5–7%" },
+                { city: t("home.analytics.city.istanbul"),  pct: 50, label: "4–6%" },
+                { city: t("home.analytics.city.barcelona"), pct: 40, label: "3–5%" },
               ].map((row, i) => (
                 <div key={row.city} style={{ marginBottom: "18px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
@@ -810,7 +807,7 @@ function Portfolio() {
         {isMobile && showArrow && (
           <button
             onClick={scrollNext}
-            aria-label="Scroll to next project"
+            aria-label={t("home.portfolio.scrollNext")}
             className="portfolio-arrow-hint"
             style={{
               position: "absolute",
@@ -935,7 +932,7 @@ function Lifestyle() {
         <div className="reveal lifestyle-photo-col">
           <img
             src="/lifestyle-botanical.jpg"
-            alt="Batumi Botanical Garden"
+            alt={t("home.lifestyle.imageAlt")}
             style={{
               width: "100%",
               height: "100%",
@@ -970,9 +967,9 @@ function Lifestyle() {
           </p>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
           {bloomCalendar.map((item, i) => (
-            <div key={item.month} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
-              <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{item.month}</span>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,250,236,0.6)" }}>{item.bloom}</span>
+            <div key={item.monthKey} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
+              <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{t(item.monthKey)}</span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,250,236,0.6)" }}>{t(item.flowersKey)}</span>
             </div>
           ))}
         </div>
@@ -985,6 +982,7 @@ function Lifestyle() {
 // ─── Discovery Tour ───────────────────────────────────────────────────────────
 function DiscoveryTour() {
   const isMobile = useIsMobile();
+  const t = useT();
   const [visible, setVisible] = React.useState(false);
   const [countUp, setCountUp] = React.useState(0);
   const ref = React.useRef<HTMLElement>(null);
@@ -1012,28 +1010,28 @@ function DiscoveryTour() {
   }, [visible]);
 
   const inclusions = [
-    { label: "VIP Arrival",
-      desc: "Private transfer and 24/7 personal support from the moment you land",
+    { label: t("home.discovery.vip.title"),
+      desc: t("home.discovery.vip.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
     },
-    { label: "Premium Stay",
-      desc: "Curated 5-star accommodation selected for your comfort",
+    { label: t("home.discovery.stay.title"),
+      desc: t("home.discovery.stay.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
-    { label: "Off-Market Viewings",
-      desc: "Exclusive properties not listed publicly, shown only to our clients",
+    { label: t("home.discovery.viewings.title"),
+      desc: t("home.discovery.viewings.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
     },
-    { label: "Gastronomic Program",
-      desc: "Batumi's finest restaurants and experiences, arranged for you",
+    { label: t("home.discovery.gastro.title"),
+      desc: t("home.discovery.gastro.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
     },
-    { label: "Investment Briefing",
-      desc: "Private session with our senior advisor on market and returns",
+    { label: t("home.discovery.briefing.title"),
+      desc: t("home.discovery.briefing.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
     },
-    { label: "Legal Consultation",
-      desc: "Full legal review of shortlisted properties before you decide",
+    { label: t("home.discovery.legal.title"),
+      desc: t("home.discovery.legal.desc"),
       svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
     },
   ];
@@ -1061,17 +1059,17 @@ function DiscoveryTour() {
           }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "24px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans", fontWeight: 600 }}>Private Property Tour</span>
+              <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans", fontWeight: 600 }}>{t("home.discovery.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
-              Sitbo Discovery{" "}
+              {t("home.discovery.headline")}{" "}
             </h2>
             <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
-              Experience.
+              {t("home.discovery.headlineEm")}
             </h2>
             <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
-              Arrive as a guest. Leave as an investor.
+              {t("home.discovery.subheadline")}
             </p>
           </div>
 
@@ -1150,9 +1148,9 @@ function DiscoveryTour() {
               <span style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
                 $2,000
               </span>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>Deposit</span>
+              <span style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>{t("home.discovery.deposit")}</span>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, margin: "6px 0 0", lineHeight: 1.5 }}>
-                Fully refundable against purchase — deducted from the transaction.
+                {t("home.discovery.depositBody")}
               </p>
             </div>
             <a href="#contact" style={{
@@ -1165,7 +1163,7 @@ function DiscoveryTour() {
               onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; e.currentTarget.style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              Book a Discovery Tour
+              {t("home.discovery.cta")}
             </a>
           </div>
 
@@ -1367,6 +1365,7 @@ function Payment() {
 // ─── Calculator ───────────────────────────────────────────────────────────────
 function Calculator() {
   const isMobile = useIsMobile();
+  const t = useT();
   // Top-level mode: installment vs mortgage
   const [mode, setMode] = React.useState<"installment" | "mortgage">("installment");
 
@@ -1446,10 +1445,10 @@ function Calculator() {
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", fontFamily: "DM Sans" }}>Payment Calculator</span>
+            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", fontFamily: "DM Sans" }}>{t("home.calculator.eyebrow")}</span>
           </div>
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
-            Plan your<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>investment.</em>
+            {t("home.calculator.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.calculator.headlineEm")}</em>
           </h2>
         </div>
 
@@ -1464,7 +1463,7 @@ function Calculator() {
               background: mode === m ? "#8CB2C0" : "transparent",
               color: mode === m ? "#21141A" : "rgba(255,250,236,0.6)",
             }}>
-              {m === "installment" ? "Interest-Free Installment" : "Bank Mortgage"}
+              {m === "installment" ? t("home.calculator.installmentTab") : t("home.calculator.mortgageTab")}
             </button>
           ))}
         </div>
@@ -1478,11 +1477,11 @@ function Calculator() {
             {mode === "installment" ? (
               <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                 <div>
-                  <label style={labelStyle}>Property Price (USD)</label>
+                  <label style={labelStyle}>{t("home.calculator.propertyPrice")}</label>
                   <input type="number" value={instPrice || ""} onChange={e => setInstPrice(e.target.value === "" ? 0 : +e.target.value)} onFocus={e => e.target.select()} style={inputStyle} min={10000} step={5000} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Down Payment — {instDown}%&nbsp;&nbsp;<span style={{ color: "#8CB2C0" }}>{fmtInst(instPrice * instDown / 100)}</span></label>
+                  <label style={labelStyle}>{t("home.calculator.downPayment")} — {instDown}%&nbsp;&nbsp;<span style={{ color: "#8CB2C0" }}>{fmtInst(instPrice * instDown / 100)}</span></label>
                   <input type="range" min={10} max={70} value={instDown} onChange={e => setInstDown(+e.target.value)}
                     style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "DM Sans", marginTop: "4px" }}>
@@ -1490,11 +1489,11 @@ function Calculator() {
                   </div>
                 </div>
                 <div>
-                  <label style={labelStyle}>Duration — {instMonths} months</label>
+                  <label style={labelStyle}>{t("home.calculator.durationMonths", { months: instMonths })}</label>
                   <input type="range" min={24} max={48} step={6} value={instMonths} onChange={e => setInstMonths(+e.target.value)}
                     style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "DM Sans", marginTop: "4px" }}>
-                    <span>24 mo</span><span>48 mo</span>
+                    <span>24</span><span>48</span>
                   </div>
                 </div>
               </div>
@@ -1502,14 +1501,14 @@ function Calculator() {
               <div>
                 {/* Mortgage sub-tabs */}
                 <div style={{ display: "flex", gap: "4px", marginBottom: "28px", background: "rgba(33,20,26,0.06)", padding: "4px" }}>
-                  {(["amount", "income"] as const).map((t) => (
-                    <button key={t} onClick={() => setMortTab(t)} style={{
+                  {(["amount", "income"] as const).map((tab) => (
+                    <button key={tab} onClick={() => setMortTab(tab)} style={{
                       flex: 1, padding: "8px 4px", border: "none", cursor: "pointer",
                       fontFamily: "DM Sans", fontSize: "0.7rem", fontWeight: 600, transition: "all 0.2s",
-                      background: mortTab === t ? "#21141A" : "transparent",
-                      color: mortTab === t ? "#FFFBF0" : "rgba(33,20,26,0.5)",
+                      background: mortTab === tab ? "#21141A" : "transparent",
+                      color: mortTab === tab ? "#FFFBF0" : "rgba(33,20,26,0.5)",
                     }}>
-                      {t === "amount" ? "By Amount" : "By Income"}
+                      {tab === "amount" ? t("home.calculator.byAmount") : t("home.calculator.byIncome")}
                     </button>
                   ))}
                 </div>
@@ -1519,11 +1518,11 @@ function Calculator() {
                 {mortTab === "amount" && (
                   <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                     <div>
-                      <label style={labelStyle}>Loan Amount ({mortCurrency})</label>
+                      <label style={labelStyle}>{t("home.calculator.loanAmount", { currency: mortCurrency })}</label>
                       <input type="number" value={mortAmount || ""} onChange={e => setMortAmount(e.target.value === "" ? 0 : +e.target.value)} onFocus={e => e.target.select()} style={inputStyle} min={3000} step={5000} />
                     </div>
                     <div>
-                      <label style={labelStyle}>Period — {mortYears} years</label>
+                      <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortYears })}</label>
                       <input type="range" min={1} max={20} value={mortYears} onChange={e => setMortYears(+e.target.value)}
                         style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "DM Sans", marginTop: "4px" }}>
@@ -1537,11 +1536,11 @@ function Calculator() {
                 {mortTab === "income" && (
                   <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                     <div>
-                      <label style={labelStyle}>Monthly Income ({mortCurrency})</label>
+                      <label style={labelStyle}>{t("home.calculator.monthlyIncome", { currency: mortCurrency })}</label>
                       <input type="number" value={mortIncome || ""} onChange={e => setMortIncome(e.target.value === "" ? 0 : +e.target.value)} onFocus={e => e.target.select()} style={inputStyle} min={500} step={500} />
                     </div>
                     <div>
-                      <label style={labelStyle}>Period — {mortIncomeYears} years</label>
+                      <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortIncomeYears })}</label>
                       <input type="range" min={1} max={20} value={mortIncomeYears} onChange={e => setMortIncomeYears(+e.target.value)}
                         style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "DM Sans", marginTop: "4px" }}>
@@ -1563,33 +1562,33 @@ function Calculator() {
 
               {mode === "installment" ? (
                 <>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Monthly Payment</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyPayment")}</p>
                   <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmtInst(instMonthly)}
                   </p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>0% interest · {instMonths} months</p>
-                  {statRow("Loan Amount", fmtInst(instLoan), "Down Payment", fmtInst(instPrice * instDown / 100))}
-                  {statRow("Total Price", fmtInst(instPrice), "Duration", instMonths + " months")}
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.interestFreeNote", { months: instMonths })}</p>
+                  {statRow(t("home.calculator.loanAmount", { currency: "USD" }), fmtInst(instLoan), t("home.calculator.downPayment"), fmtInst(instPrice * instDown / 100))}
+                  {statRow(t("home.calculator.totalPrice"), fmtInst(instPrice), t("home.calculator.duration"), t("home.calculator.durationMonths", { months: instMonths }))}
                 </>
               ) : mortTab === "amount" ? (
                 <>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Monthly Contribution</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyContribution")}</p>
                   <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(mortMonthly, currencySymbol)}
                   </p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>Annuity payment</p>
-                  {statRow("Amount", fmt(mortAmount, currencySymbol), "Period", mortYears + " years")}
-                  {statRow("Interest Rate (NIR)", NIR + "%", "Effective Rate (EIR)", EIR + "%")}
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.annuityPayment")}</p>
+                  {statRow(t("home.calculator.amount"), fmt(mortAmount, currencySymbol), t("home.calculator.period"), t("home.calculator.periodYears", { years: mortYears }))}
+                  {statRow(t("home.calculator.interestRateNir"), NIR + "%", t("home.calculator.effectiveRateEir"), EIR + "%")}
                 </>
               ) : (
                 <>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>Max Loan Amount</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.maxLoanAmount")}</p>
                   <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(maxLoan, currencySymbol)}
                   </p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>Based on 50% income ratio</p>
-                  {statRow("Monthly Contribution", fmt(maxMonthlyPayment, currencySymbol), "Period", mortIncomeYears + " years")}
-                  {statRow("Interest Rate (NIR)", NIR + "%", "Effective Rate (EIR)", EIR + "%")}
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.basedOnIncome")}</p>
+                  {statRow(t("home.calculator.monthlyContribution"), fmt(maxMonthlyPayment, currencySymbol), t("home.calculator.period"), t("home.calculator.periodYears", { years: mortIncomeYears }))}
+                  {statRow(t("home.calculator.interestRateNir"), NIR + "%", t("home.calculator.effectiveRateEir"), EIR + "%")}
                 </>
               )}
 
@@ -1597,10 +1596,10 @@ function Calculator() {
 
             {/* ROI Preview */}
             <div style={{ background: "#FFFBF0", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>ROI Preview</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
               <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
-                Based on current market data for high-demand areas in Batumi.
+                {t("home.calculator.roiPreviewBody")}
               </p>
             </div>
 
@@ -1614,7 +1613,7 @@ function Calculator() {
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
             >
-              Get a Detailed Payment Plan
+              {t("home.calculator.cta")}
             </a>
           </div>
         </div>
@@ -1625,6 +1624,7 @@ function Calculator() {
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
 function Contact() {
+  const t = useT();
   const [form, setForm] = useState({ name: "", contact: "", budget: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -1633,13 +1633,13 @@ function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (!form.name.trim() || !form.contact.trim()) { setError("Please fill in your name and contact."); return; }
+    if (!form.name.trim() || !form.contact.trim()) { setError(t("home.contact.errorRequired")); return; }
     setLoading(true);
     try {
       const res = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
       if (res.ok) setSubmitted(true);
-      else setError("Something went wrong. Please try again.");
-    } catch { setError("Network error. Please try again."); }
+      else setError(t("home.contact.errorGeneric"));
+    } catch { setError(t("home.contact.errorNetwork")); }
     finally { setLoading(false); }
   };
 
@@ -1676,14 +1676,14 @@ function Contact() {
         <div className="reveal" style={{ textAlign: "center", marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", fontFamily: "DM Sans" }}>Private Consultation</span>
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", fontFamily: "DM Sans" }}>{t("home.contact.eyebrow")}</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "16px" }}>
-            Let's discuss<br /><em style={{ fontStyle: "italic", color: C.teal }}>your strategy.</em>
+            {t("home.contact.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.contact.headlineEm")}</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
-            We take on a limited number of clients each quarter. No obligation, full transparency.
+            {t("home.contact.body")}
           </p>
         </div>
 
@@ -1692,31 +1692,31 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>We'll be in touch shortly.</h3>
+            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
-              Your inquiry has been received. Expect a personal call from Arthur within 24 hours.
+              {t("home.contact.sentBody")}
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="reveal reveal-delay-1" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <div className="form-row">
               <div>
-                <label style={contactLabelStyle}>Your Name *</label>
-                <input className="contact-input" type="text" placeholder="Full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required style={contactInputStyle} />
+                <label style={contactLabelStyle}>{t("home.contact.nameRequired")}</label>
+                <input className="contact-input" type="text" placeholder={t("home.contact.namePlaceholder")} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required style={contactInputStyle} />
               </div>
               <div>
-                <label style={contactLabelStyle}>WhatsApp / Phone *</label>
-                <input className="contact-input" type="text" placeholder="+1 234 567 8900" value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} required style={contactInputStyle} />
+                <label style={contactLabelStyle}>{t("home.contact.phoneRequired")}</label>
+                <input className="contact-input" type="text" placeholder={t("home.contact.phonePlaceholder")} value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} required style={contactInputStyle} />
               </div>
             </div>
             <div>
-              <label style={contactLabelStyle}>Investment Budget</label>
+              <label style={contactLabelStyle}>{t("home.contact.budget")}</label>
               <select className="contact-input" value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} style={{ ...contactInputStyle, cursor: "pointer" }}>
-                <option value="">Select your budget range</option>
-                <option value="50-100k">$50,000 – $100,000</option>
-                <option value="100-200k">$100,000 – $200,000</option>
-                <option value="200-500k">$200,000 – $500,000</option>
-                <option value="500k+">$500,000+</option>
+                <option value="">{t("home.contact.budgetPlaceholder")}</option>
+                <option value="50-100k">{t("home.contact.budget.50_100")}</option>
+                <option value="100-200k">{t("home.contact.budget.100_200")}</option>
+                <option value="200-500k">{t("home.contact.budget.200_500")}</option>
+                <option value="500k+">{t("home.contact.budget.500plus")}</option>
               </select>
             </div>
             {error && <p style={{ color: C.teal, fontSize: "0.8rem", fontFamily: "DM Sans" }}>{error}</p>}
@@ -1724,10 +1724,10 @@ function Contact() {
               style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#21141A", background: "#8CB2C0" }}
               onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}>
-              {loading ? "Sending..." : "Request Private Consultation"}
+              {loading ? t("home.contact.loading") : t("home.contact.submit")}
             </button>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.35)", textAlign: "center" }}>
-              By submitting you agree to be contacted by a Sitbo Invest advisor. No spam, ever.
+              {t("home.contact.disclaimer")}
             </p>
           </form>
         )}
@@ -1759,20 +1759,20 @@ function Index() {
 
 // ─── Social Proof Toast ───────────────────────────────────────────────────────
 type SocialProofMsg =
-  | { kind: "activity"; line: string }
+  | { kind: "activity"; key: "home.socialProof.peopleViewing" | "home.socialProof.investorsBrowsing"; count: number }
   | { kind: "consultation"; at: Date };
 
-function formatTimeAgo(date: Date, refMs = Date.now()): string {
+function formatTimeAgo(date: Date, t: ReturnType<typeof useT>, refMs = Date.now()): string {
   const diff = refMs - date.getTime();
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
 
-  if (minutes < 1) return "Just now";
-  if (minutes < 60) return `${minutes} min ago`;
-  if (hours < 24) return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
-  if (days < 7) return `${days} ${days === 1 ? "day" : "days"} ago`;
-  return "This week";
+  if (minutes < 1) return t("home.socialProof.justNow");
+  if (minutes < 60) return t("home.socialProof.minAgo", { count: minutes });
+  if (hours < 24) return t(hours === 1 ? "home.socialProof.hourAgo" : "home.socialProof.hoursAgo", { count: hours });
+  if (days < 7) return t(days === 1 ? "home.socialProof.dayAgo" : "home.socialProof.daysAgo", { count: days });
+  return t("home.socialProof.thisWeek");
 }
 
 function randomConsultationAt(): Date {
@@ -1805,9 +1805,14 @@ function SocialProofPulse() {
 }
 
 function SocialProofToast() {
+  const t = useT();
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [msg, setMsg] = useState<SocialProofMsg>({ kind: "activity", line: "" });
+  const [msg, setMsg] = useState<SocialProofMsg>({
+    kind: "activity",
+    key: "home.socialProof.peopleViewing",
+    count: 0,
+  });
   const [now, setNow] = useState(() => new Date());
   const [isNarrow, setIsNarrow] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 640 : false
@@ -1816,8 +1821,8 @@ function SocialProofToast() {
   const viewers = () => Math.floor(Math.random() * 10) + 3;
 
   const toasts: (() => SocialProofMsg)[] = [
-    () => ({ kind: "activity", line: `${viewers()} people are viewing this right now` }),
-    () => ({ kind: "activity", line: `${viewers()} investors are browsing properties` }),
+    () => ({ kind: "activity", key: "home.socialProof.peopleViewing", count: viewers() }),
+    () => ({ kind: "activity", key: "home.socialProof.investorsBrowsing", count: viewers() }),
     () => ({ kind: "consultation", at: randomConsultationAt() }),
   ];
 
@@ -1856,7 +1861,7 @@ function SocialProofToast() {
 
   if (!visible) return null;
 
-  const timeAgo = msg.kind === "consultation" ? formatTimeAgo(msg.at, now.getTime()) : null;
+  const timeAgo = msg.kind === "consultation" ? formatTimeAgo(msg.at, t, now.getTime()) : null;
 
   return (
     <div
@@ -1900,7 +1905,7 @@ function SocialProofToast() {
               letterSpacing: "0.02em",
             }}
           >
-            Last consultation request
+            {t("home.socialProof.lastConsultation")}
           </span>
           <span
             style={{
@@ -1925,7 +1930,7 @@ function SocialProofToast() {
             lineHeight: 1.3,
           }}
         >
-          {msg.line}
+          {t(msg.key, { count: msg.count })}
         </span>
       )}
     </div>

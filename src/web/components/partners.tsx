@@ -1,3 +1,5 @@
+import { useT } from "../i18n";
+
 type Partner = {
   name: string;
   logo: string;
@@ -49,15 +51,17 @@ const css = `
 `;
 
 export function Partners() {
+  const t = useT();
+
   return (
     <section style={{ background: '#FFFBF0', padding: 'clamp(48px,6vw,96px) 0', overflow: 'hidden' }}>
       <style>{css}</style>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
           <div style={{ width: '32px', height: '1px', background: 'rgba(33,20,26,0.3)' }} />
-          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(33,20,26,0.45)', margin: 0 }}>Trusted Partners</p>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(33,20,26,0.45)', margin: 0 }}>{t("partners.eyebrow")}</p>
         </div>
-        <h2 style={{ fontFamily: 'Jun, serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>Developer & Banking Partners</h2>
+        <h2 style={{ fontFamily: 'Jun, serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>{t("partners.headline")}</h2>
       </div>
       <div style={{ position: 'relative', marginTop: '48px' }}>
         <div className='p-fade-l' />

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { AppLink } from "../components/app-link";
+import { useT, type MessageKey } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -117,29 +118,39 @@ function Divider() {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const whyBatumi = [
- { stat: "14.5%",  desc: "Max rental yield — top globally" },
- { stat: "#1",     desc: "World rank for rental profitability (Global Property Guide)" },
- { stat: "0%",     desc: "Property purchase tax for foreign buyers" },
- { stat: "1 day",  desc: "Title transfer via blockchain registry" },
- { stat: "$1,420", desc: "Average price per sqm — still far below European peers" },
- { stat: "1.7M",   desc: "Tourists visited in 2025" },
-];
+ { stat: "14.5%",  descKey: "invest.why.stat1" },
+ { stat: "#1",     descKey: "invest.why.stat2" },
+ { stat: "0%",     descKey: "invest.why.stat3" },
+ { stat: "1 day",  descKey: "invest.why.stat4" },
+ { stat: "$1,420", descKey: "invest.why.stat5" },
+ { stat: "1.7M",   descKey: "invest.why.stat6" },
+] satisfies { stat: string; descKey: MessageKey }[];
 
 const strategies = [
-  { tag: "Strategy 01", title: "Short-Term Rental",      yield: "9–14.5%",          horizon: "Immediate cash flow",   risk: "Low–Medium", icon: "🏖", desc: "Fully furnished apartments listed on Airbnb, Booking.com, and local platforms. Managed remotely via SITBO. Strongest returns in seafront and boulevard locations.",    ideal: "Investors seeking passive income from day one." },
-  { tag: "Strategy 02", title: "Off-Plan Appreciation",  yield: "25–30%",            horizon: "18–36 months",          risk: "Medium",     icon: "📈", desc: "Buy at pre-construction pricing, exit at handover. Batumi developers consistently price below completion value. Capital gain locked before tenants even arrive.",          ideal: "Investors with 2–3 year horizon wanting capital growth." },
-  { tag: "Strategy 03", title: "Residency Investment",   yield: "Residency + rental",horizon: "Long-term",             risk: "Low",        icon: "🛂", desc: "A $150,000+ qualifying purchase unlocks Georgian residency. Combine legal status with an income-generating asset — one of the most efficient residency-by-investment structures in Europe.", ideal: "Expats and digital nomads seeking legal status." },
-  { tag: "Strategy 04", title: "TurnKey Renovation",     yield: "+2–4% yield uplift",horizon: "3–6 months fit-out",    risk: "Low",        icon: "🏛", desc: "SITBO designs and delivers premium interiors that justify 20–40% above-market rental rates. Fixed estimates. No cost overruns. You don't manage a single contractor.",      ideal: "Owners of raw units wanting premium positioning." },
-];
+  { tagKey: "invest.strategy1.tag", titleKey: "invest.strategy1.title", yield: "9–14.5%", horizonKey: "invest.strategy1.horizon", riskKey: "invest.strategy1.risk", icon: "🏖", descKey: "invest.strategy1.desc", idealKey: "invest.strategy1.ideal" },
+  { tagKey: "invest.strategy2.tag", titleKey: "invest.strategy2.title", yield: "25–30%", horizonKey: "invest.strategy2.horizon", riskKey: "invest.strategy2.risk", icon: "📈", descKey: "invest.strategy2.desc", idealKey: "invest.strategy2.ideal" },
+  { tagKey: "invest.strategy3.tag", titleKey: "invest.strategy3.title", yieldKey: "invest.strategy3.yield", horizonKey: "invest.strategy3.horizon", riskKey: "invest.strategy3.risk", icon: "🛂", descKey: "invest.strategy3.desc", idealKey: "invest.strategy3.ideal" },
+  { tagKey: "invest.strategy4.tag", titleKey: "invest.strategy4.title", yieldKey: "invest.strategy4.yield", horizonKey: "invest.strategy4.horizon", riskKey: "invest.strategy4.risk", icon: "🏛", descKey: "invest.strategy4.desc", idealKey: "invest.strategy4.ideal" },
+] satisfies {
+  tagKey: MessageKey;
+  titleKey: MessageKey;
+  yield?: string;
+  yieldKey?: MessageKey;
+  horizonKey: MessageKey;
+  riskKey: MessageKey;
+  icon: string;
+  descKey: MessageKey;
+  idealKey: MessageKey;
+}[];
 
 const process = [
- { n: "01", title: "Discovery Call",       desc: "30-minute session to define your budget, goals, and timeline. We match you with the right strategy — no generic pitch." },
- { n: "02", title: "Curated Shortlist",    desc: "We filter the market to 3–5 properties that fit your exact criteria. Legal status, yield projections, and floor plans included." },
- { n: "03", title: "Site Tour",            desc: "Fly in for 2 days or join our Discovery Tour. View the units, meet the developers, and see the neighbourhood in person." },
- { n: "04", title: "Legal & Due Diligence",desc: "Our lawyers verify title, check developer track record, and review all contracts. No hidden encumbrances." },
- { n: "05", title: "Transaction",          desc: "Purchase registered on Georgia's blockchain land registry. Title transfer completed in 1 business day." },
- { n: "06", title: "Asset Management",     desc: "We furnish, list, and manage. Monthly reports, rent collection, and maintenance handled end-to-end." },
-];
+ { n: "01", titleKey: "invest.process1.title", descKey: "invest.process1.desc" },
+ { n: "02", titleKey: "invest.process2.title", descKey: "invest.process2.desc" },
+ { n: "03", titleKey: "invest.process3.title", descKey: "invest.process3.desc" },
+ { n: "04", titleKey: "invest.process4.title", descKey: "invest.process4.desc" },
+ { n: "05", titleKey: "invest.process5.title", descKey: "invest.process5.desc" },
+ { n: "06", titleKey: "invest.process6.title", descKey: "invest.process6.desc" },
+] satisfies { n: string; titleKey: MessageKey; descKey: MessageKey }[];
 
 const faqs = [
  { q: "Can foreigners buy property in Georgia?", a: "Yes. Foreign nationals have the same property rights as Georgian citizens — purchase, own, and transfer with zero restrictions." },
@@ -167,6 +178,8 @@ function StatCard({ stat, desc, delay = 0 }: { stat: string; desc: string; delay
 
 function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) {
   const [open, setOpen] = useState(false);
+  const t = useT();
+  const yieldText = s.yieldKey ? t(s.yieldKey) : s.yield;
   return (<>
 
     <div
@@ -183,38 +196,38 @@ function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) 
       onClick={() => setOpen(!open)}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "12px" }}>
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>{s.tag}</span>
+        <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>{t(s.tagKey)}</span>
         <span style={{ fontSize: "1.3rem", lineHeight: 1 }}>{s.icon}</span>
       </div>
-      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 600, color: open ? C.light : C.dark, marginBottom: "16px", lineHeight: 1.2 }}>{s.title}</h3>
+      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 600, color: open ? C.light : C.dark, marginBottom: "16px", lineHeight: 1.2 }}>{t(s.titleKey)}</h3>
 
       <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", marginBottom: "16px" }}>
         <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Yield</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.teal : C.dark }}>{s.yield}</div>
+          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.yield")}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.teal : C.dark }}>{yieldText}</div>
         </div>
         <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Horizon</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.horizon}</div>
+          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.horizon")}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{t(s.horizonKey)}</div>
         </div>
         <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>Risk</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{s.risk}</div>
+          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.risk")}</div>
+          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{t(s.riskKey)}</div>
         </div>
       </div>
 
           {open && (
         <div style={{ borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "16px", marginTop: "4px" }}>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.75)", lineHeight: 1.7, marginBottom: "12px" }}>{s.desc}</p>
+          <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.75)", lineHeight: 1.7, marginBottom: "12px" }}>{t(s.descKey)}</p>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.teal, lineHeight: 1.6, margin: 0 }}>
-            <strong>Ideal for:</strong> {s.ideal}
+            <strong>{t("invest.strategy.idealFor")}</strong> {t(s.idealKey)}
           </p>
         </div>
       )}
 
       <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "16px" }}>
         <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>
-{open ? "Close" : "Learn more"}
+            {open ? t("cta.close") : t("cta.learnMore")}
         </span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}>
           <path d="M2 4l4 4 4-4" stroke={open ? C.teal : C.muted} strokeWidth="1.5" strokeLinecap="round" />
@@ -226,6 +239,7 @@ function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) 
 }
 
 function ProcessStep({ step, index }: { step: typeof process[0]; index: number }) {
+  const t = useT();
   return (<>
 
     <div className="inv-reveal" style={{ transitionDelay: `${index * 80}ms`, display: "flex", gap: "20px", paddingBottom: "32px", borderBottom: "1px solid rgba(33,20,26,0.07)" }}>
@@ -233,8 +247,8 @@ function ProcessStep({ step, index }: { step: typeof process[0]; index: number }
         <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 700, color: C.wine }}>{step.n}</span>
       </div>
       <div style={{ paddingTop: "10px" }}>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{step.title}</p>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{t(step.titleKey)}</p>
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{t(step.descKey)}</p>
       </div>
     </div>
   
@@ -270,6 +284,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function InvestPage() {
   const isMobile = useIsMobile();
+  const t = useT();
   useReveal();
 
   return (<>
@@ -323,17 +338,17 @@ export default function InvestPage() {
                   letterSpacing: "-0.01em",
                   maxWidth: "100%",
                 }}>
-                  Invest in one<br />
-                  of Europe's<br />
-                  <em style={{ fontStyle: "italic", color: C.teal }}>highest-yield</em><br />
-                  markets.
+                  {t("invest.hero.line1")}<br />
+                  {t("invest.hero.line2")}<br />
+                  <em style={{ fontStyle: "italic", color: C.teal }}>{t("invest.hero.line3")}</em><br />
+                  {t("invest.hero.line4")}
                 </h1>
                 <div className="invest-hero-cta" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                   <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
-                    Book a Consultation
+                    {t("invest.hero.ctaConsultation")}
                   </AppLink>
                   <a href="#strategies" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: "transparent", border: `1px solid ${C.dark}`, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
-                    View Strategies
+                    {t("invest.hero.ctaStrategies")}
                   </a>
                 </div>
               </div>
@@ -342,7 +357,7 @@ export default function InvestPage() {
 {/* Right: hero image + floating stat */}
             <Col span={5} spanMd={5} style={{ position: "relative" }}>
               <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: isMobile ? "4/5" : "3/4", background: C.light }}>
-                <img src="/hero2.png" alt="Batumi investment property"
+                <img src="/hero2.png" alt={t("invest.hero.imageAlt")}
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
               </div>
 {/* Floating badge */}
@@ -354,7 +369,7 @@ export default function InvestPage() {
                 boxShadow: "0 8px 32px rgba(33,20,26,0.18)",
               }}>
                 <div style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.teal, lineHeight: 1 }}>14.5%</div>
-                <div style={{ fontFamily: "DM Sans", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", marginTop: "4px" }}>Max rental yield</div>
+                <div style={{ fontFamily: "DM Sans", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", marginTop: "4px" }}>{t("invest.hero.badgeLabel")}</div>
               </div>
             </Col>
 
@@ -370,16 +385,16 @@ export default function InvestPage() {
           <Row style={{ marginBottom: "64px" }}>
             <Col span={5}>
               <div className="inv-reveal">
-                <Eyebrow>Why Batumi</Eyebrow>
+                <Eyebrow>{t("invest.why.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  The numbers<br />speak first.
+                  {t("invest.why.title")}
                 </h2>
               </div>
             </Col>
             <Col span={7}>
               <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "16px" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "1rem", color: C.muted, lineHeight: 1.8, maxWidth: "560px" }}>
-                  While European capitals yield 2–4%, Batumi consistently delivers 9–14.5% on well-managed short-term rentals. A growing tourist infrastructure, blockchain property registry, and zero purchase tax make it structurally different from other emerging markets.
+                  {t("invest.why.body")}
                 </p>
               </div>
             </Col>
@@ -389,7 +404,7 @@ export default function InvestPage() {
           <Row gap={24}>
             {whyBatumi.map((item, i) => (
               <Col key={item.stat} span={4} style={{ marginBottom: isMobile ? "24px" : 0 }}>
-                <StatCard stat={item.stat} desc={item.desc} delay={i * 70} />
+                <StatCard stat={item.stat} desc={t(item.descKey)} delay={i * 70} />
               </Col>
             ))}
           </Row>
@@ -399,10 +414,10 @@ export default function InvestPage() {
             <Col span={8} spanMd={8} style={{ margin: isMobile ? "0" : "0 auto" }}>
               <div className="inv-reveal" style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
                 <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.5vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: C.dark, lineHeight: 1.5, marginBottom: "12px" }}>
-                  "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
+                  {t("invest.why.quote")}
                 </p>
                 <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal }}>
-                  Mohamed Alabbar — Eagle Hills, UAE
+                  {t("invest.why.quoteAttr")}
                 </span>
               </div>
             </Col>
@@ -423,10 +438,10 @@ export default function InvestPage() {
             width: "100%",
           }}>
 {[
- { title: "0% Purchase Tax",          sub: "No stamp duty, no buyer's tax" },
- { title: "Full Foreign Ownership",    sub: "Same rights as Georgian citizens" },
- { title: "1-Day Registration",        sub: "Blockchain land registry" },
- { title: "Residency from $150K",      sub: "Qualifying real estate investment" },
+ { title: t("invest.advantage.purchaseTax.title"), sub: t("invest.advantage.purchaseTax.sub") },
+ { title: t("invest.advantage.ownership.title"), sub: t("invest.advantage.ownership.sub") },
+ { title: t("invest.advantage.registration.title"), sub: t("invest.advantage.registration.sub") },
+ { title: t("invest.advantage.residency.title"), sub: t("invest.advantage.residency.sub") },
             ].map((item, i) => (
                 <div key={item.title} className="inv-reveal" style={{
                   transitionDelay: `${i * 80}ms`,
@@ -450,16 +465,16 @@ export default function InvestPage() {
           <Row style={{ marginBottom: "56px" }}>
             <Col span={6}>
               <div className="inv-reveal">
-                <Eyebrow>Investment Strategies</Eyebrow>
+                <Eyebrow>{t("invest.strategies.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  Four ways<br />to grow your<br />capital here.
+                  {t("invest.strategies.title")}
                 </h2>
               </div>
             </Col>
             <Col span={6}>
               <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "20px" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.8 }}>
-                  Each strategy is validated by SITBO's own portfolio. Click any card to see the full breakdown — yield, timeline, risk profile, and who it's right for.
+                  {t("invest.strategies.body")}
                 </p>
               </div>
             </Col>
@@ -483,9 +498,9 @@ export default function InvestPage() {
           <Row gap={isMobile ? 32 : 48}>
             <Col span={5}>
               <div className="inv-reveal">
-                <Eyebrow>Market Context</Eyebrow>
+                <Eyebrow>{t("invest.market.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: 0 }}>
-                  Still early.<br />Still cheap.
+                  {t("invest.market.title")}
                 </h2>
               </div>
             </Col>
@@ -493,7 +508,7 @@ export default function InvestPage() {
 {/* Comparison bars */}
               <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "100ms" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
-                  Price per sqm comparison · 2025
+                  {t("invest.market.priceComparison")}
                 </p>
 {[
  { city: "Barcelona",  price: 6200, pct: 100 },
@@ -517,7 +532,7 @@ export default function InvestPage() {
 {/* Rental yield comparison */}
               <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "200ms", marginTop: "40px" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
-                  Average gross rental yield · 2025
+                  {t("invest.market.yieldComparison")}
                 </p>
 {[
  { city: "Paris",   yield: "2.8%", pct: 19 },
@@ -548,16 +563,16 @@ export default function InvestPage() {
           <Row style={{ marginBottom: "64px" }}>
             <Col span={5}>
               <div className="inv-reveal">
-                <Eyebrow>How It Works</Eyebrow>
+                <Eyebrow>{t("invest.process.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  From first call<br />to passive income.
+                  {t("invest.process.title")}
                 </h2>
               </div>
             </Col>
             <Col span={7}>
               <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "20px" }}>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.8 }}>
-                  We've compressed the entire investment journey into a clear sequence. Most clients go from first contact to title registered in under 30 days.
+                  {t("invest.process.body")}
                 </p>
               </div>
             </Col>
@@ -590,9 +605,9 @@ export default function InvestPage() {
           <Row style={{ marginBottom: "56px" }}>
             <Col span={5}>
               <div className="inv-reveal">
-                <Eyebrow>FAQ</Eyebrow>
+                <Eyebrow>{t("invest.faq.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  Common<br />questions.
+                  {t("invest.faq.title")}
                 </h2>
               </div>
             </Col>
@@ -607,11 +622,11 @@ export default function InvestPage() {
             <Col span={4}>
               {!isMobile && (
                 <div className="inv-reveal" style={{ position: "sticky", top: "96px", background: C.dark, borderRadius: "16px", padding: "32px 28px" }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>Have more questions?</p>
-                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>Talk to us directly.</h3>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, marginBottom: "24px" }}>Our team has closed hundreds of deals for non-resident investors. No pitch — just straight answers.</p>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>{t("invest.faq.moreQuestions")}</p>
+                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>{t("invest.faq.talkDirectly")}</h3>
+                  <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, marginBottom: "24px" }}>{t("invest.faq.body")}</p>
                   <AppLink href="/#contact" style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
-                    Book a Call
+                    {t("cta.bookCall")}
                   </AppLink>
                 </div>
               )}
@@ -626,20 +641,19 @@ export default function InvestPage() {
           <Row>
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="inv-reveal">
-                <Eyebrow>Ready to invest?</Eyebrow>
+                <Eyebrow>{t("invest.cta.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,5vw,3.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "24px" }}>
-                  Your first property in Batumi<br />
-                  <em style={{ fontStyle: "italic", color: C.teal }}>starts with one call.</em>
+                  {t("invest.cta.title")}
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, maxWidth: "500px", margin: "0 auto 40px" }}>
-                  30 minutes. No obligation. We'll assess your budget, goals, and timeline — then tell you exactly what's possible right now.
+                  {t("invest.cta.body")}
                 </p>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
                   <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                    Book a Free Consultation
+                    {t("cta.bookFreeConsultation")}
                   </AppLink>
                   <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(140,178,192,0.35)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                    WhatsApp Us
+                    {t("cta.whatsappUs")}
                   </a>
                 </div>
               </div>

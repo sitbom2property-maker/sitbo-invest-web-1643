@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { getAllPosts } from "../data/blog-posts";
+import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -161,6 +162,7 @@ function ArticleCard({
 
 export default function BlogPage() {
   const isMobile = useIsMobile();
+  const t = useT();
   const posts = getAllPosts();
 
   useEffect(() => {
@@ -182,7 +184,7 @@ export default function BlogPage() {
                 margin: "0 0 20px",
               }}
             >
-              Insights
+              {t("blog.eyebrow")}
             </p>
             <h1
               style={{
@@ -195,7 +197,7 @@ export default function BlogPage() {
                 maxWidth: "720px",
               }}
             >
-              Market Insights
+              {t("blog.title")}
             </h1>
             <p
               style={{
@@ -207,8 +209,7 @@ export default function BlogPage() {
                 maxWidth: "520px",
               }}
             >
-              Analysis, guides, and updates on Georgia&apos;s coastal property market — written for
-              foreign buyers who want data, not hype.
+              {t("blog.subtitle")}
             </p>
           </div>
         </section>
