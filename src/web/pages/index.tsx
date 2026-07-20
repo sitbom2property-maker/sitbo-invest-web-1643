@@ -928,7 +928,18 @@ function Lifestyle() {
       <div className="lifestyle-grid" style={{ alignItems: "stretch" }}>
         {/* Left — photo bleeds to left edge */}
         <div className="reveal lifestyle-photo-col">
-          <img src="/lifestyle-coast.png" alt="Batumi coast" style={{ width: "100%", height: "100%", minHeight: "480px", objectFit: "cover", objectPosition: "center", display: "block" }} />
+          <img
+            src="/card-new.png"
+            alt="Batumi botanical architecture"
+            style={{
+              width: "100%",
+              height: "100%",
+              minHeight: isMobile ? "520px" : "480px",
+              objectFit: "cover",
+              objectPosition: isMobile ? "center 28%" : "center 35%",
+              display: "block",
+            }}
+          />
         </div>
 
         {/* Right — text + calendar, padded */}
