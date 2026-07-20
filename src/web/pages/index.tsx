@@ -755,17 +755,10 @@ function Portfolio() {
       {/* Big frame card */}
       <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "clamp(28px,4vw,64px) 20px clamp(28px,4vw,56px)", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
-        <div className="reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "20px" }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-              <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>Selected Projects</span>
-            </div>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
-              Premium projects,<br /><em style={{ fontStyle: "italic", color: C.teal }}>filtered by us.</em>
-            </h2>
-          </div>
-          <a href="#contact" className="btn-outline-gold" style={{ color: C.dark, borderColor: C.dark, flexShrink: 0 }}>Request Access</a>
+        <div className="reveal">
+          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
+            Premium projects,<br /><em style={{ fontStyle: "italic", color: C.teal }}>filtered by us.</em>
+          </h2>
         </div>
       </div>
 
@@ -828,20 +821,35 @@ function Portfolio() {
         )}
       </div>
 
-      {/* Alabbar quote */}
+      {/* Alabbar quote + Request Access under it */}
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
-      <div className="reveal" style={{ padding: "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
-        <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-          <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
-            "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
-          </p>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+        <div className="reveal" style={{ padding: isMobile ? "40px 0 8px" : "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
+          <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
+            <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
+              "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
+            </p>
             <p style={{ color: C.teal, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", margin: 0 }}>
               Mohamed Alabbar — Eagle Hills, UAE
             </p>
           </div>
+
+          <a
+            href="#contact"
+            className="btn-outline-gold"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: isMobile ? "28px" : "32px",
+              color: C.dark,
+              borderColor: C.dark,
+              width: isMobile ? "100%" : "auto",
+              boxSizing: "border-box",
+            }}
+          >
+            Request Access
+          </a>
         </div>
-      </div>
       </div>
       </div>{/* /frame card */}
     </section>

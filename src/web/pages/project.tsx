@@ -47,14 +47,14 @@ function useReveal() {
 
 // ─── Grid ─────────────────────────────────────────────────────────────────────
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
-  return <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", ...style }}>{children}</div>;
+  return <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", width: "100%", boxSizing: "border-box", ...style }}>{children}</div>;
 }
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  return <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, ...style }}>{children}</div>;
+  return <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, width: "100%", minWidth: 0, ...style }}>{children}</div>;
 }
 function Col({ span = 12, spanMd, children, style }: { span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties }) {
   const isMobile = useIsMobile();
-  return <div style={{ gridColumn: `span ${isMobile ? 12 : (spanMd ?? span)}`, ...style }}>{children}</div>;
+  return <div style={{ gridColumn: `span ${isMobile ? 12 : (spanMd ?? span)}`, minWidth: 0, maxWidth: "100%", ...style }}>{children}</div>;
 }
 function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (<>
@@ -275,45 +275,70 @@ export default function ProjectPage() {
 
   return (<>
 
-    <div style={{ background: C.light, minHeight: "100vh", color: C.dark }}>
+    <div className="project-page" style={{ background: C.light, minHeight: "100vh", color: C.dark, overflowX: "hidden", width: "100%" }}>
 
 {/* ── CSS fadeIn keyframe ── */}
-      <style>{`@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }`}</style>
+      <style>{`
+        @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        .project-page p, .project-page h2, .project-page h3 {
+          overflow-wrap: anywhere;
+          word-break: break-word;
+        }
+        @media (max-width: 767px) {
+          .project-specs-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .project-developer-card {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .project-payment-bar {
+            flex-direction: column !important;
+          }
+          .project-payment-bar > div:first-child {
+            flex: none !important;
+            width: 100% !important;
+          }
+        }
+      `}</style>
 
 {/* ── GALLERY — Full width ── */}
-      <section style={{ paddingTop: "120px" }}>
+      <section style={{ paddingTop: isMobile ? "24px" : "120px" }}>
         <Container>
           <Gallery photos={p.photos} name={p.name} />
         </Container>
       </section>
 
 {/* ── MAIN CONTENT ── */}
-      <section style={{ padding: "64px 0 0" }}>
+      <section style={{ padding: isMobile ? "36px 0 0" : "64px 0 0" }}>
         <Container>
-          <Row gap={48}>
+          <Row gap={isMobile ? 28 : 48}>
 
 {/* ── LEFT col (8) ── */}
             <Col span={8}>
 
 {/* Overview */}
-              <div className="pr-reveal" style={{ marginBottom: "48px" }}>
+              <div className="pr-reveal" style={{ marginBottom: isMobile ? "36px" : "48px" }}>
                 <Eyebrow>Overview</Eyebrow>
                 <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "center", gap: "6px", marginBottom: "20px" }}>
-                  <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
-                  {p.address} · {p.seaDistance}
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
+                  <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
+                  <span>{p.address} · {p.seaDistance}</span>
                 </p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.85 }}>{p.desc}</p>
 
                 {/* Developer block */}
-                <div style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: "20px 22px", background: C.light, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}>
+                <div
+                  className="project-developer-card"
+                  style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}
+                >
                   {/* Logo placeholder */}
                   <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>Logo</span>
                   </div>
-                  <div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>Developer</p>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
@@ -328,7 +353,7 @@ export default function ProjectPage() {
 {/* Specs grid */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>Technical Specifications</Eyebrow>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+                <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
 {[
     { label: "Area",           value: p.area },
     { label: "Ceiling Height", value: p.ceilingHeight },
@@ -337,9 +362,9 @@ export default function ProjectPage() {
     { label: "Finishing",      value: p.finishing },
     { label: "Developer",      value: p.developer },
                   ].map(s => (
-                    <div key={s.label} style={{ background: C.light, padding: "16px 14px" }}>
+                    <div key={s.label} style={{ background: C.light, padding: isMobile ? "14px 12px" : "16px 14px", minWidth: 0 }}>
                       <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 5px" }}>{s.label}</p>
-                      <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "1rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>{s.value}</p>
+                      <p style={{ fontFamily: "Manrope, sans-serif", fontSize: isMobile ? "0.92rem" : "1rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>{s.value}</p>
                     </div>
                   ))}
                 </div>
@@ -386,14 +411,14 @@ export default function ProjectPage() {
               <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
                 <Eyebrow>Payment & Installment</Eyebrow>
                 {/* Bar visual: left block = down payment, right block = installment remainder */}
-                <div style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
+                <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: "0 0 30%", background: C.dark, padding: "22px 20px" }}>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>30%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>Down Payment</p>
                   </div>
                   {/* Remainder / installment portion */}
-                  <div style={{ flex: 1, padding: "22px 20px" }}>
+                  <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>70%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>Installment</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
@@ -405,7 +430,7 @@ export default function ProjectPage() {
 
 {/* ── RIGHT col (4) — sticky sidebar ── */}
             <Col span={4}>
-              <div style={{ position: "sticky", top: "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div style={{ position: isMobile ? "relative" : "sticky", top: isMobile ? undefined : "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
