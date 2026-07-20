@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
+import { useRates } from "../context/RatesContext";
+import { useT } from "../i18n";
 
 const C = {
   dark:      "#21141A",
@@ -28,16 +30,13 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 
 // ─── Cities & filter types ────────────────────────────────────────────────────
 const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri"] as const;
-const SORT_OPTIONS = [
-  { value: "default",    label: "Default" },
-  { value: "price-asc",  label: "Price: Low → High" },
-  { value: "price-desc", label: "Price: High → Low" },
-  { value: "yield-desc", label: "Yield: Highest first" },
-] as const;
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function CatalogCard({ p }: { p: Project }) {
   const [hovered, setHovered] = useState(false);
+  const { formatFromUSD } = useRates();
+  const t = useT();
+  const priceLabel = formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
   return (
     <Link href={`/project/${p.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
@@ -65,7 +64,7 @@ function CatalogCard({ p }: { p: Project }) {
 
             {/* ROI badge */}
             <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "5px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
-              {p.yield} ROI
+              {p.yield} {t("catalog.roi")}
             </div>
 
             {/* Name over image */}
@@ -79,7 +78,7 @@ function CatalogCard({ p }: { p: Project }) {
           <div style={{ background: C.light, padding: "16px 16px 18px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "12px" }}>
               <div>
-                <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{p.priceFrom}</p>
+                <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area} · {p.completion}</p>
               </div>
               <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "5px" }}>
@@ -107,12 +106,20 @@ function CatalogCard({ p }: { p: Project }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function CatalogPage() {
   const isMobile = useIsMobile();
+  const t = useT();
 
   const [city, setCity]     = useState<typeof CITIES[number]>("All");
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
   const [showBookCall, setShowBookCall] = useState(false);
   const [bookForm, setBookForm] = useState({ name: "", phone: "", email: "", message: "" });
+
+  const sortOptions = [
+    { value: "default", label: t("catalog.sortDefault") },
+    { value: "price-asc", label: t("catalog.sortPriceAsc") },
+    { value: "price-desc", label: t("catalog.sortPriceDesc") },
+    { value: "yield-desc", label: "Yield" },
+  ];
 
   // Scroll top on mount
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -170,10 +177,10 @@ export default function CatalogPage() {
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
             <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
-              Property Catalog
+              {t("catalog.title")}
             </h1>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
-              {projects.length} curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by SITBO.
+              {projects.length} {t("catalog.subtitle")}
             </p>
           </div>
 
@@ -217,7 +224,7 @@ export default function CatalogPage() {
             {/* Sort */}
             <select value={sort} onChange={e => setSort(e.target.value)}
               style={{ ...inputStyle, cursor: "pointer", flex: "0 0 auto" }}>
-              {SORT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              {sortOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
 
             {/* Results count */}

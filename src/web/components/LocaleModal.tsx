@@ -1,24 +1,20 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { useLocale } from "../context/LocaleContext";
+import { useRates } from "../context/RatesContext";
+import { useT } from "../i18n";
 import { LocaleSelect } from "./LocaleSelect";
 
 const LANGUAGE_OPTIONS = [
   { code: "en", label: "English" },
   { code: "ru", label: "Русский" },
-  { code: "ka", label: "ქართული" },
-  { code: "de", label: "Deutsch" },
-  { code: "tr", label: "Türkçe" },
-  { code: "ar", label: "العربية" },
-  { code: "he", label: "עברית" },
-  { code: "zh", label: "中文" },
 ] as const;
 
 const CURRENCY_OPTIONS = [
   { code: "USD", label: "USD $" },
   { code: "EUR", label: "EUR €" },
-  { code: "GBP", label: "GBP £" },
   { code: "GEL", label: "GEL ₾" },
   { code: "RUB", label: "RUB ₽" },
+  { code: "GBP", label: "GBP £" },
   { code: "AED", label: "AED د.إ" },
   { code: "TRY", label: "TRY ₺" },
 ] as const;
@@ -41,6 +37,8 @@ type LocaleModalProps = {
 
 export function LocaleModal({ open, onClose }: LocaleModalProps) {
   const { language, currency, setLocale } = useLocale();
+  const { date, source } = useRates();
+  const t = useT();
   const [draftLang, setDraftLang] = useState(language);
   const [draftCurrency, setDraftCurrency] = useState(currency);
 
@@ -71,19 +69,15 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
 
   const handleSave = () => {
     setLocale({
-      language: draftLang,
-      currency: draftCurrency,
+      language: draftLang as "en" | "ru",
+      currency: draftCurrency as typeof currency,
     });
     onClose();
   };
 
   return (
     <div className="locale-modal-root" role="presentation">
-      <div
-        className="locale-modal-backdrop"
-        onClick={onClose}
-        aria-hidden
-      />
+      <div className="locale-modal-backdrop" onClick={onClose} aria-hidden />
       <div
         className="locale-modal-panel"
         role="dialog"
@@ -94,7 +88,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
           type="button"
           className="locale-modal-close"
           onClick={onClose}
-          aria-label="Close"
+          aria-label={t("locale.close")}
         >
           ×
         </button>
@@ -102,7 +96,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
         <div className="locale-modal-fields">
           <div>
             <span id="locale-modal-title" style={FIELD_LABEL}>
-              Language
+              {t("locale.language")}
             </span>
             <LocaleSelect
               id="locale-language"
@@ -113,12 +107,26 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
           </div>
 
           <div>
-            <span style={FIELD_LABEL}>Currency</span>
+            <span style={FIELD_LABEL}>{t("locale.currency")}</span>
             <LocaleSelect
               value={draftCurrency}
               options={[...CURRENCY_OPTIONS]}
               onChange={setDraftCurrency}
             />
+            <p
+              style={{
+                margin: "10px 0 0",
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 11,
+                color: "rgba(33,20,26,0.55)",
+                lineHeight: 1.45,
+              }}
+            >
+              {date
+                ? t("locale.ratesAsOf", { date })
+                : t("locale.ratesNote")}
+              {source === "fallback" ? " *" : ""}
+            </p>
           </div>
 
           <button
@@ -132,7 +140,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
               e.currentTarget.style.background = "#21141A";
             }}
           >
-            Save
+            {t("locale.save")}
           </button>
         </div>
       </div>

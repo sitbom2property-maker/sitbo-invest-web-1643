@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import PropertyForm from "./pages/admin/PropertyForm";
 import { Provider } from "./components/provider";
 import { LocaleProvider } from "./context/LocaleContext";
+import { RatesProvider } from "./context/RatesContext";
 import { Nav, NAV_HEIGHT } from "./components/nav";
 import { Footer } from "./components/footer";
 import { CookieConsent } from "./components/cookie-consent";
@@ -29,6 +30,7 @@ function AppFooter() {
 function App() {
 	return (
 		<LocaleProvider>
+		<RatesProvider>
 		<Provider>
 			<ScrollToHash />
 			<Nav />
@@ -59,6 +61,7 @@ function App() {
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
 		</Provider>
+		</RatesProvider>
 		</LocaleProvider>
 	);
 }

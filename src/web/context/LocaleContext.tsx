@@ -10,19 +10,42 @@ import {
 
 const STORAGE_KEY = "sitbo_locale";
 
+export type LanguageCode = "en" | "ru";
 export type UnitsCode = "sqm" | "sqft";
+export type SupportedCurrency = "USD" | "EUR" | "GBP" | "GEL" | "RUB" | "AED" | "TRY";
 
 export type LocaleState = {
-  language: string;
-  currency: string;
+  language: LanguageCode;
+  currency: SupportedCurrency;
   units: UnitsCode;
 };
+
+export function normalizeLanguage(code: string): LanguageCode {
+  return code === "ru" ? "ru" : "en";
+}
+
+const SUPPORTED_CURRENCIES: SupportedCurrency[] = [
+  "USD",
+  "EUR",
+  "GBP",
+  "GEL",
+  "RUB",
+  "AED",
+  "TRY",
+];
 
 const DEFAULT_LOCALE: LocaleState = {
   language: "en",
   currency: "USD",
   units: "sqm",
 };
+
+function normalizeCurrency(code: string | undefined): SupportedCurrency {
+  const upper = (code ?? "USD").toUpperCase();
+  return (SUPPORTED_CURRENCIES.includes(upper as SupportedCurrency)
+    ? upper
+    : "USD") as SupportedCurrency;
+}
 
 type LocaleContextValue = LocaleState & {
   setLocale: (next: Partial<LocaleState>) => void;
@@ -37,8 +60,8 @@ function readStoredLocale(): LocaleState {
     if (!raw) return DEFAULT_LOCALE;
     const parsed = JSON.parse(raw) as Partial<LocaleState>;
     return {
-      language: parsed.language ?? DEFAULT_LOCALE.language,
-      currency: parsed.currency ?? DEFAULT_LOCALE.currency,
+      language: normalizeLanguage(parsed.language ?? DEFAULT_LOCALE.language),
+      currency: normalizeCurrency(parsed.currency),
       units: parsed.units === "sqft" ? "sqft" : "sqm",
     };
   } catch {
@@ -68,8 +91,10 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((next: Partial<LocaleState>) => {
     setLocaleState((prev) => ({
-      language: next.language ?? prev.language,
-      currency: next.currency ?? prev.currency,
+      language: next.language
+        ? normalizeLanguage(next.language)
+        : prev.language,
+      currency: next.currency ? normalizeCurrency(next.currency) : prev.currency,
       units: next.units ?? prev.units,
     }));
   }, []);

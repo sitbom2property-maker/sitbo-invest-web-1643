@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties, type MouseEvent } from "react"
 import { Link } from "wouter";
 import { Instagram, Mail, MessageCircle, Send } from "lucide-react";
 import { AppLink } from "./app-link";
+import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
@@ -169,6 +170,7 @@ function FooterColExternal({
 
 export function Footer() {
   const { isStacked, isBarStacked, sidePad } = useFooterLayout();
+  const t = useT();
 
   const barLinkStyle: CSSProperties = {
     color: "inherit",
@@ -250,8 +252,7 @@ export function Footer() {
               margin: 0,
             }}
           >
-            Premium real estate investment advisory in Batumi, Georgia. Off-market access, legal security, honest
-            returns.
+            {t("footer.tagline")}
           </p>
         </div>
 
@@ -264,28 +265,27 @@ export function Footer() {
           }}
         >
           <FooterCol
-            title="Investments"
+            title={t("footer.investments")}
             links={[
-              { label: "Properties", href: "/catalog" },
-              { label: "Blog & Guides", href: "/blog" },
-              /* TODO: создать страницу /about — пока якорь на главной */
-              { label: "Partnership", href: "/#contact" },
+              { label: t("footer.properties"), href: "/catalog" },
+              { label: t("footer.blog"), href: "/blog" },
+              { label: t("footer.partnership"), href: "/#contact" },
             ]}
           />
 
           <FooterCol
-            title="Services"
+            title={t("footer.services")}
             links={[
-              { label: "Due Diligence", href: "/services#due-diligence" },
-              { label: "Discovery Tour", href: "/services#discovery-tour" },
-              { label: "Mortgage", href: "/services#mortgage" },
-              { label: "Property Management", href: "/services#management" },
-              { label: "Residency & Relocation", href: "/services#residency" },
+              { label: t("footer.dueDiligence"), href: "/services#due-diligence" },
+              { label: t("footer.discoveryTour"), href: "/services#discovery-tour" },
+              { label: t("footer.mortgage"), href: "/services#mortgage" },
+              { label: t("footer.management"), href: "/services#management" },
+              { label: t("footer.residency"), href: "/services#residency" },
             ]}
           />
 
           <FooterColExternal
-            title="Contact"
+            title={t("footer.contact")}
             links={[
               {
                 label: "WhatsApp",
@@ -303,7 +303,7 @@ export function Footer() {
           />
 
           <FooterColExternal
-            title="Socials"
+            title={t("footer.socials")}
             links={[
               {
                 label: "Instagram",
@@ -341,7 +341,7 @@ export function Footer() {
         }}
       >
         <span style={{ justifySelf: isBarStacked ? "center" : "start", opacity: 0.5 }}>
-          © 2026 Sitbo Invest. All rights reserved.
+          {t("footer.rights")}
         </span>
 
         <a
@@ -354,7 +354,7 @@ export function Footer() {
           }}
           {...barHover}
         >
-          Leave us a Google Review ↗
+          {t("footer.review")}
         </a>
 
         <Link
@@ -365,7 +365,7 @@ export function Footer() {
           }}
           {...barHover}
         >
-          Privacy Policy & Terms of Service
+          {t("footer.legal")}
         </Link>
       </div>
     </footer>
