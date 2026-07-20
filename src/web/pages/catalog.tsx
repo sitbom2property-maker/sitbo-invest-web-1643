@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
-import { Footer } from "../components/footer";
 
 const C = {
   dark:      "#21141A",
@@ -273,7 +272,6 @@ export default function CatalogPage() {
           </div>
         </Container>
       </section>
-      <Footer />
 
       {/* Book a Call popup */}
       {showBookCall && (

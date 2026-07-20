@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Footer } from "../components/footer";
 import { AppLink } from "../components/app-link";
 
 const C = {
@@ -558,7 +557,6 @@ export default function ServicesPage() {
           </AppLink>
         </section>
       </div>
-      <Footer />
     </>
   );
 }

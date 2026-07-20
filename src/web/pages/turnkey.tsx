@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
-import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -608,7 +607,6 @@ export default function TurnkeyPage() {
       <Guarantees />
       <MarketStats />
       <ContactForm />
-      <Footer />
     </div>
   
   </>);

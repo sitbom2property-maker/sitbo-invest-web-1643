@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { Footer } from "../components/footer";
 
 const C = {
   dark:      "#21141A",
@@ -143,7 +142,6 @@ export default function LegalPage() {
           </div>
         </section>
 
-        <Footer />
       </div>
     </>
   );

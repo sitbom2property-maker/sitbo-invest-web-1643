@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useRoute } from "wouter";
-import { Footer } from "../components/footer";
 import { getPostBySlug, type BlogBlock } from "../data/blog-posts";
 
 const C = {
@@ -341,7 +340,6 @@ export default function BlogPostPage() {
             </Link>
           </div>
         </div>
-        <Footer />
       </>
     );
   }
@@ -430,7 +428,6 @@ export default function BlogPostPage() {
           </div>
         </article>
       </div>
-      <Footer />
     </>
   );
 }

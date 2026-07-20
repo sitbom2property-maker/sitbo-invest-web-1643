@@ -48,7 +48,13 @@ function useFooterLayout() {
 }
 
 function FooterIcon({ name, size = 16 }: { name: string; size?: number }) {
-  const props = { size, strokeWidth: 1.5 as const, color: C.light, "aria-hidden": true as const };
+  const props = {
+    size,
+    strokeWidth: 1.75 as const,
+    color: "rgba(250, 247, 240, 0.9)",
+    "aria-hidden": true as const,
+    style: { flexShrink: 0 as const },
+  };
   switch (name) {
     case "whatsapp":
       return <MessageCircle {...props} />;
@@ -120,19 +126,21 @@ function FooterColExternal({
               rel={link.external ? "noopener noreferrer" : undefined}
               style={{
                 ...linkStyle,
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
+                opacity: 1,
+                color: "rgba(250, 247, 240, 0.75)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.color = C.light;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "0.75";
+                e.currentTarget.style.color = "rgba(250, 247, 240, 0.75)";
               }}
             >
               <FooterIcon name={link.icon} size={16} />
-              {link.label}
+              <span style={{ minWidth: 0, wordBreak: "break-word" }}>{link.label}</span>
             </a>
           </li>
         ))}
@@ -202,8 +210,10 @@ export function Footer() {
               src="/logo-dark-bg.png"
               alt="SITBO Invest"
               style={{
-                height: isStacked ? 28 : 32,
+                // Half of previous footer mark (28/32) so it matches nav scale
+                height: isStacked ? 14 : 16,
                 width: "auto",
+                maxWidth: isStacked ? 96 : 112,
                 display: "block",
                 objectFit: "contain",
               }}

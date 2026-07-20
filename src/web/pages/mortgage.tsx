@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { AppLink } from "../components/app-link";
-import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -552,7 +551,6 @@ export default function MortgagePage() {
           </Row>
         </Container>
       </section>
-      <Footer />
 
     </div>
   
