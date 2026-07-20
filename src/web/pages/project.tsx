@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { AppLink } from "../components/app-link";
+import { useRates } from "../context/RatesContext";
+import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -244,6 +246,8 @@ function Diamond() {
 export default function ProjectPage() {
   const params = useParams<{ slug: string }>();
   const isMobile = useIsMobile();
+  const { formatFromUSD } = useRates();
+  const t = useT();
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
@@ -260,13 +264,15 @@ export default function ProjectPage() {
 
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.dark }}>Project not found</h1>
-          <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>← Back to home</a></Link>
+          <h1 style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
+          <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>{t("project.backHome")}</a></Link>
         </div>
       </div>
     
   </>);
   }
+
+  const priceLabel = formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
 
   const p = project;
   const prev = projects[(idx - 1 + projects.length) % projects.length];
@@ -437,7 +443,7 @@ export default function ProjectPage() {
                   <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     Get a personal offer
                   </h3>
-                  <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{p.priceFrom}</p>
+                  <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                     We'll prepare a detailed cost estimate and floor plan selection for this project.
                   </p>
@@ -449,10 +455,10 @@ export default function ProjectPage() {
 {/* Quick facts */}
                 <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.light, borderRadius: "12px", padding: "20px 18px" }}>
 {[
-    { label: "Est. ROI",   value: p.yield },
-    { label: "From",       value: p.priceFrom },
-    { label: "Ready",      value: p.completion },
-    { label: "Sea",        value: p.seaDistance },
+    { label: t("project.estRoi"), value: p.yield },
+    { label: t("project.from"), value: priceLabel },
+    { label: t("project.ready"), value: p.completion },
+    { label: t("project.sea"), value: p.seaDistance },
                   ].map((row, i) => (
                     <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: i < 3 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>

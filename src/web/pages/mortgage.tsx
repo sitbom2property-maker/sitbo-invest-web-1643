@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { AppLink } from "../components/app-link";
+import { useLocale } from "../context/LocaleContext";
+import { useRates } from "../context/RatesContext";
+import { formatMoney } from "../lib/money";
+import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -121,22 +125,30 @@ function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; 
 
 // ─── Calculator ───────────────────────────────────────────────────────────────
 function MortgageCalculator() {
+  const { currency: localeCurrency, language } = useLocale();
+  const { convertFromUSD, convert, date: ratesDate } = useRates();
+  const t = useT();
   const [price, setPrice]     = useState(200000);
   const [downPct, setDownPct] = useState(35);
   const [rate, setRate]       = useState(10.5);
   const [years, setYears]     = useState(10);
-  const [currency, setCurrency] = useState<"USD" | "GEL" | "EUR">("USD");
+  const [currency, setCurrency] = useState<"USD" | "GEL" | "EUR">(
+    ["USD", "GEL", "EUR"].includes(localeCurrency)
+      ? (localeCurrency as "USD" | "GEL" | "EUR")
+      : "USD"
+  );
 
-  const gelRate = 2.71;
-  const eurRate = 1.09;
+  useEffect(() => {
+    if (["USD", "GEL", "EUR"].includes(localeCurrency)) {
+      setCurrency(localeCurrency as "USD" | "GEL" | "EUR");
+    }
+  }, [localeCurrency]);
 
-  const toDisplay = (usd: number) => {
-    if (currency === "GEL") return Math.round(usd * gelRate);
-    if (currency === "EUR") return Math.round(usd / eurRate);
-    return Math.round(usd);
-  };
-  const sym = currency === "GEL" ? "₾" : currency === "EUR" ? "€" : "$";
-  const fmt = (v: number) => sym + toDisplay(v).toLocaleString("en-US");
+  const fmt = (usd: number) =>
+    formatMoney(convertFromUSD(usd, currency), currency, language);
+  const toDisplay = (usd: number) => Math.round(convertFromUSD(usd, currency));
+  const fromDisplay = (amount: number) =>
+    Math.round(convert(amount, currency, "USD"));
 
   const downAmount     = (price * downPct) / 100;
   const loanUSD        = price - downAmount;
@@ -211,10 +223,7 @@ function MortgageCalculator() {
                 onChange={e => setPrice(+e.target.value)}
                 style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
               <input type="number" value={toDisplay(price)}
-                onChange={e => setPrice(
-                  currency === "GEL" ? Math.round(+e.target.value / gelRate) :
-                  currency === "EUR" ? Math.round(+e.target.value * eurRate) : +e.target.value
-                )}
+                onChange={e => setPrice(fromDisplay(+e.target.value))}
                 style={numInput} />
             </div>
           </Col>
@@ -290,7 +299,7 @@ function MortgageCalculator() {
         <Row style={{ marginTop: "16px" }}>
           <Col span={12}>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, margin: 0, lineHeight: 1.6 }}>
-              * Indicative annuity calculation. USD/GEL ≈ 2.71, USD/EUR ≈ 0.92. Actual conditions depend on TBC Bank assessment.
+              * {t("mortgage.ratesNote")}{ratesDate ? ` (${ratesDate})` : ""}. Actual loan conditions depend on TBC Bank assessment.
             </p>
           </Col>
         </Row>

@@ -2,25 +2,21 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { Globe as GlobeIcon } from "lucide-react";
 import { LocaleModal } from "./LocaleModal";
+import { useT, type MessageKey } from "../i18n";
 
 export const NAV_HEIGHT = 88;
 export const NAV_HEIGHT_MOBILE = 72;
 
 const MOBILE_BP = 1024;
 
-const LEFT_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Properties", href: "/catalog" },
-  { label: "Services", href: "/services" },
-] as const;
-
-const RIGHT_LINKS = [
-  { label: "Why Georgia", href: "/invest" },
-  { label: "History Timeline", href: "/history" },
-  { label: "Blog & Guide", href: "/blog" },
-] as const;
-
-const ALL_LINKS = [...LEFT_LINKS, ...RIGHT_LINKS];
+const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
+  { labelKey: "nav.home", href: "/" },
+  { labelKey: "nav.properties", href: "/catalog" },
+  { labelKey: "nav.services", href: "/services" },
+  { labelKey: "nav.whyGeorgia", href: "/invest" },
+  { labelKey: "nav.history", href: "/history" },
+  { labelKey: "nav.blog", href: "/blog" },
+];
 
 function useNavActive() {
   const [location] = useLocation();
@@ -111,6 +107,7 @@ export function Nav() {
   const isHome = location === "/";
   const isMobile = useIsMobile();
   const { isActive } = useNavActive();
+  const t = useT();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -234,7 +231,7 @@ export function Nav() {
             >
               {ALL_LINKS.map((l) => (
                 <NavItem key={l.href} href={l.href} isActive={isActive(l.href)}>
-                  {l.label}
+                  {t(l.labelKey)}
                 </NavItem>
               ))}
             </div>
@@ -254,7 +251,7 @@ export function Nav() {
             <button
               type="button"
               onClick={() => setLangOpen(true)}
-              aria-label="Language"
+              aria-label={t("nav.language")}
               aria-expanded={langOpen}
               style={{
                 background: "none",
@@ -280,7 +277,7 @@ export function Nav() {
             {isMobile && (
               <button
                 type="button"
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-label={menuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
                 aria-expanded={menuOpen}
                 onClick={() => setMenuOpen((o) => !o)}
                 style={{
@@ -304,12 +301,12 @@ export function Nav() {
           className="nav-mobile-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation menu"
+          aria-label={t("nav.openMenu")}
         >
           <button
             type="button"
             className="nav-mobile-close"
-            aria-label="Close menu"
+            aria-label={t("nav.closeMenu")}
             onClick={() => setMenuOpen(false)}
           >
             ×
@@ -337,7 +334,7 @@ export function Nav() {
                   (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
                 }
               >
-                {l.label}
+                {t(l.labelKey)}
               </Link>
             ))}
           </div>

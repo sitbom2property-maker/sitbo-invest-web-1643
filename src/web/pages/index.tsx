@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
+import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -487,6 +488,7 @@ function Hero() {
 // ─── Founder Note ─────────────────────────────────────────────────────────────
 function FounderNote() {
   const isMobile = useIsMobile();
+  const t = useT();
   return (
     <section id="founder-note" className="snap-screen" style={{ background: "#21141A", padding: "10px" }}>
       <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
@@ -508,7 +510,7 @@ function FounderNote() {
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
               <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
               <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "DM Sans" }}>
-                The Founder&apos;s Note
+                {t("home.founder.eyebrow")}
               </span>
             </div>
 
@@ -533,7 +535,7 @@ function FounderNote() {
             </p>
 
             <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
-              — Arthur Arutyunyan, Founder
+              {t("home.founder.signature")}
             </p>
 
             <Link
@@ -565,7 +567,7 @@ function FounderNote() {
                 e.currentTarget.style.color = "#FFFBF0";
               }}
             >
-              <span style={{ lineHeight: 1 }}>See What We Do</span>
+              <span style={{ lineHeight: 1 }}>{t("cta.seeWhatWeDo")}</span>
               <svg
                 width="12"
                 height="12"
@@ -749,6 +751,7 @@ function Analytics() {
 // ─── Portfolio ────────────────────────────────────────────────────────────────
 function Portfolio() {
   const isMobile = useIsMobile();
+  const t = useT();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [showArrow, setShowArrow] = useState(true);
 
@@ -771,7 +774,7 @@ function Portfolio() {
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
-            Premium projects,<br /><em style={{ fontStyle: "italic", color: C.teal }}>filtered by us.</em>
+            {t("home.portfolio.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.portfolio.headlineEm")}</em>
           </h2>
         </div>
       </div>
@@ -840,10 +843,10 @@ function Portfolio() {
         <div className="reveal" style={{ padding: isMobile ? "40px 0 8px" : "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
           <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
             <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
-              "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
+              {t("home.portfolio.quote")}
             </p>
             <p style={{ color: C.teal, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", margin: 0 }}>
-              Mohamed Alabbar — Eagle Hills, UAE
+              {t("home.portfolio.quoteAttr")}
             </p>
           </div>
 
@@ -861,7 +864,7 @@ function Portfolio() {
               boxSizing: "border-box",
             }}
           >
-            Request Access
+            {t("cta.requestAccess")}
           </a>
         </div>
       </div>
@@ -873,6 +876,7 @@ function Portfolio() {
 
 function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]; index: number; isMobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
+  const t = useT();
   const cardW = isMobile ? "260px" : "300px";
   const slug = project.name
     .toLowerCase()
@@ -897,7 +901,7 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />
 
           <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FFFBF0", color: "#21141A", padding: "4px 10px", fontSize: "0.62rem", fontFamily: "DM Sans", fontWeight: 700, letterSpacing: "0.06em" }}>
-            {project.yield} ROI
+            {project.yield} {t("catalog.roi")}
           </div>
 
           <div style={{
@@ -907,7 +911,7 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
             padding: "4px 10px", fontSize: "0.58rem", fontFamily: "DM Sans",
             color: "#FFFBF0", letterSpacing: "0.08em", textTransform: "uppercase",
             opacity: hovered ? 1 : 0, transition: "opacity 0.3s",
-          }}>View Project</div>
+          }}>{t("cta.viewProject")}</div>
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px 24px", minHeight: "140px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
             <p style={{ color: "rgba(255,250,236,0.55)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>{project.tag}</p>
@@ -923,6 +927,7 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
 // ─── Lifestyle ────────────────────────────────────────────────────────────────
 function Lifestyle() {
   const isMobile = useIsMobile();
+  const t = useT();
   return (
     <section style={{ background: "#21141A", padding: isMobile ? "80px 0" : "120px 0", overflow: "hidden" }}>
       <div className="lifestyle-grid" style={{ alignItems: "stretch" }}>
@@ -954,16 +959,16 @@ function Lifestyle() {
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>The Climate Paradise</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>{t("home.lifestyle.eyebrow")}</span>
             </div>
           )}
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
-            Subtropical beauty.<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>Eternal bloom.</em>
+            {t("home.lifestyle.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.lifestyle.headlineEm")}</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
-            Batumi enjoys a humid subtropical climate — 300+ sunny days, palm-lined boulevards, and a Black Sea breeze that never turns hostile. Unlike most European resort cities, Batumi blooms all year round.
+            {t("home.lifestyle.body")}
           </p>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>Eternal Bloom Calendar</p>
+          <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
           {bloomCalendar.map((item, i) => (
             <div key={item.month} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
               <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{item.month}</span>
@@ -1224,6 +1229,7 @@ const PAYMENT_ICON = {
 };
 
 function Payment() {
+  const t = useT();
   const cards = [
     {
       icon: (
@@ -1235,9 +1241,9 @@ function Payment() {
           <path d="M2.5 21h19" />
         </svg>
       ),
-      title: "Official Bank Transfers (GEL)",
-      body: "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. We provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
-      sub: "Secure, transparent, and 100% compliant with Georgian financial regulations.",
+      title: t("home.payment.bank.title"),
+      body: t("home.payment.bank.body"),
+      sub: t("home.payment.bank.sub"),
     },
     {
       icon: (
@@ -1249,9 +1255,9 @@ function Payment() {
           <path d="M9.5 13.25h5" />
         </svg>
       ),
-      title: "Cryptocurrency & Digital Assets",
-      body: "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. We facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
-      sub: "Full legal compliance. Blockchain-verified ownership transfer.",
+      title: t("home.payment.crypto.title"),
+      body: t("home.payment.crypto.body"),
+      sub: t("home.payment.crypto.sub"),
     },
   ];
 
@@ -1271,8 +1277,8 @@ function Payment() {
           0%
         </span>
       ),
-      title: "Interest-Free Installments",
-      desc: "Pay in GEL over 18–48 months with a 10–30% down payment directly to the developer. No bank involvement, no interest.",
+      title: t("home.payment.installment.title"),
+      desc: t("home.payment.installment.desc"),
     },
     {
       icon: (
@@ -1284,8 +1290,8 @@ function Payment() {
           <path d="M10.5 12.5 7 16l3.5 3.5" />
         </svg>
       ),
-      title: "Remote Transactions",
-      desc: "Complete the currency exchange, payment, and property registration without being physically present in Georgia.",
+      title: t("home.payment.remote.title"),
+      desc: t("home.payment.remote.desc"),
     },
     {
       icon: (
@@ -1302,8 +1308,8 @@ function Payment() {
           SWIFT
         </span>
       ),
-      title: "SWIFT & International Support",
-      desc: "Full support for international bank transfers and remote bank account opening for non-residents.",
+      title: t("home.payment.swift.title"),
+      desc: t("home.payment.swift.desc"),
     },
   ];
 
@@ -1314,10 +1320,10 @@ function Payment() {
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#aaa", fontFamily: "DM Sans" }}>Payment Methods</span>
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#aaa", fontFamily: "DM Sans" }}>{t("home.payment.eyebrow")}</span>
           </div>
           <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
-            Flexible ways to<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>invest in Batumi.</em>
+            {t("home.payment.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.payment.headlineEm")}</em>
           </h2>
         </div>
 

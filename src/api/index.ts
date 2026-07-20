@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { cors } from "hono/cors"
 import authRouter from "./routes/auth";
 import propertiesRouter from "./routes/properties";
+import ratesRouter from "./routes/rates";
 
 const app = new Hono();
 
@@ -11,6 +12,7 @@ app.get('/api/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
 
 app.route('/api/auth', authRouter);
 app.route('/api/properties', propertiesRouter);
+app.route('/api/rates', ratesRouter);
 
 const SHEETS_WORKER = 'http://localhost:6475';
 const SHEETS_SECRET = 'sitbo-sheets-secret';
