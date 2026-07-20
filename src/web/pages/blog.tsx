@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Footer } from "../components/footer";
 import { getAllPosts } from "../data/blog-posts";
 
 const C = {
@@ -244,7 +243,6 @@ export default function BlogPage() {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 }

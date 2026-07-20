@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { Footer } from "../components/footer";
 import { HISTORY_REGIONS, LIVE_REGION, type TimelineEvent } from "../data/history-regions";
 
 const C = {
@@ -392,7 +391,6 @@ export default function HistoryPage() {
         </p>
       </section>
 
-      <Footer />
     </div>
   );
 }

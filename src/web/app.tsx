@@ -1,4 +1,4 @@
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import Index from "./pages/index";
 import MortgagePage from "./pages/mortgage";
 import InvestPage from "./pages/invest";
@@ -16,8 +16,15 @@ import PropertyForm from "./pages/admin/PropertyForm";
 import { Provider } from "./components/provider";
 import { LocaleProvider } from "./context/LocaleContext";
 import { Nav, NAV_HEIGHT } from "./components/nav";
+import { Footer } from "./components/footer";
 import { CookieConsent } from "./components/cookie-consent";
 import { ScrollToHash } from "./components/scroll-to-hash";
+
+function AppFooter() {
+	const [location] = useLocation();
+	if (location.startsWith("/admin")) return null;
+	return <Footer />;
+}
 
 function App() {
 	return (
@@ -48,6 +55,7 @@ function App() {
 					<Route path="/admin" component={AdminDashboard} />
 				</Switch>
 			</div>
+			<AppFooter />
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
 		</Provider>

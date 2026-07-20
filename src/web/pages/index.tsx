@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
-import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark (dark bg, main headers, serif text)
@@ -1684,7 +1683,6 @@ function Index() {
       <Reviews />
       <Partners />
       <Contact />
-      <Footer />
       <SocialProofToast />
     </div>
   );

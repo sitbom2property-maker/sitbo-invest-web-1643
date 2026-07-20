@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { AppLink } from "../components/app-link";
-import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -648,7 +647,6 @@ export default function InvestPage() {
           </Row>
         </Container>
       </section>
-      <Footer />
 
     </div>
   

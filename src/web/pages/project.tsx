@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { AppLink } from "../components/app-link";
-import { Footer } from "../components/footer";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -595,7 +594,6 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
-      <Footer />
 
 {/* Modal */}
       {modalSrc && (
