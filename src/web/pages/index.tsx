@@ -929,14 +929,14 @@ function Lifestyle() {
         {/* Left — photo bleeds to left edge */}
         <div className="reveal lifestyle-photo-col">
           <img
-            src="/card-new.png"
-            alt="Batumi botanical architecture"
+            src="/lifestyle-botanical.jpg"
+            alt="Batumi Botanical Garden"
             style={{
               width: "100%",
               height: "100%",
-              minHeight: isMobile ? "520px" : "480px",
+              minHeight: isMobile ? "520px" : "560px",
               objectFit: "cover",
-              objectPosition: isMobile ? "center 28%" : "center 35%",
+              objectPosition: isMobile ? "center 45%" : "center center",
               display: "block",
             }}
           />
