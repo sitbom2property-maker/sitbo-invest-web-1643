@@ -541,12 +541,14 @@ function FounderNote() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "10px",
+                justifyContent: "center",
+                gap: "8px",
                 fontFamily: "DM Sans, sans-serif",
                 fontSize: "0.72rem",
                 fontWeight: 600,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
+                lineHeight: 1,
                 color: "#FFFBF0",
                 background: "#21141A",
                 padding: "14px 28px",
@@ -563,9 +565,22 @@ function FounderNote() {
                 e.currentTarget.style.color = "#FFFBF0";
               }}
             >
-              See What We Do
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h9M8 3.5 12.5 8 8 12.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              <span style={{ lineHeight: 1 }}>See What We Do</span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+                style={{ display: "block", flexShrink: 0 }}
+              >
+                <path
+                  d="M1.5 6h8M6.25 2.75 9.5 6 6.25 9.25"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </Link>
           </div>
@@ -1190,12 +1205,23 @@ function DiscoveryTour() {
 }
 
 // ─── Payment ──────────────────────────────────────────────────────────────────
+const PAYMENT_ICON = {
+  stroke: "#8CB2C0",
+  strokeWidth: 1.6,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
 function Payment() {
   const cards = [
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+        // Bank building
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" {...PAYMENT_ICON}>
+          <path d="M3 10.5 12 4l9 6.5" />
+          <path d="M5 10.5v7.5M9.5 10.5v7.5M14.5 10.5v7.5M19 10.5v7.5" />
+          <path d="M3.5 18h17" />
+          <path d="M2.5 21h19" />
         </svg>
       ),
       title: "Official Bank Transfers (GEL)",
@@ -1204,8 +1230,12 @@ function Payment() {
     },
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/><path d="M10 9h4v2h-4z"/><path d="M10 13h4v2h-4z"/>
+        // USDT / Tether mark
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" {...PAYMENT_ICON}>
+          <circle cx="12" cy="12" r="9.25" />
+          <path d="M8.25 9h7.5" />
+          <path d="M12 9v7" />
+          <path d="M9.5 13.25h5" />
         </svg>
       ),
       title: "Cryptocurrency & Digital Assets",
@@ -1217,17 +1247,30 @@ function Payment() {
   const features = [
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
+        <span
+          style={{
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            color: "#8CB2C0",
+            letterSpacing: "-0.02em",
+            lineHeight: 1,
+          }}
+        >
+          0%
+        </span>
       ),
       title: "Interest-Free Installments",
       desc: "Pay in GEL over 18–48 months with a 10–30% down payment directly to the developer. No bank involvement, no interest.",
     },
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14"/>
+        // Right arrow over left arrow
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...PAYMENT_ICON}>
+          <path d="M5 8h12" />
+          <path d="M13.5 4.5 17 8l-3.5 3.5" />
+          <path d="M19 16H7" />
+          <path d="M10.5 12.5 7 16l3.5 3.5" />
         </svg>
       ),
       title: "Remote Transactions",
@@ -1235,9 +1278,18 @@ function Payment() {
     },
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="7" width="20" height="12" rx="1"/><path d="M6 7V4M18 7V4"/>
-        </svg>
+        <span
+          style={{
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "0.62rem",
+            fontWeight: 700,
+            color: "#8CB2C0",
+            letterSpacing: "0.14em",
+            lineHeight: 1,
+          }}
+        >
+          SWIFT
+        </span>
       ),
       title: "SWIFT & International Support",
       desc: "Full support for international bank transfers and remote bank account opening for non-residents.",
