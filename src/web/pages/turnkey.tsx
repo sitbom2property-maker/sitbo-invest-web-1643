@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { Link } from "wouter";
-import { useT } from "../i18n";
+import { useState, type CSSProperties } from "react";
+import { useT, type MessageKey } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -11,6 +10,9 @@ const C = {
   parch: "#FFFBF0",
   muted: "rgba(33,20,26,0.55)",
 };
+
+type RenovationGoal = "self" | "invest";
+type FinishLevel = "comfort" | "premium" | "luxe";
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
@@ -73,9 +75,9 @@ function TwoColumns() {
       title: t("turnkey.forSelf.title"),
       text: t("turnkey.forSelf.body"),
       items: [
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, label: "Bespoke Design", desc: "A unique project crafted around your lifestyle and aesthetic vision." },
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, label: "Master Craftsmanship", desc: "Meticulous attention to every seam, joint, and finish — no compromises." },
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, label: "Premium Materials", desc: "We source the best materials, including Italian tile and European fittings." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, label: t("turnkey.forSelf.item1.label"), desc: t("turnkey.forSelf.item1.desc") },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, label: t("turnkey.forSelf.item2.label"), desc: t("turnkey.forSelf.item2.desc") },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, label: t("turnkey.forSelf.item3.label"), desc: t("turnkey.forSelf.item3.desc") },
       ],
       bg: C.light,
       dark: false,
@@ -85,9 +87,9 @@ function TwoColumns() {
       title: t("turnkey.forInvestors.title"),
       text: t("turnkey.forInvestors.body"),
       items: [
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>, label: "ROI-Driven Design", desc: "A proven aesthetic that attracts premium short-term tenants in Batumi." },
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, label: "Speed to Market", desc: "Fast-track delivery to minimize vacancy and start earning rental income sooner." },
- { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>, label: "Durable & Low-Maintenance", desc: "Vandal-proof, wear-resistant materials designed for Batumi's humid climate." },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>, label: t("turnkey.forInvestors.item1.label"), desc: t("turnkey.forInvestors.item1.desc") },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, label: t("turnkey.forInvestors.item2.label"), desc: t("turnkey.forInvestors.item2.desc") },
+ { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>, label: t("turnkey.forInvestors.item3.label"), desc: t("turnkey.forInvestors.item3.desc") },
       ],
       bg: C.dark,
       dark: true,
@@ -166,8 +168,8 @@ function DesignRule() {
 function Calculator() {
   const [area, setArea] = useState(60);
   const [condition, setCondition] = useState<"new" | "old">("new");
-  const [goal, setGoal] = useState<"self" | "invest">("invest");
-  const [finish, setFinish] = useState<"comfort" | "premium" | "luxe">("premium");
+  const [goal, setGoal] = useState<RenovationGoal>("invest");
+  const [finish, setFinish] = useState<FinishLevel>("premium");
   const [shown, setShown] = useState(false);
   const t = useT();
 
@@ -181,11 +183,19 @@ function Calculator() {
   const low  = Math.round(pricePerSqm * area * 0.9 / 100) * 100;
   const high = Math.round(pricePerSqm * area * 1.1 / 100) * 100;
 
-  const timelines: Record<string, Record<string, string>> = {
-    self:   { comfort: "8–10 weeks", premium: "10–14 weeks", luxe: "14–20 weeks" },
-    invest: { comfort: "5–7 weeks",  premium: "6–9 weeks",   luxe: "9–13 weeks"  },
+  const timelines: Record<RenovationGoal, Record<FinishLevel, MessageKey>> = {
+    self: {
+      comfort: "turnkey.calculator.timeline.self.comfort",
+      premium: "turnkey.calculator.timeline.self.premium",
+      luxe: "turnkey.calculator.timeline.self.luxe",
+    },
+    invest: {
+      comfort: "turnkey.calculator.timeline.invest.comfort",
+      premium: "turnkey.calculator.timeline.invest.premium",
+      luxe: "turnkey.calculator.timeline.invest.luxe",
+    },
   };
-  const timeline = timelines[goal][finish];
+  const timeline = t(timelines[goal][finish]);
 
   const Radio = ({ name, value, current, label, onChange }: { name: string; value: string; current: string; label: string; onChange: (v: string) => void }) => (
     <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", fontFamily: "DM Sans", fontSize: "0.85rem", color: current === value ? C.dark : "#777", fontWeight: current === value ? 600 : 400, transition: "color 0.2s" }}>
@@ -238,16 +248,16 @@ function Calculator() {
             <div>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.goal")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <Radio name="goal" value="invest" current={goal} label={t("turnkey.calculator.goalInvest")} onChange={v => setGoal(v as "self" | "invest")} />
-                <Radio name="goal" value="self" current={goal} label={t("turnkey.calculator.goalSelf")} onChange={v => setGoal(v as "self" | "invest")} />
+                <Radio name="goal" value="invest" current={goal} label={t("turnkey.calculator.goalInvest")} onChange={v => setGoal(v as RenovationGoal)} />
+                <Radio name="goal" value="self" current={goal} label={t("turnkey.calculator.goalSelf")} onChange={v => setGoal(v as RenovationGoal)} />
               </div>
             </div>
             <div>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.finish")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <Radio name="finish" value="comfort" current={finish} label={t("turnkey.calculator.comfort")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
-                <Radio name="finish" value="premium" current={finish} label={t("turnkey.calculator.premium")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
-                <Radio name="finish" value="luxe" current={finish} label={t("turnkey.calculator.luxe")} onChange={v => setFinish(v as "comfort" | "premium" | "luxe")} />
+                <Radio name="finish" value="comfort" current={finish} label={t("turnkey.calculator.comfort")} onChange={v => setFinish(v as FinishLevel)} />
+                <Radio name="finish" value="premium" current={finish} label={t("turnkey.calculator.premium")} onChange={v => setFinish(v as FinishLevel)} />
+                <Radio name="finish" value="luxe" current={finish} label={t("turnkey.calculator.luxe")} onChange={v => setFinish(v as FinishLevel)} />
               </div>
             </div>
           </div>
@@ -328,12 +338,12 @@ function Portfolio() {
   const [filter, setFilter] = useState<"all" | "life" | "invest">("all");
   const t = useT();
   const projects = [
- { type: "invest", img: "/p1.jpg", title: "Studio, Batumi Centre", tags: ["48 Days", "$18,000", "+70% Rental Income", "ROI: 2.1 yrs"] },
- { type: "life",   img: "/p2.jpg", title: "2BR Sea View Penthouse", tags: ["Bespoke Kitchen", "Italian Tile", "Sea View"] },
- { type: "invest", img: "/p3.jpg", title: "1BR Near Boulevard", tags: ["38 Days", "$14,500", "+65% Rental Income", "ROI: 2.4 yrs"] },
- { type: "life",   img: "/p4.jpg", title: "Designer Loft, Orbi City", tags: ["Custom Millwork", "Marble Surfaces", "Full Fit-Out"] },
- { type: "invest", img: "/p5.jpg", title: "Studio, Technika", tags: ["52 Days", "$20,000", "+80% Rental Income", "ROI: 1.9 yrs"] },
- { type: "life",   img: "/p6.jpg", title: "3BR Family Residence", tags: ["Author Supervision", "Premium Materials", "6 Month Project"] },
+ { type: "invest", img: "/p1.jpg", title: t("turnkey.portfolio.project1.title"), tags: [t("turnkey.portfolio.project1.tag1"), t("turnkey.portfolio.project1.tag2"), t("turnkey.portfolio.project1.tag3"), t("turnkey.portfolio.project1.tag4")] },
+ { type: "life",   img: "/p2.jpg", title: t("turnkey.portfolio.project2.title"), tags: [t("turnkey.portfolio.project2.tag1"), t("turnkey.portfolio.project2.tag2"), t("turnkey.portfolio.project2.tag3")] },
+ { type: "invest", img: "/p3.jpg", title: t("turnkey.portfolio.project3.title"), tags: [t("turnkey.portfolio.project3.tag1"), t("turnkey.portfolio.project3.tag2"), t("turnkey.portfolio.project3.tag3"), t("turnkey.portfolio.project3.tag4")] },
+ { type: "life",   img: "/p4.jpg", title: t("turnkey.portfolio.project4.title"), tags: [t("turnkey.portfolio.project4.tag1"), t("turnkey.portfolio.project4.tag2"), t("turnkey.portfolio.project4.tag3")] },
+ { type: "invest", img: "/p5.jpg", title: t("turnkey.portfolio.project5.title"), tags: [t("turnkey.portfolio.project5.tag1"), t("turnkey.portfolio.project5.tag2"), t("turnkey.portfolio.project5.tag3"), t("turnkey.portfolio.project5.tag4")] },
+ { type: "life",   img: "/p6.jpg", title: t("turnkey.portfolio.project6.title"), tags: [t("turnkey.portfolio.project6.tag1"), t("turnkey.portfolio.project6.tag2"), t("turnkey.portfolio.project6.tag3")] },
   ];
   const visible = projects.filter(p => filter === "all" || p.type === filter);
   const placeholderColors = ["#8CB2C0","#683D47","#A8C5D0","#8B5E67","#6FA3B5","#7A4E57"];
@@ -402,7 +412,7 @@ function Guarantees() {
             {t("turnkey.guarantee.self.title")}
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#666", lineHeight: 1.8 }}>
-            We don't just guarantee the work — we guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, we'll redo it. That's our commitment to craftsmanship.
+            {t("turnkey.guarantee.self.body")}
           </p>
         </div>
         <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.15)", borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
@@ -414,7 +424,7 @@ function Guarantees() {
             {t("turnkey.guarantee.invest.title")}
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.8 }}>
-            We put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.
+            {t("turnkey.guarantee.invest.body")}
           </p>
         </div>
       </div>
@@ -444,10 +454,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Annual Tourists (2025)</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat1.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Unprecedented growth in Georgia's tourism sector creates sustained demand for short-term rental accommodations.
+              {t("turnkey.market.stat1.body")}
             </p>
           </div>
 
@@ -455,10 +465,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Peak Season (May–Oct)</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat2.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Premium daily rates for well-positioned, tastefully renovated apartments. Winter rates from $50/night provide year-round income.
+              {t("turnkey.market.stat2.body")}
             </p>
           </div>
 
@@ -466,10 +476,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Avg. Payback Period</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat3.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Batumi properties achieve investment payback in ~11 years — one of the fastest in the Black Sea region.
+              {t("turnkey.market.stat3.body")}
             </p>
           </div>
 
@@ -477,10 +487,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Value Growth by Completion</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat4.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Properties purchased pre-completion typically appreciate 70–100% by project handover due to rising market demand.
+              {t("turnkey.market.stat4.body")}
             </p>
           </div>
 
@@ -488,10 +498,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Per m² (2025–2026)</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat5.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Competitive pricing for premium locations. Entry-level projects available from $1,250/m². Room for upside.
+              {t("turnkey.market.stat5.body")}
             </p>
           </div>
 
@@ -499,10 +509,10 @@ function MarketStats() {
           <div>
             <div style={{ marginBottom: "16px" }}>
               <p style={{ fontFamily: "Jun, serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>Primary Market Data</p>
+              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat6.label")}</p>
             </div>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
-              Statistics sourced from Geostat, TBC Capital, Colliers, and Airbnb/Booking data. Transparent, market-driven.
+              {t("turnkey.market.stat6.body")}
             </p>
           </div>
         </div>
@@ -521,12 +531,12 @@ function ContactForm() {
   const [sent, setSent] = useState(false);
   const t = useT();
 
-  const inputStyle: React.CSSProperties = {
+  const inputStyle: CSSProperties = {
     width: "100%", background: "rgba(255,251,240,0.06)", border: "1px solid rgba(255,251,240,0.12)",
     borderRadius: "8px", padding: "14px 16px", color: C.light, fontFamily: "DM Sans",
     fontSize: "0.88rem", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
   };
-  const labelStyle: React.CSSProperties = {
+  const labelStyle: CSSProperties = {
     display: "block", fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em",
     textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "8px",
   };
@@ -561,11 +571,11 @@ function ContactForm() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div>
                   <label style={labelStyle}>{t("turnkey.contact.name")}</label>
-                  <input value={name} onChange={e => setName(e.target.value)} placeholder="Arthur" style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  <input value={name} onChange={e => setName(e.target.value)} placeholder={t("turnkey.contact.namePlaceholder")} style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
                 </div>
                 <div>
                   <label style={labelStyle}>{t("turnkey.contact.phoneOrEmail")}</label>
-                  <input value={contact} onChange={e => setContact(e.target.value)} placeholder="+995 ..." style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
+                  <input value={contact} onChange={e => setContact(e.target.value)} placeholder={t("turnkey.contact.phonePlaceholder")} style={inputStyle} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
                 </div>
               </div>
               <div>
@@ -597,7 +607,7 @@ function ContactForm() {
             </a>
             <span style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Batumi, Georgia
+              {t("turnkey.contact.location")}
             </span>
           </div>
         </div>

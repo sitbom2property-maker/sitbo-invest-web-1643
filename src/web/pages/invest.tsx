@@ -414,10 +414,10 @@ export default function InvestPage() {
             <Col span={8} spanMd={8} style={{ margin: isMobile ? "0" : "0 auto" }}>
               <div className="inv-reveal" style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
                 <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.5vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: C.dark, lineHeight: 1.5, marginBottom: "12px" }}>
-                  "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."
+                  {t("invest.why.quote")}
                 </p>
                 <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal }}>
-                  Mohamed Alabbar — Eagle Hills, UAE
+                  {t("invest.why.quoteAttr")}
                 </span>
               </div>
             </Col>

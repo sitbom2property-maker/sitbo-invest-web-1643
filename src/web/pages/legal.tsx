@@ -9,79 +9,78 @@ const C = {
   muted:     "#7a7a7a",
 };
 
-const sections = [
-  {
-    title: "Privacy Policy",
-    items: [
-      {
-        heading: "1. Introduction",
-        body: "Welcome to sitboinvest.ge, operated by Sitbo Group. We are committed to protecting your privacy and ensuring that your personal data is handled securely and transparently. This Privacy Policy explains how we collect, use, and protect your information when you interact with our premium real estate platform.",
-      },
-      {
-        heading: "2. Information We Collect",
-        body: "We may collect personal information that you voluntarily provide to us, including but not limited to your name, contact details, and investment preferences. Additionally, we automatically collect certain technical data (such as IP addresses and browsing behavior) through cookies to enhance your experience on our site.",
-      },
-      {
-        heading: "3. How We Use Your Information",
-        body: "We utilize your data to:",
-        list: [
-          "Provide personalized real estate and investment recommendations in the Batumi market.",
-          "Improve our website's functionality and user experience through advanced analytics and PropTech integrations.",
-          "Communicate with you regarding exclusive properties, market insights, and your inquiries.",
-          "Comply with applicable legal obligations.",
-        ],
-      },
-      {
-        heading: "4. Data Sharing and Security",
-        body: "We do not sell your personal information to third parties. We may share necessary data with trusted service providers who assist us in operating our platform, strictly under confidentiality agreements. We implement industry-standard security measures to protect your data against unauthorized access.",
-      },
-      {
-        heading: "5. Your Rights",
-        body: "Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You may also opt-out of marketing communications at any time. To exercise these rights, please contact us at sitboinvest@gmail.com.",
-      },
-      {
-        heading: "6. Changes to This Policy",
-        body: "We may update this Privacy Policy periodically to reflect changes in our practices or regulatory requirements. The latest version will always be available on this page.",
-      },
-    ],
-  },
-  {
-    title: "Terms of Service",
-    items: [
-      {
-        heading: "1. Acceptance of Terms",
-        body: "By accessing and using sitboinvest.ge, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please refrain from using our website.",
-      },
-      {
-        heading: "2. Services and Content",
-        body: "Sitbo Group provides premium real estate consulting, investment opportunities, and property management insights in Batumi, Georgia. All information, including architectural renders, market data, and AI-driven analytics provided on this site, is for informational purposes only and does not constitute financial or legal advice.",
-      },
-      {
-        heading: "3. Intellectual Property",
-        body: "All content, branding, designs, and materials on this website are the exclusive intellectual property of Sitbo Group. You may not copy, reproduce, distribute, or create derivative works from our content without explicit written permission.",
-      },
-      {
-        heading: "4. User Conduct",
-        body: "You agree to use this website only for lawful purposes. You must not engage in any activity that disrupts or interferes with the site's operations, including unauthorized data scraping, attempting to bypass security measures, or transmitting malicious code.",
-      },
-      {
-        heading: "5. Limitation of Liability",
-        body: "While we strive for accuracy, Sitbo Group makes no warranties regarding the completeness or reliability of the information presented. Real estate investments carry inherent risks. We shall not be held liable for any direct, indirect, or consequential losses arising from your use of this website or reliance on its content.",
-      },
-      {
-        heading: "6. Governing Law",
-        body: "These Terms of Service are governed by and construed in accordance with the laws of Georgia. Any disputes arising from these terms or your use of the website shall be subject to the exclusive jurisdiction of the courts in Georgia.",
-      },
-      {
-        heading: "7. Contact Information",
-        body: "If you have any questions regarding these Terms of Service, please contact us at sitboinvest@gmail.com.",
-      },
-    ],
-  },
-];
-
 export default function LegalPage() {
   const t = useT();
+  const sections = [
+    {
+      title: t("legal.privacyTitle"),
+      items: [
+        {
+          heading: t("legal.privacy.introduction.heading"),
+          body: t("legal.privacy.introduction.body"),
+        },
+        {
+          heading: t("legal.privacy.information.heading"),
+          body: t("legal.privacy.information.body"),
+        },
+        {
+          heading: t("legal.privacy.use.heading"),
+          body: t("legal.privacy.use.body"),
+          list: [
+            t("legal.privacy.use.list1"),
+            t("legal.privacy.use.list2"),
+            t("legal.privacy.use.list3"),
+            t("legal.privacy.use.list4"),
+          ],
+        },
+        {
+          heading: t("legal.privacy.sharing.heading"),
+          body: t("legal.privacy.sharing.body"),
+        },
+        {
+          heading: t("legal.privacy.rights.heading"),
+          body: t("legal.privacy.rights.body"),
+        },
+        {
+          heading: t("legal.privacy.changes.heading"),
+          body: t("legal.privacy.changes.body"),
+        },
+      ],
+    },
+    {
+      title: t("legal.termsTitle"),
+      items: [
+        {
+          heading: t("legal.terms.acceptance.heading"),
+          body: t("legal.terms.acceptance.body"),
+        },
+        {
+          heading: t("legal.terms.services.heading"),
+          body: t("legal.terms.services.body"),
+        },
+        {
+          heading: t("legal.terms.ip.heading"),
+          body: t("legal.terms.ip.body"),
+        },
+        {
+          heading: t("legal.terms.conduct.heading"),
+          body: t("legal.terms.conduct.body"),
+        },
+        {
+          heading: t("legal.terms.liability.heading"),
+          body: t("legal.terms.liability.body"),
+        },
+        {
+          heading: t("legal.terms.law.heading"),
+          body: t("legal.terms.law.body"),
+        },
+        {
+          heading: t("legal.terms.contact.heading"),
+          body: t("legal.terms.contact.body"),
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -105,7 +104,7 @@ export default function LegalPage() {
                 {/* Section title */}
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px", paddingBottom: "20px", borderBottom: `2px solid ${C.teal}` }}>
                   <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,3vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
-                    {si === 0 ? t("legal.privacyTitle") : t("legal.termsTitle")}
+                    {section.title}
                   </h2>
                 </div>
 

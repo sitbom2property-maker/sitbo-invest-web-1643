@@ -91,7 +91,7 @@ type ServiceItem = {
   num: string;
   titleKey: MessageKey;
   descriptionKey: MessageKey;
-  bullets: string[];
+  bulletKeys: MessageKey[];
 };
 
 const SERVICES: ServiceItem[] = [
@@ -99,84 +99,84 @@ const SERVICES: ServiceItem[] = [
     num: "01",
     titleKey: "services.item1.title",
     descriptionKey: "services.item1.desc",
-    bullets: [
-      "Title history and ownership chain verification",
-      "Developer track record: completed projects, delivery timelines, litigation history",
-      "Land plot category, encumbrances, and master plan compliance",
-      "Contract review: flagging dangerous clauses, requiring amendments before signing",
-      "Written due diligence report delivered to the client (3–5 pages)",
-      "Developers and projects we decline: unresolved litigation, delays exceeding 18 months, opaque land ownership structures",
+    bulletKeys: [
+      "services.item1.bullet1",
+      "services.item1.bullet2",
+      "services.item1.bullet3",
+      "services.item1.bullet4",
+      "services.item1.bullet5",
+      "services.item1.bullet6",
     ],
   },
   {
     num: "02",
     titleKey: "services.item2.title",
     descriptionKey: "services.item2.desc",
-    bullets: [
-      "Goal mapping: rental income / resale / residency / capital preservation",
-      "District comparison: Batumi centre, Gonio, Chakvi, Makhinjauri — yield vs risk vs liquidity",
-      "Access to off-market and first-release developer inventory only",
-      "ROI model per object: conservative, base, and optimistic scenarios",
-      "Capacity: twelve client mandates per quarter — your case receives full attention",
+    bulletKeys: [
+      "services.item2.bullet1",
+      "services.item2.bullet2",
+      "services.item2.bullet3",
+      "services.item2.bullet4",
+      "services.item2.bullet5",
     ],
   },
   {
     num: "03",
     titleKey: "services.item3.title",
     descriptionKey: "services.item3.desc",
-    bullets: [
-      "Design concept tailored to target tenant profile (tourists, expats, long-term)",
-      "Detailed cost estimate provided before work begins",
-      "Weekly photo progress reports sent to the client",
-      "Full furnishing and fit-out included — ready to occupy on handover",
-      "Timeline: 45–90 days depending on scope",
+    bulletKeys: [
+      "services.item3.bullet1",
+      "services.item3.bullet2",
+      "services.item3.bullet3",
+      "services.item3.bullet4",
+      "services.item3.bullet5",
     ],
   },
   {
     num: "04",
     titleKey: "services.item4.title",
     descriptionKey: "services.item4.desc",
-    bullets: [
-      "Bank selection: TBC Bank, Bank of Georgia, Credo Bank",
-      "Programme matching for non-resident buyers — a distinct expertise",
-      "Rate, deposit, and term negotiation on behalf of the client",
-      "Full documentation support for the bank submission process",
-      "We represent the client's interest exclusively",
+    bulletKeys: [
+      "services.item4.bullet1",
+      "services.item4.bullet2",
+      "services.item4.bullet3",
+      "services.item4.bullet4",
+      "services.item4.bullet5",
     ],
   },
   {
     num: "05",
     titleKey: "services.item5.title",
     descriptionKey: "services.item5.desc",
-    bullets: [
-      "Properties shown: due diligence completed before your arrival",
-      "Meetings arranged: legal counsel, notary, developer where relevant",
-      "Transfer, accommodation, and programme logistics handled in full",
-      "Format: a working session with a decision outcome — not a sightseeing tour",
+    bulletKeys: [
+      "services.item5.bullet1",
+      "services.item5.bullet2",
+      "services.item5.bullet3",
+      "services.item5.bullet4",
     ],
   },
   {
     num: "06",
     titleKey: "services.item6.title",
     descriptionKey: "services.item6.desc",
-    bullets: [
-      "Rental strategy: short-term (Airbnb / Booking) or long-term — client's choice",
-      "Management model selection: in-house oversight or management company",
-      "Monthly statement: occupancy, revenue, and operating costs",
-      "Maintenance coordination and tenant issue resolution",
-      "Designed for non-resident owners who require full hands-off operation",
+    bulletKeys: [
+      "services.item6.bullet1",
+      "services.item6.bullet2",
+      "services.item6.bullet3",
+      "services.item6.bullet4",
+      "services.item6.bullet5",
     ],
   },
   {
     num: "07",
     titleKey: "services.item7.title",
     descriptionKey: "services.item7.desc",
-    bullets: [
-      "Residency permit via real estate purchase from $100,000",
-      "Georgian tax residency structure: flat-rate framework and cross-border considerations",
-      "Georgian bank account opening — before and after purchase",
-      "Company registration in Georgia for relocating business owners",
-      "Verified referral network: legal, accounting, and tax advisory partners",
+    bulletKeys: [
+      "services.item7.bullet1",
+      "services.item7.bullet2",
+      "services.item7.bullet3",
+      "services.item7.bullet4",
+      "services.item7.bullet5",
     ],
   },
 ];
@@ -315,9 +315,9 @@ function AccordionItem({
             {t(service.descriptionKey)}
           </p>
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {service.bullets.map((item) => (
+            {service.bulletKeys.map((itemKey) => (
               <li
-                key={item}
+                key={itemKey}
                 style={{
                   display: "flex",
                   gap: "12px",
@@ -334,7 +334,7 @@ function AccordionItem({
                     lineHeight: 1.7,
                   }}
                 >
-                  {item}
+                  {t(itemKey)}
                 </span>
               </li>
             ))}
@@ -422,6 +422,7 @@ export default function ServicesPage() {
                 service={service}
                 isOpen={openIndex === index}
                 onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
+                isMobile={isMobile}
               />
             ))}
           </div>
