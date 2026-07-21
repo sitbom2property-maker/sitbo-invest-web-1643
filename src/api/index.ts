@@ -5,6 +5,8 @@ import propertiesRouter from "./routes/properties";
 import ratesRouter from "./routes/rates";
 import {
   appendLeadRow,
+  LEADS_NTFY_TOPIC,
+  notifyLeadNtfy,
   SHEETS_SHEET_GID,
   SHEETS_SHEET_NAME,
   SHEETS_SPREADSHEET_ID,
@@ -14,6 +16,7 @@ import {
 type Bindings = SheetsEnv & {
   DB?: D1Database;
   ADMIN_PASSWORD?: string;
+  LEADS_NTFY_TOPIC?: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -39,6 +42,14 @@ app.post('/api/leads', async (c) => {
     const row = [ts, String(name), String(contact), budget ? String(budget) : '', 'Website'];
     console.log('[Lead submitted]', { name, contact, budget, ts });
 
+    // Always notify (zero-config) so leads are never silently lost on Cloudflare
+    try {
+      await notifyLeadNtfy(row, c.env?.LEADS_NTFY_TOPIC || LEADS_NTFY_TOPIC);
+      console.log('[ntfy] Lead pushed ✓');
+    } catch (err) {
+      console.error('[ntfy] Failed:', err);
+    }
+
     try {
       const env: SheetsEnv = {
         SHEETS_WEBHOOK_URL: c.env?.SHEETS_WEBHOOK_URL,
@@ -51,7 +62,7 @@ app.post('/api/leads', async (c) => {
       console.log('[Sheets] Row appended ✓ via', result.via);
     } catch (err) {
       console.error('[Sheets] Failed:', err);
-      // Don't fail the user-facing request
+      // Don't fail the user-facing request — ntfy may still have delivered
     }
 
     return c.json({ success: true, message: 'Lead received' });

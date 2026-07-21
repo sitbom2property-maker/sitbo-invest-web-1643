@@ -16,12 +16,16 @@ export const SHEETS_BRIDGE_SECRET = "sitbo-sheets-secret";
 const LOCAL_SHEETS_WORKER = "http://localhost:6475";
 const SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 
+/** Zero-config push channel (open on phone: https://ntfy.sh/sitbo-invest-leads) */
+export const LEADS_NTFY_TOPIC = "sitbo-invest-leads";
+
 export type SheetsEnv = {
   SHEETS_WEBHOOK_URL?: string;
   GOOGLE_SERVICE_ACCOUNT_JSON?: string;
   SHEETS_SPREADSHEET_ID?: string;
   SHEETS_SHEET_NAME?: string;
   SHEETS_SHEET_GID?: string;
+  LEADS_NTFY_TOPIC?: string;
 };
 
 type ServiceAccount = {
@@ -198,6 +202,32 @@ async function appendViaLocalWorker(row: string[]): Promise<void> {
     body: JSON.stringify({ row: sanitizeRow(row) }),
   });
   if (!res.ok) throw new Error(`sheets-worker ${res.status}`);
+}
+
+/** Instant push notification — works on Cloudflare with no secrets. */
+export async function notifyLeadNtfy(
+  row: string[],
+  topic = LEADS_NTFY_TOPIC,
+): Promise<void> {
+  const [ts, name, contact, budget, source] = row;
+  const body = [
+    `Name: ${name || "—"}`,
+    `Contact: ${contact || "—"}`,
+    `Budget: ${budget || "—"}`,
+    `Source: ${source || "Website"}`,
+    `Time: ${ts || new Date().toISOString()}`,
+  ].join("\n");
+
+  const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+    method: "POST",
+    headers: {
+      Title: "Sitbo Invest — new lead",
+      Priority: "high",
+      Tags: "briefcase,sitbo",
+    },
+    body,
+  });
+  if (!res.ok) throw new Error(`ntfy ${res.status}`);
 }
 
 /** Append one lead row. Throws if every configured backend fails. */
