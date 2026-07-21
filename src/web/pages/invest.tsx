@@ -153,13 +153,13 @@ const process = [
 ] satisfies { n: string; titleKey: MessageKey; descKey: MessageKey }[];
 
 const faqs = [
- { q: "Can foreigners buy property in Georgia?", a: "Yes. Foreign nationals have the same property rights as Georgian citizens — purchase, own, and transfer with zero restrictions." },
- { q: "Is rental income taxed?", a: "Rental income is subject to a 5% flat tax in Georgia (20% if not separately declared). One of the lowest rates in Europe." },
- { q: "What's the minimum budget to invest?", a: "Viable investments start from $60,000–$80,000 for a studio. Residency-qualifying investments require $150,000+." },
- { q: "Do I need to be in Georgia to buy?", a: "No. We can handle the full process remotely, including notarised power of attorney. Many clients close deals without visiting first." },
- { q: "What is the typical rental yield?", a: "Well-located, professionally managed units in Batumi yield 9–14.5% annually. TurnKey-finished units with premium positioning can exceed this." },
- { q: "How long does the purchase take?", a: "From signed offer to registered title: 1–3 business days. Due diligence and property selection take 2–4 weeks typically." },
-];
+  { qKey: "invest.faq.q1", aKey: "invest.faq.a1" },
+  { qKey: "invest.faq.q2", aKey: "invest.faq.a2" },
+  { qKey: "invest.faq.q3", aKey: "invest.faq.a3" },
+  { qKey: "invest.faq.q4", aKey: "invest.faq.a4" },
+  { qKey: "invest.faq.q5", aKey: "invest.faq.a5" },
+  { qKey: "invest.faq.q6", aKey: "invest.faq.a6" },
+] satisfies { qKey: MessageKey; aKey: MessageKey }[];
 
 // ─── Components ──────────────────────────────────────────────────────────────
 
@@ -257,6 +257,7 @@ function ProcessStep({ step, index }: { step: typeof process[0]; index: number }
 
 function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
   const [open, setOpen] = useState(false);
+  const t = useT();
   return (<>
 
     <div style={{ borderBottom: "1px solid rgba(33,20,26,0.08)" }}>
@@ -268,13 +269,13 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
           padding: "22px 0", gap: "16px", textAlign: "left",
         }}
       >
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.92rem", fontWeight: 600, color: C.dark, lineHeight: 1.4 }}>{faq.q}</span>
+        <span style={{ fontFamily: "DM Sans", fontSize: "0.92rem", fontWeight: 600, color: C.dark, lineHeight: 1.4 }}>{t(faq.qKey)}</span>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}>
           <path d="M4 7l5 5 5-5" stroke={C.wine} strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </button>
           {open && (
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: "0 0 20px", paddingRight: "32px" }}>{faq.a}</p>
+        <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: "0 0 20px", paddingRight: "32px" }}>{t(faq.aKey)}</p>
       )}
     </div>
   
@@ -616,7 +617,7 @@ export default function InvestPage() {
           <Row>
             <Col span={8} style={{ margin: "0" }}>
               {faqs.map((faq, i) => (
-                <FAQItem key={faq.q} faq={faq} index={i} />
+                <FAQItem key={faq.qKey} faq={faq} index={i} />
               ))}
             </Col>
             <Col span={4}>

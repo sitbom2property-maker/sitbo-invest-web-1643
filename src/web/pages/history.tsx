@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { HISTORY_REGIONS, LIVE_REGION, type TimelineEvent } from "../data/history-regions";
+import { type TimelineEvent } from "../data/history-regions";
+import { getHistoryRegions, getLiveRegion } from "../data/history-regions-locale";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 const C = {
@@ -81,9 +83,11 @@ function TimelineItem({
 export default function HistoryPage() {
   const trackRef = useRef<HTMLElement | null>(null);
   const progress = useScrollProgress(trackRef);
-  const region = LIVE_REGION;
+  const { language } = useLocale();
+  const regions = getHistoryRegions(language);
+  const region = getLiveRegion(language);
   const t = useT();
-  useRevealItems([region.id]);
+  useRevealItems([region.id, language]);
 
   const activeIndex = Math.min(
     Math.max(region.events.length - 1, 0),
@@ -351,7 +355,7 @@ export default function HistoryPage() {
         <p>{region.intro}</p>
 
         <div className="ht-regions" aria-label={t("history.regionsLabel")}>
-          {HISTORY_REGIONS.map((r) => (
+          {regions.map((r) => (
             <span
               key={r.id}
               className={`ht-region-chip${r.status === "live" ? " ht-region-chip--live" : ""}`}

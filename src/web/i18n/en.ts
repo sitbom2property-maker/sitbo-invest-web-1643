@@ -529,6 +529,24 @@ const en = {
   "invest.faq.talkDirectly": "Talk to us directly.",
   "invest.faq.body":
     "Our team has closed hundreds of deals for non-resident investors. No pitch — just straight answers.",
+  "invest.faq.q1": "Can foreigners buy property in Georgia?",
+  "invest.faq.a1":
+    "Yes. Foreign nationals have the same property rights as Georgian citizens — purchase, own, and transfer with zero restrictions.",
+  "invest.faq.q2": "Is rental income taxed?",
+  "invest.faq.a2":
+    "Rental income is subject to a 5% flat tax in Georgia (20% if not separately declared). One of the lowest rates in Europe.",
+  "invest.faq.q3": "What's the minimum budget to invest?",
+  "invest.faq.a3":
+    "Viable investments start from $60,000–$80,000 for a studio. Residency-qualifying investments require $150,000+.",
+  "invest.faq.q4": "Do I need to be in Georgia to buy?",
+  "invest.faq.a4":
+    "No. We can handle the full process remotely, including notarised power of attorney. Many clients close deals without visiting first.",
+  "invest.faq.q5": "What is the typical rental yield?",
+  "invest.faq.a5":
+    "Well-located, professionally managed units in Batumi yield 9–14.5% annually. TurnKey-finished units with premium positioning can exceed this.",
+  "invest.faq.q6": "How long does the purchase take?",
+  "invest.faq.a6":
+    "From signed offer to registered title: 1–3 business days. Due diligence and property selection take 2–4 weeks typically.",
   "invest.cta.eyebrow": "Ready to invest?",
   "invest.cta.title": "Your first property in Batumi starts with one call.",
   "invest.cta.body":

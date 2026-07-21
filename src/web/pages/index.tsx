@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { Reviews } from "../components/reviews";
 import { Partners } from "../components/partners";
+import { projects as catalogProjects, type Project } from "../data/projects";
+import { localizeProjects } from "../data/projects-locale";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -45,124 +48,6 @@ function useReveal() {
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const projects = [
-  {
-    name: "Artex Parkline", tag: "New Boulevard · Park Front",
-    address: "New Boulevard St, 12", seaDistance: "12 minutes to the sea", seaMeters: "950 m",
-    location: "New Boulevard, Batumi City Centre · Park frontage",
-    desc: "Contemporary high-rise facing the new park avenue. Architecturally optimized layouts deliver strong rental yields driven by high demand from digital nomads and short-term tourists.",
-    yield: "9–11%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $75,000",
-    completion: "Q2 2026",
-    area: "32–85 m²",
-    ceilingHeight: "2.9 m",
-    floors: "22 floors",
-    buildings: "1 building",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Park-front location", "High rental demand", "Concierge & reception", "Rooftop terrace", "Boulevard views"],
-    materials: "Contemporary monolithic frame, energy-efficient double glazing, ventilated facade cladding.",
-    photos: ["/artex-parkline.png"],
-  },
-  {
-    name: "Queen's Residence", tag: "Gated Community",
-    address: "Adlia St, 53", seaDistance: "8 minutes to the sea", seaMeters: "620 m",
-    location: "Adlia St, 53 · 8 minutes to the sea",
-    desc: "A private, gated community offering the sophisticated infrastructure of a 5-star hotel. Architecturally optimized floor plans designed for maximum comfort and style — the perfect blend of exclusivity and coastal convenience.",
-    yield: "9–12.6%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $95,000",
-    completion: "Q1 2027",
-    area: "45–130 m²",
-    ceilingHeight: "3.1 m",
-    floors: "18 floors",
-    buildings: "4 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Gated private community", "5-star hotel infrastructure", "Reception & concierge", "Pool & wellness centre", "Personal Property Manager"],
-    materials: "Premium reinforced concrete frame, Italian facade cladding, smart home pre-wiring.",
-    photos: ["/queens-residence.png"],
-  },
-  {
-    name: "Silk Towers", tag: "First Line · Sea View",
-    address: "Black Sea Blvd, 1", seaDistance: "2 minutes to the beach", seaMeters: "150 m",
-    location: "Black Sea Boulevard, First Line · 2 min to beach",
-    desc: "Luxury living meets ecological innovation on the historic first line. Featuring the region's grandest casino and a 20,000 m² private park by Masu Planning — the last of its kind on the Batumi coastline.",
-    yield: "10–13%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $120,000",
-    completion: "Q4 2026",
-    area: "50–200 m²",
-    ceilingHeight: "3.2 m",
-    floors: "45 floors",
-    buildings: "2 towers",
-    finishing: "White frame, Turnkey, Designer",
-    installment: "40% down / 60% quarterly",
-    features: ["20,000 m² private park", "Region's largest casino", "Direct Black Sea access", "Masu Planning landscaping", "Swiss-grade construction"],
-    materials: "High-grade monolithic concrete, floor-to-ceiling glazing, Swiss engineering standards.",
-    photos: ["/silk-towers.png"],
-  },
-  {
-    name: "Rogantini Swiss Village", tag: "Chakvi · Alpine Quality",
-    address: "Chakvi village, 30 km from Batumi", seaDistance: "5 minutes to the beach", seaMeters: "400 m",
-    location: "Chakvi village, 30 km from Batumi · Mountain & Sea views",
-    desc: "A self-contained Swiss-standard village with breathtaking mountain and sea panoramas. From a private poker room and luxury spa to tennis courts and medical facilities — seclusion without compromise.",
-    yield: "8–11%",
-    developer: "Placeholder Developer",
-    priceFrom: "From €55,000",
-    completion: "Q3 2026",
-    area: "38–110 m²",
-    ceilingHeight: "2.85 m",
-    floors: "5 floors",
-    buildings: "12 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "25% down / 75% quarterly",
-    features: ["Swiss moisture-resistant concrete", "Private poker room & luxury spa", "Tennis courts & medical centre", "Beach shuttle service", "Mountain & sea panoramic views"],
-    materials: "Swiss-standard moisture-resistant reinforced concrete, alpine timber facade accents.",
-    photos: ["/rogantini.png"],
-  },
-  {
-    name: "Ambassadori Island", tag: "Off-Shore Island · Marina",
-    address: "Batumi Bay, off-shore island", seaDistance: "Waterfront", seaMeters: "0 m",
-    location: "Off-shore island, Batumi Bay · Private marina access",
-    desc: "An 87-hectare man-made archipelago redefining luxury through eco-futurism. With 49% green infrastructure, a premier yacht club, and an elite private university — a sustainable sanctuary where technology meets nature.",
-    yield: "12–14.5%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $180,000",
-    completion: "Q2 2027",
-    area: "60–350 m²",
-    ceilingHeight: "3.3 m",
-    floors: "30 floors",
-    buildings: "8 buildings",
-    finishing: "White frame, Turnkey, Designer",
-    installment: "35% down / 65% quarterly",
-    features: ["87-ha man-made archipelago", "49% green infrastructure", "Premier yacht club", "Elite private university", "High-end global brand retail"],
-    materials: "Eco-certified materials, solar infrastructure, smart building systems throughout.",
-    photos: ["/ambassadori.png"],
-  },
-  {
-    name: "Gonio Yachts & Marina", tag: "Gonio · Waterfront",
-    address: "Gonio, 15 km from Batumi", seaDistance: "Direct waterfront", seaMeters: "0 m",
-    location: "Gonio, 15 km from Batumi · Direct waterfront",
-    desc: "A private marina complex combining branded residences with resort hospitality infrastructure. Berths, a yacht club, and a waterfront promenade in one of Georgia's most scenic coastal settings.",
-    yield: "11–14%",
-    developer: "Placeholder Developer",
-    priceFrom: "From $150,000",
-    completion: "Q1 2028",
-    area: "55–180 m²",
-    ceilingHeight: "3.0 m",
-    floors: "14 floors",
-    buildings: "3 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: ["Private marina with berths", "Branded residences", "Yacht club membership", "Waterfront promenade", "Resort hospitality services"],
-    materials: "Marine-grade materials, teak decking, panoramic floor-to-ceiling facades.",
-    photos: ["/gonio_final_v1.png"],
-  },
-];
-
-type Project = typeof projects[0];
 
 const stats = [
   { value: "1.7M",   labelKey: "home.analytics.stat.tourists" },
@@ -749,6 +634,11 @@ function Analytics() {
 function Portfolio() {
   const isMobile = useIsMobile();
   const t = useT();
+  const { language } = useLocale();
+  const portfolioProjects = useMemo(
+    () => localizeProjects(catalogProjects, language),
+    [language],
+  );
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [showArrow, setShowArrow] = useState(true);
 
@@ -799,7 +689,7 @@ function Portfolio() {
               minWidth: "100%",
             }}
           >
-            {projects.map((p, i) => <ProjectCard key={p.name} project={p} index={i} isMobile={isMobile} />)}
+            {portfolioProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} isMobile={isMobile} />)}
           </div>
         </div>
 
@@ -871,14 +761,10 @@ function Portfolio() {
 }
 
 
-function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]; index: number; isMobile?: boolean }) {
+function ProjectCard({ project, index, isMobile }: { project: Project; index: number; isMobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const t = useT();
   const cardW = isMobile ? "260px" : "300px";
-  const slug = project.name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
 
   const firstSentence = project.desc.match(/^[^.!?]+[.!?]/)?.[0] ?? project.desc;
   const teaser = firstSentence.length > 110
@@ -886,13 +772,13 @@ function ProjectCard({ project, index, isMobile }: { project: typeof projects[0]
     : firstSentence;
 
   return (
-    <Link href={`/project/${slug}`}>
+    <Link href={`/project/${project.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
         <div className="property-card" style={{ width: cardW, minWidth: cardW, flexShrink: 0, scrollSnapAlign: "start", cursor: "pointer", borderRadius: "16px", overflow: "hidden", position: "relative" }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
-          <img src={cardImages[index]} alt={project.name}
+          <img src={project.cardImage || cardImages[index]} alt={project.name}
             style={{ width: "100%", height: "460px", objectFit: "cover", display: "block", transition: "transform 0.6s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
 
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />

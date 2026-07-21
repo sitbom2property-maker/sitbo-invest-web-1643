@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useRoute } from "wouter";
-import { getPostBySlug, type BlogBlock } from "../data/blog-posts";
+import { type BlogBlock } from "../data/blog-posts";
+import { getPostBySlugLocalized } from "../data/blog-posts-locale";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 const C = {
@@ -294,9 +296,10 @@ function AuthorBlock({ author }: { author: string }) {
 export default function BlogPostPage() {
   const isMobile = useIsMobile();
   const t = useT();
+  const { language } = useLocale();
   const [, params] = useRoute("/blog/:slug");
   const slug = params?.slug ?? "";
-  const post = getPostBySlug(slug);
+  const post = getPostBySlugLocalized(slug, language);
 
   useEffect(() => {
     window.scrollTo(0, 0);
