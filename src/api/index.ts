@@ -3,8 +3,20 @@ import { cors } from "hono/cors"
 import authRouter from "./routes/auth";
 import propertiesRouter from "./routes/properties";
 import ratesRouter from "./routes/rates";
+import {
+  appendLeadRow,
+  SHEETS_SHEET_GID,
+  SHEETS_SHEET_NAME,
+  SHEETS_SPREADSHEET_ID,
+  type SheetsEnv,
+} from "./lib/google-sheets";
 
-const app = new Hono();
+type Bindings = SheetsEnv & {
+  DB?: D1Database;
+  ADMIN_PASSWORD?: string;
+};
+
+const app = new Hono<{ Bindings: Bindings }>();
 
 app.use(cors({ origin: "*" }));
 
@@ -14,20 +26,7 @@ app.route('/api/auth', authRouter);
 app.route('/api/properties', propertiesRouter);
 app.route('/api/rates', ratesRouter);
 
-const SHEETS_WORKER = 'http://localhost:6475';
-const SHEETS_SECRET = 'sitbo-sheets-secret';
-
-async function appendToSheets(row: string[]) {
-  const res = await fetch(SHEETS_WORKER, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-secret': SHEETS_SECRET },
-    body: JSON.stringify({ row }),
-  });
-  if (!res.ok) throw new Error(`sheets-worker ${res.status}`);
-  return res.json();
-}
-
-// Lead form submission
+// Lead form submission → Google Sheet (gid 1664909573)
 app.post('/api/leads', async (c) => {
   try {
     const body = await c.req.json();
@@ -37,11 +36,19 @@ app.post('/api/leads', async (c) => {
     }
 
     const ts = new Date().toISOString();
+    const row = [ts, String(name), String(contact), budget ? String(budget) : '', 'Website'];
     console.log('[Lead submitted]', { name, contact, budget, ts });
 
     try {
-      await appendToSheets([ts, name, contact, budget || '', 'Website']);
-      console.log('[Sheets] Row appended ✓');
+      const env: SheetsEnv = {
+        SHEETS_WEBHOOK_URL: c.env?.SHEETS_WEBHOOK_URL,
+        GOOGLE_SERVICE_ACCOUNT_JSON: c.env?.GOOGLE_SERVICE_ACCOUNT_JSON,
+        SHEETS_SPREADSHEET_ID: c.env?.SHEETS_SPREADSHEET_ID || SHEETS_SPREADSHEET_ID,
+        SHEETS_SHEET_NAME: c.env?.SHEETS_SHEET_NAME || SHEETS_SHEET_NAME,
+        SHEETS_SHEET_GID: c.env?.SHEETS_SHEET_GID || String(SHEETS_SHEET_GID),
+      };
+      const result = await appendLeadRow(row, env);
+      console.log('[Sheets] Row appended ✓ via', result.via);
     } catch (err) {
       console.error('[Sheets] Failed:', err);
       // Don't fail the user-facing request

@@ -16,5 +16,10 @@
     "directory": "./dist/client",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application"
+  },
+  "vars": {
+    "SHEETS_SPREADSHEET_ID": "1NO4m01el_qhPqWvr45Mk-T9bluUcrLoKMupVdhXuXnk",
+    "SHEETS_SHEET_GID": "1664909573",
+    "SHEETS_SHEET_NAME": "Leads"
   }
 }

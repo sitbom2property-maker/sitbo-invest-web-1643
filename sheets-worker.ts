@@ -21,9 +21,10 @@ const server = Bun.serve({
           ? `'${cell}`
           : cell
       );
+      // Target: https://docs.google.com/spreadsheets/d/1NO4m01el_qhPqWvr45Mk-T9bluUcrLoKMupVdhXuXnk/edit?gid=1664909573
       const props = JSON.stringify({
         spreadsheetId: "1NO4m01el_qhPqWvr45Mk-T9bluUcrLoKMupVdhXuXnk",
-        sheetName: "Leads",
+        sheetName: "Leads", // sheet gid 1664909573
         rows: JSON.stringify([safeRow]),
         hasHeaders: false,
       });
