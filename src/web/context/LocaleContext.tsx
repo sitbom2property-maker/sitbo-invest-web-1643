@@ -57,7 +57,14 @@ function readStoredLocale(): LocaleState {
   if (typeof window === "undefined") return DEFAULT_LOCALE;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_LOCALE;
+    if (!raw) {
+      // First visit: prefer browser language (ru → Russian), keep USD until chosen
+      const browserLang = normalizeLanguage(navigator.language || "en");
+      return {
+        ...DEFAULT_LOCALE,
+        language: browserLang,
+      };
+    }
     const parsed = JSON.parse(raw) as Partial<LocaleState>;
     return {
       language: normalizeLanguage(parsed.language ?? DEFAULT_LOCALE.language),

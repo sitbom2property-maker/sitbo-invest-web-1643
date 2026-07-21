@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { Globe as GlobeIcon } from "lucide-react";
-import { LocaleModal } from "./LocaleModal";
+import { NavLocaleSwitcher } from "./NavLocaleSwitcher";
 import { useT, type MessageKey } from "../i18n";
 
 export const NAV_HEIGHT = 88;
@@ -110,7 +109,6 @@ export function Nav() {
   const t = useT();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
 
   const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
 
@@ -146,7 +144,7 @@ export function Nav() {
     };
   }, [menuOpen]);
 
-  const transparent = isHome && !scrolled && !menuOpen && !langOpen;
+  const transparent = isHome && !scrolled && !menuOpen;
   const showSolid = !transparent;
 
   const navBackground = !showSolid
@@ -239,40 +237,16 @@ export function Nav() {
             <div aria-hidden="true" />
           )}
 
-          {/* Language + menu — right */}
+          {/* Language + currency + menu — right */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifySelf: "end",
-              gap: 4,
+              gap: isMobile ? 2 : 8,
             }}
           >
-            <button
-              type="button"
-              onClick={() => setLangOpen(true)}
-              aria-label={t("nav.language")}
-              aria-expanded={langOpen}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#FAF7F0",
-                cursor: "pointer",
-                padding: 8,
-                display: "flex",
-                alignItems: "center",
-                opacity: 0.85,
-                transition: "opacity 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = "1";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "0.85";
-              }}
-            >
-              <GlobeIcon size={18} />
-            </button>
+            <NavLocaleSwitcher compact={isMobile} />
 
             {isMobile && (
               <button
@@ -340,8 +314,6 @@ export function Nav() {
           </div>
         </div>
       )}
-
-      <LocaleModal open={langOpen} onClose={() => setLangOpen(false)} />
     </>
   );
 }
