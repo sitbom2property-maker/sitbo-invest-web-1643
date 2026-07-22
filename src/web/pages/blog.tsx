@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { getAllPosts } from "../data/blog-posts";
+import { getAllPostsLocalized } from "../data/blog-posts-locale";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 const C = {
@@ -163,7 +164,8 @@ function ArticleCard({
 export default function BlogPage() {
   const isMobile = useIsMobile();
   const t = useT();
-  const posts = getAllPosts();
+  const { language } = useLocale();
+  const posts = getAllPostsLocalized(language);
 
   useEffect(() => {
     window.scrollTo(0, 0);

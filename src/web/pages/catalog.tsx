@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
+import { localizeCityLabel, localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 const C = {
@@ -35,6 +37,7 @@ const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri"] as 
 function CatalogCard({ p }: { p: Project }) {
   const [hovered, setHovered] = useState(false);
   const { formatFromUSD } = useRates();
+  const { language } = useLocale();
   const t = useT();
   const priceLabel = formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
   return (
@@ -59,7 +62,7 @@ function CatalogCard({ p }: { p: Project }) {
 
             {/* City badge */}
             <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,251,240,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.8)" }}>
-              {p.city}
+              {localizeCityLabel(p.city, language)}
             </div>
 
             {/* ROI badge */}
@@ -107,6 +110,11 @@ function CatalogCard({ p }: { p: Project }) {
 export default function CatalogPage() {
   const isMobile = useIsMobile();
   const t = useT();
+  const { language } = useLocale();
+  const localizedProjects = useMemo(
+    () => localizeProjects(projects, language),
+    [language],
+  );
 
   const [city, setCity]     = useState<typeof CITIES[number]>("All");
   const [sort, setSort]     = useState<string>("default");
@@ -133,9 +141,9 @@ export default function CatalogPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const filtered = useMemo(() => {
-    let list = [...projects];
+    let list = [...localizedProjects];
 
-    // City
+    // City (canonical English keys on Project.city)
     if (city !== "All") list = list.filter(p => p.city === city);
 
     // Search
@@ -145,7 +153,8 @@ export default function CatalogPage() {
         p.name.toLowerCase().includes(q) ||
         p.tag.toLowerCase().includes(q) ||
         p.city.toLowerCase().includes(q) ||
-        p.address.toLowerCase().includes(q)
+        p.address.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q)
       );
     }
 
@@ -158,13 +167,13 @@ export default function CatalogPage() {
     });
 
     return list;
-  }, [city, sort, search]);
+  }, [city, sort, search, localizedProjects]);
 
   const counts = useMemo(() => {
-    const map: Record<string, number> = { All: projects.length };
-    projects.forEach(p => { map[p.city] = (map[p.city] || 0) + 1; });
+    const map: Record<string, number> = { All: localizedProjects.length };
+    localizedProjects.forEach(p => { map[p.city] = (map[p.city] || 0) + 1; });
     return map;
-  }, []);
+  }, [localizedProjects]);
 
   const inputStyle: React.CSSProperties = {
     fontFamily: "DM Sans", fontSize: "0.82rem", color: C.dark,
@@ -188,7 +197,7 @@ export default function CatalogPage() {
               {t("catalog.title")}
             </h1>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
-              {projects.length} {t("catalog.subtitle")}
+              {localizedProjects.length} {t("catalog.subtitle")}
             </p>
           </div>
 

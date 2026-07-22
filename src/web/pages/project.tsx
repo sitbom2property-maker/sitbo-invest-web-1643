@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
+import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
 import { useRates } from "../context/RatesContext";
+import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
@@ -248,14 +250,16 @@ export default function ProjectPage() {
   const params = useParams<{ slug: string }>();
   const isMobile = useIsMobile();
   const { formatFromUSD } = useRates();
+  const { language } = useLocale();
   const t = useT();
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" });
 
-  const idx    = projects.findIndex(p => p.slug === params.slug);
-  const project = projects[idx];
+  const localizedList = localizeProjects(projects, language);
+  const idx    = localizedList.findIndex(p => p.slug === params.slug);
+  const project = localizedList[idx];
 
   // Scroll to top on mount
   useEffect(() => { window.scrollTo(0, 0); }, [params.slug]);
@@ -276,8 +280,8 @@ export default function ProjectPage() {
   const priceLabel = formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
 
   const p = project;
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
+  const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
+  const next = localizedList[(idx + 1) % localizedList.length];
 
   return (<>
 
