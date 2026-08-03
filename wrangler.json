@@ -22,6 +22,11 @@
     "ODOO_DB": "sitboinvest",
     "ODOO_LOGIN": "sitbom2property@gmail.com",
     "ODOO_API_KEY": "a5885446b10319f45065c0c8d5bc8bf7a0fa6095",
-    "ODOO_USER_ID": "2"
+    "ODOO_USER_ID": "2",
+    "ODOO_TEAM_ID": "1",
+    "ODOO_STAGE_ID": "1",
+    "ODOO_SOURCE_ID": "16",
+    "ODOO_MEDIUM_ID": "7",
+    "ODOO_TAG_IDS": "1"
   }
 }
