@@ -26,9 +26,10 @@ const inputStyle: CSSProperties = {
 
 type ConsultationFormProps = {
   onSuccess?: () => void;
+  source?: string;
 };
 
-export function ConsultationForm({ onSuccess }: ConsultationFormProps) {
+export function ConsultationForm({ onSuccess, source = "Consultation" }: ConsultationFormProps) {
   const [form, setForm] = useState({ name: "", contact: "", budget: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,11 @@ export function ConsultationForm({ onSuccess }: ConsultationFormProps) {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          source,
+          page: typeof window !== "undefined" ? window.location.pathname : undefined,
+        }),
       });
       if (res.ok) {
         setSubmitted(true);

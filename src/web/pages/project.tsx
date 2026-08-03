@@ -256,6 +256,46 @@ export default function ProjectPage() {
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" });
+  const [offerLoading, setOfferLoading] = useState(false);
+  const [offerError, setOfferError] = useState("");
+  const [offerSent, setOfferSent] = useState(false);
+
+  const submitOfferForm = async () => {
+    setOfferError("");
+    if (!offerFormData.name.trim() || (!offerFormData.phone.trim() && !offerFormData.email.trim())) {
+      setOfferError(t("home.contact.errorRequired"));
+      return;
+    }
+    setOfferLoading(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: offerFormData.name.trim(),
+          phone: offerFormData.phone.trim(),
+          email: offerFormData.email.trim(),
+          project: project.name,
+          source: "Project page",
+          page: typeof window !== "undefined" ? window.location.pathname : undefined,
+        }),
+      });
+      if (res.ok) {
+        setOfferSent(true);
+        setOfferFormData({ name: "", phone: "", email: "" });
+        window.setTimeout(() => {
+          setShowOfferForm(false);
+          setOfferSent(false);
+        }, 2000);
+      } else {
+        setOfferError(t("home.contact.errorGeneric"));
+      }
+    } catch {
+      setOfferError(t("home.contact.errorNetwork"));
+    } finally {
+      setOfferLoading(false);
+    }
+  };
 
   const localizedList = localizeProjects(projects, language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
@@ -661,9 +701,19 @@ export default function ProjectPage() {
                 onFocus={e => (e.target.style.borderColor = C.teal)}
                 onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
               />
-              <button onClick={() => { setShowOfferForm(false); setOfferFormData({ name: "", phone: "", email: "" }); }} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "8px", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                {t("cta.sendRequest")}
+              <button
+                type="button"
+                onClick={submitOfferForm}
+                disabled={offerLoading || offerSent}
+                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: offerLoading ? "wait" : "pointer", marginTop: "8px", transition: "opacity 0.2s", opacity: offerLoading ? 0.7 : 1 }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = offerLoading ? "0.7" : "1")}
+              >
+                {offerSent ? t("home.contact.sentTitle") : offerLoading ? "…" : t("cta.sendRequest")}
               </button>
+              {offerError ? (
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{offerError}</p>
+              ) : null}
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
                 {t("project.offerModal.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
