@@ -20,6 +20,8 @@
   "vars": {
     "ODOO_URL": "https://sitboinvest.odoo.com",
     "ODOO_DB": "sitboinvest",
-    "ODOO_LOGIN": "sitbom2property@gmail.com"
+    "ODOO_LOGIN": "sitbom2property@gmail.com",
+    "ODOO_API_KEY": "a5885446b10319f45065c0c8d5bc8bf7a0fa6095",
+    "ODOO_USER_ID": "2"
   }
 }

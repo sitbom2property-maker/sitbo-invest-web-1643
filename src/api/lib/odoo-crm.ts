@@ -3,6 +3,7 @@ export type OdooEnv = {
   ODOO_DB?: string;
   ODOO_LOGIN?: string;
   ODOO_API_KEY?: string;
+  ODOO_USER_ID?: string;
 };
 
 export type WebsiteLead = {
@@ -19,6 +20,10 @@ export type WebsiteLead = {
 
 const DEFAULT_ODOO_URL = "https://sitboinvest.odoo.com";
 const DEFAULT_ODOO_DB = "sitboinvest";
+/** Fallback until Cloudflare secret ODOO_API_KEY is set. Rotate after moving to secrets. */
+const DEFAULT_ODOO_API_KEY = "a5885446b10319f45065c0c8d5bc8bf7a0fa6095";
+/** Salesperson: Артур Арутюнян */
+const DEFAULT_ODOO_USER_ID = 2;
 
 function normalizeBaseUrl(url: string): string {
   return url.replace(/\/+$/, "");
@@ -53,14 +58,15 @@ function buildDescription(lead: WebsiteLead): string {
   return lines.join("\n");
 }
 
-/** Create a CRM lead in Odoo via JSON-2 API. */
+/** Create a CRM opportunity in Odoo (shows in Pipeline / Воронка). */
 export async function createOdooLead(
   lead: WebsiteLead,
   env: OdooEnv,
 ): Promise<number> {
   const baseUrl = normalizeBaseUrl(env.ODOO_URL || DEFAULT_ODOO_URL);
   const db = env.ODOO_DB || DEFAULT_ODOO_DB;
-  const apiKey = env.ODOO_API_KEY;
+  const apiKey = env.ODOO_API_KEY || DEFAULT_ODOO_API_KEY;
+  const userId = Number(env.ODOO_USER_ID || DEFAULT_ODOO_USER_ID) || DEFAULT_ODOO_USER_ID;
 
   if (!apiKey) throw new Error("ODOO_API_KEY not configured");
 
@@ -83,7 +89,9 @@ export async function createOdooLead(
           email_from: email || false,
           phone: phone || false,
           description: buildDescription(lead),
-          type: "lead",
+          // opportunity = visible in CRM Pipeline / Воронка
+          type: "opportunity",
+          user_id: userId,
         },
       ],
     }),
