@@ -14,19 +14,20 @@ export function FooterV2() {
     <footer className="fv2">
       <style>{`
         .fv2 {
+          --rd-gutter: clamp(30px, 5.5vw, 80px);
           background: #21141A;
           color: #FFFFFF;
-          font-family: 'DM Sans', Manrope, sans-serif;
+          font-family: 'Inter', 'DM Sans', Manrope, sans-serif;
           padding: clamp(46px, 6vw, 88px) 0 clamp(26px, 3vw, 44px);
         }
-        .fv2-wrap { max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 30px); }
+        .fv2-wrap { max-width: 1440px; margin: 0 auto; padding: 0 var(--rd-gutter); }
         .fv2-grid {
           display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
           gap: clamp(32px, 5vw, 96px); align-items: start;
         }
         .fv2-logo { height: 40px; width: auto; display: block; margin-bottom: 26px; }
         .fv2-name {
-          font-family: 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
+          font-family: 'Inter', 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFFFF;
         }
         .fv2-name em { font-family: 'Jun', Georgia, serif; font-style: italic; }
@@ -35,7 +36,7 @@ export function FooterV2() {
           color: rgba(255,255,255,.82); margin: 0; max-width: 560px;
         }
         .fv2-col-title {
-          font-family: 'Chillax', 'DM Sans', Manrope, sans-serif;
+          font-family: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
           font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFFFF;
         }
         .fv2-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
@@ -49,6 +50,7 @@ export function FooterV2() {
         }
         .fv2-bottom a { color: rgba(255,255,255,.72); }
         @media (max-width: 900px) {
+          .fv2 { --rd-gutter: clamp(20px, 5vw, 30px); }
           .fv2-grid { grid-template-columns: 1fr 1fr; }
           .fv2-brand { grid-column: 1 / -1; }
         }

@@ -14,6 +14,7 @@ const en = {
   "nav.feedback": "Feedback",
   "nav.contactArthur": "Contact Arthur",
   "nav.properties": "Properties",
+  "nav.pricing": "Pricing",
   "nav.services": "Services",
   "nav.whyGeorgia": "Why Georgia",
   "nav.history": "History Timeline",
@@ -145,6 +146,9 @@ const en = {
   "v2.fb.q3":
     "Bought remotely, never flew in. Rented out within three weeks of handover.",
   "v2.fb.a3": "— Elena S., Investor (Cyprus)",
+  "v2.fb.q4":
+    "Clear numbers, clear risks, clear next step. Best advisory experience I've had in the Caucasus.",
+  "v2.fb.a4": "— Alexei P., Investor (Israel)",
   "v2.fb.tag.batumi": "Batumi",
   "v2.fb.tag.protection": "Protection",
   "v2.fb.tag.turnkey": "Turnkey Asset Management",
