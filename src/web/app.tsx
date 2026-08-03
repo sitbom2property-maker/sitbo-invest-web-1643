@@ -19,7 +19,8 @@ import { Provider } from "./components/provider";
 import { LocaleProvider } from "./context/LocaleContext";
 import { RatesProvider } from "./context/RatesContext";
 import { Nav, NAV_HEIGHT } from "./components/nav";
-import { Footer } from "./components/footer";
+// Redesigned footer. Roll back by importing `Footer` from "./components/footer".
+import { FooterV2 as Footer } from "./components/FooterV2";
 import { CookieConsent } from "./components/cookie-consent";
 import { LeadPopup } from "./components/LeadPopup";
 import { ScrollToHash } from "./components/scroll-to-hash";

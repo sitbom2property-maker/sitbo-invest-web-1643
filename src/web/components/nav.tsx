@@ -71,12 +71,12 @@ function NavItem({
       href={href}
       onClick={onNavigate}
       style={{
-        fontFamily: "Manrope, sans-serif",
-        fontSize: 11,
-        fontWeight: 500,
-        letterSpacing: "0.22em",
-        color: "#FAF7F0",
-        textTransform: "uppercase",
+        fontFamily: "'DM Sans', Manrope, sans-serif",
+        fontSize: 15,
+        fontWeight: 400,
+        letterSpacing: 0,
+        color: "#FFFFFF",
+        textTransform: "none",
         textDecoration: "none",
         whiteSpace: "nowrap",
         transition: "opacity 0.2s",
@@ -150,12 +150,10 @@ export function Nav() {
   const showSolid = !transparent;
 
   const navBackground = !showSolid
-    ? "transparent"
+    ? "#21141A"
     : isMobile
-      ? "rgba(33, 20, 26, 0.85)"
-      : "rgba(33, 20, 26, 0.92)";
-
-  const logoHeight = isMobile ? 11 : 13;
+      ? "rgba(33, 20, 26, 0.92)"
+      : "rgba(33, 20, 26, 0.94)";
 
   return (
     <>
@@ -188,35 +186,10 @@ export function Nav() {
             boxSizing: "border-box",
           }}
         >
-          {/* Logo — left */}
-          <Link
-            href="/"
-            aria-label="SITBO Invest — Home"
-            style={{
-              display: "block",
-              cursor: "pointer",
-              lineHeight: 0,
-              transition: "opacity 0.2s ease",
-              justifySelf: "start",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = "0.75";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = "1";
-            }}
-          >
-            <img
-              src="/logo-dark-bg.png"
-              alt="SITBO Invest"
-              style={{
-                height: logoHeight,
-                width: "auto",
-                display: "block",
-                objectFit: "contain",
-              }}
-            />
-          </Link>
+          {/* Language + currency — left (matches the Figma header) */}
+          <div style={{ justifySelf: "start", display: "flex", alignItems: "center" }}>
+            <NavLocaleSwitcher compact={isMobile} />
+          </div>
 
           {/* Desktop nav links — center */}
           {!isMobile ? (
@@ -248,28 +221,33 @@ export function Nav() {
               gap: isMobile ? 2 : 8,
             }}
           >
-            <NavLocaleSwitcher compact={isMobile} />
-
             {!isMobile && (
               <Link
                 href={CONTACT_HREF}
                 style={{
                   marginLeft: 10,
-                  padding: "11px 20px",
-                  borderRadius: 8,
-                  background: "#8CB2C0",
-                  color: "#21141A",
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 10.5,
-                  fontWeight: 700,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
+                  padding: "12px 26px",
+                  borderRadius: 4,
+                  background: "transparent",
+                  color: "#FFFFFF",
+                  border: "1px solid rgba(255,255,255,0.55)",
+                  fontFamily: "'DM Sans', Manrope, sans-serif",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  letterSpacing: 0,
+                  textTransform: "none",
                   textDecoration: "none",
                   whiteSpace: "nowrap",
-                  transition: "opacity 0.2s",
+                  transition: "background 0.2s, color 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.86")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#FFFFFF";
+                  e.currentTarget.style.color = "#21141A";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "#FFFFFF";
+                }}
               >
                 {t("nav.contactArthur")}
               </Link>

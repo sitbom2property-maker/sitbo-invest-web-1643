@@ -1,179 +1,58 @@
-import { useEffect, useMemo, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Link } from "wouter";
 import { RequestModal } from "../components/RequestModal";
-import { Partners } from "../components/partners";
-import { projects as catalogProjects } from "../data/projects";
-import { localizeProjects } from "../data/projects-locale";
-import { useLocale } from "../context/LocaleContext";
 import { useT, type MessageKey } from "../i18n";
 
-const C = {
-  dark: "#21141A",
-  light: "#FFFBF0",
-  teal: "#8CB2C0",
-  wine: "#683D47",
-  muted: "#7a7a7a",
-};
+/**
+ * Homepage rebuilt from the Figma export (Desktop - 1.pdf, 1440 × 7851).
+ * Palette, type scale and geometry are taken directly from that file:
+ *   page #21141A · card #412834 · green #48674D · panel #F8F8F8 · featured #E9F7FF
+ */
 
-function useIsMobile(bp = 900) {
-  const [mobile, setMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth < bp : false,
-  );
-  useEffect(() => {
-    const handler = () => setMobile(window.innerWidth < bp);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, [bp]);
-  return mobile;
-}
+type ModalState = { open: boolean; source: string; topic?: string; title?: string };
+const CLOSED: ModalState = { open: false, source: "" };
 
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll(".v2-reveal");
+    const els = document.querySelectorAll(".rv");
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
+            e.target.classList.add("in");
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.12 },
+      { threshold: 0.1 },
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 }
 
-type ModalState = { open: boolean; source: string; topic?: string; title?: string };
-
-const CLOSED: ModalState = { open: false, source: "" };
-
-// ─── Shared bits ──────────────────────────────────────────────────────────────
-
-function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
-  return (
-    <p
-      style={{
-        fontFamily: "Manrope, sans-serif",
-        fontSize: 10,
-        letterSpacing: "0.22em",
-        textTransform: "uppercase",
-        color: light ? "rgba(250,247,240,0.5)" : C.teal,
-        margin: "0 0 18px",
-      }}
-    >
-      {children}
-    </p>
-  );
-}
-
-function Shell({
-  children,
-  style,
-}: {
-  children: React.ReactNode;
-  style?: CSSProperties;
-}) {
-  return (
-    <div
-      style={{
-        maxWidth: 1280,
-        margin: "0 auto",
-        padding: "0 clamp(20px, 5vw, 64px)",
-        ...style,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-// ─── 1. Hero ──────────────────────────────────────────────────────────────────
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 
 function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
   const t = useT();
   return (
-    <section
-      className="v2-hero"
-      style={{
-        position: "relative",
-        width: "100vw",
-        minHeight: "100vh",
-        marginTop: "calc(-1 * var(--nav-height, 88px))",
-        marginLeft: "calc(-50vw + 50%)",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        disablePictureInPicture
-        onContextMenu={(e) => e.preventDefault()}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      >
-        <source src="/hero-video.webm" type="video/webm" />
-        <source src="/hero-video.mp4" type="video/mp4" />
-      </video>
+    <section className="rd-hero">
+      <span className="rd-hero-circle" aria-hidden="true" />
+      <div className="rd-wrap rd-hero-grid">
+        <div className="rd-hero-photo">
+          <img src="/rd-arthur.jpg" alt="Arthur Arutyunyan" />
+        </div>
 
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          background:
-            "linear-gradient(to top, rgba(20,14,18,0.86) 0%, rgba(20,14,18,0.45) 45%, rgba(20,14,18,0.12) 78%, rgba(20,14,18,0) 100%)",
-        }}
-      />
-
-      <Shell style={{ position: "relative", zIndex: 2, width: "100%" }}>
-        <div style={{ maxWidth: 820, paddingTop: "var(--nav-height, 88px)" }}>
-          <h1
-            className="v2-hero-h1"
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: "clamp(38px, 6vw, 86px)",
-              fontWeight: 400,
-              lineHeight: 1.05,
-              letterSpacing: "-0.01em",
-              color: "#FFFFFF",
-              margin: "0 0 26px",
-            }}
-          >
+        <div className="rd-hero-copy">
+          <h1>
             {t("v2.hero.line1")}
             <br />
-            <em style={{ fontStyle: "italic" }}>{t("v2.hero.line2")}</em>
+            {t("v2.hero.line2")}
           </h1>
-
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "clamp(14px, 1.4vw, 17px)",
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.78)",
-              maxWidth: 580,
-              margin: "0 0 36px",
-            }}
-          >
-            {t("v2.hero.body")}
-          </p>
-
-          <div className="v2-hero-ctas">
+          <p>{t("v2.hero.body")}</p>
+          <div className="rd-hero-btns">
             <button
               type="button"
-              className="v2-btn v2-btn-solid"
+              className="rd-btn rd-btn-outline"
               onClick={() =>
                 onRequest({
                   open: true,
@@ -186,7 +65,7 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
             </button>
             <button
               type="button"
-              className="v2-btn v2-btn-ghost"
+              className="rd-btn rd-btn-outline"
               onClick={() =>
                 onRequest({
                   open: true,
@@ -200,474 +79,276 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
             </button>
           </div>
         </div>
-      </Shell>
+      </div>
 
-      <a href="#why-georgia" className="v2-scroll-hint" aria-label={t("v2.hero.scroll")}>
-        <span>{t("v2.hero.scroll")}</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path
-            d="M2 4.5L7 9.5L12 4.5"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </a>
+      <div className="rd-hero-band">
+        <img src="/rd-waterfront.jpg" alt="" aria-hidden="true" />
+        <a href="#why-georgia" className="rd-scroll">
+          {t("v2.hero.scroll")}
+        </a>
+      </div>
     </section>
   );
 }
 
-// ─── 2. Why Georgia ───────────────────────────────────────────────────────────
+// ─── Why Georgia + stats ──────────────────────────────────────────────────────
 
-const STATS: { value: string; labelKey: MessageKey }[] = [
-  { value: "0%", labelKey: "v2.stats.tax" },
-  { value: "$150k", labelKey: "v2.stats.residency" },
-  { value: "47.4%", labelKey: "v2.stats.women" },
-  { value: "3.7M", labelKey: "v2.stats.tourists" },
-  { value: "$1,420", labelKey: "v2.stats.price" },
-  { value: "13.2%", labelKey: "v2.stats.yield" },
+type Stat =
+  | { kind: "stat"; value: string; labelKey: MessageKey; noteKey: MessageKey; tone: "plum" | "green" | "white" }
+  | { kind: "image"; src: string; alt: string };
+
+const STATS: Stat[] = [
+  { kind: "stat", value: "0%", labelKey: "v2.stats.tax", noteKey: "v2.stats.taxNote", tone: "plum" },
+  { kind: "stat", value: "$150k", labelKey: "v2.stats.residency", noteKey: "v2.stats.residencyNote", tone: "green" },
+  { kind: "image", src: "/rd-tower.jpg", alt: "Tbilisi" },
+  { kind: "stat", value: "47.4%", labelKey: "v2.stats.women", noteKey: "v2.stats.womenNote", tone: "plum" },
+  { kind: "image", src: "/rd-beach.jpg", alt: "Batumi" },
+  { kind: "stat", value: "3.7M", labelKey: "v2.stats.tourists", noteKey: "v2.stats.touristsNote", tone: "plum" },
+  { kind: "stat", value: "$1420", labelKey: "v2.stats.price", noteKey: "v2.stats.priceNote", tone: "white" },
+  { kind: "stat", value: "13.2%", labelKey: "v2.stats.yield", noteKey: "v2.stats.yieldNote", tone: "green" },
 ];
 
 function WhyGeorgia() {
   const t = useT();
   return (
-    <section id="why-georgia" style={{ background: C.light, padding: "clamp(72px, 10vw, 130px) 0" }}>
-      <Shell>
-        <div className="v2-why-head v2-reveal">
-          <h2
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: "clamp(30px, 4.6vw, 62px)",
-              fontWeight: 400,
-              lineHeight: 1.08,
-              color: C.dark,
-              margin: 0,
-              maxWidth: 620,
-            }}
-          >
-            {t("v2.why.title")}
-          </h2>
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "clamp(14px, 1.3vw, 16px)",
-              lineHeight: 1.75,
-              color: C.muted,
-              maxWidth: 400,
-              margin: 0,
-            }}
-          >
-            {t("v2.why.body")}
-          </p>
+    <section id="why-georgia" className="rd-why">
+      <div className="rd-wrap">
+        <div className="rd-split rv">
+          <h2 className="rd-h2">{t("v2.why.title")}</h2>
+          <p className="rd-lead">{t("v2.why.body")}</p>
         </div>
 
-        <div className="v2-stats-grid v2-reveal">
-          {STATS.map((s) => (
-            <div key={s.labelKey} className="v2-stat">
-              <div
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: "clamp(34px, 4vw, 56px)",
-                  fontWeight: 400,
-                  lineHeight: 1,
-                  color: C.dark,
-                  marginBottom: 12,
-                }}
-              >
-                {s.value}
+        <div className="rd-stats rv">
+          {STATS.map((s, i) =>
+            s.kind === "image" ? (
+              <div key={`img-${i}`} className="rd-stat rd-stat-img">
+                <img src={s.src} alt={s.alt} loading="lazy" />
               </div>
-              <p
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 12,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: C.muted,
-                  margin: 0,
-                }}
-              >
-                {t(s.labelKey)}
-              </p>
-            </div>
-          ))}
+            ) : (
+              <div key={s.labelKey} className={`rd-stat rd-stat-${s.tone}`}>
+                <div className="rd-stat-top">
+                  <span className="rd-stat-value">{s.value}</span>
+                  <span className="rd-stat-label">{t(s.labelKey)}</span>
+                </div>
+                <span className="rd-stat-note">{t(s.noteKey)}</span>
+              </div>
+            ),
+          )}
         </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── 3. Alabbar quote ─────────────────────────────────────────────────────────
+// ─── Quote ────────────────────────────────────────────────────────────────────
 
 function Quote() {
   const t = useT();
   return (
-    <section
-      style={{
-        background: C.dark,
-        padding: "clamp(72px, 10vw, 130px) 0",
-        position: "relative",
-      }}
-    >
-      <Shell>
-        <div className="v2-reveal" style={{ maxWidth: 940, margin: "0 auto", textAlign: "center" }}>
-          <img
-            src="/eagle-hills-logo.png"
-            alt="Eagle Hills"
-            style={{ height: 26, width: "auto", opacity: 0.75, marginBottom: 34 }}
-          />
-          <blockquote
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: "clamp(22px, 3.2vw, 42px)",
-              fontWeight: 400,
-              fontStyle: "italic",
-              lineHeight: 1.35,
-              color: C.light,
-              margin: "0 0 30px",
-            }}
-          >
-            “{t("v2.quote.text")}”
-          </blockquote>
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: 12,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              color: C.teal,
-              margin: "0 0 34px",
-            }}
-          >
-            {t("v2.quote.author")}
-          </p>
-          <Link href="/invest" className="v2-btn v2-btn-outline-light">
-            {t("v2.quote.cta")}
-          </Link>
-        </div>
-      </Shell>
+    <section className="rd-quote">
+      <div className="rd-wrap rv">
+        <blockquote>“{t("v2.quote.text")}”</blockquote>
+        <p className="rd-quote-author">{t("v2.quote.author")}</p>
+        <Link href="/invest" className="rd-btn rd-btn-white">
+          {t("v2.quote.cta")}
+        </Link>
+      </div>
     </section>
   );
 }
 
-// ─── 4. Selected projects ─────────────────────────────────────────────────────
+// ─── Selected projects ────────────────────────────────────────────────────────
+
+const PROJECTS = [
+  { name: "Hisni by Biograpi", img: "/hisni-by-biograpi.jpg", href: "/catalog" },
+  { name: "Artex Parkline", img: "/rd-project.jpg", href: "/project/artex-parkline" },
+  { name: "CityZen", img: "/rd-tower.jpg", href: "/catalog" },
+  { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
+];
 
 function SelectedProjects() {
   const t = useT();
-  const { language } = useLocale();
-  const projects = useMemo(
-    () => localizeProjects(catalogProjects, language).slice(0, 3),
-    [language],
-  );
+  const railRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  const onScroll = () => {
+    const el = railRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
 
   return (
-    <section id="properties" style={{ background: C.light, padding: "clamp(72px, 10vw, 130px) 0" }}>
-      <Shell>
-        <div className="v2-projects-head v2-reveal">
-          <div>
-            <Eyebrow>{t("v2.projects.eyebrow")}</Eyebrow>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(30px, 4.6vw, 62px)",
-                fontWeight: 400,
-                lineHeight: 1.08,
-                color: C.dark,
-                margin: 0,
-              }}
-            >
+    <section id="properties" className="rd-projects-outer">
+      <div className="rd-panel rd-panel-white">
+        <div className="rd-projects">
+          <div className="rd-projects-side rv">
+            <h2 className="rd-h3">
               {t("v2.projects.title")}
               <br />
-              <em style={{ fontStyle: "italic", color: C.wine }}>{t("v2.projects.titleEm")}</em>
+              {t("v2.projects.titleEm")}
             </h2>
-          </div>
-          <div style={{ maxWidth: 360 }}>
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "clamp(14px, 1.3vw, 16px)",
-                lineHeight: 1.75,
-                color: C.muted,
-                margin: "0 0 20px",
-              }}
-            >
-              {t("v2.projects.body")}
-            </p>
-            <Link href="/catalog" className="v2-link-arrow">
-              {t("v2.projects.viewAll")} <span aria-hidden="true">→</span>
+            <p className="rd-small">{t("v2.projects.body")}</p>
+            <Link href="/catalog" className="rd-btn rd-btn-dark-outline">
+              {t("v2.projects.viewAll")}
             </Link>
           </div>
-        </div>
 
-        <div className="v2-projects-grid">
-          {projects.map((p) => (
-            <Link key={p.slug} href={`/project/${p.slug}`} className="v2-project-card v2-reveal">
-              <div className="v2-project-media">
-                <img src={p.cardImage} alt={p.name} loading="lazy" />
-                <span className="v2-project-yield">{p.yield}</span>
-              </div>
-              <div style={{ padding: "20px 4px 0" }}>
-                <p
-                  style={{
-                    fontFamily: "Manrope, sans-serif",
-                    fontSize: 10,
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
-                    color: C.muted,
-                    margin: "0 0 8px",
-                  }}
-                >
-                  {p.tag}
-                </p>
-                <h3
-                  style={{
-                    fontFamily: "Jun, Georgia, serif",
-                    fontSize: 24,
-                    fontWeight: 400,
-                    color: C.dark,
-                    margin: "0 0 10px",
-                  }}
-                >
-                  {p.name}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Manrope, sans-serif",
-                    fontSize: 13,
-                    color: C.muted,
-                    margin: 0,
-                  }}
-                >
-                  {p.priceFrom} · {p.completion}
-                </p>
-              </div>
-            </Link>
-          ))}
+          <div className="rd-projects-main">
+            <div className="rd-rail" ref={railRef} onScroll={onScroll}>
+              {PROJECTS.map((p) => (
+                <Link key={p.name} href={p.href} className="rd-proj">
+                  <div className="rd-proj-img">
+                    <img src={p.img} alt={p.name} loading="lazy" />
+                  </div>
+                  <span className="rd-proj-name">{p.name}</span>
+                </Link>
+              ))}
+            </div>
+            <div className="rd-rail-track" aria-hidden="true">
+              <span style={{ transform: `translateX(${progress * 200}%)` }} />
+            </div>
+          </div>
         </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── 5. Ecosystem ─────────────────────────────────────────────────────────────
+// ─── Ecosystem accordion ──────────────────────────────────────────────────────
 
-const ECOSYSTEM: { titleKey: MessageKey; bodyKey: MessageKey }[] = [
+const ECO: { titleKey: MessageKey; bodyKey: MessageKey }[] = [
   { titleKey: "v2.eco.legal.title", bodyKey: "v2.eco.legal.body" },
   { titleKey: "v2.eco.banking.title", bodyKey: "v2.eco.banking.body" },
+  { titleKey: "v2.eco.notary.title", bodyKey: "v2.eco.notary.body" },
+  { titleKey: "v2.eco.architect.title", bodyKey: "v2.eco.architect.body" },
   { titleKey: "v2.eco.renovation.title", bodyKey: "v2.eco.renovation.body" },
-  { titleKey: "v2.eco.management.title", bodyKey: "v2.eco.management.body" },
 ];
 
 function Ecosystem() {
   const t = useT();
+  const [active, setActive] = useState(0);
+
   return (
-    <section style={{ background: C.dark, padding: "clamp(72px, 10vw, 130px) 0" }}>
-      <Shell>
-        <div className="v2-eco-head v2-reveal">
-          <div>
-            <Eyebrow light>{t("v2.eco.eyebrow")}</Eyebrow>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(30px, 4.6vw, 62px)",
-                fontWeight: 400,
-                lineHeight: 1.08,
-                color: C.light,
-                margin: 0,
-              }}
-            >
-              {t("v2.eco.title")}
-              <br />
-              <em style={{ fontStyle: "italic", color: C.teal }}>{t("v2.eco.titleEm")}</em>
-            </h2>
-          </div>
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "clamp(14px, 1.3vw, 16px)",
-              lineHeight: 1.75,
-              color: "rgba(250,247,240,0.6)",
-              maxWidth: 380,
-              margin: 0,
-            }}
-          >
-            {t("v2.eco.body")}
-          </p>
+    <section className="rd-eco">
+      <div className="rd-wrap">
+        <div className="rd-split rv">
+          <h2 className="rd-h2">
+            {t("v2.eco.title")}
+            <br />
+            {t("v2.eco.titleEm")}
+          </h2>
+          <p className="rd-lead">{t("v2.eco.body")}</p>
         </div>
 
-        <div className="v2-eco-grid">
-          {ECOSYSTEM.map((item, i) => (
-            <div key={item.titleKey} className="v2-eco-card v2-reveal">
-              <span
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 11,
-                  letterSpacing: "0.14em",
-                  color: C.teal,
-                }}
-              >
-                0{i + 1}
-              </span>
-              <h3
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: 22,
-                  fontWeight: 400,
-                  color: C.light,
-                  margin: "16px 0 12px",
-                }}
-              >
-                {t(item.titleKey)}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 14,
-                  lineHeight: 1.7,
-                  color: "rgba(250,247,240,0.55)",
-                  margin: 0,
-                }}
-              >
-                {t(item.bodyKey)}
-              </p>
-            </div>
+        <div className="rd-eco-row rv">
+          {ECO.map((item, i) => (
+            <button
+              key={item.titleKey}
+              type="button"
+              className={`rd-eco-card${i === active ? " is-open" : ""}`}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              onClick={() => setActive(i)}
+              aria-expanded={i === active}
+            >
+              {i === active ? (
+                <img className="rd-eco-photo" src="/rd-ecosystem.jpg" alt="" aria-hidden="true" />
+              ) : null}
+              <span className="rd-eco-index">0{i + 1}</span>
+              <span className="rd-eco-title">{t(item.titleKey)}</span>
+              <span className="rd-eco-body">{t(item.bodyKey)}</span>
+            </button>
           ))}
         </div>
-
-        <div style={{ marginTop: 64 }}>
-          <Partners />
-        </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── 6. Feedback & case studies ───────────────────────────────────────────────
+// ─── Feedback & case studies ──────────────────────────────────────────────────
 
-const TESTIMONIALS: { quoteKey: MessageKey; authorKey: MessageKey }[] = [
-  { quoteKey: "v2.fb.q1", authorKey: "v2.fb.a1" },
-  { quoteKey: "v2.fb.q2", authorKey: "v2.fb.a2" },
-  { quoteKey: "v2.fb.q3", authorKey: "v2.fb.a3" },
-];
-
-const CASES: {
-  titleKey: MessageKey;
+const FEEDBACK: {
+  quoteKey: MessageKey;
+  authorKey: MessageKey;
+  tagKeys: MessageKey[];
   typeKey: MessageKey;
-  cityKey: MessageKey;
-  image: string;
 }[] = [
   {
-    titleKey: "v2.case1.title",
-    typeKey: "v2.case1.type",
-    cityKey: "v2.case.city",
-    image: "/artex-parkline.png",
+    quoteKey: "v2.fb.q1",
+    authorKey: "v2.fb.a1",
+    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
+    typeKey: "v2.fb.tag.turnkey",
   },
   {
-    titleKey: "v2.case2.title",
-    typeKey: "v2.case2.type",
-    cityKey: "v2.case.city",
-    image: "/queens-residence.png",
+    quoteKey: "v2.fb.q2",
+    authorKey: "v2.fb.a2",
+    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
+    typeKey: "v2.fb.tag.turnkey",
   },
   {
-    titleKey: "v2.case3.title",
-    typeKey: "v2.case3.type",
-    cityKey: "v2.case.city",
-    image: "/silk-towers.png",
+    quoteKey: "v2.fb.q3",
+    authorKey: "v2.fb.a3",
+    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
+    typeKey: "v2.fb.tag.turnkey",
   },
 ];
 
 function Feedback() {
   const t = useT();
+  const railRef = useRef<HTMLDivElement>(null);
+
+  const next = () => {
+    const el = railRef.current;
+    if (!el) return;
+    el.scrollBy({ left: el.clientWidth * 0.6, behavior: "smooth" });
+  };
+
   return (
-    <section id="feedback" style={{ background: C.light, padding: "clamp(72px, 10vw, 130px) 0" }}>
-      <Shell>
-        <div className="v2-reveal" style={{ marginBottom: 56 }}>
-          <Eyebrow>{t("v2.fb.eyebrow")}</Eyebrow>
-          <h2
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: "clamp(30px, 4.6vw, 62px)",
-              fontWeight: 400,
-              lineHeight: 1.08,
-              color: C.dark,
-              margin: 0,
-              maxWidth: 720,
-            }}
-          >
-            {t("v2.fb.title")} <em style={{ fontStyle: "italic", color: C.wine }}>{t("v2.fb.titleEm")}</em>
-          </h2>
-        </div>
+    <section id="feedback" className="rd-fb-outer">
+      <div className="rd-panel rd-panel-light">
+        <h2 className="rd-h3 rv" style={{ marginBottom: "clamp(28px, 3vw, 46px)" }}>
+          {t("v2.fb.title")}
+          <br />
+          {t("v2.fb.titleEm")}
+        </h2>
 
-        <div className="v2-fb-grid">
-          {TESTIMONIALS.map((item) => (
-            <figure key={item.quoteKey} className="v2-fb-card v2-reveal">
-              <div style={{ color: C.teal, fontSize: 13, letterSpacing: "0.2em", marginBottom: 18 }}>
-                ★★★★★
-              </div>
-              <blockquote
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: 19,
-                  fontWeight: 400,
-                  lineHeight: 1.5,
-                  color: C.dark,
-                  margin: "0 0 20px",
-                }}
-              >
-                “{t(item.quoteKey)}”
-              </blockquote>
-              <figcaption
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 12,
-                  letterSpacing: "0.08em",
-                  color: C.muted,
-                }}
-              >
-                {t(item.authorKey)}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <div className="v2-case-grid">
-          {CASES.map((c) => (
-            <article key={c.titleKey} className="v2-case-card v2-reveal">
-              <div className="v2-case-media">
-                <img src={c.image} alt={t(c.titleKey)} loading="lazy" />
-              </div>
-              <div style={{ padding: "22px 22px 24px" }}>
-                <h3
-                  style={{
-                    fontFamily: "Jun, Georgia, serif",
-                    fontSize: 21,
-                    fontWeight: 400,
-                    color: C.light,
-                    margin: "0 0 16px",
-                  }}
-                >
-                  {t(c.titleKey)}
-                </h3>
-                <dl style={{ margin: 0, display: "grid", gap: 8 }}>
-                  <div className="v2-case-row">
+        <div className="rd-fb-row">
+          <div className="rd-fb-rail" ref={railRef}>
+            {FEEDBACK.map((f, i) => (
+              <figure key={i} className="rd-fb-card rv">
+                <blockquote>‘{t(f.quoteKey)}’</blockquote>
+                <figcaption>{t(f.authorKey)}</figcaption>
+                <div className="rd-fb-tags">
+                  {f.tagKeys.map((k) => (
+                    <span key={k}>{t(k)}</span>
+                  ))}
+                  <span>{t(f.typeKey)}</span>
+                </div>
+                <dl className="rd-fb-meta">
+                  <div>
                     <dt>{t("v2.case.locationLabel")}</dt>
-                    <dd>{t(c.cityKey)}</dd>
+                    <dd>{t("v2.case.city")}</dd>
                   </div>
-                  <div className="v2-case-row">
+                  <div>
                     <dt>{t("v2.case.typeLabel")}</dt>
-                    <dd>{t(c.typeKey)}</dd>
+                    <dd>{t(f.typeKey)}</dd>
                   </div>
                 </dl>
-              </div>
-            </article>
-          ))}
+              </figure>
+            ))}
+          </div>
+
+          <button type="button" className="rd-fb-next" onClick={next} aria-label={t("v2.fb.next")}>
+            →
+          </button>
         </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── 7. Pricing — it always starts with a call ────────────────────────────────
+// ─── Pricing ──────────────────────────────────────────────────────────────────
 
 type Plan = {
   id: string;
@@ -675,34 +356,38 @@ type Plan = {
   forKey: MessageKey;
   price: string;
   featureKeys: MessageKey[];
+  requestKey: MessageKey;
   resultKey: MessageKey;
   featured?: boolean;
 };
 
 const PLANS: Plan[] = [
   {
-    id: "express",
+    id: "express-audit",
     nameKey: "v2.plan1.name",
     forKey: "v2.plan1.for",
     price: "$79",
     featureKeys: ["v2.plan1.f1", "v2.plan1.f2", "v2.plan1.f3"],
+    requestKey: "v2.plan1.request",
     resultKey: "v2.plan1.result",
   },
   {
-    id: "deep-dive",
+    id: "strategic-deep-dive",
     nameKey: "v2.plan2.name",
     forKey: "v2.plan2.for",
     price: "$279",
     featureKeys: ["v2.plan2.f1", "v2.plan2.f2", "v2.plan2.f3", "v2.plan2.f4"],
+    requestKey: "v2.plan2.request",
     resultKey: "v2.plan2.result",
     featured: true,
   },
   {
-    id: "tour",
+    id: "discovery-tour",
     nameKey: "v2.plan3.name",
     forKey: "v2.plan3.for",
-    price: "$1,999",
+    price: "$1999",
     featureKeys: ["v2.plan3.f1", "v2.plan3.f2", "v2.plan3.f3"],
+    requestKey: "v2.plan3.request",
     resultKey: "v2.plan3.result",
   },
 ];
@@ -710,83 +395,35 @@ const PLANS: Plan[] = [
 function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
   const t = useT();
   return (
-    <section id="consultation" style={{ background: C.dark, padding: "clamp(72px, 10vw, 130px) 0" }}>
-      <Shell>
-        <div className="v2-reveal" style={{ textAlign: "center", marginBottom: 60 }}>
-          <Eyebrow light>{t("v2.pricing.eyebrow")}</Eyebrow>
-          <h2
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: "clamp(30px, 4.6vw, 62px)",
-              fontWeight: 400,
-              lineHeight: 1.08,
-              color: C.light,
-              margin: "0 auto",
-              maxWidth: 760,
-            }}
-          >
-            {t("v2.pricing.title")}
-          </h2>
-        </div>
+    <section id="consultation" className="rd-pricing">
+      <div className="rd-wrap">
+        <h2 className="rd-h1 rv">{t("v2.pricing.title")}</h2>
 
-        <div className="v2-plan-grid">
+        <div className="rd-plans">
           {PLANS.map((plan) => (
-            <div
-              key={plan.id}
-              className={`v2-plan-card v2-reveal${plan.featured ? " is-featured" : ""}`}
-            >
-              {plan.featured ? <span className="v2-plan-badge">{t("v2.pricing.popular")}</span> : null}
+            <div key={plan.id} className={`rd-plan rv${plan.featured ? " is-featured" : ""}`}>
+              <h3>{t(plan.nameKey)}</h3>
+              <p className="rd-plan-for">{t(plan.forKey)}</p>
+              <div className="rd-plan-price">{plan.price}</div>
 
-              <p
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: C.teal,
-                  margin: "0 0 12px",
-                }}
-              >
-                {t(plan.forKey)}
-              </p>
-              <h3
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: 27,
-                  fontWeight: 400,
-                  color: C.light,
-                  margin: "0 0 18px",
-                }}
-              >
-                {t(plan.nameKey)}
-              </h3>
-              <div
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: 44,
-                  fontWeight: 400,
-                  color: C.light,
-                  marginBottom: 24,
-                }}
-              >
-                {plan.price}
-              </div>
-
-              <ul className="v2-plan-features">
+              <ul>
                 {plan.featureKeys.map((k) => (
                   <li key={k}>{t(k)}</li>
                 ))}
               </ul>
 
-              <div className="v2-plan-result">
-                <span>{t("v2.pricing.resultLabel")}</span>
+              <div className="rd-plan-block">
+                <strong>{t("v2.pricing.requestLabel")}</strong>
+                <p>{t(plan.requestKey)}</p>
+              </div>
+              <div className="rd-plan-block">
+                <strong>{t("v2.pricing.resultLabel")}</strong>
                 <p>{t(plan.resultKey)}</p>
               </div>
 
               <button
                 type="button"
-                className={`v2-btn ${plan.featured ? "v2-btn-solid" : "v2-btn-outline-light"}`}
-                style={{ width: "100%", marginTop: 26 }}
+                className="rd-btn rd-btn-dark rd-plan-cta"
                 onClick={() =>
                   onRequest({
                     open: true,
@@ -801,33 +438,25 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
             </div>
           ))}
         </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── 8. Newsletter ────────────────────────────────────────────────────────────
+// ─── Newsletter ───────────────────────────────────────────────────────────────
 
 function Newsletter() {
   const t = useT();
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
-  const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [state, setState] = useState<"idle" | "loading" | "done">("idle");
   const [error, setError] = useState("");
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
-    if (!email.trim() || !email.includes("@")) {
-      setError(t("v2.news.errorEmail"));
-      setState("error");
-      return;
-    }
-    if (!agree) {
-      setError(t("v2.news.errorAgree"));
-      setState("error");
-      return;
-    }
+    if (!email.trim() || !email.includes("@")) return setError(t("v2.news.errorEmail"));
+    if (!agree) return setError(t("v2.news.errorAgree"));
     setState("loading");
     try {
       const res = await fetch("/api/leads", {
@@ -842,283 +471,343 @@ function Newsletter() {
       });
       if (!res.ok) {
         setError(t("popup.errorGeneric"));
-        setState("error");
+        setState("idle");
         return;
       }
       setState("done");
       setEmail("");
     } catch {
       setError(t("popup.errorNetwork"));
-      setState("error");
+      setState("idle");
     }
   };
 
   return (
-    <section style={{ background: C.light, padding: "clamp(56px, 8vw, 100px) 0" }}>
-      <Shell>
-        <div className="v2-news v2-reveal">
-          <div>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(26px, 3.6vw, 44px)",
-                fontWeight: 400,
-                lineHeight: 1.1,
-                color: C.light,
-                margin: "0 0 14px",
-              }}
-            >
-              {t("v2.news.title")}
-            </h2>
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: 14,
-                lineHeight: 1.7,
-                color: "rgba(250,247,240,0.6)",
-                margin: 0,
-                maxWidth: 440,
-              }}
-            >
-              {t("v2.news.body")}
-            </p>
-          </div>
+    <section className="rd-news-outer">
+      <div className="rd-news rv">
+        <div className="rd-news-inner">
+          <h2>{t("v2.news.title")}</h2>
+          <p>{t("v2.news.body")}</p>
 
-          <form onSubmit={submit} className="v2-news-form">
-            {state === "done" ? (
-              <p
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 15,
-                  color: C.teal,
-                  margin: 0,
-                }}
-              >
-                {t("v2.news.done")}
-              </p>
-            ) : (
-              <>
-                <div className="v2-news-row">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t("v2.news.placeholder")}
-                    className="v2-news-input"
-                    aria-label={t("v2.news.placeholder")}
-                  />
-                  <button
-                    type="submit"
-                    className="v2-btn v2-btn-white"
-                    disabled={state === "loading"}
-                  >
-                    {state === "loading" ? "…" : t("v2.news.submit")}
-                  </button>
-                </div>
-
-                <label className="v2-news-agree">
-                  <input
-                    type="checkbox"
-                    checked={agree}
-                    onChange={(e) => setAgree(e.target.checked)}
-                  />
-                  <span>
-                    {t("v2.news.agree")}{" "}
-                    <Link href="/legal" style={{ color: C.teal }}>
-                      {t("v2.news.privacy")}
-                    </Link>
-                  </span>
-                </label>
-
-                {error ? (
-                  <p style={{ fontFamily: "Manrope, sans-serif", fontSize: 12, color: "#e57373", margin: 0 }}>
-                    {error}
-                  </p>
-                ) : null}
-              </>
-            )}
-          </form>
+          {state === "done" ? (
+            <p className="rd-news-done">{t("v2.news.done")}</p>
+          ) : (
+            <form onSubmit={submit}>
+              <div className="rd-news-row">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t("v2.news.placeholder")}
+                  aria-label={t("v2.news.placeholder")}
+                />
+                <button type="submit" className="rd-btn rd-btn-white" disabled={state === "loading"}>
+                  {state === "loading" ? "…" : t("v2.news.submit")}
+                </button>
+              </div>
+              <label className="rd-news-agree">
+                <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} />
+                <span>
+                  {t("v2.news.agree")}{" "}
+                  <Link href="/legal">{t("v2.news.privacy")}</Link>
+                </span>
+              </label>
+              {error ? <p className="rd-news-error">{error}</p> : null}
+            </form>
+          )}
         </div>
-      </Shell>
+      </div>
     </section>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Styles ───────────────────────────────────────────────────────────────────
 
-const V2_STYLES = `
-  .v2-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: Manrope, sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 16px 30px; border-radius: 8px; border: 1px solid transparent;
-    cursor: pointer; text-decoration: none; transition: opacity .2s, background .2s, color .2s, border-color .2s;
-  }
-  .v2-btn-solid { background: #8CB2C0; color: #21141A; }
-  .v2-btn-solid:hover { opacity: .88; }
-  .v2-btn-ghost { background: transparent; color: #FAF7F0; border-color: rgba(250,247,240,.4); }
-  .v2-btn-ghost:hover { border-color: #8CB2C0; color: #8CB2C0; }
-  .v2-btn-outline-light { background: transparent; color: #FAF7F0; border-color: rgba(250,247,240,.28); }
-  .v2-btn-outline-light:hover { border-color: #8CB2C0; color: #8CB2C0; }
-  .v2-btn-white { background: #FFFBF0; color: #21141A; }
-  .v2-btn-white:hover { opacity: .88; }
+const CSS = `
+html, body { background: #21141A; }
+.rd {
+  --bg: #21141A;
+  --card: #412834;
+  --green: #48674D;
+  --white: #FFFFFF;
+  --panel: #F8F8F8;
+  --blue: #E9F7FF;
+  --display: 'Chillax', 'DM Sans', Manrope, sans-serif;
+  --body: 'DM Sans', Manrope, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+}
+.rd-wrap { max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5.5vw, 80px); }
+.rd .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.rd .rv.in { opacity: 1; transform: none; }
 
-  .v2-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+/* buttons */
+.rd-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--body); font-size: 15px; font-weight: 400;
+  padding: 15px 30px; border-radius: 4px; border: 1px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s, opacity .2s;
+}
+.rd-btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+.rd-btn-outline:hover { background: var(--white); color: var(--bg); }
+.rd-btn-white { background: var(--white); color: var(--bg); }
+.rd-btn-white:hover { opacity: .88; }
+.rd-btn-dark { background: var(--bg); color: var(--white); }
+.rd-btn-dark:hover { opacity: .9; }
+.rd-btn-dark-outline { background: transparent; color: var(--bg); border-color: rgba(33,20,26,.5); }
+.rd-btn-dark-outline:hover { background: var(--bg); color: var(--white); }
 
-  .v2-scroll-hint {
-    position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
-    z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
-    font-family: Manrope, sans-serif; font-size: 10px; font-weight: 500;
-    letter-spacing: .28em; text-transform: uppercase;
-    color: rgba(255,255,255,.72); text-decoration: none;
-    animation: v2Pulse 2.4s ease-in-out infinite;
-  }
-  .v2-scroll-hint:hover { color: #8CB2C0; }
-  @keyframes v2Pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+/* type */
+.rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
+.rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
+.rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--bg); }
+.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: rgba(255,255,255,.9); margin: 0; }
+.rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
+.rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
+.rd-split .rd-lead { max-width: 420px; }
 
-  .v2-reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-  .v2-reveal.is-visible { opacity: 1; transform: none; }
+/* hero */
+.rd-hero { position: relative; padding-top: calc(var(--nav-height, 88px) + clamp(30px, 4vw, 64px)); overflow: hidden; }
+.rd-hero-circle {
+  position: absolute; top: -190px; right: -120px; width: 760px; height: 760px;
+  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
+}
+.rd-hero-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 508fr 772fr; align-items: end;
+  gap: clamp(20px, 3vw, 44px); padding-bottom: clamp(40px, 5vw, 72px);
+}
+.rd-hero-photo { border-radius: 2px; overflow: hidden; aspect-ratio: 508 / 680; }
+.rd-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rd-hero-copy { padding-bottom: clamp(0px, 2vw, 40px); margin-left: clamp(0px, -3vw, 0px); }
+.rd-hero-copy h1 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 22px;
+  font-size: clamp(32px, 3.9vw, 56px); line-height: 1.07; letter-spacing: -.01em;
+}
+.rd-hero-copy p {
+  font-family: var(--body); font-size: clamp(14px, 1.04vw, 15px); line-height: 1.45;
+  color: rgba(255,255,255,.85); margin: 0 0 30px; max-width: 500px;
+}
+.rd-hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
+.rd-hero-btns .rd-btn { min-width: 166px; }
 
-  .v2-why-head, .v2-projects-head, .v2-eco-head {
-    display: grid; grid-template-columns: 1.25fr .85fr; gap: 40px;
-    align-items: end; margin-bottom: 60px;
-  }
-  .v2-stats-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: rgba(33,20,26,.1);
-    border: 1px solid rgba(33,20,26,.1); border-radius: 14px; overflow: hidden;
-  }
-  .v2-stat { background: #FFFBF0; padding: clamp(24px, 3vw, 40px); }
+.rd-hero-band { position: relative; line-height: 0; }
+.rd-hero-band img { width: 100%; height: clamp(280px, 58vw, 838px); object-fit: cover; display: block; }
+.rd-scroll {
+  position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+  font-family: var(--body); font-size: 16px; color: #fff; text-decoration: none;
+  text-shadow: 0 1px 12px rgba(0,0,0,.45); animation: rdPulse 2.4s ease-in-out infinite;
+}
+@keyframes rdPulse { 0%,100% { opacity:.45 } 50% { opacity:1 } }
 
-  .v2-link-arrow {
-    font-family: Manrope, sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: .16em; text-transform: uppercase; color: #21141A;
-    text-decoration: none; border-bottom: 1px solid rgba(33,20,26,.3); padding-bottom: 4px;
-    transition: color .2s, border-color .2s;
-  }
-  .v2-link-arrow:hover { color: #683D47; border-color: #683D47; }
+/* why + stats */
+.rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); }
+.rd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.rd-stat {
+  border-radius: 20px; padding: clamp(18px, 1.9vw, 26px);
+  min-height: clamp(190px, 24vw, 351px);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.rd-stat-plum { background: var(--card); }
+.rd-stat-green { background: var(--green); }
+.rd-stat-white { background: var(--white); color: var(--bg); }
+.rd-stat-img { padding: 0; overflow: hidden; }
+.rd-stat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rd-stat-value { display: block; font-family: var(--display); font-weight: 500; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.05; }
+.rd-stat-label { display: block; font-family: var(--body); font-size: clamp(14px, 1.39vw, 20px); margin-top: 10px; opacity: .92; }
+.rd-stat-note { font-family: var(--body); font-size: clamp(12px, 1.1vw, 15px); opacity: .55; }
 
-  .v2-projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .v2-project-card { text-decoration: none; display: block; }
-  .v2-project-media {
-    position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/5; background: #ddd;
-  }
-  .v2-project-media img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform .6s ease;
-  }
-  .v2-project-card:hover .v2-project-media img { transform: scale(1.06); }
-  .v2-project-yield {
-    position: absolute; top: 14px; right: 14px; background: #FFFBF0; color: #21141A;
-    font-family: Manrope, sans-serif; font-size: 11px; font-weight: 700;
-    padding: 5px 11px; border-radius: 6px;
-  }
+/* quote */
+.rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); text-align: center; }
+.rd-quote blockquote {
+  font-family: var(--display); font-weight: 400; font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.3; margin: 0 auto 26px; max-width: 780px; color: rgba(255,255,255,.95);
+}
+.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0 0 30px; }
 
-  .v2-eco-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .v2-eco-card {
-    border: 1px solid rgba(250,247,240,.1); border-radius: 14px;
-    padding: 28px 24px 30px; background: rgba(250,247,240,.02);
-  }
+/* panels */
+.rd-panel { border-radius: 20px; margin: 0 10px; }
+.rd-panel-white { background: var(--white); color: var(--bg); }
+.rd-panel-light { background: var(--panel); color: var(--bg); }
+.rd-projects-outer, .rd-fb-outer { padding-bottom: clamp(50px, 6vw, 90px); }
+.rd-fb-outer { padding-top: clamp(20px, 3vw, 40px); }
 
-  .v2-fb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 72px; }
-  .v2-fb-card {
-    margin: 0; background: #FFFFFF; border: 1px solid rgba(33,20,26,.08);
-    border-radius: 14px; padding: 30px 28px;
-  }
+/* selected projects */
+.rd-projects {
+  display: grid; grid-template-columns: 400fr 940fr; gap: clamp(24px, 3vw, 48px);
+  padding: clamp(32px, 4.2vw, 62px) 0 clamp(32px, 4.2vw, 60px);
+  padding-left: clamp(24px, 4.8vw, 70px); align-items: center;
+}
+.rd-projects-side { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.rd-projects-side .rd-btn { margin-top: 14px; min-width: 202px; }
+.rd-projects-main { min-width: 0; }
+.rd-rail {
+  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: 22px; scrollbar-width: none;
+}
+.rd-rail::-webkit-scrollbar { display: none; }
+.rd-proj { flex: 0 0 clamp(220px, 22vw, 313px); scroll-snap-align: start; text-decoration: none; }
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #676060; }
+.rd-proj-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.rd-proj:hover .rd-proj-img img { transform: scale(1.05); }
+.rd-proj-name { display: block; margin-top: 14px; font-family: var(--body); font-weight: 700; font-size: 18px; color: var(--bg); }
+.rd-rail-track { position: relative; height: 4px; background: rgba(33,20,26,.12); overflow: hidden; }
+.rd-rail-track span { position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--bg); transition: transform .2s ease; }
 
-  .v2-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .v2-case-card { background: #21141A; border-radius: 14px; overflow: hidden; }
-  .v2-case-media { aspect-ratio: 16/10; overflow: hidden; }
-  .v2-case-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .v2-case-row { display: flex; justify-content: space-between; gap: 12px; font-family: Manrope, sans-serif; font-size: 12px; }
-  .v2-case-row dt { color: rgba(250,247,240,.45); margin: 0; }
-  .v2-case-row dd { color: #FAF7F0; margin: 0; text-align: right; }
+/* ecosystem */
+.rd-eco { padding: clamp(50px, 6.6vw, 96px) 0 clamp(56px, 7vw, 104px); }
+.rd-eco-row { display: flex; gap: 12px; align-items: stretch; }
+.rd-eco-card {
+  position: relative; flex: 1 1 0; min-width: 0; overflow: hidden;
+  background: var(--card); border: none; border-radius: 20px; cursor: pointer;
+  min-height: clamp(320px, 44vw, 634px); padding: clamp(18px, 1.8vw, 28px);
+  display: flex; flex-direction: column; justify-content: flex-start;
+  text-align: left; color: var(--white); transition: flex-grow .45s ease;
+}
+.rd-eco-card.is-open { flex-grow: 2.2; }
+.rd-eco-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: .34; pointer-events: none;
+}
+.rd-eco-index { position: relative; font-family: var(--body); font-size: 13px; color: rgba(255,255,255,.5); }
+.rd-eco-title {
+  position: relative; font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px);
+  margin-top: 14px; line-height: 1.3;
+}
+.rd-eco-body {
+  position: relative; margin-top: auto; font-family: var(--body);
+  font-size: clamp(14px, 1.25vw, 18px); line-height: 1.45; color: rgba(255,255,255,.86);
+  opacity: 0; max-height: 0; overflow: hidden; transition: opacity .35s ease;
+}
+.rd-eco-card.is-open .rd-eco-body { opacity: 1; max-height: 420px; }
 
-  .v2-plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
-  .v2-plan-card {
-    position: relative; display: flex; flex-direction: column;
-    border: 1px solid rgba(250,247,240,.12); border-radius: 16px;
-    padding: 34px 30px 32px; background: rgba(250,247,240,.02);
-  }
-  .v2-plan-card.is-featured { border-color: #8CB2C0; background: rgba(140,178,192,.06); }
-  .v2-plan-badge {
-    position: absolute; top: -11px; left: 30px; background: #8CB2C0; color: #21141A;
-    font-family: Manrope, sans-serif; font-size: 9px; font-weight: 700;
-    letter-spacing: .16em; text-transform: uppercase; padding: 5px 12px; border-radius: 20px;
-  }
-  .v2-plan-features {
-    list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 11px;
-    font-family: Manrope, sans-serif; font-size: 13.5px; line-height: 1.55;
-    color: rgba(250,247,240,.72);
-  }
-  .v2-plan-features li { position: relative; padding-left: 20px; }
-  .v2-plan-features li::before {
-    content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px;
-    border-radius: 50%; background: #8CB2C0;
-  }
-  .v2-plan-result {
-    margin-top: auto; border-top: 1px solid rgba(250,247,240,.1); padding-top: 18px;
-    font-family: Manrope, sans-serif;
-  }
-  .v2-plan-result span {
-    font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #8CB2C0;
-  }
-  .v2-plan-result p { font-size: 13.5px; line-height: 1.6; color: rgba(250,247,240,.72); margin: 8px 0 0; }
+/* feedback */
+.rd-panel-light { padding: clamp(34px, 4.4vw, 68px) clamp(24px, 4.8vw, 70px); }
+.rd-fb-row { display: flex; align-items: center; gap: 20px; }
+.rd-fb-rail {
+  display: flex; gap: 8px; overflow-x: auto; flex: 1; min-width: 0;
+  scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px;
+}
+.rd-fb-rail::-webkit-scrollbar { display: none; }
+.rd-fb-card {
+  flex: 0 0 clamp(260px, 27vw, 360px); scroll-snap-align: start; margin: 0;
+  background: var(--card); border-radius: 12px; padding: clamp(22px, 2.2vw, 32px);
+  min-height: clamp(320px, 30vw, 406px); display: flex; flex-direction: column; color: var(--white);
+}
+.rd-fb-card blockquote {
+  font-family: var(--body); font-weight: 700; font-size: clamp(15px, 1.39vw, 20px);
+  line-height: 1.32; margin: 0 0 18px;
+}
+.rd-fb-card figcaption { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.68); }
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.rd-fb-tags span {
+  font-family: var(--body); font-size: 14px; padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,.5); border-radius: 4px;
+}
+.rd-fb-meta { margin: 16px 0 0; display: grid; gap: 5px; font-family: var(--body); font-size: 14px; }
+.rd-fb-meta div { display: flex; gap: 6px; align-items: baseline; }
+.rd-fb-meta dt { white-space: nowrap; }
+.rd-fb-meta dt { margin: 0; color: rgba(255,255,255,.55); }
+.rd-fb-meta dd { margin: 0; color: rgba(255,255,255,.9); }
+.rd-fb-next {
+  flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; border: none;
+  background: var(--bg); color: var(--white); font-size: 18px; cursor: pointer;
+  transition: opacity .2s;
+}
+.rd-fb-next:hover { opacity: .85; }
 
-  .v2-news {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    background: linear-gradient(120deg, #21141A 0%, #2e1a24 55%, #683D47 100%);
-    border-radius: 18px; padding: clamp(32px, 5vw, 56px);
-  }
-  .v2-news-form { display: flex; flex-direction: column; gap: 14px; }
-  .v2-news-row { display: flex; gap: 12px; align-items: stretch; }
-  .v2-news-input {
-    flex: 1; min-width: 0; background: transparent; border: none;
-    border-bottom: 1px solid rgba(250,247,240,.35);
-    color: #FAF7F0; font-family: Manrope, sans-serif; font-size: 14px;
-    padding: 12px 2px; outline: none; transition: border-color .2s;
-  }
-  .v2-news-input::placeholder { color: rgba(250,247,240,.4); }
-  .v2-news-input:focus { border-color: #8CB2C0; }
-  .v2-news-agree {
-    display: flex; align-items: flex-start; gap: 9px;
-    font-family: Manrope, sans-serif; font-size: 11.5px; line-height: 1.5;
-    color: rgba(250,247,240,.55); cursor: pointer;
-  }
-  .v2-news-agree input { margin-top: 2px; accent-color: #8CB2C0; }
+/* pricing */
+.rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); }
+.rd-pricing .rd-h1 { margin-bottom: clamp(28px, 3.5vw, 56px); }
+.rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.rd-plan {
+  background: var(--white); color: var(--bg); border-radius: 12px;
+  padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column;
+}
+.rd-plan.is-featured { background: var(--blue); }
+.rd-plan h3 { font-family: var(--body); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
+.rd-plan-for {
+  font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); margin: 0 0 6px;
+  padding-top: 16px; border-top: 1px solid rgba(33,20,26,.15);
+}
+.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(48px, 6.6vw, 96px); line-height: 1.1; margin-bottom: 18px; }
+.rd-plan ul { list-style: disc; margin: 0 0 26px; padding-left: 18px; display: grid; gap: 8px; }
+.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.35; }
+.rd-plan-block { margin-bottom: 20px; }
+.rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 6px; }
+.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
+.rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: 6px; }
 
-  @media (max-width: 1024px) {
-    .v2-eco-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 900px) {
-    .v2-why-head, .v2-projects-head, .v2-eco-head { grid-template-columns: 1fr; gap: 24px; align-items: start; margin-bottom: 40px; }
-    .v2-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .v2-projects-grid, .v2-fb-grid, .v2-case-grid, .v2-plan-grid { grid-template-columns: 1fr; }
-    .v2-fb-grid { margin-bottom: 48px; }
-    .v2-news { grid-template-columns: 1fr; }
-    .v2-hero-ctas .v2-btn { flex: 1 1 auto; }
-  }
-  @media (max-width: 520px) {
-    .v2-news-row { flex-direction: column; }
-    .v2-stats-grid { grid-template-columns: 1fr 1fr; }
-    .v2-hero-ctas { flex-direction: column; }
-  }
+/* newsletter */
+.rd-news-outer { padding: 0 10px clamp(40px, 5vw, 70px); }
+.rd-news {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background:
+    radial-gradient(115% 150% at 92% 58%, rgba(255,244,248,.92) 0%, rgba(226,186,205,.62) 20%, rgba(140,86,112,.38) 42%, rgba(33,20,26,0) 68%),
+    radial-gradient(80% 130% at 62% 26%, rgba(96,62,84,.55) 0%, rgba(33,20,26,0) 62%),
+    var(--bg);
+}
+.rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) clamp(24px, 4.8vw, 70px); max-width: 780px; }
+.rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; }
+.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: rgba(255,255,255,.85); margin: 0 0 34px; max-width: 640px; }
+.rd-news-row { display: flex; align-items: flex-end; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.55); padding-bottom: 8px; }
+.rd-news-row input {
+  flex: 1; min-width: 0; background: transparent; border: none; outline: none;
+  font-family: var(--body); font-size: 16px; color: #fff; padding: 10px 0;
+}
+.rd-news-row input::placeholder { color: rgba(255,255,255,.6); }
+.rd-news-row .rd-btn { min-width: 171px; }
+.rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: rgba(255,255,255,.7); cursor: pointer; }
+.rd-news-agree input { accent-color: #fff; margin-top: 2px; }
+.rd-news-agree a { color: #fff; }
+.rd-news-done { font-family: var(--body); font-size: 18px; color: #fff; margin: 0; }
+.rd-news-error { font-family: var(--body); font-size: 13px; color: #ffb4b4; margin: 10px 0 0; }
+
+/* responsive */
+@media (max-width: 1024px) {
+  .rd-hero-grid { grid-template-columns: 1fr; align-items: start; }
+  .rd-hero-photo { max-width: 420px; }
+  .rd-split { grid-template-columns: 1fr; gap: 18px; }
+  .rd-stats { grid-template-columns: repeat(2, 1fr); }
+  .rd-projects { grid-template-columns: 1fr; padding-right: clamp(24px, 4.8vw, 70px); }
+  .rd-eco-row { flex-direction: column; }
+  .rd-eco-card { min-height: 0; }
+  .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: 14px; }
+  .rd-eco-photo { display: none; }
+  .rd-plans { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
+  .rd-hero-btns { flex-direction: column; align-items: stretch; }
+  .rd-hero-btns .rd-btn { width: 100%; }
+  .rd-stat { min-height: 168px; }
+  .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .rd-news-row .rd-btn { width: 100%; }
+  .rd-fb-next { display: none; }
+}
 `;
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomeV2() {
   const t = useT();
-  const isMobile = useIsMobile();
   const [modal, setModal] = useState<ModalState>(CLOSED);
   useReveal();
 
+  const isMobile = useMemo(
+    () => typeof window !== "undefined" && window.innerWidth < 900,
+    [],
+  );
+
   useEffect(() => {
-    // Let ScrollToHash win when the visitor lands on /#feedback etc.
     if (!window.location.hash) window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div style={{ background: C.light, overflowX: "hidden" }}>
-      <style>{V2_STYLES}</style>
+    <div className="rd">
+      <style>{CSS}</style>
 
       <Hero onRequest={setModal} />
       <WhyGeorgia />
@@ -1137,27 +826,14 @@ export default function HomeV2() {
         title={modal.title}
       />
 
-      {/* Mobile sticky CTA */}
       {isMobile ? (
-        <div
-          style={{
-            position: "fixed",
-            left: 16,
-            right: 16,
-            bottom: 16,
-            zIndex: 900,
-          }}
-        >
+        <div style={{ position: "fixed", left: 16, right: 16, bottom: 16, zIndex: 900 }}>
           <button
             type="button"
-            className="v2-btn v2-btn-solid"
-            style={{ width: "100%", boxShadow: "0 12px 30px rgba(0,0,0,0.28)" }}
+            className="rd-btn rd-btn-white"
+            style={{ width: "100%", boxShadow: "0 12px 30px rgba(0,0,0,.3)" }}
             onClick={() =>
-              setModal({
-                open: true,
-                source: "Mobile sticky CTA",
-                title: t("v2.hero.ctaPrimary"),
-              })
+              setModal({ open: true, source: "Mobile sticky CTA", title: t("v2.hero.ctaPrimary") })
             }
           >
             {t("v2.hero.ctaPrimary")}
