@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { NavLocaleSwitcher } from "./NavLocaleSwitcher";
+import { RequestModal } from "./RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
 export const NAV_HEIGHT = 88;
@@ -17,8 +18,6 @@ const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
   { labelKey: "nav.notes", href: "/blog" },
   { labelKey: "nav.feedback", href: "/#feedback" },
 ];
-
-const CONTACT_HREF = "/#consultation";
 
 function useNavActive() {
   const [location] = useLocation();
@@ -112,8 +111,15 @@ export function Nav() {
   const t = useT();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
+  const logoHeight = isMobile ? 22 : 28;
+
+  const openContact = () => {
+    setMenuOpen(false);
+    setContactOpen(true);
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty("--nav-height", `${navHeight}px`);
@@ -187,8 +193,44 @@ export function Nav() {
             boxSizing: "border-box",
           }}
         >
-          {/* Language + currency — left (matches the Figma header) */}
-          <div style={{ justifySelf: "start", display: "flex", alignItems: "center" }}>
+          {/* Logo + language — left */}
+          <div
+            style={{
+              justifySelf: "start",
+              display: "flex",
+              alignItems: "center",
+              gap: isMobile ? 12 : 22,
+              minWidth: 0,
+            }}
+          >
+            <Link
+              href="/"
+              aria-label="SITBO Invest — Home"
+              style={{
+                display: "block",
+                cursor: "pointer",
+                lineHeight: 0,
+                transition: "opacity 0.2s ease",
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "0.75";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "1";
+              }}
+            >
+              <img
+                src="/logo-dark-bg.png"
+                alt="SITBO Invest"
+                style={{
+                  height: logoHeight,
+                  width: "auto",
+                  display: "block",
+                  objectFit: "contain",
+                }}
+              />
+            </Link>
             <NavLocaleSwitcher compact={isMobile} />
           </div>
 
@@ -213,7 +255,7 @@ export function Nav() {
             <div aria-hidden="true" />
           )}
 
-          {/* Language + currency + menu — right */}
+          {/* Contact CTA + menu — right */}
           <div
             style={{
               display: "flex",
@@ -223,8 +265,9 @@ export function Nav() {
             }}
           >
             {!isMobile && (
-              <Link
-                href={CONTACT_HREF}
+              <button
+                type="button"
+                onClick={openContact}
                 style={{
                   marginLeft: 10,
                   padding: "12px 26px",
@@ -237,8 +280,8 @@ export function Nav() {
                   fontWeight: 400,
                   letterSpacing: 0,
                   textTransform: "none",
-                  textDecoration: "none",
                   whiteSpace: "nowrap",
+                  cursor: "pointer",
                   transition: "background 0.2s, color 0.2s",
                 }}
                 onMouseEnter={(e) => {
@@ -251,7 +294,7 @@ export function Nav() {
                 }}
               >
                 {t("nav.contactArthur")}
-              </Link>
+              </button>
             )}
 
             {isMobile && (
@@ -318,9 +361,9 @@ export function Nav() {
               </Link>
             ))}
 
-            <Link
-              href={CONTACT_HREF}
-              onClick={() => setMenuOpen(false)}
+            <button
+              type="button"
+              onClick={openContact}
               style={{
                 marginTop: 12,
                 padding: "15px 28px",
@@ -332,14 +375,22 @@ export function Nav() {
                 fontWeight: 700,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                textDecoration: "none",
+                border: "none",
+                cursor: "pointer",
               }}
             >
               {t("nav.contactArthur")}
-            </Link>
+            </button>
           </div>
         </div>
       )}
+
+      <RequestModal
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        source="Nav — Contact"
+        title={t("nav.contactArthur")}
+      />
     </>
   );
 }
