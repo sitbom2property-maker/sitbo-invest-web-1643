@@ -1,5 +1,6 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
+import { AppLink } from "./app-link";
 import { NavLocaleSwitcher } from "./NavLocaleSwitcher";
 import { useT, type MessageKey } from "../i18n";
 
@@ -67,29 +68,49 @@ function NavItem({
   isActive?: boolean;
   onNavigate?: () => void;
 }) {
+  const style = {
+    fontFamily: "'DM Sans', Manrope, sans-serif",
+    fontSize: 15,
+    fontWeight: 400,
+    letterSpacing: 0,
+    color: "#FFFFFF",
+    textTransform: "none" as const,
+    textDecoration: "none",
+    whiteSpace: "nowrap" as const,
+    transition: "opacity 0.2s",
+    padding: "0 4px",
+    opacity: isActive ? 1 : undefined,
+  };
+
+  const onMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (!isActive) e.currentTarget.style.opacity = "0.6";
+  };
+  const onMouseLeave = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.opacity = "1";
+  };
+
+  // Hash links need AppLink so /#consultation scrolls to pricing on the homepage
+  if (href.includes("#")) {
+    return (
+      <AppLink
+        href={href}
+        style={style}
+        onNavigate={onNavigate}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        {children}
+      </AppLink>
+    );
+  }
+
   return (
     <Link
       href={href}
       onClick={onNavigate}
-      style={{
-        fontFamily: "'DM Sans', Manrope, sans-serif",
-        fontSize: 15,
-        fontWeight: 400,
-        letterSpacing: 0,
-        color: "#FFFFFF",
-        textTransform: "none",
-        textDecoration: "none",
-        whiteSpace: "nowrap",
-        transition: "opacity 0.2s",
-        padding: "0 4px",
-        opacity: isActive ? 1 : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (!isActive) e.currentTarget.style.opacity = "0.6";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.opacity = "1";
-      }}
+      style={style}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </Link>
@@ -223,7 +244,7 @@ export function Nav() {
             }}
           >
             {!isMobile && (
-              <Link
+              <AppLink
                 href={CONTACT_HREF}
                 style={{
                   marginLeft: 10,
@@ -241,17 +262,9 @@ export function Nav() {
                   whiteSpace: "nowrap",
                   transition: "background 0.2s, color 0.2s",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#FFFFFF";
-                  e.currentTarget.style.color = "#21141A";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#FFFFFF";
-                }}
               >
                 {t("nav.contactArthur")}
-              </Link>
+              </AppLink>
             )}
 
             {isMobile && (
@@ -293,34 +306,55 @@ export function Nav() {
           </button>
 
           <div className="nav-mobile-links">
-            {ALL_LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  fontFamily: "Jun, Georgia, serif",
-                  fontSize: "clamp(26px, 6.5vw, 40px)",
-                  fontWeight: 400,
-                  color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
-                  textTransform: "none",
-                  letterSpacing: 0,
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                  textAlign: "center",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
-                }
-              >
-                {t(l.labelKey)}
-              </Link>
-            ))}
+            {ALL_LINKS.map((l) =>
+              l.href.includes("#") ? (
+                <AppLink
+                  key={l.href}
+                  href={l.href}
+                  onNavigate={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: "Jun, Georgia, serif",
+                    fontSize: "clamp(26px, 6.5vw, 40px)",
+                    fontWeight: 400,
+                    color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                    textTransform: "none",
+                    letterSpacing: 0,
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                    textAlign: "center",
+                  }}
+                >
+                  {t(l.labelKey)}
+                </AppLink>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: "Jun, Georgia, serif",
+                    fontSize: "clamp(26px, 6.5vw, 40px)",
+                    fontWeight: 400,
+                    color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                    textTransform: "none",
+                    letterSpacing: 0,
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                    textAlign: "center",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
+                  }
+                >
+                  {t(l.labelKey)}
+                </Link>
+              ),
+            )}
 
-            <Link
+            <AppLink
               href={CONTACT_HREF}
-              onClick={() => setMenuOpen(false)}
+              onNavigate={() => setMenuOpen(false)}
               style={{
                 marginTop: 12,
                 padding: "15px 28px",
@@ -336,7 +370,7 @@ export function Nav() {
               }}
             >
               {t("nav.contactArthur")}
-            </Link>
+            </AppLink>
           </div>
         </div>
       )}

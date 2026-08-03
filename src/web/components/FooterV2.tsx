@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { AppLink } from "./app-link";
 import { useT } from "../i18n";
 
 const WHATSAPP = "https://wa.me/995555505288";
@@ -96,7 +97,7 @@ export function FooterV2() {
             <h3 className="fv2-col-title">{t("v2.footer.contact")}</h3>
             <ul>
               <li>
-                <Link href="/#consultation">{t("v2.footer.consultation")}</Link>
+                <AppLink href="/#consultation">{t("v2.footer.consultation")}</AppLink>
               </li>
               <li>
                 <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">

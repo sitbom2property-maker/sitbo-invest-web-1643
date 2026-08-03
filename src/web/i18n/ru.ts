@@ -14,7 +14,7 @@ const ru: Record<MessageKey, string> = {
   "nav.feedback": "Отзывы",
   "nav.contactArthur": "Связаться",
   "nav.properties": "Объекты",
-  "nav.pricing": "Прайсинг",
+  "nav.pricing": "Консультации",
   "nav.services": "Услуги",
   "nav.whyGeorgia": "Почему Грузия",
   "nav.history": "История",
