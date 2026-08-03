@@ -1,5 +1,7 @@
 import { Route, Switch, useLocation } from "wouter";
-import Index from "./pages/index";
+// Redesigned homepage. To roll back to the previous design, swap this import
+// for `./pages/index` (the old page is still in the repo, untouched).
+import Index from "./pages/home-v2";
 import MortgagePage from "./pages/mortgage";
 import InvestPage from "./pages/invest";
 import ProjectPage from "./pages/project";
