@@ -50,9 +50,11 @@ export function FooterV2() {
         }
         .fv2-bottom a { color: rgba(255,255,255,.72); }
         @media (max-width: 900px) {
-          .fv2 { --rd-gutter: clamp(20px, 5vw, 30px); }
           .fv2-grid { grid-template-columns: 1fr 1fr; }
           .fv2-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+          .fv2 { --rd-gutter: clamp(20px, 5vw, 30px); }
         }
       `}</style>
 
