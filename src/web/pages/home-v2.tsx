@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "wouter";
 import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
@@ -83,9 +83,6 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
 
       <div className="rd-hero-band">
         <img src="/rd-waterfront.jpg" alt="" aria-hidden="true" />
-        <a href="#why-georgia" className="rd-scroll">
-          {t("v2.hero.scroll")}
-        </a>
       </div>
     </section>
   );
@@ -278,31 +275,26 @@ const FEEDBACK: {
   quoteKey: MessageKey;
   authorKey: MessageKey;
   tagKeys: MessageKey[];
-  typeKey: MessageKey;
 }[] = [
   {
     quoteKey: "v2.fb.q1",
     authorKey: "v2.fb.a1",
     tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
-    typeKey: "v2.fb.tag.turnkey",
   },
   {
     quoteKey: "v2.fb.q2",
     authorKey: "v2.fb.a2",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
-    typeKey: "v2.fb.tag.turnkey",
+    tagKeys: ["v2.fb.tag.tbilisi", "v2.fb.tag.advisory"],
   },
   {
     quoteKey: "v2.fb.q3",
     authorKey: "v2.fb.a3",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
-    typeKey: "v2.fb.tag.turnkey",
+    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.turnkey"],
   },
   {
     quoteKey: "v2.fb.q4",
     authorKey: "v2.fb.a4",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
-    typeKey: "v2.fb.tag.turnkey",
+    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.strategy"],
   },
 ];
 
@@ -335,18 +327,7 @@ function Feedback() {
                   {f.tagKeys.map((k) => (
                     <span key={k}>{t(k)}</span>
                   ))}
-                  <span>{t(f.typeKey)}</span>
                 </div>
-                <dl className="rd-fb-meta">
-                  <div>
-                    <dt>{t("v2.case.locationLabel")}</dt>
-                    <dd>{t("v2.case.city")}</dd>
-                  </div>
-                  <div>
-                    <dt>{t("v2.case.typeLabel")}</dt>
-                    <dd>{t(f.typeKey)}</dd>
-                  </div>
-                </dl>
               </figure>
             ))}
           </div>
@@ -623,13 +604,6 @@ html, body { background: #21141A; }
 
 .rd-hero-band { position: relative; line-height: 0; }
 .rd-hero-band img { width: 100%; height: clamp(280px, 58vw, 838px); object-fit: cover; display: block; }
-.rd-scroll {
-  position: absolute; left: 50%; bottom: clamp(20px, 3vw, 32px); transform: translateX(-50%);
-  font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px); font-weight: 400;
-  letter-spacing: 0.02em; color: #fff; text-decoration: none; white-space: nowrap;
-  text-shadow: 0 1px 12px rgba(0,0,0,.45); animation: rdPulse 2.4s ease-in-out infinite;
-}
-@keyframes rdPulse { 0%,100% { opacity:.45 } 50% { opacity:1 } }
 
 /* why + stats — perfect squares */
 .rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); }
@@ -736,16 +710,11 @@ html, body { background: #21141A; }
   line-height: 1.32; margin: 0 0 12px;
 }
 .rd-fb-card figcaption { font-family: var(--body); font-size: clamp(13px, 1.1vw, 15px); color: rgba(255,255,255,.68); }
-.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 13px; padding: 4px 10px;
-  border: 1px solid rgba(255,255,255,.5); border-radius: 4px;
+  font-family: var(--body); font-size: 13px; padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,.55); border-radius: 4px;
 }
-.rd-fb-meta { margin: 12px 0 0; display: grid; gap: 4px; font-family: var(--body); font-size: 13px; }
-.rd-fb-meta div { display: flex; gap: 6px; align-items: baseline; }
-.rd-fb-meta dt { white-space: nowrap; }
-.rd-fb-meta dt { margin: 0; color: rgba(255,255,255,.55); }
-.rd-fb-meta dd { margin: 0; color: rgba(255,255,255,.9); }
 .rd-fb-next {
   flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; border: none;
   background: var(--bg); color: var(--white); font-size: 18px; cursor: pointer;
@@ -808,10 +777,17 @@ html, body { background: #21141A; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }
   .rd-projects { grid-template-columns: 1fr; padding-right: var(--rd-inset); }
-  .rd-eco-row { flex-direction: column; }
-  .rd-eco-card { min-height: 0; }
-  .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: 14px; }
-  .rd-eco-photo { display: none; }
+  /* Keep vertical ecosystem cards like desktop — horizontal scroll rail */
+  .rd-eco-row {
+    flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding-bottom: 8px; scrollbar-width: none;
+  }
+  .rd-eco-row::-webkit-scrollbar { display: none; }
+  .rd-eco-card {
+    flex: 0 0 min(72vw, 280px); min-height: clamp(360px, 70vw, 520px);
+    scroll-snap-align: start;
+  }
+  .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
@@ -829,14 +805,8 @@ html, body { background: #21141A; }
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomeV2() {
-  const t = useT();
   const [modal, setModal] = useState<ModalState>(CLOSED);
   useReveal();
-
-  const isMobile = useMemo(
-    () => typeof window !== "undefined" && window.innerWidth < 900,
-    [],
-  );
 
   useEffect(() => {
     if (!window.location.hash) window.scrollTo(0, 0);
@@ -868,21 +838,6 @@ export default function HomeV2() {
         topic={modal.topic}
         title={modal.title}
       />
-
-      {isMobile ? (
-        <div style={{ position: "fixed", left: 16, right: 16, bottom: 16, zIndex: 900 }}>
-          <button
-            type="button"
-            className="rd-btn rd-btn-white"
-            style={{ width: "100%", boxShadow: "0 12px 30px rgba(0,0,0,.3)" }}
-            onClick={() =>
-              setModal({ open: true, source: "Mobile sticky CTA", title: t("v2.hero.ctaPrimary") })
-            }
-          >
-            {t("v2.hero.ctaPrimary")}
-          </button>
-        </div>
-      ) : null}
     </div>
   );
 }

@@ -1,10 +1,17 @@
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
 
-/** Delay before the popup appears on a fresh visit. */
-const SHOW_AFTER_MS = 5000;
-/** Suppress for this long after the visitor closes it without submitting. */
-const DISMISS_TTL_MS = 24 * 60 * 60 * 1000;
+/**
+ * Soft lead capture:
+ * - never interrupts in the first ~20s
+ * - waits until the visitor has scrolled meaningfully (or spent longer on page)
+ * - on desktop, exit-intent can open it earlier after the quiet period
+ * - dismissed for a week; submitted forever
+ */
+const QUIET_MS = 20_000;
+const FALLBACK_MS = 45_000;
+const SCROLL_RATIO = 0.42;
+const DISMISS_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 const STORAGE_KEY = "sitbo_lead_popup";
 
 type StoredState = { dismissedAt?: number; submitted?: boolean };
@@ -40,7 +47,7 @@ const inputStyle: CSSProperties = {
   border: "1px solid rgba(140,178,192,0.25)",
   borderRadius: 8,
   color: "#FAF7F0",
-  fontFamily: "Manrope, sans-serif",
+  fontFamily: "Inter, Manrope, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
   outline: "none",
@@ -57,8 +64,47 @@ export function LeadPopup() {
 
   useEffect(() => {
     if (!shouldShow()) return;
-    const timer = window.setTimeout(() => setOpen(true), SHOW_AFTER_MS);
-    return () => window.clearTimeout(timer);
+
+    let opened = false;
+    let quietDone = false;
+    const openOnce = () => {
+      if (opened || !shouldShow()) return;
+      opened = true;
+      setOpen(true);
+      cleanup();
+    };
+
+    const onScroll = () => {
+      if (!quietDone) return;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - window.innerHeight;
+      if (max <= 0) return;
+      if (window.scrollY / max >= SCROLL_RATIO) openOnce();
+    };
+
+    const onExit = (e: MouseEvent) => {
+      if (!quietDone) return;
+      if (e.clientY <= 8) openOnce();
+    };
+
+    const quietTimer = window.setTimeout(() => {
+      quietDone = true;
+      onScroll();
+    }, QUIET_MS);
+
+    const fallbackTimer = window.setTimeout(openOnce, FALLBACK_MS);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("mouseout", onExit);
+
+    const cleanup = () => {
+      window.clearTimeout(quietTimer);
+      window.clearTimeout(fallbackTimer);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("mouseout", onExit);
+    };
+
+    return cleanup;
   }, []);
 
   useEffect(() => {
@@ -124,31 +170,32 @@ export function LeadPopup() {
           position: fixed;
           inset: 0;
           z-index: 3000;
-          background: rgba(12, 7, 10, 0.72);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
+          background: rgba(12, 7, 10, 0.45);
+          backdrop-filter: blur(3px);
+          -webkit-backdrop-filter: blur(3px);
           display: flex;
-          align-items: center;
+          align-items: flex-end;
           justify-content: center;
-          padding: 20px;
-          animation: leadPopupFade 0.35s ease;
+          padding: 16px;
+          animation: leadPopupFade 0.3s ease;
         }
         .lead-popup-card {
           position: relative;
           width: 100%;
-          max-width: 460px;
+          max-width: 420px;
           background: #21141A;
           border: 1px solid rgba(140,178,192,0.22);
           border-radius: 16px;
-          padding: 40px 36px 34px;
-          box-shadow: 0 30px 80px rgba(0,0,0,0.45);
-          animation: leadPopupRise 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          padding: 28px 24px 22px;
+          box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+          animation: leadPopupRise 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           box-sizing: border-box;
+          margin-bottom: max(8px, env(safe-area-inset-bottom));
         }
         .lead-popup-close {
           position: absolute;
-          top: 14px;
-          right: 14px;
+          top: 12px;
+          right: 12px;
           width: 32px;
           height: 32px;
           border-radius: 50%;
@@ -165,11 +212,18 @@ export function LeadPopup() {
         .lead-popup-submit:hover { opacity: 0.88; }
         @keyframes leadPopupFade { from { opacity: 0 } to { opacity: 1 } }
         @keyframes leadPopupRise {
-          from { opacity: 0; transform: translateY(18px) scale(0.98) }
+          from { opacity: 0; transform: translateY(24px) }
           to { opacity: 1; transform: none }
         }
-        @media (max-width: 520px) {
-          .lead-popup-card { padding: 34px 22px 26px; border-radius: 14px; }
+        @media (min-width: 720px) {
+          .lead-popup-backdrop {
+            align-items: center;
+            background: rgba(12, 7, 10, 0.55);
+          }
+          .lead-popup-card {
+            padding: 36px 32px 28px;
+            margin-bottom: 0;
+          }
         }
       `}</style>
 
@@ -184,43 +238,18 @@ export function LeadPopup() {
         </button>
 
         {submitted ? (
-          <div style={{ textAlign: "center", padding: "18px 0 8px" }}>
-            <div
+          <div style={{ textAlign: "center", padding: "12px 8px 4px" }}>
+            <p
               style={{
-                width: 54,
-                height: 54,
-                margin: "0 auto 20px",
-                borderRadius: "50%",
-                border: "1px solid #8CB2C0",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#8CB2C0",
-                fontSize: 22,
-              }}
-            >
-              ✓
-            </div>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: 24,
-                fontWeight: 400,
+                fontFamily: "Coolvetica, Chillax, sans-serif",
+                fontSize: 26,
                 color: "#FAF7F0",
                 margin: "0 0 10px",
               }}
             >
               {t("popup.sentTitle")}
-            </h2>
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: 14,
-                lineHeight: 1.6,
-                color: "rgba(250,247,240,0.6)",
-                margin: 0,
-              }}
-            >
+            </p>
+            <p style={{ fontFamily: "Inter, Manrope, sans-serif", fontSize: 15, color: "rgba(250,247,240,0.75)", margin: 0 }}>
               {t("popup.sentBody")}
             </p>
           </div>
@@ -228,109 +257,67 @@ export function LeadPopup() {
           <>
             <p
               style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: 10,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#8CB2C0",
-                margin: "0 0 14px",
-              }}
-            >
-              {t("popup.eyebrow")}
-            </p>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: "clamp(24px, 5vw, 30px)",
-                fontWeight: 400,
-                lineHeight: 1.2,
+                fontFamily: "Coolvetica, Chillax, sans-serif",
+                fontSize: 24,
+                lineHeight: 1.15,
                 color: "#FAF7F0",
-                margin: "0 0 12px",
+                margin: "0 36px 10px 0",
               }}
             >
               {t("popup.title")}
-            </h2>
+            </p>
             <p
               style={{
-                fontFamily: "Manrope, sans-serif",
+                fontFamily: "Inter, Manrope, sans-serif",
                 fontSize: 14,
-                lineHeight: 1.65,
-                color: "rgba(250,247,240,0.6)",
-                margin: "0 0 26px",
+                lineHeight: 1.4,
+                color: "rgba(250,247,240,0.72)",
+                margin: "0 0 20px",
               }}
             >
               {t("popup.body")}
             </p>
 
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
               <input
                 className="lead-popup-input"
-                type="text"
-                autoComplete="name"
-                placeholder={t("popup.namePlaceholder")}
+                style={inputStyle}
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                style={inputStyle}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                placeholder={t("popup.namePlaceholder")}
+                autoComplete="name"
               />
               <input
                 className="lead-popup-input"
-                type="text"
-                autoComplete="tel"
-                placeholder={t("popup.contactPlaceholder")}
-                value={form.contact}
-                onChange={(e) => setForm({ ...form, contact: e.target.value })}
                 style={inputStyle}
+                value={form.contact}
+                onChange={(e) => setForm((f) => ({ ...f, contact: e.target.value }))}
+                placeholder={t("popup.contactPlaceholder")}
+                autoComplete="tel"
               />
-
               {error ? (
-                <p
-                  style={{
-                    fontFamily: "Manrope, sans-serif",
-                    fontSize: 13,
-                    color: "#e57373",
-                    margin: 0,
-                  }}
-                >
+                <p style={{ margin: 0, color: "#ffb4b4", fontSize: 13, fontFamily: "Inter, Manrope, sans-serif" }}>
                   {error}
                 </p>
               ) : null}
-
               <button
                 type="submit"
                 className="lead-popup-submit"
                 disabled={loading}
                 style={{
                   marginTop: 4,
-                  padding: "15px 18px",
-                  borderRadius: 8,
                   border: "none",
-                  background: "#8CB2C0",
+                  borderRadius: 6,
+                  background: "#FAF7F0",
                   color: "#21141A",
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
+                  fontFamily: "Inter, Manrope, sans-serif",
+                  fontSize: 15,
+                  padding: "14px 18px",
                   cursor: loading ? "wait" : "pointer",
-                  opacity: loading ? 0.7 : 1,
-                  transition: "opacity 0.2s",
                 }}
               >
                 {loading ? "…" : t("popup.submit")}
               </button>
-
-              <p
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  fontSize: 11,
-                  lineHeight: 1.6,
-                  color: "rgba(250,247,240,0.4)",
-                  margin: "6px 0 0",
-                  textAlign: "center",
-                }}
-              >
-                {t("popup.privacy")}
-              </p>
             </form>
           </>
         )}

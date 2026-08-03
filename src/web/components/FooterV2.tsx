@@ -30,7 +30,7 @@ export function FooterV2() {
           display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
           gap: clamp(32px, 5vw, 96px); align-items: start;
         }
-        .fv2-logo { height: 40px; width: auto; display: block; margin-bottom: 26px; }
+        .fv2-logo { height: 36px; width: auto; display: block; margin-bottom: 22px; }
         .fv2-name {
           font-family: 'Inter', 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFFFF;
@@ -40,6 +40,7 @@ export function FooterV2() {
           font-size: clamp(15px, 1.25vw, 18px); line-height: 1.45;
           color: rgba(255,255,255,.82); margin: 0; max-width: 560px;
         }
+        .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
           font-family: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
           font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFFFF;
@@ -60,6 +61,9 @@ export function FooterV2() {
         }
         @media (max-width: 640px) {
           .fv2 { --rd-gutter: clamp(20px, 5vw, 30px); }
+          .fv2-logo { height: 26px; margin-bottom: 16px; }
+          .fv2-name { font-size: 15px; margin-bottom: 14px; }
+          .fv2-tagline { font-size: 14px; max-width: none; }
         }
       `}</style>
 
@@ -73,6 +77,7 @@ export function FooterV2() {
               Arthur Arutyunyan | <em>{t("v2.footer.role")}</em>
             </p>
             <p className="fv2-tagline">{t("v2.footer.tagline")}</p>
+            <p className="fv2-tagline">{t("v2.footer.taglineEnd")}</p>
           </div>
 
           <nav className="fv2-col" aria-label={t("v2.footer.investment")}>

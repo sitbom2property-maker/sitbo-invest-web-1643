@@ -153,11 +153,11 @@ const en = {
     "Clear numbers, clear risks, clear next step. Best advisory experience I've had in the Caucasus.",
   "v2.fb.a4": "— Alexei P., Investor (Israel)",
   "v2.fb.tag.batumi": "Batumi",
+  "v2.fb.tag.tbilisi": "Tbilisi",
   "v2.fb.tag.protection": "Protection",
+  "v2.fb.tag.advisory": "Advisory",
   "v2.fb.tag.turnkey": "Turnkey Asset Management",
-  "v2.case.city": "Batumi",
-  "v2.case.locationLabel": "Location:",
-  "v2.case.typeLabel": "Transaction type:",
+  "v2.fb.tag.strategy": "Strategy",
 
   "v2.pricing.title": "It always starts with a call...",
   "v2.pricing.requestLabel": "Request",
@@ -208,7 +208,8 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "You come with a goal, not a property. Tell me what you want to achieve - rental income, capital growth, relocation, diversification. We start from the outcome, not the listing.",
+    "You come with a goal, not a property. Tell me what you want to achieve — rental income, capital growth, relocation,\u00A0diversification.",
+  "v2.footer.taglineEnd": "We start from the outcome, not the listing.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
