@@ -58,6 +58,22 @@ const en = {
   "cta.requestConsultation": "Request a Consultation",
   "cta.requestPrivateConsultation": "Request Private Consultation",
 
+  // Lead popup (auto-opens after 5s)
+  "popup.eyebrow": "Private consultation",
+  "popup.title": "Thinking about buying in Georgia?",
+  "popup.body":
+    "Leave your contact and Arthur will personally come back to you within 24 hours — with honest numbers, not a sales pitch.",
+  "popup.namePlaceholder": "Your name",
+  "popup.contactPlaceholder": "Phone, WhatsApp or email",
+  "popup.submit": "Request a call",
+  "popup.privacy": "No spam. Your details stay private.",
+  "popup.sentTitle": "Thank you",
+  "popup.sentBody": "Your request has been received. Arthur will contact you within 24 hours.",
+  "popup.errorRequired": "Please fill in your name and contact.",
+  "popup.errorGeneric": "Something went wrong. Please try again.",
+  "popup.errorNetwork": "Network error. Please try again.",
+  "popup.close": "Close",
+
   // Homepage hero
   "home.hero.line1": "Don't play",
   "home.hero.line2": "roulette",

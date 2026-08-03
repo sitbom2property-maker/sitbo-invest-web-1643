@@ -19,12 +19,19 @@ import { RatesProvider } from "./context/RatesContext";
 import { Nav, NAV_HEIGHT } from "./components/nav";
 import { Footer } from "./components/footer";
 import { CookieConsent } from "./components/cookie-consent";
+import { LeadPopup } from "./components/LeadPopup";
 import { ScrollToHash } from "./components/scroll-to-hash";
 
 function AppFooter() {
 	const [location] = useLocation();
 	if (location.startsWith("/admin")) return null;
 	return <Footer />;
+}
+
+function AppLeadPopup() {
+	const [location] = useLocation();
+	if (location.startsWith("/admin")) return null;
+	return <LeadPopup />;
 }
 
 function App() {
@@ -58,6 +65,7 @@ function App() {
 				</Switch>
 			</div>
 			<AppFooter />
+			<AppLeadPopup />
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
 		</Provider>

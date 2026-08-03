@@ -56,6 +56,22 @@ const ru: Record<MessageKey, string> = {
   "cta.requestConsultation": "Запросить консультацию",
   "cta.requestPrivateConsultation": "Запросить частную консультацию",
 
+  // Лид-форма (открывается через 5 секунд)
+  "popup.eyebrow": "Частная консультация",
+  "popup.title": "Думаете о покупке в Грузии?",
+  "popup.body":
+    "Оставьте контакт — Артур свяжется с вами лично в течение 24 часов. Честные цифры, без давления.",
+  "popup.namePlaceholder": "Ваше имя",
+  "popup.contactPlaceholder": "Телефон, WhatsApp или email",
+  "popup.submit": "Заказать звонок",
+  "popup.privacy": "Без спама. Ваши данные останутся конфиденциальными.",
+  "popup.sentTitle": "Спасибо",
+  "popup.sentBody": "Заявка получена. Артур свяжется с вами в течение 24 часов.",
+  "popup.errorRequired": "Пожалуйста, укажите имя и контакт.",
+  "popup.errorGeneric": "Что-то пошло не так. Попробуйте ещё раз.",
+  "popup.errorNetwork": "Ошибка сети. Попробуйте ещё раз.",
+  "popup.close": "Закрыть",
+
   "home.hero.line1": "Не играйте",
   "home.hero.line2": "в рулетку",
   "home.hero.line3": "с недвижимостью",
