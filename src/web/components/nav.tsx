@@ -10,12 +10,14 @@ const MOBILE_BP = 1024;
 
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
   { labelKey: "nav.home", href: "/" },
+  { labelKey: "nav.about", href: "/services" },
   { labelKey: "nav.properties", href: "/catalog" },
-  { labelKey: "nav.services", href: "/services" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
-  { labelKey: "nav.history", href: "/history" },
-  { labelKey: "nav.blog", href: "/blog" },
+  { labelKey: "nav.notes", href: "/blog" },
+  { labelKey: "nav.feedback", href: "/#feedback" },
 ];
+
+const CONTACT_HREF = "/#consultation";
 
 function useNavActive() {
   const [location] = useLocation();
@@ -30,8 +32,8 @@ function useNavActive() {
   }, [location]);
 
   const isActive = (href: string) => {
-    if (href === "/") return location === "/";
-    if (href === "/#about") return location === "/" && hash === "#about";
+    if (href === "/") return location === "/" && !hash;
+    if (href.startsWith("/#")) return location === "/" && hash === href.slice(1);
     if (href === "/history") return location === "/history" || location.startsWith("/history/");
     if (href === "/catalog") return location === "/catalog" || location.startsWith("/project/");
     if (href === "/blog") return location === "/blog" || location.startsWith("/blog/");
@@ -248,6 +250,31 @@ export function Nav() {
           >
             <NavLocaleSwitcher compact={isMobile} />
 
+            {!isMobile && (
+              <Link
+                href={CONTACT_HREF}
+                style={{
+                  marginLeft: 10,
+                  padding: "11px 20px",
+                  borderRadius: 8,
+                  background: "#8CB2C0",
+                  color: "#21141A",
+                  fontFamily: "Manrope, sans-serif",
+                  fontSize: 10.5,
+                  fontWeight: 700,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.86")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                {t("nav.contactArthur")}
+              </Link>
+            )}
+
             {isMobile && (
               <button
                 type="button"
@@ -311,6 +338,26 @@ export function Nav() {
                 {t(l.labelKey)}
               </Link>
             ))}
+
+            <Link
+              href={CONTACT_HREF}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                marginTop: 12,
+                padding: "15px 28px",
+                borderRadius: 8,
+                background: "#8CB2C0",
+                color: "#21141A",
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+              }}
+            >
+              {t("nav.contactArthur")}
+            </Link>
           </div>
         </div>
       )}

@@ -9,6 +9,10 @@ const en = {
 
   // Nav
   "nav.home": "Home",
+  "nav.about": "About",
+  "nav.notes": "Notes",
+  "nav.feedback": "Feedback",
+  "nav.contactArthur": "Contact Arthur",
   "nav.properties": "Properties",
   "nav.services": "Services",
   "nav.whyGeorgia": "Why Georgia",
@@ -57,6 +61,135 @@ const en = {
   "cta.getFreeOffer": "Get a Free Offer",
   "cta.requestConsultation": "Request a Consultation",
   "cta.requestPrivateConsultation": "Request Private Consultation",
+
+  // Lead popup (auto-opens after 5s)
+  "popup.eyebrow": "Private consultation",
+  "popup.title": "Thinking about buying in Georgia?",
+  "popup.body":
+    "Leave your contact and Arthur will personally come back to you within 24 hours — with honest numbers, not a sales pitch.",
+  "popup.namePlaceholder": "Your name",
+  "popup.contactPlaceholder": "Phone, WhatsApp or email",
+  "popup.submit": "Request a call",
+  "popup.privacy": "No spam. Your details stay private.",
+  "popup.sentTitle": "Thank you",
+  "popup.sentBody": "Your request has been received. Arthur will contact you within 24 hours.",
+  "popup.errorRequired": "Please fill in your name and contact.",
+  "popup.errorGeneric": "Something went wrong. Please try again.",
+  "popup.errorNetwork": "Network error. Please try again.",
+  "popup.close": "Close",
+
+  // ── Redesigned homepage (v2) ──
+  "v2.hero.line1": "Don't play real estate",
+  "v2.hero.line2": "roulette in Georgia",
+  "v2.hero.body":
+    "Private Property Advisor. Born and raised in Georgia. Combining investment analytics, legal protection, and end-to-end management for high-net-worth buyers.",
+  "v2.hero.ctaPrimary": "Consultation",
+  "v2.hero.ctaSecondary": "Sell with me",
+  "v2.hero.scroll": "Scroll for more",
+
+  "v2.why.title": "Why investors choose Georgia?",
+  "v2.why.body":
+    "One of the world's most accessible, low-tax, and fast-growing real estate hubs.",
+  "v2.stats.tax": "Purchase tax",
+  "v2.stats.residency": "Residency permit",
+  "v2.stats.women": "Buyers are women",
+  "v2.stats.tourists": "Tourists in 2025",
+  "v2.stats.price": "Avg. price / sqm",
+  "v2.stats.yield": "Max rental yield",
+
+  "v2.quote.text":
+    "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
+  "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
+  "v2.quote.cta": "Read more about Georgia",
+
+  "v2.projects.eyebrow": "Selected projects",
+  "v2.projects.title": "Selected projects",
+  "v2.projects.titleEm": "filtered by me",
+  "v2.projects.body":
+    "I reject 85% of market listings so you only see the assets worth holding.",
+  "v2.projects.viewAll": "View all",
+
+  "v2.eco.eyebrow": "Ecosystem",
+  "v2.eco.title": "Ecosystem of",
+  "v2.eco.titleEm": "trusted partners",
+  "v2.eco.body":
+    "My network is your network. When you work with one advisor, you gain instant access to an entire ecosystem of verified professionals.",
+  "v2.eco.legal.title": "Legal & tax advisory",
+  "v2.eco.legal.body":
+    "Title checks, contract review, and tax structuring by lawyers who work with foreign buyers daily.",
+  "v2.eco.banking.title": "Banking & finance",
+  "v2.eco.banking.body":
+    "Account opening, transfers, and mortgage introductions with Georgia's leading banks.",
+  "v2.eco.renovation.title": "Renovation & furnishing",
+  "v2.eco.renovation.body":
+    "Vetted contractors and designers who deliver rental-ready interiors on fixed budgets.",
+  "v2.eco.management.title": "Turnkey management",
+  "v2.eco.management.body":
+    "Listing, guests, maintenance, and monthly reporting — your asset works while you are away.",
+
+  "v2.fb.eyebrow": "Client feedback",
+  "v2.fb.title": "Client feedback &",
+  "v2.fb.titleEm": "case studies",
+  "v2.fb.q1":
+    "Arthur saved me from buying a property with a legal flaw — and saved me $12,000.",
+  "v2.fb.a1": "— Mark V., Investor (Germany)",
+  "v2.fb.q2": "The only person in Georgia whom I and my business partners trust.",
+  "v2.fb.a2": "— Daniel K., Investor (UAE)",
+  "v2.fb.q3":
+    "Bought remotely, never flew in. Rented out within three weeks of handover.",
+  "v2.fb.a3": "— Elena S., Investor (Cyprus)",
+  "v2.case.city": "Batumi",
+  "v2.case.locationLabel": "Location",
+  "v2.case.typeLabel": "Transaction type",
+  "v2.case1.title": "Legal protection before purchase",
+  "v2.case1.type": "Due diligence",
+  "v2.case2.title": "Turnkey asset management",
+  "v2.case2.type": "Management",
+  "v2.case3.title": "Off-market first-line entry",
+  "v2.case3.type": "Acquisition",
+
+  "v2.pricing.eyebrow": "Work with me",
+  "v2.pricing.title": "It always starts with a call…",
+  "v2.pricing.popular": "Most chosen",
+  "v2.pricing.resultLabel": "Result",
+  "v2.pricing.choose": "Choose",
+  "v2.plan1.name": "Express audit",
+  "v2.plan1.for": "Just ask",
+  "v2.plan1.f1": "45–60 minutes",
+  "v2.plan1.f2": "Online call (WhatsApp / Google Meet)",
+  "v2.plan1.f3": "Real-time answers to your questions",
+  "v2.plan1.result": "Quick verdict: “Yes, let's do it” or “No, it's too risky”.",
+  "v2.plan2.name": "Strategic deep-dive",
+  "v2.plan2.for": "Ready to buy",
+  "v2.plan2.f1": "90–120 minutes + preliminary check",
+  "v2.plan2.f2": "Online call (WhatsApp / Google Meet)",
+  "v2.plan2.f3": "Preliminary review of your documents",
+  "v2.plan2.f4": "7 days of follow-up support via messenger",
+  "v2.plan2.result": "Financial model, legal summary, step-by-step plan.",
+  "v2.plan3.name": "Discovery tour",
+  "v2.plan3.for": "Arrive as a guest. Leave as an investor.",
+  "v2.plan3.f1": "3 days & 2 nights in Batumi",
+  "v2.plan3.f2": "Personal meetings and site visits",
+  "v2.plan3.f3": "Shortlist built around your goal",
+  "v2.plan3.result": "A decision made on the ground, with the paperwork ready.",
+
+  "v2.news.title": "Let's stay in touch",
+  "v2.news.body":
+    "Subscribe and get the updates that actually matter. The real numbers, the real opportunities, and the reality behind the pretty listings.",
+  "v2.news.placeholder": "Enter your e-mail",
+  "v2.news.submit": "Subscribe",
+  "v2.news.agree": "I agree to the",
+  "v2.news.privacy": "privacy policy.",
+  "v2.news.done": "You're subscribed. Talk soon.",
+  "v2.news.errorEmail": "Please enter a valid email.",
+  "v2.news.errorAgree": "Please accept the privacy policy.",
+  "v2.news.leadName": "Newsletter subscriber",
+
+  "v2.modal.defaultTitle": "Request a consultation",
+  "v2.modal.defaultBody":
+    "Leave your details and Arthur will get back to you personally within 24 hours.",
+  "v2.modal.messagePlaceholder": "What would you like to discuss? (optional)",
+  "v2.modal.direct": "Or reach out directly:",
 
   // Homepage hero
   "home.hero.line1": "Don't play",
