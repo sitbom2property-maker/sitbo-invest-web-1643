@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { Link } from "wouter";
 import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
@@ -172,13 +172,65 @@ const PROJECTS = [
 function SelectedProjects() {
   const t = useT();
   const railRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{
+    active: boolean;
+    pointerId: number;
+    startX: number;
+    startScroll: number;
+    moved: boolean;
+  } | null>(null);
   const [progress, setProgress] = useState(0);
+  const [dragging, setDragging] = useState(false);
 
   const onScroll = () => {
     const el = railRef.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
     setProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    // Only primary button / touch / pen — leave trackpad native scroll alone for wheel
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    const el = railRef.current;
+    if (!el) return;
+    dragRef.current = {
+      active: true,
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startScroll: el.scrollLeft,
+      moved: false,
+    };
+    el.setPointerCapture(e.pointerId);
+    setDragging(true);
+  };
+
+  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const el = railRef.current;
+    if (!drag?.active || !el || drag.pointerId !== e.pointerId) return;
+    const dx = e.clientX - drag.startX;
+    if (Math.abs(dx) > 4) drag.moved = true;
+    el.scrollLeft = drag.startScroll - dx;
+  };
+
+  const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const el = railRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    if (el?.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+    // Block the click that follows a real drag so project links don't fire
+    if (drag.moved) {
+      const blockClick = (ev: Event) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        el?.removeEventListener("click", blockClick, true);
+      };
+      el?.addEventListener("click", blockClick, true);
+      window.setTimeout(() => el?.removeEventListener("click", blockClick, true), 0);
+    }
+    dragRef.current = null;
+    setDragging(false);
   };
 
   return (
@@ -198,11 +250,19 @@ function SelectedProjects() {
           </div>
 
           <div className="rd-projects-main">
-            <div className="rd-rail" ref={railRef} onScroll={onScroll}>
+            <div
+              className={`rd-rail${dragging ? " is-dragging" : ""}`}
+              ref={railRef}
+              onScroll={onScroll}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+            >
               {PROJECTS.map((p) => (
-                <Link key={p.name} href={p.href} className="rd-proj">
+                <Link key={p.name} href={p.href} className="rd-proj" draggable={false}>
                   <div className="rd-proj-img">
-                    <img src={p.img} alt={p.name} loading="lazy" />
+                    <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
                   </div>
                   <span className="rd-proj-name">{p.name}</span>
                 </Link>
@@ -652,12 +712,20 @@ html, body { background: #21141A; }
 .rd-rail {
   display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
   padding-bottom: 22px; scrollbar-width: none;
+  cursor: grab; touch-action: pan-y; user-select: none;
 }
+.rd-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .rd-rail::-webkit-scrollbar { display: none; }
-.rd-proj { flex: 0 0 clamp(220px, 22vw, 313px); scroll-snap-align: start; text-decoration: none; }
-.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #676060; }
-.rd-proj-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
-.rd-proj:hover .rd-proj-img img { transform: scale(1.05); }
+.rd-proj {
+  flex: 0 0 clamp(220px, 22vw, 313px); scroll-snap-align: start;
+  text-decoration: none; cursor: inherit;
+}
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #676060; pointer-events: none; }
+.rd-proj-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
+}
+.rd-rail:not(.is-dragging) .rd-proj:hover .rd-proj-img img { transform: scale(1.05); }
 .rd-proj-name { display: block; margin-top: 14px; font-family: var(--body); font-weight: 700; font-size: 18px; color: var(--bg); }
 .rd-rail-track { position: relative; height: 4px; background: rgba(33,20,26,.12); overflow: hidden; }
 .rd-rail-track span { position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--bg); transition: transform .2s ease; }
