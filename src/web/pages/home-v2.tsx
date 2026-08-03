@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { Link } from "wouter";
+import { PrivacyModal } from "../components/PrivacyModal";
 import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
@@ -518,6 +519,7 @@ function Newsletter() {
   const [agree, setAgree] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "done">("idle");
   const [error, setError] = useState("");
+  const [privacyOpen, setPrivacyOpen] = useState(false);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -576,7 +578,17 @@ function Newsletter() {
                 <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} />
                 <span>
                   {t("v2.news.agree")}{" "}
-                  <Link href="/legal">{t("v2.news.privacy")}</Link>
+                  <button
+                    type="button"
+                    className="rd-news-privacy"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setPrivacyOpen(true);
+                    }}
+                  >
+                    {t("v2.news.privacy")}
+                  </button>
                 </span>
               </label>
               {error ? <p className="rd-news-error">{error}</p> : null}
@@ -584,6 +596,7 @@ function Newsletter() {
           )}
         </div>
       </div>
+      <PrivacyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </section>
   );
 }
@@ -847,7 +860,11 @@ html, body { background: #21141A; }
 .rd-news-row .rd-btn { min-width: 171px; }
 .rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: rgba(255,255,255,.7); cursor: pointer; }
 .rd-news-agree input { accent-color: #fff; margin-top: 2px; }
-.rd-news-agree a { color: #fff; }
+.rd-news-agree a, .rd-news-privacy {
+  color: #fff; background: none; border: none; padding: 0; margin: 0;
+  font: inherit; font-style: italic; text-decoration: underline; cursor: pointer;
+}
+.rd-news-privacy:hover { opacity: .85; }
 .rd-news-done { font-family: var(--body); font-size: 18px; color: #fff; margin: 0; }
 .rd-news-error { font-family: var(--body); font-size: 13px; color: #ffb4b4; margin: 10px 0 0; }
 
