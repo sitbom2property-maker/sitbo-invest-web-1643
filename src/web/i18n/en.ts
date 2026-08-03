@@ -14,7 +14,7 @@ const en = {
   "nav.feedback": "Feedback",
   "nav.contactArthur": "Contact Arthur",
   "nav.properties": "Properties",
-  "nav.pricing": "Pricing",
+  "nav.pricing": "Consultations",
   "nav.services": "Services",
   "nav.whyGeorgia": "Why Georgia",
   "nav.history": "History Timeline",
