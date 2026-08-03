@@ -121,6 +121,46 @@ export default function CatalogPage() {
   const [search, setSearch] = useState("");
   const [showBookCall, setShowBookCall] = useState(false);
   const [bookForm, setBookForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [bookLoading, setBookLoading] = useState(false);
+  const [bookError, setBookError] = useState("");
+  const [bookSent, setBookSent] = useState(false);
+
+  const submitBookCall = async () => {
+    setBookError("");
+    if (!bookForm.name.trim() || (!bookForm.phone.trim() && !bookForm.email.trim())) {
+      setBookError(t("home.contact.errorRequired"));
+      return;
+    }
+    setBookLoading(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: bookForm.name.trim(),
+          phone: bookForm.phone.trim(),
+          email: bookForm.email.trim(),
+          message: bookForm.message.trim(),
+          source: "Catalog — Book a Call",
+          page: typeof window !== "undefined" ? window.location.pathname : undefined,
+        }),
+      });
+      if (res.ok) {
+        setBookSent(true);
+        setBookForm({ name: "", phone: "", email: "", message: "" });
+        window.setTimeout(() => {
+          setShowBookCall(false);
+          setBookSent(false);
+        }, 2000);
+      } else {
+        setBookError(t("home.contact.errorGeneric"));
+      }
+    } catch {
+      setBookError(t("home.contact.errorNetwork"));
+    } finally {
+      setBookLoading(false);
+    }
+  };
 
   const sortOptions = [
     { value: "default", label: t("catalog.sortDefault") },
@@ -318,11 +358,19 @@ export default function CatalogPage() {
               <textarea placeholder={t("catalog.bookCall.message")} value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
                 style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
-              <button onClick={() => { setShowBookCall(false); setBookForm({ name: "", phone: "", email: "", message: "" }); }}
-                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%" }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                {t("cta.sendRequest")}
+              <button
+                type="button"
+                onClick={submitBookCall}
+                disabled={bookLoading || bookSent}
+                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = bookLoading ? "0.7" : "1")}
+              >
+                {bookSent ? t("home.contact.sentTitle") : bookLoading ? "…" : t("cta.sendRequest")}
               </button>
+              {bookError ? (
+                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
+              ) : null}
               <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
                 {t("catalog.bookCall.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>

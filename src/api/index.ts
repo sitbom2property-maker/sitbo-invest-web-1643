@@ -1,50 +1,60 @@
 import { Hono } from 'hono';
-import { cors } from "hono/cors"
-import authRouter from "./routes/auth";
-import propertiesRouter from "./routes/properties";
-import ratesRouter from "./routes/rates";
+import { cors } from "hono/cors";
+import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 
-const app = new Hono();
+type Bindings = {
+  ODOO_URL?: string;
+  ODOO_DB?: string;
+  ODOO_LOGIN?: string;
+  ODOO_API_KEY?: string;
+};
+
+const app = new Hono<{ Bindings: Bindings }>().basePath('api');
 
 app.use(cors({ origin: "*" }));
 
-app.get('/api/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
+app.get('/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
 
-app.route('/api/auth', authRouter);
-app.route('/api/properties', propertiesRouter);
-app.route('/api/rates', ratesRouter);
+function parseLeadBody(body: Record<string, unknown>): WebsiteLead | null {
+  const name = typeof body.name === "string" ? body.name.trim() : "";
+  if (!name) return null;
 
-const SHEETS_WORKER = 'http://localhost:6475';
-const SHEETS_SECRET = 'sitbo-sheets-secret';
+  const contact = typeof body.contact === "string" ? body.contact.trim() : "";
+  const phone = typeof body.phone === "string" ? body.phone.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim() : "";
 
-async function appendToSheets(row: string[]) {
-  const res = await fetch(SHEETS_WORKER, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-secret': SHEETS_SECRET },
-    body: JSON.stringify({ row }),
-  });
-  if (!res.ok) throw new Error(`sheets-worker ${res.status}`);
-  return res.json();
+  if (!contact && !phone && !email) return null;
+
+  return {
+    name,
+    contact: contact || undefined,
+    phone: phone || undefined,
+    email: email || undefined,
+    budget: typeof body.budget === "string" ? body.budget : undefined,
+    message: typeof body.message === "string" ? body.message : undefined,
+    source: typeof body.source === "string" ? body.source : undefined,
+    project: typeof body.project === "string" ? body.project : undefined,
+    page: typeof body.page === "string" ? body.page : undefined,
+  };
 }
 
-// Lead form submission
-app.post('/api/leads', async (c) => {
+// Lead form submission → Odoo CRM
+app.post('/leads', async (c) => {
   try {
-    const body = await c.req.json();
-    const { name, contact, budget } = body;
-    if (!name || !contact) {
+    const body = await c.req.json<Record<string, unknown>>();
+    const lead = parseLeadBody(body);
+    if (!lead) {
       return c.json({ error: 'Name and contact are required' }, 400);
     }
 
-    const ts = new Date().toISOString();
-    console.log('[Lead submitted]', { name, contact, budget, ts });
+    console.log('[Lead submitted]', lead);
 
     try {
-      await appendToSheets([ts, name, contact, budget || '', 'Website']);
-      console.log('[Sheets] Row appended ✓');
+      const id = await createOdooLead(lead, c.env);
+      console.log('[Odoo CRM] Lead created ✓ id=', id);
     } catch (err) {
-      console.error('[Sheets] Failed:', err);
-      // Don't fail the user-facing request
+      console.error('[Odoo CRM] Failed:', err);
+      // Don't fail the user-facing request if CRM is temporarily unavailable
     }
 
     return c.json({ success: true, message: 'Lead received' });

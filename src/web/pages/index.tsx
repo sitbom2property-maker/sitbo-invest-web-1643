@@ -1522,7 +1522,15 @@ function Contact() {
     if (!form.name.trim() || !form.contact.trim()) { setError(t("home.contact.errorRequired")); return; }
     setLoading(true);
     try {
-      const res = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          source: "Homepage Contact",
+          page: typeof window !== "undefined" ? window.location.pathname : undefined,
+        }),
+      });
       if (res.ok) setSubmitted(true);
       else setError(t("home.contact.errorGeneric"));
     } catch { setError(t("home.contact.errorNetwork")); }
