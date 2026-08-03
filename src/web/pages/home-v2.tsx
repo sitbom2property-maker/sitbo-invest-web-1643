@@ -725,8 +725,9 @@ html, body { background: #21141A; }
 .rd-fb-rail::-webkit-scrollbar { display: none; }
 .rd-fb-card {
   --fb-size: clamp(280px, 28vw, 360px);
-  flex: 0 0 var(--fb-size); width: var(--fb-size); aspect-ratio: 1 / 1;
-  scroll-snap-align: start; margin: 0; box-sizing: border-box;
+  flex: 0 0 var(--fb-size);
+  width: var(--fb-size); height: var(--fb-size); max-height: var(--fb-size);
+  aspect-ratio: 1 / 1; scroll-snap-align: start; margin: 0; box-sizing: border-box;
   background: var(--card); border-radius: 12px; padding: clamp(18px, 1.8vw, 28px);
   display: flex; flex-direction: column; color: var(--white); overflow: hidden;
 }
