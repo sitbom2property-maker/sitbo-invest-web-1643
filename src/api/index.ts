@@ -14,7 +14,30 @@ const app = new Hono<{ Bindings: Bindings }>().basePath('api');
 
 app.use(cors({ origin: "*" }));
 
-app.get('/ping', (c) => c.json({ message: `Pong! ${Date.now()}` }));
+app.get('/ping', (c) =>
+  c.json({
+    message: `Pong! ${Date.now()}`,
+    crm: "odoo",
+    version: "odoo-crm-v2",
+  }),
+);
+
+app.get('/leads/health', async (c) => {
+  try {
+    const id = await createOdooLead(
+      {
+        name: "Healthcheck",
+        contact: "healthcheck@sitbo.local",
+        source: "API healthcheck",
+        page: "/api/leads/health",
+      },
+      c.env,
+    );
+    return c.json({ ok: true, crm: "odoo", odooId: id });
+  } catch (err) {
+    return c.json({ ok: false, crm: "odoo", error: String(err) }, 500);
+  }
+});
 
 function parseLeadBody(body: Record<string, unknown>): WebsiteLead | null {
   const name = typeof body.name === "string" ? body.name.trim() : "";
@@ -53,12 +76,24 @@ app.post('/leads', async (c) => {
     try {
       const id = await createOdooLead(lead, c.env);
       console.log('[Odoo CRM] Lead created ✓ id=', id);
+      return c.json({
+        success: true,
+        message: 'Lead received',
+        crm: 'odoo',
+        odooId: id,
+        version: 'odoo-crm-v2',
+      });
     } catch (err) {
       console.error('[Odoo CRM] Failed:', err);
-      // Don't fail the user-facing request if CRM is temporarily unavailable
+      // Still acknowledge the form so UX does not break, but surface CRM failure
+      return c.json({
+        success: true,
+        message: 'Lead received',
+        crm: 'failed',
+        error: String(err),
+        version: 'odoo-crm-v2',
+      });
     }
-
-    return c.json({ success: true, message: 'Lead received' });
   } catch {
     return c.json({ error: 'Invalid request' }, 400);
   }
