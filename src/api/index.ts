@@ -7,6 +7,7 @@ type Bindings = {
   ODOO_DB?: string;
   ODOO_LOGIN?: string;
   ODOO_API_KEY?: string;
+  ODOO_USER_ID?: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>().basePath('api');
