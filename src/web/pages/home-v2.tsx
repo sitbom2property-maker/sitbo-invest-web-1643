@@ -362,10 +362,10 @@ function Feedback() {
   const t = useT();
   const railRef = useRef<HTMLDivElement>(null);
 
-  const next = () => {
+  const scrollByPage = (dir: -1 | 1) => {
     const el = railRef.current;
     if (!el) return;
-    el.scrollBy({ left: el.clientWidth * 0.6, behavior: "smooth" });
+    el.scrollBy({ left: el.clientWidth * 0.6 * dir, behavior: "smooth" });
   };
 
   return (
@@ -378,6 +378,15 @@ function Feedback() {
         </h2>
 
         <div className="rd-fb-row">
+          <button
+            type="button"
+            className="rd-fb-nav"
+            onClick={() => scrollByPage(-1)}
+            aria-label={t("v2.fb.prev")}
+          >
+            ←
+          </button>
+
           <div className="rd-fb-rail" ref={railRef}>
             {FEEDBACK.map((f, i) => (
               <figure key={i} className="rd-fb-card rv">
@@ -392,7 +401,12 @@ function Feedback() {
             ))}
           </div>
 
-          <button type="button" className="rd-fb-next" onClick={next} aria-label={t("v2.fb.next")}>
+          <button
+            type="button"
+            className="rd-fb-nav"
+            onClick={() => scrollByPage(1)}
+            aria-label={t("v2.fb.next")}
+          >
             →
           </button>
         </div>
@@ -783,12 +797,12 @@ html, body { background: #21141A; }
   font-family: var(--body); font-size: 13px; padding: 6px 12px;
   border: 1px solid rgba(255,255,255,.55); border-radius: 4px;
 }
-.rd-fb-next {
+.rd-fb-nav {
   flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; border: none;
   background: var(--bg); color: var(--white); font-size: 18px; cursor: pointer;
-  transition: opacity .2s;
+  transition: opacity .2s; display: inline-flex; align-items: center; justify-content: center;
 }
-.rd-fb-next:hover { opacity: .85; }
+.rd-fb-nav:hover { opacity: .85; }
 
 /* pricing */
 .rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); }
@@ -866,7 +880,7 @@ html, body { background: #21141A; }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
   .rd-fb-card { --fb-size: min(86vw, 320px); }
-  .rd-fb-next { display: none; }
+  .rd-fb-nav { display: none; }
 }
 `;
 

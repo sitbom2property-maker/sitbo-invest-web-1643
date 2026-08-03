@@ -140,6 +140,7 @@ const en = {
 
   "v2.fb.title": "Client Feedback",
   "v2.fb.titleEm": "& Case Studies",
+  "v2.fb.prev": "Previous testimonial",
   "v2.fb.next": "Next testimonial",
   "v2.fb.q1":
     "Arthur saved me from buying a property with a legal flaw and saved me $12,000",
