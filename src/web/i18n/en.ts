@@ -14,6 +14,7 @@ const en = {
   "nav.feedback": "Feedback",
   "nav.contactArthur": "Contact Arthur",
   "nav.properties": "Properties",
+  "nav.pricing": "Pricing",
   "nav.services": "Services",
   "nav.whyGeorgia": "Why Georgia",
   "nav.history": "History Timeline",
@@ -106,6 +107,9 @@ const en = {
   "v2.quote.text":
     "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
   "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
+  "v2.quote2.text":
+    "For international buyers, Georgia combines legal clarity, residency pathways, and yields that are hard to find in Europe today.",
+  "v2.quote2.author": "Maria K. — Family Office, Switzerland",
   "v2.quote.cta": "Read more About Georgia",
 
   "v2.projects.title": "Selected Projects",
@@ -145,12 +149,15 @@ const en = {
   "v2.fb.q3":
     "Bought remotely, never flew in. Rented out within three weeks of handover.",
   "v2.fb.a3": "— Elena S., Investor (Cyprus)",
+  "v2.fb.q4":
+    "Clear numbers, clear risks, clear next step. Best advisory experience I've had in the Caucasus.",
+  "v2.fb.a4": "— Alexei P., Investor (Israel)",
   "v2.fb.tag.batumi": "Batumi",
+  "v2.fb.tag.tbilisi": "Tbilisi",
   "v2.fb.tag.protection": "Protection",
+  "v2.fb.tag.advisory": "Advisory",
   "v2.fb.tag.turnkey": "Turnkey Asset Management",
-  "v2.case.city": "Batumi",
-  "v2.case.locationLabel": "Location:",
-  "v2.case.typeLabel": "Transaction type:",
+  "v2.fb.tag.strategy": "Strategy",
 
   "v2.pricing.title": "It always starts with a call...",
   "v2.pricing.requestLabel": "Request",
@@ -201,7 +208,8 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "You come with a goal, not a property. Tell me what you want to achieve - rental income, capital growth, relocation, diversification. We start from the outcome, not the listing.",
+    "You come with a goal, not a property. Tell me what you want to achieve — rental income, capital growth, relocation,\u00A0diversification.",
+  "v2.footer.taglineEnd": "We start from the outcome, not the listing.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
