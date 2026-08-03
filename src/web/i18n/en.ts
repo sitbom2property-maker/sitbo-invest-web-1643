@@ -107,6 +107,9 @@ const en = {
   "v2.quote.text":
     "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
   "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
+  "v2.quote2.text":
+    "For international buyers, Georgia combines legal clarity, residency pathways, and yields that are hard to find in Europe today.",
+  "v2.quote2.author": "Maria K. — Family Office, Switzerland",
   "v2.quote.cta": "Read more About Georgia",
 
   "v2.projects.title": "Selected Projects",

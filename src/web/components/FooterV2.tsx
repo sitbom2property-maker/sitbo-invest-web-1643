@@ -14,13 +14,18 @@ export function FooterV2() {
     <footer className="fv2">
       <style>{`
         .fv2 {
+          /* Keep in sync with .rd --rd-max / --rd-gutter on home-v2 */
+          --rd-max: 1440px;
           --rd-gutter: clamp(30px, 5.5vw, 80px);
           background: #21141A;
           color: #FFFFFF;
           font-family: 'Inter', 'DM Sans', Manrope, sans-serif;
           padding: clamp(46px, 6vw, 88px) 0 clamp(26px, 3vw, 44px);
         }
-        .fv2-wrap { max-width: 1440px; margin: 0 auto; padding: 0 var(--rd-gutter); }
+        .fv2-wrap {
+          max-width: var(--rd-max); margin: 0 auto;
+          padding: 0 var(--rd-gutter); box-sizing: border-box;
+        }
         .fv2-grid {
           display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
           gap: clamp(32px, 5vw, 96px); align-items: start;

@@ -146,9 +146,15 @@ function Quote() {
   const t = useT();
   return (
     <section className="rd-quote">
-      <div className="rd-wrap rv">
-        <blockquote>“{t("v2.quote.text")}”</blockquote>
-        <p className="rd-quote-author">{t("v2.quote.author")}</p>
+      <div className="rd-wrap">
+        <div className="rd-quote-stack rv">
+          <blockquote>“{t("v2.quote.text")}”</blockquote>
+          <p className="rd-quote-author">{t("v2.quote.author")}</p>
+        </div>
+        <div className="rd-quote-stack rv">
+          <blockquote>“{t("v2.quote2.text")}”</blockquote>
+          <p className="rd-quote-author">{t("v2.quote2.author")}</p>
+        </div>
         <Link href="/invest" className="rd-btn rd-btn-white">
           {t("v2.quote.cta")}
         </Link>
@@ -540,7 +546,8 @@ html, body { background: #21141A; }
   --blue: #E9F7FF;
   --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
   --body: 'Inter', 'DM Sans', Manrope, sans-serif;
-  /* Shared page rhythm: edge inset for panels + content gutter */
+  /* One canvas: same max width + gutters as FooterV2 */
+  --rd-max: 1440px;
   --rd-edge: 10px;
   --rd-gutter: clamp(30px, 5.5vw, 80px);
   --rd-inset: calc(var(--rd-gutter) - var(--rd-edge));
@@ -549,7 +556,12 @@ html, body { background: #21141A; }
   overflow-x: hidden;
   font-family: var(--body);
 }
-.rd-wrap { max-width: 1440px; margin: 0 auto; padding: 0 var(--rd-gutter); }
+.rd-wrap { max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-gutter); box-sizing: border-box; }
+/* Panels / newsletter share the 1440 canvas so titles align with footer logo */
+.rd-canvas {
+  max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-edge);
+  box-sizing: border-box;
+}
 .rd .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .rd .rv.in { opacity: 1; transform: none; }
 
@@ -579,8 +591,8 @@ html, body { background: #21141A; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
 .rd-split .rd-lead { max-width: 420px; }
 
-/* hero */
-.rd-hero { position: relative; padding-top: calc(var(--nav-height, 88px) + clamp(30px, 4vw, 64px)); overflow: hidden; }
+/* hero — app shell already offsets fixed nav; only add section spacing */
+.rd-hero { position: relative; padding-top: clamp(30px, 4vw, 64px); overflow: hidden; }
 .rd-hero-circle {
   position: absolute; top: -190px; right: -120px; width: 760px; height: 760px;
   border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
@@ -639,14 +651,16 @@ html, body { background: #21141A; }
 
 /* quote */
 .rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); text-align: center; }
+.rd-quote-stack { margin: 0 0 clamp(36px, 4.5vw, 56px); }
+.rd-quote-stack:last-of-type { margin-bottom: clamp(28px, 3.5vw, 40px); }
 .rd-quote blockquote {
   font-family: var(--body); font-weight: 300; font-size: clamp(20px, 2.22vw, 32px);
-  line-height: 1.3; margin: 0 auto 26px; max-width: 780px; color: rgba(255,255,255,.95);
+  line-height: 1.3; margin: 0 auto 18px; max-width: 780px; color: rgba(255,255,255,.95);
 }
-.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0 0 30px; }
+.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0; }
 
-/* panels — content left edge aligns with .rd-wrap / footer logo */
-.rd-panel { border-radius: 20px; margin: 0 var(--rd-edge); }
+/* panels — sit inside .rd-canvas so left content matches footer logo */
+.rd-panel { border-radius: 20px; margin: 0; }
 .rd-panel-white { background: var(--white); color: var(--bg); }
 .rd-panel-light { background: var(--panel); color: var(--bg); }
 .rd-projects-outer, .rd-fb-outer { padding-bottom: clamp(50px, 6vw, 90px); }
@@ -760,8 +774,8 @@ html, body { background: #21141A; }
 .rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
 .rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: 6px; }
 
-/* newsletter — title left edge matches footer logo via shared --rd-gutter */
-.rd-news-outer { padding: 0 var(--rd-edge) clamp(40px, 5vw, 70px); }
+/* newsletter — title left edge = --rd-gutter inside 1440 canvas (= footer logo) */
+.rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); }
 .rd-news {
   position: relative; border-radius: 20px; overflow: hidden;
   background:
@@ -834,11 +848,17 @@ export default function HomeV2() {
       <Hero onRequest={setModal} />
       <WhyGeorgia />
       <Quote />
-      <SelectedProjects />
+      <div className="rd-canvas">
+        <SelectedProjects />
+      </div>
       <Ecosystem />
-      <Feedback />
+      <div className="rd-canvas">
+        <Feedback />
+      </div>
       <Pricing onRequest={setModal} />
-      <Newsletter />
+      <div className="rd-canvas">
+        <Newsletter />
+      </div>
 
       <RequestModal
         open={modal.open}
