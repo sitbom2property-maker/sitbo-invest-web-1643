@@ -16,6 +16,7 @@
     "directory": "./dist/client",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application"
+  },
   "vars": {
     "ODOO_URL": "https://sitboinvest.odoo.com",
     "ODOO_DB": "sitboinvest",
