@@ -747,22 +747,29 @@ html, body { background: #21141A; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
 .rd-split .rd-lead { max-width: 420px; }
 
-/* hero — app shell already offsets fixed nav; only add section spacing */
-.rd-hero { position: relative; padding-top: clamp(30px, 4vw, 64px); overflow: hidden; }
+/* hero — app shell already offsets fixed nav; center photo between nav and fold */
+.rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
 .rd-hero-circle {
   position: absolute; top: -190px; right: -120px; width: 760px; height: 760px;
   border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
 }
 .rd-hero-grid {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr); align-items: end;
-  gap: 0; padding-bottom: clamp(40px, 5vw, 72px);
+  display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr); align-items: center;
+  gap: 0;
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--nav-height, 88px) - clamp(16px, 2vw, 28px));
+  padding-bottom: clamp(28px, 3.5vw, 48px);
 }
-.rd-hero-photo { border-radius: 2px; overflow: hidden; aspect-ratio: 508 / 680; z-index: 1; }
-.rd-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rd-hero-photo {
+  border-radius: 2px; overflow: hidden; aspect-ratio: 508 / 680; z-index: 1;
+  justify-self: start; width: 100%;
+  max-height: min(72svh, 640px);
+  max-width: min(100%, calc(min(72svh, 640px) * 508 / 680));
+}
+.rd-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .rd-hero-copy {
   position: relative; z-index: 2;
-  padding-bottom: clamp(0px, 2vw, 40px);
   margin-left: clamp(-48px, -6vw, -18px);
   padding-left: clamp(12px, 2vw, 28px);
 }
@@ -968,8 +975,11 @@ html, body { background: #21141A; }
 
 /* responsive */
 @media (max-width: 1024px) {
-  .rd-hero-grid { grid-template-columns: 1fr; align-items: start; gap: clamp(20px, 3vw, 32px); }
-  .rd-hero-photo { max-width: 420px; }
+  .rd-hero-grid {
+    grid-template-columns: 1fr; align-items: start; gap: clamp(20px, 3vw, 32px);
+    min-height: 0;
+  }
+  .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }
