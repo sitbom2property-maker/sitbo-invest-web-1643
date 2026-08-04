@@ -13,6 +13,7 @@ const en = {
   "nav.notes": "Notes",
   "nav.feedback": "Feedback",
   "nav.contactArthur": "Contact Arthur",
+  "float.consult": "Consultation",
   "nav.properties": "Properties",
   "nav.pricing": "Consultations",
   "nav.services": "Services",
