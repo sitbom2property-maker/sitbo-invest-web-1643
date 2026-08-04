@@ -11,7 +11,8 @@ export function ScrollToHash() {
       const hash = window.location.hash;
       if (!hash) return;
       const id = decodeURIComponent(hash.slice(1));
-      window.setTimeout(() => scrollToId(id), 100);
+      window.setTimeout(() => scrollToId(id), 80);
+      window.setTimeout(() => scrollToId(id), 280);
     };
 
     scroll();
