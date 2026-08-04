@@ -161,17 +161,9 @@ function Quote() {
   );
 }
 
-// ─── Selected projects ────────────────────────────────────────────────────────
+// ─── Drag rail (projects + feedback) ──────────────────────────────────────────
 
-const PROJECTS = [
-  { name: "Hisni by Biograpi", img: "/hisni-by-biograpi.jpg", href: "/catalog" },
-  { name: "Artex Parkline", img: "/rd-project.jpg", href: "/project/artex-parkline" },
-  { name: "CityZen", img: "/rd-tower.jpg", href: "/catalog" },
-  { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
-];
-
-function SelectedProjects() {
-  const t = useT();
+function useDragRail(cardSelector: string, gap = 12) {
   const railRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{
     active: boolean;
@@ -202,9 +194,9 @@ function SelectedProjects() {
   };
 
   const snapToNearest = (el: HTMLDivElement) => {
-    const card = el.querySelector<HTMLElement>(".rd-proj");
+    const card = el.querySelector<HTMLElement>(cardSelector);
     if (!card) return;
-    const step = card.offsetWidth + 12; // card + gap
+    const step = card.offsetWidth + gap;
     if (step <= 0) return;
     const max = el.scrollWidth - el.clientWidth;
     const target = Math.min(max, Math.max(0, Math.round(el.scrollLeft / step) * step));
@@ -218,7 +210,6 @@ function SelectedProjects() {
     const t0 = performance.now();
     const tick = (now: number) => {
       const p = Math.min(1, (now - t0) / duration);
-      // ease-out cubic
       const e = 1 - (1 - p) ** 3;
       el.scrollLeft = start + dist * e;
       syncProgress();
@@ -229,7 +220,6 @@ function SelectedProjects() {
   };
 
   const glide = (el: HTMLDivElement, initialVelocity: number) => {
-    // px per ms → decay with friction, then snap
     let v = initialVelocity;
     let prev = performance.now();
     const tick = (now: number) => {
@@ -288,7 +278,7 @@ function SelectedProjects() {
     const now = performance.now();
     const dt = now - drag.lastT;
     if (dt > 0) {
-      const instant = (drag.lastX - e.clientX) / dt; // scroll direction
+      const instant = (drag.lastX - e.clientX) / dt;
       drag.velocity = drag.velocity * 0.7 + instant * 0.3;
     }
     drag.lastX = e.clientX;
@@ -317,6 +307,31 @@ function SelectedProjects() {
     dragRef.current = null;
     setDragging(false);
   };
+
+  return {
+    railRef,
+    dragging,
+    progress,
+    syncProgress,
+    onPointerDown,
+    onPointerMove,
+    endDrag,
+  };
+}
+
+// ─── Selected projects ────────────────────────────────────────────────────────
+
+const PROJECTS = [
+  { name: "Hisni by Biograpi", img: "/hisni-by-biograpi.jpg", href: "/catalog" },
+  { name: "Artex Parkline", img: "/rd-project.jpg", href: "/project/artex-parkline" },
+  { name: "CityZen", img: "/rd-tower.jpg", href: "/catalog" },
+  { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
+];
+
+function SelectedProjects() {
+  const t = useT();
+  const { railRef, dragging, progress, syncProgress, onPointerDown, onPointerMove, endDrag } =
+    useDragRail(".rd-proj", 12);
 
   return (
     <section id="properties" className="rd-projects-outer">
@@ -449,13 +464,8 @@ const FEEDBACK: {
 
 function Feedback() {
   const t = useT();
-  const railRef = useRef<HTMLDivElement>(null);
-
-  const scrollByPage = (dir: -1 | 1) => {
-    const el = railRef.current;
-    if (!el) return;
-    el.scrollBy({ left: el.clientWidth * 0.6 * dir, behavior: "smooth" });
-  };
+  const { railRef, dragging, progress, syncProgress, onPointerDown, onPointerMove, endDrag } =
+    useDragRail(".rd-fb-card", 8);
 
   return (
     <section id="feedback" className="rd-fb-outer">
@@ -466,17 +476,16 @@ function Feedback() {
           {t("v2.fb.titleEm")}
         </h2>
 
-        <div className="rd-fb-row">
-          <button
-            type="button"
-            className="rd-fb-nav"
-            onClick={() => scrollByPage(-1)}
-            aria-label={t("v2.fb.prev")}
+        <div className="rd-fb-main">
+          <div
+            className={`rd-fb-rail${dragging ? " is-dragging" : ""}`}
+            ref={railRef}
+            onScroll={syncProgress}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
           >
-            ←
-          </button>
-
-          <div className="rd-fb-rail" ref={railRef}>
             {FEEDBACK.map((f, i) => (
               <figure key={i} className="rd-fb-card rv">
                 <blockquote>‘{t(f.quoteKey)}’</blockquote>
@@ -489,15 +498,9 @@ function Feedback() {
               </figure>
             ))}
           </div>
-
-          <button
-            type="button"
-            className="rd-fb-nav"
-            onClick={() => scrollByPage(1)}
-            aria-label={t("v2.fb.next")}
-          >
-            →
-          </button>
+          <div className="rd-rail-track" aria-hidden="true">
+            <span style={{ transform: `translateX(${progress * 200}%)` }} />
+          </div>
         </div>
       </div>
     </section>
@@ -889,21 +892,25 @@ html, body { background: #21141A; }
 }
 .rd-eco-card.is-open .rd-eco-body { opacity: 1; max-height: 420px; }
 
-/* feedback — square cards */
+/* feedback — square cards, drag-scroll like projects */
 .rd-panel-light { padding: clamp(34px, 4.4vw, 68px) var(--rd-inset); }
-.rd-fb-row { display: flex; align-items: center; gap: 20px; }
+.rd-fb-main { min-width: 0; }
 .rd-fb-rail {
-  display: flex; gap: 8px; overflow-x: auto; flex: 1; min-width: 0;
-  scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px;
+  display: flex; gap: 8px; overflow-x: auto; min-width: 0;
+  scroll-snap-type: none; scrollbar-width: none; padding-bottom: 22px;
+  cursor: grab; touch-action: pan-y; user-select: none;
+  -webkit-overflow-scrolling: touch;
 }
+.rd-fb-rail.is-dragging { cursor: grabbing; }
 .rd-fb-rail::-webkit-scrollbar { display: none; }
 .rd-fb-card {
   --fb-size: clamp(280px, 28vw, 360px);
   flex: 0 0 var(--fb-size);
   width: var(--fb-size); height: var(--fb-size); max-height: var(--fb-size);
-  aspect-ratio: 1 / 1; scroll-snap-align: start; margin: 0; box-sizing: border-box;
+  aspect-ratio: 1 / 1; margin: 0; box-sizing: border-box;
   background: var(--card); border-radius: 12px; padding: clamp(18px, 1.8vw, 28px);
   display: flex; flex-direction: column; color: var(--white); overflow: hidden;
+  pointer-events: none;
 }
 .rd-fb-card blockquote {
   font-family: var(--body); font-weight: 700; font-size: clamp(14px, 1.25vw, 18px);
@@ -915,12 +922,6 @@ html, body { background: #21141A; }
   font-family: var(--body); font-size: 13px; padding: 6px 12px;
   border: 1px solid rgba(255,255,255,.55); border-radius: 4px;
 }
-.rd-fb-nav {
-  flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; border: none;
-  background: var(--bg); color: var(--white); font-size: 18px; cursor: pointer;
-  transition: opacity .2s; display: inline-flex; align-items: center; justify-content: center;
-}
-.rd-fb-nav:hover { opacity: .85; }
 
 /* pricing */
 .rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); }
@@ -1006,7 +1007,6 @@ html, body { background: #21141A; }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
   .rd-fb-card { --fb-size: min(86vw, 320px); }
-  .rd-fb-nav { display: none; }
 }
 `;
 
