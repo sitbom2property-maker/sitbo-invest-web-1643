@@ -984,6 +984,7 @@ html, body { background: #21141A; }
     flex: 0 0 min(72vw, 280px); min-height: clamp(360px, 70vw, 520px);
     scroll-snap-align: start;
   }
+  .rd-eco-card .rd-eco-photo { opacity: .4; }
   .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
 }
