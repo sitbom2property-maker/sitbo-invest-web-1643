@@ -774,7 +774,7 @@ const en = {
   "services.item7.title": "Residency & Relocation Advisory",
   "services.item7.desc":
     "Georgia offers one of the most accessible residency-by-investment frameworks in Europe. I connect the property purchase to the broader legal and financial picture.",
-  "services.item7.bullet1": "Residency permit via real estate purchase from $100,000",
+  "services.item7.bullet1": "Residency permit via real estate purchase from $150,000",
   "services.item7.bullet2":
     "I explain Georgian tax residency: flat-rate framework and cross-border considerations",
   "services.item7.bullet3": "I help open a Georgian bank account — before and after purchase",
