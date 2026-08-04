@@ -23,6 +23,7 @@ import { Nav, NAV_HEIGHT } from "./components/nav";
 import { FooterV2 as Footer } from "./components/FooterV2";
 import { CookieConsent } from "./components/cookie-consent";
 import { LeadPopup } from "./components/LeadPopup";
+import { FloatingConsultation } from "./components/FloatingConsultation";
 import { ScrollToHash } from "./components/scroll-to-hash";
 import { ScrollRestore } from "./components/scroll-restore";
 
@@ -36,6 +37,12 @@ function AppLeadPopup() {
 	const [location] = useLocation();
 	if (location.startsWith("/admin")) return null;
 	return <LeadPopup />;
+}
+
+function AppFloatingConsult() {
+	const [location] = useLocation();
+	if (location.startsWith("/admin")) return null;
+	return <FloatingConsultation />;
 }
 
 function App() {
@@ -71,6 +78,7 @@ function App() {
 			</div>
 			<AppFooter />
 			<AppLeadPopup />
+			<AppFloatingConsult />
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
 		</Provider>

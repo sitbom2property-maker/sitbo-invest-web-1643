@@ -13,6 +13,7 @@ const ru: Record<MessageKey, string> = {
   "nav.notes": "Заметки",
   "nav.feedback": "Отзывы",
   "nav.contactArthur": "Связаться",
+  "float.consult": "Консультация",
   "nav.properties": "Объекты",
   "nav.pricing": "Консультации",
   "nav.services": "Услуги",
