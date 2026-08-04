@@ -1,669 +1,741 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "wouter";
-import { AppLink } from "../components/app-link";
+import { useEffect, useRef, useState } from "react";
+import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
-// ─── Palette ──────────────────────────────────────────────────────────────────
-const C = {
-  dark:      "#21141A",
-  teal:      "#8CB2C0",
-  wine:      "#683D47",
-  light:     "#FFFBF0",
-  parchment: "#FFFBF0",
-  muted:     "#7a7a7a",
-  mutedDark: "#4a4a4a",
+/**
+ * Why Georgia / Invest — first-person voice, home-v2 visual system:
+ * Coolvetica / Inter · #21141A · card #412834 · green #48674D · panel #F8F8F8
+ */
+
+type StatItem = {
+  value?: string;
+  valueKey?: MessageKey;
+  labelKey: MessageKey;
+  tone: "plum" | "green" | "white";
 };
 
-// ─── 12-col grid system ───────────────────────────────────────────────────────
-// Max content width: 1200px, gutters: 24px, margin: auto
-// On mobile (< 768px): all cols collapse to 12/12 (full width)
-// Classes: col-N (desktop), span helpers via inline style colSpan
+const STATS: StatItem[] = [
+  { value: "13.2%", labelKey: "invest.why.stat1", tone: "green" },
+  { value: "#1", labelKey: "invest.why.stat2", tone: "plum" },
+  { value: "0%", labelKey: "invest.why.stat3", tone: "white" },
+  { valueKey: "invest.why.stat4Value", labelKey: "invest.why.stat4", tone: "plum" },
+  { value: "$1,420", labelKey: "invest.why.stat5", tone: "plum" },
+  { value: "3.7M", labelKey: "invest.why.stat6", tone: "green" },
+];
 
-function useIsMobile(bp = 768) {
-  const [mobile, setMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth < bp : false
-  );
-  useEffect(() => {
-    const h = () => setMobile(window.innerWidth < bp);
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
-  }, [bp]);
-  return mobile;
-}
+const ADVANTAGES = [
+  { titleKey: "invest.advantage.purchaseTax.title" as MessageKey, subKey: "invest.advantage.purchaseTax.sub" as MessageKey },
+  { titleKey: "invest.advantage.ownership.title" as MessageKey, subKey: "invest.advantage.ownership.sub" as MessageKey },
+  { titleKey: "invest.advantage.registration.title" as MessageKey, subKey: "invest.advantage.registration.sub" as MessageKey },
+  { titleKey: "invest.advantage.residency.title" as MessageKey, subKey: "invest.advantage.residency.sub" as MessageKey },
+];
+
+type Strategy = {
+  tagKey: MessageKey;
+  titleKey: MessageKey;
+  yieldKey: MessageKey;
+  horizonKey: MessageKey;
+  riskKey: MessageKey;
+  descKey: MessageKey;
+  idealKey: MessageKey;
+};
+
+const STRATEGIES: Strategy[] = [
+  {
+    tagKey: "invest.strategy1.tag",
+    titleKey: "invest.strategy1.title",
+    yieldKey: "invest.strategy1.yield",
+    horizonKey: "invest.strategy1.horizon",
+    riskKey: "invest.strategy1.risk",
+    descKey: "invest.strategy1.desc",
+    idealKey: "invest.strategy1.ideal",
+  },
+  {
+    tagKey: "invest.strategy2.tag",
+    titleKey: "invest.strategy2.title",
+    yieldKey: "invest.strategy2.yield",
+    horizonKey: "invest.strategy2.horizon",
+    riskKey: "invest.strategy2.risk",
+    descKey: "invest.strategy2.desc",
+    idealKey: "invest.strategy2.ideal",
+  },
+  {
+    tagKey: "invest.strategy3.tag",
+    titleKey: "invest.strategy3.title",
+    yieldKey: "invest.strategy3.yield",
+    horizonKey: "invest.strategy3.horizon",
+    riskKey: "invest.strategy3.risk",
+    descKey: "invest.strategy3.desc",
+    idealKey: "invest.strategy3.ideal",
+  },
+  {
+    tagKey: "invest.strategy4.tag",
+    titleKey: "invest.strategy4.title",
+    yieldKey: "invest.strategy4.yield",
+    horizonKey: "invest.strategy4.horizon",
+    riskKey: "invest.strategy4.risk",
+    descKey: "invest.strategy4.desc",
+    idealKey: "invest.strategy4.ideal",
+  },
+];
+
+const PROCESS = [
+  { n: "01", titleKey: "invest.process1.title" as MessageKey, descKey: "invest.process1.desc" as MessageKey },
+  { n: "02", titleKey: "invest.process2.title" as MessageKey, descKey: "invest.process2.desc" as MessageKey },
+  { n: "03", titleKey: "invest.process3.title" as MessageKey, descKey: "invest.process3.desc" as MessageKey },
+  { n: "04", titleKey: "invest.process4.title" as MessageKey, descKey: "invest.process4.desc" as MessageKey },
+  { n: "05", titleKey: "invest.process5.title" as MessageKey, descKey: "invest.process5.desc" as MessageKey },
+  { n: "06", titleKey: "invest.process6.title" as MessageKey, descKey: "invest.process6.desc" as MessageKey },
+];
+
+const FAQS = [
+  { qKey: "invest.faq.q1" as MessageKey, aKey: "invest.faq.a1" as MessageKey },
+  { qKey: "invest.faq.q2" as MessageKey, aKey: "invest.faq.a2" as MessageKey },
+  { qKey: "invest.faq.q3" as MessageKey, aKey: "invest.faq.a3" as MessageKey },
+  { qKey: "invest.faq.q4" as MessageKey, aKey: "invest.faq.a4" as MessageKey },
+  { qKey: "invest.faq.q5" as MessageKey, aKey: "invest.faq.a5" as MessageKey },
+  { qKey: "invest.faq.q6" as MessageKey, aKey: "invest.faq.a6" as MessageKey },
+];
+
+const PRICE_BARS = [
+  { cityKey: "invest.market.city.barcelona" as MessageKey, value: 5200, pct: 100 },
+  { cityKey: "invest.market.city.lisbon" as MessageKey, value: 4800, pct: 92 },
+  { cityKey: "invest.market.city.athens" as MessageKey, value: 3100, pct: 60 },
+  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: 1650, pct: 32 },
+  { cityKey: "invest.market.city.batumi" as MessageKey, value: 1420, pct: 27 },
+];
+
+const YIELD_BARS = [
+  { cityKey: "invest.market.city.batumi" as MessageKey, value: "13.2%", pct: 100 },
+  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: "8.5%", pct: 64 },
+  { cityKey: "invest.market.city.athens" as MessageKey, value: "5.2%", pct: 39 },
+  { cityKey: "invest.market.city.lisbon" as MessageKey, value: "3.8%", pct: 29 },
+  { cityKey: "invest.market.city.barcelona" as MessageKey, value: "3.1%", pct: 23 },
+];
 
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll(".inv-reveal");
+    const els = document.querySelectorAll(".iv .rv");
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) {
-          (e.target as HTMLElement).style.opacity = "1";
-          (e.target as HTMLElement).style.transform = "translateY(0)";
-          io.unobserve(e.target);
-        }
-      }),
-      { threshold: 0.08 }
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12 },
     );
-    els.forEach((el) => {
-      (el as HTMLElement).style.opacity = "0";
-      (el as HTMLElement).style.transform = "translateY(28px)";
-      (el as HTMLElement).style.transition = "opacity 0.6s ease, transform 0.6s ease";
-      io.observe(el);
-    });
+    els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 }
 
-// ─── Grid container ───────────────────────────────────────────────────────────
-function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
-  return (
-    <div style={{
-      maxWidth: "1200px",
-      margin: "0 auto",
-      padding: "0 clamp(16px, 4vw, 64px)",
-      width: "100%",
-      boxSizing: "border-box",
-      ...style,
-    }}>{children}
-    </div>
-  );
-}
-
-// ─── 12-col row ───────────────────────────────────────────────────────────────
-function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
-  return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(12, 1fr)",
-      gap: `${gap}px`,
-      width: "100%",
-      minWidth: 0,
-      ...style,
-    }}>{children}
-    </div>
-  );
-}
-
-// ─── Column ───────────────────────────────────────────────────────────────────
-function Col({
-  span = 12, spanMd, children, style
+function StrategyItem({
+  strategy,
+  isOpen,
+  onToggle,
 }: {
-  span?: number; spanMd?: number; children?: React.ReactNode; style?: React.CSSProperties;
+  strategy: Strategy;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
-  const isMobile = useIsMobile();
-  const cols = isMobile ? 12 : (spanMd ?? span);
-  return (
-    <div style={{ gridColumn: `span ${cols}`, minWidth: 0, maxWidth: "100%", ...style }}>{children}
-    </div>
-  );
-}
-
-// ─── Eyebrow ──────────────────────────────────────────────────────────────────
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (<>
-
-    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-      <div style={{ width: "28px", height: "1px", background: C.wine, flexShrink: 0 }} />
-      <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{children}
-      </span>
-    </div>
-  
-  </>);
-}
-
-// ─── Divider ─────────────────────────────────────────────────────────────────
-function Divider() {
-  return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
-}
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const whyBatumi = [
- { stat: "14.5%",  descKey: "invest.why.stat1" },
- { stat: "#1",     descKey: "invest.why.stat2" },
- { stat: "0%",     descKey: "invest.why.stat3" },
- { stat: "1 day",  descKey: "invest.why.stat4" },
- { stat: "$1,420", descKey: "invest.why.stat5" },
- { stat: "1.7M",   descKey: "invest.why.stat6" },
-] satisfies { stat: string; descKey: MessageKey }[];
-
-const strategies = [
-  { tagKey: "invest.strategy1.tag", titleKey: "invest.strategy1.title", yield: "9–14.5%", horizonKey: "invest.strategy1.horizon", riskKey: "invest.strategy1.risk", icon: "🏖", descKey: "invest.strategy1.desc", idealKey: "invest.strategy1.ideal" },
-  { tagKey: "invest.strategy2.tag", titleKey: "invest.strategy2.title", yield: "25–30%", horizonKey: "invest.strategy2.horizon", riskKey: "invest.strategy2.risk", icon: "📈", descKey: "invest.strategy2.desc", idealKey: "invest.strategy2.ideal" },
-  { tagKey: "invest.strategy3.tag", titleKey: "invest.strategy3.title", yieldKey: "invest.strategy3.yield", horizonKey: "invest.strategy3.horizon", riskKey: "invest.strategy3.risk", icon: "🛂", descKey: "invest.strategy3.desc", idealKey: "invest.strategy3.ideal" },
-  { tagKey: "invest.strategy4.tag", titleKey: "invest.strategy4.title", yieldKey: "invest.strategy4.yield", horizonKey: "invest.strategy4.horizon", riskKey: "invest.strategy4.risk", icon: "🏛", descKey: "invest.strategy4.desc", idealKey: "invest.strategy4.ideal" },
-] satisfies {
-  tagKey: MessageKey;
-  titleKey: MessageKey;
-  yield?: string;
-  yieldKey?: MessageKey;
-  horizonKey: MessageKey;
-  riskKey: MessageKey;
-  icon: string;
-  descKey: MessageKey;
-  idealKey: MessageKey;
-}[];
-
-const process = [
- { n: "01", titleKey: "invest.process1.title", descKey: "invest.process1.desc" },
- { n: "02", titleKey: "invest.process2.title", descKey: "invest.process2.desc" },
- { n: "03", titleKey: "invest.process3.title", descKey: "invest.process3.desc" },
- { n: "04", titleKey: "invest.process4.title", descKey: "invest.process4.desc" },
- { n: "05", titleKey: "invest.process5.title", descKey: "invest.process5.desc" },
- { n: "06", titleKey: "invest.process6.title", descKey: "invest.process6.desc" },
-] satisfies { n: string; titleKey: MessageKey; descKey: MessageKey }[];
-
-const faqs = [
-  { qKey: "invest.faq.q1", aKey: "invest.faq.a1" },
-  { qKey: "invest.faq.q2", aKey: "invest.faq.a2" },
-  { qKey: "invest.faq.q3", aKey: "invest.faq.a3" },
-  { qKey: "invest.faq.q4", aKey: "invest.faq.a4" },
-  { qKey: "invest.faq.q5", aKey: "invest.faq.a5" },
-  { qKey: "invest.faq.q6", aKey: "invest.faq.a6" },
-] satisfies { qKey: MessageKey; aKey: MessageKey }[];
-
-// ─── Components ──────────────────────────────────────────────────────────────
-
-function StatCard({ stat, desc, delay = 0 }: { stat: string; desc: string; delay?: number }) {
-  return (<>
-
-    <div className="inv-reveal" style={{ transitionDelay: `${delay}ms`, borderTop: `2px solid ${C.wine}`, paddingTop: "20px" }}>
-      <div style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>
-        {stat}
-      </div>
-      <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.muted, lineHeight: 1.5, margin: 0 }}>{desc}</p>
-    </div>
-  
-  </>);
-}
-
-function StrategyCard({ s, index }: { s: typeof strategies[0]; index: number }) {
-  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [maxHeight, setMaxHeight] = useState(0);
   const t = useT();
-  const yieldText = s.yieldKey ? t(s.yieldKey) : s.yield;
-  return (<>
 
-    <div
-      className="inv-reveal"
-      style={{
-        transitionDelay: `${index * 80}ms`,
-        background: open ? C.dark : C.light,
-        border: `1px solid ${open ? "rgba(140,178,192,0.2)" : "rgba(33,20,26,0.1)"}`,
-        borderRadius: "12px",
-        padding: "28px 24px",
-        cursor: "pointer",
-        transition: "background 0.3s, border-color 0.3s",
-      }}
-      onClick={() => setOpen(!open)}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "12px" }}>
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>{t(s.tagKey)}</span>
-        <span style={{ fontSize: "1.3rem", lineHeight: 1 }}>{s.icon}</span>
-      </div>
-      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 600, color: open ? C.light : C.dark, marginBottom: "16px", lineHeight: 1.2 }}>{t(s.titleKey)}</h3>
+  useEffect(() => {
+    if (!panelRef.current) return;
+    setMaxHeight(isOpen ? panelRef.current.scrollHeight : 0);
+  }, [isOpen]);
 
-      <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", marginBottom: "16px" }}>
-        <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.yield")}</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.teal : C.dark }}>{yieldText}</div>
-        </div>
-        <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.horizon")}</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{t(s.horizonKey)}</div>
-        </div>
-        <div>
-          <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: open ? C.teal : C.muted, marginBottom: "4px" }}>{t("invest.strategy.risk")}</div>
-          <div style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontWeight: 700, color: open ? C.light : C.dark }}>{t(s.riskKey)}</div>
-        </div>
-      </div>
-
-          {open && (
-        <div style={{ borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "16px", marginTop: "4px" }}>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.75)", lineHeight: 1.7, marginBottom: "12px" }}>{t(s.descKey)}</p>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.teal, lineHeight: 1.6, margin: 0 }}>
-            <strong>{t("invest.strategy.idealFor")}</strong> {t(s.idealKey)}
+  return (
+    <div className={`iv-acc${isOpen ? " is-open" : ""}`}>
+      <button type="button" className="iv-acc-head" onClick={onToggle} aria-expanded={isOpen}>
+        <span className="iv-acc-tag">{t(strategy.tagKey)}</span>
+        <span className="iv-acc-title">{t(strategy.titleKey)}</span>
+        <span className="iv-acc-yield">{t(strategy.yieldKey)}</span>
+        <span className="iv-acc-toggle" aria-hidden>
+          {isOpen ? "−" : "+"}
+        </span>
+      </button>
+      <div className="iv-acc-panel" style={{ maxHeight }}>
+        <div ref={panelRef} className="iv-acc-body">
+          <div className="iv-acc-meta">
+            <div>
+              <span>{t("invest.strategy.horizon")}</span>
+              <strong>{t(strategy.horizonKey)}</strong>
+            </div>
+            <div>
+              <span>{t("invest.strategy.risk")}</span>
+              <strong>{t(strategy.riskKey)}</strong>
+            </div>
+          </div>
+          <p>{t(strategy.descKey)}</p>
+          <p className="iv-acc-ideal">
+            <strong>{t("invest.strategy.idealFor")}</strong> {t(strategy.idealKey)}
           </p>
         </div>
-      )}
+      </div>
+    </div>
+  );
+}
 
-      <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "16px" }}>
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: open ? C.teal : C.muted }}>
-            {open ? t("cta.close") : t("cta.learnMore")}
+function FaqItem({
+  qKey,
+  aKey,
+  isOpen,
+  onToggle,
+}: {
+  qKey: MessageKey;
+  aKey: MessageKey;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const t = useT();
+  return (
+    <div className={`iv-faq${isOpen ? " is-open" : ""}`}>
+      <button type="button" className="iv-faq-head" onClick={onToggle} aria-expanded={isOpen}>
+        <span>{t(qKey)}</span>
+        <span className="iv-faq-toggle" aria-hidden>
+          {isOpen ? "−" : "+"}
         </span>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}>
-          <path d="M2 4l4 4 4-4" stroke={open ? C.teal : C.muted} strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      </div>
-    </div>
-  
-  </>);
-}
-
-function ProcessStep({ step, index }: { step: typeof process[0]; index: number }) {
-  const t = useT();
-  return (<>
-
-    <div className="inv-reveal" style={{ transitionDelay: `${index * 80}ms`, display: "flex", gap: "20px", paddingBottom: "32px", borderBottom: "1px solid rgba(33,20,26,0.07)" }}>
-      <div style={{ flexShrink: 0, width: "48px", height: "48px", borderRadius: "50%", border: `1.5px solid ${C.wine}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 700, color: C.wine }}>{step.n}</span>
-      </div>
-      <div style={{ paddingTop: "10px" }}>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{t(step.titleKey)}</p>
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>{t(step.descKey)}</p>
-      </div>
-    </div>
-  
-  </>);
-}
-
-function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
-  const [open, setOpen] = useState(false);
-  const t = useT();
-  return (<>
-
-    <div style={{ borderBottom: "1px solid rgba(33,20,26,0.08)" }}>
-      <button
-        onClick={() => setOpen(!open)}
-        style={{
-          width: "100%", background: "none", border: "none", cursor: "pointer",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "22px 0", gap: "16px", textAlign: "left",
-        }}
-      >
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.92rem", fontWeight: 600, color: C.dark, lineHeight: 1.4 }}>{t(faq.qKey)}</span>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}>
-          <path d="M4 7l5 5 5-5" stroke={C.wine} strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
       </button>
-          {open && (
-        <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: "0 0 20px", paddingRight: "32px" }}>{t(faq.aKey)}</p>
-      )}
+      {isOpen && <p className="iv-faq-body">{t(aKey)}</p>}
     </div>
-  
-  </>);
+  );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+const CSS = `
+.iv {
+  --bg: #21141A;
+  --card: #412834;
+  --green: #48674D;
+  --white: #FFFFFF;
+  --panel: #F8F8F8;
+  --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
+  --body: 'Inter', 'DM Sans', Manrope, sans-serif;
+  --gutter: clamp(24px, 5.5vw, 80px);
+  --max: 1440px;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.iv .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.iv .rv.in { opacity: 1; transform: none; }
+.iv-wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); box-sizing: border-box; }
+
+.iv-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--body); font-size: 15px; font-weight: 400;
+  padding: 15px 30px; border-radius: 4px; border: 1px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s, opacity .2s;
+}
+.iv-btn-white { background: var(--white); color: var(--bg); }
+.iv-btn-white:hover { opacity: .88; }
+.iv-btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+.iv-btn-outline:hover { background: var(--white); color: var(--bg); }
+.iv-btn-dark { background: var(--bg); color: var(--white); }
+.iv-btn-dark:hover { opacity: .9; }
+
+/* hero */
+.iv-hero {
+  position: relative;
+  padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+.iv-hero-circle {
+  position: absolute; top: -180px; right: -140px; width: 640px; height: 640px;
+  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
+}
+.iv-hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 4vw, 64px); align-items: center;
+}
+.iv-hero-eyebrow {
+  display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255,255,255,.5); margin: 0 0 16px;
+}
+.iv-hero h1 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 18px;
+  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
+}
+.iv-hero-lead {
+  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
+  color: rgba(255,255,255,.78); margin: 0 0 28px; max-width: 460px;
+}
+.iv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.iv-hero-visual {
+  border-radius: 2px; overflow: hidden; aspect-ratio: 4 / 5;
+  max-height: min(68svh, 620px); justify-self: end; width: 100%;
+}
+.iv-hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* why + stats */
+.iv-why { padding: clamp(48px, 6vw, 88px) 0; }
+.iv-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+  margin-bottom: clamp(34px, 4vw, 58px);
+}
+.iv-split h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
+}
+.iv-split p {
+  margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
+  color: rgba(255,255,255,.78); max-width: 420px;
+}
+.iv-stats {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+}
+.iv-stat {
+  aspect-ratio: 1 / 1; border-radius: 20px; padding: clamp(16px, 1.7vw, 26px);
+  display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
+}
+.iv-stat-plum { background: var(--card); }
+.iv-stat-green { background: var(--green); }
+.iv-stat-white { background: var(--white); color: var(--bg); }
+.iv-stat-value {
+  font-family: var(--body); font-weight: 600;
+  font-size: clamp(28px, 3.2vw, 42px); line-height: 1; letter-spacing: -.02em;
+}
+.iv-stat-label {
+  font-size: clamp(13px, 1.1vw, 15px); line-height: 1.35;
+  color: inherit; opacity: .78; max-width: 16ch;
+}
+.iv-stat-white .iv-stat-label { opacity: .65; }
+
+.iv-quote {
+  margin-top: clamp(36px, 4vw, 56px);
+  padding-top: clamp(28px, 3vw, 40px);
+  border-top: 1px solid rgba(255,255,255,.12);
+  max-width: 720px;
+}
+.iv-quote blockquote {
+  font-family: var(--display); font-weight: 600; margin: 0 0 12px;
+  font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
+}
+.iv-quote cite {
+  font-style: normal; font-size: 14px; color: rgba(255,255,255,.5);
+}
+
+/* advantages */
+.iv-adv { padding: 0 0 clamp(48px, 6vw, 88px); }
+.iv-adv-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+}
+.iv-adv-card {
+  background: var(--card); border-radius: 16px;
+  padding: clamp(20px, 2.2vw, 28px);
+}
+.iv-adv-card h3 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 8px;
+  font-size: clamp(17px, 1.5vw, 20px); line-height: 1.25;
+}
+.iv-adv-card p {
+  margin: 0; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.65);
+}
+
+/* panel sections */
+.iv-panel-outer { padding: 0 10px clamp(40px, 5vw, 72px); }
+.iv-panel {
+  background: var(--panel); color: var(--bg); border-radius: 20px;
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
+}
+.iv-panel-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-bottom: clamp(28px, 4vw, 44px); align-items: start;
+}
+.iv-panel-eyebrow {
+  display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(33,20,26,.4); margin: 0 0 10px;
+}
+.iv-panel-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
+}
+.iv-panel-head p {
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+}
+
+/* strategy accordion */
+.iv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
+.iv-acc:first-child { border-top: 1px solid rgba(33,20,26,.12); }
+.iv-acc-head {
+  width: 100%; display: grid;
+  grid-template-columns: 110px 1fr auto auto;
+  gap: 16px; align-items: center; padding: 22px 0;
+  border: none; background: transparent; cursor: pointer; text-align: left;
+}
+.iv-acc-tag {
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(33,20,26,.4);
+}
+.iv-acc-title {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(18px, 2vw, 26px); color: var(--bg); line-height: 1.2;
+}
+.iv-acc-yield {
+  font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--green);
+  white-space: nowrap;
+}
+.iv-acc-toggle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg); color: var(--white); font-size: 20px; line-height: 1;
+}
+.iv-acc.is-open .iv-acc-toggle { background: var(--green); }
+.iv-acc-panel { overflow: hidden; transition: max-height .4s ease; }
+.iv-acc-body { padding: 0 0 26px 126px; max-width: 720px; }
+.iv-acc-meta {
+  display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.iv-acc-meta span {
+  display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(33,20,26,.4); margin-bottom: 4px;
+}
+.iv-acc-meta strong {
+  font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--bg);
+}
+.iv-acc-body p {
+  margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.72);
+}
+.iv-acc-ideal { color: rgba(33,20,26,.85) !important; }
+
+/* market */
+.iv-market { padding: clamp(48px, 6vw, 88px) 0; }
+.iv-market-head { margin-bottom: clamp(28px, 4vw, 44px); max-width: 560px; }
+.iv-market-head .iv-panel-eyebrow { color: rgba(255,255,255,.45); }
+.iv-market-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
+}
+.iv-charts {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px);
+}
+.iv-chart h3 {
+  font-family: var(--body); font-size: 14px; font-weight: 500; margin: 0 0 20px;
+  color: rgba(255,255,255,.55);
+}
+.iv-bar-row {
+  display: grid; grid-template-columns: 88px 1fr auto; gap: 12px;
+  align-items: center; margin-bottom: 12px;
+}
+.iv-bar-row span:first-child { font-size: 14px; color: rgba(255,255,255,.75); }
+.iv-bar-row span:last-child {
+  font-size: 13px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.55); min-width: 4.5ch; text-align: right;
+}
+.iv-bar-track {
+  height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden;
+}
+.iv-bar-fill {
+  height: 100%; border-radius: 999px; background: var(--green);
+  transform-origin: left center;
+}
+
+/* process */
+.iv-process { padding: 0 0 clamp(48px, 6vw, 88px); }
+.iv-process-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px;
+}
+.iv-step {
+  display: grid; grid-template-columns: 48px 1fr; gap: 16px;
+  padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.iv-step-n {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.7);
+}
+.iv-step h3 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 6px;
+  font-size: clamp(17px, 1.5vw, 20px);
+}
+.iv-step p {
+  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.65);
+}
+
+/* faq */
+.iv-faq-grid {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(28px, 4vw, 48px); align-items: start;
+}
+.iv-faq { border-bottom: 1px solid rgba(33,20,26,.12); }
+.iv-faq:first-child { border-top: 1px solid rgba(33,20,26,.12); }
+.iv-faq-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; padding: 20px 0; border: none; background: transparent;
+  cursor: pointer; text-align: left;
+  font-family: var(--body); font-size: 16px; font-weight: 500; color: var(--bg);
+}
+.iv-faq-toggle {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg); color: var(--white); font-size: 18px; line-height: 1;
+}
+.iv-faq.is-open .iv-faq-toggle { background: var(--green); }
+.iv-faq-body {
+  margin: 0 0 20px; padding-right: 40px;
+  font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.68);
+}
+.iv-faq-aside {
+  background: var(--bg); color: var(--white); border-radius: 16px;
+  padding: clamp(24px, 3vw, 36px);
+  position: sticky; top: calc(var(--nav-height, 88px) + 16px);
+}
+.iv-faq-aside h3 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 10px;
+  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2;
+}
+.iv-faq-aside p {
+  margin: 0 0 22px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.68);
+}
+
+/* cta */
+.iv-cta-outer { padding: 0 10px clamp(56px, 7vw, 100px); }
+.iv-cta {
+  border-radius: 20px; overflow: hidden;
+  background:
+    radial-gradient(100% 140% at 90% 50%, rgba(72,103,77,.55) 0%, rgba(33,20,26,0) 55%),
+    var(--card);
+  padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
+  text-align: center;
+}
+.iv-cta .iv-panel-eyebrow { color: rgba(255,255,255,.45); }
+.iv-cta h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 14px;
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
+}
+.iv-cta p {
+  margin: 0 auto 28px; max-width: 480px;
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: rgba(255,255,255,.75);
+}
+
+@media (max-width: 1024px) {
+  .iv-hero-grid, .iv-split, .iv-charts, .iv-process-grid, .iv-faq-grid, .iv-panel-head {
+    grid-template-columns: 1fr;
+  }
+  .iv-stats { grid-template-columns: repeat(2, 1fr); }
+  .iv-adv-grid { grid-template-columns: repeat(2, 1fr); }
+  .iv-hero-visual { justify-self: start; max-height: 480px; aspect-ratio: 16 / 11; }
+  .iv-panel-head p { justify-self: start; }
+  .iv-acc-head { grid-template-columns: 1fr auto auto; gap: 10px; }
+  .iv-acc-tag { display: none; }
+  .iv-acc-body { padding-left: 0; }
+  .iv-faq-aside { position: static; }
+}
+@media (max-width: 640px) {
+  .iv-hero { padding-top: 36px; }
+  .iv-hero-circle { width: 380px; height: 380px; top: -120px; right: -120px; }
+  .iv-hero-btns .iv-btn { width: 100%; }
+  .iv-adv-grid { grid-template-columns: 1fr; }
+  .iv-acc-yield { font-size: 13px; }
+}
+`;
+
 export default function InvestPage() {
-  const isMobile = useIsMobile();
   const t = useT();
+  const [openStrategy, setOpenStrategy] = useState(0);
+  const [openFaq, setOpenFaq] = useState(-1);
+  const [modalOpen, setModalOpen] = useState(false);
   useReveal();
 
-  return (<>
+  return (
+    <div className="iv">
+      <style>{CSS}</style>
 
-    <div className="invest-page" style={{ background: C.light, minHeight: "100vh", color: C.dark, overflowX: "hidden", width: "100%" }}>
-      <style>{`
-        .invest-page p, .invest-page h1, .invest-page h2, .invest-page h3 {
-          overflow-wrap: anywhere;
-          word-break: break-word;
-        }
-        @media (max-width: 767px) {
-          .invest-hero-cta {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 10px !important;
-            width: 100% !important;
-          }
-          .invest-hero-cta a {
-            text-align: center !important;
-            padding: 14px 10px !important;
-            font-size: 0.68rem !important;
-            letter-spacing: 0.08em !important;
-            box-sizing: border-box !important;
-            width: 100% !important;
-          }
-          .invest-float-badge {
-            left: 12px !important;
-            right: auto !important;
-            bottom: 12px !important;
-          }
-          .invest-chart-wrap {
-            width: 100% !important;
-            max-width: 100% !important;
-            overflow: hidden !important;
-          }
-        }
-      `}</style>
-{/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section>
-        <Container>
-          <Row style={{ minHeight: isMobile ? "auto" : "88vh", alignItems: "center", paddingTop: isMobile ? "24px" : "48px", paddingBottom: isMobile ? "40px" : "64px" }}>
-
-{/* Left: headline */}
-            <Col span={7} spanMd={7} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div className="inv-reveal">
-                <h1 style={{
-                  fontFamily: "Jun, serif",
-                  fontSize: "clamp(2.2rem, 8vw, 5.2rem)",
-                  fontWeight: 400, lineHeight: 1.05,
-                  color: C.dark, marginBottom: "28px",
-                  letterSpacing: "-0.01em",
-                  maxWidth: "100%",
-                }}>
-                  {t("invest.hero.line1")}<br />
-                  {t("invest.hero.line2")}<br />
-                  <em style={{ fontStyle: "italic", color: C.teal }}>{t("invest.hero.line3")}</em><br />
-                  {t("invest.hero.line4")}
-                </h1>
-                <div className="invest-hero-cta" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
-                    {t("invest.hero.ctaConsultation")}
-                  </AppLink>
-                  <a href="#strategies" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: "transparent", border: `1px solid ${C.dark}`, borderRadius: "8px", padding: "14px 32px", textDecoration: "none" }}>
-                    {t("invest.hero.ctaStrategies")}
-                  </a>
-                </div>
-              </div>
-            </Col>
-
-{/* Right: hero image + floating stat */}
-            <Col span={5} spanMd={5} style={{ position: "relative" }}>
-              <div className="inv-reveal" style={{ transitionDelay: "150ms", borderRadius: "16px", overflow: "hidden", aspectRatio: isMobile ? "4/5" : "3/4", background: C.light }}>
-                <img src="/hero2.png" alt={t("invest.hero.imageAlt")}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
-              </div>
-{/* Floating badge */}
-              <div
-                className="invest-float-badge"
-                style={{
-                position: "absolute", bottom: "24px", left: isMobile ? "12px" : "-20px",
-                background: C.dark, borderRadius: "12px", padding: "16px 20px",
-                boxShadow: "0 8px 32px rgba(33,20,26,0.18)",
-              }}>
-                <div style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 700, color: C.teal, lineHeight: 1 }}>14.5%</div>
-                <div style={{ fontFamily: "DM Sans", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", marginTop: "4px" }}>{t("invest.hero.badgeLabel")}</div>
-              </div>
-            </Col>
-
-          </Row>
-        </Container>
+      <section className="iv-hero">
+        <span className="iv-hero-circle" aria-hidden="true" />
+        <div className="iv-wrap iv-hero-grid">
+          <div className="rv">
+            <span className="iv-hero-eyebrow">{t("invest.hero.eyebrow")}</span>
+            <h1>
+              {t("invest.hero.line1")}
+              <br />
+              {t("invest.hero.line2")}
+              <br />
+              {t("invest.hero.line3")}
+            </h1>
+            <p className="iv-hero-lead">{t("invest.hero.body")}</p>
+            <div className="iv-hero-btns">
+              <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
+                {t("invest.hero.ctaConsultation")}
+              </button>
+              <a href="#strategies" className="iv-btn iv-btn-outline">
+                {t("invest.hero.ctaStrategies")}
+              </a>
+            </div>
+          </div>
+          <div className="iv-hero-visual rv">
+            <img src="/rd-waterfront.jpg" alt={t("invest.hero.imageAlt")} />
+          </div>
+        </div>
       </section>
 
-      <Divider />
-
-{/* ── WHY BATUMI ───────────────────────────────────────────────────────── */}
-      <section id="why-batumi" style={{ padding: "96px 0" }}>
-        <Container>
-          <Row style={{ marginBottom: "64px" }}>
-            <Col span={5}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.why.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  {t("invest.why.title")}
-                </h2>
+      <section className="iv-why" id="why-georgia">
+        <div className="iv-wrap">
+          <div className="iv-split rv">
+            <h2>{t("invest.why.title")}</h2>
+            <p>{t("invest.why.body")}</p>
+          </div>
+          <div className="iv-stats rv">
+            {STATS.map((s) => (
+              <div key={s.labelKey} className={`iv-stat iv-stat-${s.tone}`}>
+                <span className="iv-stat-value">{s.valueKey ? t(s.valueKey) : s.value}</span>
+                <span className="iv-stat-label">{t(s.labelKey)}</span>
               </div>
-            </Col>
-            <Col span={7}>
-              <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "16px" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "1rem", color: C.muted, lineHeight: 1.8, maxWidth: "560px" }}>
-                  {t("invest.why.body")}
-                </p>
-              </div>
-            </Col>
-          </Row>
-
-{/* Stats 6-col grid on desktop, full-width on mobile */}
-          <Row gap={24}>
-            {whyBatumi.map((item, i) => (
-              <Col key={item.stat} span={4} style={{ marginBottom: isMobile ? "24px" : 0 }}>
-                <StatCard stat={item.stat} desc={t(item.descKey)} delay={i * 70} />
-              </Col>
-            ))}
-          </Row>
-
-{/* Forbes quote */}
-          <Row style={{ marginTop: "80px" }}>
-            <Col span={8} spanMd={8} style={{ margin: isMobile ? "0" : "0 auto" }}>
-              <div className="inv-reveal" style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-                <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.5vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: C.dark, lineHeight: 1.5, marginBottom: "12px" }}>
-                  {t("invest.why.quote")}
-                </p>
-                <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal }}>
-                  {t("invest.why.quoteAttr")}
-                </span>
-              </div>
-            </Col>
-          </Row>
-
-        </Container>
-      </section>
-
-      <Divider />
-
-{/* ── ADVANTAGES STRIP ─────────────────────────────────────────────────── */}
-      <section style={{ background: C.dark, padding: isMobile ? "40px 0" : "56px 0" }}>
-        <Container>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
-            gap: isMobile ? 0 : 0,
-            width: "100%",
-          }}>
-{[
- { title: t("invest.advantage.purchaseTax.title"), sub: t("invest.advantage.purchaseTax.sub") },
- { title: t("invest.advantage.ownership.title"), sub: t("invest.advantage.ownership.sub") },
- { title: t("invest.advantage.registration.title"), sub: t("invest.advantage.registration.sub") },
- { title: t("invest.advantage.residency.title"), sub: t("invest.advantage.residency.sub") },
-            ].map((item, i) => (
-                <div key={item.title} className="inv-reveal" style={{
-                  transitionDelay: `${i * 80}ms`,
-                  padding: isMobile ? "20px 12px" : "24px",
-                  borderRight: !isMobile && i < 3 ? "1px solid rgba(140,178,192,0.1)" : "none",
-                  borderBottom: isMobile && i < 2 ? "1px solid rgba(140,178,192,0.1)" : "none",
-                  textAlign: "center",
-                  minWidth: 0,
-                }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: isMobile ? "0.72rem" : "0.82rem", fontWeight: 700, color: C.light, marginBottom: "6px", lineHeight: 1.35 }}>{item.title}</p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", margin: 0, lineHeight: 1.4 }}>{item.sub}</p>
-                </div>
             ))}
           </div>
-        </Container>
+          <div className="iv-quote rv">
+            <blockquote>{t("invest.why.quote")}</blockquote>
+            <cite>{t("invest.why.quoteAttr")}</cite>
+          </div>
+        </div>
       </section>
 
-{/* ── STRATEGIES ───────────────────────────────────────────────────────── */}
-      <section id="strategies" className="scroll-mt-24" style={{ padding: "96px 0" }}>
-        <Container>
-          <Row style={{ marginBottom: "56px" }}>
-            <Col span={6}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.strategies.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  {t("invest.strategies.title")}
-                </h2>
+      <section className="iv-adv">
+        <div className="iv-wrap">
+          <div className="iv-adv-grid rv">
+            {ADVANTAGES.map((a) => (
+              <div key={a.titleKey} className="iv-adv-card">
+                <h3>{t(a.titleKey)}</h3>
+                <p>{t(a.subKey)}</p>
               </div>
-            </Col>
-            <Col span={6}>
-              <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "20px" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.8 }}>
-                  {t("invest.strategies.body")}
-                </p>
-              </div>
-            </Col>
-          </Row>
-
-          <Row gap={20}>
-            {strategies.map((s, i) => (
-              <Col key={s.tag} span={6}>
-                <StrategyCard s={s} index={i} />
-              </Col>
             ))}
-          </Row>
-        </Container>
+          </div>
+        </div>
       </section>
 
-      <Divider />
+      <section className="iv-panel-outer" id="strategies">
+        <div className="iv-panel rv">
+          <div className="iv-panel-head">
+            <div>
+              <span className="iv-panel-eyebrow">{t("invest.strategies.eyebrow")}</span>
+              <h2>{t("invest.strategies.title")}</h2>
+            </div>
+            <p>{t("invest.strategies.body")}</p>
+          </div>
+          {STRATEGIES.map((strategy, index) => (
+            <StrategyItem
+              key={strategy.tagKey}
+              strategy={strategy}
+              isOpen={openStrategy === index}
+              onToggle={() => setOpenStrategy(openStrategy === index ? -1 : index)}
+            />
+          ))}
+        </div>
+      </section>
 
-{/* ── MARKET CONTEXT ───────────────────────────────────────────────────── */}
-      <section style={{ padding: isMobile ? "64px 0" : "96px 0", background: "#FFFBF0" }}>
-        <Container>
-          <Row gap={isMobile ? 32 : 48}>
-            <Col span={5}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.market.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: 0 }}>
-                  {t("invest.market.title")}
-                </h2>
-              </div>
-            </Col>
-            <Col span={7}>
-{/* Comparison bars */}
-              <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "100ms" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
-                  {t("invest.market.priceComparison")}
-                </p>
-{[
- { city: "Barcelona",  price: 6200, pct: 100 },
- { city: "Lisbon",     price: 4800, pct: 77 },
- { city: "Warsaw",     price: 3200, pct: 52 },
- { city: "Tbilisi",    price: 1900, pct: 31 },
- { city: "Batumi",     price: 1420, pct: 23, highlight: true },
-                ].map((row) => (
-                  <div key={row.city} style={{ marginBottom: "16px", minWidth: 0 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: "6px" }}>
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted, flexShrink: 0 }}>${row.price.toLocaleString()}</span>
-                    </div>
-                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px", overflow: "hidden" }}>
-                      <div style={{ height: "100%", width: `${row.pct}%`, maxWidth: "100%", background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px", transition: "width 1s ease" }} />
-                    </div>
+      <section className="iv-market">
+        <div className="iv-wrap">
+          <div className="iv-market-head rv">
+            <span className="iv-panel-eyebrow">{t("invest.market.eyebrow")}</span>
+            <h2>{t("invest.market.title")}</h2>
+          </div>
+          <div className="iv-charts rv">
+            <div className="iv-chart">
+              <h3>{t("invest.market.priceComparison")}</h3>
+              {PRICE_BARS.map((row) => (
+                <div key={row.cityKey} className="iv-bar-row">
+                  <span>{t(row.cityKey)}</span>
+                  <div className="iv-bar-track">
+                    <div className="iv-bar-fill" style={{ width: `${row.pct}%` }} />
                   </div>
-                ))}
-              </div>
-
-{/* Rental yield comparison */}
-              <div className="inv-reveal invest-chart-wrap" style={{ transitionDelay: "200ms", marginTop: "40px" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, marginBottom: "24px" }}>
-                  {t("invest.market.yieldComparison")}
-                </p>
-{[
- { city: "Paris",   yield: "2.8%", pct: 19 },
- { city: "Berlin",  yield: "3.2%", pct: 22 },
- { city: "Lisbon",  yield: "4.1%", pct: 28 },
- { city: "Warsaw",  yield: "5.8%", pct: 40 },
- { city: "Batumi",  yield: "9–14.5%", pct: 100, highlight: true },
-                ].map((row) => (
-                  <div key={row.city} style={{ marginBottom: "16px", minWidth: 0 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: "6px" }}>
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: row.highlight ? C.dark : C.muted, fontWeight: row.highlight ? 700 : 400 }}>{row.city}</span>
-                      <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: row.highlight ? C.wine : C.muted, flexShrink: 0 }}>{row.yield}</span>
-                    </div>
-                    <div style={{ height: "3px", background: "rgba(33,20,26,0.1)", borderRadius: "2px", overflow: "hidden" }}>
-                      <div style={{ height: "100%", width: `${row.pct}%`, maxWidth: "100%", background: row.highlight ? C.wine : "rgba(33,20,26,0.2)", borderRadius: "2px" }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-{/* ── HOW IT WORKS ─────────────────────────────────────────────────────── */}
-      <section id="process" style={{ padding: "96px 0" }}>
-        <Container>
-          <Row style={{ marginBottom: "64px" }}>
-            <Col span={5}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.process.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  {t("invest.process.title")}
-                </h2>
-              </div>
-            </Col>
-            <Col span={7}>
-              <div className="inv-reveal" style={{ transitionDelay: "100ms", paddingTop: isMobile ? "0" : "20px" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.8 }}>
-                  {t("invest.process.body")}
-                </p>
-              </div>
-            </Col>
-          </Row>
-
-          <Row gap={48}>
-            <Col span={6}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-                {process.slice(0, 3).map((step, i) => (
-                  <ProcessStep key={step.n} step={step} index={i} />
-                ))}
-              </div>
-            </Col>
-            <Col span={6}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-                {process.slice(3).map((step, i) => (
-                  <ProcessStep key={step.n} step={step} index={i + 3} />
-                ))}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      <Divider />
-
-{/* ── FAQ ──────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: "96px 0", background: C.light }}>
-        <Container>
-          <Row style={{ marginBottom: "56px" }}>
-            <Col span={5}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.faq.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
-                  {t("invest.faq.title")}
-                </h2>
-              </div>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span={8} style={{ margin: "0" }}>
-              {faqs.map((faq, i) => (
-                <FAQItem key={faq.qKey} faq={faq} index={i} />
+                  <span>${row.value.toLocaleString("en-US")}</span>
+                </div>
               ))}
-            </Col>
-            <Col span={4}>
-              {!isMobile && (
-                <div className="inv-reveal" style={{ position: "sticky", top: "96px", background: C.dark, borderRadius: "16px", padding: "32px 28px" }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>{t("invest.faq.moreQuestions")}</p>
-                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.3, marginBottom: "16px" }}>{t("invest.faq.talkDirectly")}</h3>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, marginBottom: "24px" }}>{t("invest.faq.body")}</p>
-                  <AppLink href="/#contact" style={{ display: "block", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
-                    {t("cta.bookCall")}
-                  </AppLink>
+            </div>
+            <div className="iv-chart">
+              <h3>{t("invest.market.yieldComparison")}</h3>
+              {YIELD_BARS.map((row) => (
+                <div key={row.cityKey} className="iv-bar-row">
+                  <span>{t(row.cityKey)}</span>
+                  <div className="iv-bar-track">
+                    <div className="iv-bar-fill" style={{ width: `${row.pct}%` }} />
+                  </div>
+                  <span>{row.value}</span>
                 </div>
-              )}
-            </Col>
-          </Row>
-        </Container>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-{/* ── CTA FOOTER ───────────────────────────────────────────────────────── */}
-      <section style={{ background: C.dark, padding: "96px 0" }}>
-        <Container>
-          <Row>
-            <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
-              <div className="inv-reveal">
-                <Eyebrow>{t("invest.cta.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,5vw,3.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "24px" }}>
-                  {t("invest.cta.title")}
-                </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, maxWidth: "500px", margin: "0 auto 40px" }}>
-                  {t("invest.cta.body")}
-                </p>
-                <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                    {t("cta.bookFreeConsultation")}
-                  </AppLink>
-                  <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(140,178,192,0.35)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
-                    {t("cta.whatsappUs")}
-                  </a>
+      <section className="iv-process" id="process">
+        <div className="iv-wrap">
+          <div className="iv-split rv">
+            <h2>{t("invest.process.title")}</h2>
+            <p>{t("invest.process.body")}</p>
+          </div>
+          <div className="iv-process-grid rv">
+            {PROCESS.map((step) => (
+              <div key={step.n} className="iv-step">
+                <span className="iv-step-n">{step.n}</span>
+                <div>
+                  <h3>{t(step.titleKey)}</h3>
+                  <p>{t(step.descKey)}</p>
                 </div>
               </div>
-            </Col>
-          </Row>
-        </Container>
+            ))}
+          </div>
+        </div>
       </section>
 
+      <section className="iv-panel-outer">
+        <div className="iv-panel rv">
+          <div className="iv-panel-head">
+            <div>
+              <span className="iv-panel-eyebrow">{t("invest.faq.eyebrow")}</span>
+              <h2>{t("invest.faq.title")}</h2>
+            </div>
+            <p>{t("invest.faq.body")}</p>
+          </div>
+          <div className="iv-faq-grid">
+            <div>
+              {FAQS.map((faq, index) => (
+                <FaqItem
+                  key={faq.qKey}
+                  qKey={faq.qKey}
+                  aKey={faq.aKey}
+                  isOpen={openFaq === index}
+                  onToggle={() => setOpenFaq(openFaq === index ? -1 : index)}
+                />
+              ))}
+            </div>
+            <aside className="iv-faq-aside">
+              <h3>{t("invest.faq.moreQuestions")}</h3>
+              <p>{t("invest.faq.talkDirectly")}</p>
+              <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
+                {t("invest.cta.button")}
+              </button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="iv-cta-outer">
+        <div className="iv-cta rv">
+          <span className="iv-panel-eyebrow">{t("invest.cta.eyebrow")}</span>
+          <h2>{t("invest.cta.title")}</h2>
+          <p>{t("invest.cta.body")}</p>
+          <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
+            {t("invest.cta.button")}
+          </button>
+        </div>
+      </section>
+
+      <RequestModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        source="Invest page — Why Georgia"
+        title={t("invest.cta.button")}
+      />
     </div>
-  
-  </>);
+  );
 }
