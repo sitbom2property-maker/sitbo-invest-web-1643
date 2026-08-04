@@ -206,56 +206,59 @@ export function Nav() {
             maxWidth: isMobile ? undefined : 1680,
             height: "100%",
             margin: "0 auto",
-            padding: isMobile ? "0 24px" : "0 56px",
+            padding: isMobile ? "0 20px" : "0 56px",
             display: "grid",
-            gridTemplateColumns: isMobile ? "auto 1fr auto" : "auto 1fr auto",
+            // Mobile: language | centered logo | menu
+            gridTemplateColumns: isMobile ? "1fr auto 1fr" : "auto 1fr auto",
             alignItems: "center",
-            columnGap: isMobile ? 12 : 32,
+            columnGap: isMobile ? 8 : 32,
             boxSizing: "border-box",
           }}
         >
-          {/* Logo + language — left */}
+          {/* Left: language (mobile) or logo + language (desktop) */}
           <div
             style={{
               justifySelf: "start",
               display: "flex",
               alignItems: "center",
-              gap: isMobile ? 12 : 22,
+              gap: isMobile ? 0 : 22,
               minWidth: 0,
             }}
           >
-            <Link
-              href="/"
-              aria-label="SITBO Invest — Home"
-              style={{
-                display: "block",
-                cursor: "pointer",
-                lineHeight: 0,
-                transition: "opacity 0.2s ease",
-                flexShrink: 0,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = "0.75";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "1";
-              }}
-            >
-              <img
-                src="/logo-dark-bg.png"
-                alt="SITBO Invest"
+            {!isMobile ? (
+              <Link
+                href="/"
+                aria-label="SITBO Invest — Home"
                 style={{
-                  height: logoHeight,
-                  width: "auto",
                   display: "block",
-                  objectFit: "contain",
+                  cursor: "pointer",
+                  lineHeight: 0,
+                  transition: "opacity 0.2s ease",
+                  flexShrink: 0,
                 }}
-              />
-            </Link>
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "0.75";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = "1";
+                }}
+              >
+                <img
+                  src="/logo-dark-bg.png"
+                  alt="SITBO Invest"
+                  style={{
+                    height: logoHeight,
+                    width: "auto",
+                    display: "block",
+                    objectFit: "contain",
+                  }}
+                />
+              </Link>
+            ) : null}
             <NavLocaleSwitcher compact={isMobile} />
           </div>
 
-          {/* Desktop nav links — center */}
+          {/* Center: desktop links OR mobile logo */}
           {!isMobile ? (
             <div
               style={{
@@ -273,7 +276,27 @@ export function Nav() {
               ))}
             </div>
           ) : (
-            <div aria-hidden="true" />
+            <Link
+              href="/"
+              aria-label="SITBO Invest — Home"
+              style={{
+                display: "block",
+                cursor: "pointer",
+                lineHeight: 0,
+                justifySelf: "center",
+              }}
+            >
+              <img
+                src="/logo-dark-bg.png"
+                alt="SITBO Invest"
+                style={{
+                  height: logoHeight,
+                  width: "auto",
+                  display: "block",
+                  objectFit: "contain",
+                }}
+              />
+            </Link>
           )}
 
           {/* Contact CTA + menu — right */}

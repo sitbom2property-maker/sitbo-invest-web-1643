@@ -24,6 +24,7 @@ import { FooterV2 as Footer } from "./components/FooterV2";
 import { CookieConsent } from "./components/cookie-consent";
 import { LeadPopup } from "./components/LeadPopup";
 import { ScrollToHash } from "./components/scroll-to-hash";
+import { ScrollRestore } from "./components/scroll-restore";
 
 function AppFooter() {
 	const [location] = useLocation();
@@ -42,6 +43,7 @@ function App() {
 		<LocaleProvider>
 		<RatesProvider>
 		<Provider>
+			<ScrollRestore />
 			<ScrollToHash />
 			<Nav />
 			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>

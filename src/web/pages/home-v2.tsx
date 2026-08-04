@@ -365,12 +365,12 @@ function SelectedProjects() {
 
 // ─── Ecosystem accordion ──────────────────────────────────────────────────────
 
-const ECO: { titleKey: MessageKey; bodyKey: MessageKey }[] = [
-  { titleKey: "v2.eco.legal.title", bodyKey: "v2.eco.legal.body" },
-  { titleKey: "v2.eco.banking.title", bodyKey: "v2.eco.banking.body" },
-  { titleKey: "v2.eco.notary.title", bodyKey: "v2.eco.notary.body" },
-  { titleKey: "v2.eco.architect.title", bodyKey: "v2.eco.architect.body" },
-  { titleKey: "v2.eco.renovation.title", bodyKey: "v2.eco.renovation.body" },
+const ECO: { titleKey: MessageKey; bodyKey: MessageKey; img: string }[] = [
+  { titleKey: "v2.eco.legal.title", bodyKey: "v2.eco.legal.body", img: "/rd-eco-legal.jpg" },
+  { titleKey: "v2.eco.banking.title", bodyKey: "v2.eco.banking.body", img: "/rd-eco-banking.jpg" },
+  { titleKey: "v2.eco.notary.title", bodyKey: "v2.eco.notary.body", img: "/rd-eco-notary.jpg" },
+  { titleKey: "v2.eco.architect.title", bodyKey: "v2.eco.architect.body", img: "/rd-eco-architect.jpg" },
+  { titleKey: "v2.eco.renovation.title", bodyKey: "v2.eco.renovation.body", img: "/rd-eco-renovation.jpg" },
 ];
 
 function Ecosystem() {
@@ -400,9 +400,13 @@ function Ecosystem() {
               onClick={() => setActive(i)}
               aria-expanded={i === active}
             >
-              {i === active ? (
-                <img className="rd-eco-photo" src="/rd-ecosystem.jpg" alt="" aria-hidden="true" />
-              ) : null}
+              <img
+                className="rd-eco-photo"
+                src={item.img}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+              />
               <span className="rd-eco-index">0{i + 1}</span>
               <span className="rd-eco-title">{t(item.titleKey)}</span>
               <span className="rd-eco-body">{t(item.bodyKey)}</span>
@@ -858,15 +862,21 @@ html, body { background: #21141A; }
 .rd-eco-card.is-open { flex-grow: 2.2; }
 .rd-eco-photo {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: .34; pointer-events: none;
+  opacity: .18; pointer-events: none; transition: opacity .35s ease;
+  filter: saturate(.85) brightness(.75);
 }
-.rd-eco-index { position: relative; font-family: var(--body); font-size: 13px; color: rgba(255,255,255,.5); }
+.rd-eco-card.is-open .rd-eco-photo { opacity: .42; filter: saturate(.95) brightness(.85); }
+.rd-eco-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(33,20,26,.35) 0%, rgba(33,20,26,.72) 100%);
+}
+.rd-eco-index { position: relative; z-index: 1; font-family: var(--body); font-size: 13px; color: rgba(255,255,255,.5); }
 .rd-eco-title {
-  position: relative; font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px);
+  position: relative; z-index: 1; font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px);
   margin-top: 14px; line-height: 1.3;
 }
 .rd-eco-body {
-  position: relative; margin-top: auto; font-family: var(--body);
+  position: relative; z-index: 1; margin-top: auto; font-family: var(--body);
   font-size: clamp(14px, 1.25vw, 18px); line-height: 1.45; color: rgba(255,255,255,.86);
   opacity: 0; max-height: 0; overflow: hidden; transition: opacity .35s ease;
 }
@@ -994,10 +1004,6 @@ html, body { background: #21141A; }
 export default function HomeV2() {
   const [modal, setModal] = useState<ModalState>(CLOSED);
   useReveal();
-
-  useEffect(() => {
-    if (!window.location.hash) window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="rd">
