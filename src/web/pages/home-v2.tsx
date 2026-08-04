@@ -178,28 +178,100 @@ function SelectedProjects() {
     pointerId: number;
     startX: number;
     startScroll: number;
+    lastX: number;
+    lastT: number;
+    velocity: number;
     moved: boolean;
   } | null>(null);
+  const momentumRef = useRef(0);
   const [progress, setProgress] = useState(0);
   const [dragging, setDragging] = useState(false);
 
-  const onScroll = () => {
+  const syncProgress = () => {
     const el = railRef.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
     setProgress(max > 0 ? el.scrollLeft / max : 0);
   };
 
+  const stopMomentum = () => {
+    if (momentumRef.current) {
+      cancelAnimationFrame(momentumRef.current);
+      momentumRef.current = 0;
+    }
+  };
+
+  const snapToNearest = (el: HTMLDivElement) => {
+    const card = el.querySelector<HTMLElement>(".rd-proj");
+    if (!card) return;
+    const step = card.offsetWidth + 12; // card + gap
+    if (step <= 0) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const target = Math.min(max, Math.max(0, Math.round(el.scrollLeft / step) * step));
+    const start = el.scrollLeft;
+    const dist = target - start;
+    if (Math.abs(dist) < 1) {
+      syncProgress();
+      return;
+    }
+    const duration = 320;
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - t0) / duration);
+      // ease-out cubic
+      const e = 1 - (1 - p) ** 3;
+      el.scrollLeft = start + dist * e;
+      syncProgress();
+      if (p < 1) momentumRef.current = requestAnimationFrame(tick);
+      else momentumRef.current = 0;
+    };
+    momentumRef.current = requestAnimationFrame(tick);
+  };
+
+  const glide = (el: HTMLDivElement, initialVelocity: number) => {
+    // px per ms → decay with friction, then snap
+    let v = initialVelocity;
+    let prev = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(32, now - prev);
+      prev = now;
+      v *= Math.pow(0.95, dt / 16);
+      el.scrollLeft += v * dt;
+      const max = el.scrollWidth - el.clientWidth;
+      if (el.scrollLeft < 0) {
+        el.scrollLeft = 0;
+        v = 0;
+      } else if (el.scrollLeft > max) {
+        el.scrollLeft = max;
+        v = 0;
+      }
+      syncProgress();
+      if (Math.abs(v) > 0.04) {
+        momentumRef.current = requestAnimationFrame(tick);
+      } else {
+        momentumRef.current = 0;
+        snapToNearest(el);
+      }
+    };
+    momentumRef.current = requestAnimationFrame(tick);
+  };
+
+  useEffect(() => () => stopMomentum(), []);
+
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    // Only primary button / touch / pen — leave trackpad native scroll alone for wheel
     if (e.pointerType === "mouse" && e.button !== 0) return;
     const el = railRef.current;
     if (!el) return;
+    stopMomentum();
+    const now = performance.now();
     dragRef.current = {
       active: true,
       pointerId: e.pointerId,
       startX: e.clientX,
       startScroll: el.scrollLeft,
+      lastX: e.clientX,
+      lastT: now,
+      velocity: 0,
       moved: false,
     };
     el.setPointerCapture(e.pointerId);
@@ -213,6 +285,15 @@ function SelectedProjects() {
     const dx = e.clientX - drag.startX;
     if (Math.abs(dx) > 4) drag.moved = true;
     el.scrollLeft = drag.startScroll - dx;
+    const now = performance.now();
+    const dt = now - drag.lastT;
+    if (dt > 0) {
+      const instant = (drag.lastX - e.clientX) / dt; // scroll direction
+      drag.velocity = drag.velocity * 0.7 + instant * 0.3;
+    }
+    drag.lastX = e.clientX;
+    drag.lastT = now;
+    syncProgress();
   };
 
   const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -220,7 +301,6 @@ function SelectedProjects() {
     const el = railRef.current;
     if (!drag || drag.pointerId !== e.pointerId) return;
     if (el?.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
-    // Block the click that follows a real drag so project links don't fire
     if (drag.moved) {
       const blockClick = (ev: Event) => {
         ev.preventDefault();
@@ -229,6 +309,10 @@ function SelectedProjects() {
       };
       el?.addEventListener("click", blockClick, true);
       window.setTimeout(() => el?.removeEventListener("click", blockClick, true), 0);
+      if (el) {
+        if (Math.abs(drag.velocity) > 0.05) glide(el, drag.velocity);
+        else snapToNearest(el);
+      }
     }
     dragRef.current = null;
     setDragging(false);
@@ -254,7 +338,7 @@ function SelectedProjects() {
             <div
               className={`rd-rail${dragging ? " is-dragging" : ""}`}
               ref={railRef}
-              onScroll={onScroll}
+              onScroll={syncProgress}
               onPointerDown={onPointerDown}
               onPointerMove={onPointerMove}
               onPointerUp={endDrag}
@@ -737,14 +821,15 @@ html, body { background: #21141A; }
 .rd-projects-side .rd-btn { margin-top: 14px; min-width: 202px; }
 .rd-projects-main { min-width: 0; }
 .rd-rail {
-  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: none;
   padding-bottom: 22px; scrollbar-width: none;
   cursor: grab; touch-action: pan-y; user-select: none;
+  -webkit-overflow-scrolling: touch;
 }
 .rd-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .rd-rail::-webkit-scrollbar { display: none; }
 .rd-proj {
-  flex: 0 0 clamp(220px, 22vw, 313px); scroll-snap-align: start;
+  flex: 0 0 clamp(220px, 22vw, 313px);
   text-decoration: none; cursor: inherit;
 }
 .rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #676060; pointer-events: none; }
@@ -754,8 +839,11 @@ html, body { background: #21141A; }
 }
 .rd-rail:not(.is-dragging) .rd-proj:hover .rd-proj-img img { transform: scale(1.05); }
 .rd-proj-name { display: block; margin-top: 14px; font-family: var(--body); font-weight: 700; font-size: 18px; color: var(--bg); }
-.rd-rail-track { position: relative; height: 4px; background: rgba(33,20,26,.12); overflow: hidden; }
-.rd-rail-track span { position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--bg); transition: transform .2s ease; }
+.rd-rail-track { position: relative; height: 4px; background: rgba(33,20,26,.12); overflow: hidden; border-radius: 2px; }
+.rd-rail-track span {
+  position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--bg); border-radius: 2px;
+  will-change: transform; transition: transform .05s linear;
+}
 
 /* ecosystem */
 .rd-eco { padding: clamp(50px, 6.6vw, 96px) 0 clamp(56px, 7vw, 104px); }
