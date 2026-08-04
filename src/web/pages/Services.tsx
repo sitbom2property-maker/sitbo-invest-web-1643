@@ -1,91 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AppLink } from "../components/app-link";
+import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
-const C = {
-  dark: "#21141A",
-  light: "#FAF7F0",
-  teal: "#8CB2C0",
-  plum: "#694153",
-  muted: "rgba(33,20,26,0.45)",
-  border: "rgba(140,178,192,0.15)",
-};
-
-const PAGE_STYLES = `
-  .services-page {
-    background: ${C.light};
-    min-height: 100vh;
-  }
-  .services-narrow {
-    max-width: 860px;
-    margin: 0 auto;
-    padding-left: clamp(24px, 5vw, 0px);
-    padding-right: clamp(24px, 5vw, 0px);
-    box-sizing: border-box;
-  }
-  .services-accordion-panel {
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-  .services-accordion-toggle {
-    transition: transform 0.3s ease;
-    display: inline-block;
-    line-height: 1;
-  }
-  .services-accordion-toggle.open {
-    transform: rotate(45deg);
-  }
-  .services-cta-btn {
-    transition: background 0.25s ease, color 0.25s ease;
-  }
-  .services-cta-btn:hover {
-    background: ${C.dark} !important;
-    color: ${C.light} !important;
-  }
-  .services-limits-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px 48px;
-  }
-  @media (max-width: 768px) {
-    .services-hero {
-      padding: 100px 24px 64px !important;
-    }
-    .services-hero h1 {
-      font-size: 36px !important;
-    }
-    .services-section-pad {
-      padding: 64px 24px !important;
-    }
-    .services-accordion-num {
-      display: none !important;
-    }
-    .services-accordion-head {
-      padding: 20px 0 !important;
-    }
-    .services-accordion-title {
-      font-size: 18px !important;
-    }
-    .services-accordion-body {
-      padding: 0 0 24px 0 !important;
-    }
-    .services-limits-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-    .services-cta-btn {
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-    }
-    .services-limits h2 {
-      font-size: 26px !important;
-    }
-    .services-cta h2 {
-      font-size: 28px !important;
-    }
-  }
-`;
+/**
+ * Services page — first-person voice, aligned with home-v2 visual system:
+ * Coolvetica / Inter · #21141A · card #412834 · green #48674D · panel #F8F8F8
+ */
 
 type ServiceItem = {
   num: string;
@@ -182,161 +103,63 @@ const SERVICES: ServiceItem[] = [
 ];
 
 const LIMITS = [
-  {
-    titleKey: "services.limit1.title",
-    textKey: "services.limit1.text",
-  },
-  {
-    titleKey: "services.limit2.title",
-    textKey: "services.limit2.text",
-  },
-  {
-    titleKey: "services.limit3.title",
-    textKey: "services.limit3.text",
-  },
-  {
-    titleKey: "services.limit4.title",
-    textKey: "services.limit4.text",
-  },
-] satisfies { titleKey: MessageKey; textKey: MessageKey }[];
+  { titleKey: "services.limit1.title" as MessageKey, textKey: "services.limit1.text" as MessageKey },
+  { titleKey: "services.limit2.title" as MessageKey, textKey: "services.limit2.text" as MessageKey },
+  { titleKey: "services.limit3.title" as MessageKey, textKey: "services.limit3.text" as MessageKey },
+  { titleKey: "services.limit4.title" as MessageKey, textKey: "services.limit4.text" as MessageKey },
+];
 
-function useIsMobile(bp = 768) {
-  const [mobile, setMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth < bp : false
-  );
+function useReveal() {
   useEffect(() => {
-    const h = () => setMobile(window.innerWidth < bp);
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
-  }, [bp]);
-  return mobile;
+    const els = document.querySelectorAll(".sv .rv");
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 }
 
 function AccordionItem({
   service,
   isOpen,
   onToggle,
-  isMobile,
 }: {
   service: ServiceItem;
   isOpen: boolean;
   onToggle: () => void;
-  isMobile: boolean;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const [maxHeight, setMaxHeight] = useState(isOpen ? 2000 : 0);
+  const [maxHeight, setMaxHeight] = useState(0);
   const t = useT();
 
   useEffect(() => {
-    if (panelRef.current) {
-      setMaxHeight(isOpen ? panelRef.current.scrollHeight : 0);
-    }
-  }, [isOpen, isMobile]);
+    if (!panelRef.current) return;
+    setMaxHeight(isOpen ? panelRef.current.scrollHeight : 0);
+  }, [isOpen]);
 
   return (
-    <div>
-      <button
-        type="button"
-        className="services-accordion-head"
-        onClick={onToggle}
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "28px 0",
-          border: "none",
-          borderBottom: `1px solid rgba(140,178,192,0.2)`,
-          background: "transparent",
-          cursor: "pointer",
-          textAlign: "left",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 0 }}>
-          <span
-            className="services-accordion-num"
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "0.7rem",
-              color: C.teal,
-              marginRight: "24px",
-              opacity: 0.6,
-              letterSpacing: "0.1em",
-              flexShrink: 0,
-            }}
-          >
-            {service.num}
-          </span>
-          <span
-            className="services-accordion-title"
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: isMobile ? "18px" : "22px",
-              color: C.dark,
-              fontWeight: 400,
-            }}
-          >
-            {t(service.titleKey)}
-          </span>
-        </div>
-        <span
-          className={`services-accordion-toggle${isOpen ? " open" : ""}`}
-          style={{
-            fontFamily: "Manrope, sans-serif",
-            fontSize: "20px",
-            color: C.teal,
-            flexShrink: 0,
-            marginLeft: "16px",
-          }}
-          aria-hidden
-        >
-          +
+    <div className={`sv-acc${isOpen ? " is-open" : ""}`}>
+      <button type="button" className="sv-acc-head" onClick={onToggle} aria-expanded={isOpen}>
+        <span className="sv-acc-num">{service.num}</span>
+        <span className="sv-acc-title">{t(service.titleKey)}</span>
+        <span className="sv-acc-toggle" aria-hidden>
+          {isOpen ? "−" : "+"}
         </span>
       </button>
-
-      <div className="services-accordion-panel" style={{ maxHeight }}>
-        <div
-          ref={panelRef}
-          className="services-accordion-body"
-          style={{
-            padding: isMobile ? "0 0 24px 0" : "0 0 32px 46px",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "15px",
-              color: "rgba(33,20,26,0.65)",
-              lineHeight: 1.8,
-              maxWidth: "640px",
-              margin: "0 0 20px",
-            }}
-          >
-            {t(service.descriptionKey)}
-          </p>
-          <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {service.bulletKeys.map((itemKey) => (
-              <li
-                key={itemKey}
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "flex-start",
-                  marginBottom: "10px",
-                }}
-              >
-                <span style={{ color: C.teal, flexShrink: 0, fontFamily: "Manrope, sans-serif" }}>—</span>
-                <span
-                  style={{
-                    fontFamily: "Manrope, sans-serif",
-                    fontSize: "14px",
-                    color: "rgba(33,20,26,0.7)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {t(itemKey)}
-                </span>
-              </li>
+      <div className="sv-acc-panel" style={{ maxHeight }}>
+        <div ref={panelRef} className="sv-acc-body">
+          <p>{t(service.descriptionKey)}</p>
+          <ul>
+            {service.bulletKeys.map((k) => (
+              <li key={k}>{t(k)}</li>
             ))}
           </ul>
         </div>
@@ -345,215 +168,273 @@ function AccordionItem({
   );
 }
 
-export default function ServicesPage() {
-  const isMobile = useIsMobile();
-  const [openIndex, setOpenIndex] = useState(0);
-  const t = useT();
+const CSS = `
+.sv {
+  --bg: #21141A;
+  --card: #412834;
+  --green: #48674D;
+  --white: #FFFFFF;
+  --panel: #F8F8F8;
+  --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
+  --body: 'Inter', 'DM Sans', Manrope, sans-serif;
+  --gutter: clamp(24px, 5.5vw, 80px);
+  --max: 1440px;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.sv .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.sv .rv.in { opacity: 1; transform: none; }
+.sv-wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); box-sizing: border-box; }
+.sv-narrow { max-width: 920px; margin: 0 auto; }
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+.sv-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--body); font-size: 15px; font-weight: 400;
+  padding: 15px 30px; border-radius: 4px; border: 1px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s, opacity .2s;
+}
+.sv-btn-white { background: var(--white); color: var(--bg); }
+.sv-btn-white:hover { opacity: .88; }
+.sv-btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
+
+/* hero */
+.sv-hero {
+  position: relative;
+  padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 8vw, 110px);
+  overflow: hidden;
+}
+.sv-hero-circle {
+  position: absolute; top: -180px; right: -140px; width: 640px; height: 640px;
+  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
+}
+.sv-hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(28px, 4vw, 64px); align-items: end;
+}
+.sv-hero h1 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 18px;
+  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
+}
+.sv-hero h1 em {
+  font-style: normal; color: rgba(255,255,255,.72);
+}
+.sv-hero-lead {
+  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
+  color: rgba(255,255,255,.78); margin: 0; max-width: 420px;
+}
+.sv-hero-side {
+  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
+  color: rgba(255,255,255,.62); margin: 0; max-width: 380px;
+  justify-self: end;
+}
+.sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+
+/* services list */
+.sv-list-outer { padding: 0 10px clamp(48px, 6vw, 90px); }
+.sv-list {
+  background: var(--panel); color: var(--bg); border-radius: 20px;
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
+}
+.sv-list-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-bottom: clamp(28px, 4vw, 48px); align-items: start;
+}
+.sv-list-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
+}
+.sv-list-head p {
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+}
+
+.sv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
+.sv-acc:first-child { border-top: 1px solid rgba(33,20,26,.12); }
+.sv-acc-head {
+  width: 100%; display: grid; grid-template-columns: 48px 1fr auto;
+  gap: 16px; align-items: center; padding: 22px 0;
+  border: none; background: transparent; cursor: pointer; text-align: left;
+}
+.sv-acc-num {
+  font-family: var(--body); font-size: 13px; color: rgba(33,20,26,.4);
+  font-variant-numeric: tabular-nums;
+}
+.sv-acc-title {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(18px, 2vw, 26px); color: var(--bg); line-height: 1.2;
+}
+.sv-acc-toggle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg); color: var(--white); font-size: 20px; line-height: 1;
+}
+.sv-acc.is-open .sv-acc-toggle { background: var(--green); }
+.sv-acc-panel { overflow: hidden; transition: max-height .4s ease; }
+.sv-acc-body { padding: 0 0 26px 64px; max-width: 720px; }
+.sv-acc-body p {
+  margin: 0 0 16px; font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.72);
+}
+.sv-acc-body ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.sv-acc-body li {
+  position: relative; padding-left: 18px;
+  font-size: 14px; line-height: 1.5; color: rgba(33,20,26,.78);
+}
+.sv-acc-body li::before {
+  content: ""; position: absolute; left: 0; top: .55em;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+}
+
+/* limits */
+.sv-limits { padding: clamp(56px, 7vw, 100px) 0; }
+.sv-limits-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-bottom: clamp(28px, 4vw, 48px); align-items: start;
+}
+.sv-limits-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
+}
+.sv-limits-head p {
+  margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.62);
+  max-width: 360px; justify-self: end;
+}
+.sv-limits-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.sv-limit {
+  background: var(--card); border-radius: 16px;
+  padding: clamp(22px, 2.4vw, 32px);
+}
+.sv-limit h3 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 10px;
+  font-size: clamp(18px, 1.7vw, 22px); line-height: 1.25;
+}
+.sv-limit p {
+  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.7);
+}
+
+/* cta */
+.sv-cta-outer { padding: 0 10px clamp(56px, 7vw, 100px); }
+.sv-cta {
+  border-radius: 20px; overflow: hidden;
+  background:
+    radial-gradient(100% 140% at 90% 50%, rgba(72,103,77,.55) 0%, rgba(33,20,26,0) 55%),
+    var(--card);
+  padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
+  text-align: center;
+}
+.sv-cta h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 14px;
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
+}
+.sv-cta p {
+  margin: 0 auto 28px; max-width: 480px;
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: rgba(255,255,255,.75);
+}
+
+@media (max-width: 900px) {
+  .sv-hero { padding-top: 36px; }
+  .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
+  .sv-hero-side, .sv-list-head p, .sv-limits-head p { justify-self: start; }
+  .sv-hero-circle { width: 380px; height: 380px; top: -120px; right: -120px; }
+  .sv-limits-grid { grid-template-columns: 1fr; }
+  .sv-acc-body { padding-left: 0; }
+  .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }
+  .sv-hero-btns .sv-btn { width: 100%; }
+}
+`;
+
+export default function ServicesPage() {
+  const t = useT();
+  const [openIndex, setOpenIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  useReveal();
 
   return (
-    <>
-      <style>{PAGE_STYLES}</style>
-      <div className="services-page">
-        {/* ── Hero ── */}
-        <section
-          className="services-hero"
-          style={{
-            background: C.dark,
-            padding: isMobile ? "100px 24px 64px" : "140px 24px 100px",
-            textAlign: "center",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "0.65rem",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: C.teal,
-              margin: "0 0 20px",
-            }}
-          >
-            {t("services.hero.eyebrow")}
-          </p>
-          <h1
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: isMobile ? "36px" : "56px",
-              color: C.light,
-              lineHeight: 1.1,
-              fontWeight: 400,
-              margin: 0,
-            }}
-          >
-            {t("services.hero.title")}
-            <br />
-            <em style={{ fontStyle: "italic", color: C.teal }}>{t("services.hero.titleEm")}</em>
-          </h1>
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "17px",
-              color: "rgba(250,247,240,0.55)",
-              maxWidth: "520px",
-              margin: "24px auto 0",
-              lineHeight: 1.7,
-            }}
-          >
-            {t("services.hero.body")}
-          </p>
-        </section>
+    <div className="sv">
+      <style>{CSS}</style>
 
-        {/* ── Accordion services ── */}
-        <section
-          className="services-section-pad"
-          style={{
-            background: C.light,
-            padding: isMobile ? "64px 24px" : "100px 0",
-          }}
-        >
-          <div className="services-narrow">
+      <section className="sv-hero">
+        <span className="sv-hero-circle" aria-hidden="true" />
+        <div className="sv-wrap sv-hero-grid">
+          <div className="rv">
+            <h1>
+              {t("services.hero.title")}
+              <br />
+              <em>{t("services.hero.titleEm")}</em>
+            </h1>
+            <div className="sv-hero-btns">
+              <button type="button" className="sv-btn sv-btn-white" onClick={() => setModalOpen(true)}>
+                {t("services.cta.button")}
+              </button>
+              <AppLink href="/#consultation" className="sv-btn sv-btn-outline">
+                {t("nav.pricing")}
+              </AppLink>
+            </div>
+          </div>
+          <p className="sv-hero-side rv">{t("services.hero.body")}</p>
+        </div>
+      </section>
+
+      <section className="sv-list-outer">
+        <div className="sv-list rv">
+          <div className="sv-list-head">
+            <h2>{t("services.list.title")}</h2>
+            <p>{t("services.list.lead")}</p>
+          </div>
+          <div className="sv-narrow" style={{ maxWidth: "100%" }}>
             {SERVICES.map((service, index) => (
               <AccordionItem
                 key={service.num}
                 service={service}
                 isOpen={openIndex === index}
                 onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
-                isMobile={isMobile}
               />
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ── What we don't do ── */}
-        <section
-          className="services-limits services-section-pad"
-          style={{
-            background: C.dark,
-            padding: isMobile ? "64px 24px" : "80px 0",
-          }}
-        >
-          <div className="services-narrow">
-            <p
-              style={{
-                fontFamily: "Manrope, sans-serif",
-                fontSize: "0.65rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: C.teal,
-                margin: "0 0 16px",
-              }}
-            >
-              {t("services.limits.eyebrow")}
-            </p>
-            <h2
-              style={{
-                fontFamily: "Jun, Georgia, serif",
-                fontSize: isMobile ? "26px" : "36px",
-                color: C.light,
-                fontWeight: 400,
-                margin: "0 0 40px",
-                lineHeight: 1.15,
-              }}
-            >
-              {t("services.limits.title")}
-            </h2>
-            <div className="services-limits-grid">
-              {LIMITS.map((item) => (
-                <div
-                  key={item.titleKey}
-                  style={{
-                    borderLeft: `1px solid rgba(140,178,192,0.25)`,
-                    paddingLeft: "20px",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "Manrope, sans-serif",
-                      fontSize: "13px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      color: C.light,
-                      margin: "0 0 8px",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {t(item.titleKey)}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "Manrope, sans-serif",
-                      fontSize: "14px",
-                      color: "rgba(250,247,240,0.5)",
-                      lineHeight: 1.7,
-                      margin: 0,
-                    }}
-                  >
-                    {t(item.textKey)}
-                  </p>
-                </div>
-              ))}
-            </div>
+      <section className="sv-limits">
+        <div className="sv-wrap">
+          <div className="sv-limits-head rv">
+            <h2>{t("services.limits.title")}</h2>
+            <p>{t("services.limits.eyebrow")}</p>
           </div>
-        </section>
+          <div className="sv-limits-grid">
+            {LIMITS.map((item) => (
+              <div key={item.titleKey} className="sv-limit rv">
+                <h3>{t(item.titleKey)}</h3>
+                <p>{t(item.textKey)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* ── CTA ── */}
-        <section
-          className="services-cta services-section-pad"
-          style={{
-            background: C.light,
-            padding: isMobile ? "64px 24px" : "100px 24px 120px",
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "Jun, Georgia, serif",
-              fontSize: isMobile ? "28px" : "42px",
-              color: C.dark,
-              fontWeight: 400,
-              margin: 0,
-              lineHeight: 1.15,
-            }}
-          >
-            {t("services.cta.title")}
-          </h2>
-          <p
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "16px",
-              color: "rgba(33,20,26,0.55)",
-              margin: "16px auto 40px",
-              maxWidth: "460px",
-              lineHeight: 1.7,
-            }}
-          >
-            {t("services.cta.body")}
-          </p>
-          <AppLink
-            href="/#contact"
-            className="services-cta-btn"
-            style={{
-              display: "inline-block",
-              background: C.teal,
-              color: C.dark,
-              fontFamily: "Manrope, sans-serif",
-              fontSize: "0.72rem",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              padding: "18px 48px",
-              border: "none",
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
-          >
-            {t("cta.requestPrivateConsultation")}
-          </AppLink>
-        </section>
-      </div>
-    </>
+      <section className="sv-cta-outer">
+        <div className="sv-cta rv">
+          <h2>{t("services.cta.title")}</h2>
+          <p>{t("services.cta.body")}</p>
+          <button type="button" className="sv-btn sv-btn-white" onClick={() => setModalOpen(true)}>
+            {t("services.cta.button")}
+          </button>
+        </div>
+      </section>
+
+      <RequestModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        source="Services page"
+        title={t("services.cta.button")}
+      />
+    </div>
   );
 }
