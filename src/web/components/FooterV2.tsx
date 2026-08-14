@@ -42,7 +42,7 @@ export function FooterV2() {
         }
         .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
-          font-family: 'Coolvetica', Inter, sans-serif;
+          font-family: 'Inter', sans-serif;
           font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFFFF;
         }
         .fv2-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }

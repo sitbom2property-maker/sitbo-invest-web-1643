@@ -185,9 +185,9 @@ export default function HistoryPage() {
         }
 
         .ht-sticky strong {
-          font-family: Coolvetica, Inter, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 1.35rem;
-          font-weight: 400;
+          font-weight: 600;
           color: ${C.light};
         }
 
