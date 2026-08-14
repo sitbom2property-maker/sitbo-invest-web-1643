@@ -627,6 +627,11 @@ const en = {
   "chess.view3d": "360 3D view",
   "chess.viewFloors": "Floors",
   "chess.view2d": "2D view",
+  "chess.viewPanorama": "360 panorama",
+  "chess.parklineHint": "Open the 3D tour, the 2D chessboard, or the 13–28 floor panorama.",
+  "chess.openFullscreen": "Open fullscreen",
+  "chess.filter.allBlocks": "All blocks",
+  "chess.blockN": "Block {n}",
   "chess.findOutMore": "Find out more",
   "chess.pickFloor": "Click a floor on the building",
   "chess.hideList": "Hide apartment list",
@@ -643,7 +648,6 @@ const en = {
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
   "chess.officialHint": "360° model, floor plates, and the 2D grid — request a unit and it comes to us.",
-  "chess.openFullscreen": "Open on developer site",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",

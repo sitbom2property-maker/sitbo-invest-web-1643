@@ -4,6 +4,7 @@ import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
 import { PiazzaViewer } from "../components/PiazzaViewer";
+import { ParklineViewer } from "../components/ParklineViewer";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -299,10 +300,15 @@ export default function ProjectPage() {
                   className="project-developer-card"
                   style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}
                 >
-                  {/* Logo placeholder */}
+                  {p.developerLogo ? (
+                    <div style={{ flexShrink: 0, width: "88px", height: "64px", borderRadius: "8px", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "8px" }}>
+                      <img src={p.developerLogo} alt={p.developer} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+                    </div>
+                  ) : (
                   <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
+                  )}
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.15rem", fontWeight: 600, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
@@ -410,7 +416,7 @@ export default function ProjectPage() {
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
-                  {p.apartmentsKey === "piazza" && (
+                  {p.apartmentsKey && (
                     <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
                       {t("chess.chooseCta")}
                     </a>
@@ -440,6 +446,16 @@ export default function ProjectPage() {
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
                   </a>
                 )}
+                {p.tourUrl && (
+                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.35)", textDecoration: "none" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.view3d")}</span>
+                  </a>
+                )}
+                {p.panoramaUrl && (
+                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.35)", textDecoration: "none" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.viewPanorama")}</span>
+                  </a>
+                )}
 
               </div>
             </Col>
@@ -450,10 +466,19 @@ export default function ProjectPage() {
 
 
 
-{/* ── APARTMENT SELECTOR (developer Flat.show) ── */}
+{/* ── APARTMENT SELECTOR ── */}
       {p.apartmentsKey === "piazza" && (
         <section style={{ padding: "80px 0 0" }}>
           <PiazzaViewer projectName={p.name} />
+        </section>
+      )}
+      {p.apartmentsKey === "parkline" && p.tourUrl && (
+        <section style={{ padding: "80px 0 0" }}>
+          <Container>
+            <div className="pr-reveal">
+              <ParklineViewer projectName={p.name} tourUrl={p.tourUrl} panoramaUrl={p.panoramaUrl} />
+            </div>
+          </Container>
         </section>
       )}
 

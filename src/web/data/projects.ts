@@ -29,12 +29,15 @@ export type Project = {
   floorPlanLabels?: string[];
   pricePerSqm?: string;
   liveCameraUrl?: string;
+  tourUrl?: string;
+  panoramaUrl?: string;
+  developerLogo?: string;
   downPaymentPct?: number;
   developerBody?: string;
   districtTitle?: string;
   districtBody?: string;
   districtBody2?: string;
-  apartmentsKey?: "piazza";
+  apartmentsKey?: "piazza" | "parkline";
 };
 
 export const projects: Project[] = [
@@ -114,44 +117,82 @@ export const projects: Project[] = [
     slug: "artex-parkline",
     tag: "New Boulevard · Park Front",
     city: "Batumi",
-    address: "Batumi, Angisa St. 1st, 35b",
-    seaDistance: "12 minutes to the sea",
-    seaMeters: "950 m",
-    location: "Batumi, Angisa St. 1st, 35b",
-    desc: "Contemporary high-rise facing the new park avenue. Architecturally optimized layouts deliver strong rental yields driven by high demand from digital nomads and short-term tourists.",
+    address: "Angisa 1st lane, 35b, Batumi",
+    seaDistance: "10 minutes to the sea",
+    seaMeters: "800 m",
+    location: "New Boulevard, Angisa 1st lane 35b · 10 min to the sea",
+    desc: "A business-class residence on Batumi’s New Boulevard: three towers of 26–28 floors around a landscaped courtyard with a pool, spa, kindergarten and coworking. Thoughtful layouts from studios to 2+1, park-front living, and a 3D apartment selector so you can pick a unit before you fly in.",
     yield: "9–11%",
-    developer: "Artex Development",
-    priceFrom: "From $42,000",
-    priceUSD: 42000,
+    developer: "Artex",
+    priceFrom: "From $52,480",
+    priceUSD: 52480,
     completion: "Q2 2029",
-    area: "32–85 m²",
+    area: "32.8–71.2 m²",
     ceilingHeight: "2.9 m",
     floors: "26–28 floors",
     buildings: "3 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "0% Until 12/2029",
+    finishing: "White frame",
+    installment: "30% down / 0% over 40 months",
+    downPaymentPct: 30,
+    apartmentsKey: "parkline",
+    developerLogo: "/parkline/developer-logo.svg",
+    developerBody:
+      "Artex is a Batumi developer behind Parkline — a mixed-use complex on the New Boulevard with hotel-grade infrastructure, jet-grouted foundations and seismic design above the mandatory standard.",
+    districtTitle: "New Boulevard",
+    districtBody:
+      "The New Boulevard is Batumi’s fastest-growing seaside district: a new park avenue, the expanding waterfront and a short hop to the airport. Parkline sits at Angisa 1st lane 35b, about 800 m from the beach.",
+    districtBody2:
+      "Batumi International Airport is around 8 minutes by car. Schools, a kindergarten and everyday services are nearby, while the city’s largest park and the seafront are a 10-minute walk.",
     features: [
-      "Park-front location",
-      "High rental demand",
-      "Concierge & reception",
-      "Rooftop terrace",
-      "Boulevard views",
-      "Kindergarden",
-      "Playground",
-      "SPA, Gym & Pool",
-      "Parking",
-      "Coworking",
-      "Pets area",
+      "Park-front New Boulevard address",
+      "Kindergarten & children’s playroom",
+      "SPA with indoor and outdoor pools",
+      "Fitness centre & coworking",
+      "Concierge 24/7",
+      "Underground parking for 120 cars",
+      "Pet zone with paw-wash",
+      "Rooftop terraces",
+      "Panoramic glazing",
+      "3D apartment tour",
     ],
-    materials: "Jet Grouting Technology: Advanced soil stabilization creates a rock-solid foundation, ensuring maximum structural integrity and zero deformation risk. Superior Protection: Used high-grade W30 waterproof concrete to prevent corrosion and significantly extend the building's lifespan. Seismic Resilience: Engineered to withstand magnitude 9.0 earthquakes, exceeding mandatory safety standards for ultimate peace of mind.",
-    photos: ["/artex-5.jpg", "/artex-ext-1.jpg", "/artex-ext-2.png", "/artex-ext-3.png", "/artex-ext-4.png", "/artex-1.jpg", "/artex-2.jpg", "/artex-3.jpg", "/artex-4.jpg", "/artex-6.jpg", "/artex-7.jpg", "/artex-8.jpg", "/artex-9.jpg", "/artex-10.jpg"],
-    cardImage: "/artex-1.jpg",
+    materials:
+      "Jet Grouting: Deep soil cementation creates Soilcrete — a rock-like formation that removes deformation risk and keeps the towers static. Moisture & corrosion protection: Grade B30 waterproof concrete shields the reinforcement and extends the building’s life. Seismic resilience: The structure is designed for an 8-magnitude earthquake, above Georgia’s mandatory 7-magnitude standard.",
+    photos: [
+      "/parkline/ext-01.jpg",
+      "/parkline/ext-07.jpg",
+      "/parkline/ext-13.jpg",
+      "/parkline/ext-02.jpg",
+      "/parkline/ext-03.jpg",
+      "/parkline/ext-05.jpg",
+      "/parkline/ext-09.jpg",
+      "/parkline/ext-11.jpg",
+      "/parkline/ext-16.jpg",
+      "/parkline/ext-20.jpg",
+      "/parkline/ext-22.jpg",
+      "/parkline/ext-23.jpg",
+      "/parkline/int-lobby.jpg",
+      "/parkline/int-lobby-2.jpg",
+      "/parkline/int-reception-1.jpg",
+      "/parkline/int-reception-2.jpg",
+      "/parkline/int-studio.jpg",
+      "/parkline/int-1br.jpg",
+      "/parkline/int-2br-live.jpg",
+      "/parkline/int-2br-bed.jpg",
+    ],
+    cardImage: "/parkline/ext-01.jpg",
     lat: 41.6282308808277,
     lng: 41.60779103914824,
-    floorPlans: ["/artex-layout-1.png", "/artex-layout-2.png", "/artex-layout-4.png", "/artex-layout-3.png"],
-    floorPlanLabels: ["Studio", "1+1", "1+1", "2+1"],
-    pricePerSqm: "30/70",
+    floorPlans: [
+      "/parkline/layout-studio.jpg",
+      "/parkline/layout-516.jpg",
+      "/parkline/layout-559.jpg",
+      "/parkline/layout-629.jpg",
+    ],
+    floorPlanLabels: ["Studio 37.6 m²", "1+1 51.6 m²", "1+1 55.9 m²", "2+1 62.9 m²"],
+    pricePerSqm: "from $1,300/m²",
     liveCameraUrl: "https://rtsp.me/embed/NYD67ak2/",
+    tourUrl: "https://flatshow.property/ru/Parkline#/",
+    panoramaUrl: "https://tour.panoee.net/69f77826c2c57195733b52a5/parkline-13-fl",
   },
   {
     name: "Queen's Residence",

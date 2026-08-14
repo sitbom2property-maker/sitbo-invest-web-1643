@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from "hono/cors";
 import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
-import { fetchPiazzaApartments } from "./lib/piazza-apartments";
+import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
 import { fetchPiazzaViewerHtml } from "./lib/piazza-viewer";
 
 type Bindings = {
@@ -24,9 +24,13 @@ app.get('/ping', (c) =>
   }),
 );
 
-app.get('/apartments/piazza', async (c) => {
+app.get('/apartments/:key', async (c) => {
+  const key = c.req.param('key');
+  if (key !== 'piazza' && key !== 'parkline') {
+    return c.json({ error: 'Unknown project' }, 404);
+  }
   try {
-    const data = await fetchPiazzaApartments();
+    const data = await fetchFlatshowApartments(key as ApartmentKey);
     c.header('Cache-Control', 'public, max-age=300');
     return c.json(data);
   } catch (err) {
