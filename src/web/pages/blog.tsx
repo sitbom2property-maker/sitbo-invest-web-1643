@@ -83,7 +83,7 @@ function ArticleCard({
         </span>
         <h2
           style={{
-            fontFamily: "Jun, serif",
+            fontFamily: "Coolvetica, Inter, sans-serif",
             fontSize: "clamp(1.25rem,2.5vw,1.5rem)",
             fontWeight: 400,
             color: C.dark,
@@ -190,7 +190,7 @@ export default function BlogPage() {
             </p>
             <h1
               style={{
-                fontFamily: "Jun, serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: "clamp(2.4rem,5vw,4rem)",
                 fontWeight: 400,
                 color: C.light,

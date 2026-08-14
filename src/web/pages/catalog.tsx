@@ -73,7 +73,7 @@ function CatalogCard({ p }: { p: Project }) {
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{p.tag}</p>
-              <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
+              <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
             </div>
           </div>
 
@@ -81,7 +81,7 @@ function CatalogCard({ p }: { p: Project }) {
           <div style={{ background: C.light, padding: "16px 16px 18px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "12px" }}>
               <div>
-                <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
+                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area} · {p.completion}</p>
               </div>
               <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "5px" }}>
@@ -233,7 +233,7 @@ export default function CatalogPage() {
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
-            <h1 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
+            <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
               {t("catalog.title")}
             </h1>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
@@ -297,7 +297,7 @@ export default function CatalogPage() {
         <Container>
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
-              <p style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</p>
+              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
                 style={{ marginTop: "20px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
@@ -321,7 +321,7 @@ export default function CatalogPage() {
         <Container>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "48px", alignItems: "center" }}>
             <div>
-              <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
+              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
                 {t("catalog.cta.title")}
               </h2>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7 }}>
@@ -342,7 +342,7 @@ export default function CatalogPage() {
         <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.2)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>✕</button>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {[

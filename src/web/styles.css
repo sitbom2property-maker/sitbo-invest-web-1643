@@ -310,12 +310,12 @@ body.has-cookie-banner {
   }
   body {
     @apply bg-background text-foreground;
-    font-family: Manrope, 'DM Sans', sans-serif;
+    font-family: 'Inter', 'DM Sans', Manrope, sans-serif;
     font-weight: 400;
     overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Jun', 'Cormorant Garamond', serif;
+    font-family: 'Coolvetica', 'Chillax', Inter, 'DM Sans', Manrope, sans-serif;
   }
 }
 
@@ -419,7 +419,7 @@ body.has-cookie-banner {
 
 /* Stat number */
 .stat-number {
-  font-family: 'Jun', serif;
+  font-family: 'Coolvetica', Inter, sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   color: #8CB2C0;
@@ -571,7 +571,7 @@ select.form-input-light {
   overflow: hidden;
 }
 .hero-h1 {
-  font-family: 'Jun', serif;
+  font-family: 'Coolvetica', Inter, sans-serif;
   font-size: clamp(2.2rem, 8vw, 5rem);
   font-weight: 400;
   color: #21141A;

@@ -290,7 +290,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 						<Link href="/admin">
 							<a style={{ color: C.accent, fontFamily: "DM Sans, sans-serif", fontSize: "0.8rem", textDecoration: "none" }}>← Назад</a>
 						</Link>
-						<h1 style={{ fontFamily: "Jun, serif", fontSize: "1.75rem", margin: "8px 0 0", fontWeight: 500 }}>
+						<h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.75rem", margin: "8px 0 0", fontWeight: 500 }}>
 							{isNew ? "Новый объект" : `Объект ${id}`}
 						</h1>
 					</div>
@@ -463,7 +463,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
 					{!isNew && (
 						<aside style={{ flex: "0 0 320px", maxWidth: "100%" }}>
-							<h2 style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", margin: "0 0 16px", color: C.accent }}>История</h2>
+							<h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.1rem", margin: "0 0 16px", color: C.accent }}>История</h2>
 							<div style={{ borderLeft: `2px solid ${C.burgundy}`, paddingLeft: "16px" }}>
 								{history.length === 0 ? (
 									<p style={{ fontFamily: "DM Sans, sans-serif", fontSize: "0.85rem", color: "rgba(250,247,240,0.45)" }}>Нет записей</p>

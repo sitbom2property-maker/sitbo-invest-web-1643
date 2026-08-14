@@ -131,7 +131,7 @@ const HERO_STYLES = `
     color: #8CB2C0 !important;
   }
   .hero-video-section .hero-roulette {
-    font-family: 'ZT Neue Ralewe', 'Jun', Georgia, serif;
+    font-family: 'ZT Neue Ralewe', 'Coolvetica', Inter, sans-serif;
     font-style: italic;
     font-weight: 400;
     color: #FFFFFF;
@@ -309,7 +309,7 @@ function Hero() {
           <h1
             className="hero-h1-video"
             style={{
-              fontFamily: "Jun, Georgia, serif",
+              fontFamily: "Coolvetica, Inter, sans-serif",
               fontSize: "clamp(48px, 6.5vw, 92px)",
               fontWeight: 400,
               color: "#FFFFFF",
@@ -400,7 +400,7 @@ function FounderNote() {
               </span>
             </div>
 
-            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Jun, serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
+            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
               &ldquo;{t("home.founder.quote")}&rdquo;
             </blockquote>
 
@@ -414,7 +414,7 @@ function FounderNote() {
               {t("home.founder.body3")}
             </p>
 
-            <p style={{ fontFamily: "Jun, serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
+            <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
               {t("home.founder.signature")}
             </p>
 
@@ -483,7 +483,7 @@ function Founder() {
   const t = useT();
   return (
     <section id="about" className="scroll-mt-24" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Jun, serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
+      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Coolvetica, Inter, sans-serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
 
       {/* Big frame card */}
       <div style={{ background: "#FFFBF0", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "hidden", padding: "80px 0" }}>
@@ -496,7 +496,7 @@ function Founder() {
             <img src="/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
-              <p style={{ color: "#FFFBF0", fontFamily: "Jun, serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
+              <p style={{ color: "#FFFBF0", fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
               <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "DM Sans", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
             </div>
           </div>
@@ -510,7 +510,7 @@ function Founder() {
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>{t("home.founder.aboutEyebrow")}</span>
             </div>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
               {t("home.founder.aboutHeadline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.founder.aboutHeadlineEm")}</em>
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "#666", lineHeight: 1.85, marginBottom: "60px" }}>
@@ -556,7 +556,7 @@ function Analytics() {
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans" }}>{t("home.analytics.eyebrow")}</span>
             </div>
           )}
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
             {isMobile ? (
               <>
                 {t("home.analytics.headline")}
@@ -590,7 +590,7 @@ function Analytics() {
         {/* Triggers + Chart */}
         <div className="analytics-grid" style={{ marginTop: isMobile ? "20px" : "56px" }}>
           <div className="reveal">
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
               {t("home.analytics.whyTitle")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.analytics.whyTitleEm")}</em>
             </h3>
             {triggers.map((triggerKey) => (
@@ -660,7 +660,7 @@ function Portfolio() {
       <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
             {t("home.portfolio.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.portfolio.headlineEm")}</em>
           </h2>
         </div>
@@ -729,7 +729,7 @@ function Portfolio() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ padding: isMobile ? "40px 0 8px" : "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
           <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-            <p style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
+            <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
               {t("home.portfolio.quote")}
             </p>
             <p style={{ color: C.teal, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "DM Sans", margin: 0 }}>
@@ -798,7 +798,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px 24px", minHeight: "140px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
             <p style={{ color: "rgba(255,250,236,0.55)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "DM Sans", marginBottom: "6px" }}>{project.tag}</p>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFBF0", margin: "0 0 8px" }}>{project.name}</h3>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFBF0", margin: "0 0 8px" }}>{project.name}</h3>
             <p style={{ color: "rgba(255,250,236,0.65)", fontSize: "0.75rem", fontFamily: "DM Sans", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
           </div>
         </div>
@@ -845,7 +845,7 @@ function Lifestyle() {
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "DM Sans" }}>{t("home.lifestyle.eyebrow")}</span>
             </div>
           )}
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
             {t("home.lifestyle.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.lifestyle.headlineEm")}</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
@@ -854,7 +854,7 @@ function Lifestyle() {
           <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
           {bloomCalendar.map((item, i) => (
             <div key={item.monthKey} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
-              <span style={{ fontFamily: "Jun, serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{t(item.monthKey)}</span>
+              <span style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{t(item.monthKey)}</span>
               <span style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "rgba(255,250,236,0.6)" }}>{t(item.flowersKey)}</span>
             </div>
           ))}
@@ -948,13 +948,13 @@ function DiscoveryTour() {
               <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "DM Sans", fontWeight: 600 }}>{t("home.discovery.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headline")}{" "}
             </h2>
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headlineEm")}
             </h2>
-            <p style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
+            <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
               {t("home.discovery.subheadline")}
             </p>
           </div>
@@ -1031,7 +1031,7 @@ function DiscoveryTour() {
             transition: "opacity 0.9s ease 0.4s",
           }}>
             <div>
-              <span style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
+              <span style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
                 $2,000
               </span>
               <span style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>{t("home.discovery.deposit")}</span>
@@ -1206,7 +1206,7 @@ function Payment() {
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#aaa", fontFamily: "DM Sans" }}>{t("home.payment.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
             {t("home.payment.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.payment.headlineEm")}</em>
           </h2>
         </div>
@@ -1222,7 +1222,7 @@ function Payment() {
               <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
                 {card.icon}
               </div>
-              <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
+              <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#555", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#8CB2C0", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.25)", paddingTop: "16px" }}>{card.sub}</p>
             </div>
@@ -1312,12 +1312,12 @@ function Calculator() {
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", padding: "12px 0", borderBottom: "1px solid rgba(33,20,26,0.1)" }}>
       <div>
         <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</p>
-        <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
+        <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
       </div>
       {label2 && (
         <div>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label2}</p>
-          <p style={{ fontFamily: "Jun, serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
+          <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
         </div>
       )}
     </div>
@@ -1333,7 +1333,7 @@ function Calculator() {
             <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
             <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", fontFamily: "DM Sans" }}>{t("home.calculator.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
             {t("home.calculator.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.calculator.headlineEm")}</em>
           </h2>
         </div>
@@ -1449,7 +1449,7 @@ function Calculator() {
               {mode === "installment" ? (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyPayment")}</p>
-                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmtInst(instMonthly)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.interestFreeNote", { months: instMonths })}</p>
@@ -1459,7 +1459,7 @@ function Calculator() {
               ) : mortTab === "amount" ? (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyContribution")}</p>
-                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(mortMonthly, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.annuityPayment")}</p>
@@ -1469,7 +1469,7 @@ function Calculator() {
               ) : (
                 <>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.maxLoanAmount")}</p>
-                  <p style={{ fontFamily: "Jun, serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(maxLoan, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.basedOnIncome")}</p>
@@ -1483,7 +1483,7 @@ function Calculator() {
             {/* ROI Preview */}
             <div style={{ background: "#FFFBF0", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
-              <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
+              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
               <p style={{ fontFamily: "DM Sans", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
                 {t("home.calculator.roiPreviewBody")}
               </p>
@@ -1573,7 +1573,7 @@ function Contact() {
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", fontFamily: "DM Sans" }}>{t("home.contact.eyebrow")}</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
-          <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "16px" }}>
             {t("home.contact.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.contact.headlineEm")}</em>
           </h2>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
@@ -1586,7 +1586,7 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
               {t("home.contact.sentBody")}
             </p>
