@@ -291,7 +291,7 @@ export default function CatalogPage() {
         <Container>
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</p>
+              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
                 style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>

@@ -387,7 +387,7 @@ export function Nav() {
                   href={l.href}
                   onNavigate={() => setMenuOpen(false)}
                   style={{
-                    fontFamily: "Coolvetica, Inter, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
                     color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
@@ -406,7 +406,7 @@ export function Nav() {
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
                   style={{
-                    fontFamily: "Coolvetica, Inter, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
                     color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",

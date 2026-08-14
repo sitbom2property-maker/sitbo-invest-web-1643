@@ -282,6 +282,7 @@ const COOKIE_CSS = `
 }
 .ck-title {
   margin: 0;
+  font-family: Inter, sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0;

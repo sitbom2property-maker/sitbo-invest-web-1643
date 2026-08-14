@@ -351,7 +351,7 @@ function Portfolio() {
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,240,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div style={{ padding: "24px" }}>
-                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</p>
+                  <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</h3>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                     {p.tags.map(tag => (
                       <span key={tag} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,251,240,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.12)" : "rgba(255,251,240,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
@@ -519,7 +519,7 @@ function ContactForm() {
           {sent ? (
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>{t("turnkey.contact.successTitle")}</p>
+              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "10px" }}>{t("turnkey.contact.successTitle")}</h2>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.contact.successBody")}</p>
             </div>
           ) : (

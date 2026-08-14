@@ -239,33 +239,35 @@ export function LeadPopup() {
 
         {submitted ? (
           <div style={{ textAlign: "center", padding: "12px 8px 4px" }}>
-            <p
+            <h2
               style={{
                 fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 26,
+                fontWeight: 400,
                 color: "#FAF7F0",
                 margin: "0 0 10px",
               }}
             >
               {t("popup.sentTitle")}
-            </p>
+            </h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "rgba(250,247,240,0.75)", margin: 0 }}>
               {t("popup.sentBody")}
             </p>
           </div>
         ) : (
           <>
-            <p
+            <h2
               style={{
                 fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 24,
+                fontWeight: 400,
                 lineHeight: 1.15,
                 color: "#FAF7F0",
                 margin: "0 36px 10px 0",
               }}
             >
               {t("popup.title")}
-            </p>
+            </h2>
             <p
               style={{
                 fontFamily: "Inter, sans-serif",
