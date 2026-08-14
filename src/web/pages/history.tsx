@@ -134,7 +134,7 @@ export default function HistoryPage() {
         }
 
         .ht-hero h1 {
-          font-family: Jun, Georgia, serif;
+          font-family: Coolvetica, Inter, sans-serif;
           font-size: clamp(2.4rem, 7vw, 4.4rem);
           font-weight: 400;
           line-height: 1.08;
@@ -207,7 +207,7 @@ export default function HistoryPage() {
         }
 
         .ht-sticky strong {
-          font-family: Jun, Georgia, serif;
+          font-family: Coolvetica, Inter, sans-serif;
           font-size: 1.35rem;
           font-weight: 400;
           color: ${C.light};
@@ -310,7 +310,7 @@ export default function HistoryPage() {
         }
 
         .ht-item__title {
-          font-family: Jun, Georgia, serif;
+          font-family: Coolvetica, Inter, sans-serif;
           font-size: clamp(1.35rem, 3.2vw, 1.9rem);
           font-weight: 400;
           line-height: 1.2;

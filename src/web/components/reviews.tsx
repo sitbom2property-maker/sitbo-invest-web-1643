@@ -52,7 +52,7 @@ export function Reviews() {
           </span>
         </div>
 
-        <h3 style={{ margin: "0 0 30px", fontFamily: "Jun, serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
+        <h3 style={{ margin: "0 0 30px", fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
           {t("reviews.headline")}
           <br />
           <em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("reviews.headlineEm")}</em>
