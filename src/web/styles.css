@@ -1,20 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
-
-/* ── Jun (local) ──────────────────────────────────────────────────────────── */
-@font-face {
-  font-family: 'Jun';
-  src: url('/fonts/Jun-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Jun';
-  src: url('/fonts/Jun-Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* ── Coolvetica (local) — display / headings ─────────────────────────────── */
 @font-face {
@@ -201,16 +185,6 @@
   font-display: swap;
 }
 
-/* ── DM Sans digits subset — overrides Jun for all numerals sitewide ─────── */
-/* Applies to any element using Jun or any other font: 0-9 % + , . / $ € -   */
-@font-face {
-  font-family: 'Jun';
-  src: url('/fonts/DMSans-digits.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0030-0039, U+0025, U+002B, U+002C, U+002E, U+002F, U+0024, U+20AC, U+002D;
-}
 @import "tailwindcss";
 @import "tw-animate-css";
 
