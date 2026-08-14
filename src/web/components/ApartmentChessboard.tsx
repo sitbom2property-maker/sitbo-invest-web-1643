@@ -127,7 +127,7 @@ const chip = (active: boolean): CSSProperties => ({
               {t("chess.eyebrow")}
             </span>
           </div>
-          <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
+          <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
             {t("chess.title")}
           </h3>
           <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, margin: "8px 0 0" }}>
@@ -266,7 +266,7 @@ const chip = (active: boolean): CSSProperties => ({
               <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 8px" }}>
                 {t("chess.unit")} {selected.n}
               </p>
-              <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
+              <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
                 {ru ? selected.tr : selected.t}
               </h4>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 16px", marginBottom: 16 }}>
@@ -283,7 +283,7 @@ const chip = (active: boolean): CSSProperties => ({
                 ))}
               </div>
               {selected.p ? (
-                <p style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 700, color: C.teal, margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.teal, margin: "0 0 4px" }}>
                   {formatFromUSD(selected.p)}
                 </p>
               ) : (

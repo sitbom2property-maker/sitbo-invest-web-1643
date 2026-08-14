@@ -161,7 +161,7 @@ export function RequestModal({
             </div>
             <h2
               style={{
-                fontFamily: "Jun, Georgia, serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 24,
                 fontWeight: 400,
                 color: "#FAF7F0",
@@ -200,7 +200,7 @@ export function RequestModal({
             ) : null}
             <h2
               style={{
-                fontFamily: "Jun, Georgia, serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: "clamp(23px, 5vw, 29px)",
                 fontWeight: 400,
                 lineHeight: 1.2,

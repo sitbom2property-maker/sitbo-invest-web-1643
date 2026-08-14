@@ -35,7 +35,7 @@ export function FooterV2() {
           font-family: 'Inter', 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFFFF;
         }
-        .fv2-name em { font-family: 'Jun', Georgia, serif; font-style: italic; }
+        .fv2-name em { font-family: 'Coolvetica', Inter, sans-serif; font-style: italic; }
         .fv2-tagline {
           font-size: clamp(15px, 1.25vw, 18px); line-height: 1.45;
           color: rgba(255,255,255,.82); margin: 0; max-width: 560px;

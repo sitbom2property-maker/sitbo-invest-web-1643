@@ -125,97 +125,6 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
   </>);
 }
 
-// ─── ROI Calculator ───────────────────────────────────────────────────────────
-function ROICalc() {
-  const [budget, setBudget]   = useState(150000);
-  const [yieldPct, setYield]  = useState(11);
-  const [horizon, setHorizon] = useState(5);
-  const [occupancy, setOccupancy] = useState(75);
-  const t = useT();
-
-  const annualRental = budget * (yieldPct / 100) * (occupancy / 100);
-  const totalRental  = annualRental * horizon;
-  // Off-plan appreciation assumption: 25% at handover, 8%/yr after
-  const appreciation = budget * 0.25 + budget * 0.08 * Math.max(0, horizon - 1);
-  const totalReturn  = totalRental + appreciation;
-  const roi          = (totalReturn / budget) * 100;
-
-  const fmt = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
-
-  const fieldLabel: React.CSSProperties = {
-    display: "block", fontFamily: "DM Sans", fontSize: "0.68rem",
-    letterSpacing: "0.1em", textTransform: "uppercase",
-    color: C.muted, marginBottom: "6px",
-  };
-
-  return (<>
-
-    <div style={{ background: C.light, borderRadius: "16px", padding: "32px 28px" }}>
-      <Eyebrow>{t("project.roiCalc.eyebrow")}</Eyebrow>
-      <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 400, color: C.dark, marginBottom: "28px" }}>
-        {t("project.roiCalc.title")}
-      </h3>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "28px" }}>
-{/* Budget */}
-        <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>{t("project.roiCalc.budget")} · <strong style={{ color: C.dark }}>{fmt(budget)}</strong></label>
-          <input type="range" min="50000" max="500000" step="5000" value={budget} onChange={e => setBudget(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Yield */}
-        <div>
-          <label style={fieldLabel}>{t("project.roiCalc.annualYield")} · <strong style={{ color: C.dark }}>{yieldPct}%</strong></label>
-          <input type="range" min="8" max="15" step="0.5" value={yieldPct} onChange={e => setYield(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Occupancy */}
-        <div>
-          <label style={fieldLabel}>{t("project.roiCalc.occupancy")} · <strong style={{ color: C.dark }}>{occupancy}%</strong></label>
-          <input type="range" min="50" max="95" step="5" value={occupancy} onChange={e => setOccupancy(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-{/* Horizon */}
-        <div style={{ gridColumn: "span 2" }}>
-          <label style={fieldLabel}>{t("project.roiCalc.horizon")} · <strong style={{ color: C.dark }}>{horizon} {t("project.roiCalc.yearsSuffix")}</strong></label>
-          <input type="range" min="1" max="10" step="1" value={horizon} onChange={e => setHorizon(+e.target.value)}
-            style={{ width: "100%", accentColor: C.wine, cursor: "pointer" }} />
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-{[
-    { label: t("project.roiCalc.annualRentalIncome"), value: fmt(annualRental), accent: false },
-    { label: t("project.roiCalc.rentalOverYears", { years: horizon }), value: fmt(totalRental), accent: false },
-    { label: t("project.roiCalc.appreciation"), value: fmt(appreciation), accent: false },
-    { label: t("project.roiCalc.totalReturn"), value: fmt(totalReturn), accent: true },
-        ].map(item => (
-          <div key={item.label} style={{
-            background: item.accent ? C.dark : C.light,
-            borderRadius: "10px", padding: "18px 16px",
-            borderTop: `2px solid ${item.accent ? C.teal : C.wine}`,
-          }}>
-            <div style={{ fontFamily: "Jun, serif", fontSize: "1.5rem", fontWeight: 700, color: item.accent ? C.teal : C.dark, lineHeight: 1 }}>{item.value}</div>
-            <div style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: item.accent ? "rgba(255,251,240,0.45)" : C.muted, marginTop: "6px" }}>{item.label}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ marginTop: "16px", textAlign: "center", background: C.dark, borderRadius: "10px", padding: "16px" }}>
-        <span style={{ fontFamily: "Jun, serif", fontSize: "2.4rem", fontWeight: 700, color: C.teal }}>{roi.toFixed(0)}%</span>
-        <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(255,251,240,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", display: "block", marginTop: "2px" }}>
-          {t("project.roiCalc.estimatedTotalRoi", { years: horizon })}
-        </span>
-      </div>
-
-      <p style={{ fontFamily: "DM Sans", fontSize: "0.68rem", color: C.muted, marginTop: "12px", lineHeight: 1.5 }}>
-        {t("project.roiCalc.note", { yield: yieldPct, occupancy })}
-      </p>
-    </div>
-  
-  </>);
-}
-
 // ─── Map ──────────────────────────────────────────────────────────────────────
 function MapEmbed({ project }: { project: Project }) {
   const mapUrl = `https://maps.google.com/maps?q=${project.lat},${project.lng}&z=15&output=embed`;
@@ -310,7 +219,7 @@ export default function ProjectPage() {
 
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Jun, serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
+          <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
           <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>{t("project.backHome")}</a></Link>
         </div>
       </div>
@@ -356,7 +265,7 @@ export default function ProjectPage() {
       `}</style>
 
 {/* ── GALLERY — Full width ── */}
-      <section style={{ paddingTop: isMobile ? "24px" : "120px" }}>
+      <section style={{ paddingTop: 60 }}>
         <Container>
           <Gallery photos={p.photos} name={p.name} />
         </Container>
@@ -373,7 +282,7 @@ export default function ProjectPage() {
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "36px" : "48px" }}>
                 <Eyebrow>{t("project.overview")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
@@ -393,7 +302,7 @@ export default function ProjectPage() {
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
+                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
                       {p.developerBody ?? t("project.developerBody")}
                     </p>
@@ -467,12 +376,12 @@ export default function ProjectPage() {
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
+                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
+                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
                   </div>
@@ -488,10 +397,10 @@ export default function ProjectPage() {
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>{t("project.interested")}</p>
-                  <h3 style={{ fontFamily: "Jun, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
+                  <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
                   </h3>
-                  <p style={{ fontFamily: "Jun, serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
+                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
                   <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
@@ -518,10 +427,6 @@ export default function ProjectPage() {
                       <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 700, color: C.dark }}>{row.value}</span>
                     </div>
                   ))}
-                </div>
-
-                <div className="pr-reveal" style={{ transitionDelay: "120ms" }}>
-                  <ROICalc />
                 </div>
 
 {/* Live Camera Card */}
@@ -558,7 +463,7 @@ export default function ProjectPage() {
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
             <Eyebrow>{t("project.floorPlans")}</Eyebrow>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
               {t("project.availableLayouts")}
             </h3>
           </div>
@@ -594,7 +499,7 @@ export default function ProjectPage() {
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
             <Eyebrow>{t("project.location")}</Eyebrow>
-            <h3 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
 {p.location}
             </h3>
           </div>
@@ -603,7 +508,7 @@ export default function ProjectPage() {
           </div>
           {/* District description */}
           <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "12px", padding: "28px 28px" }}>
-            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
+            <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
               {p.districtBody ?? t("project.district.newBoulevard.body")}
               <br /><br />
@@ -619,7 +524,7 @@ export default function ProjectPage() {
           <Row>
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="pr-reveal">
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
                   {t("project.cta.title")}<br />
                   <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
@@ -652,7 +557,7 @@ export default function ProjectPage() {
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
+                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
                     {proj.yield} {t("catalog.roi")}
@@ -684,7 +589,7 @@ export default function ProjectPage() {
               ✕
             </button>
 
-            <h2 style={{ fontFamily: "Jun, serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
               {t("project.offerModal.title")}
             </h2>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>

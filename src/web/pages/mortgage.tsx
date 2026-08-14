@@ -113,7 +113,7 @@ function ProcessStep({ n, title, desc, delay = 0 }: { n: number; title: string; 
   return (
     <div className="m-reveal" style={{ transitionDelay: `${delay}ms`, display: "flex", gap: "20px", padding: "28px 0", borderBottom: "1px solid rgba(33,20,26,0.07)", flex: 1 }}>
       <div style={{ flexShrink: 0, width: "44px", height: "44px", borderRadius: "50%", border: `1.5px solid ${C.wine}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 700, color: C.wine }}>{String(n).padStart(2, "0")}</span>
+        <span style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1rem", fontWeight: 700, color: C.wine }}>{String(n).padStart(2, "0")}</span>
       </div>
       <div style={{ paddingTop: "8px" }}>
         <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", fontWeight: 700, color: C.dark, marginBottom: "6px" }}>{title}</p>
@@ -179,7 +179,7 @@ function MortgageCalculator() {
           <Col span={6}>
             <div className="m-reveal">
               <Eyebrow>{t("mortgage.calculator.eyebrow")}</Eyebrow>
-              <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                 {t("mortgage.calculator.title")}
               </h2>
             </div>
@@ -283,7 +283,7 @@ function MortgageCalculator() {
                 borderRadius: "12px", padding: "24px 20px", textAlign: "center",
               }}>
                 <div style={{
-                  fontFamily: "Jun, serif",
+                  fontFamily: "Coolvetica, Inter, sans-serif",
                   fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 700, lineHeight: 1,
                   color: item.accent ? C.teal : C.dark, marginBottom: "8px",
                 }}>{item.value}</div>
@@ -326,7 +326,7 @@ export default function MortgagePage() {
               <div className="m-reveal">
                 <Eyebrow>{t("mortgage.hero.eyebrow")}</Eyebrow>
                 <h1 style={{
-                  fontFamily: "Jun, serif",
+                  fontFamily: "Coolvetica, Inter, sans-serif",
                   fontSize: "clamp(2.8rem, 6vw, 5rem)",
                   fontWeight: 400, lineHeight: 1.05,
                   color: C.dark, marginBottom: "28px", letterSpacing: "-0.01em",
@@ -360,7 +360,7 @@ export default function MortgagePage() {
     { val: "$500K", label: t("mortgage.stat.maxAmount") },
                   ].map((s) => (
                     <div key={s.label} style={{ background: C.light, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
-                      <div style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
+                      <div style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
                       <div style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</div>
                     </div>
                   ))}
@@ -381,7 +381,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>{t("mortgage.terms.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   {t("mortgage.terms.title")}
                 </h2>
               </div>
@@ -400,7 +400,7 @@ export default function MortgagePage() {
             <Col span={6}>
               <div className="m-reveal" style={{ background: C.light, borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
                 <h3 style={{ fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "20px" }}>{t("mortgage.terms.downPayment.title")}</h3>
-                <div style={{ fontFamily: "Jun, serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
+                <div style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, marginBottom: "16px" }}>
                   {t("mortgage.terms.downPayment.body")}
                 </p>
@@ -475,7 +475,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>{t("mortgage.risks.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2 }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2 }}>
                   {t("mortgage.risks.title")}
                 </h2>
               </div>
@@ -510,7 +510,7 @@ export default function MortgagePage() {
             <Col span={5}>
               <div className="m-reveal">
                 <Eyebrow>{t("mortgage.process.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   {t("mortgage.process.title")}
                 </h2>
               </div>
@@ -545,7 +545,7 @@ export default function MortgagePage() {
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="m-reveal">
                 <Eyebrow>{t("mortgage.cta.eyebrow")}</Eyebrow>
-                <h2 style={{ fontFamily: "Jun, serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
                   {t("mortgage.cta.title")}
                 </h2>
                 <p style={{ fontFamily: "DM Sans", fontSize: "0.92rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto 40px" }}>

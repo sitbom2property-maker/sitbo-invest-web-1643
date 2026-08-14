@@ -113,7 +113,7 @@ export default function AdminDashboard() {
 					<div>
 						<h1
 							style={{
-								fontFamily: "Jun, serif",
+								fontFamily: "Coolvetica, Inter, sans-serif",
 								fontSize: "2rem",
 								margin: 0,
 								fontWeight: 500,
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
 							</p>
 							<p
 								style={{
-									fontFamily: "Jun, serif",
+									fontFamily: "Coolvetica, Inter, sans-serif",
 									fontSize: "2.2rem",
 									margin: 0,
 									fontWeight: 500,

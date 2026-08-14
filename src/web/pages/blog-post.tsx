@@ -42,7 +42,7 @@ const ARTICLE_STYLES = `
     margin: 0 0 24px;
   }
   .blog-article-body .blog-h2 {
-    font-family: Jun, serif;
+    font-family: Coolvetica, Inter, sans-serif;
     font-size: 26px;
     font-weight: 400;
     color: #2C1F27;
@@ -136,7 +136,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
     >
       <h2
         style={{
-          fontFamily: "Jun, serif",
+          fontFamily: "Coolvetica, Inter, sans-serif",
           fontSize: "clamp(1.75rem,4vw,2.25rem)",
           fontWeight: 400,
           color: C.light,
@@ -323,7 +323,7 @@ export default function BlogPostPage() {
           <div style={{ textAlign: "center", maxWidth: "480px" }}>
             <h1
               style={{
-                fontFamily: "Jun, serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: "2rem",
                 fontWeight: 400,
                 color: C.text,
@@ -396,7 +396,7 @@ export default function BlogPostPage() {
             </div>
             <h1
               style={{
-                fontFamily: "Jun, serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: "clamp(2rem, 5vw, 3.5rem)",
                 fontWeight: 400,
                 color: C.light,
