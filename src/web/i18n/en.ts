@@ -642,7 +642,7 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
-  "chess.officialHint": "The same 360° apartment selector as on the developer’s website.",
+  "chess.officialHint": "360° model, floor plates, and the 2D grid — request a unit and it comes to us.",
   "chess.openFullscreen": "Open on developer site",
 
   // Invest page
