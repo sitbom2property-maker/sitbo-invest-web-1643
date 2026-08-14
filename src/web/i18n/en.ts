@@ -113,6 +113,7 @@ const en = {
     "For international buyers, Georgia combines legal clarity, residency pathways, and yields that are hard to find in Europe today.",
   "v2.quote2.author": "Maria K. — Family Office, Switzerland",
   "v2.quote.cta": "Read more About Georgia",
+  "v2.quote.imageAlt": "Waterfront dining terrace at a marina in Georgia",
 
   "v2.projects.title": "Selected Projects",
   "v2.projects.titleEm": "Filtered By Me",

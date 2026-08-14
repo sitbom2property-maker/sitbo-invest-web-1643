@@ -156,7 +156,7 @@ function Quote() {
             </AppLink>
           </div>
           <div className="rd-recog-visual">
-            <img src="/gonio-marina.png" alt="" />
+            <img src="/rd-global-recognition.jpg" alt={t("v2.quote.imageAlt")} />
           </div>
         </div>
       </div>
@@ -811,23 +811,27 @@ html, body { background: #21141A; }
 .rd-stat-note { font-family: var(--body); font-size: clamp(11px, 1vw, 15px); opacity: .55; }
 
 /* quote / global recognition */
-.rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); }
+.rd-quote { padding: clamp(48px, 7vw, 110px) 0 clamp(56px, 7vw, 110px); }
 .rd-recog {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 56px); align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(36px, 5vw, 72px); align-items: center;
 }
-.rd-recog-copy { display: flex; flex-direction: column; align-items: flex-start; }
-.rd-recog-copy .rd-h2 { margin: 0 0 22px; }
+.rd-recog-copy { display: flex; flex-direction: column; align-items: flex-start; padding-right: clamp(0px, 2vw, 24px); }
+.rd-recog-copy .rd-h2 {
+  margin: 0 0 22px; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15;
+}
 .rd-recog-copy blockquote {
-  font-family: var(--body); font-weight: 300; font-size: clamp(20px, 2.22vw, 32px);
-  line-height: 1.3; margin: 0 0 18px; color: rgba(255,255,255,.95);
+  font-family: var(--body); font-weight: 400; font-size: clamp(18px, 1.7vw, 24px);
+  line-height: 1.45; margin: 0 0 18px; color: #FFFFFF;
 }
-.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0 0 28px; }
+.rd-quote-author {
+  font-family: var(--body); font-size: 15px; font-style: italic;
+  color: rgba(255,255,255,.82); margin: 0 0 32px;
+}
 .rd-recog-visual {
-  border: 1px solid rgba(255,255,255,.85); overflow: hidden;
-  aspect-ratio: 4 / 5; max-height: 640px;
+  background: #FFFFFF; padding: 10px; box-sizing: border-box;
 }
-.rd-recog-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rd-recog-visual img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
 
 /* panels — sit inside .rd-canvas so left content matches footer logo */
 .rd-panel { border-radius: 20px; margin: 0; }
@@ -994,8 +998,9 @@ html, body { background: #21141A; }
   .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
-  .rd-recog { grid-template-columns: 1fr; }
-  .rd-recog-visual { aspect-ratio: 16 / 10; max-height: 420px; }
+  .rd-recog { grid-template-columns: 1fr; gap: 28px; }
+  .rd-recog-copy { padding-right: 0; }
+  .rd-recog-visual img { aspect-ratio: 3 / 4; max-height: none; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }
   .rd-projects { grid-template-columns: 1fr; padding-right: var(--rd-inset); }
   /* Keep vertical ecosystem cards like desktop — horizontal scroll rail */
