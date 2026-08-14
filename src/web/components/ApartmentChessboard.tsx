@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import snapshot from "../data/piazza-apartments.json";
 import {
   SELECTABLE,
@@ -72,8 +72,14 @@ export function ApartmentChessboard({ projectName }: { projectName: string }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [requestOpen, setRequestOpen] = useState(false);
   const [layoutSrc, setLayoutSrc] = useState<string | null>(null);
+  const floorRowRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const floors = useMemo(() => [...board.floors].sort((a, b) => b - a), [board.floors]);
+
+  useEffect(() => {
+    if (floorFilter === "all") return;
+    floorRowRefs.current[floorFilter]?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [floorFilter]);
 
   const counts = useMemo(() => {
     const available = board.units.filter((u) => u.s === "available").length;
@@ -86,7 +92,6 @@ export function ApartmentChessboard({ projectName }: { projectName: string }) {
   const matchesFilters = (u: ApartmentUnit) => {
     if (statusFilter === "free" && !SELECTABLE.includes(u.s)) return false;
     if (roomFilter !== "all" && u.r !== roomFilter) return false;
-    if (floorFilter !== "all" && u.f !== floorFilter) return false;
     return true;
   };
 
@@ -191,8 +196,8 @@ const chip = (active: boolean): CSSProperties => ({
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(260px,320px)", gap: 20 }} className="chess-layout">
-        <div style={{ overflowX: "auto", border: "1px solid rgba(33,20,26,0.08)", borderRadius: 12, background: C.light }}>
+      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(260px,320px)", gap: 20, alignItems: "start" }} className="chess-layout">
+        <div style={{ overflowX: "auto", alignSelf: "start", border: "1px solid rgba(33,20,26,0.08)", borderRadius: 12, background: C.light }}>
           <div style={{ minWidth: 720, padding: 12 }}>
             <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
               <div />
@@ -202,8 +207,24 @@ const chip = (active: boolean): CSSProperties => ({
                 </div>
               ))}
             </div>
-            {floors.filter((f) => floorFilter === "all" || f === floorFilter).map((floor) => (
-              <div key={floor} style={{ display: "grid", gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 3 }}>
+            {floors.map((floor) => {
+              const focused = floorFilter === "all" || floor === floorFilter;
+              return (
+              <div
+                key={floor}
+                ref={(el) => { floorRowRefs.current[floor] = el; }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`,
+                  gap: 3,
+                  marginBottom: 3,
+                  padding: focused && floorFilter !== "all" ? 3 : 0,
+                  borderRadius: 6,
+                  outline: floorFilter !== "all" && floor === floorFilter ? `2px solid ${C.teal}` : "none",
+                  background: floorFilter !== "all" && floor === floorFilter ? "rgba(140,178,192,0.12)" : "transparent",
+                  opacity: focused ? 1 : 0.38,
+                }}
+              >
                 <div style={{
                   fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 700, color: C.dark,
                   display: "flex", alignItems: "center", justifyContent: "center",
@@ -249,7 +270,8 @@ const chip = (active: boolean): CSSProperties => ({
                   );
                 })}
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
