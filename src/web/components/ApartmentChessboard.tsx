@@ -39,13 +39,7 @@ const STATUS_KEYS: Record<ApartmentStatus, MessageKey> = {
   unavailable: "chess.status.unavailable",
 };
 
-export function ApartmentChessboard({
-  projectName,
-  embedded = false,
-}: {
-  projectName: string;
-  embedded?: boolean;
-}) {
+export function ApartmentChessboard({ projectName }: { projectName: string }) {
   const t = useT();
   const { language } = useLocale();
   const ru = language.toLowerCase().startsWith("ru");
@@ -108,8 +102,7 @@ const chip = (active: boolean): CSSProperties => ({
     : projectName;
 
   return (
-    <div id={embedded ? undefined : "apartments"}>
-      {!embedded && (
+    <div id="apartments">
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 22 }}>
         <div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
@@ -121,7 +114,6 @@ const chip = (active: boolean): CSSProperties => ({
           </p>
         </div>
       </div>
-      )}
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14 }}>
         <button type="button" style={chip(statusFilter === "free")} onClick={() => setStatusFilter("free")}>
