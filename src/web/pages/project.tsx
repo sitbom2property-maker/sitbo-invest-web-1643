@@ -450,14 +450,10 @@ export default function ProjectPage() {
 
 
 
-{/* ── APARTMENT CHESSBOARD ── */}
+{/* ── APARTMENT SELECTOR (developer Flat.show) ── */}
       {p.apartmentsKey === "piazza" && (
         <section style={{ padding: "80px 0 0" }}>
-          <Container>
-            <div className="pr-reveal">
-              <PiazzaViewer projectName={p.name} />
-            </div>
-          </Container>
+          <PiazzaViewer projectName={p.name} />
         </section>
       )}
 

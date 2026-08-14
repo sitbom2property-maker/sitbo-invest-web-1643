@@ -642,6 +642,8 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
+  "chess.officialHint": "The same 360° apartment selector as on the developer’s website.",
+  "chess.openFullscreen": "Open on developer site",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",
