@@ -47,7 +47,7 @@ export function Reviews() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
           <div style={{ width: "26px", height: "1px", background: "#683D47" }} />
-          <span style={{ fontFamily: "DM Sans", fontSize: "0.66rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)" }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.66rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)" }}>
             {t("reviews.eyebrow")}
           </span>
         </div>
@@ -84,13 +84,13 @@ export function Reviews() {
                 justifyContent: "space-between",
               }}
             >
-              <p style={{ margin: "0 0 14px", fontFamily: "DM Sans", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(33,20,26,0.78)", fontStyle: "italic" }}>
+              <p style={{ margin: "0 0 14px", fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(33,20,26,0.78)", fontStyle: "italic" }}>
                 "{t(item.quoteKey)}"
               </p>
-              <p style={{ margin: 0, fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 400, color: "#21141A" }}>
+              <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 400, color: "#21141A" }}>
                 {t(item.nameKey)}
               </p>
-              <p style={{ margin: "3px 0 0", fontFamily: "DM Sans", fontSize: "0.72rem", color: "rgba(33,20,26,0.55)" }}>
+              <p style={{ margin: "3px 0 0", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: "rgba(33,20,26,0.55)" }}>
                 {t(item.statusKey)}
               </p>
             </article>
@@ -117,7 +117,7 @@ export function Reviews() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFBF0" }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFBF0" }}>
               {t("reviews.readMore")}
             </span>
           </a>

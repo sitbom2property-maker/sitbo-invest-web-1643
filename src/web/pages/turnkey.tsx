@@ -31,7 +31,7 @@ function Hero() {
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.hero.eyebrow")}</span>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.hero.eyebrow")}</span>
           </div>
 
           <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
@@ -39,15 +39,15 @@ function Hero() {
             <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.hero.titleEm")}</em>
           </h1>
 
-          <p style={{ fontFamily: "DM Sans", fontSize: "clamp(0.9rem,1.3vw,1.05rem)", color: "rgba(255,251,240,0.65)", lineHeight: 1.75, marginBottom: "52px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem,1.3vw,1.05rem)", color: "rgba(255,251,240,0.65)", lineHeight: 1.75, marginBottom: "52px" }}>
             {t("turnkey.hero.body")}
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+            <a href="#contact-form" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
               {t("turnkey.hero.ctaSelf")}
             </a>
-            <a href="#contact-form" style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.25)", borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.borderColor = C.teal)} onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,251,240,0.25)")}>
+            <a href="#contact-form" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.25)", borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.borderColor = C.teal)} onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,251,240,0.25)")}>
               {t("turnkey.hero.ctaInvest")}
             </a>
           </div>
@@ -104,23 +104,23 @@ function TwoColumns() {
           <div key={col.tag} style={{ background: col.bg, borderRadius: "16px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
               <div style={{ width: "24px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: col.dark ? "rgba(255,251,240,0.45)" : C.muted }}>{col.tag}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: col.dark ? "rgba(255,251,240,0.45)" : C.muted }}>{col.tag}</span>
             </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: col.dark ? "rgba(255,251,240,0.55)" : "#666", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: col.dark ? "rgba(255,251,240,0.55)" : "#666", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
               {col.items.map(item => (
                 <div key={item.label} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
                   <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: col.dark ? "rgba(140,178,192,0.1)" : "rgba(140,178,192,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{item.icon}</div>
                   <div>
-                    <p style={{ fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.85rem", color: col.dark ? C.light : C.dark, margin: "0 0 5px" }}>{item.label}</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: col.dark ? "rgba(255,251,240,0.5)" : "#777", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.85rem", color: col.dark ? C.light : C.dark, margin: "0 0 5px" }}>{item.label}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: col.dark ? "rgba(255,251,240,0.5)" : "#777", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div style={{ marginTop: "40px" }}>
-              <a href="#contact-form" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.dark ? C.dark : C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <a href="#contact-form" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.dark ? C.dark : C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {col.dark ? t("turnkey.cta.calculateRoi") : t("turnkey.cta.discussProject")}
               </a>
             </div>
@@ -140,21 +140,21 @@ function DesignRule() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.wine, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(32px,5vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Coolvetica, Inter, sans-serif", fontWeight: 700, color: "rgba(255,251,240,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(255,251,240,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "28px" }}>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>{t("turnkey.design.eyebrow")}</span>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>{t("turnkey.design.eyebrow")}</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
           </div>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
             {t("turnkey.design.title")}<br />
             <em style={{ fontStyle: "italic" }}>{t("turnkey.design.titleEm")}</em>
           </h2>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8, marginBottom: "12px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8, marginBottom: "12px" }}>
             {t("turnkey.design.body1")}
           </p>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.8 }}>
             {t("turnkey.design.body2")}
           </p>
         </div>
@@ -198,7 +198,7 @@ function Calculator() {
   const timeline = t(timelines[goal][finish]);
 
   const Radio = ({ name, value, current, label, onChange }: { name: string; value: string; current: string; label: string; onChange: (v: string) => void }) => (
-    <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", fontFamily: "DM Sans", fontSize: "0.85rem", color: current === value ? C.dark : "#777", fontWeight: current === value ? 600 : 400, transition: "color 0.2s" }}>
+    <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: current === value ? C.dark : "#777", fontWeight: current === value ? 600 : 400, transition: "color 0.2s" }}>
       <span style={{ width: "18px", height: "18px", borderRadius: "50%", border: `2px solid ${current === value ? C.teal : "#ccc"}`, background: current === value ? C.teal : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
         {current === value && <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.dark, display: "block" }} />}
       </span>
@@ -214,46 +214,46 @@ function Calculator() {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
             <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.calculator.eyebrow")}</span>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.calculator.eyebrow")}</span>
           </div>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
             {t("turnkey.calculator.title")}
           </h2>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, marginBottom: "40px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, marginBottom: "40px" }}>
             {t("turnkey.calculator.body")}
           </p>
 
 {/* Area slider */}
           <div style={{ marginBottom: "36px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark }}>{t("turnkey.calculator.area")}</span>
-              <span style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark }}>{area} m²</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark }}>{t("turnkey.calculator.area")}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.dark }}>{area} m²</span>
             </div>
             <input type="range" min={25} max={200} value={area} onChange={e => setArea(+e.target.value)}
               style={{ width: "100%", accentColor: C.teal, height: "4px", cursor: "pointer" }} />
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", color: "#aaa" }}>25 m²</span>
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", color: "#aaa" }}>200 m²</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: "#aaa" }}>25 m²</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: "#aaa" }}>200 m²</span>
             </div>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "32px", marginBottom: "36px" }}>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.condition")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.condition")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <Radio name="cond" value="new" current={condition} label={t("turnkey.calculator.newBuild")} onChange={v => setCondition(v as "new" | "old")} />
                 <Radio name="cond" value="old" current={condition} label={t("turnkey.calculator.oldBuild")} onChange={v => setCondition(v as "new" | "old")} />
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.goal")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.goal")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <Radio name="goal" value="invest" current={goal} label={t("turnkey.calculator.goalInvest")} onChange={v => setGoal(v as RenovationGoal)} />
                 <Radio name="goal" value="self" current={goal} label={t("turnkey.calculator.goalSelf")} onChange={v => setGoal(v as RenovationGoal)} />
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.finish")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.dark, marginBottom: "14px" }}>{t("turnkey.calculator.finish")}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <Radio name="finish" value="comfort" current={finish} label={t("turnkey.calculator.comfort")} onChange={v => setFinish(v as FinishLevel)} />
                 <Radio name="finish" value="premium" current={finish} label={t("turnkey.calculator.premium")} onChange={v => setFinish(v as FinishLevel)} />
@@ -262,24 +262,24 @@ function Calculator() {
             </div>
           </div>
 
-          <button onClick={() => setShown(true)} style={{ width: "100%", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "10px", padding: "16px", cursor: "pointer", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = C.teal)} onMouseLeave={e => (e.currentTarget.style.background = C.dark)}>
+          <button onClick={() => setShown(true)} style={{ width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "10px", padding: "16px", cursor: "pointer", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = C.teal)} onMouseLeave={e => (e.currentTarget.style.background = C.dark)}>
             {t("turnkey.calculator.calculate")}
           </button>
 
           {shown && (
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
-                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
                   ${low.toLocaleString()} – ${high.toLocaleString()}
                 </p>
               </div>
               <div style={{ background: C.wine, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
-                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                   {t("turnkey.calculator.detailedQuote")}
                 </a>
               </div>
@@ -309,7 +309,7 @@ function RemoteProcess() {
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.remote.eyebrow")}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.remote.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
@@ -320,9 +320,9 @@ function RemoteProcess() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
             {steps.map((s, i) => (
               <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#FFFBF0", padding: "40px 32px" }}>
-                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
-                <p style={{ fontFamily: "DM Sans", fontWeight: 700, fontSize: "0.88rem", color: C.dark, margin: "0 0 10px" }}>{s.title}</p>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: "#777", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.88rem", color: C.dark, margin: "0 0 10px" }}>{s.title}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: "#777", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -357,7 +357,7 @@ function Portfolio() {
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
                 <div style={{ width: "28px", height: "1px", background: C.wine }} />
-                <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.portfolio.eyebrow")}</span>
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.portfolio.eyebrow")}</span>
               </div>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
                 {t("turnkey.portfolio.title")} <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.portfolio.titleEm")}</em>
@@ -365,7 +365,7 @@ function Portfolio() {
             </div>
             <div style={{ display: "flex", gap: "8px", background: "rgba(255,251,240,0.06)", borderRadius: "10px", padding: "4px" }}>
 {([["all", t("turnkey.portfolio.all")], ["life", t("turnkey.portfolio.forLife")], ["invest", t("turnkey.portfolio.forInvestment")]] as const).map(([val, label]) => (
-                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "DM Sans", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.dark : "rgba(255,251,240,0.55)" }}>
+                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.dark : "rgba(255,251,240,0.55)" }}>
 {label}
                 </button>
               ))}
@@ -381,7 +381,7 @@ function Portfolio() {
                   <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                     {p.tags.map(tag => (
-                      <span key={tag} style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,251,240,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.12)" : "rgba(255,251,240,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
+                      <span key={tag} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,251,240,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.12)" : "rgba(255,251,240,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -406,24 +406,24 @@ function Guarantees() {
         <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.forSelf.eyebrow")}</span>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.forSelf.eyebrow")}</span>
           </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.self.title")}
           </h3>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#666", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#666", lineHeight: 1.8 }}>
             {t("turnkey.guarantee.self.body")}
           </p>
         </div>
         <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.15)", borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.forInvestors.eyebrow")}</span>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.forInvestors.eyebrow")}</span>
           </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.invest.title")}
           </h3>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.8 }}>
             {t("turnkey.guarantee.invest.body")}
           </p>
         </div>
@@ -443,7 +443,7 @@ function MarketStats() {
       <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
           <div style={{ width: "28px", height: "1px", background: C.wine }} />
-          <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.market.eyebrow")}</span>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.market.eyebrow")}</span>
         </div>
         <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "60px", maxWidth: "700px" }}>
           {t("turnkey.market.title")}
@@ -453,10 +453,10 @@ function MarketStats() {
 {/* Stat 1: Tourism Growth */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat1.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat1.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat1.body")}
             </p>
           </div>
@@ -464,10 +464,10 @@ function MarketStats() {
 {/* Stat 2: Nightly Rates */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat2.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat2.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat2.body")}
             </p>
           </div>
@@ -475,10 +475,10 @@ function MarketStats() {
 {/* Stat 3: Payback Period */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat3.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat3.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat3.body")}
             </p>
           </div>
@@ -486,10 +486,10 @@ function MarketStats() {
 {/* Stat 4: Price Appreciation */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat4.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat4.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat4.body")}
             </p>
           </div>
@@ -497,10 +497,10 @@ function MarketStats() {
 {/* Stat 5: Market Price */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat5.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat5.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat5.body")}
             </p>
           </div>
@@ -508,10 +508,10 @@ function MarketStats() {
 {/* Stat 6: Institutional Confidence */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat6.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat6.label")}</p>
             </div>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.65)", lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat6.body")}
             </p>
           </div>
@@ -533,11 +533,11 @@ function ContactForm() {
 
   const inputStyle: CSSProperties = {
     width: "100%", background: "rgba(255,251,240,0.06)", border: "1px solid rgba(255,251,240,0.12)",
-    borderRadius: "8px", padding: "14px 16px", color: C.light, fontFamily: "DM Sans",
+    borderRadius: "8px", padding: "14px 16px", color: C.light, fontFamily: "Inter, sans-serif",
     fontSize: "0.88rem", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
   };
   const labelStyle: CSSProperties = {
-    display: "block", fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em",
+    display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.14em",
     textTransform: "uppercase", color: "rgba(255,251,240,0.45)", marginBottom: "8px",
   };
 
@@ -549,13 +549,13 @@ function ContactForm() {
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.contact.eyebrow")}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.contact.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
               {t("turnkey.contact.title")}
             </h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.75 }}>
               {t("turnkey.contact.body")}
             </p>
           </div>
@@ -564,7 +564,7 @@ function ContactForm() {
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: C.light, marginBottom: "10px" }}>{t("turnkey.contact.successTitle")}</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.contact.successBody")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.contact.successBody")}</p>
             </div>
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -589,7 +589,7 @@ function ContactForm() {
                 <label style={labelStyle}>{t("turnkey.contact.describe")}</label>
                 <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder={t("turnkey.contact.describePlaceholder")} rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               </div>
-              <button onClick={() => setSent(true)} style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <button onClick={() => setSent(true)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {t("turnkey.contact.submit")}
               </button>
             </div>
@@ -597,15 +597,15 @@ function ContactForm() {
 
 {/* Contact details */}
           <div style={{ marginTop: "48px", paddingTop: "40px", borderTop: "1px solid rgba(140,178,192,0.1)", display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "32px" }}>
-            <a href="https://wa.me/995591800800" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,251,240,0.5)")}>
+            <a href="https://wa.me/995591800800" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,251,240,0.5)")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp
             </a>
-            <a href="mailto:sitboinvest@gmail.com" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,251,240,0.5)")}>
+            <a href="mailto:sitboinvest@gmail.com" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,251,240,0.5)")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               sitboinvest@gmail.com
             </a>
-            <span style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
               {t("turnkey.contact.location")}
             </span>

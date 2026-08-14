@@ -37,7 +37,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
   }, [open]);
 
   const chipBase: CSSProperties = {
-    fontFamily: "Manrope, sans-serif",
+    fontFamily: "Inter, sans-serif",
     fontSize: compact ? 10 : 11,
     fontWeight: 600,
     letterSpacing: "0.12em",
@@ -167,7 +167,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
                     border: "none",
                     background: active ? "rgba(140,178,192,0.15)" : "transparent",
                     color: active ? "#8CB2C0" : "#FAF7F0",
-                    fontFamily: "Manrope, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: 12,
                     fontWeight: 600,
                     letterSpacing: "0.08em",

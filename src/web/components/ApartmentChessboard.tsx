@@ -105,7 +105,7 @@ export function ApartmentChessboard({ projectName }: { projectName: string }) {
   };
 
 const chip = (active: boolean): CSSProperties => ({
-    fontFamily: "DM Sans",
+    fontFamily: "Inter, sans-serif",
     fontSize: "0.72rem",
     fontWeight: 600,
     letterSpacing: "0.06em",
@@ -128,14 +128,14 @@ const chip = (active: boolean): CSSProperties => ({
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
             <div style={{ width: 24, height: 1, background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>
               {t("chess.eyebrow")}
             </span>
           </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
             {t("chess.title")}
           </h3>
-          <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, margin: "8px 0 0" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted, margin: "8px 0 0" }}>
             {t("chess.availableCount", { count: counts.available })}
             {counts.reserved ? ` · ${t("chess.reservedCount", { count: counts.reserved })}` : ""}
           </p>
@@ -164,14 +164,14 @@ const chip = (active: boolean): CSSProperties => ({
       </div>
 
       <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap", marginBottom: 16 }}>
-        <label style={{ fontFamily: "DM Sans", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted }}>
+        <label style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted }}>
           {t("chess.floor")}
         </label>
         <select
           value={floorFilter === "all" ? "all" : String(floorFilter)}
           onChange={(e) => setFloorFilter(e.target.value === "all" ? "all" : Number(e.target.value))}
           style={{
-            fontFamily: "DM Sans", fontSize: "0.82rem", color: C.dark,
+            fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
             background: C.light, border: "1px solid rgba(33,20,26,0.12)",
             borderRadius: 8, padding: "8px 12px",
           }}
@@ -188,7 +188,7 @@ const chip = (active: boolean): CSSProperties => ({
             ["sold", t("chess.status.sold")],
             ["unavailable", t("chess.status.unavailable")],
           ] as const).map(([st, label]) => (
-            <span key={st} style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted }}>
+            <span key={st} style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>
               <span style={{ width: 10, height: 10, borderRadius: 2, background: STATUS_COLOR[st as ApartmentStatus] }} />
               {label}
             </span>
@@ -202,7 +202,7 @@ const chip = (active: boolean): CSSProperties => ({
             <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
               <div />
               {COLS.map((c) => (
-                <div key={c} style={{ textAlign: "center", fontFamily: "DM Sans", fontSize: "0.62rem", color: C.muted }}>
+                <div key={c} style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", color: C.muted }}>
                   {c}
                 </div>
               ))}
@@ -226,7 +226,7 @@ const chip = (active: boolean): CSSProperties => ({
                 }}
               >
                 <div style={{
-                  fontFamily: "DM Sans", fontSize: "0.68rem", fontWeight: 700, color: C.dark,
+                  fontFamily: "Inter, sans-serif", fontSize: "0.68rem", fontWeight: 700, color: C.dark,
                   display: "flex", alignItems: "center", justifyContent: "center",
                 }}>
                   {floor}
@@ -257,7 +257,7 @@ const chip = (active: boolean): CSSProperties => ({
                               padding: 0,
                               opacity: dim ? 0.35 : 1,
                               color: u.s === "available" || u.s === "reserved" ? C.dark : "rgba(33,20,26,0.45)",
-                              fontFamily: "DM Sans",
+                              fontFamily: "Inter, sans-serif",
                               fontSize: "0.55rem",
                               fontWeight: 700,
                             }}
@@ -280,12 +280,12 @@ const chip = (active: boolean): CSSProperties => ({
           color: C.light, minHeight: 280,
         }}>
           {!selected ? (
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, margin: 0 }}>
               {t("chess.pickHint")}
             </p>
           ) : (
             <div>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 8px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 8px" }}>
                 {t("chess.unit")} {selected.n}
               </p>
               <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
@@ -299,27 +299,27 @@ const chip = (active: boolean): CSSProperties => ({
                   [t("chess.status.label"), t(STATUS_KEYS[selected.s])],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.4)", margin: "0 0 4px" }}>{label}</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.4)", margin: "0 0 4px" }}>{label}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
                   </div>
                 ))}
               </div>
               {selected.p ? (
-                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.teal, margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.teal, margin: "0 0 4px" }}>
                   {formatFromUSD(selected.p)}
                 </p>
               ) : (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)", margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)", margin: "0 0 4px" }}>
                   {t("chess.priceOnRequest")}
                 </p>
               )}
               {selected.m ? (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.45)", margin: "0 0 14px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,251,240,0.45)", margin: "0 0 14px" }}>
                   {formatFromUSD(selected.m)} / m²
                 </p>
               ) : <div style={{ height: 14 }} />}
               {(ru ? selected.vr || selected.hr : selected.v || selected.h) ? (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.65)", margin: "0 0 16px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.65)", margin: "0 0 16px" }}>
                   {[ru ? selected.vr : selected.v, ru ? selected.hr : selected.h].filter(Boolean).join(" · ")}
                 </p>
               ) : null}
@@ -335,7 +335,7 @@ const chip = (active: boolean): CSSProperties => ({
                   type="button"
                   onClick={() => setRequestOpen(true)}
                   style={{
-                    width: "100%", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600,
+                    width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                     letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal,
                     border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
                   }}
@@ -343,7 +343,7 @@ const chip = (active: boolean): CSSProperties => ({
                   {t("chess.request")}
                 </button>
               ) : (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "rgba(255,251,240,0.45)", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "rgba(255,251,240,0.45)", margin: 0 }}>
                   {t("chess.notSelectable")}
                 </p>
               )}

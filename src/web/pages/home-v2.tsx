@@ -707,8 +707,8 @@ html, body { background: #21141A; }
   --white: #FFFFFF;
   --panel: #F8F8F8;
   --blue: #E9F7FF;
-  --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
-  --body: 'Inter', 'DM Sans', Manrope, sans-serif;
+  --display: 'Coolvetica', Inter, sans-serif;
+  --body: 'Inter', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
   --rd-max: var(--site-max, 1440px);
   --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
@@ -864,7 +864,7 @@ html, body { background: #21141A; }
   transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
 }
 .rd-rail:not(.is-dragging) .rd-proj:hover .rd-proj-img img { transform: scale(1.05); }
-.rd-proj-name { display: block; margin-top: 14px; font-family: var(--body); font-weight: 700; font-size: 18px; color: var(--bg); }
+.rd-proj-name { display: block; margin-top: 14px; font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--bg); }
 .rd-rail-track { position: relative; height: 4px; background: rgba(33,20,26,.12); overflow: hidden; border-radius: 2px; }
 .rd-rail-track span {
   position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--bg); border-radius: 2px;
@@ -944,7 +944,7 @@ html, body { background: #21141A; }
   padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column;
 }
 .rd-plan.is-featured { background: var(--blue); }
-.rd-plan h3 { font-family: var(--body); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
+.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
 .rd-plan-for {
   font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); margin: 0 0 6px;
   padding-top: 16px; border-top: 1px solid rgba(33,20,26,.15);

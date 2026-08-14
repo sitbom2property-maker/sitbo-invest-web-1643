@@ -119,7 +119,7 @@ export default function HistoryPage() {
         }
 
         .ht-eyebrow span {
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.65rem;
           letter-spacing: 0.18em;
           text-transform: uppercase;
@@ -148,7 +148,7 @@ export default function HistoryPage() {
         }
 
         .ht-hero p {
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: clamp(0.92rem, 2vw, 1.05rem);
           line-height: 1.75;
           color: rgba(250,247,240,0.58);
@@ -164,7 +164,7 @@ export default function HistoryPage() {
         }
 
         .ht-region-chip {
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.72rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -214,7 +214,7 @@ export default function HistoryPage() {
         }
 
         .ht-sticky span {
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -301,7 +301,7 @@ export default function HistoryPage() {
 
         .ht-item__year {
           display: block;
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.18em;
           text-transform: uppercase;
@@ -319,7 +319,7 @@ export default function HistoryPage() {
         }
 
         .ht-item__body {
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.92rem;
           line-height: 1.7;
           color: rgba(250,247,240,0.62);
@@ -330,7 +330,7 @@ export default function HistoryPage() {
           max-width: 520px;
           margin: 72px auto 0;
           text-align: center;
-          font-family: Manrope, sans-serif;
+          font-family: Inter, sans-serif;
           font-size: 0.88rem;
           line-height: 1.7;
           color: rgba(250,247,240,0.45);

@@ -70,7 +70,7 @@ export default function AdminLogin() {
 				</h1>
 				<p
 					style={{
-						fontFamily: "DM Sans, sans-serif",
+						fontFamily: "Inter, sans-serif",
 						fontSize: "0.85rem",
 						color: "rgba(250,247,240,0.55)",
 						margin: "0 0 28px",
@@ -82,7 +82,7 @@ export default function AdminLogin() {
 				<label
 					style={{
 						display: "block",
-						fontFamily: "DM Sans, sans-serif",
+						fontFamily: "Inter, sans-serif",
 						fontSize: "0.7rem",
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
@@ -105,7 +105,7 @@ export default function AdminLogin() {
 						border: `1px solid ${C.burgundy}`,
 						borderRadius: "8px",
 						color: C.light,
-						fontFamily: "DM Sans, sans-serif",
+						fontFamily: "Inter, sans-serif",
 						fontSize: "0.95rem",
 						marginBottom: "20px",
 						outline: "none",
@@ -116,7 +116,7 @@ export default function AdminLogin() {
 					<p
 						style={{
 							color: "#e88",
-							fontFamily: "DM Sans, sans-serif",
+							fontFamily: "Inter, sans-serif",
 							fontSize: "0.85rem",
 							margin: "0 0 16px",
 						}}
@@ -136,7 +136,7 @@ export default function AdminLogin() {
 						color: C.dark,
 						border: "none",
 						borderRadius: "8px",
-						fontFamily: "DM Sans, sans-serif",
+						fontFamily: "Inter, sans-serif",
 						fontSize: "0.9rem",
 						fontWeight: 600,
 						cursor: submitting ? "wait" : "pointer",

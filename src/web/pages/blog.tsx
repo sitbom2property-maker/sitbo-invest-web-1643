@@ -67,7 +67,7 @@ function ArticleCard({
           style={{
             display: "inline-block",
             alignSelf: "flex-start",
-            fontFamily: "DM Sans",
+            fontFamily: "Inter, sans-serif",
             fontSize: "0.62rem",
             fontWeight: 600,
             letterSpacing: "0.12em",
@@ -95,7 +95,7 @@ function ArticleCard({
         </h2>
         <p
           style={{
-            fontFamily: "DM Sans",
+            fontFamily: "Inter, sans-serif",
             fontSize: "0.88rem",
             color: C.muted,
             lineHeight: 1.75,
@@ -120,7 +120,7 @@ function ArticleCard({
               display: "flex",
               flexWrap: "wrap",
               gap: "6px 12px",
-              fontFamily: "DM Sans",
+              fontFamily: "Inter, sans-serif",
               fontSize: "0.75rem",
               color: C.muted,
             }}
@@ -178,7 +178,7 @@ export default function BlogPage() {
           <div className="site-wrap">
             <p
               style={{
-                fontFamily: "DM Sans",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "0.63rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
@@ -203,7 +203,7 @@ export default function BlogPage() {
             </h1>
             <p
               style={{
-                fontFamily: "DM Sans",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "0.88rem",
                 color: "rgba(255,251,240,0.6)",
                 lineHeight: 1.7,

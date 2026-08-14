@@ -20,7 +20,7 @@ const inputStyle: CSSProperties = {
   border: "1px solid rgba(140,178,192,0.25)",
   borderRadius: 8,
   color: "#FAF7F0",
-  fontFamily: "Manrope, sans-serif",
+  fontFamily: "Inter, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
   outline: "none",
@@ -172,7 +172,7 @@ export function RequestModal({
             </h2>
             <p
               style={{
-                fontFamily: "Manrope, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.6,
                 color: "rgba(250,247,240,0.6)",
@@ -187,7 +187,7 @@ export function RequestModal({
             {topic ? (
               <p
                 style={{
-                  fontFamily: "Manrope, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: 10,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -212,7 +212,7 @@ export function RequestModal({
             </h2>
             <p
               style={{
-                fontFamily: "Manrope, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.65,
                 color: "rgba(250,247,240,0.6)",
@@ -251,7 +251,7 @@ export function RequestModal({
               />
 
               {error ? (
-                <p style={{ fontFamily: "Manrope, sans-serif", fontSize: 13, color: "#e57373", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#e57373", margin: 0 }}>
                   {error}
                 </p>
               ) : null}
@@ -267,7 +267,7 @@ export function RequestModal({
                   border: "none",
                   background: "#8CB2C0",
                   color: "#21141A",
-                  fontFamily: "Manrope, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: "0.16em",
@@ -282,7 +282,7 @@ export function RequestModal({
 
               <p
                 style={{
-                  fontFamily: "Manrope, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: 11,
                   lineHeight: 1.6,
                   color: "rgba(250,247,240,0.4)",

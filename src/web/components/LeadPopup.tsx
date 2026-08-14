@@ -47,7 +47,7 @@ const inputStyle: CSSProperties = {
   border: "1px solid rgba(140,178,192,0.25)",
   borderRadius: 8,
   color: "#FAF7F0",
-  fontFamily: "Inter, Manrope, sans-serif",
+  fontFamily: "Inter, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
   outline: "none",
@@ -241,7 +241,7 @@ export function LeadPopup() {
           <div style={{ textAlign: "center", padding: "12px 8px 4px" }}>
             <p
               style={{
-                fontFamily: "Coolvetica, Chillax, sans-serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 26,
                 color: "#FAF7F0",
                 margin: "0 0 10px",
@@ -249,7 +249,7 @@ export function LeadPopup() {
             >
               {t("popup.sentTitle")}
             </p>
-            <p style={{ fontFamily: "Inter, Manrope, sans-serif", fontSize: 15, color: "rgba(250,247,240,0.75)", margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "rgba(250,247,240,0.75)", margin: 0 }}>
               {t("popup.sentBody")}
             </p>
           </div>
@@ -257,7 +257,7 @@ export function LeadPopup() {
           <>
             <p
               style={{
-                fontFamily: "Coolvetica, Chillax, sans-serif",
+                fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 24,
                 lineHeight: 1.15,
                 color: "#FAF7F0",
@@ -268,7 +268,7 @@ export function LeadPopup() {
             </p>
             <p
               style={{
-                fontFamily: "Inter, Manrope, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.4,
                 color: "rgba(250,247,240,0.72)",
@@ -296,7 +296,7 @@ export function LeadPopup() {
                 autoComplete="tel"
               />
               {error ? (
-                <p style={{ margin: 0, color: "#ffb4b4", fontSize: 13, fontFamily: "Inter, Manrope, sans-serif" }}>
+                <p style={{ margin: 0, color: "#ffb4b4", fontSize: 13, fontFamily: "Inter, sans-serif" }}>
                   {error}
                 </p>
               ) : null}
@@ -310,7 +310,7 @@ export function LeadPopup() {
                   borderRadius: 6,
                   background: "#FAF7F0",
                   color: "#21141A",
-                  fontFamily: "Inter, Manrope, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: 15,
                   padding: "14px 18px",
                   cursor: loading ? "wait" : "pointer",
