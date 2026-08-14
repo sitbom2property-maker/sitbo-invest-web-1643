@@ -225,12 +225,12 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-style: normal; color: rgba(255,255,255,.72);
 }
 .sv-hero-lead {
-  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
+  font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5;
   color: rgba(255,255,255,.78); margin: 0; max-width: 420px;
 }
 .sv-hero-side {
-  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
-  color: rgba(255,255,255,.62); margin: 0; max-width: 380px;
+  font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55;
+  color: rgba(255,255,255,.62); margin: 0; max-width: 420px;
   justify-self: end;
 }
 .sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
@@ -254,8 +254,8 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .sv-list-head p {
-  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+  margin: 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 480px; justify-self: end;
 }
 
 .sv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
@@ -305,8 +305,8 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .sv-limits-head p {
-  margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.62);
-  max-width: 360px; justify-self: end;
+  margin: 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5; color: rgba(255,255,255,.62);
+  max-width: 420px; justify-self: end;
 }
 .sv-limits-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -321,7 +321,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(18px, 1.7vw, 22px); line-height: 1.25;
 }
 .sv-limit p {
-  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.7);
+  margin: 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5; color: rgba(255,255,255,.7);
 }
 
 /* cta */

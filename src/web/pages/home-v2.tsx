@@ -394,6 +394,18 @@ const ECO: { titleKey: MessageKey; bodyKey: MessageKey; img: string }[] = [
 function Ecosystem() {
   const t = useT();
   const [active, setActive] = useState(0);
+  const hoverTimer = useRef<number>(0);
+
+  const openCard = (i: number, immediate = false) => {
+    window.clearTimeout(hoverTimer.current);
+    if (immediate || i === active) {
+      setActive(i);
+      return;
+    }
+    hoverTimer.current = window.setTimeout(() => setActive(i), 90);
+  };
+
+  useEffect(() => () => window.clearTimeout(hoverTimer.current), []);
 
   return (
     <section className="rd-eco">
@@ -413,9 +425,9 @@ function Ecosystem() {
               key={item.titleKey}
               type="button"
               className={`rd-eco-card${i === active ? " is-open" : ""}`}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              onClick={() => setActive(i)}
+              onMouseEnter={() => openCard(i)}
+              onFocus={() => openCard(i, true)}
+              onClick={() => openCard(i, true)}
               aria-expanded={i === active}
             >
               <img
@@ -711,7 +723,7 @@ html, body { background: #21141A; }
   /* One canvas: same max width + gutters as header / footer / every page */
   --rd-max: var(--site-max, 1440px);
   --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
-  --rd-inset: clamp(24px, 3vw, 40px);
+  --rd-copy: clamp(16px, 1.15vw, 18px);
   background: var(--bg);
   color: var(--white);
   overflow-x: hidden;
@@ -747,10 +759,10 @@ html, body { background: #21141A; }
 .rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
 .rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
 .rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--bg); }
-.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: rgba(255,255,255,.9); margin: 0; }
-.rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
+.rd-lead { font-family: var(--body); font-size: var(--rd-copy); line-height: 1.5; color: rgba(255,255,255,.9); margin: 0; }
+.rd-small { font-family: var(--body); font-size: var(--rd-copy); line-height: 1.5; color: rgba(33,20,26,.75); margin: 0; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
-.rd-split .rd-lead { max-width: 420px; }
+.rd-split .rd-lead { max-width: 520px; }
 
 /* hero — app shell already offsets fixed nav; center photo between nav and fold */
 .rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
@@ -783,8 +795,8 @@ html, body { background: #21141A; }
   font-size: clamp(32px, 3.9vw, 56px); line-height: 1.07; letter-spacing: -.01em;
 }
 .rd-hero-copy p {
-  font-family: var(--body); font-size: clamp(14px, 1.04vw, 15px); line-height: 1.45;
-  color: rgba(255,255,255,.85); margin: 0 0 30px; max-width: 500px;
+  font-family: var(--body); font-size: var(--rd-copy); line-height: 1.5;
+  color: rgba(255,255,255,.85); margin: 0 0 30px; max-width: 520px;
 }
 .rd-hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
 .rd-hero-btns .rd-btn { min-width: 166px; }
@@ -882,12 +894,14 @@ html, body { background: #21141A; }
   background: var(--card); border: none; border-radius: 20px; cursor: pointer;
   min-height: clamp(320px, 44vw, 634px); padding: clamp(18px, 1.8vw, 28px);
   display: flex; flex-direction: column; justify-content: flex-start;
-  text-align: left; color: var(--white); transition: flex-grow .45s ease;
+  text-align: left; color: var(--white);
+  transition: flex 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.rd-eco-card.is-open { flex-grow: 2.2; }
+.rd-eco-card.is-open { flex: 2.35 1 0; }
 .rd-eco-photo {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: .18; pointer-events: none; transition: opacity .35s ease;
+  opacity: .18; pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
   filter: saturate(.85) brightness(.75);
 }
 .rd-eco-card.is-open .rd-eco-photo { opacity: .42; filter: saturate(.95) brightness(.85); }
@@ -902,10 +916,16 @@ html, body { background: #21141A; }
 }
 .rd-eco-body {
   position: relative; z-index: 1; margin-top: auto; font-family: var(--body);
-  font-size: clamp(14px, 1.25vw, 18px); line-height: 1.45; color: rgba(255,255,255,.86);
-  opacity: 0; max-height: 0; overflow: hidden; transition: opacity .35s ease;
+  font-size: var(--rd-copy); line-height: 1.5; color: rgba(255,255,255,.86);
+  opacity: 0; max-height: 0; overflow: hidden; transform: translateY(10px);
+  transition:
+    opacity 0.55s ease 0.18s,
+    max-height 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
 }
-.rd-eco-card.is-open .rd-eco-body { opacity: 1; max-height: 420px; }
+.rd-eco-card.is-open .rd-eco-body {
+  opacity: 1; max-height: 220px; transform: none;
+}
 
 /* feedback — square cards, drag-scroll like projects */
 .rd-panel-light { padding: clamp(34px, 4.4vw, 68px) var(--rd-inset); }
@@ -949,7 +969,7 @@ html, body { background: #21141A; }
 .rd-plan.is-featured { background: var(--blue); }
 .rd-plan h3 { font-family: var(--body); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); margin: 0 0 6px;
+  font-family: var(--body); font-size: var(--rd-copy); margin: 0 0 6px;
   padding-top: 16px; border-top: 1px solid rgba(33,20,26,.15);
 }
 .rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(48px, 6.6vw, 96px); line-height: 1.1; margin-bottom: 18px; font-variant-numeric: tabular-nums; }
@@ -971,7 +991,7 @@ html, body { background: #21141A; }
 }
 .rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(780px + var(--rd-inset)); }
 .rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; }
-.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: rgba(255,255,255,.85); margin: 0 0 34px; max-width: 640px; }
+.rd-news-inner > p { font-family: var(--body); font-size: var(--rd-copy); line-height: 1.5; color: rgba(255,255,255,.85); margin: 0 0 34px; max-width: 640px; }
 .rd-news-row { display: flex; align-items: flex-end; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.55); padding-bottom: 8px; }
 .rd-news-row input {
   flex: 1; min-width: 0; background: transparent; border: none; outline: none;
@@ -1009,12 +1029,13 @@ html, body { background: #21141A; }
     padding-bottom: 8px; scrollbar-width: none;
   }
   .rd-eco-row::-webkit-scrollbar { display: none; }
-  .rd-eco-card {
+  .rd-eco-card,
+  .rd-eco-card.is-open {
     flex: 0 0 min(72vw, 280px); min-height: clamp(360px, 70vw, 520px);
     scroll-snap-align: start;
   }
   .rd-eco-card .rd-eco-photo { opacity: .4; }
-  .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
+  .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; transform: none; }
   .rd-plans { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {

@@ -265,7 +265,7 @@ const CSS = `
   font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
 }
 .iv-hero-lead {
-  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
+  font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5;
   color: rgba(255,255,255,.78); margin: 0 0 28px; max-width: 460px;
 }
 .iv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -286,8 +286,8 @@ const CSS = `
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .iv-split p {
-  margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
-  color: rgba(255,255,255,.78); max-width: 420px;
+  margin: 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5;
+  color: rgba(255,255,255,.78); max-width: 520px;
 }
 .iv-stats {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
@@ -365,8 +365,8 @@ const CSS = `
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .iv-panel-head p {
-  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+  margin: 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 480px; justify-self: end;
 }
 
 /* strategy accordion */
