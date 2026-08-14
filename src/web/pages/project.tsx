@@ -50,7 +50,7 @@ function useReveal() {
 
 // ─── Grid ─────────────────────────────────────────────────────────────────────
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
-  return <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(16px,4vw,48px)", width: "100%", boxSizing: "border-box", ...style }}>{children}</div>;
+  return <div className="site-wrap" style={{ width: "100%", ...style }}>{children}</div>;
 }
 function Row({ children, gap = 24, style }: { children: React.ReactNode; gap?: number; style?: React.CSSProperties }) {
   return <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: `${gap}px`, width: "100%", minWidth: 0, ...style }}>{children}</div>;

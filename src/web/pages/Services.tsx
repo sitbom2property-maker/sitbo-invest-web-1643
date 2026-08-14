@@ -177,8 +177,8 @@ const CSS = `
   --panel: #F8F8F8;
   --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
   --body: 'Inter', 'DM Sans', Manrope, sans-serif;
-  --gutter: clamp(24px, 5.5vw, 80px);
-  --max: 1440px;
+  --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
+  --max: var(--site-max, 1440px);
   background: var(--bg);
   color: var(--white);
   font-family: var(--body);
@@ -236,7 +236,11 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 .sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
 
 /* services list */
-.sv-list-outer { padding: 0 10px clamp(48px, 6vw, 90px); }
+.sv-list-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(48px, 6vw, 90px);
+  box-sizing: border-box;
+}
 .sv-list {
   background: var(--panel); color: var(--bg); border-radius: 20px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
@@ -321,7 +325,11 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 }
 
 /* cta */
-.sv-cta-outer { padding: 0 10px clamp(56px, 7vw, 100px); }
+.sv-cta-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(56px, 7vw, 100px);
+  box-sizing: border-box;
+}
 .sv-cta {
   border-radius: 20px; overflow: hidden;
   background:

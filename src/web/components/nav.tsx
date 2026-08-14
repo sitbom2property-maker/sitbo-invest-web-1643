@@ -11,7 +11,6 @@ export const NAV_HEIGHT_MOBILE = 72;
 const MOBILE_BP = 1024;
 
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
-  { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.about", href: "/services" },
   { labelKey: "nav.properties", href: "/catalog" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
@@ -135,7 +134,7 @@ export function Nav() {
   const [contactOpen, setContactOpen] = useState(false);
 
   const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
-  const logoHeight = isMobile ? 22 : 28;
+  const logoHeight = isMobile ? 16 : 20;
 
   const openContact = () => {
     setMenuOpen(false);
@@ -203,10 +202,11 @@ export function Nav() {
       >
         <div
           style={{
-            maxWidth: isMobile ? undefined : 1680,
+            maxWidth: "var(--site-max)",
+            width: "100%",
             height: "100%",
             margin: "0 auto",
-            padding: isMobile ? "0 20px" : "0 56px",
+            padding: "0 var(--site-gutter)",
             display: "grid",
             // Mobile: language | centered logo | menu
             gridTemplateColumns: isMobile ? "1fr auto 1fr" : "auto 1fr auto",

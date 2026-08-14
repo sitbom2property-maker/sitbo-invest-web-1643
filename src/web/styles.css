@@ -257,6 +257,9 @@ html {
 }
 
 :root {
+  /* Shared page canvas — header, footer and every public page use these */
+  --site-max: 1440px;
+  --site-gutter: clamp(30px, 5.5vw, 80px);
   --radius: 0.25rem;
   --background: #FFFBF0;
   --foreground: #21141A;
@@ -276,6 +279,26 @@ html {
   --border: rgba(140,178,192,0.18);
   --input: rgba(140,178,192,0.1);
   --ring: #8CB2C0;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --site-gutter: clamp(20px, 5vw, 30px);
+  }
+}
+
+.site-wrap {
+  max-width: var(--site-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+body.has-cookie-banner {
+  padding-bottom: var(--cookie-banner-height, 0px);
 }
 
 @layer base {

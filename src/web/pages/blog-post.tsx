@@ -21,14 +21,16 @@ const ARTICLE_STYLES = `
     min-height: 100vh;
   }
   .blog-hero-inner {
-    max-width: 1100px;
+    max-width: var(--site-max);
     margin: 0 auto;
-    padding: 0 clamp(24px, 5vw, 0px);
+    padding: 0 var(--site-gutter);
+    box-sizing: border-box;
   }
   .blog-article-body {
-    max-width: 760px;
+    max-width: var(--site-max);
     margin: 0 auto;
-    padding: 0 clamp(24px, 5vw, 0px);
+    padding: 0 var(--site-gutter);
+    box-sizing: border-box;
     color: #2C1F27;
     font-family: Manrope, sans-serif;
   }

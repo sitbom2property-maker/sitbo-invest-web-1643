@@ -175,7 +175,7 @@ export default function BlogPage() {
     <>
       <div style={{ background: C.light, minHeight: "100vh" }}>
         <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+          <div className="site-wrap">
             <p
               style={{
                 fontFamily: "DM Sans",
@@ -222,7 +222,7 @@ export default function BlogPage() {
             padding: "clamp(48px,6vw,80px) 0 clamp(64px,8vw,96px)",
           }}
         >
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+          <div className="site-wrap">
             <div
               style={{
                 display: "grid",

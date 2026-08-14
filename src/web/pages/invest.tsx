@@ -215,8 +215,8 @@ const CSS = `
   --panel: #F8F8F8;
   --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
   --body: 'Inter', 'DM Sans', Manrope, sans-serif;
-  --gutter: clamp(24px, 5.5vw, 80px);
-  --max: 1440px;
+  --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
+  --max: var(--site-max, 1440px);
   background: var(--bg);
   color: var(--white);
   font-family: var(--body);
@@ -314,7 +314,9 @@ const CSS = `
   padding-top: clamp(28px, 3vw, 40px);
   border-top: 1px solid rgba(255,255,255,.12);
   max-width: 720px;
+  scroll-margin-top: calc(var(--nav-height, 88px) + 24px);
 }
+.iv-quote .iv-panel-eyebrow { display: block; margin-bottom: 14px; }
 .iv-quote blockquote {
   font-family: var(--display); font-weight: 600; margin: 0 0 12px;
   font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
@@ -341,7 +343,11 @@ const CSS = `
 }
 
 /* panel sections */
-.iv-panel-outer { padding: 0 10px clamp(40px, 5vw, 72px); }
+.iv-panel-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(40px, 5vw, 72px);
+  box-sizing: border-box;
+}
 .iv-panel {
   background: var(--panel); color: var(--bg); border-radius: 20px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
@@ -498,7 +504,11 @@ const CSS = `
 }
 
 /* cta */
-.iv-cta-outer { padding: 0 10px clamp(56px, 7vw, 100px); }
+.iv-cta-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(56px, 7vw, 100px);
+  box-sizing: border-box;
+}
 .iv-cta {
   border-radius: 20px; overflow: hidden;
   background:
@@ -592,7 +602,10 @@ export default function InvestPage() {
               </div>
             ))}
           </div>
-          <div className="iv-quote rv">
+          <div className="iv-quote rv" id="notes">
+            <span className="iv-panel-eyebrow" style={{ color: "rgba(255,255,255,.45)" }}>
+              {t("v2.quote.eyebrow")}
+            </span>
             <blockquote>{t("invest.why.quote")}</blockquote>
             <cite>{t("invest.why.quoteAttr")}</cite>
           </div>

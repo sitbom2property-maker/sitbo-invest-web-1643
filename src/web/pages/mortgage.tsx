@@ -57,7 +57,7 @@ function useReveal() {
 function Container({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (<>
 
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", ...style }}>{children}
+    <div className="site-wrap" style={style}>{children}
     </div>
   
   </>);

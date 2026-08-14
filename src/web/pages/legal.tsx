@@ -88,7 +88,7 @@ export default function LegalPage() {
 
         {/* Content */}
         <section style={{ background: C.light, padding: "72px 0 96px" }}>
-          <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(24px,4vw,48px)" }}>
+          <div className="site-wrap">
             
             {/* Page title */}
             <div style={{ marginBottom: "64px" }}>

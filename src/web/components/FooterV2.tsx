@@ -15,9 +15,8 @@ export function FooterV2() {
     <footer className="fv2">
       <style>{`
         .fv2 {
-          /* Keep in sync with .rd --rd-max / --rd-gutter on home-v2 */
-          --rd-max: 1440px;
-          --rd-gutter: clamp(30px, 5.5vw, 80px);
+          --rd-max: var(--site-max, 1440px);
+          --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
           background: #21141A;
           color: #FFFFFF;
           font-family: 'Inter', 'DM Sans', Manrope, sans-serif;
@@ -31,7 +30,7 @@ export function FooterV2() {
           display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
           gap: clamp(32px, 5vw, 96px); align-items: start;
         }
-        .fv2-logo { height: 36px; width: auto; display: block; margin-bottom: 22px; }
+        .fv2-logo { height: 22px; width: auto; display: block; margin-bottom: 22px; }
         .fv2-name {
           font-family: 'Inter', 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFFFF;
@@ -61,8 +60,7 @@ export function FooterV2() {
           .fv2-brand { grid-column: 1 / -1; }
         }
         @media (max-width: 640px) {
-          .fv2 { --rd-gutter: clamp(20px, 5vw, 30px); }
-          .fv2-logo { height: 26px; margin-bottom: 16px; }
+          .fv2-logo { height: 18px; margin-bottom: 16px; }
           .fv2-name { font-size: 15px; margin-bottom: 14px; }
           .fv2-tagline { font-size: 14px; max-width: none; }
         }
