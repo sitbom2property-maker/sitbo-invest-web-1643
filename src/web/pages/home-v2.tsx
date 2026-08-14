@@ -327,7 +327,7 @@ function useDragRail(cardSelector: string, gap = 12) {
 const PROJECTS = [
   { name: "Piazza Residence", img: "/piazza/exterior-tower.jpg", href: "/project/piazza-residence" },
   { name: "Hisni by Biograpi", img: "/hisni-by-biograpi.jpg", href: "/catalog" },
-  { name: "Artex Parkline", img: "/rd-project.jpg", href: "/project/artex-parkline" },
+  { name: "Artex Parkline", img: "/parkline/ext-01.jpg", href: "/project/artex-parkline" },
   { name: "CityZen", img: "/rd-tower.jpg", href: "/catalog" },
   { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
 ];

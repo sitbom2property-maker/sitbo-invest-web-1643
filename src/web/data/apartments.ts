@@ -7,6 +7,7 @@ export type ApartmentUnit = {
   f: number;
   c: number;
   k: string;
+  b?: string;
   r: RoomKey;
   a: number;
   p: number | null;
@@ -27,6 +28,7 @@ export type ApartmentBoard = {
   currency: string;
   floors: number[];
   columns: string[];
+  buildings?: string[];
   units: ApartmentUnit[];
 };
 

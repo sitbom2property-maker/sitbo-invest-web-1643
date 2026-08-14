@@ -6,7 +6,7 @@ import {
   type ApartmentUnit,
   type RoomKey,
 } from "../data/apartments";
-import { usePiazzaBoard } from "../hooks/usePiazzaBoard";
+import { useApartmentBoard, type ApartmentProjectKey } from "../hooks/useApartmentBoard";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT, type MessageKey } from "../i18n";
@@ -15,15 +15,13 @@ import { RequestModal } from "./RequestModal";
 const C = {
   dark: "#21141A",
   teal: "#8CB2C0",
-  wine: "#683D47",
   light: "#FFFBF0",
   muted: "#7a7a7a",
 };
 
-const COLS = Array.from({ length: 17 }, (_, i) => i + 1);
-
 type StatusFilter = "free" | "all";
 type RoomFilter = "all" | RoomKey;
+type BuildingFilter = "all" | string;
 
 const ROOM_KEYS: Record<RoomKey, MessageKey> = {
   studio: "chess.room.studio",
@@ -42,24 +40,49 @@ const STATUS_KEYS: Record<ApartmentStatus, MessageKey> = {
 export function ApartmentChessboard({
   projectName,
   embedded = false,
+  projectKey = "piazza",
+  source,
 }: {
   projectName: string;
   embedded?: boolean;
+  projectKey?: ApartmentProjectKey;
+  source?: string;
 }) {
   const t = useT();
   const { language } = useLocale();
   const ru = language.toLowerCase().startsWith("ru");
   const { formatFromUSD } = useRates();
-  const board = usePiazzaBoard();
+  const board = useApartmentBoard(projectKey);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("free");
   const [roomFilter, setRoomFilter] = useState<RoomFilter>("all");
   const [floorFilter, setFloorFilter] = useState<number | "all">("all");
+  const [buildingFilter, setBuildingFilter] = useState<BuildingFilter>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [requestOpen, setRequestOpen] = useState(false);
   const [layoutSrc, setLayoutSrc] = useState<string | null>(null);
   const floorRowRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const leadSource = source ?? (projectKey === "parkline" ? "Parkline chessboard" : "Piazza chessboard");
+  const buildings = board.buildings ?? [];
+  const buildingKey = buildings.join("|");
 
-  const floors = useMemo(() => [...board.floors].sort((a, b) => b - a), [board.floors]);
+  useEffect(() => {
+    if (!buildingKey) return;
+    const list = buildingKey.split("|");
+    setBuildingFilter((cur) => (cur === "all" ? list[0] : cur));
+  }, [buildingKey]);
+
+  const scopedUnits = useMemo(
+    () => board.units.filter((u) => buildingFilter === "all" || u.b === buildingFilter),
+    [board.units, buildingFilter],
+  );
+  const floors = useMemo(
+    () => [...new Set(scopedUnits.map((u) => u.f))].sort((a, b) => b - a),
+    [scopedUnits],
+  );
+  const cols = useMemo(() => {
+    const max = Math.max(0, ...scopedUnits.map((u) => u.c));
+    return Array.from({ length: max }, (_, i) => i + 1);
+  }, [scopedUnits]);
 
   useEffect(() => {
     if (floorFilter === "all") return;
@@ -67,10 +90,10 @@ export function ApartmentChessboard({
   }, [floorFilter]);
 
   const counts = useMemo(() => {
-    const available = board.units.filter((u) => u.s === "available").length;
-    const reserved = board.units.filter((u) => u.s === "reserved").length;
-    return { available, reserved, total: board.units.length };
-  }, [board.units]);
+    const available = scopedUnits.filter((u) => u.s === "available").length;
+    const reserved = scopedUnits.filter((u) => u.s === "reserved").length;
+    return { available, reserved, total: scopedUnits.length };
+  }, [scopedUnits]);
 
   const selected = board.units.find((u) => u.id === selectedId) ?? null;
 
@@ -81,7 +104,7 @@ export function ApartmentChessboard({
   };
 
   const unitsAt = (floor: number, col: number) =>
-    board.units.filter((u) => u.f === floor && u.c === col);
+    scopedUnits.filter((u) => u.f === floor && u.c === col);
 
   const cellBg = (u: ApartmentUnit, dim: boolean) => {
     const base = STATUS_COLOR[u.s];
@@ -142,6 +165,19 @@ const chip = (active: boolean): CSSProperties => ({
             {label}
           </button>
         ))}
+        {buildings.length > 0 && (
+          <>
+            <span style={{ width: 1, background: "rgba(33,20,26,0.1)", margin: "0 4px" }} />
+            <button type="button" style={chip(buildingFilter === "all")} onClick={() => setBuildingFilter("all")}>
+              {t("chess.filter.allBlocks")}
+            </button>
+            {buildings.map((b) => (
+              <button key={b} type="button" style={chip(buildingFilter === b)} onClick={() => setBuildingFilter(b)}>
+                {t("chess.blockN", { n: b })}
+              </button>
+            ))}
+          </>
+        )}
       </div>
 
       <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap", marginBottom: 16 }}>
@@ -180,9 +216,9 @@ const chip = (active: boolean): CSSProperties => ({
       <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(260px,320px)", gap: 20, alignItems: "start" }} className="chess-layout">
         <div style={{ overflowX: "auto", alignSelf: "start", border: "1px solid rgba(33,20,26,0.08)", borderRadius: 12, background: C.light }}>
           <div style={{ minWidth: 720, padding: 12 }}>
-            <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
+            <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${cols.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
               <div />
-              {COLS.map((c) => (
+              {cols.map((c) => (
                 <div key={c} style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", color: C.muted }}>
                   {c}
                 </div>
@@ -196,7 +232,7 @@ const chip = (active: boolean): CSSProperties => ({
                 ref={(el) => { floorRowRefs.current[floor] = el; }}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: `36px repeat(${COLS.length}, minmax(34px,1fr))`,
+                  gridTemplateColumns: `36px repeat(${cols.length}, minmax(34px,1fr))`,
                   gap: 3,
                   marginBottom: 3,
                   padding: focused && floorFilter !== "all" ? 3 : 0,
@@ -212,7 +248,7 @@ const chip = (active: boolean): CSSProperties => ({
                 }}>
                   {floor}
                 </div>
-                {COLS.map((col) => {
+                {cols.map((col) => {
                   const cellUnits = unitsAt(floor, col);
                   if (!cellUnits.length) {
                     return <div key={col} style={{ minHeight: 34, borderRadius: 4, background: "rgba(33,20,26,0.03)" }} />;
@@ -243,7 +279,7 @@ const chip = (active: boolean): CSSProperties => ({
                               fontWeight: 700,
                             }}
                           >
-                            {u.k}
+                            {buildingFilter === "all" && u.b ? `${u.b}${u.k}` : u.k}
                           </button>
                         );
                       })}
@@ -344,7 +380,7 @@ const chip = (active: boolean): CSSProperties => ({
         onClose={() => setRequestOpen(false)}
         title={t("chess.request")}
         subtitle={topic}
-        source="Piazza chessboard"
+        source={leadSource}
         topic={topic}
       />
 
