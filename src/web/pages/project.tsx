@@ -285,7 +285,6 @@ export default function ProjectPage() {
 
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "36px" : "48px" }}>
-                <Eyebrow>{t("project.overview")}</Eyebrow>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
@@ -466,7 +465,9 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
-            <Eyebrow>{t("project.floorPlans")}</Eyebrow>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
+              {t("project.availableLayouts")}
+            </h3>
           </div>
           <div className="pr-reveal" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
             {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
@@ -499,7 +500,6 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 0 0" }}>
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "24px" }}>
-            <Eyebrow>{t("project.location")}</Eyebrow>
             <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
 {p.location}
             </h3>

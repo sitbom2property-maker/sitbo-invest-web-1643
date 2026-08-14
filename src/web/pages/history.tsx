@@ -111,28 +111,6 @@ export default function HistoryPage() {
           box-sizing: border-box;
         }
 
-        .ht-eyebrow {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 18px;
-        }
-
-        .ht-eyebrow span {
-          font-family: Inter, sans-serif;
-          font-size: 0.65rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(250,247,240,0.5);
-        }
-
-        .ht-eyebrow i {
-          display: block;
-          width: 28px;
-          height: 1px;
-          background: ${C.teal};
-        }
-
         .ht-hero h1 {
           font-family: Coolvetica, Inter, sans-serif;
           font-size: clamp(2.4rem, 7vw, 4.4rem);
@@ -346,10 +324,6 @@ export default function HistoryPage() {
       `}</style>
 
       <header className="ht-hero">
-        <div className="ht-eyebrow">
-          <i />
-          <span>{t("history.eyebrow")}</span>
-        </div>
         <h1>
           {t("history.title")}<br />
           <em>{t("history.titleEm")}</em>

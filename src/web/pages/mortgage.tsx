@@ -80,18 +80,6 @@ function Col({ span = 12, spanMd, children, style }: {
   return <div style={{ gridColumn: `span ${cols}`, ...style }}>{children}</div>;
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (<>
-
-    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-      <div style={{ width: "28px", height: "1px", background: C.wine, flexShrink: 0 }} />
-      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{children}
-      </span>
-    </div>
-  
-  </>);
-}
-
 function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)" }} />;
 }
@@ -178,7 +166,6 @@ function MortgageCalculator() {
         <Row style={{ marginBottom: "48px" }}>
           <Col span={6}>
             <div className="m-reveal">
-              <Eyebrow>{t("mortgage.calculator.eyebrow")}</Eyebrow>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                 {t("mortgage.calculator.title")}
               </h2>
@@ -324,7 +311,6 @@ export default function MortgagePage() {
 
             <Col span={7}>
               <div className="m-reveal">
-                <Eyebrow>{t("mortgage.hero.eyebrow")}</Eyebrow>
                 <h1 style={{
                   fontFamily: "Coolvetica, Inter, sans-serif",
                   fontSize: "clamp(2.8rem, 6vw, 5rem)",
@@ -380,7 +366,6 @@ export default function MortgagePage() {
           <Row style={{ marginBottom: "56px" }}>
             <Col span={5}>
               <div className="m-reveal">
-                <Eyebrow>{t("mortgage.terms.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   {t("mortgage.terms.title")}
                 </h2>
@@ -474,7 +459,6 @@ export default function MortgagePage() {
           <Row style={{ marginBottom: "48px" }}>
             <Col span={5}>
               <div className="m-reveal">
-                <Eyebrow>{t("mortgage.risks.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2 }}>
                   {t("mortgage.risks.title")}
                 </h2>
@@ -509,7 +493,6 @@ export default function MortgagePage() {
           <Row style={{ marginBottom: "56px" }}>
             <Col span={5}>
               <div className="m-reveal">
-                <Eyebrow>{t("mortgage.process.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15 }}>
                   {t("mortgage.process.title")}
                 </h2>
@@ -544,7 +527,6 @@ export default function MortgagePage() {
           <Row>
             <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
               <div className="m-reveal">
-                <Eyebrow>{t("mortgage.cta.eyebrow")}</Eyebrow>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
                   {t("mortgage.cta.title")}
                 </h2>

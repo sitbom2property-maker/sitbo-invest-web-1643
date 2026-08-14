@@ -45,13 +45,6 @@ export function Reviews() {
   return (
     <section style={{ background: "#FFFBF0", padding: "clamp(52px,7vw,90px) 0" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-          <div style={{ width: "26px", height: "1px", background: "#683D47" }} />
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.66rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)" }}>
-            {t("reviews.eyebrow")}
-          </span>
-        </div>
-
         <h3 style={{ margin: "0 0 30px", fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
           {t("reviews.headline")}
           <br />

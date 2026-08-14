@@ -226,12 +226,6 @@ export default function CatalogPage() {
       {/* ── HERO ── */}
       <section style={{ background: C.dark }}>
         <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
-              {t("catalog.eyebrow")}
-            </span>
-          </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
             <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
               {t("catalog.title")}

@@ -126,12 +126,6 @@ const chip = (active: boolean): CSSProperties => ({
     <div id="apartments">
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 22 }}>
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-            <div style={{ width: 24, height: 1, background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>
-              {t("chess.eyebrow")}
-            </span>
-          </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
             {t("chess.title")}
           </h3>

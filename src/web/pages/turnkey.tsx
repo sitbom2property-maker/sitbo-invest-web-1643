@@ -29,11 +29,6 @@ function Hero() {
 
 {/* Left: text */}
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
-            <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.hero.eyebrow")}</span>
-          </div>
-
           <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
             {t("turnkey.hero.title")}<br />
             <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.hero.titleEm")}</em>
@@ -102,10 +97,6 @@ function TwoColumns() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
         {cols.map(col => (
           <div key={col.tag} style={{ background: col.bg, borderRadius: "16px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
-              <div style={{ width: "24px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: col.dark ? "rgba(255,251,240,0.45)" : C.muted }}>{col.tag}</span>
-            </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: col.dark ? "rgba(255,251,240,0.55)" : "#666", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
@@ -142,11 +133,6 @@ function DesignRule() {
       <div style={{ background: C.wine, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(32px,5vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(255,251,240,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: "720px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "28px" }}>
-            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)" }}>{t("turnkey.design.eyebrow")}</span>
-            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-          </div>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
             {t("turnkey.design.title")}<br />
             <em style={{ fontStyle: "italic" }}>{t("turnkey.design.titleEm")}</em>
@@ -212,10 +198,6 @@ function Calculator() {
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,6vw,80px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-            <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.calculator.eyebrow")}</span>
-          </div>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
             {t("turnkey.calculator.title")}
           </h2>
@@ -307,11 +289,6 @@ function RemoteProcess() {
       <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
-              <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.remote.eyebrow")}</span>
-              <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
               {t("turnkey.remote.title")}<br />
               <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.remote.titleEm")}</em>
@@ -355,10 +332,6 @@ function Portfolio() {
         <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-                <div style={{ width: "28px", height: "1px", background: C.wine }} />
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.portfolio.eyebrow")}</span>
-              </div>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
                 {t("turnkey.portfolio.title")} <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.portfolio.titleEm")}</em>
               </h2>
@@ -404,10 +377,6 @@ function Guarantees() {
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
         <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
-            <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted }}>{t("turnkey.forSelf.eyebrow")}</span>
-          </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.self.title")}
           </h3>
@@ -416,10 +385,6 @@ function Guarantees() {
           </p>
         </div>
         <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.15)", borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
-            <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.forInvestors.eyebrow")}</span>
-          </div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.invest.title")}
           </h3>
@@ -441,10 +406,6 @@ function MarketStats() {
 
     <section style={{ background: C.dark, padding: "80px 10px" }}>
       <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
-          <div style={{ width: "28px", height: "1px", background: C.wine }} />
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.market.eyebrow")}</span>
-        </div>
         <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "60px", maxWidth: "700px" }}>
           {t("turnkey.market.title")}
         </h2>
@@ -547,11 +508,6 @@ function ContactForm() {
       <div style={{ background: C.dark, borderRadius: "16px 16px 0 0", padding: "clamp(60px,8vw,120px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "680px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
-              <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>{t("turnkey.contact.eyebrow")}</span>
-              <div style={{ width: "28px", height: "1px", background: C.wine }} />
-            </div>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
               {t("turnkey.contact.title")}
             </h2>
