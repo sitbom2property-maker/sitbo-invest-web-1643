@@ -84,7 +84,7 @@ const en = {
   "v2.hero.line1": "Don't play real estate",
   "v2.hero.line2": "roulette in Georgia",
   "v2.hero.body":
-    "Private Property Advisor. Born and raised in Georgia. Combining investment analytics, legal protection, and end-to-end management for high-net-worth buyers in Georgia.",
+    "Private Property Advisor — Arthur Arutyunyan. Born and raised in Georgia. Combining investment analytics, legal protection, and end-to-end management for high-net-worth buyers in Georgia.",
   "v2.hero.ctaPrimary": "Consultation",
   "v2.hero.ctaSecondary": "Sell with me",
   "v2.hero.scroll": "Scroll For More",
@@ -105,6 +105,7 @@ const en = {
   "v2.stats.yield": "Max rental yield",
   "v2.stats.yieldNote": "Managed seafront units",
 
+  "v2.quote.eyebrow": "Global Recognition",
   "v2.quote.text":
     "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
   "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
@@ -490,10 +491,28 @@ const en = {
   "partners.headline": "Developer & Banking Partners",
 
   // Cookie consent
-  "cookie.title": "Cookie Notice",
-  "cookie.body": "We use cookies to improve your browsing experience.",
+  "cookie.title": "This website uses cookies",
+  "cookie.body":
+    "This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.",
+  "cookie.readMore": "Read more about Cookie Policy",
   "cookie.decline": "Decline",
   "cookie.accept": "Accept",
+  "cookie.acceptAll": "Accept all",
+  "cookie.declineAll": "Decline all",
+  "cookie.showDetails": "Show details",
+  "cookie.hideDetails": "Hide details",
+  "cookie.language": "Language",
+  "cookie.close": "Close",
+  "cookie.necessary": "Strictly necessary",
+  "cookie.performance": "Performance",
+  "cookie.targeting": "Targeting",
+  "cookie.functionality": "Functionality",
+  "cookie.unclassified": "Unclassified",
+  "cookie.necessaryDesc": "Required for the site to work — security, language, and cookie preferences. Always on.",
+  "cookie.performanceDesc": "Help us understand how the site is used so we can improve it.",
+  "cookie.targetingDesc": "Used to deliver more relevant content and measure campaigns.",
+  "cookie.functionalityDesc": "Remember choices such as currency and display preferences.",
+  "cookie.unclassifiedDesc": "Cookies that have not yet been assigned to a category.",
 
   // Catalog
   "catalog.title": "Properties",

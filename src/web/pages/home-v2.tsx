@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type PointerEvent as React
 import { Link } from "wouter";
 import { PrivacyModal } from "../components/PrivacyModal";
 import { RequestModal } from "../components/RequestModal";
+import { AppLink } from "../components/app-link";
 import { useT, type MessageKey } from "../i18n";
 
 /**
@@ -143,19 +144,21 @@ function WhyGeorgia() {
 function Quote() {
   const t = useT();
   return (
-    <section className="rd-quote">
+    <section className="rd-quote" id="global-recognition">
       <div className="rd-wrap">
-        <div className="rd-quote-stack rv">
-          <blockquote>“{t("v2.quote.text")}”</blockquote>
-          <p className="rd-quote-author">{t("v2.quote.author")}</p>
+        <div className="rd-recog rv">
+          <div className="rd-recog-copy">
+            <h2 className="rd-h2">{t("v2.quote.eyebrow")}</h2>
+            <blockquote>“{t("v2.quote.text")}”</blockquote>
+            <p className="rd-quote-author">{t("v2.quote.author")}</p>
+            <AppLink href="/invest#notes" className="rd-btn rd-btn-white">
+              {t("v2.quote.cta")}
+            </AppLink>
+          </div>
+          <div className="rd-recog-visual">
+            <img src="/gonio-marina.png" alt="" />
+          </div>
         </div>
-        <div className="rd-quote-stack rv">
-          <blockquote>“{t("v2.quote2.text")}”</blockquote>
-          <p className="rd-quote-author">{t("v2.quote2.author")}</p>
-        </div>
-        <Link href="/invest" className="rd-btn rd-btn-white">
-          {t("v2.quote.cta")}
-        </Link>
       </div>
     </section>
   );
@@ -705,20 +708,19 @@ html, body { background: #21141A; }
   --blue: #E9F7FF;
   --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
   --body: 'Inter', 'DM Sans', Manrope, sans-serif;
-  /* One canvas: same max width + gutters as FooterV2 */
-  --rd-max: 1440px;
-  --rd-edge: 10px;
-  --rd-gutter: clamp(30px, 5.5vw, 80px);
-  --rd-inset: calc(var(--rd-gutter) - var(--rd-edge));
+  /* One canvas: same max width + gutters as header / footer / every page */
+  --rd-max: var(--site-max, 1440px);
+  --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
+  --rd-inset: clamp(24px, 3vw, 40px);
   background: var(--bg);
   color: var(--white);
   overflow-x: hidden;
   font-family: var(--body);
 }
 .rd-wrap { max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-gutter); box-sizing: border-box; }
-/* Panels / newsletter share the 1440 canvas so titles align with footer logo */
+/* Panels share the same 1440 canvas and side gutters as every other block */
 .rd-canvas {
-  max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-edge);
+  max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-gutter);
   box-sizing: border-box;
 }
 .rd .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -808,15 +810,24 @@ html, body { background: #21141A; }
 .rd-stat-label { display: block; font-family: var(--body); font-size: clamp(13px, 1.25vw, 20px); margin-top: 10px; opacity: .92; }
 .rd-stat-note { font-family: var(--body); font-size: clamp(11px, 1vw, 15px); opacity: .55; }
 
-/* quote */
-.rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); text-align: center; }
-.rd-quote-stack { margin: 0 0 clamp(36px, 4.5vw, 56px); }
-.rd-quote-stack:last-of-type { margin-bottom: clamp(28px, 3.5vw, 40px); }
-.rd-quote blockquote {
-  font-family: var(--body); font-weight: 300; font-size: clamp(20px, 2.22vw, 32px);
-  line-height: 1.3; margin: 0 auto 18px; max-width: 780px; color: rgba(255,255,255,.95);
+/* quote / global recognition */
+.rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); }
+.rd-recog {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 56px); align-items: center;
 }
-.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0; }
+.rd-recog-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.rd-recog-copy .rd-h2 { margin: 0 0 22px; }
+.rd-recog-copy blockquote {
+  font-family: var(--body); font-weight: 300; font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.3; margin: 0 0 18px; color: rgba(255,255,255,.95);
+}
+.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0 0 28px; }
+.rd-recog-visual {
+  border: 1px solid rgba(255,255,255,.85); overflow: hidden;
+  aspect-ratio: 4 / 5; max-height: 640px;
+}
+.rd-recog-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* panels — sit inside .rd-canvas so left content matches footer logo */
 .rd-panel { border-radius: 20px; margin: 0; }
@@ -983,6 +994,8 @@ html, body { background: #21141A; }
   .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
+  .rd-recog { grid-template-columns: 1fr; }
+  .rd-recog-visual { aspect-ratio: 16 / 10; max-height: 420px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }
   .rd-projects { grid-template-columns: 1fr; padding-right: var(--rd-inset); }
   /* Keep vertical ecosystem cards like desktop — horizontal scroll rail */
@@ -1000,7 +1013,6 @@ html, body { background: #21141A; }
   .rd-plans { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .rd { --rd-gutter: clamp(20px, 5vw, 30px); }
   .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
   .rd-hero-btns { flex-direction: column; align-items: stretch; }
   .rd-hero-btns .rd-btn { width: 100%; }

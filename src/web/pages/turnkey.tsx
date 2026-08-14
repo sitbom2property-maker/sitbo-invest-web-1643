@@ -20,12 +20,12 @@ function Hero() {
 
   return (<>
 
-    <section style={{ background: C.dark, minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "120px 10px 80px" }}>
+    <section style={{ background: C.dark, minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "120px 0 80px" }}>
 {/* bg texture */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/turnkey-web.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(33,20,26,0.95) 40%, rgba(33,20,26,0.7))" }} />
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", position: "relative", zIndex: 2, width: "100%", display: "flex", alignItems: "center", gap: "64px" }}>
+      <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)", position: "relative", zIndex: 2, width: "100%", display: "flex", alignItems: "center", gap: "64px" }}>
 
 {/* Left: text */}
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
@@ -305,7 +305,7 @@ function RemoteProcess() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+        <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
@@ -352,7 +352,7 @@ function Portfolio() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ background: C.dark, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+        <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
@@ -440,7 +440,7 @@ function MarketStats() {
   return (<>
 
     <section style={{ background: C.dark, padding: "80px 10px" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
+      <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
           <div style={{ width: "28px", height: "1px", background: C.wine }} />
           <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)" }}>{t("turnkey.market.eyebrow")}</span>

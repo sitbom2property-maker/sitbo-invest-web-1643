@@ -82,7 +82,7 @@ const ru: Record<MessageKey, string> = {
   "v2.hero.line1": "Не играйте в рулетку",
   "v2.hero.line2": "с недвижимостью в Грузии",
   "v2.hero.body":
-    "Частный консультант по недвижимости. Родился и вырос в Грузии. Объединяю инвестиционную аналитику, юридическую защиту и полное сопровождение для состоятельных покупателей в Грузии.",
+    "Частный консультант по недвижимости — Артур Арутюнян. Родился и вырос в Грузии. Объединяю инвестиционную аналитику, юридическую защиту и полное сопровождение для состоятельных покупателей в Грузии.",
   "v2.hero.ctaPrimary": "Консультация",
   "v2.hero.ctaSecondary": "Продать со мной",
   "v2.hero.scroll": "листай вниз",
@@ -103,6 +103,7 @@ const ru: Record<MessageKey, string> = {
   "v2.stats.yield": "Макс. доходность аренды",
   "v2.stats.yieldNote": "Первая линия под управлением",
 
+  "v2.quote.eyebrow": "Мировое признание",
   "v2.quote.text":
     "Грузия — страна с необыкновенными ландшафтами и уверенным путём к процветанию. Мы видим здесь огромный потенциал.",
   "v2.quote.author": "Мохамед Алаббар — Eagle Hills, ОАЭ",
@@ -476,10 +477,28 @@ const ru: Record<MessageKey, string> = {
   "partners.eyebrow": "Проверенные партнёры",
   "partners.headline": "Партнёры среди девелоперов и банков",
 
-  "cookie.title": "Уведомление о cookies",
-  "cookie.body": "Мы используем cookies, чтобы улучшить ваш опыт на сайте.",
+  "cookie.title": "Этот сайт использует cookies",
+  "cookie.body":
+    "Мы используем cookies, чтобы улучшить ваш опыт. Пользуясь сайтом, вы соглашаетесь со всеми cookies в соответствии с нашей Политикой cookies.",
+  "cookie.readMore": "Подробнее о Политике cookies",
   "cookie.decline": "Отклонить",
   "cookie.accept": "Принять",
+  "cookie.acceptAll": "Принять все",
+  "cookie.declineAll": "Отклонить все",
+  "cookie.showDetails": "Показать детали",
+  "cookie.hideDetails": "Скрыть детали",
+  "cookie.language": "Язык",
+  "cookie.close": "Закрыть",
+  "cookie.necessary": "Строго необходимые",
+  "cookie.performance": "Производительность",
+  "cookie.targeting": "Таргетинг",
+  "cookie.functionality": "Функциональные",
+  "cookie.unclassified": "Неклассифицированные",
+  "cookie.necessaryDesc": "Нужны для работы сайта — безопасность, язык и сохранённые настройки cookies. Всегда включены.",
+  "cookie.performanceDesc": "Помогают понять, как пользуются сайтом, чтобы мы могли его улучшать.",
+  "cookie.targetingDesc": "Используются для более релевантного контента и оценки кампаний.",
+  "cookie.functionalityDesc": "Запоминают выбор — валюту и настройки отображения.",
+  "cookie.unclassifiedDesc": "Cookies, которым ещё не назначена категория.",
 
   "catalog.title": "Объекты",
   "catalog.subtitle":

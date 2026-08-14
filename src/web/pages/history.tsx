@@ -105,9 +105,10 @@ export default function HistoryPage() {
         }
 
         .ht-hero {
-          padding: clamp(48px, 8vw, 96px) clamp(20px, 4vw, 64px) clamp(32px, 5vw, 56px);
-          max-width: 920px;
+          padding: clamp(48px, 8vw, 96px) var(--site-gutter) clamp(32px, 5vw, 56px);
+          max-width: var(--site-max);
           margin: 0 auto;
+          box-sizing: border-box;
         }
 
         .ht-eyebrow {
@@ -182,9 +183,10 @@ export default function HistoryPage() {
 
         .ht-track {
           position: relative;
-          max-width: 920px;
+          max-width: var(--site-max);
           margin: 0 auto;
-          padding: 8px clamp(20px, 4vw, 64px) clamp(96px, 12vw, 160px);
+          padding: 8px var(--site-gutter) clamp(96px, 12vw, 160px);
+          box-sizing: border-box;
         }
 
         .ht-sticky {

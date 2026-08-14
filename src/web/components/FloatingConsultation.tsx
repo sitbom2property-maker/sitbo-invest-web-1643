@@ -34,7 +34,7 @@ export function FloatingConsultation() {
         .float-consult {
           position: fixed;
           right: max(16px, env(safe-area-inset-right));
-          bottom: max(20px, env(safe-area-inset-bottom));
+          bottom: calc(var(--cookie-banner-height, 0px) + max(20px, env(safe-area-inset-bottom)));
           z-index: 850;
           display: inline-flex;
           align-items: center;
@@ -78,7 +78,7 @@ export function FloatingConsultation() {
         @media (max-width: 640px) {
           .float-consult {
             right: max(12px, env(safe-area-inset-right));
-            bottom: max(16px, env(safe-area-inset-bottom));
+            bottom: calc(var(--cookie-banner-height, 0px) + max(16px, env(safe-area-inset-bottom)));
             padding: 13px 18px;
             font-size: 13px;
           }
