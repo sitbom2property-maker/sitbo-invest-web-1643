@@ -626,7 +626,7 @@ const ru: Record<MessageKey, string> = {
   "chess.noMatches": "Нет квартир по этим фильтрам",
   "chess.priceUsd": "Цена, USD",
   "chess.priceGel": "Цена, GEL",
-  "chess.officialHint": "Тот же 360° подбор квартир, что на сайте застройщика.",
+  "chess.officialHint": "360° модель, планы этажей и 2D-сетка — заявка приходит к нам.",
   "chess.openFullscreen": "Открыть на сайте застройщика",
 
   "invest.hero.eyebrow": "Почему Грузия",
