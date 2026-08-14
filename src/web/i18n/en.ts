@@ -647,6 +647,7 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
+  "chess.officialHint": "360° model, floor plates, and the 2D grid — request a unit and it comes to us.",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",

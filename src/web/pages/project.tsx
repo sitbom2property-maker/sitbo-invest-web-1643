@@ -469,11 +469,7 @@ export default function ProjectPage() {
 {/* ── APARTMENT SELECTOR ── */}
       {p.apartmentsKey === "piazza" && (
         <section style={{ padding: "80px 0 0" }}>
-          <Container>
-            <div className="pr-reveal">
-              <PiazzaViewer projectName={p.name} />
-            </div>
-          </Container>
+          <PiazzaViewer projectName={p.name} />
         </section>
       )}
       {p.apartmentsKey === "parkline" && p.tourUrl && (
