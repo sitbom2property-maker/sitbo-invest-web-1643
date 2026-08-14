@@ -29,9 +29,86 @@ export type Project = {
   floorPlanLabels?: string[];
   pricePerSqm?: string;
   liveCameraUrl?: string;
+  downPaymentPct?: number;
+  developerBody?: string;
+  districtTitle?: string;
+  districtBody?: string;
+  districtBody2?: string;
+  apartmentsKey?: "piazza";
 };
 
 export const projects: Project[] = [
+  {
+    name: "Piazza Residence",
+    slug: "piazza-residence",
+    tag: "Old Batumi · Historic Core",
+    city: "Batumi",
+    address: "59 Vakhtang Gorgasali St, Old Batumi",
+    seaDistance: "10 minutes to the sea",
+    seaMeters: "850 m",
+    location: "Old Batumi, Vakhtang Gorgasali 59–61 · 10 min walk to the sea",
+    desc: "A landmark residence in the historic heart of Old Batumi. Architecture that reads the neighbourhood's heritage, a private piazza with Venetian fountains, and a restored 119-year cultural monument. Step outside and you are already in the city's cultural district — the seafront is a ten-minute walk.",
+    yield: "10–12%",
+    developer: "Tower Group",
+    priceFrom: "From $89,250",
+    priceUSD: 89250,
+    completion: "Q4 2027",
+    area: "35.1–141.3 m²",
+    ceilingHeight: "3.0 m",
+    floors: "18 floors",
+    buildings: "1 building",
+    finishing: "White frame",
+    installment: "20% down / 0% over 29 months",
+    downPaymentPct: 20,
+    apartmentsKey: "piazza",
+    developerBody:
+      "Tower Group is a Batumi developer known for Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
+    districtTitle: "Old Batumi",
+    districtBody:
+      "Old Batumi is the city's cultural and entertainment core: the historic Piazza, central park, restaurants, boutiques and the seaside boulevard are all within a short walk. Property here holds value because the location cannot be replicated.",
+    districtBody2:
+      "Schools, a university, a hospital and the main streets of the city sit around the Gorgasali / 26 May intersection. Batumi International Airport is about 15 minutes by car.",
+    features: [
+      "Historic Old Batumi address",
+      "Private piazza with Venetian fountains",
+      "24/7 concierge & security",
+      "Underground parking",
+      "Coworking spaces",
+      "Children's play area",
+      "Gym",
+      "Restaurants, cafés and concept stores",
+      "Ventilated façade",
+      "Restored 119-year cultural monument",
+    ],
+    materials:
+      "Energy-efficient monolithic-frame construction with a ventilated façade and premium finishes. The project restores a 119-year-old building officially recognised as a cultural heritage monument, combining historic fabric with a contemporary residential tower.",
+    photos: [
+      "/piazza/exterior-tower.jpg",
+      "/piazza/exterior-entrance.jpg",
+      "/piazza/piazza-cafe.jpg",
+      "/piazza/lobby.jpg",
+      "/piazza/interior-1.jpg",
+      "/piazza/interior-2.jpg",
+      "/piazza/interior-3.jpg",
+      "/piazza/interior-4.jpg",
+      "/piazza/interior-5.jpg",
+      "/piazza/interior-6.jpg",
+      "/piazza/exterior-2.jpg",
+      "/piazza/exterior-3.jpg",
+      "/piazza/render-2br.jpg",
+    ],
+    cardImage: "/piazza/exterior-tower.jpg",
+    lat: 41.65055,
+    lng: 41.6412,
+    floorPlans: [
+      "/piazza/layout-studio.jpg",
+      "/piazza/layout-1br.jpg",
+      "/piazza/layout-2br.jpg",
+      "/piazza/layout-3br.jpg",
+    ],
+    floorPlanLabels: ["Studio 35.7 m²", "1 bedroom 53.5 m²", "2 bedrooms 76.9 m²", "3 bedrooms 134 m²"],
+    pricePerSqm: "from $2,450/m²",
+  },
   {
     name: "Artex Parkline",
     slug: "artex-parkline",
