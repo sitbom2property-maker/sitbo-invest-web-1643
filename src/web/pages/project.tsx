@@ -61,14 +61,19 @@ function Col({ span = 12, spanMd, children, style }: { span?: number; spanMd?: n
   return <div style={{ gridColumn: `span ${isMobile ? 12 : (spanMd ?? span)}`, minWidth: 0, maxWidth: "100%", ...style }}>{children}</div>;
 }
 function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
-  return (<>
-
-    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-      <div style={{ width: "24px", height: "1px", background: C.wine, flexShrink: 0 }} />
-      <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: light ? "rgba(255,251,240,0.5)" : C.muted }}>{children}</span>
-    </div>
-  
-  </>);
+  return (
+    <h3 style={{
+      fontFamily: "Coolvetica, Inter, sans-serif",
+      fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
+      fontWeight: 500,
+      color: light ? C.light : C.dark,
+      lineHeight: 1.25,
+      letterSpacing: "0.01em",
+      margin: "0 0 20px",
+    }}>
+      {children}
+    </h3>
+  );
 }
 function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
@@ -148,8 +153,8 @@ function MapEmbed({ project }: { project: Project }) {
 function Diamond() {
   return (<>
 
-    <svg width="7" height="7" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "5px" }}>
-      <rect x="5" y="0.5" width="6.36" height="6.36" rx="0" transform="rotate(45 5 0.5)" fill={C.wine} />
+    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "7px" }} aria-hidden>
+      <rect x="5" y="0.5" width="6.36" height="6.36" rx="0.6" transform="rotate(45 5 0.5)" fill={C.teal} />
     </svg>
   
   </>);
@@ -243,8 +248,7 @@ export default function ProjectPage() {
       <style>{`
         @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
         .project-page p, .project-page h2, .project-page h3 {
-          overflow-wrap: anywhere;
-          word-break: break-word;
+          overflow-wrap: break-word;
         }
         @media (max-width: 767px) {
           .project-specs-grid {
@@ -285,11 +289,11 @@ export default function ProjectPage() {
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: C.muted, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
+                <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
                   <span>{p.address} · {p.seaDistance}</span>
                 </p>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.95rem", color: C.muted, lineHeight: 1.85 }}>{p.desc}</p>
+                <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
 
                 {/* Developer block */}
                 <div
@@ -301,9 +305,9 @@ export default function ProjectPage() {
                     <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
-                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
+                    <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
+                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.15rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
+                    <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.95rem", color: C.mutedDark, lineHeight: 1.7, margin: 0 }}>
                       {p.developerBody ?? t("project.developerBody")}
                     </p>
                   </div>
@@ -315,7 +319,7 @@ export default function ProjectPage() {
 {/* Specs grid */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>{t("project.specs")}</Eyebrow>
-                <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(33,20,26,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+                <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: isMobile ? "10px" : "12px" }}>
 {[
     { label: t("project.spec.area"), value: p.area },
     { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
@@ -324,9 +328,9 @@ export default function ProjectPage() {
     { label: t("project.spec.finishing"), value: p.finishing },
     { label: t("project.developer"), value: p.developer },
                   ].map(s => (
-                    <div key={s.label} style={{ background: C.light, padding: isMobile ? "14px 12px" : "16px 14px", minWidth: 0 }}>
-                      <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted, margin: "0 0 5px" }}>{s.label}</p>
-                      <p style={{ fontFamily: "Manrope, sans-serif", fontSize: isMobile ? "0.92rem" : "1rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>{s.value}</p>
+                    <div key={s.label} style={{ background: "#fff", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "12px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
+                      <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
+                      <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
                     </div>
                   ))}
                 </div>
@@ -337,11 +341,11 @@ export default function ProjectPage() {
 {/* Key Features */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>{t("project.features")}</Eyebrow>
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px 32px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px 28px" }}>
                   {p.features.map(f => (
-                    <div key={f} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                    <div key={f} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Diamond />
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.5 }}>{f}</span>
+                      <span style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.dark, lineHeight: 1.55 }}>{f}</span>
                     </div>
                   ))}
                 </div>
@@ -352,17 +356,17 @@ export default function ProjectPage() {
 {/* Materials */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>{t("project.materials")}</Eyebrow>
-                <div style={{ background: C.light, borderRadius: "12px", padding: "20px 22px", display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ background: "#fff", borderRadius: "12px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
                   {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
                     const colonIdx = sentence.indexOf(":");
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
-                    return (<>
-                      <p key={i} style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
+                    return (
+                      <p key={i} style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.75, margin: 0 }}>
                         {hasTitle ? (
-                          <><strong style={{ color: C.dark }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
+                          <><strong style={{ color: C.dark, fontWeight: 600 }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
                         ) : sentence + (sentence.endsWith(".") ? "" : ".")}
                       </p>
-                    </>);
+                    );
                   })}
                 </div>
               </div>
@@ -463,9 +467,6 @@ export default function ProjectPage() {
         <Container>
           <div className="pr-reveal" style={{ marginBottom: "40px" }}>
             <Eyebrow>{t("project.floorPlans")}</Eyebrow>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
-              {t("project.availableLayouts")}
-            </h3>
           </div>
           <div className="pr-reveal" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
             {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
@@ -509,7 +510,7 @@ export default function ProjectPage() {
           {/* District description */}
           <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "12px", padding: "28px 28px" }}>
             <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
               {p.districtBody ?? t("project.district.newBoulevard.body")}
               <br /><br />
               {p.districtBody2 ?? t("project.district.newBoulevard.body2")}
