@@ -67,7 +67,7 @@ function NavItem({
   onNavigate?: () => void;
 }) {
   const style = {
-    fontFamily: "'DM Sans', Manrope, sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: 15,
     fontWeight: 400,
     letterSpacing: 0,
@@ -319,7 +319,7 @@ export function Nav() {
                   background: "transparent",
                   color: "#FFFFFF",
                   border: "1px solid rgba(255,255,255,0.55)",
-                  fontFamily: "'DM Sans', Manrope, sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 15,
                   fontWeight: 400,
                   letterSpacing: 0,
@@ -435,7 +435,7 @@ export function Nav() {
                 borderRadius: 8,
                 background: "#8CB2C0",
                 color: "#21141A",
-                fontFamily: "Manrope, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 11,
                 fontWeight: 700,
                 letterSpacing: "0.16em",

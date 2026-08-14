@@ -175,8 +175,8 @@ const CSS = `
   --green: #48674D;
   --white: #FFFFFF;
   --panel: #F8F8F8;
-  --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
-  --body: 'Inter', 'DM Sans', Manrope, sans-serif;
+  --display: 'Coolvetica', Inter, sans-serif;
+  --body: 'Inter', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --max: var(--site-max, 1440px);
   background: var(--bg);

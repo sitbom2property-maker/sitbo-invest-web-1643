@@ -2,7 +2,7 @@ import { useState, type CSSProperties, type FormEvent } from "react";
 
 const labelStyle: CSSProperties = {
   display: "block",
-  fontFamily: "Manrope, sans-serif",
+  fontFamily: "Inter, sans-serif",
   fontSize: "0.62rem",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
@@ -16,7 +16,7 @@ const inputStyle: CSSProperties = {
   background: "rgba(250,247,240,0.05)",
   border: "1px solid rgba(140,178,192,0.2)",
   color: "#FAF7F0",
-  fontFamily: "Manrope, sans-serif",
+  fontFamily: "Inter, sans-serif",
   fontSize: "14px",
   padding: "14px 16px",
   outline: "none",
@@ -70,7 +70,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
     return (
       <p
         style={{
-          fontFamily: "Manrope, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontSize: "15px",
           color: "#8CB2C0",
           textAlign: "center",
@@ -149,7 +149,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "13px", color: "#8CB2C0", margin: "16px 0 0" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#8CB2C0", margin: "16px 0 0" }}>
             {error}
           </p>
         )}
@@ -161,7 +161,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
             width: "100%",
             background: loading ? "rgba(140,178,192,0.6)" : "#8CB2C0",
             color: "#21141A",
-            fontFamily: "Manrope, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "0.7rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",

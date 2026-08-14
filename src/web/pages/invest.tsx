@@ -213,8 +213,8 @@ const CSS = `
   --green: #48674D;
   --white: #FFFFFF;
   --panel: #F8F8F8;
-  --display: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
-  --body: 'Inter', 'DM Sans', Manrope, sans-serif;
+  --display: 'Coolvetica', Inter, sans-serif;
+  --body: 'Inter', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --max: var(--site-max, 1440px);
   background: var(--bg);
@@ -318,7 +318,7 @@ const CSS = `
 }
 .iv-quote .iv-panel-eyebrow { display: block; margin-bottom: 14px; }
 .iv-quote blockquote {
-  font-family: var(--display); font-weight: 600; margin: 0 0 12px;
+  font-family: var(--body); font-weight: 400; margin: 0 0 12px;
   font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
 }
 .iv-quote cite {

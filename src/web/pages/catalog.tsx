@@ -61,18 +61,18 @@ function CatalogCard({ p }: { p: Project }) {
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
             {/* City badge */}
-            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,251,240,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.8)" }}>
+            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,251,240,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.8)" }}>
               {localizeCityLabel(p.city, language)}
             </div>
 
             {/* ROI badge */}
-            <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "5px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
+            <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
               {p.yield} {t("catalog.roi")}
             </div>
 
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{p.tag}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{p.tag}</p>
               <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
             </div>
           </div>
@@ -81,16 +81,16 @@ function CatalogCard({ p }: { p: Project }) {
           <div style={{ background: C.light, padding: "16px 16px 18px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "12px" }}>
               <div>
-                <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area} · {p.completion}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area} · {p.completion}</p>
               </div>
               <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "5px" }}>
                 <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill={C.muted}/></svg>
-                <span style={{ fontFamily: "DM Sans", fontSize: "0.72rem", color: C.muted }}>{p.seaDistance}</span>
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>{p.seaDistance}</span>
               </div>
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: C.muted, margin: 0, lineHeight: 1.5, flex: 1, paddingRight: "12px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.muted, margin: 0, lineHeight: 1.5, flex: 1, paddingRight: "12px" }}>
                 {p.desc.length > 80 ? p.desc.slice(0, 78) + "…" : p.desc}
               </p>
               <div style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "50%", border: `1px solid rgba(33,20,26,0.15)`, display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s, border-color 0.2s", background: hovered ? C.dark : "transparent", borderColor: hovered ? C.dark : "rgba(33,20,26,0.15)" }}>
@@ -216,7 +216,7 @@ export default function CatalogPage() {
   }, [localizedProjects]);
 
   const inputStyle: React.CSSProperties = {
-    fontFamily: "DM Sans", fontSize: "0.82rem", color: C.dark,
+    fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
     background: C.light, border: "1px solid rgba(33,20,26,0.12)",
     borderRadius: "8px", padding: "10px 14px", outline: "none",
   };
@@ -228,7 +228,7 @@ export default function CatalogPage() {
         <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: C.wine }} />
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.63rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,251,240,0.45)" }}>
               {t("catalog.eyebrow")}
             </span>
           </div>
@@ -236,7 +236,7 @@ export default function CatalogPage() {
             <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
               {t("catalog.title")}
             </h1>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
               {localizedProjects.length} {t("catalog.subtitle")}
             </p>
           </div>
@@ -245,7 +245,7 @@ export default function CatalogPage() {
           <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap" }}>
             {CITIES.map(c => (
               <button key={c} onClick={() => setCity(c)} style={{
-                fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600,
+                fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",
                 padding: "8px 18px", borderRadius: "6px", cursor: "pointer",
                 border: `1px solid ${city === c ? C.teal : "rgba(255,251,240,0.15)"}`,
@@ -285,7 +285,7 @@ export default function CatalogPage() {
             </select>
 
             {/* Results count */}
-            <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted, flexShrink: 0 }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted, flexShrink: 0 }}>
               {filtered.length} {filtered.length === 1 ? t("catalog.projectSingular") : t("catalog.projectPlural")}
             </span>
           </div>
@@ -298,9 +298,9 @@ export default function CatalogPage() {
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
               <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</p>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
-                style={{ marginTop: "20px", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
+                style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
                 {t("cta.resetFilters")}
               </button>
             </div>
@@ -324,12 +324,12 @@ export default function CatalogPage() {
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
                 {t("catalog.cta.title")}
               </h2>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7 }}>
                 {t("catalog.cta.body")}
               </p>
             </div>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {t("catalog.cta.bookCall")}
               </button>
             </div>
@@ -343,7 +343,7 @@ export default function CatalogPage() {
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.2)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>✕</button>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: "rgba(255,251,240,0.55)", marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {[
                 { key: "name", placeholder: t("catalog.bookCall.name"), type: "text" },
@@ -352,26 +352,26 @@ export default function CatalogPage() {
               ].map(f => (
                 <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as any)[f.key]}
                   onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
-                  style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
                   onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               ))}
               <textarea placeholder={t("catalog.bookCall.message")} value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
-                style={{ fontFamily: "DM Sans", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")} />
               <button
                 type="button"
                 onClick={submitBookCall}
                 disabled={bookLoading || bookSent}
-                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = bookLoading ? "0.7" : "1")}
               >
                 {bookSent ? t("home.contact.sentTitle") : bookLoading ? "…" : t("cta.sendRequest")}
               </button>
               {bookError ? (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
               ) : null}
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", textAlign: "center" }}>
                 {t("catalog.bookCall.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
             </div>

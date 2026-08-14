@@ -109,7 +109,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
           </>
         )}
 {/* Counter */}
-        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "20px", padding: "4px 12px", fontFamily: "DM Sans", fontSize: "0.72rem", color: C.light }}>
+        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "20px", padding: "4px 12px", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light }}>
           {active + 1} / {photos.length}
         </div>
       </div>
@@ -225,7 +225,7 @@ export default function ProjectPage() {
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
           <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
-          <Link href="/"><a style={{ fontFamily: "DM Sans", color: C.teal }}>{t("project.backHome")}</a></Link>
+          <Link href="/"><a style={{ fontFamily: "Inter, sans-serif", color: C.teal }}>{t("project.backHome")}</a></Link>
         </div>
       </div>
     
@@ -289,11 +289,11 @@ export default function ProjectPage() {
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "10px" }}>
 {p.name}
                 </h2>
-                <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
                   <span>{p.address} · {p.seaDistance}</span>
                 </p>
-                <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
 
                 {/* Developer block */}
                 <div
@@ -302,12 +302,12 @@ export default function ProjectPage() {
                 >
                   {/* Logo placeholder */}
                   <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ fontFamily: "DM Sans", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
-                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.15rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
-                    <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.95rem", color: C.mutedDark, lineHeight: 1.7, margin: 0 }}>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.15rem", fontWeight: 600, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, lineHeight: 1.7, margin: 0 }}>
                       {p.developerBody ?? t("project.developerBody")}
                     </p>
                   </div>
@@ -329,8 +329,8 @@ export default function ProjectPage() {
     { label: t("project.developer"), value: p.developer },
                   ].map(s => (
                     <div key={s.label} style={{ background: "#fff", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "12px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
-                      <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
-                      <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
                     </div>
                   ))}
                 </div>
@@ -345,7 +345,7 @@ export default function ProjectPage() {
                   {p.features.map(f => (
                     <div key={f} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Diamond />
-                      <span style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.dark, lineHeight: 1.55 }}>{f}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.dark, lineHeight: 1.55 }}>{f}</span>
                     </div>
                   ))}
                 </div>
@@ -361,7 +361,7 @@ export default function ProjectPage() {
                     const colonIdx = sentence.indexOf(":");
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
                     return (
-                      <p key={i} style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.75, margin: 0 }}>
+                      <p key={i} style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.75, margin: 0 }}>
                         {hasTitle ? (
                           <><strong style={{ color: C.dark, fontWeight: 600 }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
                         ) : sentence + (sentence.endsWith(".") ? "" : ".")}
@@ -380,14 +380,14 @@ export default function ProjectPage() {
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
-                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
-                    <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
                   </div>
                 </div>
               </div>
@@ -400,19 +400,19 @@ export default function ProjectPage() {
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>{t("project.interested")}</p>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>{t("project.interested")}</p>
                   <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
                   </h3>
-                  <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
-                  <p style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
-                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
                   {p.apartmentsKey === "piazza" && (
-                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
+                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
                       {t("chess.chooseCta")}
                     </a>
                   )}
@@ -427,8 +427,8 @@ export default function ProjectPage() {
     { label: t("project.sea"), value: p.seaDistance },
                   ].map((row, i) => (
                     <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: i < 3 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>
-                      <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 700, color: C.dark }}>{row.value}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700, color: C.dark }}>{row.value}</span>
                     </div>
                   ))}
                 </div>
@@ -438,7 +438,7 @@ export default function ProjectPage() {
                   <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                     <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
-                    <span style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
                   </a>
                 )}
 
@@ -475,7 +475,7 @@ export default function ProjectPage() {
                   <img src={src} alt={t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", display: "block", objectFit: "contain" }} />
                     {p.floorPlanLabels?.[n] && (
                     <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center" }}>
-                      <span style={{ fontFamily: "Manrope, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
                     </div>
                   )}
                 </div>
@@ -485,7 +485,7 @@ export default function ProjectPage() {
                     <rect x="3" y="3" width="18" height="18" rx="1"/>
                     <path d="M3 9h18M9 9v12M3 15h6"/>
                   </svg>
-                  <span style={{ fontFamily: "DM Sans", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)" }}>
                     {t("project.layoutComingSoon", { number: n + 1 })}
                   </span>
                 </div>
@@ -510,7 +510,7 @@ export default function ProjectPage() {
           {/* District description */}
           <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "12px", padding: "28px 28px" }}>
             <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
-            <p style={{ fontFamily: "Inter, DM Sans, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
               {p.districtBody ?? t("project.district.newBoulevard.body")}
               <br /><br />
               {p.districtBody2 ?? t("project.district.newBoulevard.body2")}
@@ -529,10 +529,10 @@ export default function ProjectPage() {
                   {t("project.cta.title")}<br />
                   <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
                   {t("project.cta.body")}
                 </p>
-                <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                   {t("cta.getFreeOffer")}
                 </AppLink>
               </div>
@@ -557,10 +557,10 @@ export default function ProjectPage() {
                   />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
-                    <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
                     <p style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", color: C.light, margin: 0 }}>{proj.name}</p>
                   </div>
-                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "DM Sans", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
+                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
                     {proj.yield} {t("catalog.roi")}
                   </div>
                 </a>
@@ -593,7 +593,7 @@ export default function ProjectPage() {
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
               {t("project.offerModal.title")}
             </h2>
-            <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
               {t("project.offerModal.body", { project: project.name })}
             </p>
 
@@ -603,7 +603,7 @@ export default function ProjectPage() {
                 placeholder={t("project.offerModal.name")}
                 value={offerFormData.name}
                 onChange={e => setOfferFormData({ ...offerFormData, name: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)}
                 onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
               />
@@ -612,7 +612,7 @@ export default function ProjectPage() {
                 placeholder={t("project.offerModal.phone")}
                 value={offerFormData.phone}
                 onChange={e => setOfferFormData({ ...offerFormData, phone: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)}
                 onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
               />
@@ -621,7 +621,7 @@ export default function ProjectPage() {
                 placeholder={t("project.offerModal.email")}
                 value={offerFormData.email}
                 onChange={e => setOfferFormData({ ...offerFormData, email: e.target.value })}
-                style={{ fontFamily: "DM Sans", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)}
                 onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
               />
@@ -629,16 +629,16 @@ export default function ProjectPage() {
                 type="button"
                 onClick={submitOfferForm}
                 disabled={offerLoading || offerSent}
-                style={{ fontFamily: "DM Sans", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: offerLoading ? "wait" : "pointer", marginTop: "8px", transition: "opacity 0.2s", opacity: offerLoading ? 0.7 : 1 }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: offerLoading ? "wait" : "pointer", marginTop: "8px", transition: "opacity 0.2s", opacity: offerLoading ? 0.7 : 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = offerLoading ? "0.7" : "1")}
               >
                 {offerSent ? t("home.contact.sentTitle") : offerLoading ? "…" : t("cta.sendRequest")}
               </button>
               {offerError ? (
-                <p style={{ fontFamily: "DM Sans", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{offerError}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{offerError}</p>
               ) : null}
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
                 {t("project.offerModal.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
             </div>

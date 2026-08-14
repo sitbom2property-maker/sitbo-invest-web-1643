@@ -95,7 +95,7 @@ export default function LegalPage() {
               <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, margin: "0 0 12px" }}>
                 {t("legal.title")}
               </h1>
-              <p style={{ fontFamily: "DM Sans", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
                 {t("legal.updated")}
               </p>
             </div>
@@ -115,13 +115,13 @@ export default function LegalPage() {
                       <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 10px", letterSpacing: "0.01em" }}>
                         {item.heading}
                       </h3>
-                      <p style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, margin: 0 }}>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, margin: 0 }}>
                         {item.body}
                       </p>
                       {item.list && (
                         <ul style={{ margin: "10px 0 0 0", padding: "0 0 0 20px" }}>
                           {item.list.map(li => (
-                            <li key={li} style={{ fontFamily: "DM Sans", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, marginBottom: "4px" }}>
+                            <li key={li} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, marginBottom: "4px" }}>
                               {li}
                             </li>
                           ))}
@@ -136,7 +136,7 @@ export default function LegalPage() {
             {/* Back link */}
             <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(33,20,26,0.1)" }}>
               <Link href="/">
-                <a style={{ fontFamily: "DM Sans", fontSize: "0.8rem", color: C.teal, textDecoration: "none", letterSpacing: "0.06em" }}>
+                <a style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.teal, textDecoration: "none", letterSpacing: "0.06em" }}>
                   {t("legal.backHome")}
                 </a>
               </Link>

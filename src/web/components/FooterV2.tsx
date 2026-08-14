@@ -19,7 +19,7 @@ export function FooterV2() {
           --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
           background: #21141A;
           color: #FFFFFF;
-          font-family: 'Inter', 'DM Sans', Manrope, sans-serif;
+          font-family: 'Inter', sans-serif;
           padding: clamp(46px, 6vw, 88px) 0 clamp(26px, 3vw, 44px);
         }
         .fv2-wrap {
@@ -32,17 +32,17 @@ export function FooterV2() {
         }
         .fv2-logo { height: 22px; width: auto; display: block; margin-bottom: 22px; }
         .fv2-name {
-          font-family: 'Inter', 'DM Sans', Manrope, sans-serif; font-size: clamp(17px, 1.39vw, 20px);
+          font-family: 'Inter', sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFFFF;
         }
-        .fv2-name em { font-family: 'Coolvetica', Inter, sans-serif; font-style: italic; }
+        .fv2-name em { font-family: 'Inter', sans-serif; font-style: italic; }
         .fv2-tagline {
           font-size: clamp(15px, 1.25vw, 18px); line-height: 1.45;
           color: rgba(255,255,255,.82); margin: 0; max-width: 560px;
         }
         .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
-          font-family: 'Coolvetica', 'Chillax', 'DM Sans', Manrope, sans-serif;
+          font-family: 'Coolvetica', Inter, sans-serif;
           font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFFFF;
         }
         .fv2-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }

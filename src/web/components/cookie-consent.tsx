@@ -265,7 +265,7 @@ const COOKIE_CSS = `
   z-index: 9999;
   background: #1c1c1c;
   color: #fff;
-  font-family: Inter, 'DM Sans', Helvetica, sans-serif;
+  font-family: Inter, sans-serif;
   box-shadow: 0 -8px 32px rgba(0,0,0,.35);
 }
 .ck-inner {
