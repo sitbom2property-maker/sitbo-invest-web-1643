@@ -176,18 +176,6 @@ export default function BlogPage() {
       <div style={{ background: C.light, minHeight: "100vh" }}>
         <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
           <div className="site-wrap">
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "0.63rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: C.teal,
-                margin: "0 0 20px",
-              }}
-            >
-              {t("blog.eyebrow")}
-            </p>
             <h1
               style={{
                 fontFamily: "Coolvetica, Inter, sans-serif",
