@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from "hono/cors";
 import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
+import { fetchPiazzaApartments } from "./lib/piazza-apartments";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -21,6 +22,16 @@ app.get('/ping', (c) =>
     version: "odoo-crm-v2",
   }),
 );
+
+app.get('/apartments/piazza', async (c) => {
+  try {
+    const data = await fetchPiazzaApartments();
+    c.header('Cache-Control', 'public, max-age=300');
+    return c.json(data);
+  } catch (err) {
+    return c.json({ error: String(err) }, 502);
+  }
+});
 
 app.get('/leads/health', async (c) => {
   try {

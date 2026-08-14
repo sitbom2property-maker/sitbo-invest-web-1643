@@ -3,6 +3,7 @@ import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
+import { ApartmentChessboard } from "../components/ApartmentChessboard";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -318,6 +319,8 @@ export default function ProjectPage() {
   }
 
   const priceLabel = formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
+  const downPct = project.downPaymentPct ?? 30;
+  const restPct = 100 - downPct;
 
   const p = project;
   const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
@@ -392,7 +395,7 @@ export default function ProjectPage() {
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
                     <p style={{ fontFamily: "Jun, serif", fontSize: "1rem", fontWeight: 400, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
-                      {t("project.developerBody")}
+                      {p.developerBody ?? t("project.developerBody")}
                     </p>
                   </div>
                 </div>
@@ -463,13 +466,13 @@ export default function ProjectPage() {
                 {/* Bar visual: left block = down payment, right block = installment remainder */}
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
-                  <div style={{ flex: "0 0 30%", background: C.dark, padding: "22px 20px" }}>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>30%</p>
+                  <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
-                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>70%</p>
+                    <p style={{ fontFamily: "Jun, serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
                     <p style={{ fontFamily: "DM Sans", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
                   </div>
@@ -495,6 +498,11 @@ export default function ProjectPage() {
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
+                  {p.apartmentsKey === "piazza" && (
+                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "DM Sans", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
+                      {t("chess.chooseCta")}
+                    </a>
+                  )}
                 </div>
 
 {/* Quick facts */}
@@ -534,7 +542,17 @@ export default function ProjectPage() {
 
 
 
-{/* ── MAP ── */}
+{/* ── APARTMENT CHESSBOARD ── */}
+      {p.apartmentsKey === "piazza" && (
+        <section style={{ padding: "80px 0 0" }}>
+          <Container>
+            <div className="pr-reveal">
+              <ApartmentChessboard projectName={p.name} />
+            </div>
+          </Container>
+        </section>
+      )}
+
 {/* ── FLOOR PLANS ── */}
       <section style={{ padding: "80px 0 0" }}>
         <Container>
@@ -585,11 +603,11 @@ export default function ProjectPage() {
           </div>
           {/* District description */}
           <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "12px", padding: "28px 28px" }}>
-            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{t("project.district.newBoulevard.title")}</h4>
+            <h4 style={{ fontFamily: "Jun, serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
             <p style={{ fontFamily: "DM Sans", fontSize: "0.9rem", color: C.mutedDark, lineHeight: 1.85, margin: 0 }}>
-              {t("project.district.newBoulevard.body")}
+              {p.districtBody ?? t("project.district.newBoulevard.body")}
               <br /><br />
-              {t("project.district.newBoulevard.body2")}
+              {p.districtBody2 ?? t("project.district.newBoulevard.body2")}
             </p>
           </div>
         </Container>
