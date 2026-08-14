@@ -2,7 +2,6 @@ import { Hono } from 'hono';
 import { cors } from "hono/cors";
 import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchPiazzaApartments } from "./lib/piazza-apartments";
-import { fetchPiazzaViewerHtml } from "./lib/piazza-viewer";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -31,21 +30,6 @@ app.get('/apartments/piazza', async (c) => {
     return c.json(data);
   } catch (err) {
     return c.json({ error: String(err) }, 502);
-  }
-});
-
-app.get('/apartments/piazza-viewer', async (c) => {
-  try {
-    const lang = c.req.query("lang") || "en";
-    const html = await fetchPiazzaViewerHtml(lang);
-    c.header("Cache-Control", "public, max-age=120");
-    c.header("X-Frame-Options", "SAMEORIGIN");
-    return c.html(html);
-  } catch {
-    return c.html(
-      `<!doctype html><meta charset="utf-8"><p>Apartment selector unavailable.</p>`,
-      502,
-    );
   }
 });
 

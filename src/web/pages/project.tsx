@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
-import { PiazzaViewer } from "../components/PiazzaViewer";
+import { ApartmentChessboard } from "../components/ApartmentChessboard";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -450,10 +450,14 @@ export default function ProjectPage() {
 
 
 
-{/* ── APARTMENT SELECTOR (developer Flat.show) ── */}
+{/* ── APARTMENT CHESSBOARD ── */}
       {p.apartmentsKey === "piazza" && (
         <section style={{ padding: "80px 0 0" }}>
-          <PiazzaViewer projectName={p.name} />
+          <Container>
+            <div className="pr-reveal">
+              <ApartmentChessboard projectName={p.name} />
+            </div>
+          </Container>
         </section>
       )}
 
