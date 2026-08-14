@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import snapshot from "../data/piazza-apartments.json";
 import {
   SELECTABLE,
   STATUS_COLOR,
-  type ApartmentBoard,
   type ApartmentStatus,
   type ApartmentUnit,
   type RoomKey,
 } from "../data/apartments";
+import { usePiazzaBoard } from "../hooks/usePiazzaBoard";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT, type MessageKey } from "../i18n";
@@ -22,29 +21,9 @@ const C = {
 };
 
 const COLS = Array.from({ length: 17 }, (_, i) => i + 1);
-const FALLBACK = snapshot as ApartmentBoard;
 
 type StatusFilter = "free" | "all";
 type RoomFilter = "all" | RoomKey;
-
-function usePiazzaBoard() {
-  const [board, setBoard] = useState<ApartmentBoard>(FALLBACK);
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/apartments/piazza")
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((data: ApartmentBoard) => {
-        if (!cancelled && Array.isArray(data?.units) && data.units.length) setBoard(data);
-      })
-      .catch(() => {
-        /* snapshot already loaded */
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-  return board;
-}
 
 const ROOM_KEYS: Record<RoomKey, MessageKey> = {
   studio: "chess.room.studio",
@@ -60,7 +39,13 @@ const STATUS_KEYS: Record<ApartmentStatus, MessageKey> = {
   unavailable: "chess.status.unavailable",
 };
 
-export function ApartmentChessboard({ projectName }: { projectName: string }) {
+export function ApartmentChessboard({
+  projectName,
+  embedded = false,
+}: {
+  projectName: string;
+  embedded?: boolean;
+}) {
   const t = useT();
   const { language } = useLocale();
   const ru = language.toLowerCase().startsWith("ru");
@@ -123,7 +108,8 @@ const chip = (active: boolean): CSSProperties => ({
     : projectName;
 
   return (
-    <div id="apartments">
+    <div id={embedded ? undefined : "apartments"}>
+      {!embedded && (
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 22 }}>
         <div>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
@@ -135,6 +121,7 @@ const chip = (active: boolean): CSSProperties => ({
           </p>
         </div>
       </div>
+      )}
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14 }}>
         <button type="button" style={chip(statusFilter === "free")} onClick={() => setStatusFilter("free")}>
