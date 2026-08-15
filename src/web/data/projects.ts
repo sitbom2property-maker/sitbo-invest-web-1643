@@ -29,6 +29,7 @@ export type Project = {
   mapsQuery?: string;
   floorPlans?: string[];
   floorPlanLabels?: string[];
+  floorPlanAreas?: string[];
   pricePerSqm?: string;
   liveCameraUrl?: string;
   tourUrl?: string;
@@ -119,7 +120,8 @@ export const projects: Project[] = [
       "/piazza/layout-2br.jpg",
       "/piazza/layout-3br.jpg",
     ],
-    floorPlanLabels: ["Studio 35.7 m²", "1+1 53.5 m²", "2+1 76.9 m²", "3+1 134 m²"],
+    floorPlanLabels: ["Studio", "1+1", "2+1", "3+1"],
+    floorPlanAreas: ["35.7 m²", "53.5 m²", "76.9 m²", "134 m²"],
     pricePerSqm: "from $2,450/m²",
   },
   {
