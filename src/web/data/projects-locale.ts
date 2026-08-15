@@ -41,7 +41,7 @@ function localizeCompletion(value: string): string {
 export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
   "piazza-residence": {
     tag: "Старый Батуми · Исторический центр",
-    address: "ул. Вахтанга Горгасали 59, Старый Батуми",
+    address: "ул. Вахтанга Горгасали 59–61, Старый Батуми",
     seaDistance: "10 минут до моря",
     seaMeters: "850 м",
     location: "Старый Батуми, ул. Вахтанга Горгасали 59–61 · 10 минут пешком до моря",

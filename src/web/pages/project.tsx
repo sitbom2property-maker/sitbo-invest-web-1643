@@ -134,7 +134,10 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
 
 // ─── Map ──────────────────────────────────────────────────────────────────────
 function MapEmbed({ project }: { project: Project }) {
-  const mapUrl = `https://maps.google.com/maps?q=${project.lat},${project.lng}&z=15&output=embed`;
+  const q = project.mapsQuery
+    ? encodeURIComponent(project.mapsQuery)
+    : `${project.lat},${project.lng}`;
+  const mapUrl = `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
   return (<>
 
     <div style={{ borderRadius: "16px", overflow: "hidden", height: "340px", background: C.light }}>
