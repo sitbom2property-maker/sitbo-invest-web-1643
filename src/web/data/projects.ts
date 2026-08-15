@@ -25,6 +25,8 @@ export type Project = {
   cardImage: string;
   lat: number;
   lng: number;
+  /** Google Maps search query for the embed pin; falls back to lat,lng. */
+  mapsQuery?: string;
   floorPlans?: string[];
   floorPlanLabels?: string[];
   pricePerSqm?: string;
@@ -50,7 +52,7 @@ export const projects: Project[] = [
     slug: "piazza-residence",
     tag: "Old Batumi · Historic Core",
     city: "Batumi",
-    address: "59 Vakhtang Gorgasali St, Old Batumi",
+    address: "59–61 Vakhtang Gorgasali St, Old Batumi",
     seaDistance: "10 minutes to the sea",
     seaMeters: "850 m",
     location: "Old Batumi, Vakhtang Gorgasali 59–61 · 10 min walk to the sea",
@@ -108,8 +110,9 @@ export const projects: Project[] = [
       "/piazza/render-2br.jpg",
     ],
     cardImage: "/piazza/exterior-tower.jpg",
-    lat: 41.65055,
-    lng: 41.6412,
+    lat: 41.64573,
+    lng: 41.63408,
+    mapsQuery: "Piazza Residence, 59-61 Vakhtang Gorgasali St, Batumi",
     floorPlans: [
       "/piazza/layout-studio.jpg",
       "/piazza/layout-1br.jpg",
