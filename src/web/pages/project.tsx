@@ -458,7 +458,7 @@ export default function ProjectPage() {
             {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
               src ? (
                 <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-                  <div style={{ aspectRatio: "3 / 4", background: "#FFFBF0", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "8px" : "12px" }}>
+                  <div style={{ aspectRatio: p.apartmentsKey === "piazza" ? "16 / 9" : "3 / 4", background: p.apartmentsKey === "piazza" ? "#0a0a0a" : "#FFFBF0", display: "flex", alignItems: "center", justifyContent: "center", padding: p.apartmentsKey === "piazza" ? 0 : (isMobile ? "8px" : "12px") }}>
                     <img src={src} alt={p.floorPlanLabels?.[n] || t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
                   </div>
                     {p.floorPlanLabels?.[n] && (
