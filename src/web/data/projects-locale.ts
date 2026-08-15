@@ -19,6 +19,7 @@ export type ProjectLocaleFields = Partial<
     | "features"
     | "materials"
     | "floorPlanLabels"
+    | "floorPlanAreas"
     | "pricePerSqm"
     | "priceFrom"
     | "completion"
@@ -54,7 +55,8 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     installment: "30% взнос / 0% на 27 месяцев",
     priceFrom: "От $89,250",
     pricePerSqm: "от $2,450/м²",
-    floorPlanLabels: ["Студия 35,7 м²", "1+1 53,5 м²", "2+1 76,9 м²", "3+1 134 м²"],
+    floorPlanLabels: ["Студия", "1+1", "2+1", "3+1"],
+    floorPlanAreas: ["35,7 м²", "53,5 м²", "76,9 м²", "134 м²"],
     developerBody:
       "Tower Group — батумский девелопер Piazza Residence: премиальный комплекс с реставрацией охраняемого исторического здания и современной башней с инфраструктурой отельного уровня в старом городе.",
     districtTitle: "Старый Батуми",
