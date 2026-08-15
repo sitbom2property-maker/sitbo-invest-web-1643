@@ -3,8 +3,9 @@ import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
-import { PiazzaViewer } from "../components/PiazzaViewer";
+import { ApartmentChessboard } from "../components/ApartmentChessboard";
 import { ParklineViewer } from "../components/ParklineViewer";
+import { RequestModal } from "../components/RequestModal";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -171,47 +172,6 @@ export default function ProjectPage() {
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
-  const [offerFormData, setOfferFormData] = useState({ name: "", phone: "", email: "" });
-  const [offerLoading, setOfferLoading] = useState(false);
-  const [offerError, setOfferError] = useState("");
-  const [offerSent, setOfferSent] = useState(false);
-
-  const submitOfferForm = async () => {
-    setOfferError("");
-    if (!offerFormData.name.trim() || (!offerFormData.phone.trim() && !offerFormData.email.trim())) {
-      setOfferError(t("home.contact.errorRequired"));
-      return;
-    }
-    setOfferLoading(true);
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: offerFormData.name.trim(),
-          phone: offerFormData.phone.trim(),
-          email: offerFormData.email.trim(),
-          project: project.name,
-          source: "Project page",
-          page: typeof window !== "undefined" ? window.location.pathname : undefined,
-        }),
-      });
-      if (res.ok) {
-        setOfferSent(true);
-        setOfferFormData({ name: "", phone: "", email: "" });
-        window.setTimeout(() => {
-          setShowOfferForm(false);
-          setOfferSent(false);
-        }, 2000);
-      } else {
-        setOfferError(t("home.contact.errorGeneric"));
-      }
-    } catch {
-      setOfferError(t("home.contact.errorNetwork"));
-    } finally {
-      setOfferLoading(false);
-    }
-  };
 
   const localizedList = localizeProjects(projects, language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
@@ -466,10 +426,14 @@ export default function ProjectPage() {
 
 
 
-{/* ── APARTMENT SELECTOR ── */}
+{/* ── APARTMENT CHESSBOARD ── */}
       {p.apartmentsKey === "piazza" && (
         <section style={{ padding: "80px 0 0" }}>
-          <PiazzaViewer projectName={p.name} />
+          <Container>
+            <div className="pr-reveal">
+              <ApartmentChessboard projectName={p.name} />
+            </div>
+          </Container>
         </section>
       )}
       {p.apartmentsKey === "parkline" && p.tourUrl && (
@@ -604,68 +568,14 @@ export default function ProjectPage() {
       )}
 
 {/* Offer Form Modal */}
-      {showOfferForm && (
-        <div onClick={() => setShowOfferForm(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "500px", width: "90%", cursor: "default", border: `1px solid rgba(140,178,192,0.2)` }}>
-            <button onClick={() => setShowOfferForm(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
-              ✕
-            </button>
-
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>
-              {t("project.offerModal.title")}
-            </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.6)", marginBottom: "28px" }}>
-              {t("project.offerModal.body", { project: project.name })}
-            </p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              <input
-                type="text"
-                placeholder={t("project.offerModal.name")}
-                value={offerFormData.name}
-                onChange={e => setOfferFormData({ ...offerFormData, name: e.target.value })}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <input
-                type="tel"
-                placeholder={t("project.offerModal.phone")}
-                value={offerFormData.phone}
-                onChange={e => setOfferFormData({ ...offerFormData, phone: e.target.value })}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <input
-                type="email"
-                placeholder={t("project.offerModal.email")}
-                value={offerFormData.email}
-                onChange={e => setOfferFormData({ ...offerFormData, email: e.target.value })}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", background: "rgba(255,251,240,0.05)", border: "1px solid rgba(255,251,240,0.12)", borderRadius: "8px", color: C.light, padding: "12px", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)}
-                onBlur={e => (e.target.style.borderColor = "rgba(255,251,240,0.12)")}
-              />
-              <button
-                type="button"
-                onClick={submitOfferForm}
-                disabled={offerLoading || offerSent}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: offerLoading ? "wait" : "pointer", marginTop: "8px", transition: "opacity 0.2s", opacity: offerLoading ? 0.7 : 1 }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = offerLoading ? "0.7" : "1")}
-              >
-                {offerSent ? t("home.contact.sentTitle") : offerLoading ? "…" : t("cta.sendRequest")}
-              </button>
-              {offerError ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#e57373", margin: "8px 0 0", textAlign: "center" }}>{offerError}</p>
-              ) : null}
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,251,240,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,251,240,0.1)", margin: "16px 0 0", textAlign: "center" }}>
-                {t("project.offerModal.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      <RequestModal
+        open={showOfferForm}
+        onClose={() => setShowOfferForm(false)}
+        title={t("popup.submit")}
+        subtitle={t("project.offerModal.body", { project: project.name })}
+        source="Project page"
+        topic={project.name}
+      />
     </div>
   </>);
 }

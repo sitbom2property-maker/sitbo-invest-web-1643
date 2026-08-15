@@ -297,9 +297,22 @@ const chip = (active: boolean): CSSProperties => ({
           color: C.light, minHeight: 280,
         }}>
           {!selected ? (
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, margin: 0 }}>
-              {t("chess.pickHint")}
-            </p>
+            <div>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, margin: "0 0 20px" }}>
+                {t("chess.pickHint")}
+              </p>
+              <button
+                type="button"
+                onClick={() => setRequestOpen(true)}
+                style={{
+                  width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
+                  letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal,
+                  border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
+                }}
+              >
+                {t("popup.submit")}
+              </button>
+            </div>
           ) : (
             <div>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 8px" }}>
@@ -378,7 +391,7 @@ const chip = (active: boolean): CSSProperties => ({
       <RequestModal
         open={requestOpen}
         onClose={() => setRequestOpen(false)}
-        title={t("chess.request")}
+        title={selected ? t("chess.request") : t("popup.submit")}
         subtitle={topic}
         source={leadSource}
         topic={topic}
