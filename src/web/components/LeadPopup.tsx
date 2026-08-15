@@ -113,7 +113,11 @@ export function LeadPopup() {
       if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.documentElement.classList.add("sitbo-modal-open");
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.documentElement.classList.remove("sitbo-modal-open");
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
@@ -170,9 +174,7 @@ export function LeadPopup() {
           position: fixed;
           inset: 0;
           z-index: 3000;
-          background: rgba(12, 7, 10, 0.45);
-          backdrop-filter: blur(3px);
-          -webkit-backdrop-filter: blur(3px);
+          background: rgba(12, 7, 10, 0.86);
           display: flex;
           align-items: flex-end;
           justify-content: center;

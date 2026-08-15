@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
+import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
 
 const C = {
@@ -34,6 +35,7 @@ export function ParklineViewer({
   panoramaUrl?: string;
 }) {
   const t = useT();
+  const modalOpen = useSitboModalOpen();
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
@@ -87,12 +89,16 @@ export function ParklineViewer({
         <ApartmentChessboard projectName={projectName} projectKey="parkline" embedded source="Parkline chessboard" />
       ) : (
         <div className="pk-frame">
-          <iframe
-            src={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
-            title={mode === "360" ? `${projectName} 360` : `${projectName} 3D`}
-            allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
-            allowFullScreen
-          />
+          {modalOpen ? (
+            <div className="pk-paused" aria-hidden="true" />
+          ) : (
+            <iframe
+              src={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
+              title={mode === "360" ? `${projectName} 360` : `${projectName} 3D`}
+              allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
+              allowFullScreen
+            />
+          )}
           <a
             className="pk-open"
             href={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
@@ -139,6 +145,7 @@ const CSS = `
     background: ${C.dark}; height: min(78vh, 760px); min-height: 480px;
   }
   .pk-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #111; }
+  .pk-paused { width: 100%; height: 100%; background: #111; }
   .pk-open {
     position: absolute; top: 12px; right: 12px;
     font-family: Inter, sans-serif; font-size: 0.68rem; font-weight: 600;
