@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "wouter";
 import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
@@ -132,6 +132,250 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
   </>);
 }
 
+// ─── Layout carousel ──────────────────────────────────────────────────────────
+function LayoutCarousel({
+  plans,
+  labels,
+  areas,
+  onOpen,
+}: {
+  plans: string[];
+  labels?: string[];
+  areas?: string[];
+  onOpen?: (src: string) => void;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ x: 0, moved: false });
+  const [active, setActive] = useState(0);
+  const isMobile = useIsMobile();
+
+  const goTo = (index: number) => {
+    const el = scrollerRef.current;
+    const slide = el?.children[index] as HTMLElement | undefined;
+    if (!el || !slide) return;
+    const left = slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2;
+    el.scrollTo({ left, behavior: "smooth" });
+  };
+
+  const onScroll = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const mid = el.scrollLeft + el.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    Array.from(el.children).forEach((node, i) => {
+      const s = node as HTMLElement;
+      const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    });
+    setActive(best);
+  };
+
+  return (
+    <div className="pr-reveal layout-carousel-wrap" style={{ transitionDelay: "80ms" }}>
+      {labels && labels.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            WebkitOverflowScrolling: "touch",
+            marginBottom: isMobile ? "16px" : "20px",
+            paddingBottom: "2px",
+          }}
+        >
+          {labels.map((label, i) => {
+            const on = i === active;
+            return (
+              <button
+                key={label + i}
+                type="button"
+                onClick={() => goTo(i)}
+                style={{
+                  flexShrink: 0,
+                  border: on ? "none" : "1px solid rgba(33,20,26,0.12)",
+                  background: on ? C.dark : "transparent",
+                  color: on ? C.light : C.dark,
+                  borderRadius: "999px",
+                  padding: isMobile ? "8px 14px" : "8px 16px",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: isMobile ? "0.68rem" : "0.75rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  transition: "background 0.25s ease, color 0.25s ease, border-color 0.25s ease",
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <div style={{ position: "relative" }}>
+        <div
+          ref={scrollerRef}
+          onScroll={onScroll}
+          className="layout-carousel"
+          style={{
+            display: "flex",
+            gap: isMobile ? "12px" : "18px",
+            overflowX: "auto",
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            padding: isMobile ? "0 6% 6px" : "0 11% 8px",
+          }}
+        >
+          {plans.map((src, i) => (
+            <article
+              key={src + i}
+              style={{
+                flex: isMobile ? "0 0 88%" : "0 0 min(720px, 78%)",
+                scrollSnapAlign: "center",
+                scrollSnapStop: "always",
+                borderRadius: "16px",
+                overflow: "hidden",
+                background: "#fff",
+                border: "1px solid rgba(33,20,26,0.08)",
+                boxShadow: i === active ? "0 10px 28px rgba(33,20,26,0.08)" : "none",
+                transition: "box-shadow 0.3s ease",
+                cursor: onOpen ? "pointer" : "default",
+              }}
+              onPointerDown={(e) => {
+                dragRef.current = { x: e.clientX, moved: false };
+              }}
+              onPointerMove={(e) => {
+                if (Math.abs(e.clientX - dragRef.current.x) > 10) dragRef.current.moved = true;
+              }}
+              onClick={() => {
+                if (!dragRef.current.moved) onOpen?.(src);
+              }}
+            >
+              <div
+                style={{
+                  aspectRatio: "16 / 10",
+                  background: "#FFFBF0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: isMobile ? "10px" : "18px",
+                }}
+              >
+                <img
+                  src={src}
+                  alt={labels?.[i] || `Layout ${i + 1}`}
+                  draggable={false}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", pointerEvents: "none" }}
+                />
+              </div>
+              {(labels?.[i] || areas?.[i]) && (
+                <div style={{ padding: isMobile ? "12px 14px 14px" : "14px 18px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#fff" }}>
+                  {labels?.[i] && (
+                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: C.dark }}>
+                      {labels[i]}
+                    </div>
+                  )}
+                  {areas?.[i] && (
+                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 500, marginTop: "4px", color: C.mutedDark }}>
+                      {areas[i]}
+                    </div>
+                  )}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+
+        {!isMobile && plans.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Previous layout"
+              onClick={() => goTo((active - 1 + plans.length) % plans.length)}
+              style={{
+                position: "absolute",
+                left: "8px",
+                top: "42%",
+                transform: "translateY(-50%)",
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid rgba(33,20,26,0.12)",
+                background: "rgba(255,251,240,0.92)",
+                color: C.dark,
+                fontSize: "1.25rem",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 4px 16px rgba(33,20,26,0.1)",
+              }}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              aria-label="Next layout"
+              onClick={() => goTo((active + 1) % plans.length)}
+              style={{
+                position: "absolute",
+                right: "8px",
+                top: "42%",
+                transform: "translateY(-50%)",
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid rgba(33,20,26,0.12)",
+                background: "rgba(255,251,240,0.92)",
+                color: C.dark,
+                fontSize: "1.25rem",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 4px 16px rgba(33,20,26,0.1)",
+              }}
+            >
+              ›
+            </button>
+          </>
+        )}
+      </div>
+
+      {plans.length > 1 && (
+        <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "16px" }}>
+          {plans.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={labels?.[i] || `Layout ${i + 1}`}
+              onClick={() => goTo(i)}
+              style={{
+                width: i === active ? "22px" : "8px",
+                height: "8px",
+                borderRadius: "999px",
+                border: "none",
+                padding: 0,
+                background: i === active ? C.dark : "rgba(33,20,26,0.18)",
+                cursor: "pointer",
+                transition: "width 0.25s ease, background 0.25s ease",
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Map ──────────────────────────────────────────────────────────────────────
 function MapEmbed({ project }: { project: Project }) {
   const q = project.mapsQuery
@@ -214,6 +458,8 @@ export default function ProjectPage() {
         .project-page p, .project-page h2, .project-page h3 {
           overflow-wrap: break-word;
         }
+        .layout-carousel::-webkit-scrollbar { display: none; }
+        .layout-carousel { -ms-overflow-style: none; scrollbar-width: none; }
         @media (max-width: 767px) {
           .project-specs-grid {
             grid-template-columns: 1fr 1fr !important;
@@ -457,23 +703,16 @@ export default function ProjectPage() {
               {t("project.availableLayouts")}
             </h3>
           </div>
+          {p.floorPlans && p.floorPlans.length > 0 ? (
+            <LayoutCarousel
+              plans={p.floorPlans}
+              labels={p.floorPlanLabels}
+              areas={p.floorPlanAreas}
+              onOpen={setModalSrc}
+            />
+          ) : (
           <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "10px" : "16px" }}>
-            {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
-              src ? (
-                <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-                  <div style={{ aspectRatio: "3 / 4", background: "#FFFBF0", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "8px" : "12px" }}>
-                    <img src={src} alt={p.floorPlanLabels?.[n] || t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
-                  </div>
-                    {p.floorPlanLabels?.[n] && (
-                    <div style={{ padding: isMobile ? "10px 8px" : "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#fff" }}>
-                      <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.62rem" : "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</div>
-                      {p.floorPlanAreas?.[n] && (
-                        <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.58rem" : "0.7rem", fontWeight: 500, letterSpacing: "0.06em", marginTop: "4px", color: C.mutedDark }}>{p.floorPlanAreas[n]}</div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : (
+            {[null, null, null].map((_, n) => (
                 <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "12px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFBF0" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="1"/>
@@ -483,9 +722,9 @@ export default function ProjectPage() {
                     {t("project.layoutComingSoon", { number: n + 1 })}
                   </span>
                 </div>
-              )
             ))}
           </div>
+          )}
         </Container>
       </section>
 
