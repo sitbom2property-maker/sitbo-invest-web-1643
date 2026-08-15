@@ -1,3 +1,4 @@
+import { formatInstallmentLine, remainingInstallmentMonths } from "./installment";
 import type { Project } from "./projects";
 
 export type ProjectLocaleFields = Partial<
@@ -47,10 +48,10 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     desc: "Знаковый жилой комплекс в историческом сердце Старого Батуми. Архитектура, которая считывает наследие квартала, частная пьяцца с венецианскими фонтанами и отреставрированный 119-летний памятник культуры. Выходите из дома — и вы уже в культурном центре города; до моря десять минут пешком.",
     area: "35,1–141,3 м²",
     ceilingHeight: "3,0 м",
-    floors: "18 этажей",
+    floors: "24 этажа",
     buildings: "1 корпус",
     finishing: "Белый каркас",
-    installment: "20% взнос / 0% на 29 месяцев",
+    installment: "30% взнос / 0% на 27 месяцев",
     priceFrom: "От $89,250",
     pricePerSqm: "от $2,450/м²",
     floorPlanLabels: ["Студия 35,7 м²", "1 спальня 53,5 м²", "2 спальни 76,9 м²", "3 спальни 134 м²"],
@@ -248,11 +249,14 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
 
 export function localizeProject(p: Project, language: string): Project {
   const lang = language.toLowerCase().startsWith("ru") ? "ru" : "en";
-  if (lang !== "ru") return p;
-  const ru = projectRuBySlug[p.slug];
-  const merged = ru ? { ...p, ...ru } : { ...p };
-  if (!ru?.completion) {
+  const ru = lang === "ru" ? projectRuBySlug[p.slug] : undefined;
+  const merged: Project = ru ? { ...p, ...ru } : { ...p };
+  if (lang === "ru" && !ru?.completion) {
     merged.completion = localizeCompletion(merged.completion);
+  }
+  if (p.installmentMonths != null && p.installmentAnchorYm) {
+    const months = remainingInstallmentMonths(p.installmentMonths, p.installmentAnchorYm);
+    merged.installment = formatInstallmentLine(p.downPaymentPct ?? 30, months, lang === "ru");
   }
   return merged;
 }

@@ -33,6 +33,10 @@ export type Project = {
   panoramaUrl?: string;
   developerLogo?: string;
   downPaymentPct?: number;
+  /** Remaining 0% months as of installmentAnchorYm; ticks down 1 each calendar month. */
+  installmentMonths?: number;
+  /** YYYY-MM when installmentMonths was the remaining term. */
+  installmentAnchorYm?: string;
   developerBody?: string;
   districtTitle?: string;
   districtBody?: string;
@@ -58,11 +62,13 @@ export const projects: Project[] = [
     completion: "Q4 2027",
     area: "35.1–141.3 m²",
     ceilingHeight: "3.0 m",
-    floors: "18 floors",
+    floors: "24 floors",
     buildings: "1 building",
     finishing: "White frame",
-    installment: "20% down / 0% over 29 months",
-    downPaymentPct: 20,
+    installment: "30% down / 0% over 27 months",
+    downPaymentPct: 30,
+    installmentMonths: 27,
+    installmentAnchorYm: "2026-08",
     apartmentsKey: "piazza",
     developerBody:
       "Tower Group is a Batumi developer known for Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
