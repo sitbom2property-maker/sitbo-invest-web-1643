@@ -634,6 +634,7 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
+  "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is our chessboard.",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",
