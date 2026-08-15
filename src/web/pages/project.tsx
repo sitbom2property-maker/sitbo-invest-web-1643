@@ -261,7 +261,7 @@ export default function ProjectPage() {
                   style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}
                 >
                   {p.developerLogo ? (
-                    <div style={{ flexShrink: 0, width: "88px", height: "64px", borderRadius: "8px", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "8px" }}>
+                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "8px", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
                       <img src={p.developerLogo} alt={p.developer} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
                     </div>
                   ) : (
@@ -454,14 +454,16 @@ export default function ProjectPage() {
               {t("project.availableLayouts")}
             </h3>
           </div>
-          <div className="pr-reveal" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
+          <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "10px" : "16px" }}>
             {(p.floorPlans && p.floorPlans.length > 0 ? p.floorPlans : [null, null, null]).map((src, n) => (
               src ? (
-                <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#FFFBF0", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-                  <img src={src} alt={t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", display: "block", objectFit: "contain" }} />
+                <div key={n} onClick={() => setModalSrc(src)} style={{ borderRadius: "12px", overflow: "hidden", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
+                  <div style={{ aspectRatio: "3 / 4", background: "#FFFBF0", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "8px" : "12px" }}>
+                    <img src={src} alt={p.floorPlanLabels?.[n] || t("project.layoutComingSoon", { number: n + 1 })} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+                  </div>
                     {p.floorPlanLabels?.[n] && (
-                    <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center" }}>
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
+                    <div style={{ padding: isMobile ? "10px 8px" : "12px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#fff" }}>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.62rem" : "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{p.floorPlanLabels[n]}</span>
                     </div>
                   )}
                 </div>

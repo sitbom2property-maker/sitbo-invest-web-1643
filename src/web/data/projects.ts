@@ -70,6 +70,7 @@ export const projects: Project[] = [
     installmentMonths: 27,
     installmentAnchorYm: "2026-08",
     apartmentsKey: "piazza",
+    developerLogo: "/piazza/developer-logo.png",
     developerBody:
       "Tower Group is a Batumi developer known for Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
     districtTitle: "Old Batumi",
@@ -115,7 +116,7 @@ export const projects: Project[] = [
       "/piazza/layout-2br.jpg",
       "/piazza/layout-3br.jpg",
     ],
-    floorPlanLabels: ["Studio 35.7 m²", "1 bedroom 53.5 m²", "2 bedrooms 76.9 m²", "3 bedrooms 134 m²"],
+    floorPlanLabels: ["Studio 35.7 m²", "1+1 53.5 m²", "2+1 76.9 m²", "3+1 134 m²"],
     pricePerSqm: "from $2,450/m²",
   },
   {

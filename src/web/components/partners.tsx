@@ -12,6 +12,7 @@ const partners: Partner[] = [
   { name: 'Ambassadori', logo: '/partners/partner-logo-ambassadori.png' },
   { name: 'Archi', logo: '/partners/partner-logo-archi.png' },
   { name: 'Artex', logo: '/partners/partner-logo-artex.png' },
+  { name: 'Tower Group', logo: '/partners/partner-logo-tower.png' },
   { name: 'Eagle Hills', logo: '/partners/partner-logo-eaglehills.png' },
   { name: 'Gumbati', logo: '/partners/partner-logo-gumbati.png' },
   { name: 'One', logo: '/partners/partner-logo-one.png' },
