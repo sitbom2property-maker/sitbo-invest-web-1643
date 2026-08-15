@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
 
 export type RequestModalProps = {
@@ -41,18 +41,24 @@ export function RequestModal({
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onCloseRef.current();
     };
     window.addEventListener("keydown", onKey);
+    document.documentElement.classList.add("sitbo-modal-open");
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("sitbo-modal-open");
+      document.body.style.overflow = prevOverflow;
     };
-  }, [open, onClose]);
+  }, [open]);
 
   useEffect(() => {
     if (open) {
@@ -104,18 +110,19 @@ export function RequestModal({
       <style>{`
         .req-modal-backdrop {
           position: fixed; inset: 0; z-index: 3200;
-          background: rgba(12,7,10,0.74);
-          backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-          display: flex; align-items: center; justify-content: center;
-          padding: 20px; animation: reqFade 0.3s ease;
+          background: rgba(12,7,10,0.86);
+          display: flex; align-items: flex-start; justify-content: center;
+          padding: max(24px, 8vh) 16px 24px; animation: reqFade 0.2s ease;
+          overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
         .req-modal-card {
           position: relative; width: 100%; max-width: 470px;
           background: #21141A; border: 1px solid rgba(140,178,192,0.22);
           border-radius: 16px; padding: 40px 36px 32px;
           box-shadow: 0 30px 80px rgba(0,0,0,0.45);
-          animation: reqRise 0.38s cubic-bezier(0.16,1,0.3,1);
-          box-sizing: border-box; max-height: 90vh; overflow-y: auto;
+          animation: reqRise 0.28s cubic-bezier(0.16,1,0.3,1);
+          box-sizing: border-box; margin: 0 auto;
+          overscroll-behavior: contain;
         }
         .req-modal-close {
           position: absolute; top: 14px; right: 14px;
@@ -128,7 +135,10 @@ export function RequestModal({
         .req-modal-submit:hover { opacity: 0.88; }
         @keyframes reqFade { from { opacity: 0 } to { opacity: 1 } }
         @keyframes reqRise { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: none } }
-        @media (max-width: 520px) { .req-modal-card { padding: 34px 22px 26px } }
+        @media (max-width: 520px) { .req-modal-card { padding: 28px 20px 22px } }
+        @media (min-width: 721px) {
+          .req-modal-backdrop { align-items: center; padding: 24px; }
+        }
       `}</style>
 
       <div className="req-modal-card" onClick={(e) => e.stopPropagation()}>

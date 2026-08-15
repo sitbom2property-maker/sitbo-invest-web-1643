@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
 import { useLocale } from "../context/LocaleContext";
+import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
 
 const C = {
@@ -37,6 +38,7 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
   const src = useMemo(() => viewerSrc(ru), [ru]);
+  const modalOpen = useSitboModalOpen();
 
   useEffect(() => {
     const apply = () => {
@@ -84,14 +86,18 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
         <ApartmentChessboard projectName={projectName} embedded source="Piazza chessboard" />
       ) : (
         <div className="pz-frame">
-          <iframe
-            title={`${projectName} — Flat.show`}
-            src={src}
-            allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
-            allowFullScreen
-            loading="eager"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {modalOpen ? (
+            <div className="pz-paused" aria-hidden="true" />
+          ) : (
+            <iframe
+              title={`${projectName} — Flat.show`}
+              src={src}
+              allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
+              allowFullScreen
+              loading="eager"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          )}
         </div>
       )}
 
@@ -130,6 +136,7 @@ const CSS = `
     background: #f4f1ec; height: min(82vh, 860px); min-height: 520px;
   }
   .pz-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #f4f1ec; }
+  .pz-paused { width: 100%; height: 100%; background: #1a1216; }
   @media (max-width: 767px) {
     .pz-frame { height: 75vh; min-height: 460px; }
   }
