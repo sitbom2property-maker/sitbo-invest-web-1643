@@ -111,7 +111,7 @@ function TwoColumns() {
               ))}
             </div>
             <div style={{ marginTop: "40px" }}>
-              <a href="#contact-form" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.dark ? C.dark : C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <a href="#contact-form" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: col.dark ? C.teal : C.dark, borderRadius: "8px", padding: "12px 28px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {col.dark ? t("turnkey.cta.calculateRoi") : t("turnkey.cta.discussProject")}
               </a>
             </div>
