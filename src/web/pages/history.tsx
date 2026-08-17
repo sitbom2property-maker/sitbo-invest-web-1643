@@ -122,14 +122,14 @@ export default function HistoryPage() {
 
         .ht-hero h1 em {
           font-style: italic;
-          color: ${C.teal};
+          color: ${C.light};
         }
 
         .ht-hero p {
           font-family: Inter, sans-serif;
           font-size: clamp(0.92rem, 2vw, 1.05rem);
           line-height: 1.75;
-          color: rgba(255,254,249,0.58);
+          color: ${C.light};
           max-width: 560px;
           margin: 0;
         }
@@ -148,7 +148,7 @@ export default function HistoryPage() {
           text-transform: uppercase;
           padding: 10px 16px;
           border: 1px solid rgba(255,254,249,0.16);
-          color: rgba(255,254,249,0.45);
+          color: ${C.light};
           background: transparent;
           border-radius: 999px;
         }
@@ -196,7 +196,7 @@ export default function HistoryPage() {
           font-size: 0.68rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: ${C.teal};
+          color: ${C.light};
           white-space: nowrap;
         }
 
@@ -283,7 +283,7 @@ export default function HistoryPage() {
           font-size: 0.68rem;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: ${C.teal};
+          color: ${C.light};
           margin-bottom: 10px;
         }
 
@@ -300,7 +300,7 @@ export default function HistoryPage() {
           font-family: Inter, sans-serif;
           font-size: 0.92rem;
           line-height: 1.7;
-          color: rgba(255,254,249,0.62);
+          color: ${C.light};
           margin: 0;
         }
 
@@ -311,7 +311,7 @@ export default function HistoryPage() {
           font-family: Inter, sans-serif;
           font-size: 0.88rem;
           line-height: 1.7;
-          color: rgba(255,254,249,0.45);
+          color: ${C.light};
         }
 
         @media (prefers-reduced-motion: reduce) {

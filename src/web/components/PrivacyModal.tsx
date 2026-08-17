@@ -112,7 +112,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           margin: 0;
           font-family: Inter, sans-serif;
           font-size: 13px;
-          color: rgba(255,255,255,0.55);
+          color: #FFFEF9;
         }
         .privacy-modal-close {
           position: absolute;
@@ -150,7 +150,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           font-family: Inter, sans-serif;
           font-size: 14px;
           line-height: 1.55;
-          color: rgba(255,255,255,0.78);
+          color: #FFFEF9;
         }
         .privacy-modal-section ul {
           margin: 10px 0 0;
@@ -162,7 +162,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           font-family: Inter, sans-serif;
           font-size: 14px;
           line-height: 1.5;
-          color: rgba(255,255,255,0.78);
+          color: #FFFEF9;
         }
         @keyframes privacyFade { from { opacity: 0 } to { opacity: 1 } }
         @keyframes privacyRise {

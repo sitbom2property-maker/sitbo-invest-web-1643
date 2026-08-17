@@ -298,7 +298,7 @@ const chip = (active: boolean): CSSProperties => ({
         }}>
           {!selected ? (
             <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.55)", lineHeight: 1.7, margin: "0 0 20px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, margin: "0 0 20px" }}>
                 {t("chess.pickHint")}
               </p>
               <button
@@ -315,7 +315,7 @@ const chip = (active: boolean): CSSProperties => ({
             </div>
           ) : (
             <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 8px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, margin: "0 0 8px" }}>
                 {t("chess.unit")} {selected.n}
               </p>
               <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
@@ -329,27 +329,27 @@ const chip = (active: boolean): CSSProperties => ({
                   [t("chess.status.label"), t(STATUS_KEYS[selected.s])],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,254,249,0.4)", margin: "0 0 4px" }}>{label}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: "0 0 4px" }}>{label}</p>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
                   </div>
                 ))}
               </div>
               {selected.p ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.teal, margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.light, margin: "0 0 4px" }}>
                   {formatFromUSD(selected.p)}
                 </p>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,254,249,0.5)", margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.light, margin: "0 0 4px" }}>
                   {t("chess.priceOnRequest")}
                 </p>
               )}
               {selected.m ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.45)", margin: "0 0 14px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.light, margin: "0 0 14px" }}>
                   {formatFromUSD(selected.m)} / m²
                 </p>
               ) : <div style={{ height: 14 }} />}
               {(ru ? selected.vr || selected.hr : selected.v || selected.h) ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.65)", margin: "0 0 16px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "0 0 16px" }}>
                   {[ru ? selected.vr : selected.v, ru ? selected.hr : selected.h].filter(Boolean).join(" · ")}
                 </p>
               ) : null}
@@ -373,7 +373,7 @@ const chip = (active: boolean): CSSProperties => ({
                   {t("chess.request")}
                 </button>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "rgba(255,254,249,0.45)", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.light, margin: 0 }}>
                   {t("chess.notSelectable")}
                 </p>
               )}

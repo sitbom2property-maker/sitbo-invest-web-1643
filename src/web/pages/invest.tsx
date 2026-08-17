@@ -258,7 +258,7 @@ const CSS = `
 }
 .iv-hero-eyebrow {
   display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(255,255,255,.5); margin: 0 0 16px;
+  color: var(--white); margin: 0 0 16px;
 }
 .iv-hero h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
@@ -266,7 +266,7 @@ const CSS = `
 }
 .iv-hero-lead {
   font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
-  color: rgba(255,255,255,.78); margin: 0 0 28px; max-width: 460px;
+  color: var(--white); margin: 0 0 28px; max-width: 460px;
 }
 .iv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 .iv-hero-visual {
@@ -287,7 +287,7 @@ const CSS = `
 }
 .iv-split p {
   margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
-  color: rgba(255,255,255,.78); max-width: 420px;
+  color: var(--white); max-width: 420px;
 }
 .iv-stats {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
@@ -305,9 +305,9 @@ const CSS = `
 }
 .iv-stat-label {
   font-size: clamp(13px, 1.1vw, 15px); line-height: 1.35;
-  color: inherit; opacity: .78; max-width: 16ch;
+  color: var(--white); max-width: 16ch;
 }
-.iv-stat-white .iv-stat-label { opacity: .65; }
+.iv-stat-white .iv-stat-label { color: inherit; opacity: .65; }
 
 .iv-quote {
   margin-top: clamp(36px, 4vw, 56px);
@@ -322,7 +322,7 @@ const CSS = `
   font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
 }
 .iv-quote cite {
-  font-style: normal; font-size: 14px; color: rgba(255,255,255,.5);
+  font-style: normal; font-size: 14px; color: var(--white);
 }
 
 /* advantages */
@@ -339,7 +339,7 @@ const CSS = `
   font-size: clamp(17px, 1.5vw, 20px); line-height: 1.25;
 }
 .iv-adv-card p {
-  margin: 0; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.65);
+  margin: 0; font-size: 14px; line-height: 1.45; color: var(--white);
 }
 
 /* panel sections */
@@ -416,7 +416,7 @@ const CSS = `
 /* market */
 .iv-market { padding: clamp(48px, 6vw, 88px) 0; }
 .iv-market-head { margin-bottom: clamp(28px, 4vw, 44px); max-width: 560px; }
-.iv-market-head .iv-panel-eyebrow { color: rgba(255,255,255,.45); }
+.iv-market-head .iv-panel-eyebrow { color: var(--white); }
 .iv-market-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
@@ -426,15 +426,15 @@ const CSS = `
 }
 .iv-chart h3 {
   font-family: var(--body); font-size: 14px; font-weight: 500; margin: 0 0 20px;
-  color: rgba(255,255,255,.55);
+  color: var(--white);
 }
 .iv-bar-row {
   display: grid; grid-template-columns: 88px 1fr auto; gap: 12px;
   align-items: center; margin-bottom: 12px;
 }
-.iv-bar-row span:first-child { font-size: 14px; color: rgba(255,255,255,.75); }
+.iv-bar-row span:first-child { font-size: 14px; color: var(--white); }
 .iv-bar-row span:last-child {
-  font-size: 13px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.55); min-width: 4.5ch; text-align: right;
+  font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white); min-width: 4.5ch; text-align: right;
 }
 .iv-bar-track {
   height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden;
@@ -457,14 +457,14 @@ const CSS = `
   width: 48px; height: 48px; border-radius: 50%;
   border: 1px solid rgba(255,255,255,.28);
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.7);
+  font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white);
 }
 .iv-step h3 {
   font-family: var(--display); font-weight: 600; margin: 0 0 6px;
   font-size: clamp(17px, 1.5vw, 20px);
 }
 .iv-step p {
-  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.65);
+  margin: 0; font-size: 14px; line-height: 1.5; color: var(--white);
 }
 
 /* faq */
@@ -500,7 +500,7 @@ const CSS = `
   font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2;
 }
 .iv-faq-aside p {
-  margin: 0 0 22px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.68);
+  margin: 0 0 22px; font-size: 14px; line-height: 1.5; color: var(--white);
 }
 
 /* cta */
@@ -517,14 +517,14 @@ const CSS = `
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;
 }
-.iv-cta .iv-panel-eyebrow { color: rgba(255,255,255,.45); }
+.iv-cta .iv-panel-eyebrow { color: var(--white); }
 .iv-cta h2 {
   font-family: var(--display); font-weight: 600; margin: 0 0 14px;
   font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
 }
 .iv-cta p {
   margin: 0 auto 28px; max-width: 480px;
-  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: rgba(255,255,255,.75);
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: var(--white);
 }
 
 @media (max-width: 1024px) {
@@ -603,7 +603,7 @@ export default function InvestPage() {
             ))}
           </div>
           <div className="iv-quote rv" id="notes">
-            <span className="iv-panel-eyebrow" style={{ color: "rgba(255,255,255,.45)" }}>
+            <span className="iv-panel-eyebrow" style={{ color: "var(--white)" }}>
               {t("v2.quote.eyebrow")}
             </span>
             <blockquote>{t("invest.why.quote")}</blockquote>

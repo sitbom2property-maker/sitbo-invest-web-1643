@@ -288,7 +288,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 				<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px", flexWrap: "wrap", gap: "12px" }}>
 					<div>
 						<Link href="/admin">
-							<a style={{ color: C.accent, fontFamily: "Inter, sans-serif", fontSize: "0.8rem", textDecoration: "none" }}>← Назад</a>
+							<a style={{ color: C.light, fontFamily: "Inter, sans-serif", fontSize: "0.8rem", textDecoration: "none" }}>← Назад</a>
 						</Link>
 						<h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.75rem", margin: "8px 0 0", fontWeight: 500 }}>
 							{isNew ? "Новый объект" : `Объект ${id}`}
@@ -463,22 +463,22 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
 					{!isNew && (
 						<aside style={{ flex: "0 0 320px", maxWidth: "100%" }}>
-							<h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.1rem", margin: "0 0 16px", color: C.accent }}>История</h2>
+							<h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.1rem", margin: "0 0 16px", color: C.light }}>История</h2>
 							<div style={{ borderLeft: `2px solid ${C.burgundy}`, paddingLeft: "16px" }}>
 								{history.length === 0 ? (
-									<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,254,249,0.45)" }}>Нет записей</p>
+									<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "#FFFEF9" }}>Нет записей</p>
 								) : (
 									history.map((h) => (
 										<div key={h.id} style={{ marginBottom: "20px", position: "relative" }}>
 											<div style={{ position: "absolute", left: "-23px", top: "6px", width: "8px", height: "8px", borderRadius: "50%", background: C.accent }} />
-											<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.accent, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+											<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.light, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
 												{h.event} · {new Date(h.createdAt).toLocaleString("ru-RU")}
 											</p>
 											{h.description && (
 												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", margin: "0 0 4px", lineHeight: 1.4 }}>{h.description}</p>
 											)}
 											{h.price != null && (
-												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.5)", margin: 0 }}>
+												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "#FFFEF9", margin: 0 }}>
 													Цена: {h.price.toLocaleString()}
 												</p>
 											)}
@@ -497,7 +497,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
 		<div style={{ marginBottom: "28px", padding: "20px", background: "rgba(255,254,249,0.03)", border: `1px solid ${C.burgundy}`, borderRadius: "10px" }}>
-			<h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.12em", color: C.accent, margin: "0 0 16px" }}>{title}</h2>
+			<h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.12em", color: C.light, margin: "0 0 16px" }}>{title}</h2>
 			{children}
 		</div>
 	);
@@ -506,7 +506,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
 	return (
 		<div style={{ marginBottom: "14px" }}>
-			<label style={{ display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.6)", marginBottom: "6px" }}>{label}</label>
+			<label style={{ display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "#FFFEF9", marginBottom: "6px" }}>{label}</label>
 			{children}
 		</div>
 	);

@@ -31,10 +31,10 @@ function Hero() {
         <div style={{ flex: "1 1 0", minWidth: 0 }}>
           <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, marginBottom: "28px" }}>
             {t("turnkey.hero.title")}<br />
-            <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.hero.titleEm")}</em>
+            <em style={{ fontStyle: "italic", color: C.light }}>{t("turnkey.hero.titleEm")}</em>
           </h1>
 
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem,1.3vw,1.05rem)", color: "rgba(255,254,249,0.65)", lineHeight: 1.75, marginBottom: "52px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem,1.3vw,1.05rem)", color: C.light, lineHeight: 1.75, marginBottom: "52px" }}>
             {t("turnkey.hero.body")}
           </p>
 
@@ -98,14 +98,14 @@ function TwoColumns() {
         {cols.map(col => (
           <div key={col.tag} style={{ background: col.bg, borderRadius: "16px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: col.dark ? "rgba(255,254,249,0.55)" : "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: col.dark ? C.light : "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
               {col.items.map(item => (
                 <div key={item.label} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
                   <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: col.dark ? "rgba(140,178,192,0.1)" : "rgba(140,178,192,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{item.icon}</div>
                   <div>
                     <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.85rem", color: col.dark ? C.light : C.dark, margin: "0 0 5px" }}>{item.label}</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: col.dark ? "rgba(255,254,249,0.5)" : "rgba(33,20,26,0.5)", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: col.dark ? C.light : "rgba(33,20,26,0.5)", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -137,10 +137,10 @@ function DesignRule() {
             {t("turnkey.design.title")}<br />
             <em style={{ fontStyle: "italic" }}>{t("turnkey.design.titleEm")}</em>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.7)", lineHeight: 1.8, marginBottom: "12px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.8, marginBottom: "12px" }}>
             {t("turnkey.design.body1")}
           </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.7)", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.8 }}>
             {t("turnkey.design.body2")}
           </p>
         </div>
@@ -251,13 +251,13 @@ function Calculator() {
           {shown && (
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,254,249,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
                   ${low.toLocaleString()} – ${high.toLocaleString()}
                 </p>
               </div>
               <div style={{ background: C.wine, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,254,249,0.45)", marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
@@ -338,7 +338,7 @@ function Portfolio() {
             </div>
             <div style={{ display: "flex", gap: "8px", background: "rgba(255,254,249,0.06)", borderRadius: "10px", padding: "4px" }}>
 {([["all", t("turnkey.portfolio.all")], ["life", t("turnkey.portfolio.forLife")], ["invest", t("turnkey.portfolio.forInvestment")]] as const).map(([val, label]) => (
-                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.light : "rgba(255,254,249,0.55)" }}>
+                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: C.light }}>
 {label}
                 </button>
               ))}
@@ -354,7 +354,7 @@ function Portfolio() {
                   <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 500, color: C.light, margin: "0 0 14px" }}>{p.title}</h3>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                     {p.tags.map(tag => (
-                      <span key={tag} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: p.type === "invest" ? C.teal : "rgba(255,254,249,0.6)", background: p.type === "invest" ? "rgba(140,178,192,0.1)" : "rgba(255,254,249,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
+                      <span key={tag} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.light, background: p.type === "invest" ? "rgba(140,178,192,0.1)" : "rgba(255,254,249,0.06)", borderRadius: "4px", padding: "4px 8px" }}>{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -388,7 +388,7 @@ function Guarantees() {
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.invest.title")}
           </h3>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.55)", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.8 }}>
             {t("turnkey.guarantee.invest.body")}
           </p>
         </div>
@@ -414,10 +414,10 @@ function MarketStats() {
 {/* Stat 1: Tourism Growth */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>9,4M</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat1.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>9,4M</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat1.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat1.body")}
             </p>
           </div>
@@ -425,10 +425,10 @@ function MarketStats() {
 {/* Stat 2: Nightly Rates */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$60–$100</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat2.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>$60–$100</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat2.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat2.body")}
             </p>
           </div>
@@ -436,10 +436,10 @@ function MarketStats() {
 {/* Stat 3: Payback Period */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>11</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat3.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>11</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat3.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat3.body")}
             </p>
           </div>
@@ -447,10 +447,10 @@ function MarketStats() {
 {/* Stat 4: Price Appreciation */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>+70%</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat4.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>+70%</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat4.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat4.body")}
             </p>
           </div>
@@ -458,10 +458,10 @@ function MarketStats() {
 {/* Stat 5: Market Price */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>$1,850</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat5.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>$1,850</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat5.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat5.body")}
             </p>
           </div>
@@ -469,10 +469,10 @@ function MarketStats() {
 {/* Stat 6: Institutional Confidence */}
           <div>
             <div style={{ marginBottom: "16px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.teal, margin: "0" }}>✓</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.6)", margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat6.label")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: C.light, margin: "0" }}>✓</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "6px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t("turnkey.market.stat6.label")}</p>
             </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7, margin: 0 }}>
               {t("turnkey.market.stat6.body")}
             </p>
           </div>
@@ -499,7 +499,7 @@ function ContactForm() {
   };
   const labelStyle: CSSProperties = {
     display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.14em",
-    textTransform: "uppercase", color: "rgba(255,254,249,0.45)", marginBottom: "8px",
+    textTransform: "uppercase", color: C.light, marginBottom: "8px",
   };
 
   return (<>
@@ -511,7 +511,7 @@ function ContactForm() {
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>
               {t("turnkey.contact.title")}
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.75 }}>
               {t("turnkey.contact.body")}
             </p>
           </div>
@@ -520,7 +520,7 @@ function ContactForm() {
             <div style={{ textAlign: "center", padding: "60px 0" }}>
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "20px" }}><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "10px" }}>{t("turnkey.contact.successTitle")}</h2>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,254,249,0.5)" }}>{t("turnkey.contact.successBody")}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.light }}>{t("turnkey.contact.successBody")}</p>
             </div>
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -553,15 +553,15 @@ function ContactForm() {
 
 {/* Contact details */}
           <div style={{ marginTop: "48px", paddingTop: "40px", borderTop: "1px solid rgba(140,178,192,0.1)", display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "32px" }}>
-            <a href="https://wa.me/995591800800" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,254,249,0.5)")}>
+            <a href="https://wa.me/995591800800" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, textDecoration: "none" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp
             </a>
-            <a href="mailto:sitboinvest@gmail.com" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.5)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = C.teal)} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,254,249,0.5)")}>
+            <a href="mailto:sitboinvest@gmail.com" style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, textDecoration: "none" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               sitboinvest@gmail.com
             </a>
-            <span style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.5)" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
               {t("turnkey.contact.location")}
             </span>

@@ -390,7 +390,7 @@ export function Nav() {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
-                    color: isActive(l.href) ? "#FFFEF9" : "rgba(255,254,249,0.72)",
+                    color: "#FFFEF9",
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
@@ -409,7 +409,7 @@ export function Nav() {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
-                    color: isActive(l.href) ? "#FFFEF9" : "rgba(255,254,249,0.72)",
+                    color: "#FFFEF9",
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
@@ -418,7 +418,7 @@ export function Nav() {
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFEF9")}
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = isActive(l.href) ? "#FFFEF9" : "rgba(255,254,249,0.72)")
+                    (e.currentTarget.style.color = "#FFFEF9")
                   }
                 >
                   {t(l.labelKey)}

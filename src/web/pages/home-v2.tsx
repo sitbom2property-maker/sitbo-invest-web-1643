@@ -749,7 +749,7 @@ html, body { background: #21141A; }
 .rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
 .rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
 .rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--bg); }
-.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: rgba(255,255,255,.9); margin: 0; }
+.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: var(--white); margin: 0; }
 .rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
 .rd-split .rd-lead { max-width: 420px; }
@@ -786,7 +786,7 @@ html, body { background: #21141A; }
 }
 .rd-hero-copy p {
   font-family: var(--body); font-size: clamp(14px, 1.04vw, 15px); line-height: 1.45;
-  color: rgba(255,255,255,.85); margin: 0 0 30px; max-width: 500px;
+  color: var(--white); margin: 0 0 30px; max-width: 500px;
 }
 .rd-hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
 .rd-hero-btns .rd-btn { min-width: 166px; }
@@ -809,8 +809,10 @@ html, body { background: #21141A; }
 .rd-stat-img { padding: 0; overflow: hidden; }
 .rd-stat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .rd-stat-value { display: block; font-family: var(--body); font-weight: 500; font-size: clamp(28px, 3.6vw, 56px); line-height: 1.05; }
-.rd-stat-label { display: block; font-family: var(--body); font-size: clamp(13px, 1.25vw, 20px); margin-top: 10px; opacity: .92; }
-.rd-stat-note { font-family: var(--body); font-size: clamp(11px, 1vw, 15px); opacity: .55; }
+.rd-stat-label { display: block; font-family: var(--body); font-size: clamp(13px, 1.25vw, 20px); margin-top: 10px; color: var(--white); }
+.rd-stat-white .rd-stat-label { color: inherit; opacity: .92; }
+.rd-stat-note { font-family: var(--body); font-size: clamp(11px, 1vw, 15px); color: var(--white); }
+.rd-stat-white .rd-stat-note { color: inherit; opacity: .55; }
 
 /* quote / global recognition */
 .rd-quote { padding: clamp(40px, 6vw, 96px) 0 clamp(56px, 7vw, 104px); }
@@ -822,9 +824,9 @@ html, body { background: #21141A; }
 .rd-recog-copy .rd-h2 { margin: 0 0 22px; }
 .rd-recog-copy blockquote {
   font-family: var(--body); font-weight: 300; font-size: clamp(20px, 2.22vw, 32px);
-  line-height: 1.3; margin: 0 0 18px; color: rgba(255,255,255,.95);
+  line-height: 1.3; margin: 0 0 18px; color: var(--white);
 }
-.rd-quote-author { font-family: var(--body); font-size: 16px; color: rgba(255,255,255,.7); margin: 0 0 28px; }
+.rd-quote-author { font-family: var(--body); font-size: 16px; color: var(--white); margin: 0 0 28px; }
 .rd-recog-visual {
   border: 1px solid rgba(255,255,255,.85); overflow: hidden;
   aspect-ratio: 4 / 5; max-height: 640px;
@@ -893,14 +895,14 @@ html, body { background: #21141A; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(33,20,26,.35) 0%, rgba(33,20,26,.72) 100%);
 }
-.rd-eco-index { position: relative; z-index: 1; font-family: var(--body); font-size: 13px; color: rgba(255,255,255,.5); }
+.rd-eco-index { position: relative; z-index: 1; font-family: var(--body); font-size: 13px; color: var(--white); }
 .rd-eco-title {
   position: relative; z-index: 1; font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px);
   margin-top: 14px; line-height: 1.3;
 }
 .rd-eco-body {
   position: relative; z-index: 1; margin-top: auto; font-family: var(--body);
-  font-size: clamp(14px, 1.25vw, 18px); line-height: 1.45; color: rgba(255,255,255,.86);
+  font-size: clamp(14px, 1.25vw, 18px); line-height: 1.45; color: var(--white);
   opacity: 0; max-height: 0; overflow: hidden; transition: opacity .35s ease;
 }
 .rd-eco-card.is-open .rd-eco-body { opacity: 1; max-height: 420px; }
@@ -929,7 +931,7 @@ html, body { background: #21141A; }
   font-family: var(--body); font-weight: 700; font-size: clamp(14px, 1.25vw, 18px);
   line-height: 1.32; margin: 0 0 12px;
 }
-.rd-fb-card figcaption { font-family: var(--body); font-size: clamp(13px, 1.1vw, 15px); color: rgba(255,255,255,.68); }
+.rd-fb-card figcaption { font-family: var(--body); font-size: clamp(13px, 1.1vw, 15px); color: var(--white); }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
 .rd-fb-tags span {
   font-family: var(--body); font-size: 13px; padding: 6px 12px;
@@ -969,15 +971,15 @@ html, body { background: #21141A; }
 }
 .rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(780px + var(--rd-inset)); }
 .rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; }
-.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: rgba(255,255,255,.85); margin: 0 0 34px; max-width: 640px; }
+.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
 .rd-news-row { display: flex; align-items: flex-end; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.55); padding-bottom: 8px; }
 .rd-news-row input {
   flex: 1; min-width: 0; background: transparent; border: none; outline: none;
   font-family: var(--body); font-size: 16px; color: #FFFEF9; padding: 10px 0;
 }
-.rd-news-row input::placeholder { color: rgba(255,255,255,.6); }
+.rd-news-row input::placeholder { color: #FFFEF9; }
 .rd-news-row .rd-btn { min-width: 171px; }
-.rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: rgba(255,255,255,.7); cursor: pointer; }
+.rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: #FFFEF9; cursor: pointer; }
 .rd-news-agree input { accent-color: #FFFEF9; margin-top: 2px; }
 .rd-news-agree a, .rd-news-privacy {
   color: #FFFEF9; background: none; border: none; padding: 0; margin: 0;

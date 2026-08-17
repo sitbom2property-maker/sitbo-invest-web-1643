@@ -38,7 +38,7 @@ export function FooterV2() {
         .fv2-name em { font-family: 'Inter', sans-serif; font-style: italic; }
         .fv2-tagline {
           font-size: clamp(15px, 1.25vw, 18px); line-height: 1.45;
-          color: rgba(255,255,255,.82); margin: 0; max-width: 560px;
+          color: #FFFEF9; margin: 0; max-width: 560px;
         }
         .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
@@ -47,14 +47,14 @@ export function FooterV2() {
         }
         .fv2-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
         .fv2-col a {
-          font-size: 16px; color: rgba(255,255,255,.85); text-decoration: none;
+          font-size: 16px; color: #FFFEF9; text-decoration: none;
           transition: color .2s; white-space: nowrap;
         }
         .fv2-col a:hover { color: #FFFEF9; text-decoration: underline; }
         .fv2-bottom {
-          margin-top: clamp(40px, 6vw, 96px); font-size: 16px; color: rgba(255,255,255,.72);
+          margin-top: clamp(40px, 6vw, 96px); font-size: 16px; color: #FFFEF9;
         }
-        .fv2-bottom a { color: rgba(255,255,255,.72); }
+        .fv2-bottom a { color: #FFFEF9; }
         @media (max-width: 900px) {
           .fv2-grid { grid-template-columns: 1fr 1fr; }
           .fv2-brand { grid-column: 1 / -1; }

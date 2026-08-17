@@ -61,7 +61,7 @@ function CatalogCard({ p }: { p: Project }) {
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
             {/* City badge */}
-            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,254,249,0.8)" }}>
+            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>
               {localizeCityLabel(p.city, language)}
             </div>
 
@@ -72,7 +72,7 @@ function CatalogCard({ p }: { p: Project }) {
 
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,254,249,0.55)", marginBottom: "4px" }}>{p.tag}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{p.tag}</p>
               <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function CatalogPage() {
             <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
               {t("catalog.title")}
             </h1>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.5)", maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
               {localizedProjects.length} {t("catalog.subtitle")}
             </p>
           </div>
@@ -245,10 +245,10 @@ export default function CatalogPage() {
                 padding: "8px 18px", borderRadius: "6px", cursor: "pointer",
                 border: `1px solid ${city === c ? C.teal : "rgba(255,254,249,0.15)"}`,
                 background: city === c ? C.teal : "transparent",
-                color: city === c ? C.dark : "rgba(255,254,249,0.6)",
+                color: C.light,
                 transition: "all 0.2s",
               }}>
-                {cityLabels[c]} {counts[c] ? <span style={{ opacity: 0.7, fontWeight: 400 }}>({counts[c]})</span> : ""}
+                {cityLabels[c]} {counts[c] ? <span style={{ fontWeight: 400 }}>({counts[c]})</span> : ""}
               </button>
             ))}
           </div>
@@ -319,7 +319,7 @@ export default function CatalogPage() {
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
                 {t("catalog.cta.title")}
               </h2>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7 }}>
                 {t("catalog.cta.body")}
               </p>
             </div>
@@ -338,7 +338,7 @@ export default function CatalogPage() {
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>✕</button>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: "rgba(255,254,249,0.55)", marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: C.light, marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {[
                 { key: "name", placeholder: t("catalog.bookCall.name"), type: "text" },
@@ -364,10 +364,10 @@ export default function CatalogPage() {
                 {bookSent ? t("home.contact.sentTitle") : bookLoading ? "…" : t("cta.sendRequest")}
               </button>
               {bookError ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#703C54", margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.light, margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
               ) : null}
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.5)", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,254,249,0.1)", textAlign: "center" }}>
-                {t("catalog.bookCall.direct")} <span style={{ color: C.teal, fontWeight: 600 }}>+995 555 50 52 88</span>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.light, marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,254,249,0.1)", textAlign: "center" }}>
+                {t("catalog.bookCall.direct")} <span style={{ color: C.light, fontWeight: 600 }}>+995 555 50 52 88</span>
               </p>
             </div>
           </div>

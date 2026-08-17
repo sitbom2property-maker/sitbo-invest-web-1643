@@ -222,15 +222,15 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
 }
 .sv-hero h1 em {
-  font-style: normal; color: rgba(255,255,255,.72);
+  font-style: normal; color: var(--white);
 }
 .sv-hero-lead {
   font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
-  color: rgba(255,255,255,.78); margin: 0; max-width: 420px;
+  color: var(--white); margin: 0; max-width: 420px;
 }
 .sv-hero-side {
   font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
-  color: rgba(255,255,255,.62); margin: 0; max-width: 380px;
+  color: var(--white); margin: 0; max-width: 380px;
   justify-self: end;
 }
 .sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
@@ -305,7 +305,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .sv-limits-head p {
-  margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.62);
+  margin: 0; font-size: 15px; line-height: 1.5; color: var(--white);
   max-width: 360px; justify-self: end;
 }
 .sv-limits-grid {
@@ -321,7 +321,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(18px, 1.7vw, 22px); line-height: 1.25;
 }
 .sv-limit p {
-  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.7);
+  margin: 0; font-size: 14px; line-height: 1.5; color: var(--white);
 }
 
 /* cta */
@@ -344,7 +344,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 }
 .sv-cta p {
   margin: 0 auto 28px; max-width: 480px;
-  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: rgba(255,255,255,.75);
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: var(--white);
 }
 
 @media (max-width: 900px) {
