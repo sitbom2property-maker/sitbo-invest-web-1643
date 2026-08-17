@@ -514,6 +514,7 @@ const ru: Record<MessageKey, string> = {
   "catalog.city.tbilisi": "Тбилиси",
   "catalog.city.chakviGonio": "Чакви / Гонио",
   "catalog.city.makhinjauri": "Махинджаури",
+  "catalog.city.shekvetili": "Шекветили",
   "catalog.roi": "ROI",
   "catalog.searchPlaceholder": "Поиск по названию, району, городу…",
   "catalog.projectSingular": "проект",

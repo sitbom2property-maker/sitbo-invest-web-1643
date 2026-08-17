@@ -326,9 +326,10 @@ function useDragRail(cardSelector: string, gap = 12) {
 
 const PROJECTS = [
   { name: "Piazza Residence", img: "/piazza/exterior-tower.jpg", href: "/project/piazza-residence" },
-  { name: "Hisni by Biograpi", img: "/hisni-by-biograpi.jpg", href: "/catalog" },
+  { name: "Krtsanisi Resort Residence", img: "/krtsanisi/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
   { name: "Artex Parkline", img: "/parkline/ext-01.jpg", href: "/project/artex-parkline" },
-  { name: "CityZen", img: "/rd-tower.jpg", href: "/catalog" },
+  { name: "Shekvetili Forest - Beach", img: "/shekvetili/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
+  { name: "Vake Sky Tower", img: "/vake-sky/ext-01.jpg", href: "/project/vake-sky-tower" },
   { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
 ];
 

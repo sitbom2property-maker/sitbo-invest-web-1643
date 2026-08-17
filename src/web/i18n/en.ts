@@ -529,6 +529,7 @@ const en = {
   "catalog.city.tbilisi": "Tbilisi",
   "catalog.city.chakviGonio": "Chakvi / Gonio",
   "catalog.city.makhinjauri": "Makhinjauri",
+  "catalog.city.shekvetili": "Shekvetili",
   "catalog.roi": "ROI",
   "catalog.searchPlaceholder": "Search by name, area, city…",
   "catalog.projectSingular": "project",
