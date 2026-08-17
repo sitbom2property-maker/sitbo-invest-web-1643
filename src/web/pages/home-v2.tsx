@@ -156,7 +156,7 @@ function Quote() {
             </AppLink>
           </div>
           <div className="rd-recog-visual">
-            <img src="/gonio/marina.png" alt="" />
+            <img src="/projects/gonio/for-sale/marina.png" alt="" />
           </div>
         </div>
       </div>
@@ -325,12 +325,12 @@ function useDragRail(cardSelector: string, gap = 12) {
 // ─── Selected projects ────────────────────────────────────────────────────────
 
 const PROJECTS = [
-  { name: "Piazza Residence", img: "/piazza/exterior-tower.jpg", href: "/project/piazza-residence" },
-  { name: "Krtsanisi Resort Residence", img: "/krtsanisi/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
-  { name: "Artex Parkline", img: "/parkline/ext-01.jpg", href: "/project/artex-parkline" },
-  { name: "Shekvetili Forest - Beach", img: "/shekvetili/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
-  { name: "Vake Sky Tower", img: "/vake-sky/ext-01.jpg", href: "/project/vake-sky-tower" },
-  { name: "Silk Towers", img: "/silk/towers.png", href: "/project/silk-towers" },
+  { name: "Piazza Residence", img: "/projects/piazza/for-sale/exterior-tower.jpg", href: "/project/piazza-residence" },
+  { name: "Krtsanisi Resort Residence", img: "/projects/krtsanisi/for-sale/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
+  { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-01.jpg", href: "/project/artex-parkline" },
+  { name: "Shekvetili Forest - Beach", img: "/projects/shekvetili/for-sale/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
+  { name: "Vake Sky Tower", img: "/projects/vake-sky/for-sale/ext-01.jpg", href: "/project/vake-sky-tower" },
+  { name: "Silk Towers", img: "/projects/silk/for-sale/card.png", href: "/project/silk-towers" },
 ];
 
 function SelectedProjects() {
