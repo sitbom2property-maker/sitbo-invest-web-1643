@@ -227,7 +227,7 @@ export function Footer() {
             }}
           >
             <img
-              src="/logo-dark-bg.png"
+              src="/brand/logo-dark-bg.png"
               alt="SITBO Invest"
               style={{
                 // Half of previous footer mark (28/32) so it matches nav scale

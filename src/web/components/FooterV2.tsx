@@ -70,7 +70,7 @@ export function FooterV2() {
         <div className="fv2-grid">
           <div className="fv2-brand">
             <Link href="/" aria-label="SITBO Invest">
-              <img className="fv2-logo" src="/logo-dark-bg.png" alt="SITBO Invest" />
+              <img className="fv2-logo" src="/brand/logo-dark-bg.png" alt="SITBO Invest" />
             </Link>
             <p className="fv2-name">
               Arthur Arutyunyan | <em>{t("v2.footer.role")}</em>

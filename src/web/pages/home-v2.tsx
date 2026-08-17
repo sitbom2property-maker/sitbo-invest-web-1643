@@ -41,7 +41,7 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
       <span className="rd-hero-circle" aria-hidden="true" />
       <div className="rd-wrap rd-hero-grid">
         <div className="rd-hero-photo">
-          <img src="/rd-arthur.jpg" alt="Arthur Arutyunyan" />
+          <img src="/home/rd-arthur.jpg" alt="Arthur Arutyunyan" />
         </div>
 
         <div className="rd-hero-copy">
@@ -84,7 +84,7 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
       </div>
 
       <div className="rd-hero-band">
-        <img src="/rd-waterfront.jpg" alt="" aria-hidden="true" />
+        <img src="/home/rd-waterfront.jpg" alt="" aria-hidden="true" />
       </div>
     </section>
   );
@@ -99,9 +99,9 @@ type Stat =
 const STATS: Stat[] = [
   { kind: "stat", value: "0%", labelKey: "v2.stats.tax", noteKey: "v2.stats.taxNote", tone: "plum" },
   { kind: "stat", value: "$150k", labelKey: "v2.stats.residency", noteKey: "v2.stats.residencyNote", tone: "green" },
-  { kind: "image", src: "/rd-tower.jpg", alt: "Tbilisi" },
+  { kind: "image", src: "/home/rd-tower.jpg", alt: "Tbilisi" },
   { kind: "stat", value: "47.4%", labelKey: "v2.stats.women", noteKey: "v2.stats.womenNote", tone: "plum" },
-  { kind: "image", src: "/rd-beach.jpg", alt: "Batumi" },
+  { kind: "image", src: "/home/rd-beach.jpg", alt: "Batumi" },
   { kind: "stat", value: "3.7M", labelKey: "v2.stats.tourists", noteKey: "v2.stats.touristsNote", tone: "plum" },
   { kind: "stat", value: "$1420", labelKey: "v2.stats.price", noteKey: "v2.stats.priceNote", tone: "white" },
   { kind: "stat", value: "13.2%", labelKey: "v2.stats.yield", noteKey: "v2.stats.yieldNote", tone: "green" },
@@ -156,7 +156,7 @@ function Quote() {
             </AppLink>
           </div>
           <div className="rd-recog-visual">
-            <img src="/gonio-marina.png" alt="" />
+            <img src="/gonio/marina.png" alt="" />
           </div>
         </div>
       </div>
@@ -330,7 +330,7 @@ const PROJECTS = [
   { name: "Artex Parkline", img: "/parkline/ext-01.jpg", href: "/project/artex-parkline" },
   { name: "Shekvetili Forest - Beach", img: "/shekvetili/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
   { name: "Vake Sky Tower", img: "/vake-sky/ext-01.jpg", href: "/project/vake-sky-tower" },
-  { name: "Silk Towers", img: "/silk-towers.png", href: "/project/silk-towers" },
+  { name: "Silk Towers", img: "/silk/towers.png", href: "/project/silk-towers" },
 ];
 
 function SelectedProjects() {
@@ -386,11 +386,11 @@ function SelectedProjects() {
 // ─── Ecosystem accordion ──────────────────────────────────────────────────────
 
 const ECO: { titleKey: MessageKey; bodyKey: MessageKey; img: string }[] = [
-  { titleKey: "v2.eco.legal.title", bodyKey: "v2.eco.legal.body", img: "/rd-eco-legal.jpg" },
-  { titleKey: "v2.eco.banking.title", bodyKey: "v2.eco.banking.body", img: "/rd-eco-banking.jpg" },
-  { titleKey: "v2.eco.notary.title", bodyKey: "v2.eco.notary.body", img: "/rd-eco-notary.jpg" },
-  { titleKey: "v2.eco.architect.title", bodyKey: "v2.eco.architect.body", img: "/rd-eco-architect.jpg" },
-  { titleKey: "v2.eco.renovation.title", bodyKey: "v2.eco.renovation.body", img: "/rd-eco-renovation.jpg" },
+  { titleKey: "v2.eco.legal.title", bodyKey: "v2.eco.legal.body", img: "/home/rd-eco-legal.jpg" },
+  { titleKey: "v2.eco.banking.title", bodyKey: "v2.eco.banking.body", img: "/home/rd-eco-banking.jpg" },
+  { titleKey: "v2.eco.notary.title", bodyKey: "v2.eco.notary.body", img: "/home/rd-eco-notary.jpg" },
+  { titleKey: "v2.eco.architect.title", bodyKey: "v2.eco.architect.body", img: "/home/rd-eco-architect.jpg" },
+  { titleKey: "v2.eco.renovation.title", bodyKey: "v2.eco.renovation.body", img: "/home/rd-eco-renovation.jpg" },
 ];
 
 function Ecosystem() {

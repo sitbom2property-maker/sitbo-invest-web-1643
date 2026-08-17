@@ -583,7 +583,7 @@ export default function InvestPage() {
             </div>
           </div>
           <div className="iv-hero-visual rv">
-            <img src="/rd-waterfront.jpg" alt={t("invest.hero.imageAlt")} />
+            <img src="/home/rd-waterfront.jpg" alt={t("invest.hero.imageAlt")} />
           </div>
         </div>
       </section>
