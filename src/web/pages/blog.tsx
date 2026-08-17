@@ -193,7 +193,7 @@ export default function BlogPage() {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.88rem",
-                color: "rgba(255,254,249,0.6)",
+                color: C.light,
                 lineHeight: 1.7,
                 margin: 0,
                 maxWidth: "520px",

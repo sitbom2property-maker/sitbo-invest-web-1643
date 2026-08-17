@@ -307,7 +307,7 @@ const COOKIE_CSS = `
   padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 6px;
 }
 .ck-lang-menu button.is-active,
-.ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #703C54; }
+.ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #FFFEF9; }
 .ck-body {
   margin: 8px 0 0; max-width: 820px;
   font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,.92);
@@ -315,7 +315,7 @@ const COOKIE_CSS = `
 .ck-policy {
   display: inline-block; margin: 8px 0 14px; padding: 0;
   background: none; border: none; cursor: pointer;
-  color: #703C54; font-size: 13.5px; font-weight: 500;
+  color: #FFFEF9; font-size: 13.5px; font-weight: 500;
   text-decoration: none;
 }
 .ck-policy:hover { text-decoration: underline; }
@@ -371,7 +371,7 @@ const COOKIE_CSS = `
   text-transform: uppercase; margin-bottom: 4px;
 }
 .ck-details p {
-  margin: 0; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,.7);
+  margin: 0; font-size: 12px; line-height: 1.45; color: #FFFEF9;
   font-weight: 400; text-transform: none; letter-spacing: 0;
 }
 @media (max-width: 720px) {

@@ -252,7 +252,7 @@ export function LeadPopup() {
             >
               {t("popup.sentTitle")}
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "rgba(255,254,249,0.75)", margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "#FFFEF9", margin: 0 }}>
               {t("popup.sentBody")}
             </p>
           </div>
@@ -275,7 +275,7 @@ export function LeadPopup() {
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.4,
-                color: "rgba(255,254,249,0.72)",
+                color: "#FFFEF9",
                 margin: "0 0 20px",
               }}
             >
@@ -300,7 +300,7 @@ export function LeadPopup() {
                 autoComplete="tel"
               />
               {error ? (
-                <p style={{ margin: 0, color: "#703C54", fontSize: 13, fontFamily: "Inter, sans-serif" }}>
+                <p style={{ margin: 0, color: "#FFFEF9", fontSize: 13, fontFamily: "Inter, sans-serif" }}>
                   {error}
                 </p>
               ) : null}

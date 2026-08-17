@@ -150,7 +150,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "0.9rem",
-          color: "rgba(255,254,249,0.6)",
+          color: C.light,
           lineHeight: 1.75,
           margin: "0 0 32px",
           maxWidth: "520px",
@@ -367,7 +367,7 @@ export default function BlogPostPage() {
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.78rem",
                 fontWeight: 600,
-                color: C.teal,
+                color: C.light,
                 textDecoration: "none",
                 letterSpacing: "0.06em",
                 display: "inline-block",
@@ -385,8 +385,8 @@ export default function BlogPostPage() {
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: C.teal,
-                  border: `1px solid ${C.teal}`,
+                  color: C.light,
+                  border: `1px solid rgba(255,254,249,0.35)`,
                   padding: "5px 12px",
                   borderRadius: "100px",
                 }}
@@ -413,10 +413,10 @@ export default function BlogPostPage() {
                 gap: "8px 16px",
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.82rem",
-                color: "rgba(255,254,249,0.55)",
+                color: C.light,
               }}
             >
-              <span style={{ fontWeight: 600, color: "rgba(255,254,249,0.75)" }}>{post.author}</span>
+              <span style={{ fontWeight: 600, color: C.light }}>{post.author}</span>
               <span>·</span>
               <span>{post.date}</span>
               <span>·</span>

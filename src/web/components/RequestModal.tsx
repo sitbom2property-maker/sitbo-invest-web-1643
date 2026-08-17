@@ -159,11 +159,11 @@ export function RequestModal({
                 height: 54,
                 margin: "0 auto 20px",
                 borderRadius: "50%",
-                border: "1px solid #703C54",
+                border: "1px solid #FFFEF9",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#703C54",
+                color: "#FFFEF9",
                 fontSize: 22,
               }}
             >
@@ -185,7 +185,7 @@ export function RequestModal({
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.6,
-                color: "rgba(255,254,249,0.6)",
+                color: "#FFFEF9",
                 margin: 0,
               }}
             >
@@ -201,7 +201,7 @@ export function RequestModal({
                   fontSize: 10,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "#703C54",
+                  color: "#FFFEF9",
                   margin: "0 0 14px",
                 }}
               >
@@ -225,7 +225,7 @@ export function RequestModal({
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.65,
-                color: "rgba(255,254,249,0.6)",
+                color: "#FFFEF9",
                 margin: "0 0 24px",
               }}
             >
@@ -261,7 +261,7 @@ export function RequestModal({
               />
 
               {error ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#703C54", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#FFFEF9", margin: 0 }}>
                   {error}
                 </p>
               ) : null}
@@ -295,7 +295,7 @@ export function RequestModal({
                   fontFamily: "Inter, sans-serif",
                   fontSize: 11,
                   lineHeight: 1.6,
-                  color: "rgba(255,254,249,0.4)",
+                  color: "#FFFEF9",
                   margin: "6px 0 0",
                   textAlign: "center",
                 }}
@@ -305,7 +305,7 @@ export function RequestModal({
                   href="https://wa.me/995555505288"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "#703C54", fontWeight: 600, textDecoration: "none" }}
+                  style={{ color: "#FFFEF9", fontWeight: 600, textDecoration: "none" }}
                 >
                   +995 555 50 52 88
                 </a>

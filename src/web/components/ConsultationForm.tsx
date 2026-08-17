@@ -6,7 +6,7 @@ const labelStyle: CSSProperties = {
   fontSize: "0.62rem",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
-  color: "rgba(255,254,249,0.4)",
+  color: "#FFFEF9",
   marginBottom: "8px",
 };
 
@@ -72,7 +72,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "15px",
-          color: "#703C54",
+          color: "#FFFEF9",
           textAlign: "center",
           margin: "24px 0 0",
           lineHeight: 1.6,
@@ -88,7 +88,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
       <style>{`
         .consultation-form input::placeholder,
         .consultation-form select { color: #FFFEF9; }
-        .consultation-form input::placeholder { color: rgba(255,254,249,0.25); }
+        .consultation-form input::placeholder { color: #FFFEF9; }
         .consultation-form select option { background: #21141A; color: #FFFEF9; }
         .consultation-form-row {
           display: grid;
@@ -149,7 +149,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#703C54", margin: "16px 0 0" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#FFFEF9", margin: "16px 0 0" }}>
             {error}
           </p>
         )}

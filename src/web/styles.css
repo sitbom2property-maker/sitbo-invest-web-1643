@@ -422,7 +422,7 @@ body.has-cookie-banner {
   font-size: 0.9rem;
 }
 .form-input::placeholder {
-  color: rgba(255,254,249,0.4);
+  color: #FFFEF9;
 }
 .form-input:focus {
   border-color: #703C54;
@@ -508,7 +508,7 @@ select.form-input-light {
   background: none;
   border: none;
   font-size: 28px;
-  color: rgba(255,254,249,0.4);
+  color: #FFFEF9;
   cursor: pointer;
   line-height: 1;
   padding: 4px 8px;

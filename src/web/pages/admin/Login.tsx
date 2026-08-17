@@ -72,7 +72,7 @@ export default function AdminLogin() {
 					style={{
 						fontFamily: "Inter, sans-serif",
 						fontSize: "0.85rem",
-						color: "rgba(255,254,249,0.55)",
+						color: "#FFFEF9",
 						margin: "0 0 28px",
 					}}
 				>
@@ -86,7 +86,7 @@ export default function AdminLogin() {
 						fontSize: "0.7rem",
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
-						color: C.accent,
+						color: C.light,
 						marginBottom: "8px",
 					}}
 				>

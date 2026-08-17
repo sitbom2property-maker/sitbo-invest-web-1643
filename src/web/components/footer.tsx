@@ -16,7 +16,7 @@ const colTitleStyle: CSSProperties = {
   fontWeight: 500,
   letterSpacing: "0.28em",
   textTransform: "uppercase",
-  color: C.teal,
+  color: C.light,
   margin: "0 0 24px 0",
 };
 
@@ -25,7 +25,7 @@ const linkStyle: CSSProperties = {
   fontSize: 13,
   fontWeight: 400,
   color: C.light,
-  opacity: 0.75,
+  opacity: 1,
   textDecoration: "none",
   transition: "opacity 0.2s",
 };
@@ -52,7 +52,7 @@ function FooterIcon({ name, size = 16 }: { name: string; size?: number }) {
   const props = {
     size,
     strokeWidth: 1.75 as const,
-    color: "rgba(255,254,249, 0.9)",
+    color: "rgba(255,254,249, 1)",
     "aria-hidden": true as const,
     style: { flexShrink: 0 as const },
   };
@@ -81,7 +81,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
               e.currentTarget.style.opacity = "1";
             },
             onMouseLeave: (e: MouseEvent<HTMLElement>) => {
-              e.currentTarget.style.opacity = "0.75";
+              e.currentTarget.style.opacity = "1";
             },
           };
 
@@ -136,14 +136,14 @@ function FooterColExternal({
                   alignItems: isEmail ? "flex-start" : "center",
                   gap: 8,
                   opacity: 1,
-                  color: "rgba(255,254,249, 0.75)",
+                  color: C.light,
                   maxWidth: "100%",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = C.light;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(255,254,249, 0.75)";
+                  e.currentTarget.style.color = C.light;
                 }}
               >
                 <span style={{ display: "inline-flex", flexShrink: 0, marginTop: isEmail ? 2 : 0 }}>
@@ -175,7 +175,7 @@ export function Footer() {
   const barLinkStyle: CSSProperties = {
     color: "inherit",
     textDecoration: "none",
-    opacity: 0.5,
+    opacity: 1,
     transition: "opacity 0.2s",
   };
 
@@ -184,7 +184,7 @@ export function Footer() {
       e.currentTarget.style.opacity = "1";
     },
     onMouseLeave: (e: MouseEvent<HTMLElement>) => {
-      e.currentTarget.style.opacity = "0.5";
+      e.currentTarget.style.opacity = "1";
     },
   };
 
@@ -247,7 +247,7 @@ export function Footer() {
               fontWeight: 400,
               lineHeight: 1.7,
               color: C.light,
-              opacity: 0.6,
+              opacity: 1,
               maxWidth: 360,
               margin: 0,
             }}
@@ -340,7 +340,7 @@ export function Footer() {
           color: C.light,
         }}
       >
-        <span style={{ justifySelf: isBarStacked ? "center" : "start", opacity: 0.5 }}>
+        <span style={{ justifySelf: isBarStacked ? "center" : "start", opacity: 1 }}>
           {t("footer.rights")}
         </span>
 

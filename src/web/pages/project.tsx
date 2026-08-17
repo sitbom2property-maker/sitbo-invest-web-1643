@@ -594,8 +594,8 @@ export default function ProjectPage() {
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "12px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,254,249,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.light, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
@@ -614,12 +614,12 @@ export default function ProjectPage() {
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "16px", padding: "28px 24px" }}>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "10px" }}>{t("project.interested")}</p>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("project.interested")}</p>
                   <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
                   </h3>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.light, marginBottom: "16px" }}>{priceLabel}</p>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
@@ -759,9 +759,9 @@ export default function ProjectPage() {
               <div className="pr-reveal">
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
                   {t("project.cta.title")}<br />
-                  <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
+                  <em style={{ color: C.light, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
                   {t("project.cta.body")}
                 </p>
                 <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
@@ -789,7 +789,7 @@ export default function ProjectPage() {
                   />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,254,249,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{proj.tag}</p>
                     <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>

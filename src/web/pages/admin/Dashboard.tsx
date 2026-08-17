@@ -124,7 +124,7 @@ export default function AdminDashboard() {
 						<p
 							style={{
 								fontFamily: "Inter, sans-serif",
-								color: "rgba(255,254,249,0.5)",
+								color: "#FFFEF9",
 								margin: "8px 0 0",
 								fontSize: "0.9rem",
 							}}
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
 									fontSize: "0.7rem",
 									textTransform: "uppercase",
 									letterSpacing: "0.1em",
-									color: C.accent,
+									color: C.light,
 									margin: "0 0 8px",
 								}}
 							>
@@ -267,7 +267,7 @@ export default function AdminDashboard() {
 										style={{
 											textAlign: "left",
 											padding: "12px 14px",
-											color: C.accent,
+											color: C.light,
 											fontWeight: 500,
 											fontSize: "0.7rem",
 											textTransform: "uppercase",
@@ -282,13 +282,13 @@ export default function AdminDashboard() {
 						<tbody>
 							{fetching ? (
 								<tr>
-									<td colSpan={6} style={{ padding: "24px", color: "rgba(255,254,249,0.5)" }}>
+									<td colSpan={6} style={{ padding: "24px", color: "#FFFEF9" }}>
 										Загрузка…
 									</td>
 								</tr>
 							) : filtered.length === 0 ? (
 								<tr>
-									<td colSpan={6} style={{ padding: "24px", color: "rgba(255,254,249,0.5)" }}>
+									<td colSpan={6} style={{ padding: "24px", color: "#FFFEF9" }}>
 										Нет объектов
 									</td>
 								</tr>
@@ -310,7 +310,7 @@ export default function AdminDashboard() {
 													padding: "2px 8px",
 													borderRadius: "4px",
 													background: "rgba(140,178,192,0.1)",
-													color: C.accent,
+													color: C.light,
 													fontSize: "0.75rem",
 												}}
 											>
@@ -326,7 +326,7 @@ export default function AdminDashboard() {
 											<Link href={`/admin/property/${p.id}`}>
 												<a
 													style={{
-														color: C.accent,
+														color: C.light,
 														textDecoration: "none",
 														fontWeight: 600,
 													}}
