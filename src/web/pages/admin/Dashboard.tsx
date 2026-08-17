@@ -139,7 +139,7 @@ export default function AdminDashboard() {
 							style={{
 								padding: "10px 18px",
 								background: C.accent,
-								color: C.dark,
+								color: C.light,
 								border: "none",
 								borderRadius: "8px",
 								fontFamily: "Inter, sans-serif",

@@ -534,7 +534,7 @@ export default function MortgagePage() {
                   {t("mortgage.cta.body")}
                 </p>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                  <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                     {t("cta.getFreeConsultation")}
                   </AppLink>
                   <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>

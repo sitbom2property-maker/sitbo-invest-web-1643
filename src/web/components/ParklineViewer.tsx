@@ -150,7 +150,7 @@ const CSS = `
     position: absolute; top: 12px; right: 12px;
     font-family: Inter, sans-serif; font-size: 0.68rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
-    color: ${C.dark}; background: ${C.teal}; border-radius: 8px;
+    color: ${C.light}; background: ${C.teal}; border-radius: 8px;
     padding: 8px 12px; text-decoration: none;
   }
   @media (max-width: 767px) {

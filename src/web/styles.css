@@ -221,7 +221,13 @@ html {
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand palette: light, dark, wine, teal at 10% */
+  /* Brand palette: light, dark, wine, teal at 10%
+     Contrast rule:
+       #21141A (dark)  → text #FFFEF9
+       #FFFEF9 (light) → text #21141A (wine #703C54 OK as accent on light)
+       #703C54 (wine)  → text #FFFEF9
+       #8CB2C0 only at 10% mixes — never as solid body text on dark
+  */
   --color-light:      #FFFEF9;
   --color-parchment:  #FFFEF9;
   --color-wine:       #703C54;

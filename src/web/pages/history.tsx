@@ -154,7 +154,7 @@ export default function HistoryPage() {
         }
 
         .ht-region-chip--live {
-          color: ${C.dark};
+          color: ${C.light};
           background: ${C.teal};
           border-color: ${C.teal};
         }

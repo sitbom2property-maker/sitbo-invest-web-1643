@@ -306,7 +306,7 @@ const chip = (active: boolean): CSSProperties => ({
                 onClick={() => setRequestOpen(true)}
                 style={{
                   width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                  letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal,
+                  letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
                   border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
                 }}
               >
@@ -366,7 +366,7 @@ const chip = (active: boolean): CSSProperties => ({
                   onClick={() => setRequestOpen(true)}
                   style={{
                     width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                    letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal,
+                    letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
                     border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
                   }}
                 >
