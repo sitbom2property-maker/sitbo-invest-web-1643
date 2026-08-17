@@ -39,7 +39,7 @@ function Hero() {
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <a href="#contact-form" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+            <a href="#contact-form" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
               {t("turnkey.hero.ctaSelf")}
             </a>
             <a href="#contact-form" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.25)", borderRadius: "8px", padding: "16px 36px", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.borderColor = C.teal)} onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,254,249,0.25)")}>
@@ -261,7 +261,7 @@ function Calculator() {
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                <a href="#contact-form" style={{ display: "block", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "10px", padding: "16px", textDecoration: "none", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                   {t("turnkey.calculator.detailedQuote")}
                 </a>
               </div>
@@ -333,12 +333,12 @@ function Portfolio() {
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
             <div>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1 }}>
-                {t("turnkey.portfolio.title")} <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.portfolio.titleEm")}</em>
+                {t("turnkey.portfolio.title")} <em style={{ fontStyle: "italic", color: C.light }}>{t("turnkey.portfolio.titleEm")}</em>
               </h2>
             </div>
             <div style={{ display: "flex", gap: "8px", background: "rgba(255,254,249,0.06)", borderRadius: "10px", padding: "4px" }}>
 {([["all", t("turnkey.portfolio.all")], ["life", t("turnkey.portfolio.forLife")], ["invest", t("turnkey.portfolio.forInvestment")]] as const).map(([val, label]) => (
-                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.dark : "rgba(255,254,249,0.55)" }}>
+                <button key={val} onClick={() => setFilter(val)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", border: "none", borderRadius: "7px", padding: "9px 18px", cursor: "pointer", transition: "all 0.2s", background: filter === val ? C.teal : "transparent", color: filter === val ? C.light : "rgba(255,254,249,0.55)" }}>
 {label}
                 </button>
               ))}
@@ -545,7 +545,7 @@ function ContactForm() {
                 <label style={labelStyle}>{t("turnkey.contact.describe")}</label>
                 <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder={t("turnkey.contact.describePlaceholder")} rows={4} style={{ ...inputStyle, resize: "vertical" }} onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,254,249,0.12)")} />
               </div>
-              <button onClick={() => setSent(true)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <button onClick={() => setSent(true)} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "10px", padding: "18px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {t("turnkey.contact.submit")}
               </button>
             </div>

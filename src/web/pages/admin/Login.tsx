@@ -133,7 +133,7 @@ export default function AdminLogin() {
 						width: "100%",
 						padding: "14px",
 						background: C.accent,
-						color: C.dark,
+						color: C.light,
 						border: "none",
 						borderRadius: "8px",
 						fontFamily: "Inter, sans-serif",

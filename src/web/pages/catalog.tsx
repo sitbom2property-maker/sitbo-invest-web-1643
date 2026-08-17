@@ -324,7 +324,7 @@ export default function CatalogPage() {
               </p>
             </div>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {t("catalog.cta.bookCall")}
               </button>
             </div>
@@ -357,7 +357,7 @@ export default function CatalogPage() {
                 type="button"
                 onClick={submitBookCall}
                 disabled={bookLoading || bookSent}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = bookLoading ? "0.7" : "1")}
               >

@@ -294,7 +294,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 							{isNew ? "Новый объект" : `Объект ${id}`}
 						</h1>
 					</div>
-					<button type="button" disabled={saving} onClick={handleSave} style={{ padding: "12px 24px", background: C.accent, color: C.dark, border: "none", borderRadius: "8px", fontFamily: "Inter, sans-serif", fontWeight: 600, cursor: saving ? "wait" : "pointer", opacity: saving ? 0.7 : 1 }}>
+					<button type="button" disabled={saving} onClick={handleSave} style={{ padding: "12px 24px", background: C.accent, color: C.light, border: "none", borderRadius: "8px", fontFamily: "Inter, sans-serif", fontWeight: 600, cursor: saving ? "wait" : "pointer", opacity: saving ? 0.7 : 1 }}>
 						{saving ? "Сохранение…" : "Сохранить"}
 					</button>
 				</div>
