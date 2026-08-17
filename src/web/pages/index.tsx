@@ -108,12 +108,12 @@ const bloomCalendar = [
 ] as const;
 
 const cardImages = [
-  "/artex-parkline.png",
-  "/queens-residence.png",
-  "/silk-towers.png",
-  "/rogantini.png",
-  "/ambassadori.png",
-  "/gonio_final_v1.png",
+  "/projects/parkline/for-sale/card.png",
+  "/projects/queens/for-sale/card.png",
+  "/projects/silk/for-sale/card.png",
+  "/projects/rogantini/for-sale/card.png",
+  "/projects/ambassadori/for-sale/card.png",
+  "/projects/gonio/for-sale/card.png",
 ];
 
 const HERO_STYLES = `
@@ -290,8 +290,8 @@ function Hero() {
             zIndex: 0,
           }}
         >
-          <source src="/hero-video.webm" type="video/webm" />
-          <source src="/hero-video.mp4" type="video/mp4" />
+          <source src="/home/hero-video.webm" type="video/webm" />
+          <source src="/home/hero-video.mp4" type="video/mp4" />
         </video>
 
         <div
@@ -384,7 +384,7 @@ function FounderNote() {
           <div className="reveal">
             <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFEF9" }}>
               <img
-                src="/arthur-founder.jpg"
+                src="/home/arthur-founder.jpg"
                 alt={t("home.founder.imageAlt")}
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
               />
@@ -493,7 +493,7 @@ function Founder() {
         {/* Photo — 30–35% width, padded, aligned top */}
         <div className="reveal" style={{ alignSelf: "flex-start", marginLeft: "0" }}>
           <div style={{ position: "relative" }}>
-            <img src="/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
+            <img src="/home/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
               <p style={{ color: "#FFFEF9", fontFamily: "Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
@@ -817,7 +817,7 @@ function Lifestyle() {
         {/* Left — photo bleeds to left edge */}
         <div className="reveal lifestyle-photo-col">
           <img
-            src="/lifestyle-botanical.jpg"
+            src="/home/lifestyle-botanical.jpg"
             alt={t("home.lifestyle.imageAlt")}
             style={{
               width: "100%",
@@ -1073,20 +1073,20 @@ function DiscoveryTour() {
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to left, #FFFEF9, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div className="gallery-track">
             {[
-              "/turnkey-new.png",
-              "/turnkey-web.png",
-              "/lifestyle-coast.png",
-              "/interior-bedroom.png",
-              "/hero2.png",
-              "/card1.png",
-              "/card2.png",
-              "/turnkey-new.png",
-              "/turnkey-web.png",
-              "/lifestyle-coast.png",
-              "/interior-bedroom.png",
-              "/hero2.png",
-              "/card1.png",
-              "/card2.png",
+              "/home/turnkey-new.png",
+              "/home/turnkey-web.png",
+              "/home/lifestyle-coast.png",
+              "/home/interior-bedroom.png",
+              "/home/hero2.png",
+              "/home/card1.png",
+              "/home/card2.png",
+              "/home/turnkey-new.png",
+              "/home/turnkey-web.png",
+              "/home/lifestyle-coast.png",
+              "/home/interior-bedroom.png",
+              "/home/hero2.png",
+              "/home/card1.png",
+              "/home/card2.png",
             ].map((src, i) => (
               <div key={i} style={{ width: "280px", height: "280px", flexShrink: 0, overflow: "hidden", borderRadius: "12px" }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease" }}

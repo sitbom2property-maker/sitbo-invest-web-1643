@@ -244,7 +244,7 @@ export function Nav() {
                 }}
               >
                 <img
-                  src="/logo-dark-bg.png"
+                  src="/brand/logo-dark-bg.png"
                   alt="SITBO Invest"
                   style={{
                     height: logoHeight,
@@ -287,7 +287,7 @@ export function Nav() {
               }}
             >
               <img
-                src="/logo-dark-bg.png"
+                src="/brand/logo-dark-bg.png"
                 alt="SITBO Invest"
                 style={{
                   height: logoHeight,

@@ -22,7 +22,7 @@ function Hero() {
 
     <section style={{ background: C.dark, minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "120px 0 80px" }}>
 {/* bg texture */}
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/turnkey-web.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/home/turnkey-web.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(33,20,26,0.95) 40%, rgba(33,20,26,0.7))" }} />
 
       <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)", position: "relative", zIndex: 2, width: "100%", display: "flex", alignItems: "center", gap: "64px" }}>
@@ -51,7 +51,7 @@ function Hero() {
 {/* Right: photo */}
         <div style={{ flex: "0 0 420px", maxWidth: "420px" }} className="hero-photo-col">
           <div style={{ borderRadius: "20px", overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,0.5)" }}>
-            <img src="/turnkey-hero-photo.png" alt={t("turnkey.hero.title")} style={{ width: "100%", display: "block", objectFit: "cover" }} />
+            <img src="/home/turnkey-hero-photo.png" alt={t("turnkey.hero.title")} style={{ width: "100%", display: "block", objectFit: "cover" }} />
           </div>
         </div>
 
