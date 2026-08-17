@@ -134,7 +134,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
             className="locale-modal-save"
             onClick={handleSave}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#694153";
+              e.currentTarget.style.background = "#703C54";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "#21141A";

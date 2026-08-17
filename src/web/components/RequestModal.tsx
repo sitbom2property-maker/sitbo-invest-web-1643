@@ -16,10 +16,10 @@ export type RequestModalProps = {
 const inputStyle: CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  background: "rgba(250,247,240,0.05)",
-  border: "1px solid rgba(140,178,192,0.25)",
+  background: "rgba(255,254,249,0.05)",
+  border: "1px solid rgba(140,178,192,0.1)",
   borderRadius: 8,
-  color: "#FAF7F0",
+  color: "#FFFEF9",
   fontFamily: "Inter, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
@@ -117,7 +117,7 @@ export function RequestModal({
         }
         .req-modal-card {
           position: relative; width: 100%; max-width: 470px;
-          background: #21141A; border: 1px solid rgba(140,178,192,0.22);
+          background: #21141A; border: 1px solid rgba(140,178,192,0.1);
           border-radius: 16px; padding: 40px 36px 32px;
           box-shadow: 0 30px 80px rgba(0,0,0,0.45);
           animation: reqRise 0.28s cubic-bezier(0.16,1,0.3,1);
@@ -127,11 +127,11 @@ export function RequestModal({
         .req-modal-close {
           position: absolute; top: 14px; right: 14px;
           width: 32px; height: 32px; border-radius: 50%; border: none;
-          background: rgba(250,247,240,0.08); color: #FAF7F0;
+          background: rgba(255,254,249,0.08); color: #FFFEF9;
           font-size: 18px; line-height: 1; cursor: pointer; transition: background 0.2s;
         }
-        .req-modal-close:hover { background: rgba(250,247,240,0.18); }
-        .req-modal-input:focus { border-color: #8CB2C0 !important; }
+        .req-modal-close:hover { background: rgba(255,254,249,0.18); }
+        .req-modal-input:focus { border-color: #703C54 !important; }
         .req-modal-submit:hover { opacity: 0.88; }
         @keyframes reqFade { from { opacity: 0 } to { opacity: 1 } }
         @keyframes reqRise { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: none } }
@@ -159,11 +159,11 @@ export function RequestModal({
                 height: 54,
                 margin: "0 auto 20px",
                 borderRadius: "50%",
-                border: "1px solid #8CB2C0",
+                border: "1px solid #703C54",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#8CB2C0",
+                color: "#703C54",
                 fontSize: 22,
               }}
             >
@@ -174,7 +174,7 @@ export function RequestModal({
                 fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 24,
                 fontWeight: 400,
-                color: "#FAF7F0",
+                color: "#FFFEF9",
                 margin: "0 0 10px",
               }}
             >
@@ -185,7 +185,7 @@ export function RequestModal({
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.6,
-                color: "rgba(250,247,240,0.6)",
+                color: "rgba(255,254,249,0.6)",
                 margin: 0,
               }}
             >
@@ -201,7 +201,7 @@ export function RequestModal({
                   fontSize: 10,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "#8CB2C0",
+                  color: "#703C54",
                   margin: "0 0 14px",
                 }}
               >
@@ -214,7 +214,7 @@ export function RequestModal({
                 fontSize: "clamp(23px, 5vw, 29px)",
                 fontWeight: 400,
                 lineHeight: 1.2,
-                color: "#FAF7F0",
+                color: "#FFFEF9",
                 margin: "0 0 12px",
               }}
             >
@@ -225,7 +225,7 @@ export function RequestModal({
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.65,
-                color: "rgba(250,247,240,0.6)",
+                color: "rgba(255,254,249,0.6)",
                 margin: "0 0 24px",
               }}
             >
@@ -261,7 +261,7 @@ export function RequestModal({
               />
 
               {error ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#e57373", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#703C54", margin: 0 }}>
                   {error}
                 </p>
               ) : null}
@@ -275,8 +275,8 @@ export function RequestModal({
                   padding: "15px 18px",
                   borderRadius: 8,
                   border: "none",
-                  background: "#8CB2C0",
-                  color: "#21141A",
+                  background: "#703C54",
+                  color: "#FFFEF9",
                   fontFamily: "Inter, sans-serif",
                   fontSize: 11,
                   fontWeight: 700,
@@ -295,7 +295,7 @@ export function RequestModal({
                   fontFamily: "Inter, sans-serif",
                   fontSize: 11,
                   lineHeight: 1.6,
-                  color: "rgba(250,247,240,0.4)",
+                  color: "rgba(255,254,249,0.4)",
                   margin: "6px 0 0",
                   textAlign: "center",
                 }}
@@ -305,7 +305,7 @@ export function RequestModal({
                   href="https://wa.me/995555505288"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "#8CB2C0", fontWeight: 600, textDecoration: "none" }}
+                  style={{ color: "#703C54", fontWeight: 600, textDecoration: "none" }}
                 >
                   +995 555 50 52 88
                 </a>

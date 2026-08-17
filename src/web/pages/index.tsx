@@ -8,19 +8,19 @@ import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
-// #21141A  → primary dark (dark bg, main headers, serif text)
-// #8CB2C0  → main accent (buttons, CTAs, highlights, icons)
-// #683D47  → secondary accent (decorative diamonds, dividers)
-// #FFFBF0  → background light (warm off-white)
+// #21141A  → primary dark
+// #FFFEF9  → light
+// #703C54  → wine accent
+// #8CB2C0  → teal, only at 10%
 const C = {
-  light:     "#FFFBF0",
-  parchment: "#FFFBF0",
-  teal:      "#8CB2C0",
-  teal2:     "#8CB2C0",
-  wine:      "#683D47",
+  light:     "#FFFEF9",
+  parchment: "#FFFEF9",
+  teal:      "#703C54",
+  teal2:     "#703C54",
+  wine:      "#703C54",
   dark:      "#21141A",
   darkTeal:  "#21141A",
-  muted:     "#7a7a7a",
+  muted:     "rgba(33,20,26,0.55)",
 };
 
 // ─── Mobile hook ─────────────────────────────────────────────────────────────
@@ -127,14 +127,14 @@ const HERO_STYLES = `
     );
   }
   .hero-video-section .hero-outline-btn:hover {
-    border-color: #8CB2C0 !important;
-    color: #8CB2C0 !important;
+    border-color: #703C54 !important;
+    color: #703C54 !important;
   }
   .hero-video-section .hero-roulette {
     font-family: 'Coolvetica, Inter, sans-serif';
     font-style: italic;
     font-weight: 400;
-    color: #FFFFFF;
+    color: #FFFEF9;
   }
   .hero-video-section .hero-cta-row {
     display: flex;
@@ -158,9 +158,9 @@ const HERO_STYLES = `
     letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #FAF7F0;
+    color: #FFFEF9;
     background: transparent;
-    border: 1px solid rgba(250, 247, 240, 0.35);
+    border: 1px solid rgba(255,254,249, 0.35);
     transition: border-color 0.2s, color 0.2s;
     cursor: pointer;
   }
@@ -185,7 +185,7 @@ const HERO_STYLES = `
     animation: heroScrollPulse 2.4s ease-in-out infinite;
   }
   .hero-video-section .hero-scroll-hint:hover {
-    color: #8CB2C0;
+    color: #703C54;
   }
   .hero-video-section .hero-scroll-hint .hero-scroll-arrow {
     display: block;
@@ -312,7 +312,7 @@ function Hero() {
               fontFamily: "Coolvetica, Inter, sans-serif",
               fontSize: "clamp(48px, 6.5vw, 92px)",
               fontWeight: 400,
-              color: "#FFFFFF",
+              color: "#FFFEF9",
               lineHeight: 1.02,
               margin: "0 0 32px",
               letterSpacing: "-0.01em",
@@ -352,7 +352,7 @@ function Hero() {
             letterSpacing: "0.08em",
             transition: "color 0.2s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#703C54")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
         >
           {t("home.hero.googleReviews")}
@@ -377,12 +377,12 @@ function FounderNote() {
   const t = useT();
   return (
     <section id="founder-note" className="snap-screen" style={{ background: "#21141A", padding: "10px" }}>
-      <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "16px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
 
           {/* Left: photo */}
           <div className="reveal">
-            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFBF0" }}>
+            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFEF9" }}>
               <img
                 src="/arthur-founder.jpg"
                 alt={t("home.founder.imageAlt")}
@@ -394,7 +394,7 @@ function FounderNote() {
           {/* Right: quote */}
           <div className="reveal reveal-delay-2">
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
-              <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
+              <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
               <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "Inter, sans-serif" }}>
                 {t("home.founder.eyebrow")}
               </span>
@@ -431,7 +431,7 @@ function FounderNote() {
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 lineHeight: 1,
-                color: "#FFFBF0",
+                color: "#FFFEF9",
                 background: "#21141A",
                 padding: "14px 28px",
                 textDecoration: "none",
@@ -439,12 +439,12 @@ function FounderNote() {
                 transition: "background 0.2s, color 0.2s",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#8CB2C0";
-                e.currentTarget.style.color = "#21141A";
+                e.currentTarget.style.background = "#703C54";
+                e.currentTarget.style.color = "#FFFEF9";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "#21141A";
-                e.currentTarget.style.color = "#FFFBF0";
+                e.currentTarget.style.color = "#FFFEF9";
               }}
             >
               <span style={{ lineHeight: 1 }}>{t("cta.seeWhatWeDo")}</span>
@@ -486,7 +486,7 @@ function Founder() {
       <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
 
       {/* Big frame card */}
-      <div style={{ background: "#FFFBF0", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "hidden", padding: "80px 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "16px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "hidden", padding: "80px 0" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
       <div className="founder-grid">
 
@@ -496,8 +496,8 @@ function Founder() {
             <img src="/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
-              <p style={{ color: "#FFFBF0", fontFamily: "Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
-              <p style={{ color: "rgba(255,250,236,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "Inter, sans-serif", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
+              <p style={{ color: "#FFFEF9", fontFamily: "Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
+              <p style={{ color: "rgba(255,254,249,0.7)", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "Inter, sans-serif", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
             </div>
           </div>
         </div>
@@ -513,7 +513,7 @@ function Founder() {
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
               {t("home.founder.aboutHeadline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.founder.aboutHeadlineEm")}</em>
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "#666", lineHeight: 1.85, marginBottom: "60px" }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.85, marginBottom: "60px" }}>
               {t("home.founder.aboutBody")}
             </p>
           </div>
@@ -526,9 +526,9 @@ function Founder() {
               { label: t("home.founder.pillar3.title"),  desc: t("home.founder.pillar3.desc") },
               { label: t("home.founder.pillar4.title"),  desc: t("home.founder.pillar4.desc") },
             ].map((item) => (
-              <div key={item.label} style={{ borderLeft: "2px solid #8CB2C0", paddingLeft: "18px", paddingTop: "4px", paddingBottom: "4px" }}>
+              <div key={item.label} style={{ borderLeft: "2px solid #703C54", paddingLeft: "18px", paddingTop: "4px", paddingBottom: "4px" }}>
                 <p style={{ color: C.dark, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", marginBottom: "8px", fontWeight: 700 }}>{item.label}</p>
-                <p style={{ color: "#666", fontSize: "0.84rem", fontFamily: "Inter, sans-serif", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+                <p style={{ color: "rgba(33,20,26,0.55)", fontSize: "0.84rem", fontFamily: "Inter, sans-serif", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -547,7 +547,7 @@ function Analytics() {
   const t = useT();
   return (
     <section id="analytics" style={{ background: "#21141A", padding: "10px", overflow: "hidden" }}>
-      <div style={{ background: "#FFFBF0", borderRadius: "16px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "16px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ marginBottom: isMobile ? "20px" : "56px" }}>
           {!isMobile && (
@@ -595,14 +595,14 @@ function Analytics() {
             </h3>
             {triggers.map((triggerKey) => (
               <div key={triggerKey} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px" }}>
-                <div style={{ width: "6px", height: "6px", background: "#683D47", flexShrink: 0, marginTop: "6px", borderRadius: "50%" }} />
+                <div style={{ width: "6px", height: "6px", background: "#703C54", flexShrink: 0, marginTop: "6px", borderRadius: "50%" }} />
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{t(triggerKey)}</p>
               </div>
             ))}
           </div>
 
           <div className="reveal reveal-delay-2">
-            <div style={{ background: "#FFFBF0", padding: "32px", maxWidth: "420px", border: "2px solid #21141A" }}>
+            <div style={{ background: "#FFFEF9", padding: "32px", maxWidth: "420px", border: "2px solid #21141A" }}>
               <p style={{ color: "#21141A", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", fontWeight: 600, marginBottom: "24px" }}>{t("home.analytics.rentalYieldComparison")}</p>
               {[
                 { city: t("home.analytics.city.batumiFirstLine"), pct: 87, label: "8–14.5%" },
@@ -657,7 +657,7 @@ function Portfolio() {
   return (
     <section id="portfolio" style={{ background: C.darkTeal, padding: "20px 0 20px" }}>
       {/* Big frame card */}
-      <div style={{ margin: "0 10px", background: "#FFFBF0", borderRadius: "16px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.12)", overflow: "visible" }}>
+      <div style={{ margin: "0 10px", background: "#FFFEF9", borderRadius: "16px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
@@ -705,7 +705,7 @@ function Portfolio() {
               top: "50%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              background: "rgba(255,250,236,0.85)",
+              background: "rgba(255,254,249,0.85)",
               border: "none",
               borderRadius: "50%",
               width: "36px",
@@ -719,7 +719,7 @@ function Portfolio() {
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3l5 5-5 5" stroke="#8CB2C0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 3l5 5-5 5" stroke="#703C54" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
@@ -783,23 +783,23 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
 
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />
 
-          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FFFBF0", color: "#21141A", padding: "4px 10px", fontSize: "0.62rem", fontFamily: "Inter, sans-serif", fontWeight: 700, letterSpacing: "0.06em" }}>
+          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FFFEF9", color: "#21141A", padding: "4px 10px", fontSize: "0.62rem", fontFamily: "Inter, sans-serif", fontWeight: 700, letterSpacing: "0.06em" }}>
             {project.yield} {t("catalog.roi")}
           </div>
 
           <div style={{
             position: "absolute", top: "14px", left: "14px",
-            background: "rgba(255,250,236,0.12)", backdropFilter: "blur(6px)",
-            border: "1px solid rgba(255,250,236,0.2)", borderRadius: "6px",
+            background: "rgba(255,254,249,0.12)", backdropFilter: "blur(6px)",
+            border: "1px solid rgba(255,254,249,0.2)", borderRadius: "6px",
             padding: "4px 10px", fontSize: "0.58rem", fontFamily: "Inter, sans-serif",
-            color: "#FFFBF0", letterSpacing: "0.08em", textTransform: "uppercase",
+            color: "#FFFEF9", letterSpacing: "0.08em", textTransform: "uppercase",
             opacity: hovered ? 1 : 0, transition: "opacity 0.3s",
           }}>{t("cta.viewProject")}</div>
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px 24px", minHeight: "140px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-            <p style={{ color: "rgba(255,250,236,0.55)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", marginBottom: "6px" }}>{project.tag}</p>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFBF0", margin: "0 0 8px" }}>{project.name}</h3>
-            <p style={{ color: "rgba(255,250,236,0.65)", fontSize: "0.75rem", fontFamily: "Inter, sans-serif", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
+            <p style={{ color: "rgba(255,254,249,0.55)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", marginBottom: "6px" }}>{project.tag}</p>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFEF9", margin: "0 0 8px" }}>{project.name}</h3>
+            <p style={{ color: "rgba(255,254,249,0.65)", fontSize: "0.75rem", fontFamily: "Inter, sans-serif", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
           </div>
         </div>
       </a>
@@ -841,21 +841,21 @@ function Lifestyle() {
         >
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-              <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
+              <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
               <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", fontFamily: "Inter, sans-serif" }}>{t("home.lifestyle.eyebrow")}</span>
             </div>
           )}
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "20px" }}>
-            {t("home.lifestyle.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.lifestyle.headlineEm")}</em>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "20px" }}>
+            {t("home.lifestyle.headline")}<br /><em style={{ fontStyle: "italic", color: "#703C54" }}>{t("home.lifestyle.headlineEm")}</em>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,250,236,0.65)", lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.65)", lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
             {t("home.lifestyle.body")}
           </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#8CB2C0", marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#703C54", marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
           {bloomCalendar.map((item, i) => (
-            <div key={item.monthKey} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,250,236,0.08)" : "none" }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#8CB2C0" }}>{t(item.monthKey)}</span>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: "rgba(255,250,236,0.6)" }}>{t(item.flowersKey)}</span>
+            <div key={item.monthKey} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,254,249,0.08)" : "none" }}>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#703C54" }}>{t(item.monthKey)}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: "rgba(255,254,249,0.6)" }}>{t(item.flowersKey)}</span>
             </div>
           ))}
         </div>
@@ -898,27 +898,27 @@ function DiscoveryTour() {
   const inclusions = [
     { label: t("home.discovery.vip.title"),
       desc: t("home.discovery.vip.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>,
     },
     { label: t("home.discovery.stay.title"),
       desc: t("home.discovery.stay.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
     { label: t("home.discovery.viewings.title"),
       desc: t("home.discovery.viewings.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
     },
     { label: t("home.discovery.gastro.title"),
       desc: t("home.discovery.gastro.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
     },
     { label: t("home.discovery.briefing.title"),
       desc: t("home.discovery.briefing.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
     },
     { label: t("home.discovery.legal.title"),
       desc: t("home.discovery.legal.desc"),
-      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8CB2C0" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
+      svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#703C54" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
     },
   ];
 
@@ -933,7 +933,7 @@ function DiscoveryTour() {
 
 
 
-      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFBF0", borderRadius: "16px", paddingTop: isMobile ? "40px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "40px" : "clamp(60px,7vw,100px)" }}>
+      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFEF9", borderRadius: "16px", paddingTop: isMobile ? "40px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "40px" : "clamp(60px,7vw,100px)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
 
           {/* HEADER: centered */}
@@ -951,7 +951,7 @@ function DiscoveryTour() {
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headline")}{" "}
             </h2>
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#8CB2C0", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#703C54", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headlineEm")}
             </h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
@@ -973,8 +973,8 @@ function DiscoveryTour() {
               <div key={item.label} style={{
                 textAlign: "left",
                 padding: isMobile ? "16px 14px" : "28px 24px",
-                background: isMobile ? "#ffffff" : "rgba(140,178,192,0.05)",
-                border: isMobile ? "none" : "1px solid rgba(140,178,192,0.15)",
+                background: isMobile ? "#FFFEF9" : "rgba(140,178,192,0.05)",
+                border: isMobile ? "none" : "1px solid rgba(140,178,192,0.1)",
                 borderRadius: isMobile ? "12px" : "16px",
                 boxShadow: isMobile ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
                 opacity: visible ? 1 : 0,
@@ -983,19 +983,19 @@ function DiscoveryTour() {
                 transitionDelay: `${0.2 + i * 0.07}s`,
                 cursor: "default",
               }}
-              onMouseEnter={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(140,178,192,0.15)"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.4)"; }}
-              onMouseLeave={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.15)"; }}
+              onMouseEnter={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(140,178,192,0.1)"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.1)"; }}
+              onMouseLeave={isMobile ? undefined : e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(140,178,192,0.1)"; }}
               >
                 <div style={{ marginBottom: isMobile ? "10px" : "20px" }}>
                   {isMobile ? (
                     React.cloneElement(item.svg, {
                       width: 24,
                       height: 24,
-                      stroke: "#8CB2C0",
+                      stroke: "#703C54",
                       strokeWidth: 1,
                     })
                   ) : (
-                    <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: "rgba(140,178,192,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: "rgba(140,178,192,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {React.cloneElement(item.svg, { width: 28, height: 28 })}
                     </div>
                   )}
@@ -1025,7 +1025,7 @@ function DiscoveryTour() {
             display: "flex", alignItems: "center", justifyContent: "space-between",
             flexWrap: "wrap", gap: "20px",
             background: "rgba(140,178,192,0.08)",
-            border: "1px solid rgba(140,178,192,0.25)",
+            border: "1px solid rgba(140,178,192,0.1)",
             borderRadius: "12px", padding: "24px 32px",
             opacity: visible ? 1 : 0,
             transition: "opacity 0.9s ease 0.4s",
@@ -1041,9 +1041,9 @@ function DiscoveryTour() {
             </div>
             <a href="#contact" style={{
               display: "inline-block", padding: "14px 32px", flexShrink: 0,
-              background: "#8CB2C0", borderRadius: "6px", textDecoration: "none",
+              background: "#703C54", borderRadius: "6px", textDecoration: "none",
               fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700,
-              color: "#FFFBF0", letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "#FFFEF9", letterSpacing: "0.1em", textTransform: "uppercase",
               transition: "opacity 0.2s, transform 0.2s",
             }}
               onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -1069,8 +1069,8 @@ function DiscoveryTour() {
               animation: gallery-scroll 30s linear infinite;
             }
           `}</style>
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to right, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to left, #FFFBF0, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to right, #FFFEF9, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(to left, #FFFEF9, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div className="gallery-track">
             {[
               "/turnkey-new.png",
@@ -1106,7 +1106,7 @@ function DiscoveryTour() {
 
 // ─── Payment ──────────────────────────────────────────────────────────────────
 const PAYMENT_ICON = {
-  stroke: "#8CB2C0",
+  stroke: "#703C54",
   strokeWidth: 1.6,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
@@ -1153,7 +1153,7 @@ function Payment() {
             fontFamily: "Inter, sans-serif",
             fontSize: "0.95rem",
             fontWeight: 700,
-            color: "#8CB2C0",
+            color: "#703C54",
             letterSpacing: "-0.02em",
             lineHeight: 1,
           }}
@@ -1184,7 +1184,7 @@ function Payment() {
             fontFamily: "Inter, sans-serif",
             fontSize: "0.62rem",
             fontWeight: 700,
-            color: "#8CB2C0",
+            color: "#703C54",
             letterSpacing: "0.14em",
             lineHeight: 1,
           }}
@@ -1203,11 +1203,11 @@ function Payment() {
         {/* Header */}
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#aaa", fontFamily: "Inter, sans-serif" }}>{t("home.payment.eyebrow")}</span>
+            <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif" }}>{t("home.payment.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1 }}>
-            {t("home.payment.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.payment.headlineEm")}</em>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1 }}>
+            {t("home.payment.headline")}<br /><em style={{ fontStyle: "italic", color: "#703C54" }}>{t("home.payment.headlineEm")}</em>
           </h2>
         </div>
 
@@ -1215,30 +1215,30 @@ function Payment() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginBottom: "48px" }}>
           {cards.map((card) => (
             <div key={card.title} className="reveal"
-              style={{ background: "#FFFBF0", borderRadius: "16px", padding: "56px 32px", border: "1px solid rgba(140,178,192,0.15)", transition: "transform 0.3s, box-shadow 0.3s", cursor: "default" }}
+              style={{ background: "#FFFEF9", borderRadius: "16px", padding: "56px 32px", border: "1px solid rgba(140,178,192,0.1)", transition: "transform 0.3s, box-shadow 0.3s", cursor: "default" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.3)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; }}
             >
-              <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
+              <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.1)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
                 {card.icon}
               </div>
               <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#555", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#8CB2C0", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.25)", paddingTop: "16px" }}>{card.sub}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#703C54", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.1)", paddingTop: "16px" }}>{card.sub}</p>
             </div>
           ))}
         </div>
 
         {/* Three features — in boxes */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px", borderTop: "1px solid rgba(140,178,192,0.15)", paddingTop: "40px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px", borderTop: "1px solid rgba(140,178,192,0.1)", paddingTop: "40px" }}>
           {features.map((f) => (
-            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", padding: "28px 24px", background: "rgba(255,251,240,0.07)", borderRadius: "14px", border: "1px solid rgba(255,251,240,0.1)", textAlign: "center", alignItems: "center" }}>
-              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.15)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", padding: "28px 24px", background: "rgba(255,254,249,0.07)", borderRadius: "14px", border: "1px solid rgba(255,254,249,0.1)", textAlign: "center", alignItems: "center" }}>
+              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {f.icon}
               </div>
               <div>
-                <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.9rem", color: "#FAF7F0", marginBottom: "8px" }}>{f.title}</p>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "#aaa", lineHeight: 1.7 }}>{f.desc}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.9rem", color: "#FFFEF9", marginBottom: "8px" }}>{f.title}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(33,20,26,0.4)", lineHeight: 1.7 }}>{f.desc}</p>
               </div>
             </div>
           ))}
@@ -1330,24 +1330,24 @@ function Calculator() {
         {/* Header */}
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: "#683D47" }} />
-            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", fontFamily: "Inter, sans-serif" }}>{t("home.calculator.eyebrow")}</span>
+            <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
+            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,254,249,0.55)", fontFamily: "Inter, sans-serif" }}>{t("home.calculator.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFBF0", margin: 0, lineHeight: 1.1 }}>
-            {t("home.calculator.headline")}<br /><em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("home.calculator.headlineEm")}</em>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFEF9", margin: 0, lineHeight: 1.1 }}>
+            {t("home.calculator.headline")}<br /><em style={{ fontStyle: "italic", color: "#703C54" }}>{t("home.calculator.headlineEm")}</em>
           </h2>
         </div>
 
         {/* Mode toggle */}
-        <div style={{ display: isMobile ? "flex" : "inline-flex", width: isMobile ? "100%" : "auto", background: "rgba(255,250,236,0.07)", borderRadius: "10px", padding: "4px", marginBottom: "32px", border: "1px solid rgba(255,250,236,0.1)" }}>
+        <div style={{ display: isMobile ? "flex" : "inline-flex", width: isMobile ? "100%" : "auto", background: "rgba(255,254,249,0.07)", borderRadius: "10px", padding: "4px", marginBottom: "32px", border: "1px solid rgba(255,254,249,0.1)" }}>
           {(["installment", "mortgage"] as const).map((m) => (
             <button key={m} onClick={() => setMode(m)} style={{
               flex: isMobile ? 1 : undefined,
               padding: "9px 22px", borderRadius: "7px", border: "none", cursor: "pointer",
               fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", letterSpacing: "0.04em", fontWeight: 600,
               transition: "all 0.2s",
-              background: mode === m ? "#8CB2C0" : "transparent",
-              color: mode === m ? "#21141A" : "rgba(255,250,236,0.6)",
+              background: mode === m ? "#703C54" : "transparent",
+              color: mode === m ? "#FFFEF9" : "rgba(255,254,249,0.6)",
             }}>
               {m === "installment" ? t("home.calculator.installmentTab") : t("home.calculator.mortgageTab")}
             </button>
@@ -1358,7 +1358,7 @@ function Calculator() {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 360px", gap: "32px", alignItems: "start" }}>
 
           {/* ── LEFT: Inputs ── */}
-          <div style={{ background: "#FFFBF0", borderRadius: "16px", padding: "36px", border: "1px solid rgba(33,20,26,0.12)" }}>
+          <div style={{ background: "#FFFEF9", borderRadius: "16px", padding: "36px", border: "1px solid rgba(33,20,26,0.12)" }}>
 
             {mode === "installment" ? (
               <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -1367,9 +1367,9 @@ function Calculator() {
                   <input type="number" value={instPrice || ""} onChange={e => setInstPrice(e.target.value === "" ? 0 : +e.target.value)} onFocus={e => e.target.select()} style={inputStyle} min={10000} step={5000} />
                 </div>
                 <div>
-                  <label style={labelStyle}>{t("home.calculator.downPayment")} — {instDown}%&nbsp;&nbsp;<span style={{ color: "#8CB2C0" }}>{fmtInst(instPrice * instDown / 100)}</span></label>
+                  <label style={labelStyle}>{t("home.calculator.downPayment")} — {instDown}%&nbsp;&nbsp;<span style={{ color: "#703C54" }}>{fmtInst(instPrice * instDown / 100)}</span></label>
                   <input type="range" min={10} max={70} value={instDown} onChange={e => setInstDown(+e.target.value)}
-                    style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
+                    style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
                     <span>10%</span><span>70%</span>
                   </div>
@@ -1377,7 +1377,7 @@ function Calculator() {
                 <div>
                   <label style={labelStyle}>{t("home.calculator.durationMonths", { months: instMonths })}</label>
                   <input type="range" min={24} max={48} step={6} value={instMonths} onChange={e => setInstMonths(+e.target.value)}
-                    style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
+                    style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
                     <span>24</span><span>48</span>
                   </div>
@@ -1392,7 +1392,7 @@ function Calculator() {
                       flex: 1, padding: "8px 4px", border: "none", cursor: "pointer",
                       fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, transition: "all 0.2s",
                       background: mortTab === tab ? "#21141A" : "transparent",
-                      color: mortTab === tab ? "#FFFBF0" : "rgba(33,20,26,0.5)",
+                      color: mortTab === tab ? "#FFFEF9" : "rgba(33,20,26,0.5)",
                     }}>
                       {tab === "amount" ? t("home.calculator.byAmount") : t("home.calculator.byIncome")}
                     </button>
@@ -1410,7 +1410,7 @@ function Calculator() {
                     <div>
                       <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortYears })}</label>
                       <input type="range" min={1} max={20} value={mortYears} onChange={e => setMortYears(+e.target.value)}
-                        style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
+                        style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
                         {[1,5,9,13,17,20].map(v => <span key={v}>{v}</span>)}
                       </div>
@@ -1428,7 +1428,7 @@ function Calculator() {
                     <div>
                       <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortIncomeYears })}</label>
                       <input type="range" min={1} max={20} value={mortIncomeYears} onChange={e => setMortIncomeYears(+e.target.value)}
-                        style={{ width: "100%", accentColor: "#8CB2C0", cursor: "pointer" }} />
+                        style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
                         {[1,5,9,13,17,20].map(v => <span key={v}>{v}</span>)}
                       </div>
@@ -1444,12 +1444,12 @@ function Calculator() {
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
             {/* Result card */}
-            <div style={{ background: "#FFFBF0", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "28px" }}>
+            <div style={{ background: "#FFFEF9", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "28px" }}>
 
               {mode === "installment" ? (
                 <>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyPayment")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmtInst(instMonthly)}
                   </p>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.interestFreeNote", { months: instMonths })}</p>
@@ -1459,7 +1459,7 @@ function Calculator() {
               ) : mortTab === "amount" ? (
                 <>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.monthlyContribution")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(mortMonthly, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.annuityPayment")}</p>
@@ -1469,7 +1469,7 @@ function Calculator() {
               ) : (
                 <>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.55)", margin: "0 0 10px" }}>{t("home.calculator.maxLoanAmount")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(maxLoan, currencySymbol)}
                   </p>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.basedOnIncome")}</p>
@@ -1481,9 +1481,9 @@ function Calculator() {
             </div>
 
             {/* ROI Preview */}
-            <div style={{ background: "#FFFBF0", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
+            <div style={{ background: "#FFFEF9", borderRadius: "16px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#8CB2C0", margin: "0 0 4px" }}>9–14%</p>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px" }}>9–14%</p>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
                 {t("home.calculator.roiPreviewBody")}
               </p>
@@ -1492,9 +1492,9 @@ function Calculator() {
             {/* CTA */}
             <a href="#contact" style={{
               display: "block", textAlign: "center", padding: "14px 20px",
-              background: "#8CB2C0", borderRadius: "10px", textDecoration: "none",
+              background: "#703C54", borderRadius: "10px", textDecoration: "none",
               fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700,
-              color: "#21141A", letterSpacing: "0.04em", transition: "opacity 0.2s",
+              color: "#FFFEF9", letterSpacing: "0.04em", transition: "opacity 0.2s",
             }}
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
@@ -1539,7 +1539,7 @@ function Contact() {
 
   const contactLabelStyle: React.CSSProperties = {
     display: "block",
-    color: "rgba(255,251,240,0.5)",
+    color: "rgba(255,254,249,0.5)",
     fontSize: "0.65rem",
     letterSpacing: "0.1em",
     textTransform: "uppercase",
@@ -1549,9 +1549,9 @@ function Contact() {
   const contactInputStyle: React.CSSProperties = {
     width: "100%",
     boxSizing: "border-box",
-    background: "rgba(255,251,240,0.08)",
-    border: "1px solid rgba(255,251,240,0.15)",
-    color: "#FFFBF0",
+    background: "rgba(255,254,249,0.08)",
+    border: "1px solid rgba(255,254,249,0.15)",
+    color: "#FFFEF9",
     fontFamily: "Inter, sans-serif",
     fontSize: "0.9rem",
     padding: "12px 14px",
@@ -1560,23 +1560,23 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-[rgba(140,178,192,0.15)] bg-[#21141A] py-[clamp(64px,8vw,120px)]">
+    <section id="contact" className="scroll-mt-24 border-t border-[rgba(140,178,192,0.1)] bg-[#21141A] py-[clamp(64px,8vw,120px)]">
       <style>{`
-        #contact .contact-input::placeholder { color: rgba(255,251,240,0.35); }
-        #contact select.contact-input option { background: #21141A; color: #FFFBF0; }
+        #contact .contact-input::placeholder { color: rgba(255,254,249,0.35); }
+        #contact select.contact-input option { background: #21141A; color: #FFFEF9; }
       `}</style>
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
       <div className="mx-auto max-w-[680px]">
         <div className="reveal" style={{ textAlign: "center", marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
-            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", fontFamily: "Inter, sans-serif" }}>{t("home.contact.eyebrow")}</span>
-            <div style={{ width: "28px", height: "1px", background: "rgba(255,251,240,0.3)" }} />
+            <div style={{ width: "28px", height: "1px", background: "rgba(255,254,249,0.3)" }} />
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,254,249,0.5)", fontFamily: "Inter, sans-serif" }}>{t("home.contact.eyebrow")}</span>
+            <div style={{ width: "28px", height: "1px", background: "rgba(255,254,249,0.3)" }} />
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFBF0", lineHeight: 1.1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "16px" }}>
             {t("home.contact.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.contact.headlineEm")}</em>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(255,254,249,0.6)", lineHeight: 1.7 }}>
             {t("home.contact.body")}
           </p>
         </div>
@@ -1586,8 +1586,8 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.teal, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: "#FFFBF0", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.6)", lineHeight: 1.7 }}>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: "#FFFEF9", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.6)", lineHeight: 1.7 }}>
               {t("home.contact.sentBody")}
             </p>
           </div>
@@ -1615,12 +1615,12 @@ function Contact() {
             </div>
             {error && <p style={{ color: C.teal, fontSize: "0.8rem", fontFamily: "Inter, sans-serif" }}>{error}</p>}
             <button type="submit" className="btn-gold" disabled={loading}
-              style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#21141A", background: "#8CB2C0" }}
+              style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#FFFEF9", background: "#703C54" }}
               onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}>
               {loading ? t("home.contact.loading") : t("home.contact.submit")}
             </button>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: "rgba(255,251,240,0.35)", textAlign: "center" }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: "rgba(255,254,249,0.35)", textAlign: "center" }}>
               {t("home.contact.disclaimer")}
             </p>
           </form>
@@ -1682,7 +1682,7 @@ function SocialProofPulse() {
           position: "absolute",
           inset: 0,
           borderRadius: "50%",
-          background: "#8CB2C0",
+          background: "#703C54",
           animation: "sitboPulse 2s ease-out infinite",
         }}
       />
@@ -1691,7 +1691,7 @@ function SocialProofPulse() {
           position: "absolute",
           inset: 0,
           borderRadius: "50%",
-          background: "#8CB2C0",
+          background: "#703C54",
         }}
       />
     </div>
@@ -1772,14 +1772,14 @@ function SocialProofToast() {
         background: "rgba(33, 20, 26, 0.88)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        border: "1px solid rgba(140, 178, 192, 0.2)",
+        border: "1px solid rgba(140,178,192,0.1)",
         borderRadius: 999,
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.24)",
         fontFamily: "Inter, sans-serif",
         fontSize: isNarrow ? 11 : 12,
         fontWeight: 400,
         letterSpacing: "0.04em",
-        color: "#FAF7F0",
+        color: "#FFFEF9",
         cursor: "default",
         maxWidth: isNarrow ? "calc(100vw - 32px)" : 320,
         opacity: leaving ? 0 : 1,
@@ -1795,7 +1795,7 @@ function SocialProofToast() {
             style={{
               fontSize: isNarrow ? 11 : 12,
               fontWeight: 500,
-              color: "#FAF7F0",
+              color: "#FFFEF9",
               letterSpacing: "0.02em",
             }}
           >
@@ -1805,7 +1805,7 @@ function SocialProofToast() {
             style={{
               fontSize: isNarrow ? 9 : 10,
               fontWeight: 400,
-              color: "#FAF7F0",
+              color: "#FFFEF9",
               opacity: 0.55,
               letterSpacing: "0.06em",
               textTransform: "uppercase",
@@ -1819,7 +1819,7 @@ function SocialProofToast() {
           style={{
             fontSize: isNarrow ? 11 : 12,
             fontWeight: 500,
-            color: "#FAF7F0",
+            color: "#FFFEF9",
             letterSpacing: "0.02em",
             lineHeight: 1.3,
           }}

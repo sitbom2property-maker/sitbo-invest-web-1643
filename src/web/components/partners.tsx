@@ -42,20 +42,20 @@ const css = `
     cursor: default;
   }
   .p-card:hover {
-    box-shadow: 0 8px 32px rgba(33,20,26,0.12), 0 0 0 1.5px rgba(140,178,192,0.5);
-    border-color: rgba(140,178,192,0.6);
+    box-shadow: 0 8px 32px rgba(33,20,26,0.12), 0 0 0 1.5px rgba(140,178,192,0.1);
+    border-color: rgba(140,178,192,0.1);
     transform: translateY(-3px);
   }
   .p-card img { width: 100%; height: 100%; object-fit: contain; display: block; opacity: 1; }
-  .p-fade-l { position: absolute; left: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to right, #FFFBF0 20%, transparent); pointer-events: none; z-index: 2; }
-  .p-fade-r { position: absolute; right: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to left, #FFFBF0 20%, transparent); pointer-events: none; z-index: 2; }
+  .p-fade-l { position: absolute; left: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to right, #FFFEF9 20%, transparent); pointer-events: none; z-index: 2; }
+  .p-fade-r { position: absolute; right: 0; top: 0; bottom: 0; width: 140px; background: linear-gradient(to left, #FFFEF9 20%, transparent); pointer-events: none; z-index: 2; }
 `;
 
 export function Partners() {
   const t = useT();
 
   return (
-    <section style={{ background: '#FFFBF0', padding: 'clamp(48px,6vw,96px) 0', overflow: 'hidden' }}>
+    <section style={{ background: '#FFFEF9', padding: 'clamp(48px,6vw,96px) 0', overflow: 'hidden' }}>
       <style>{css}</style>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <h2 style={{ fontFamily: 'Coolvetica, Inter, sans-serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>{t("partners.headline")}</h2>

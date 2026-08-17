@@ -5,9 +5,9 @@ import { useT, type MessageKey } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  teal: "#8CB2C0",
-  light: "#FFFBF0",
-  muted: "#7a7a7a",
+  teal: "#703C54",
+  light: "#FFFEF9",
+  muted: "rgba(33,20,26,0.55)",
 };
 
 type ViewMode = "3d" | "2d" | "360";
@@ -144,8 +144,8 @@ const CSS = `
     position: relative; border-radius: 16px; overflow: hidden;
     background: ${C.dark}; height: min(78vh, 760px); min-height: 480px;
   }
-  .pk-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #111; }
-  .pk-paused { width: 100%; height: 100%; background: #111; }
+  .pk-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #21141A; }
+  .pk-paused { width: 100%; height: 100%; background: #21141A; }
   .pk-open {
     position: absolute; top: 12px; right: 12px;
     font-family: Inter, sans-serif; font-size: 0.68rem; font-weight: 600;

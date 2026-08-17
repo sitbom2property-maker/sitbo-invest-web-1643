@@ -43,10 +43,10 @@ function shouldShow(): boolean {
 const inputStyle: CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  background: "rgba(250,247,240,0.05)",
-  border: "1px solid rgba(140,178,192,0.25)",
+  background: "rgba(255,254,249,0.05)",
+  border: "1px solid rgba(140,178,192,0.1)",
   borderRadius: 8,
-  color: "#FAF7F0",
+  color: "#FFFEF9",
   fontFamily: "Inter, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
@@ -186,7 +186,7 @@ export function LeadPopup() {
           width: 100%;
           max-width: 420px;
           background: #21141A;
-          border: 1px solid rgba(140,178,192,0.22);
+          border: 1px solid rgba(140,178,192,0.1);
           border-radius: 16px;
           padding: 28px 24px 22px;
           box-shadow: 0 18px 48px rgba(0,0,0,0.35);
@@ -202,15 +202,15 @@ export function LeadPopup() {
           height: 32px;
           border-radius: 50%;
           border: none;
-          background: rgba(250,247,240,0.08);
-          color: #FAF7F0;
+          background: rgba(255,254,249,0.08);
+          color: #FFFEF9;
           font-size: 18px;
           line-height: 1;
           cursor: pointer;
           transition: background 0.2s;
         }
-        .lead-popup-close:hover { background: rgba(250,247,240,0.18); }
-        .lead-popup-input:focus { border-color: #8CB2C0 !important; }
+        .lead-popup-close:hover { background: rgba(255,254,249,0.18); }
+        .lead-popup-input:focus { border-color: #703C54 !important; }
         .lead-popup-submit:hover { opacity: 0.88; }
         @keyframes leadPopupFade { from { opacity: 0 } to { opacity: 1 } }
         @keyframes leadPopupRise {
@@ -246,13 +246,13 @@ export function LeadPopup() {
                 fontFamily: "Coolvetica, Inter, sans-serif",
                 fontSize: 26,
                 fontWeight: 400,
-                color: "#FAF7F0",
+                color: "#FFFEF9",
                 margin: "0 0 10px",
               }}
             >
               {t("popup.sentTitle")}
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "rgba(250,247,240,0.75)", margin: 0 }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "rgba(255,254,249,0.75)", margin: 0 }}>
               {t("popup.sentBody")}
             </p>
           </div>
@@ -264,7 +264,7 @@ export function LeadPopup() {
                 fontSize: 24,
                 fontWeight: 400,
                 lineHeight: 1.15,
-                color: "#FAF7F0",
+                color: "#FFFEF9",
                 margin: "0 36px 10px 0",
               }}
             >
@@ -275,7 +275,7 @@ export function LeadPopup() {
                 fontFamily: "Inter, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.4,
-                color: "rgba(250,247,240,0.72)",
+                color: "rgba(255,254,249,0.72)",
                 margin: "0 0 20px",
               }}
             >
@@ -300,7 +300,7 @@ export function LeadPopup() {
                 autoComplete="tel"
               />
               {error ? (
-                <p style={{ margin: 0, color: "#ffb4b4", fontSize: 13, fontFamily: "Inter, sans-serif" }}>
+                <p style={{ margin: 0, color: "#703C54", fontSize: 13, fontFamily: "Inter, sans-serif" }}>
                   {error}
                 </p>
               ) : null}
@@ -312,7 +312,7 @@ export function LeadPopup() {
                   marginTop: 4,
                   border: "none",
                   borderRadius: 6,
-                  background: "#FAF7F0",
+                  background: "#FFFEF9",
                   color: "#21141A",
                   fontFamily: "Inter, sans-serif",
                   fontSize: 15,

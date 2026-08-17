@@ -58,7 +58,7 @@ export function LocaleSelect({ value, options, onChange, id }: LocaleSelectProps
         style={{
           width: "100%",
           height: 56,
-          background: "#F0EDE6",
+          background: "#FFFEF9",
           border: "none",
           padding: "0 20px",
           fontFamily: "Inter, sans-serif",
@@ -89,7 +89,7 @@ export function LocaleSelect({ value, options, onChange, id }: LocaleSelectProps
             margin: "4px 0 0",
             padding: 0,
             listStyle: "none",
-            background: "#FFFFFF",
+            background: "#FFFEF9",
             boxShadow: "0 8px 32px rgba(33,20,26,0.12)",
             zIndex: 10,
             maxHeight: 280,
@@ -115,12 +115,12 @@ export function LocaleSelect({ value, options, onChange, id }: LocaleSelectProps
                     fontFamily: "Inter, sans-serif",
                     fontSize: 14,
                     letterSpacing: "0.08em",
-                    color: active ? "#694153" : "#21141A",
+                    color: active ? "#703C54" : "#21141A",
                     cursor: "pointer",
                     transition: "background 0.15s ease",
                   }}
                   onMouseEnter={(e) => {
-                    if (!active) e.currentTarget.style.background = "#F0EDE6";
+                    if (!active) e.currentTarget.style.background = "#FFFEF9";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";

@@ -7,17 +7,17 @@ import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  teal: "#8CB2C0",
-  wine: "#683D47",
-  pageBg: "#FAF7F0",
+  teal: "#703C54",
+  wine: "#703C54",
+  pageBg: "#FFFEF9",
   text: "#2C1F27",
-  muted: "#7a7a7a",
-  light: "#FFFBF0",
+  muted: "rgba(33,20,26,0.55)",
+  light: "#FFFEF9",
 };
 
 const ARTICLE_STYLES = `
   .blog-post-page {
-    background: #FAF7F0;
+    background: #FFFEF9;
     min-height: 100vh;
   }
   .blog-hero-inner {
@@ -150,7 +150,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "0.9rem",
-          color: "rgba(255,251,240,0.6)",
+          color: "rgba(255,254,249,0.6)",
           lineHeight: 1.75,
           margin: "0 0 32px",
           maxWidth: "520px",
@@ -199,7 +199,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
             padding: "14px 28px",
             borderRadius: "8px",
             background: "transparent",
-            border: "1px solid rgba(255,251,240,0.5)",
+            border: "1px solid rgba(255,254,249,0.5)",
             color: C.light,
             fontFamily: "Inter, sans-serif",
             fontSize: "0.82rem",
@@ -210,10 +210,10 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = C.light;
-            e.currentTarget.style.background = "rgba(255,251,240,0.06)";
+            e.currentTarget.style.background = "rgba(255,254,249,0.06)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "rgba(255,251,240,0.5)";
+            e.currentTarget.style.borderColor = "rgba(255,254,249,0.5)";
             e.currentTarget.style.background = "transparent";
           }}
         >
@@ -234,7 +234,7 @@ function AuthorBlock({ author }: { author: string }) {
         gap: "18px",
         alignItems: "center",
         padding: "24px 28px",
-        background: "#FFFFFF",
+        background: "#FFFEF9",
         borderRadius: "12px",
         border: "1px solid rgba(44,31,39,0.08)",
         boxShadow: "0 2px 12px rgba(33,20,26,0.04)",
@@ -413,10 +413,10 @@ export default function BlogPostPage() {
                 gap: "8px 16px",
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.82rem",
-                color: "rgba(255,251,240,0.55)",
+                color: "rgba(255,254,249,0.55)",
               }}
             >
-              <span style={{ fontWeight: 600, color: "rgba(255,251,240,0.75)" }}>{post.author}</span>
+              <span style={{ fontWeight: 600, color: "rgba(255,254,249,0.75)" }}>{post.author}</span>
               <span>·</span>
               <span>{post.date}</span>
               <span>·</span>

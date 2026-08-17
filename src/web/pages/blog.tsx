@@ -6,10 +6,10 @@ import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  teal: "#8CB2C0",
-  wine: "#683D47",
-  light: "#FFFBF0",
-  muted: "#7a7a7a",
+  teal: "#703C54",
+  wine: "#703C54",
+  light: "#FFFEF9",
+  muted: "rgba(33,20,26,0.55)",
 };
 
 function useIsMobile(bp = 768) {
@@ -49,7 +49,7 @@ function ArticleCard({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          background: "#FFFFFF",
+          background: "#FFFEF9",
           borderRadius: "12px",
           padding: "clamp(24px,3vw,32px)",
           height: "100%",
@@ -193,7 +193,7 @@ export default function BlogPage() {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.88rem",
-                color: "rgba(255,251,240,0.6)",
+                color: "rgba(255,254,249,0.6)",
                 lineHeight: 1.7,
                 margin: 0,
                 maxWidth: "520px",

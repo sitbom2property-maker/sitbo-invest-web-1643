@@ -6,9 +6,9 @@ import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  light: "#FAF7F0",
-  teal: "#8CB2C0",
-  wine: "#683D47",
+  light: "#FFFEF9",
+  teal: "#703C54",
+  wine: "#703C54",
 };
 
 function useScrollProgress(containerRef: RefObject<HTMLElement | null>) {
@@ -129,7 +129,7 @@ export default function HistoryPage() {
           font-family: Inter, sans-serif;
           font-size: clamp(0.92rem, 2vw, 1.05rem);
           line-height: 1.75;
-          color: rgba(250,247,240,0.58);
+          color: rgba(255,254,249,0.58);
           max-width: 560px;
           margin: 0;
         }
@@ -147,8 +147,8 @@ export default function HistoryPage() {
           letter-spacing: 0.14em;
           text-transform: uppercase;
           padding: 10px 16px;
-          border: 1px solid rgba(250,247,240,0.16);
-          color: rgba(250,247,240,0.45);
+          border: 1px solid rgba(255,254,249,0.16);
+          color: rgba(255,254,249,0.45);
           background: transparent;
           border-radius: 999px;
         }
@@ -180,7 +180,7 @@ export default function HistoryPage() {
           background: rgba(33,20,26,0.86);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(250,247,240,0.1);
+          border: 1px solid rgba(255,254,249,0.1);
           border-radius: 12px;
         }
 
@@ -211,7 +211,7 @@ export default function HistoryPage() {
           top: 0;
           bottom: 0;
           width: 2px;
-          background: rgba(250,247,240,0.1);
+          background: rgba(255,254,249,0.1);
         }
 
         .ht-progress__fill {
@@ -253,7 +253,7 @@ export default function HistoryPage() {
           height: 14px;
           border-radius: 50%;
           background: ${C.dark};
-          border: 2px solid rgba(250,247,240,0.28);
+          border: 2px solid rgba(255,254,249,0.28);
           z-index: 2;
           transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
         }
@@ -261,20 +261,20 @@ export default function HistoryPage() {
         .ht-item--active .ht-item__dot {
           background: ${C.teal};
           border-color: ${C.teal};
-          box-shadow: 0 0 0 6px rgba(140,178,192,0.18);
+          box-shadow: 0 0 0 6px rgba(140,178,192,0.1);
         }
 
         .ht-item__card {
           padding: clamp(22px, 4vw, 30px);
-          border: 1px solid rgba(250,247,240,0.1);
+          border: 1px solid rgba(255,254,249,0.1);
           border-radius: 16px;
-          background: rgba(250,247,240,0.03);
+          background: rgba(255,254,249,0.03);
           transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease;
         }
 
         .ht-item--active .ht-item__card {
-          border-color: rgba(140,178,192,0.38);
-          background: rgba(140,178,192,0.07);
+          border-color: rgba(140,178,192,0.1);
+          background: rgba(140,178,192,0.1);
         }
 
         .ht-item__year {
@@ -300,7 +300,7 @@ export default function HistoryPage() {
           font-family: Inter, sans-serif;
           font-size: 0.92rem;
           line-height: 1.7;
-          color: rgba(250,247,240,0.62);
+          color: rgba(255,254,249,0.62);
           margin: 0;
         }
 
@@ -311,7 +311,7 @@ export default function HistoryPage() {
           font-family: Inter, sans-serif;
           font-size: 0.88rem;
           line-height: 1.7;
-          color: rgba(250,247,240,0.45);
+          color: rgba(255,254,249,0.45);
         }
 
         @media (prefers-reduced-motion: reduce) {

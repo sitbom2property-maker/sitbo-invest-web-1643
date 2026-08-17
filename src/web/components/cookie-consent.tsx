@@ -175,7 +175,7 @@ export function CookieConsent() {
                       <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                         <path
                           d="M1 4.1 3.6 6.6 9 1.2"
-                          stroke="#1c1c1c"
+                          stroke="#21141A"
                           strokeWidth="1.6"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -263,8 +263,8 @@ const COOKIE_CSS = `
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background: #1c1c1c;
-  color: #fff;
+  background: #21141A;
+  color: #FFFEF9;
   font-family: Inter, sans-serif;
   box-shadow: 0 -8px 32px rgba(0,0,0,.35);
 }
@@ -286,28 +286,28 @@ const COOKIE_CSS = `
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0;
-  color: #fff;
+  color: #FFFEF9;
 }
 .ck-tools { display: flex; align-items: center; gap: 4px; }
 .ck-lang { position: relative; }
 .ck-icon-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; padding: 0;
-  background: none; border: none; color: #fff; cursor: pointer;
+  background: none; border: none; color: #FFFEF9; cursor: pointer;
 }
 .ck-icon-btn:hover { opacity: .7; }
 .ck-lang-menu {
   position: absolute; right: 0; bottom: calc(100% + 8px);
-  min-width: 72px; background: #111; border: 1px solid rgba(255,255,255,.16);
+  min-width: 72px; background: #21141A; border: 1px solid rgba(255,255,255,.16);
   border-radius: 8px; padding: 4px; z-index: 2;
 }
 .ck-lang-menu button {
-  width: 100%; background: none; border: none; color: #fff;
+  width: 100%; background: none; border: none; color: #FFFEF9;
   font-size: 11px; font-weight: 700; letter-spacing: .08em;
   padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 6px;
 }
 .ck-lang-menu button.is-active,
-.ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #c4b08a; }
+.ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #703C54; }
 .ck-body {
   margin: 8px 0 0; max-width: 820px;
   font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,.92);
@@ -315,7 +315,7 @@ const COOKIE_CSS = `
 .ck-policy {
   display: inline-block; margin: 8px 0 14px; padding: 0;
   background: none; border: none; cursor: pointer;
-  color: #8c7b60; font-size: 13.5px; font-weight: 500;
+  color: #703C54; font-size: 13.5px; font-weight: 500;
   text-decoration: none;
 }
 .ck-policy:hover { text-decoration: underline; }
@@ -331,32 +331,32 @@ const COOKIE_CSS = `
   display: inline-flex; align-items: center; gap: 8px;
   cursor: pointer; user-select: none;
   font-size: 11px; font-weight: 700; letter-spacing: .08em;
-  text-transform: uppercase; color: #fff;
+  text-transform: uppercase; color: #FFFEF9;
 }
 .ck-cat.is-locked { cursor: default; }
 .ck-cat input { position: absolute; opacity: 0; pointer-events: none; }
 .ck-box {
   width: 16px; height: 16px; flex-shrink: 0;
-  border: 1.5px solid #fff; border-radius: 3px;
+  border: 1.5px solid #FFFEF9; border-radius: 3px;
   display: inline-flex; align-items: center; justify-content: center;
   background: transparent;
 }
 .ck-cat input:checked + .ck-box {
-  background: #8c7b60; border-color: #8c7b60;
+  background: #703C54; border-color: #703C54;
 }
 .ck-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .ck-btn {
-  background: transparent; color: #fff;
-  border: 1px solid #fff; border-radius: 999px;
+  background: transparent; color: #FFFEF9;
+  border: 1px solid #FFFEF9; border-radius: 999px;
   padding: 10px 22px; cursor: pointer;
   font-size: 11px; font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; white-space: nowrap;
 }
-.ck-btn:hover { background: #fff; color: #1c1c1c; }
+.ck-btn:hover { background: #FFFEF9; color: #21141A; }
 .ck-details-toggle {
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 14px; padding: 0;
-  background: none; border: none; color: #fff; cursor: pointer;
+  background: none; border: none; color: #FFFEF9; cursor: pointer;
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
 }
 .ck-details-toggle:hover { opacity: .75; }

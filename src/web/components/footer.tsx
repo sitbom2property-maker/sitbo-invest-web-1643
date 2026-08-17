@@ -6,8 +6,8 @@ import { useT } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  light: "#FAF7F0",
-  teal: "#8CB2C0",
+  light: "#FFFEF9",
+  teal: "#703C54",
 };
 
 const colTitleStyle: CSSProperties = {
@@ -52,7 +52,7 @@ function FooterIcon({ name, size = 16 }: { name: string; size?: number }) {
   const props = {
     size,
     strokeWidth: 1.75 as const,
-    color: "rgba(250, 247, 240, 0.9)",
+    color: "rgba(255,254,249, 0.9)",
     "aria-hidden": true as const,
     style: { flexShrink: 0 as const },
   };
@@ -136,14 +136,14 @@ function FooterColExternal({
                   alignItems: isEmail ? "flex-start" : "center",
                   gap: 8,
                   opacity: 1,
-                  color: "rgba(250, 247, 240, 0.75)",
+                  color: "rgba(255,254,249, 0.75)",
                   maxWidth: "100%",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = C.light;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(250, 247, 240, 0.75)";
+                  e.currentTarget.style.color = "rgba(255,254,249, 0.75)";
                 }}
               >
                 <span style={{ display: "inline-flex", flexShrink: 0, marginTop: isEmail ? 2 : 0 }}>
@@ -324,7 +324,7 @@ export function Footer() {
 
       <div
         style={{
-          borderTop: "1px solid rgba(250, 247, 240, 0.08)",
+          borderTop: "1px solid rgba(255,254,249, 0.08)",
           maxWidth: 1280,
           margin: "0 auto",
           padding: isBarStacked ? "24px" : `24px ${sidePad}px`,

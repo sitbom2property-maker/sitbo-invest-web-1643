@@ -6,9 +6,9 @@ import { useT, type MessageKey } from "../i18n";
 
 const C = {
   dark: "#21141A",
-  teal: "#8CB2C0",
-  light: "#FFFBF0",
-  muted: "#7a7a7a",
+  teal: "#703C54",
+  light: "#FFFEF9",
+  muted: "rgba(33,20,26,0.55)",
 };
 
 /** Allowlisted Piazza module — same embed Visarteam uses. */
@@ -133,10 +133,10 @@ const CSS = `
   }
   .pz-frame {
     position: relative; border-radius: 16px; overflow: hidden;
-    background: #f4f1ec; height: min(82vh, 860px); min-height: 520px;
+    background: #FFFEF9; height: min(82vh, 860px); min-height: 520px;
   }
-  .pz-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #f4f1ec; }
-  .pz-paused { width: 100%; height: 100%; background: #1a1216; }
+  .pz-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #FFFEF9; }
+  .pz-paused { width: 100%; height: 100%; background: #21141A; }
   @media (max-width: 767px) {
     .pz-frame { height: 75vh; min-height: 460px; }
   }
