@@ -985,7 +985,7 @@ html, body { background: #21141A; }
 }
 .rd-news-privacy:hover { opacity: .85; }
 .rd-news-done { font-family: var(--body); font-size: 18px; color: #FFFEF9; margin: 0; }
-.rd-news-error { font-family: var(--body); font-size: 13px; color: #703C54; margin: 10px 0 0; }
+.rd-news-error { font-family: var(--body); font-size: 13px; color: #FFFEF9; margin: 10px 0 0; }
 
 /* responsive */
 @media (max-width: 1024px) {
