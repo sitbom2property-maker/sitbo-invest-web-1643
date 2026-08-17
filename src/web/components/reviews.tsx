@@ -43,12 +43,12 @@ export function Reviews() {
   const visibleReviews = reviews.slice(0, 6);
 
   return (
-    <section style={{ background: "#FFFBF0", padding: "clamp(52px,7vw,90px) 0" }}>
+    <section style={{ background: "#FFFEF9", padding: "clamp(52px,7vw,90px) 0" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <h3 style={{ margin: "0 0 30px", fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
           {t("reviews.headline")}
           <br />
-          <em style={{ fontStyle: "italic", color: "#8CB2C0" }}>{t("reviews.headlineEm")}</em>
+          <em style={{ fontStyle: "italic", color: "#703C54" }}>{t("reviews.headlineEm")}</em>
         </h3>
 
         <div
@@ -66,7 +66,7 @@ export function Reviews() {
               key={item.nameKey}
               style={{
                 flex: "0 0 min(320px, 86vw)",
-                background: "#fff",
+                background: "#FFFEF9",
                 border: "1px solid rgba(33,20,26,0.08)",
                 borderRadius: "12px",
                 padding: "18px 18px 16px",
@@ -110,7 +110,7 @@ export function Reviews() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFBF0" }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFEF9" }}>
               {t("reviews.readMore")}
             </span>
           </a>

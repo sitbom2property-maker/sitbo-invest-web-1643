@@ -4,9 +4,9 @@ import { useAdmin } from "../../hooks/useAdmin";
 
 const C = {
 	dark: "#21141A",
-	light: "#FAF7F0",
-	accent: "#8CB2C0",
-	burgundy: "#694153",
+	light: "#FFFEF9",
+	accent: "#703C54",
+	burgundy: "#703C54",
 };
 
 type Property = {
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
 						<p
 							style={{
 								fontFamily: "Inter, sans-serif",
-								color: "rgba(250,247,240,0.5)",
+								color: "rgba(255,254,249,0.5)",
 								margin: "8px 0 0",
 								fontSize: "0.9rem",
 							}}
@@ -185,7 +185,7 @@ export default function AdminDashboard() {
 						<div
 							key={s.key}
 							style={{
-								background: "rgba(250,247,240,0.05)",
+								background: "rgba(255,254,249,0.05)",
 								border: `1px solid ${C.burgundy}`,
 								borderRadius: "10px",
 								padding: "20px",
@@ -282,13 +282,13 @@ export default function AdminDashboard() {
 						<tbody>
 							{fetching ? (
 								<tr>
-									<td colSpan={6} style={{ padding: "24px", color: "rgba(250,247,240,0.5)" }}>
+									<td colSpan={6} style={{ padding: "24px", color: "rgba(255,254,249,0.5)" }}>
 										Загрузка…
 									</td>
 								</tr>
 							) : filtered.length === 0 ? (
 								<tr>
-									<td colSpan={6} style={{ padding: "24px", color: "rgba(250,247,240,0.5)" }}>
+									<td colSpan={6} style={{ padding: "24px", color: "rgba(255,254,249,0.5)" }}>
 										Нет объектов
 									</td>
 								</tr>
@@ -309,7 +309,7 @@ export default function AdminDashboard() {
 													display: "inline-block",
 													padding: "2px 8px",
 													borderRadius: "4px",
-													background: "rgba(140,178,192,0.15)",
+													background: "rgba(140,178,192,0.1)",
 													color: C.accent,
 													fontSize: "0.75rem",
 												}}
@@ -349,9 +349,9 @@ export default function AdminDashboard() {
 const selectStyle: React.CSSProperties = {
 	padding: "10px 14px",
 	background: "rgba(33,20,26,0.8)",
-	border: `1px solid #694153`,
+	border: `1px solid #703C54`,
 	borderRadius: "8px",
-	color: "#FAF7F0",
+	color: "#FFFEF9",
 	fontFamily: "Inter, sans-serif",
 	fontSize: "0.85rem",
 	outline: "none",

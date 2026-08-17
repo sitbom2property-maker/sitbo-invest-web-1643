@@ -71,7 +71,7 @@ function NavItem({
     fontSize: 15,
     fontWeight: 400,
     letterSpacing: 0,
-    color: "#FFFFFF",
+    color: "#FFFEF9",
     textTransform: "none" as const,
     textDecoration: "none",
     whiteSpace: "nowrap" as const,
@@ -118,7 +118,7 @@ function NavItem({
 function HamburgerIcon() {
   return (
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden>
-      <path d="M0 1h22M0 8h22M0 15h22" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M0 1h22M0 8h22M0 15h22" stroke="#FFFEF9" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -317,7 +317,7 @@ export function Nav() {
                   padding: "12px 26px",
                   borderRadius: 4,
                   background: "transparent",
-                  color: "#FFFFFF",
+                  color: "#FFFEF9",
                   border: "1px solid rgba(255,255,255,0.55)",
                   fontFamily: "'Inter', sans-serif",
                   fontSize: 15,
@@ -329,12 +329,12 @@ export function Nav() {
                   transition: "background 0.2s, color 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#FFFFFF";
+                  e.currentTarget.style.background = "#FFFEF9";
                   e.currentTarget.style.color = "#21141A";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#FFFFFF";
+                  e.currentTarget.style.color = "#FFFEF9";
                 }}
               >
                 {t("nav.contactArthur")}
@@ -390,7 +390,7 @@ export function Nav() {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
-                    color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                    color: isActive(l.href) ? "#703C54" : "#FFFEF9",
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
@@ -409,16 +409,16 @@ export function Nav() {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
-                    color: isActive(l.href) ? "#8CB2C0" : "#FAF7F0",
+                    color: isActive(l.href) ? "#703C54" : "#FFFEF9",
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
                     transition: "color 0.2s ease",
                     textAlign: "center",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#8CB2C0")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#703C54")}
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = isActive(l.href) ? "#8CB2C0" : "#FAF7F0")
+                    (e.currentTarget.style.color = isActive(l.href) ? "#703C54" : "#FFFEF9")
                   }
                 >
                   {t(l.labelKey)}
@@ -433,8 +433,8 @@ export function Nav() {
                 marginTop: 12,
                 padding: "15px 28px",
                 borderRadius: 8,
-                background: "#8CB2C0",
-                color: "#21141A",
+                background: "#703C54",
+                color: "#FFFEF9",
                 fontFamily: "Inter, sans-serif",
                 fontSize: 11,
                 fontWeight: 700,

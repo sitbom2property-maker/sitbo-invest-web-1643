@@ -18,7 +18,7 @@ export function FooterV2() {
           --rd-max: var(--site-max, 1440px);
           --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
           background: #21141A;
-          color: #FFFFFF;
+          color: #FFFEF9;
           font-family: 'Inter', sans-serif;
           padding: clamp(46px, 6vw, 88px) 0 clamp(26px, 3vw, 44px);
         }
@@ -33,7 +33,7 @@ export function FooterV2() {
         .fv2-logo { height: 22px; width: auto; display: block; margin-bottom: 22px; }
         .fv2-name {
           font-family: 'Inter', sans-serif; font-size: clamp(17px, 1.39vw, 20px);
-          margin: 0 0 22px; color: #FFFFFF;
+          margin: 0 0 22px; color: #FFFEF9;
         }
         .fv2-name em { font-family: 'Inter', sans-serif; font-style: italic; }
         .fv2-tagline {
@@ -43,14 +43,14 @@ export function FooterV2() {
         .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFFFF;
+          font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFEF9;
         }
         .fv2-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
         .fv2-col a {
           font-size: 16px; color: rgba(255,255,255,.85); text-decoration: none;
           transition: color .2s; white-space: nowrap;
         }
-        .fv2-col a:hover { color: #FFFFFF; text-decoration: underline; }
+        .fv2-col a:hover { color: #FFFEF9; text-decoration: underline; }
         .fv2-bottom {
           margin-top: clamp(40px, 6vw, 96px); font-size: 16px; color: rgba(255,255,255,.72);
         }

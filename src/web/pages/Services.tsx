@@ -5,7 +5,7 @@ import { useT, type MessageKey } from "../i18n";
 
 /**
  * Services page — first-person voice, aligned with home-v2 visual system:
- * Coolvetica / Inter · #21141A · card #412834 · green #48674D · panel #F8F8F8
+ * Coolvetica / Inter · #21141A · wine #703C54 · light #FFFEF9 · teal #8CB2C0 at 10%
  */
 
 type ServiceItem = {
@@ -171,10 +171,10 @@ function AccordionItem({
 const CSS = `
 .sv {
   --bg: #21141A;
-  --card: #412834;
-  --green: #48674D;
-  --white: #FFFFFF;
-  --panel: #F8F8F8;
+  --card: #703C54;
+  --green: color-mix(in srgb, #8CB2C0 10%, #703C54);
+  --white: #FFFEF9;
+  --panel: color-mix(in srgb, #8CB2C0 10%, #FFFEF9);
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
@@ -333,7 +333,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 .sv-cta {
   border-radius: 20px; overflow: hidden;
   background:
-    radial-gradient(100% 140% at 90% 50%, rgba(72,103,77,.55) 0%, rgba(33,20,26,0) 55%),
+    radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
     var(--card);
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;

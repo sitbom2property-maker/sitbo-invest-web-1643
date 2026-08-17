@@ -13,11 +13,11 @@ import { useT } from "../i18n";
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
   dark:      "#21141A",
-  teal:      "#8CB2C0",
-  wine:      "#683D47",
-  light:     "#FFFBF0",
-  parchment: "#FFFBF0",
-  muted:     "#7a7a7a",
+  teal:      "#703C54",
+  wine:      "#703C54",
+  light:     "#FFFEF9",
+  parchment: "#FFFEF9",
+  muted:     "rgba(33,20,26,0.55)",
   mutedDark: "#4a4a4a",
 };
 
@@ -101,11 +101,11 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
           {photos.length > 1 && (
           <>
             <button onClick={() => setActive(i => (i - 1 + photos.length) % photos.length)}
-              style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,251,240,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
+              style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
               ‹
             </button>
             <button onClick={() => setActive(i => (i + 1) % photos.length)}
-              style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,251,240,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
+              style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
               ›
             </button>
           </>
@@ -243,7 +243,7 @@ function LayoutCarousel({
                 scrollSnapStop: "always",
                 borderRadius: "16px",
                 overflow: "hidden",
-                background: "#fff",
+                background: "#FFFEF9",
                 border: "1px solid rgba(33,20,26,0.08)",
                 boxShadow: i === active ? "0 10px 28px rgba(33,20,26,0.08)" : "none",
                 transition: "box-shadow 0.3s ease",
@@ -262,7 +262,7 @@ function LayoutCarousel({
               <div
                 style={{
                   aspectRatio: "16 / 10",
-                  background: "#FFFBF0",
+                  background: "#FFFEF9",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -277,7 +277,7 @@ function LayoutCarousel({
                 />
               </div>
               {(labels?.[i] || areas?.[i]) && (
-                <div style={{ padding: isMobile ? "12px 14px 14px" : "14px 18px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#fff" }}>
+                <div style={{ padding: isMobile ? "12px 14px 14px" : "14px 18px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#FFFEF9" }}>
                   {labels?.[i] && (
                     <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: C.dark }}>
                       {labels[i]}
@@ -309,7 +309,7 @@ function LayoutCarousel({
                 height: "40px",
                 borderRadius: "50%",
                 border: "1px solid rgba(33,20,26,0.12)",
-                background: "rgba(255,251,240,0.92)",
+                background: "rgba(255,254,249,0.92)",
                 color: C.dark,
                 fontSize: "1.25rem",
                 cursor: "pointer",
@@ -334,7 +334,7 @@ function LayoutCarousel({
                 height: "40px",
                 borderRadius: "50%",
                 border: "1px solid rgba(33,20,26,0.12)",
-                background: "rgba(255,251,240,0.92)",
+                background: "rgba(255,254,249,0.92)",
                 color: C.dark,
                 fontSize: "1.25rem",
                 cursor: "pointer",
@@ -510,7 +510,7 @@ export default function ProjectPage() {
                   style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "12px", border: `1px solid rgba(33,20,26,0.07)` }}
                 >
                   {p.developerLogo ? (
-                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "8px", background: "#fff", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
+                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "8px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
                       <img src={p.developerLogo} alt={p.developer} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
                     </div>
                   ) : (
@@ -542,7 +542,7 @@ export default function ProjectPage() {
     { label: t("project.spec.finishing"), value: p.finishing },
     { label: t("project.developer"), value: p.developer },
                   ].map(s => (
-                    <div key={s.label} style={{ background: "#fff", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "12px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
+                    <div key={s.label} style={{ background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "12px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
                     </div>
@@ -570,7 +570,7 @@ export default function ProjectPage() {
 {/* Materials */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>{t("project.materials")}</Eyebrow>
-                <div style={{ background: "#fff", borderRadius: "12px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ background: "#FFFEF9", borderRadius: "12px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
                   {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
                     const colonIdx = sentence.indexOf(":");
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
@@ -595,7 +595,7 @@ export default function ProjectPage() {
                   {/* Filled / down payment portion */}
                   <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.teal, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,254,249,0.5)", margin: 0 }}>{t("project.downPayment")}</p>
                   </div>
                   {/* Remainder / installment portion */}
                   <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
@@ -619,14 +619,14 @@ export default function ProjectPage() {
                     {t("project.offerTitle")}
                   </h3>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.teal, marginBottom: "16px" }}>{priceLabel}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
                   {p.apartmentsKey && (
-                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
+                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
                       {t("chess.chooseCta")}
                     </a>
                   )}
@@ -656,12 +656,12 @@ export default function ProjectPage() {
                   </a>
                 )}
                 {p.tourUrl && (
-                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.35)", textDecoration: "none" }}>
+                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.view3d")}</span>
                   </a>
                 )}
                 {p.panoramaUrl && (
-                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.35)", textDecoration: "none" }}>
+                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "16px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.viewPanorama")}</span>
                   </a>
                 )}
@@ -713,7 +713,7 @@ export default function ProjectPage() {
           ) : (
           <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "10px" : "16px" }}>
             {[null, null, null].map((_, n) => (
-                <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "12px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFBF0" }}>
+                <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "12px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFEF9" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="1"/>
                     <path d="M3 9h18M9 9v12M3 15h6"/>
@@ -761,7 +761,7 @@ export default function ProjectPage() {
                   {t("project.cta.title")}<br />
                   <em style={{ color: C.teal, fontStyle: "italic" }}>{p.name}?</em>
                 </h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
                   {t("project.cta.body")}
                 </p>
                 <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
@@ -789,7 +789,7 @@ export default function ProjectPage() {
                   />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,251,240,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,254,249,0.55)", marginBottom: "4px" }}>{proj.tag}</p>
                     <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
@@ -807,7 +807,7 @@ export default function ProjectPage() {
         <div onClick={() => setModalSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, backdropFilter: "blur(4px)", cursor: "pointer" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", maxWidth: "60vw", maxHeight: "70vh", cursor: "default" }}>
             <img src={modalSrc} alt={t("project.modal.layoutPreview")} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "12px" }} />
-            <button onClick={() => setModalSrc(null)} style={{ position: "absolute", top: "-40px", right: "0", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,251,240,0.1)", border: "1px solid rgba(255,251,240,0.25)", color: "#FFFBF0", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,251,240,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,251,240,0.1)")}>
+            <button onClick={() => setModalSrc(null)} style={{ position: "absolute", top: "-40px", right: "0", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "1px solid rgba(255,254,249,0.25)", color: "#FFFEF9", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>
               ✕
             </button>
           </div>

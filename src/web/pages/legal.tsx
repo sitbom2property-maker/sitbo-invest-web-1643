@@ -3,10 +3,10 @@ import { useT } from "../i18n";
 
 const C = {
   dark:      "#21141A",
-  teal:      "#8CB2C0",
-  light:     "#FFFBF0",
-  parchment: "#FFFBF0",
-  muted:     "#7a7a7a",
+  teal:      "#703C54",
+  light:     "#FFFEF9",
+  parchment: "#FFFEF9",
+  muted:     "rgba(33,20,26,0.55)",
 };
 
 export default function LegalPage() {
@@ -115,13 +115,13 @@ export default function LegalPage() {
                       <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 600, color: C.dark, margin: "0 0 10px", letterSpacing: "0.01em" }}>
                         {item.heading}
                       </h3>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, margin: 0 }}>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, margin: 0 }}>
                         {item.body}
                       </p>
                       {item.list && (
                         <ul style={{ margin: "10px 0 0 0", padding: "0 0 0 20px" }}>
                           {item.list.map(li => (
-                            <li key={li} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "#444", lineHeight: 1.8, marginBottom: "4px" }}>
+                            <li key={li} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "4px" }}>
                               {li}
                             </li>
                           ))}

@@ -14,9 +14,9 @@ import { RequestModal } from "./RequestModal";
 
 const C = {
   dark: "#21141A",
-  teal: "#8CB2C0",
-  light: "#FFFBF0",
-  muted: "#7a7a7a",
+  teal: "#703C54",
+  light: "#FFFEF9",
+  muted: "rgba(33,20,26,0.55)",
 };
 
 type StatusFilter = "free" | "all";
@@ -108,7 +108,7 @@ export function ApartmentChessboard({
 
   const cellBg = (u: ApartmentUnit, dim: boolean) => {
     const base = STATUS_COLOR[u.s];
-    if (dim) return u.s === "available" || u.s === "reserved" ? `${base}55` : "#f0e8df";
+    if (dim) return u.s === "available" || u.s === "reserved" ? `${base}55` : "#FFFEF9";
     return base;
   };
 
@@ -238,7 +238,7 @@ const chip = (active: boolean): CSSProperties => ({
                   padding: focused && floorFilter !== "all" ? 3 : 0,
                   borderRadius: 6,
                   outline: floorFilter !== "all" && floor === floorFilter ? `2px solid ${C.teal}` : "none",
-                  background: floorFilter !== "all" && floor === floorFilter ? "rgba(140,178,192,0.12)" : "transparent",
+                  background: floorFilter !== "all" && floor === floorFilter ? "rgba(140,178,192,0.1)" : "transparent",
                   opacity: focused ? 1 : 0.38,
                 }}
               >
@@ -298,7 +298,7 @@ const chip = (active: boolean): CSSProperties => ({
         }}>
           {!selected ? (
             <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.55)", lineHeight: 1.7, margin: "0 0 20px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.55)", lineHeight: 1.7, margin: "0 0 20px" }}>
                 {t("chess.pickHint")}
               </p>
               <button
@@ -329,7 +329,7 @@ const chip = (active: boolean): CSSProperties => ({
                   [t("chess.status.label"), t(STATUS_KEYS[selected.s])],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,251,240,0.4)", margin: "0 0 4px" }}>{label}</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,254,249,0.4)", margin: "0 0 4px" }}>{label}</p>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
                   </div>
                 ))}
@@ -339,17 +339,17 @@ const chip = (active: boolean): CSSProperties => ({
                   {formatFromUSD(selected.p)}
                 </p>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,251,240,0.5)", margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,254,249,0.5)", margin: "0 0 4px" }}>
                   {t("chess.priceOnRequest")}
                 </p>
               )}
               {selected.m ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,251,240,0.45)", margin: "0 0 14px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.45)", margin: "0 0 14px" }}>
                   {formatFromUSD(selected.m)} / m²
                 </p>
               ) : <div style={{ height: 14 }} />}
               {(ru ? selected.vr || selected.hr : selected.v || selected.h) ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.65)", margin: "0 0 16px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.65)", margin: "0 0 16px" }}>
                   {[ru ? selected.vr : selected.v, ru ? selected.hr : selected.h].filter(Boolean).join(" · ")}
                 </p>
               ) : null}
@@ -373,7 +373,7 @@ const chip = (active: boolean): CSSProperties => ({
                   {t("chess.request")}
                 </button>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "rgba(255,251,240,0.45)", margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "rgba(255,254,249,0.45)", margin: 0 }}>
                   {t("chess.notSelectable")}
                 </p>
               )}

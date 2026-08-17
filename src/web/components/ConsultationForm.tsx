@@ -6,16 +6,16 @@ const labelStyle: CSSProperties = {
   fontSize: "0.62rem",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
-  color: "rgba(250,247,240,0.4)",
+  color: "rgba(255,254,249,0.4)",
   marginBottom: "8px",
 };
 
 const inputStyle: CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  background: "rgba(250,247,240,0.05)",
-  border: "1px solid rgba(140,178,192,0.2)",
-  color: "#FAF7F0",
+  background: "rgba(255,254,249,0.05)",
+  border: "1px solid rgba(140,178,192,0.1)",
+  color: "#FFFEF9",
   fontFamily: "Inter, sans-serif",
   fontSize: "14px",
   padding: "14px 16px",
@@ -72,7 +72,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "15px",
-          color: "#8CB2C0",
+          color: "#703C54",
           textAlign: "center",
           margin: "24px 0 0",
           lineHeight: 1.6,
@@ -87,9 +87,9 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
     <>
       <style>{`
         .consultation-form input::placeholder,
-        .consultation-form select { color: #FAF7F0; }
-        .consultation-form input::placeholder { color: rgba(250,247,240,0.25); }
-        .consultation-form select option { background: #21141A; color: #FAF7F0; }
+        .consultation-form select { color: #FFFEF9; }
+        .consultation-form input::placeholder { color: rgba(255,254,249,0.25); }
+        .consultation-form select option { background: #21141A; color: #FFFEF9; }
         .consultation-form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -112,8 +112,8 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
               style={inputStyle}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#8CB2C0")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.2)")}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#703C54")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.1)")}
             />
           </div>
           <div>
@@ -125,8 +125,8 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
               onChange={(e) => setForm({ ...form, contact: e.target.value })}
               required
               style={inputStyle}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#8CB2C0")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.2)")}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#703C54")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.1)")}
             />
           </div>
         </div>
@@ -137,8 +137,8 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
             value={form.budget}
             onChange={(e) => setForm({ ...form, budget: e.target.value })}
             style={{ ...inputStyle, cursor: "pointer" }}
-            onFocus={(e) => (e.currentTarget.style.borderColor = "#8CB2C0")}
-            onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.2)")}
+            onFocus={(e) => (e.currentTarget.style.borderColor = "#703C54")}
+            onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(140,178,192,0.1)")}
           >
             <option value="">Select your budget range</option>
             <option value="50-100k">$50,000 – $100,000</option>
@@ -149,7 +149,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#8CB2C0", margin: "16px 0 0" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#703C54", margin: "16px 0 0" }}>
             {error}
           </p>
         )}
@@ -159,8 +159,8 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
           disabled={loading}
           style={{
             width: "100%",
-            background: loading ? "rgba(140,178,192,0.6)" : "#8CB2C0",
-            color: "#21141A",
+            background: loading ? "rgba(112,60,84,0.6)" : "#703C54",
+            color: "#FFFEF9",
             fontFamily: "Inter, sans-serif",
             fontSize: "0.7rem",
             letterSpacing: "0.14em",
@@ -173,10 +173,18 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
             fontWeight: 600,
           }}
           onMouseEnter={(e) => {
-            if (!loading) (e.currentTarget as HTMLButtonElement).style.background = "#FAF7F0";
+            if (!loading) {
+              const btn = e.currentTarget as HTMLButtonElement;
+              btn.style.background = "#FFFEF9";
+              btn.style.color = "#21141A";
+            }
           }}
           onMouseLeave={(e) => {
-            if (!loading) (e.currentTarget as HTMLButtonElement).style.background = "#8CB2C0";
+            if (!loading) {
+              const btn = e.currentTarget as HTMLButtonElement;
+              btn.style.background = "#703C54";
+              btn.style.color = "#FFFEF9";
+            }
           }}
         >
           {loading ? "Sending..." : "Request Private Consultation"}

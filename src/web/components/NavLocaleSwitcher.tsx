@@ -44,7 +44,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
     textTransform: "uppercase",
     border: "none",
     background: "transparent",
-    color: "#FAF7F0",
+    color: "#FFFEF9",
     cursor: "pointer",
     padding: compact ? "6px 4px" : "6px 7px",
     lineHeight: 1,
@@ -75,7 +75,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
               style={{
                 ...chipBase,
                 opacity: active ? 1 : 0.45,
-                color: active ? "#8CB2C0" : "#FAF7F0",
+                color: active ? "#703C54" : "#FFFEF9",
                 paddingLeft: i === 0 ? (compact ? 4 : 6) : 4,
                 paddingRight: i === LANGS.length - 1 ? (compact ? 4 : 6) : 4,
               }}
@@ -91,7 +91,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
         style={{
           width: 1,
           height: 12,
-          background: "rgba(250,247,240,0.25)",
+          background: "rgba(255,254,249,0.25)",
           margin: "0 2px",
           flexShrink: 0,
         }}
@@ -139,7 +139,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
               right: 0,
               minWidth: 128,
               background: "#21141A",
-              border: "1px solid rgba(250,247,240,0.12)",
+              border: "1px solid rgba(255,254,249,0.12)",
               borderRadius: 10,
               padding: 6,
               boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
@@ -165,8 +165,8 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
                     justifyContent: "space-between",
                     gap: 12,
                     border: "none",
-                    background: active ? "rgba(140,178,192,0.15)" : "transparent",
-                    color: active ? "#8CB2C0" : "#FAF7F0",
+                    background: active ? "rgba(140,178,192,0.1)" : "transparent",
+                    color: active ? "#703C54" : "#FFFEF9",
                     fontFamily: "Inter, sans-serif",
                     fontSize: 12,
                     fontWeight: 600,

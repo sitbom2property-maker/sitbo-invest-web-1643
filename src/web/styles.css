@@ -221,9 +221,10 @@ html {
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand palette */
-  --color-light:      #FFFBF0;
-  --color-parchment:  #FFFBF0;
+  /* Brand palette: light, dark, wine, teal at 10% */
+  --color-light:      #FFFEF9;
+  --color-parchment:  #FFFEF9;
+  --color-wine:       #703C54;
   --color-teal:       #8CB2C0;
   --color-dark:       #21141A;
 }
@@ -233,24 +234,24 @@ html {
   --site-max: 1440px;
   --site-gutter: clamp(30px, 5.5vw, 80px);
   --radius: 0.25rem;
-  --background: #FFFBF0;
+  --background: #FFFEF9;
   --foreground: #21141A;
-  --card: #FFFBF0;
+  --card: #FFFEF9;
   --card-foreground: #21141A;
-  --popover: #FFFBF0;
+  --popover: #FFFEF9;
   --popover-foreground: #21141A;
-  --primary: #8CB2C0;
-  --primary-foreground: #FFFBF0;
+  --primary: #703C54;
+  --primary-foreground: #FFFEF9;
   --secondary: #21141A;
-  --secondary-foreground: #FFFBF0;
-  --muted: #FFFBF0;
-  --muted-foreground: #7a7a7a;
-  --accent: #8CB2C0;
-  --accent-foreground: #FFFBF0;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(140,178,192,0.18);
+  --secondary-foreground: #FFFEF9;
+  --muted: #FFFEF9;
+  --muted-foreground: rgba(33,20,26,0.55);
+  --accent: #703C54;
+  --accent-foreground: #FFFEF9;
+  --destructive: #703C54;
+  --border: rgba(140,178,192,0.1);
   --input: rgba(140,178,192,0.1);
-  --ring: #8CB2C0;
+  --ring: #703C54;
 }
 
 @media (max-width: 640px) {
@@ -313,7 +314,7 @@ body.has-cookie-banner {
 /* Accent line */
 .gold-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #8CB2C0, transparent);
+  background: linear-gradient(90deg, transparent, #703C54, transparent);
 }
 
 /* Noise texture overlay */
@@ -349,8 +350,8 @@ body.has-cookie-banner {
 
 /* Primary button */
 .btn-gold {
-  background: #8CB2C0;
-  color: #FFFBF0;
+  background: #703C54;
+  color: #FFFEF9;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -365,22 +366,22 @@ body.has-cookie-banner {
   text-decoration: none;
 }
 .btn-gold:hover {
-  background: #3D7A6C;
-  color: #FFFBF0;
+  background: #21141A;
+  color: #FFFEF9;
   transform: translateY(-1px);
 }
 
 /* Outline button */
 .btn-outline-gold {
   background: transparent;
-  color: #8CB2C0;
+  color: #703C54;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.75rem;
   padding: 13px 32px;
-  border: 1px solid #8CB2C0;
+  border: 1px solid #703C54;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s;
@@ -388,7 +389,7 @@ body.has-cookie-banner {
   text-decoration: none;
 }
 .btn-outline-gold:hover {
-  background: rgba(140,178,192,0.12);
+  background: rgba(140,178,192,0.1);
   transform: translateY(-1px);
 }
 
@@ -397,15 +398,15 @@ body.has-cookie-banner {
   font-family: 'Inter', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
-  color: #8CB2C0;
+  color: #703C54;
   line-height: 1;
 }
 
 /* Form input */
 .form-input {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(140,178,192,0.25);
-  color: #FFFBF0;
+  border: 1px solid rgba(140,178,192,0.1);
+  color: #FFFEF9;
   font-family: 'Inter', sans-serif;
   padding: 16px 20px;
   width: 100%;
@@ -415,16 +416,16 @@ body.has-cookie-banner {
   font-size: 0.9rem;
 }
 .form-input::placeholder {
-  color: rgba(255,250,236,0.4);
+  color: rgba(255,254,249,0.4);
 }
 .form-input:focus {
-  border-color: #8CB2C0;
+  border-color: #703C54;
 }
 
 /* Light form input (for light bg sections) */
 .form-input-light {
-  background: #FFFBF0;
-  border: 1px solid rgba(140,178,192,0.35);
+  background: #FFFEF9;
+  border: 1px solid rgba(140,178,192,0.1);
   color: #21141A;
   font-family: 'Inter', sans-serif;
   padding: 16px 48px 16px 20px;
@@ -437,13 +438,13 @@ body.has-cookie-banner {
   appearance: none;
 }
 .form-input-light::placeholder {
-  color: #aaa;
+  color: rgba(33,20,26,0.4);
 }
 .form-input-light:focus {
-  border-color: #8CB2C0;
+  border-color: #703C54;
 }
 select.form-input-light {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238CB2C0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23703C54' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
 }
@@ -501,7 +502,7 @@ select.form-input-light {
   background: none;
   border: none;
   font-size: 28px;
-  color: rgba(250,247,240,0.4);
+  color: rgba(255,254,249,0.4);
   cursor: pointer;
   line-height: 1;
   padding: 4px 8px;
@@ -509,7 +510,7 @@ select.form-input-light {
 }
 
 .nav-mobile-close:hover {
-  color: #FAF7F0;
+  color: #FFFEF9;
 }
 
 @keyframes navOverlayIn {
@@ -585,13 +586,13 @@ select.form-input-light {
   background: rgba(61,61,61,0.08);
 }
 .stat-tile {
-  background: #FFFBF0;
+  background: #FFFEF9;
   padding: 28px 16px;
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s;
 }
 .stat-tile:hover {
-  border-color: #8CB2C0;
+  border-color: #703C54;
 }
 
 .lifestyle-grid {
@@ -822,16 +823,16 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #8CB2C0;
+  background: #703C54;
   cursor: pointer;
   border: none;
-  box-shadow: 0 0 0 3px rgba(236,255,135,0.15);
+  box-shadow: 0 0 0 3px rgba(140,178,192,0.1);
 }
 input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #8CB2C0;
+  background: #703C54;
   cursor: pointer;
   border: none;
 }
@@ -1114,7 +1115,7 @@ input[type="range"]::-moz-range-track {
   z-index: 1;
   width: 100%;
   max-width: 560px;
-  background: #faf7f0;
+  background: #FFFEF9;
   border-radius: 2px;
   padding: 56px 48px;
   box-sizing: border-box;
@@ -1149,7 +1150,7 @@ input[type="range"]::-moz-range-track {
   width: 100%;
   height: 56px;
   background: #21141a;
-  color: #faf7f0;
+  color: #FFFEF9;
   border: none;
   font-family: Inter, sans-serif;
   font-size: 12px;

@@ -4,9 +4,9 @@ import { useAdmin } from "../../hooks/useAdmin";
 
 const C = {
 	dark: "#21141A",
-	light: "#FAF7F0",
-	accent: "#8CB2C0",
-	burgundy: "#694153",
+	light: "#FFFEF9",
+	accent: "#703C54",
+	burgundy: "#703C54",
 };
 
 const CITIES = ["Батуми", "Тбилиси", "Гонио", "Чакви", "Махинджаури"] as const;
@@ -466,7 +466,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 							<h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.1rem", margin: "0 0 16px", color: C.accent }}>История</h2>
 							<div style={{ borderLeft: `2px solid ${C.burgundy}`, paddingLeft: "16px" }}>
 								{history.length === 0 ? (
-									<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(250,247,240,0.45)" }}>Нет записей</p>
+									<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "rgba(255,254,249,0.45)" }}>Нет записей</p>
 								) : (
 									history.map((h) => (
 										<div key={h.id} style={{ marginBottom: "20px", position: "relative" }}>
@@ -478,7 +478,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", margin: "0 0 4px", lineHeight: 1.4 }}>{h.description}</p>
 											)}
 											{h.price != null && (
-												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(250,247,240,0.5)", margin: 0 }}>
+												<p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.5)", margin: 0 }}>
 													Цена: {h.price.toLocaleString()}
 												</p>
 											)}
@@ -496,7 +496,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
-		<div style={{ marginBottom: "28px", padding: "20px", background: "rgba(250,247,240,0.03)", border: `1px solid ${C.burgundy}`, borderRadius: "10px" }}>
+		<div style={{ marginBottom: "28px", padding: "20px", background: "rgba(255,254,249,0.03)", border: `1px solid ${C.burgundy}`, borderRadius: "10px" }}>
 			<h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.12em", color: C.accent, margin: "0 0 16px" }}>{title}</h2>
 			{children}
 		</div>
@@ -506,7 +506,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
 	return (
 		<div style={{ marginBottom: "14px" }}>
-			<label style={{ display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(250,247,240,0.6)", marginBottom: "6px" }}>{label}</label>
+			<label style={{ display: "block", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "rgba(255,254,249,0.6)", marginBottom: "6px" }}>{label}</label>
 			{children}
 		</div>
 	);

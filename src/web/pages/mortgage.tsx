@@ -9,11 +9,11 @@ import { useT } from "../i18n";
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
   dark:      "#21141A",
-  teal:      "#8CB2C0",
-  wine:      "#683D47",
-  light:     "#FFFBF0",
-  parchment: "#FFFBF0",
-  muted:     "#7a7a7a",
+  teal:      "#703C54",
+  wine:      "#703C54",
+  light:     "#FFFEF9",
+  parchment: "#FFFEF9",
+  muted:     "rgba(33,20,26,0.55)",
   mutedDark: "#4a4a4a",
 };
 
@@ -274,7 +274,7 @@ function MortgageCalculator() {
                   fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 700, lineHeight: 1,
                   color: item.accent ? C.teal : C.dark, marginBottom: "8px",
                 }}>{item.value}</div>
-                <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: item.accent ? "rgba(255,251,240,0.5)" : C.muted }}>
+                <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: item.accent ? "rgba(255,254,249,0.5)" : C.muted }}>
                   {item.label}
                 </div>
               </div>
@@ -428,7 +428,7 @@ export default function MortgagePage() {
             <Col span={8}>
               <div className="m-reveal" style={{ transitionDelay: "80ms", background: C.dark, borderRadius: "14px", padding: "28px 28px" }}>
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, marginBottom: "16px" }}>{t("mortgage.terms.whoQualifies")}</h3>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,251,240,0.7)", lineHeight: 1.7, marginBottom: "20px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(255,254,249,0.7)", lineHeight: 1.7, marginBottom: "20px" }}>
                   {t("mortgage.terms.whoQualifiesBody")}
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: "12px" }}>
@@ -441,7 +441,7 @@ export default function MortgagePage() {
 ].map((item) => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                       <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: C.teal, flexShrink: 0 }} />
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,251,240,0.65)" }}>{item}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: "rgba(255,254,249,0.65)" }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -530,14 +530,14 @@ export default function MortgagePage() {
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,5vw,3.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "20px" }}>
                   {t("mortgage.cta.title")}
                 </h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.92rem", color: "rgba(255,251,240,0.5)", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto 40px" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.92rem", color: "rgba(255,254,249,0.5)", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto 40px" }}>
                   {t("mortgage.cta.body")}
                 </p>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
                   <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                     {t("cta.getFreeConsultation")}
                   </AppLink>
-                  <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,251,240,0.2)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
+                  <a href="https://wa.me/995555505288" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                     {t("cta.whatsappUs")}
                   </a>
                 </div>

@@ -8,7 +8,7 @@ import { useT, type MessageKey } from "../i18n";
 /**
  * Homepage rebuilt from the Figma export (Desktop - 1.pdf, 1440 × 7851).
  * Palette, type scale and geometry are taken directly from that file:
- *   page #21141A · card #412834 · green #48674D · panel #F8F8F8 · featured #E9F7FF
+ *   page #21141A · wine #703C54 · light #FFFEF9 · teal #8CB2C0 at 10%
  */
 
 type ModalState = { open: boolean; source: string; topic?: string; title?: string };
@@ -703,11 +703,11 @@ const CSS = `
 html, body { background: #21141A; }
 .rd {
   --bg: #21141A;
-  --card: #412834;
-  --green: #48674D;
-  --white: #FFFFFF;
-  --panel: #F8F8F8;
-  --blue: #E9F7FF;
+  --card: #703C54;
+  --green: color-mix(in srgb, #8CB2C0 10%, #703C54);
+  --white: #FFFEF9;
+  --panel: #FFFEF9;
+  --blue: color-mix(in srgb, #8CB2C0 10%, #FFFEF9);
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
@@ -859,7 +859,7 @@ html, body { background: #21141A; }
   flex: 0 0 clamp(220px, 22vw, 313px);
   text-decoration: none; cursor: inherit;
 }
-.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #676060; pointer-events: none; }
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #703C54; pointer-events: none; }
 .rd-proj-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
@@ -963,8 +963,8 @@ html, body { background: #21141A; }
 .rd-news {
   position: relative; border-radius: 20px; overflow: hidden;
   background:
-    radial-gradient(115% 150% at 92% 58%, rgba(255,244,248,.92) 0%, rgba(226,186,205,.62) 20%, rgba(140,86,112,.38) 42%, rgba(33,20,26,0) 68%),
-    radial-gradient(80% 130% at 62% 26%, rgba(96,62,84,.55) 0%, rgba(33,20,26,0) 62%),
+    radial-gradient(115% 150% at 92% 58%, rgba(255,254,249,.92) 0%, rgba(112,60,84,.62) 20%, rgba(112,60,84,.38) 42%, rgba(33,20,26,0) 68%),
+    radial-gradient(80% 130% at 62% 26%, rgba(140,178,192,.10) 0%, rgba(33,20,26,0) 62%),
     var(--bg);
 }
 .rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(780px + var(--rd-inset)); }
@@ -973,19 +973,19 @@ html, body { background: #21141A; }
 .rd-news-row { display: flex; align-items: flex-end; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.55); padding-bottom: 8px; }
 .rd-news-row input {
   flex: 1; min-width: 0; background: transparent; border: none; outline: none;
-  font-family: var(--body); font-size: 16px; color: #fff; padding: 10px 0;
+  font-family: var(--body); font-size: 16px; color: #FFFEF9; padding: 10px 0;
 }
 .rd-news-row input::placeholder { color: rgba(255,255,255,.6); }
 .rd-news-row .rd-btn { min-width: 171px; }
 .rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: rgba(255,255,255,.7); cursor: pointer; }
-.rd-news-agree input { accent-color: #fff; margin-top: 2px; }
+.rd-news-agree input { accent-color: #FFFEF9; margin-top: 2px; }
 .rd-news-agree a, .rd-news-privacy {
-  color: #fff; background: none; border: none; padding: 0; margin: 0;
+  color: #FFFEF9; background: none; border: none; padding: 0; margin: 0;
   font: inherit; font-style: italic; text-decoration: underline; cursor: pointer;
 }
 .rd-news-privacy:hover { opacity: .85; }
-.rd-news-done { font-family: var(--body); font-size: 18px; color: #fff; margin: 0; }
-.rd-news-error { font-family: var(--body); font-size: 13px; color: #ffb4b4; margin: 10px 0 0; }
+.rd-news-done { font-family: var(--body); font-size: 18px; color: #FFFEF9; margin: 0; }
+.rd-news-error { font-family: var(--body); font-size: 13px; color: #703C54; margin: 10px 0 0; }
 
 /* responsive */
 @media (max-width: 1024px) {

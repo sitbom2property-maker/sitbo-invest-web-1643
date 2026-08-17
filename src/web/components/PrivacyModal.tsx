@@ -86,7 +86,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           width: min(100%, 640px);
           max-height: min(82vh, 720px);
           background: #21141A;
-          border: 1px solid rgba(140,178,192,0.22);
+          border: 1px solid rgba(140,178,192,0.1);
           border-radius: 16px;
           box-shadow: 0 24px 64px rgba(0,0,0,0.4);
           display: flex;
@@ -105,7 +105,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           font-family: Coolvetica, Inter, sans-serif;
           font-size: clamp(22px, 3vw, 28px);
           font-weight: 600;
-          color: #fff;
+          color: #FFFEF9;
           line-height: 1.15;
         }
         .privacy-modal-head p {
@@ -122,13 +122,13 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           height: 34px;
           border-radius: 50%;
           border: none;
-          background: rgba(250,247,240,0.08);
-          color: #FAF7F0;
+          background: rgba(255,254,249,0.08);
+          color: #FFFEF9;
           font-size: 20px;
           line-height: 1;
           cursor: pointer;
         }
-        .privacy-modal-close:hover { background: rgba(250,247,240,0.18); }
+        .privacy-modal-close:hover { background: rgba(255,254,249,0.18); }
         .privacy-modal-body {
           flex: 1 1 auto;
           overflow-y: auto;
@@ -143,7 +143,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           font-family: Inter, sans-serif;
           font-size: 15px;
           font-weight: 600;
-          color: #fff;
+          color: #FFFEF9;
         }
         .privacy-modal-section p {
           margin: 0;

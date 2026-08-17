@@ -4,9 +4,9 @@ import { useAdmin } from "../../hooks/useAdmin";
 
 const C = {
 	dark: "#21141A",
-	light: "#FAF7F0",
-	accent: "#8CB2C0",
-	burgundy: "#694153",
+	light: "#FFFEF9",
+	accent: "#703C54",
+	burgundy: "#703C54",
 };
 
 export default function AdminLogin() {
@@ -51,7 +51,7 @@ export default function AdminLogin() {
 				style={{
 					width: "100%",
 					maxWidth: "400px",
-					background: "rgba(250,247,240,0.04)",
+					background: "rgba(255,254,249,0.04)",
 					border: `1px solid ${C.burgundy}`,
 					borderRadius: "12px",
 					padding: "40px 32px",
@@ -72,7 +72,7 @@ export default function AdminLogin() {
 					style={{
 						fontFamily: "Inter, sans-serif",
 						fontSize: "0.85rem",
-						color: "rgba(250,247,240,0.55)",
+						color: "rgba(255,254,249,0.55)",
 						margin: "0 0 28px",
 					}}
 				>

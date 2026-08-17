@@ -33,10 +33,10 @@ export type ApartmentBoard = {
 };
 
 export const STATUS_COLOR: Record<ApartmentStatus, string> = {
-  available: "#8CB2C0",
-  reserved: "#C4A35A",
-  sold: "#c9b8b0",
-  unavailable: "#e6ddd4",
+  available: "#703C54",
+  reserved: "#73485F",
+  sold: "#21141A",
+  unavailable: "#FFFEF9",
 };
 
 export const SELECTABLE: ApartmentStatus[] = ["available", "reserved"];

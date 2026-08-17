@@ -42,7 +42,7 @@ export function FloatingConsultation() {
           padding: 14px 20px;
           border: none;
           border-radius: 999px;
-          background: #FFFFFF;
+          background: #FFFEF9;
           color: #21141A;
           font-family: Inter, sans-serif;
           font-size: 14px;
@@ -67,13 +67,13 @@ export function FloatingConsultation() {
         }
         .float-consult-dot {
           width: 8px; height: 8px; border-radius: 50%;
-          background: #48674D; flex-shrink: 0;
-          box-shadow: 0 0 0 0 rgba(72,103,77,.45);
+          background: #703C54; flex-shrink: 0;
+          box-shadow: 0 0 0 0 rgba(112,60,84,.45);
           animation: floatConsultPulse 2s ease-in-out infinite;
         }
         @keyframes floatConsultPulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(72,103,77,.4); }
-          50% { box-shadow: 0 0 0 6px rgba(72,103,77,0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(112,60,84,.4); }
+          50% { box-shadow: 0 0 0 6px rgba(112,60,84,0); }
         }
         @media (max-width: 640px) {
           .float-consult {
