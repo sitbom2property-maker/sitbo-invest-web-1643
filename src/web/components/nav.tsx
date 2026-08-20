@@ -135,13 +135,6 @@ export function Nav() {
   const [contactOpen, setContactOpen] = useState(false);
 
   const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
-  const logoSrc = "/brand/logo-dark-bg.png"; // light mark for dark header
-  const logoStyle = {
-    width: 60,
-    height: 26,
-    display: "block" as const,
-    objectFit: "contain" as const,
-  };
 
   const openContact = () => {
     setMenuOpen(false);
@@ -215,14 +208,14 @@ export function Nav() {
             margin: "0 auto",
             padding: "0 var(--site-gutter)",
             display: "grid",
-            // Mobile: language | centered logo | menu
-            gridTemplateColumns: isMobile ? "1fr auto 1fr" : "auto 1fr auto",
+            // Mobile: language | menu — no logo
+            gridTemplateColumns: isMobile ? "1fr auto" : "auto 1fr auto",
             alignItems: "center",
             columnGap: isMobile ? 8 : 32,
             boxSizing: "border-box",
           }}
         >
-          {/* Left: language (mobile) or logo + language (desktop) */}
+          {/* Left: language switcher */}
           <div
             style={{
               justifySelf: "start",
@@ -232,31 +225,10 @@ export function Nav() {
               minWidth: 0,
             }}
           >
-            {!isMobile ? (
-              <Link
-                href="/"
-                aria-label="Arthur Arutyunyan — Home"
-                style={{
-                  display: "block",
-                  cursor: "pointer",
-                  lineHeight: 0,
-                  transition: "opacity 0.2s ease",
-                  flexShrink: 0,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = "0.75";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = "1";
-                }}
-              >
-                <img src={logoSrc} alt="Arthur Arutyunyan" style={logoStyle} />
-              </Link>
-            ) : null}
             <NavLocaleSwitcher compact={isMobile} />
           </div>
 
-          {/* Center: desktop links OR mobile logo */}
+          {/* Center: desktop links only */}
           {!isMobile ? (
             <div
               style={{
@@ -273,20 +245,7 @@ export function Nav() {
                 </NavItem>
               ))}
             </div>
-          ) : (
-            <Link
-              href="/"
-              aria-label="Arthur Arutyunyan — Home"
-              style={{
-                display: "block",
-                cursor: "pointer",
-                lineHeight: 0,
-                justifySelf: "center",
-              }}
-            >
-              <img src={logoSrc} alt="Arthur Arutyunyan" style={logoStyle} />
-            </Link>
-          )}
+          ) : null}
 
           {/* Contact CTA + menu — right */}
           <div
