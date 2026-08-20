@@ -1024,13 +1024,13 @@ html, body { background: #21141A; }
   /* Strategic Deep-Dive */
   background: #48674D; color: #FFFEF9;
 }
-.rd-plan.is-featured .rd-plan-for { border-top-color: rgba(255,254,249,.2); }
-.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
+.rd-plan.is-featured .rd-plan-for { border-bottom-color: rgba(255,254,249,.2); }
+.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 8px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: 16px; line-height: 1.3; margin: 0 0 6px;
-  padding-top: 16px; border-top: 1px solid rgba(33,20,26,.15);
+  font-family: var(--body); font-size: 16px; line-height: 1.3; margin: 0 0 16px;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(33,20,26,.15);
 }
-.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 18px; font-variant-numeric: tabular-nums; }
+.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 28px; font-variant-numeric: tabular-nums; }
 .rd-plan ul { list-style: disc; margin: 0 0 26px; padding-left: 18px; display: grid; gap: 8px; }
 .rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.35; }
 .rd-plan-block { margin-bottom: 20px; }
