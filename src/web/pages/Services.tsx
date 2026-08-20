@@ -218,10 +218,6 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 8vw, 110px);
   overflow: hidden;
 }
-.sv-hero-circle {
-  position: absolute; top: -180px; right: -140px; width: 640px; height: 640px;
-  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
-}
 .sv-hero-grid {
   position: relative; z-index: 1;
   display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -361,7 +357,6 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   .sv-hero { padding-top: 36px; }
   .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
   .sv-hero-side, .sv-list-head p, .sv-limits-head p { justify-self: start; }
-  .sv-hero-circle { width: 380px; height: 380px; top: -120px; right: -120px; }
   .sv-limits-grid { grid-template-columns: 1fr; }
   .sv-acc-body { padding-left: 0; }
   .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }
@@ -380,7 +375,6 @@ export default function ServicesPage() {
       <style>{CSS}</style>
 
       <section className="sv-hero">
-        <span className="sv-hero-circle" aria-hidden="true" />
         <div className="sv-wrap sv-hero-grid">
           <div className="rv">
             <h1>
@@ -424,7 +418,6 @@ export default function ServicesPage() {
         <div className="sv-wrap">
           <div className="sv-limits-head rv">
             <h2>{t("services.limits.title")}</h2>
-            <p>{t("services.limits.eyebrow")}</p>
           </div>
           <div className="sv-limits-grid">
             {LIMITS.map((item) => (
