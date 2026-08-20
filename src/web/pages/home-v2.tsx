@@ -1027,8 +1027,9 @@ html, body { background: #21141A; }
 .rd-plan.is-featured .rd-plan-for { border-top-color: rgba(255,254,249,.2); }
 .rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); margin: 0 0 6px;
+  font-family: var(--body); font-size: 13px; line-height: 1.3; margin: 0 0 6px;
   padding-top: 16px; border-top: 1px solid rgba(33,20,26,.15);
+  white-space: nowrap;
 }
 .rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(48px, 6.6vw, 96px); line-height: 1.1; margin-bottom: 18px; font-variant-numeric: tabular-nums; }
 .rd-plan ul { list-style: disc; margin: 0 0 26px; padding-left: 18px; display: grid; gap: 8px; }
