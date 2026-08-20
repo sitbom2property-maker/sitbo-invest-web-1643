@@ -30,7 +30,7 @@ export function FooterV2() {
           display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
           gap: clamp(32px, 5vw, 96px); align-items: start;
         }
-        .fv2-logo { height: 22px; width: auto; display: block; margin-bottom: 22px; }
+        .fv2-logo { width: 60px; height: 26px; display: block; margin-bottom: 22px; object-fit: contain; }
         .fv2-name {
           font-family: 'Inter', sans-serif; font-size: clamp(17px, 1.39vw, 20px);
           margin: 0 0 22px; color: #FFFEF9;
@@ -60,7 +60,7 @@ export function FooterV2() {
           .fv2-brand { grid-column: 1 / -1; }
         }
         @media (max-width: 640px) {
-          .fv2-logo { height: 18px; margin-bottom: 16px; }
+          .fv2-logo { width: 60px; height: 26px; margin-bottom: 16px; }
           .fv2-name { font-size: 15px; margin-bottom: 14px; }
           .fv2-tagline { font-size: 14px; max-width: none; }
         }
@@ -70,7 +70,7 @@ export function FooterV2() {
         <div className="fv2-grid">
           <div className="fv2-brand">
             <Link href="/" aria-label="SITBO Invest">
-              <img className="fv2-logo" src="/brand/logo-dark-bg.png" alt="SITBO Invest" />
+              <img className="fv2-logo" src="/brand/logo-dark-bg.png" alt="Arthur Arutyunyan" />
             </Link>
             <p className="fv2-name">
               Arthur Arutyunyan | <em>{t("v2.footer.role")}</em>

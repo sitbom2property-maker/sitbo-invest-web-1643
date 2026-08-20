@@ -212,7 +212,7 @@ export function Footer() {
         >
           <Link
             href="/"
-            aria-label="SITBO Invest — Home"
+            aria-label="Arthur Arutyunyan — Home"
             style={{
               display: "block",
               marginBottom: 24,
@@ -228,12 +228,10 @@ export function Footer() {
           >
             <img
               src="/brand/logo-dark-bg.png"
-              alt="SITBO Invest"
+              alt="Arthur Arutyunyan"
               style={{
-                // Half of previous footer mark (28/32) so it matches nav scale
-                height: isStacked ? 14 : 16,
-                width: "auto",
-                maxWidth: isStacked ? 96 : 112,
+                width: 60,
+                height: 26,
                 display: "block",
                 objectFit: "contain",
               }}
