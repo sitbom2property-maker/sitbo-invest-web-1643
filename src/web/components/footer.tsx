@@ -201,7 +201,7 @@ export function Footer() {
           alignItems: "start",
         }}
       >
-        {/* Left: logo + description */}
+        {/* Left: description */}
         <div
           style={{
             display: "flex",
@@ -210,34 +210,6 @@ export function Footer() {
             textAlign: "left",
           }}
         >
-          <Link
-            href="/"
-            aria-label="Arthur Arutyunyan — Home"
-            style={{
-              display: "block",
-              marginBottom: 24,
-              lineHeight: 0,
-              transition: "opacity 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = "0.75";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = "1";
-            }}
-          >
-            <img
-              src="/brand/logo-dark-bg.png"
-              alt="Arthur Arutyunyan"
-              style={{
-                width: 60,
-                height: 26,
-                display: "block",
-                objectFit: "contain",
-              }}
-            />
-          </Link>
-
           <p
             style={{
               fontFamily: "Inter, sans-serif",
