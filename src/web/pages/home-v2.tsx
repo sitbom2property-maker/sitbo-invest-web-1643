@@ -259,6 +259,8 @@ function useDragRail(cardSelector: string, gap = 12) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     const el = railRef.current;
     if (!el) return;
+    // Don't capture yet — allow real clicks on project links until the user
+    // actually starts dragging past the threshold.
     stopMomentum();
     const now = performance.now();
     dragRef.current = {
@@ -271,8 +273,6 @@ function useDragRail(cardSelector: string, gap = 12) {
       velocity: 0,
       moved: false,
     };
-    el.setPointerCapture(e.pointerId);
-    setDragging(true);
   };
 
   const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -280,7 +280,12 @@ function useDragRail(cardSelector: string, gap = 12) {
     const el = railRef.current;
     if (!drag?.active || !el || drag.pointerId !== e.pointerId) return;
     const dx = e.clientX - drag.startX;
-    if (Math.abs(dx) > 4) drag.moved = true;
+    if (!drag.moved && Math.abs(dx) > 6) {
+      drag.moved = true;
+      el.setPointerCapture(e.pointerId);
+      setDragging(true);
+    }
+    if (!drag.moved) return;
     el.scrollLeft = drag.startScroll - dx;
     const now = performance.now();
     const dt = now - drag.lastT;
@@ -369,7 +374,13 @@ function SelectedProjects() {
               onPointerCancel={endDrag}
             >
               {PROJECTS.map((p) => (
-                <Link key={p.name} href={p.href} className="rd-proj" draggable={false}>
+                <Link
+                  key={p.name}
+                  href={p.href}
+                  className="rd-proj"
+                  draggable={false}
+                  aria-label={p.name}
+                >
                   <div className="rd-proj-img">
                     <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
                   </div>
@@ -908,9 +919,9 @@ html, body { background: #21141A; }
 .rd-rail::-webkit-scrollbar { display: none; }
 .rd-proj {
   flex: 0 0 clamp(220px, 22vw, 313px);
-  text-decoration: none; cursor: inherit;
+  text-decoration: none; color: inherit; cursor: pointer;
 }
-.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 10px; pointer-events: none; }
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 10px; }
 .rd-proj-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
