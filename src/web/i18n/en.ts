@@ -779,10 +779,10 @@ const en = {
 
   // Services page — first person (Arthur)
   "services.hero.eyebrow": "How I work",
-  "services.hero.title": "I advise from the outcome,",
-  "services.hero.titleEm": "not from the listing.",
+  "services.hero.title": "I protect your capital first,",
+  "services.hero.titleEm": "then multiply it.",
   "services.hero.body":
-    "I take on a limited number of client mandates each quarter. When you work with me, you get my full attention — not a call centre and not a sales floor.",
+    "When you work with me, you get my full attention — not a call centre and not a sales floor.",
   "services.item1.title": "Due Diligence",
   "services.item1.desc":
     "Before you buy, I run a full-layer check on the property, the developer, and the legal title. You get a written conclusion from me — not a verbal opinion.",
