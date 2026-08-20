@@ -504,9 +504,10 @@ const ru: Record<MessageKey, string> = {
   "cookie.functionalityDesc": "Запоминают выбор — валюту и настройки отображения.",
   "cookie.unclassifiedDesc": "Cookies, которым ещё не назначена категория.",
 
-  "catalog.title": "Объекты",
+  "catalog.title":
+    "Отобранные проекты в Батуми, Чакви, Гонио и дальше — отфильтрованы и проверены Arthur Arutyunyan",
   "catalog.subtitle":
-    "отобранных проектов в Батуми, Чакви, Гонио и дальше — отфильтрованы и проверены SITBO.",
+    "отобранных проектов в Батуми, Чакви, Гонио и дальше — отфильтрованы и проверены Arthur Arutyunyan.",
   "catalog.eyebrow": "Недвижимость в Грузии",
   "catalog.sort": "Сортировка",
   "catalog.sortDefault": "Рекомендованные",

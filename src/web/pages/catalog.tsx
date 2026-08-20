@@ -228,11 +228,12 @@ export default function CatalogPage() {
       <section style={{ background: C.dark }}>
         <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
-            <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.4rem,5vw,4rem)", fontWeight: 400, color: C.light, lineHeight: 1.05, margin: 0 }}>
+            <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.6vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, margin: 0, maxWidth: "920px" }}>
               {t("catalog.title")}
             </h1>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, maxWidth: "420px", lineHeight: 1.7, margin: 0 }}>
-              {localizedProjects.length} {t("catalog.subtitle")}
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, maxWidth: "220px", lineHeight: 1.7, margin: 0 }}>
+              {localizedProjects.length}{" "}
+              {localizedProjects.length === 1 ? t("catalog.projectSingular") : t("catalog.projectPlural")}
             </p>
           </div>
 
