@@ -39,7 +39,6 @@ export function FooterV2() {
           font-size: clamp(15px, 1.25vw, 18px); line-height: 1.45;
           color: #FFFEF9; margin: 0; max-width: 560px;
         }
-        .fv2-tagline + .fv2-tagline { margin-top: 0.55em; }
         .fv2-col-title {
           font-family: 'Inter', sans-serif;
           font-size: clamp(16px, 1.39vw, 20px); font-weight: 600; margin: 0 0 22px; color: #FFFEF9;
