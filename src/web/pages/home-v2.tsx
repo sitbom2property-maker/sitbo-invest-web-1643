@@ -493,19 +493,6 @@ function Feedback() {
   const { railRef, dragging, progress, syncProgress, onPointerDown, onPointerMove, endDrag } =
     useDragRail(".rd-fb-card", 16);
 
-  const scrollNext = () => {
-    const el = railRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>(".rd-fb-card");
-    if (!card) return;
-    const step = card.offsetWidth + 16;
-    const max = el.scrollWidth - el.clientWidth;
-    const atEnd = el.scrollLeft >= max - 8;
-    const target = atEnd ? 0 : Math.min(max, el.scrollLeft + step);
-    el.scrollTo({ left: target, behavior: "smooth" });
-    window.setTimeout(syncProgress, 350);
-  };
-
   return (
     <section id="feedback" className="rd-fb-outer">
       <div className="rd-panel rd-panel-light rd-fb-panel">
@@ -525,39 +512,28 @@ function Feedback() {
           </a>
         </div>
 
-        <div className="rd-fb-row">
-          <div className="rd-fb-main">
-            <div
-              className={`rd-fb-rail${dragging ? " is-dragging" : ""}`}
-              ref={railRef}
-              onScroll={syncProgress}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={endDrag}
-              onPointerCancel={endDrag}
-            >
-              {FEEDBACK.map((f) => (
-                <figure key={f.quoteKey} className="rd-fb-card rv">
-                  <blockquote>“{t(f.quoteKey)}”</blockquote>
-                  <figcaption>— {t(f.authorKey)}</figcaption>
-                  <div className="rd-fb-tags">
-                    {f.tags.map((tag) => (
-                      <span key={tag}>{tag.replace(/^#/, "")}</span>
-                    ))}
-                  </div>
-                </figure>
-              ))}
-            </div>
-          </div>
-
-          <button
-            type="button"
-            className="rd-fb-next"
-            onClick={scrollNext}
-            aria-label={t("v2.fb.next")}
+        <div className="rd-fb-main">
+          <div
+            className={`rd-fb-rail${dragging ? " is-dragging" : ""}`}
+            ref={railRef}
+            onScroll={syncProgress}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
           >
-            <span aria-hidden="true">→</span>
-          </button>
+            {FEEDBACK.map((f) => (
+              <figure key={f.quoteKey} className="rd-fb-card rv">
+                <blockquote>“{t(f.quoteKey)}”</blockquote>
+                <figcaption>— {t(f.authorKey)}</figcaption>
+                <div className="rd-fb-tags">
+                  {f.tags.map((tag) => (
+                    <span key={tag}>{tag.replace(/^#/, "")}</span>
+                  ))}
+                </div>
+              </figure>
+            ))}
+          </div>
         </div>
 
         <div className="rd-rail-track rd-fb-track" aria-hidden="true">
@@ -989,21 +965,20 @@ html, body { background: #21141A; }
 }
 .rd-fb-google-link:hover { opacity: .7; }
 .rd-fb-google-link span { margin-right: 6px; text-decoration: none; display: inline-block; }
-.rd-fb-row {
-  display: flex; align-items: center; gap: clamp(12px, 1.5vw, 20px);
-  min-width: 0;
-}
-.rd-fb-main { min-width: 0; flex: 1; }
+.rd-fb-main { min-width: 0; }
 .rd-fb-rail {
   display: flex; gap: 16px; overflow-x: auto; min-width: 0;
   scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px;
+  /* Peek of the next card on the right edge */
+  padding-right: clamp(48px, 8vw, 96px);
   cursor: grab; touch-action: pan-y; user-select: none;
   -webkit-overflow-scrolling: touch;
 }
 .rd-fb-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .rd-fb-rail::-webkit-scrollbar { display: none; }
 .rd-fb-card {
-  --fb-size: clamp(260px, 26vw, 340px);
+  /* ~2.65 cards visible → next review peeks */
+  --fb-size: clamp(240px, calc((100% - 32px) / 2.65), 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
   width: var(--fb-size); min-height: var(--fb-size);
@@ -1028,15 +1003,6 @@ html, body { background: #21141A; }
   border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
   text-transform: capitalize;
 }
-.rd-fb-next {
-  flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%;
-  border: none; background: #21141A; color: #FFFEF9;
-  display: inline-flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: opacity .2s, transform .2s;
-  font-size: 22px; line-height: 1; padding: 0;
-}
-.rd-fb-next:hover { opacity: .88; transform: translateX(2px); }
-.rd-fb-next:focus-visible { outline: 2px solid #8CB2C0; outline-offset: 3px; }
 .rd-fb-track { margin-top: 18px; }
 
 /* pricing — dark page section; light cards + green featured */
@@ -1133,9 +1099,9 @@ html, body { background: #21141A; }
   .rd-hero-btns .rd-btn { width: 100%; }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
-  .rd-fb-card { --fb-size: min(78vw, 320px); }
+  .rd-fb-card { --fb-size: min(78vw, 300px); }
   .rd-fb-head { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .rd-fb-next { width: 48px; height: 48px; font-size: 20px; }
+  .rd-fb-rail { padding-right: 56px; }
 }
 `;
 
