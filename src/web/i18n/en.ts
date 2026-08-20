@@ -224,7 +224,7 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "I work one-on-one with each client: from selecting a liquid property and conducting due diligence to renovations and turnkey completion. I do not take on high-risk properties. I discourage emotional purchases. I protect the buyer’s interests, not the developer’s. I was born and raised in Georgia. I have been active in the Batumi market for 7 years. My philosophy is to build long-term relationships.",
+    "Born and raised locally with 7 years of experience in Batumi. Dedicated to protecting and growing your capital, selecting only liquid properties, and eliminating risks and emotions. Full-cycle service in the buyer’s interest from due diligence to turnkey renovation, building long-term relationships.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
