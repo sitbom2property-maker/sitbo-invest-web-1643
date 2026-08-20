@@ -557,6 +557,7 @@ type Plan = {
   noteKey?: MessageKey;
   ctaKey?: MessageKey;
   featured?: boolean;
+  atmosphere?: boolean;
 };
 
 const PLANS: Plan[] = [
@@ -589,6 +590,7 @@ const PLANS: Plan[] = [
     resultKey: "v2.plan3.result",
     noteKey: "v2.plan3.note",
     ctaKey: "v2.plan3.cta",
+    atmosphere: true,
   },
 ];
 
@@ -601,7 +603,10 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
 
         <div className="rd-plans">
           {PLANS.map((plan) => (
-            <div key={plan.id} className={`rd-plan rv${plan.featured ? " is-featured" : ""}`}>
+            <div
+              key={plan.id}
+              className={`rd-plan rv${plan.featured ? " is-featured" : ""}${plan.atmosphere ? " is-atmosphere" : ""}`}
+            >
               <h3>{t(plan.nameKey)}</h3>
               <p className="rd-plan-for">{t(plan.forKey)}</p>
               <div className="rd-plan-price">{plan.price}</div>
@@ -625,7 +630,7 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
 
               <button
                 type="button"
-                className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
+                className={`rd-btn rd-plan-cta ${plan.featured || plan.atmosphere ? "rd-btn-white" : "rd-btn-dark"}`}
                 onClick={() =>
                   onRequest({
                     open: true,
@@ -1024,7 +1029,17 @@ html, body { background: #21141A; }
   /* Strategic Deep-Dive */
   background: #48674D; color: #FFFEF9;
 }
-.rd-plan.is-featured .rd-plan-for { border-top-color: rgba(255,254,249,.2); }
+.rd-plan.is-atmosphere {
+  /* Discovery Tour — shared atmospheric CTA background */
+  background-color: #21141A;
+  background-image: url('/images/cta-bg.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  color: #FFFEF9;
+}
+.rd-plan.is-featured .rd-plan-for,
+.rd-plan.is-atmosphere .rd-plan-for { border-top-color: rgba(255,254,249,.2); }
 .rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 16px; }
 .rd-plan-for {
   font-family: var(--body); font-size: 13px; line-height: 1.3; margin: 0 0 6px;
@@ -1041,15 +1056,16 @@ html, body { background: #21141A; }
   font-family: var(--body); font-size: 13px; line-height: 1.4;
   color: rgba(33,20,26,.55); margin: 0 0 18px;
 }
-.rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
+.rd-plan.is-featured .rd-plan-note,
+.rd-plan.is-atmosphere .rd-plan-note { color: rgba(255,254,249,.7); }
 .rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: 10px; }
 
-/* newsletter CTA — image bg /images/cta-bg.png, fallback #21141A (no solid plum fill) */
+/* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); background: #21141A; }
 .rd-news {
   position: relative; border-radius: 10px; overflow: hidden;
   background-color: #21141A;
-  background-image: url('/images/cta-bg.png');
+  background-image: url('/images/cta-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
