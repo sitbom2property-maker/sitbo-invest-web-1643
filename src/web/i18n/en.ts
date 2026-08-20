@@ -144,6 +144,7 @@ const en = {
   "v2.fb.titleEm": "& Case Studies",
   "v2.fb.prev": "Previous testimonial",
   "v2.fb.next": "Next testimonial",
+  "v2.fb.google": "Google Reviews 5/5",
   "v2.fb.q1":
     "Found a buyer for my apartment in just 9 days and completely handled the sale process end-to-end. True full VIP service.",
   "v2.fb.a1": "Anastasia S. (USA)",

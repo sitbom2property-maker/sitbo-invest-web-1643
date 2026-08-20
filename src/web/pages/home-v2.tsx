@@ -444,6 +444,8 @@ function Ecosystem() {
 
 // ─── Feedback & case studies ──────────────────────────────────────────────────
 
+const GOOGLE_REVIEWS_URL = "https://g.page/r/CR1_vKWcSyUNEAE/review";
+
 const FEEDBACK: {
   quoteKey: MessageKey;
   authorKey: MessageKey;
@@ -486,60 +488,80 @@ const FEEDBACK: {
   },
 ];
 
-function GoogleReviewBadge() {
-  return (
-    <img
-      className="rd-fb-google"
-      src="/images/google-review.svg"
-      alt="Google Review"
-      width={50}
-      height={30}
-      loading="lazy"
-      decoding="async"
-    />
-  );
-}
-
 function Feedback() {
   const t = useT();
   const { railRef, dragging, progress, syncProgress, onPointerDown, onPointerMove, endDrag } =
-    useDragRail(".rd-fb-card", 8);
+    useDragRail(".rd-fb-card", 16);
+
+  const scrollNext = () => {
+    const el = railRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>(".rd-fb-card");
+    if (!card) return;
+    const step = card.offsetWidth + 16;
+    const max = el.scrollWidth - el.clientWidth;
+    const atEnd = el.scrollLeft >= max - 8;
+    const target = atEnd ? 0 : Math.min(max, el.scrollLeft + step);
+    el.scrollTo({ left: target, behavior: "smooth" });
+    window.setTimeout(syncProgress, 350);
+  };
 
   return (
     <section id="feedback" className="rd-fb-outer">
-      <div className="rd-panel rd-panel-light">
-        <h2 className="rd-h3 rv" style={{ marginBottom: "clamp(28px, 3vw, 46px)" }}>
-          {t("v2.fb.title")}
-          <br />
-          {t("v2.fb.titleEm")}
-        </h2>
-
-        <div className="rd-fb-main">
-          <div
-            className={`rd-fb-rail${dragging ? " is-dragging" : ""}`}
-            ref={railRef}
-            onScroll={syncProgress}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
+      <div className="rd-panel rd-panel-light rd-fb-panel">
+        <div className="rd-fb-head rv">
+          <h2 className="rd-h3">
+            {t("v2.fb.title")}
+            <br />
+            {t("v2.fb.titleEm")}
+          </h2>
+          <a
+            className="rd-fb-google-link"
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {FEEDBACK.map((f, i) => (
-              <figure key={f.quoteKey} className="rd-fb-card rv">
-                <GoogleReviewBadge />
-                <blockquote>‘{t(f.quoteKey)}’</blockquote>
-                <figcaption>{t(f.authorKey)}</figcaption>
-                <div className="rd-fb-tags">
-                  {f.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              </figure>
-            ))}
+            <span aria-hidden="true">→</span> {t("v2.fb.google")}
+          </a>
+        </div>
+
+        <div className="rd-fb-row">
+          <div className="rd-fb-main">
+            <div
+              className={`rd-fb-rail${dragging ? " is-dragging" : ""}`}
+              ref={railRef}
+              onScroll={syncProgress}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+            >
+              {FEEDBACK.map((f) => (
+                <figure key={f.quoteKey} className="rd-fb-card rv">
+                  <blockquote>“{t(f.quoteKey)}”</blockquote>
+                  <figcaption>— {t(f.authorKey)}</figcaption>
+                  <div className="rd-fb-tags">
+                    {f.tags.map((tag) => (
+                      <span key={tag}>{tag.replace(/^#/, "")}</span>
+                    ))}
+                  </div>
+                </figure>
+              ))}
+            </div>
           </div>
-          <div className="rd-rail-track" aria-hidden="true">
-            <span style={{ transform: `translateX(${progress * 200}%)` }} />
-          </div>
+
+          <button
+            type="button"
+            className="rd-fb-next"
+            onClick={scrollNext}
+            aria-label={t("v2.fb.next")}
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div className="rd-rail-track rd-fb-track" aria-hidden="true">
+          <span style={{ transform: `translateX(${progress * 200}%)` }} />
         </div>
       </div>
     </section>
@@ -952,45 +974,70 @@ html, body { background: #21141A; }
 }
 .rd-eco-card.is-open .rd-eco-body { opacity: 1; max-height: 420px; }
 
-/* feedback — square cards, drag-scroll like projects */
+/* feedback — redesigned carousel with Google Reviews CTA + next arrow */
 .rd-panel-light { padding: clamp(34px, 4.4vw, 68px) var(--rd-inset); }
-.rd-fb-main { min-width: 0; }
+.rd-fb-panel { background: #FFFEF9; color: #21141A; }
+.rd-fb-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: clamp(28px, 3vw, 46px);
+}
+.rd-fb-head .rd-h3 { margin: 0; color: #21141A; }
+.rd-fb-google-link {
+  flex-shrink: 0; font-family: var(--body); font-size: clamp(14px, 1.25vw, 18px);
+  color: #21141A; text-decoration: underline; text-underline-offset: 3px;
+  white-space: nowrap; transition: opacity .2s;
+}
+.rd-fb-google-link:hover { opacity: .7; }
+.rd-fb-google-link span { margin-right: 6px; text-decoration: none; display: inline-block; }
+.rd-fb-row {
+  display: flex; align-items: center; gap: clamp(12px, 1.5vw, 20px);
+  min-width: 0;
+}
+.rd-fb-main { min-width: 0; flex: 1; }
 .rd-fb-rail {
-  display: flex; gap: 8px; overflow-x: auto; min-width: 0;
-  scroll-snap-type: none; scrollbar-width: none; padding-bottom: 22px;
+  display: flex; gap: 16px; overflow-x: auto; min-width: 0;
+  scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px;
   cursor: grab; touch-action: pan-y; user-select: none;
   -webkit-overflow-scrolling: touch;
 }
-.rd-fb-rail.is-dragging { cursor: grabbing; }
+.rd-fb-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .rd-fb-rail::-webkit-scrollbar { display: none; }
 .rd-fb-card {
-  --fb-size: clamp(280px, 28vw, 360px);
+  --fb-size: clamp(260px, 26vw, 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
-  width: var(--fb-size); height: var(--fb-size); max-height: var(--fb-size);
-  aspect-ratio: 1 / 1; margin: 0; box-sizing: border-box;
+  width: var(--fb-size); min-height: var(--fb-size);
+  scroll-snap-align: start;
+  margin: 0; box-sizing: border-box;
   background: #412835; border-radius: 10px;
-  padding: clamp(18px, 1.8vw, 28px);
-  padding-top: clamp(42px, 4vw, 52px);
-  padding-right: clamp(58px, 6vw, 72px);
+  padding: clamp(22px, 2.2vw, 32px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
   pointer-events: none;
 }
-.rd-fb-google {
-  position: absolute; top: 12px; right: 12px;
-  width: 50px; height: 30px; display: block; object-fit: contain;
-  pointer-events: none;
-}
 .rd-fb-card blockquote {
-  font-family: var(--body); font-weight: 700; font-size: clamp(14px, 1.25vw, 18px);
-  line-height: 1.32; margin: 0 0 12px; color: #FFFEF9;
+  font-family: var(--body); font-weight: 700; font-size: clamp(15px, 1.35vw, 20px);
+  line-height: 1.35; margin: 0 0 18px; color: #FFFEF9;
 }
-.rd-fb-card figcaption { font-family: var(--body); font-size: clamp(13px, 1.1vw, 15px); color: #FFFEF9; }
-.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
+.rd-fb-card figcaption {
+  font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px);
+  color: #FFFEF9; margin: 0 0 8px;
+}
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 18px; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 13px; padding: 6px 12px; color: #FFFEF9;
+  font-family: var(--body); font-size: 13px; padding: 7px 12px; color: #FFFEF9;
   border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
+  text-transform: capitalize;
 }
+.rd-fb-next {
+  flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%;
+  border: none; background: #21141A; color: #FFFEF9;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: opacity .2s, transform .2s;
+  font-size: 22px; line-height: 1; padding: 0;
+}
+.rd-fb-next:hover { opacity: .88; transform: translateX(2px); }
+.rd-fb-next:focus-visible { outline: 2px solid #8CB2C0; outline-offset: 3px; }
+.rd-fb-track { margin-top: 18px; }
 
 /* pricing — dark page section; light cards + green featured */
 .rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); background: #21141A; color: #FFFEF9; }
@@ -1086,7 +1133,9 @@ html, body { background: #21141A; }
   .rd-hero-btns .rd-btn { width: 100%; }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
-  .rd-fb-card { --fb-size: min(86vw, 320px); }
+  .rd-fb-card { --fb-size: min(78vw, 320px); }
+  .rd-fb-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .rd-fb-next { width: 48px; height: 48px; font-size: 20px; }
 }
 `;
 
