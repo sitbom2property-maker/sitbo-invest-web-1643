@@ -520,9 +520,10 @@ const en = {
   "cookie.unclassifiedDesc": "Cookies that have not yet been assigned to a category.",
 
   // Catalog
-  "catalog.title": "Properties",
+  "catalog.title":
+    "Curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan",
   "catalog.subtitle":
-    "curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by SITBO.",
+    "curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan.",
   "catalog.eyebrow": "Georgia Real Estate",
   "catalog.sort": "Sort",
   "catalog.sortDefault": "Featured",
