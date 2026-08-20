@@ -214,6 +214,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 
 /* hero */
 .sv-hero {
+  /* about-hero-2026-08-20 */
   position: relative;
   padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 8vw, 110px);
   overflow: hidden;
