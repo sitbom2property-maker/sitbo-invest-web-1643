@@ -53,7 +53,7 @@ export default function AdminLogin() {
 					maxWidth: "400px",
 					background: "rgba(255,254,249,0.04)",
 					border: `1px solid ${C.burgundy}`,
-					borderRadius: "12px",
+					borderRadius: "10px",
 					padding: "40px 32px",
 				}}
 			>

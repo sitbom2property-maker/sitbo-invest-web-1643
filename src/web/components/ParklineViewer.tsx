@@ -141,7 +141,7 @@ const CSS = `
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
   }
   .pk-frame {
-    position: relative; border-radius: 16px; overflow: hidden;
+    position: relative; border-radius: 10px; overflow: hidden;
     background: ${C.dark}; height: min(78vh, 760px); min-height: 480px;
   }
   .pk-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #21141A; }

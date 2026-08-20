@@ -267,7 +267,7 @@ function MortgageCalculator() {
                 transitionDelay: `${i * 60}ms`,
                 background: item.accent ? C.dark : C.light,
                 border: `1px solid ${item.accent ? "transparent" : "rgba(33,20,26,0.1)"}`,
-                borderRadius: "12px", padding: "24px 20px", textAlign: "center",
+                borderRadius: "10px", padding: "24px 20px", textAlign: "center",
               }}>
                 <div style={{
                   fontFamily: "Inter, sans-serif",
@@ -345,7 +345,7 @@ export default function MortgagePage() {
     { val: "10 yr", label: t("mortgage.stat.maxTerm") },
     { val: "$500K", label: t("mortgage.stat.maxAmount") },
                   ].map((s) => (
-                    <div key={s.label} style={{ background: C.light, borderRadius: "12px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
+                    <div key={s.label} style={{ background: C.light, borderRadius: "10px", padding: "24px 20px", borderTop: `2px solid ${C.wine}` }}>
                       <div style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "6px" }}>{s.val}</div>
                       <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</div>
                     </div>
@@ -383,7 +383,7 @@ export default function MortgagePage() {
           <Row gap={24}>
 {/* Card 1: Down Payment */}
             <Col span={6}>
-              <div className="m-reveal" style={{ background: C.light, borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
+              <div className="m-reveal" style={{ background: C.light, borderRadius: "10px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "20px" }}>{t("mortgage.terms.downPayment.title")}</h3>
                 <div style={{ fontFamily: "Inter, sans-serif", fontSize: "3.5rem", fontWeight: 700, color: C.dark, lineHeight: 1, marginBottom: "8px" }}>30–40%</div>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: C.muted, lineHeight: 1.7, marginBottom: "16px" }}>
@@ -400,7 +400,7 @@ export default function MortgagePage() {
 
 {/* Card 2: Rates */}
             <Col span={6}>
-              <div className="m-reveal" style={{ transitionDelay: "80ms", background: C.light, border: "1px solid rgba(33,20,26,0.08)", borderRadius: "14px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
+              <div className="m-reveal" style={{ transitionDelay: "80ms", background: C.light, border: "1px solid rgba(33,20,26,0.08)", borderRadius: "10px", padding: "32px 28px", height: "100%", boxSizing: "border-box" }}>
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "20px" }}>{t("mortgage.terms.rates.title")}</h3>
                 <TRow label={t("mortgage.terms.nominalRate")} value={t("mortgage.terms.nominalRateValue")} />
                 <TRow label={t("mortgage.terms.eir")} value={t("mortgage.terms.eirValue")} />
@@ -415,7 +415,7 @@ export default function MortgagePage() {
 
 {/* Card 3: Loan params */}
             <Col span={4}>
-              <div className="m-reveal" style={{ transitionDelay: "40ms", background: C.light, border: "1px solid rgba(33,20,26,0.08)", borderRadius: "14px", padding: "28px 24px" }}>
+              <div className="m-reveal" style={{ transitionDelay: "40ms", background: C.light, border: "1px solid rgba(33,20,26,0.08)", borderRadius: "10px", padding: "28px 24px" }}>
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.wine, marginBottom: "16px" }}>{t("mortgage.terms.loanParameters")}</h3>
                 <TRow label={t("mortgage.terms.term")} value={t("mortgage.terms.termValue")} />
                 <TRow label={t("mortgage.terms.maxAmount")} value={t("mortgage.terms.maxAmountValue")} />
@@ -426,7 +426,7 @@ export default function MortgagePage() {
 
 {/* Card 4: Who qualifies */}
             <Col span={8}>
-              <div className="m-reveal" style={{ transitionDelay: "80ms", background: C.dark, borderRadius: "14px", padding: "28px 28px" }}>
+              <div className="m-reveal" style={{ transitionDelay: "80ms", background: C.dark, borderRadius: "10px", padding: "28px 28px" }}>
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "16px" }}>{t("mortgage.terms.whoQualifies")}</h3>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, marginBottom: "20px" }}>
                   {t("mortgage.terms.whoQualifiesBody")}
@@ -474,7 +474,7 @@ export default function MortgagePage() {
             ].map((item, i) => (
               <div key={item.title} className="m-reveal" style={{
                 transitionDelay: `${i * 70}ms`,
-                background: C.light, borderRadius: "12px", padding: "28px 22px",
+                background: C.light, borderRadius: "10px", padding: "28px 22px",
                 borderTop: `2px solid ${C.wine}`,
                 display: "flex", flexDirection: "column",
               }}>
