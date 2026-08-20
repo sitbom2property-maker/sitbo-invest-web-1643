@@ -746,7 +746,7 @@ html, body { background: #21141A; }
 .rd-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--body); font-size: 15px; font-weight: 400;
-  padding: 15px 30px; border-radius: 4px; border: 1px solid transparent;
+  padding: 15px 30px; border-radius: var(--radius); border: 1px solid transparent;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
@@ -949,7 +949,7 @@ html, body { background: #21141A; }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
 .rd-fb-tags span {
   font-family: var(--body); font-size: 13px; padding: 6px 12px;
-  border: 1px solid rgba(255,255,255,.55); border-radius: 4px;
+  border: 1px solid rgba(255,255,255,.55); border-radius: var(--radius);
 }
 
 /* pricing */
@@ -975,7 +975,7 @@ html, body { background: #21141A; }
 .rd-plan-block { margin-bottom: 20px; }
 .rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 6px; }
 .rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
-.rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: 6px; }
+.rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: var(--radius); }
 
 /* newsletter CTA — Figma background image (not CSS-only gradient) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); }
