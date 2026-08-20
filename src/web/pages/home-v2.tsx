@@ -554,6 +554,8 @@ type Plan = {
   featureKeys: MessageKey[];
   requestKey: MessageKey;
   resultKey: MessageKey;
+  noteKey?: MessageKey;
+  ctaKey?: MessageKey;
   featured?: boolean;
 };
 
@@ -581,10 +583,12 @@ const PLANS: Plan[] = [
     id: "discovery-tour",
     nameKey: "v2.plan3.name",
     forKey: "v2.plan3.for",
-    price: "$1999",
-    featureKeys: ["v2.plan3.f1", "v2.plan3.f2", "v2.plan3.f3"],
+    price: "$1999*",
+    featureKeys: ["v2.plan3.f1", "v2.plan3.f2", "v2.plan3.f3", "v2.plan3.f4"],
     requestKey: "v2.plan3.request",
     resultKey: "v2.plan3.result",
+    noteKey: "v2.plan3.note",
+    ctaKey: "v2.plan3.cta",
   },
 ];
 
@@ -617,6 +621,8 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
                 <p>{t(plan.resultKey)}</p>
               </div>
 
+              {plan.noteKey ? <p className="rd-plan-note">{t(plan.noteKey)}</p> : null}
+
               <button
                 type="button"
                 className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
@@ -629,7 +635,7 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
                   })
                 }
               >
-                {t("v2.pricing.choose")}
+                {t(plan.ctaKey ?? "v2.pricing.choose")}
               </button>
             </div>
           ))}
@@ -1030,6 +1036,11 @@ html, body { background: #21141A; }
 .rd-plan-block { margin-bottom: 20px; }
 .rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 6px; }
 .rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
+.rd-plan-note {
+  font-family: var(--body); font-size: 13px; line-height: 1.4;
+  color: rgba(33,20,26,.55); margin: 0 0 18px;
+}
+.rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
 .rd-plan-cta { margin-top: auto; width: 100%; font-size: 24px; padding: 18px 20px; border-radius: 10px; }
 
 /* newsletter CTA — image bg /images/cta-bg.png, fallback #21141A (no solid plum fill) */
