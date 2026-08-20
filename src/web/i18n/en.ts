@@ -190,11 +190,19 @@ const en = {
   "v2.plan2.result": "Financial model, legal summary, step-by-step plan",
   "v2.plan3.name": "Discovery Tour",
   "v2.plan3.for": "Arrive as a guest. Leave as an investor.",
-  "v2.plan3.f1": "3 days & 2 nights",
-  "v2.plan3.f2": "Personal meeting",
-  "v2.plan3.f3": "Real-time answers to questions",
-  "v2.plan3.request": "You have a specific question or 1-2 objects to check",
-  "v2.plan3.result": "Quick verdict: 'Yes, let's do it' / 'No, it's too risky'",
+  "v2.plan3.f1": "2 Days & 3 Nights of personal immersion",
+  "v2.plan3.f2": "1-on-1 Guidance with Artur (Private Advisor)",
+  "v2.plan3.f3":
+    "On-Site Inspections: Active developments, completed units & premium locations",
+  "v2.plan3.f4":
+    "Lifestyle & Culture: Curated dining, wine tastings & local Adjara highlights",
+  "v2.plan3.request":
+    "You want to experience Batumi firsthand, evaluate top-tier properties in person, and understand the market beyond online presentations.",
+  "v2.plan3.result":
+    "A clear investment decision, deep local context, and a fully prepared strategy to close the deal.",
+  "v2.plan3.note":
+    "*100% Refundable: The $1,999 tour fee is fully credited toward your property purchase upon deal completion.",
+  "v2.plan3.cta": "Apply for Discovery Tour",
 
   "v2.news.title": "Let's stay in touch",
   "v2.news.body":
@@ -216,8 +224,7 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "You come with a goal, not a property. Tell me what you want to achieve — rental income, capital growth, relocation,\u00A0diversification.",
-  "v2.footer.taglineEnd": "We start from the outcome, not the listing.",
+    "I work one-on-one with each client: from selecting a liquid property and conducting due diligence to renovations and turnkey completion. I do not take on high-risk properties. I discourage emotional purchases. I protect the buyer’s interests, not the developer’s. I was born and raised in Georgia. I have been active in the Batumi market for 7 years. My philosophy is to build long-term relationships.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",

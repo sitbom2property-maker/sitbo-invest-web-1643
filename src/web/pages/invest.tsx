@@ -521,11 +521,13 @@ const CSS = `
 }
 .iv-cta {
   border-radius: 10px; overflow: hidden;
-  background:
-    radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
-    var(--card);
+  background-color: #21141A;
+  background-image: url('/images/cta-bg.jpg');
+  background-size: cover;
+  background-position: center right;
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;
+  color: #FFFEF9;
 }
 .iv-cta .iv-panel-eyebrow { color: var(--white); }
 .iv-cta h2 {
