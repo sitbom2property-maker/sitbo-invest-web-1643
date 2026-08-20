@@ -447,29 +447,58 @@ function Ecosystem() {
 const FEEDBACK: {
   quoteKey: MessageKey;
   authorKey: MessageKey;
-  tagKeys: MessageKey[];
+  tags: string[];
 }[] = [
   {
     quoteKey: "v2.fb.q1",
     authorKey: "v2.fb.a1",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.protection"],
+    tags: ["#batumi", "#fastsale", "#vipservice"],
   },
   {
     quoteKey: "v2.fb.q2",
     authorKey: "v2.fb.a2",
-    tagKeys: ["v2.fb.tag.tbilisi", "v2.fb.tag.advisory"],
+    tags: ["#batumi", "#mortgage", "#advisory"],
   },
   {
     quoteKey: "v2.fb.q3",
     authorKey: "v2.fb.a3",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.turnkey"],
+    tags: ["#batumi", "#investment", "#fullservice"],
   },
   {
     quoteKey: "v2.fb.q4",
     authorKey: "v2.fb.a4",
-    tagKeys: ["v2.fb.tag.batumi", "v2.fb.tag.strategy"],
+    tags: ["#batumi", "#seamlessdeal", "#protection"],
+  },
+  {
+    quoteKey: "v2.fb.q5",
+    authorKey: "v2.fb.a5",
+    tags: ["#batumi", "#problemsolver", "#mortgage"],
+  },
+  {
+    quoteKey: "v2.fb.q6",
+    authorKey: "v2.fb.a6",
+    tags: ["#tbilisi", "#batumi", "#representation"],
+  },
+  {
+    quoteKey: "v2.fb.q7",
+    authorKey: "v2.fb.a7",
+    tags: ["#georgia", "#legalprotection", "#diplomacy"],
   },
 ];
+
+function GoogleReviewBadge() {
+  return (
+    <img
+      className="rd-fb-google"
+      src="/images/google-review.svg"
+      alt="Google Review"
+      width={50}
+      height={30}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
 
 function Feedback() {
   const t = useT();
@@ -496,12 +525,13 @@ function Feedback() {
             onPointerCancel={endDrag}
           >
             {FEEDBACK.map((f, i) => (
-              <figure key={i} className="rd-fb-card rv">
+              <figure key={f.quoteKey} className="rd-fb-card rv">
+                <GoogleReviewBadge />
                 <blockquote>‘{t(f.quoteKey)}’</blockquote>
                 <figcaption>{t(f.authorKey)}</figcaption>
                 <div className="rd-fb-tags">
-                  {f.tagKeys.map((k) => (
-                    <span key={k}>{t(k)}</span>
+                  {f.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
                   ))}
                 </div>
               </figure>
@@ -935,22 +965,31 @@ html, body { background: #21141A; }
 .rd-fb-rail::-webkit-scrollbar { display: none; }
 .rd-fb-card {
   --fb-size: clamp(280px, 28vw, 360px);
+  position: relative;
   flex: 0 0 var(--fb-size);
   width: var(--fb-size); height: var(--fb-size); max-height: var(--fb-size);
   aspect-ratio: 1 / 1; margin: 0; box-sizing: border-box;
-  background: #463C41; border-radius: 10px; padding: clamp(18px, 1.8vw, 28px);
+  background: #412835; border-radius: 10px;
+  padding: clamp(18px, 1.8vw, 28px);
+  padding-top: clamp(42px, 4vw, 52px);
+  padding-right: clamp(58px, 6vw, 72px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
+  pointer-events: none;
+}
+.rd-fb-google {
+  position: absolute; top: 12px; right: 12px;
+  width: 50px; height: 30px; display: block; object-fit: contain;
   pointer-events: none;
 }
 .rd-fb-card blockquote {
   font-family: var(--body); font-weight: 700; font-size: clamp(14px, 1.25vw, 18px);
-  line-height: 1.32; margin: 0 0 12px;
+  line-height: 1.32; margin: 0 0 12px; color: #FFFEF9;
 }
 .rd-fb-card figcaption { font-family: var(--body); font-size: clamp(13px, 1.1vw, 15px); color: #FFFEF9; }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 13px; padding: 6px 12px;
-  border: 1px solid rgba(255,255,255,.55); border-radius: 10px;
+  font-family: var(--body); font-size: 13px; padding: 6px 12px; color: #FFFEF9;
+  border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
 }
 
 /* pricing — dark page section; light cards + green featured */

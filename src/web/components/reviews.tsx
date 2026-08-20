@@ -1,46 +1,71 @@
 import { useT, type MessageKey } from "../i18n";
 
-const reviews: { quoteKey: MessageKey; nameKey: MessageKey; statusKey: MessageKey }[] = [
+const reviews: {
+  quoteKey: MessageKey;
+  nameKey: MessageKey;
+  tags: string[];
+}[] = [
   {
     quoteKey: "reviews.1.quote",
     nameKey: "reviews.1.name",
-    statusKey: "reviews.1.status",
+    tags: ["#batumi", "#fastsale", "#vipservice"],
   },
   {
     quoteKey: "reviews.2.quote",
     nameKey: "reviews.2.name",
-    statusKey: "reviews.2.status",
+    tags: ["#batumi", "#mortgage", "#advisory"],
   },
   {
     quoteKey: "reviews.3.quote",
     nameKey: "reviews.3.name",
-    statusKey: "reviews.3.status",
+    tags: ["#batumi", "#investment", "#fullservice"],
   },
   {
     quoteKey: "reviews.4.quote",
     nameKey: "reviews.4.name",
-    statusKey: "reviews.4.status",
+    tags: ["#batumi", "#seamlessdeal", "#protection"],
   },
   {
     quoteKey: "reviews.5.quote",
     nameKey: "reviews.5.name",
-    statusKey: "reviews.5.status",
+    tags: ["#batumi", "#problemsolver", "#mortgage"],
   },
   {
     quoteKey: "reviews.6.quote",
     nameKey: "reviews.6.name",
-    statusKey: "reviews.6.status",
+    tags: ["#tbilisi", "#batumi", "#representation"],
   },
   {
     quoteKey: "reviews.7.quote",
     nameKey: "reviews.7.name",
-    statusKey: "reviews.7.status",
+    tags: ["#georgia", "#legalprotection", "#diplomacy"],
   },
 ];
 
+function GoogleReviewBadge() {
+  return (
+    <img
+      src="/images/google-review.svg"
+      alt="Google Review"
+      width={50}
+      height={30}
+      loading="lazy"
+      decoding="async"
+      style={{
+        position: "absolute",
+        top: 12,
+        right: 12,
+        width: 50,
+        height: 30,
+        objectFit: "contain",
+        display: "block",
+      }}
+    />
+  );
+}
+
 export function Reviews() {
   const t = useT();
-  const visibleReviews = reviews.slice(0, 6);
 
   return (
     <section style={{ background: "#FFFEF9", padding: "clamp(52px,7vw,90px) 0" }}>
@@ -61,31 +86,49 @@ export function Reviews() {
             WebkitOverflowScrolling: "touch",
           }}
         >
-          {visibleReviews.map((item) => (
+          {reviews.map((item) => (
             <article
               key={item.nameKey}
               style={{
+                position: "relative",
                 flex: "0 0 min(320px, 86vw)",
-                background: "#FFFEF9",
-                border: "1px solid rgba(33,20,26,0.08)",
+                background: "#412835",
                 borderRadius: "10px",
-                padding: "18px 18px 16px",
-                boxShadow: "0 8px 20px rgba(33,20,26,0.06)",
+                padding: "48px 64px 16px 18px",
                 minHeight: "300px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                color: "#FFFEF9",
+                boxSizing: "border-box",
               }}
             >
-              <p style={{ margin: "0 0 14px", fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(33,20,26,0.78)", fontStyle: "italic" }}>
+              <GoogleReviewBadge />
+              <p style={{ margin: "0 0 14px", fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.65, color: "#FFFEF9", fontStyle: "italic" }}>
                 "{t(item.quoteKey)}"
               </p>
-              <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 400, color: "#21141A" }}>
-                {t(item.nameKey)}
-              </p>
-              <p style={{ margin: "3px 0 0", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: "rgba(33,20,26,0.55)" }}>
-                {t(item.statusKey)}
-              </p>
+              <div>
+                <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 400, color: "#FFFEF9" }}>
+                  {t(item.nameKey)}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 12,
+                        padding: "6px 12px",
+                        border: "1px solid rgba(255,254,249,0.55)",
+                        borderRadius: 10,
+                        color: "#FFFEF9",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </article>
           ))}
 

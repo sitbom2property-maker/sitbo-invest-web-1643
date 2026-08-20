@@ -145,22 +145,26 @@ const en = {
   "v2.fb.prev": "Previous testimonial",
   "v2.fb.next": "Next testimonial",
   "v2.fb.q1":
-    "Arthur saved me from buying a property with a legal flaw and saved me $12,000",
-  "v2.fb.a1": "— Mark V., Investor (Germany)",
-  "v2.fb.q2": "The only person in Georgia whom I and my business partners trust.",
-  "v2.fb.a2": "— Daniel K., Investor (UAE)",
+    "Found a buyer for my apartment in just 9 days and completely handled the sale process end-to-end. True full VIP service.",
+  "v2.fb.a1": "Anastasia S. (USA)",
+  "v2.fb.q2":
+    "Helped negotiate the price and met tight deadlines for mortgage approval. The team you can rely on in Batumi.",
+  "v2.fb.a2": "Tamar Kh., Buyer (Yerevan)",
   "v2.fb.q3":
-    "Bought remotely, never flew in. Rented out within three weeks of handover.",
-  "v2.fb.a3": "— Elena S., Investor (Cyprus)",
+    "Selected an investment project on highly favorable terms and even handled all utility setups after the deal.",
+  "v2.fb.a3": "Milana S., Investor (Russia)",
   "v2.fb.q4":
-    "Clear numbers, clear risks, clear next step. Best advisory experience I've had in the Caucasus.",
-  "v2.fb.a4": "— Alexei P., Investor (Israel)",
-  "v2.fb.tag.batumi": "Batumi",
-  "v2.fb.tag.tbilisi": "Tbilisi",
-  "v2.fb.tag.protection": "Protection",
-  "v2.fb.tag.advisory": "Advisory",
-  "v2.fb.tag.turnkey": "Turnkey Asset Management",
-  "v2.fb.tag.strategy": "Strategy",
+    "Seamlessly coordinated the seller, bank, developer, and public registry. Always calm, supportive, and highly professional.",
+  "v2.fb.a4": "Natalia P., Homeowner (Crimea)",
+  "v2.fb.q5":
+    "The seller canceled at 10 PM. By midnight, Arthur already had me standing inside a new, even better apartment. Absolute game-changer!",
+  "v2.fb.a5": "Arman A., Buyer (Yerevan)",
+  "v2.fb.q6":
+    "Flew from Batumi to Tbilisi to negotiate with the developer and review every contract detail in person.",
+  "v2.fb.a6": "Teona T., Buyer (Moscow)",
+  "v2.fb.q7":
+    "Resolved complex developer conflicts and legal flaws instantly with complete diplomacy and expertise.",
+  "v2.fb.a7": "Maya S., Homeowner (Georgia)",
 
   "v2.pricing.title": "It always starts with a call...",
   "v2.pricing.requestLabel": "Request",
@@ -458,33 +462,26 @@ const en = {
   "reviews.headlineEm": "optimize for quality.",
   "reviews.readMore": "Read More",
   "reviews.1.quote":
-    "SITBO structured the deal exactly as promised. I entered with a clear exit strategy and started receiving rental income within the first season.",
-  "reviews.1.name": "Alexey M.",
-  "reviews.1.status": "Berlin, Germany",
+    "Found a buyer for my apartment in just 9 days and completely handled the sale process end-to-end. True full VIP service.",
+  "reviews.1.name": "Anastasia S. (USA)",
   "reviews.2.quote":
-    "The team filtered projects with real numbers, not sales noise. The process felt calm, transparent, and very premium.",
-  "reviews.2.name": "Elena R.",
-  "reviews.2.status": "Warsaw, Poland",
+    "Helped negotiate the price and met tight deadlines for mortgage approval. The team you can rely on in Batumi.",
+  "reviews.2.name": "Tamar Kh., Buyer (Yerevan)",
   "reviews.3.quote":
-    "I appreciated the legal clarity and payment planning. Every milestone was documented and easy to track remotely.",
-  "reviews.3.name": "David K.",
-  "reviews.3.status": "London, UK",
+    "Selected an investment project on highly favorable terms and even handled all utility setups after the deal.",
+  "reviews.3.name": "Milana S., Investor (Russia)",
   "reviews.4.quote":
-    "From selection to closing, communication was disciplined and fast. It saved me weeks of on-ground due diligence.",
-  "reviews.4.name": "Nino T.",
-  "reviews.4.status": "Tbilisi, Georgia",
+    "Seamlessly coordinated the seller, bank, developer, and public registry. Always calm, supportive, and highly professional.",
+  "reviews.4.name": "Natalia P., Homeowner (Crimea)",
   "reviews.5.quote":
-    "Their market perspective is practical: yield, liquidity, and risk in one view. Exactly what an investor needs.",
-  "reviews.5.name": "Maria S.",
-  "reviews.5.status": "Prague, Czechia",
+    "The seller canceled at 10 PM. By midnight, Arthur already had me standing inside a new, even better apartment. Absolute game-changer!",
+  "reviews.5.name": "Arman A., Buyer (Yerevan)",
   "reviews.6.quote":
-    "The renovation and furnishing guidance was concise and profitable. We launched rentals with no operational chaos.",
-  "reviews.6.name": "Igor P.",
-  "reviews.6.status": "Riga, Latvia",
+    "Flew from Batumi to Tbilisi to negotiate with the developer and review every contract detail in person.",
+  "reviews.6.name": "Teona T., Buyer (Moscow)",
   "reviews.7.quote":
-    "Quiet, professional execution. I never felt pressure to buy, only confidence in the final decision.",
-  "reviews.7.name": "Sophie L.",
-  "reviews.7.status": "Paris, France",
+    "Resolved complex developer conflicts and legal flaws instantly with complete diplomacy and expertise.",
+  "reviews.7.name": "Maya S., Homeowner (Georgia)",
 
   // Partners component
   "partners.eyebrow": "Trusted Partners",
