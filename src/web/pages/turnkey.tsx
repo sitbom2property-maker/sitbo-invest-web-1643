@@ -50,7 +50,7 @@ function Hero() {
 
 {/* Right: photo */}
         <div style={{ flex: "0 0 420px", maxWidth: "420px" }} className="hero-photo-col">
-          <div style={{ borderRadius: "20px", overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,0.5)" }}>
+          <div style={{ borderRadius: "10px", overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,0.5)" }}>
             <img src="/home/turnkey-hero-photo.png" alt={t("turnkey.hero.title")} style={{ width: "100%", display: "block", objectFit: "cover" }} />
           </div>
         </div>
@@ -96,7 +96,7 @@ function TwoColumns() {
     <section style={{ background: C.dark, padding: "0 10px 10px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
         {cols.map(col => (
-          <div key={col.tag} style={{ background: col.bg, borderRadius: "16px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
+          <div key={col.tag} style={{ background: col.bg, borderRadius: "10px", padding: "clamp(48px,5vw,72px) clamp(32px,4vw,56px)" }}>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", fontWeight: 400, color: col.dark ? C.light : C.dark, lineHeight: 1.15, marginBottom: "20px" }}>{col.title}</h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: col.dark ? C.light : "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "40px" }}>{col.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
@@ -130,7 +130,7 @@ function DesignRule() {
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
-      <div style={{ background: C.wine, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(32px,5vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <div style={{ background: C.wine, borderRadius: "10px", padding: "clamp(60px,7vw,100px) clamp(32px,5vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "clamp(80px,20vw,220px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(255,254,249,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>100%</div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: "720px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "28px" }}>
@@ -196,7 +196,7 @@ function Calculator() {
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
-      <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,6vw,80px) clamp(24px,4vw,64px)" }}>
+      <div style={{ background: C.light, borderRadius: "10px", padding: "clamp(48px,6vw,80px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "10px" }}>
             {t("turnkey.calculator.title")}
@@ -250,13 +250,13 @@ function Calculator() {
 
           {shown && (
             <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-              <div style={{ background: C.dark, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
+              <div style={{ background: C.dark, borderRadius: "10px", padding: "28px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("turnkey.calculator.costRange")}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>
                   ${low.toLocaleString()} – ${high.toLocaleString()}
                 </p>
               </div>
-              <div style={{ background: C.wine, borderRadius: "12px", padding: "28px 24px", textAlign: "center" }}>
+              <div style={{ background: C.wine, borderRadius: "10px", padding: "28px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("turnkey.calculator.timeline")}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 700, color: C.light, margin: 0 }}>{timeline}</p>
               </div>
@@ -286,7 +286,7 @@ function RemoteProcess() {
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
-      <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
+      <div style={{ background: C.light, borderRadius: "10px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
@@ -294,7 +294,7 @@ function RemoteProcess() {
               <em style={{ fontStyle: "italic", color: C.teal }}>{t("turnkey.remote.titleEm")}</em>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "12px", overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", borderRadius: "10px", overflow: "hidden" }}>
             {steps.map((s, i) => (
               <div key={s.n} style={{ background: i % 2 === 0 ? C.parch : "#FFFEF9", padding: "40px 32px" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.8rem", fontWeight: 700, color: "rgba(33,20,26,0.1)", margin: "0 0 20px", lineHeight: 1 }}>{s.n}</p>
@@ -328,7 +328,7 @@ function Portfolio() {
   return (<>
 
     <section style={{ background: C.dark, padding: "10px" }}>
-      <div style={{ background: C.dark, borderRadius: "16px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
+      <div style={{ background: C.dark, borderRadius: "10px", padding: "clamp(60px,7vw,100px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "var(--site-max)", margin: "0 auto", padding: "0 var(--site-gutter)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
             <div>
@@ -346,7 +346,7 @@ function Portfolio() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "16px" }}>
             {visible.map((p, i) => (
-              <div key={p.title} style={{ borderRadius: "12px", overflow: "hidden", background: placeholderColors[i % placeholderColors.length] + "33", border: "1px solid rgba(255,254,249,0.06)" }}>
+              <div key={p.title} style={{ borderRadius: "10px", overflow: "hidden", background: placeholderColors[i % placeholderColors.length] + "33", border: "1px solid rgba(255,254,249,0.06)" }}>
                 <div style={{ height: "220px", background: placeholderColors[i % placeholderColors.length] + "44", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,254,249,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
@@ -376,7 +376,7 @@ function Guarantees() {
 
     <section style={{ background: C.dark, padding: "10px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
-        <div style={{ background: C.light, borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
+        <div style={{ background: C.light, borderRadius: "10px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.self.title")}
           </h3>
@@ -384,7 +384,7 @@ function Guarantees() {
             {t("turnkey.guarantee.self.body")}
           </p>
         </div>
-        <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.1)", borderRadius: "16px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
+        <div style={{ background: C.dark, border: "1px solid rgba(140,178,192,0.1)", borderRadius: "10px", padding: "clamp(48px,5vw,64px) clamp(32px,4vw,48px)" }}>
           <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.2, marginBottom: "20px" }}>
             {t("turnkey.guarantee.invest.title")}
           </h3>
@@ -505,7 +505,7 @@ function ContactForm() {
   return (<>
 
     <section id="contact-form" style={{ background: C.dark, padding: "10px 10px 0" }}>
-      <div style={{ background: C.dark, borderRadius: "16px 16px 0 0", padding: "clamp(60px,8vw,120px) clamp(24px,4vw,64px)" }}>
+      <div style={{ background: C.dark, borderRadius: "10px 10px 0 0", padding: "clamp(60px,8vw,120px) clamp(24px,4vw,64px)" }}>
         <div style={{ maxWidth: "680px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.light, lineHeight: 1.1, marginBottom: "16px" }}>

@@ -118,7 +118,7 @@ export function RequestModal({
         .req-modal-card {
           position: relative; width: 100%; max-width: 470px;
           background: #21141A; border: 1px solid rgba(140,178,192,0.1);
-          border-radius: 16px; padding: 40px 36px 32px;
+          border-radius: 10px; padding: 40px 36px 32px;
           box-shadow: 0 30px 80px rgba(0,0,0,0.45);
           animation: reqRise 0.28s cubic-bezier(0.16,1,0.3,1);
           box-sizing: border-box; margin: 0 auto;

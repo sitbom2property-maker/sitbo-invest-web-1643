@@ -347,7 +347,7 @@ const COOKIE_CSS = `
 .ck-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .ck-btn {
   background: transparent; color: #FFFEF9;
-  border: 1px solid #FFFEF9; border-radius: 999px;
+  border: 1px solid #FFFEF9; border-radius: 10px;
   padding: 10px 22px; cursor: pointer;
   font-size: 11px; font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; white-space: nowrap;

@@ -170,11 +170,21 @@ function AccordionItem({
 
 const CSS = `
 .sv {
-  --bg: #21141A;
-  --card: #703C54;
-  --green: color-mix(in srgb, #8CB2C0 10%, #703C54);
-  --white: #FFFEF9;
-  --panel: color-mix(in srgb, #8CB2C0 10%, #FFFEF9);
+  --bg-dark: #21141A;
+  --bg-light: #FFFEF9;
+  --text-light: #FFFEF9;
+  --text-dark: #21141A;
+  --card-gray: #463C41;
+  --card-green: #48674D;
+  --card-light: #FFFEF9;
+  --accent-plum: #703C54;
+  --accent-blue: #8CB2C0;
+  --radius: 10px;
+  --bg: var(--bg-dark);
+  --card: var(--card-gray);
+  --green: var(--card-green);
+  --white: var(--bg-light);
+  --panel: var(--bg-light);
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
@@ -193,7 +203,7 @@ const CSS = `
 .sv-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--body); font-size: 15px; font-weight: 400;
-  padding: 15px 30px; border-radius: 4px; border: 1px solid transparent;
+  padding: 15px 30px; border-radius: var(--radius); border: 1px solid transparent;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
@@ -242,7 +252,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-list {
-  background: var(--panel); color: var(--bg); border-radius: 20px;
+  background: var(--panel); color: var(--bg); border-radius: 10px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .sv-list-head {
@@ -313,7 +323,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   gap: 12px;
 }
 .sv-limit {
-  background: var(--card); border-radius: 16px;
+  background: var(--card); border-radius: 10px;
   padding: clamp(22px, 2.4vw, 32px);
 }
 .sv-limit h3 {
@@ -331,7 +341,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-cta {
-  border-radius: 20px; overflow: hidden;
+  border-radius: 10px; overflow: hidden;
   background:
     radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
     var(--card);

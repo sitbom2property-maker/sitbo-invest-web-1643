@@ -187,7 +187,7 @@ export function LeadPopup() {
           max-width: 420px;
           background: #21141A;
           border: 1px solid rgba(140,178,192,0.1);
-          border-radius: 16px;
+          border-radius: 10px;
           padding: 28px 24px 22px;
           box-shadow: 0 18px 48px rgba(0,0,0,0.35);
           animation: leadPopupRise 0.35s cubic-bezier(0.16, 1, 0.3, 1);

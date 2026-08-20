@@ -47,7 +47,7 @@ function CatalogCard({ p }: { p: Project }) {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           style={{
-            borderRadius: "14px", overflow: "hidden", background: C.dark,
+            borderRadius: "10px", overflow: "hidden", background: C.dark,
             boxShadow: hovered ? "0 12px 40px rgba(33,20,26,0.15)" : "0 2px 16px rgba(33,20,26,0.06)",
             transition: "box-shadow 0.3s, transform 0.3s",
             transform: hovered ? "translateY(-4px)" : "none",
@@ -335,7 +335,7 @@ export default function CatalogPage() {
       {/* Book a Call popup */}
       {showBookCall && (
         <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "10px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>✕</button>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: C.light, marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
