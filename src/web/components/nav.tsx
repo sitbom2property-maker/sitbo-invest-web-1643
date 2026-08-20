@@ -11,6 +11,7 @@ export const NAV_HEIGHT_MOBILE = 72;
 const MOBILE_BP = 1024;
 
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
+  { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.about", href: "/services" },
   { labelKey: "nav.properties", href: "/catalog" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
