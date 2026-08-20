@@ -11,6 +11,7 @@ export const NAV_HEIGHT_MOBILE = 72;
 const MOBILE_BP = 1024;
 
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
+  { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.about", href: "/services" },
   { labelKey: "nav.properties", href: "/catalog" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
@@ -134,7 +135,13 @@ export function Nav() {
   const [contactOpen, setContactOpen] = useState(false);
 
   const navHeight = isMobile ? NAV_HEIGHT_MOBILE : NAV_HEIGHT;
-  const logoHeight = isMobile ? 16 : 20;
+  const logoSrc = "/brand/logo-dark-bg.png"; // light mark for dark header
+  const logoStyle = {
+    width: 60,
+    height: 26,
+    display: "block" as const,
+    objectFit: "contain" as const,
+  };
 
   const openContact = () => {
     setMenuOpen(false);
@@ -228,7 +235,7 @@ export function Nav() {
             {!isMobile ? (
               <Link
                 href="/"
-                aria-label="SITBO Invest — Home"
+                aria-label="Arthur Arutyunyan — Home"
                 style={{
                   display: "block",
                   cursor: "pointer",
@@ -243,16 +250,7 @@ export function Nav() {
                   e.currentTarget.style.opacity = "1";
                 }}
               >
-                <img
-                  src="/brand/logo-dark-bg.png"
-                  alt="SITBO Invest"
-                  style={{
-                    height: logoHeight,
-                    width: "auto",
-                    display: "block",
-                    objectFit: "contain",
-                  }}
-                />
+                <img src={logoSrc} alt="Arthur Arutyunyan" style={logoStyle} />
               </Link>
             ) : null}
             <NavLocaleSwitcher compact={isMobile} />
@@ -278,7 +276,7 @@ export function Nav() {
           ) : (
             <Link
               href="/"
-              aria-label="SITBO Invest — Home"
+              aria-label="Arthur Arutyunyan — Home"
               style={{
                 display: "block",
                 cursor: "pointer",
@@ -286,16 +284,7 @@ export function Nav() {
                 justifySelf: "center",
               }}
             >
-              <img
-                src="/brand/logo-dark-bg.png"
-                alt="SITBO Invest"
-                style={{
-                  height: logoHeight,
-                  width: "auto",
-                  display: "block",
-                  objectFit: "contain",
-                }}
-              />
+              <img src={logoSrc} alt="Arthur Arutyunyan" style={logoStyle} />
             </Link>
           )}
 
