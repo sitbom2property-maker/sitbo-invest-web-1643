@@ -71,7 +71,6 @@ export function FooterV2() {
               Arthur Arutyunyan | <em>{t("v2.footer.role")}</em>
             </p>
             <p className="fv2-tagline">{t("v2.footer.tagline")}</p>
-            <p className="fv2-tagline">{t("v2.footer.taglineEnd")}</p>
           </div>
 
           <nav className="fv2-col" aria-label={t("v2.footer.investment")}>
