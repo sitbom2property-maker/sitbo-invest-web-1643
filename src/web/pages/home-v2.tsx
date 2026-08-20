@@ -987,7 +987,7 @@ html, body { background: #21141A; }
   --fb-size: clamp(240px, calc((100% - 32px) / 2.65), 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
-  width: var(--fb-size); min-height: var(--fb-size);
+  width: var(--fb-size); min-height: calc(var(--fb-size) + 20px);
   scroll-snap-align: start;
   margin: 0; box-sizing: border-box;
   background: #412835; border-radius: 10px;
@@ -996,7 +996,7 @@ html, body { background: #21141A; }
   pointer-events: none;
 }
 .rd-fb-card blockquote {
-  font-family: var(--body); font-weight: 700; font-size: clamp(15px, 1.35vw, 20px);
+  font-family: var(--body); font-weight: 700; font-size: 16px;
   line-height: 1.35; margin: 0 0 18px; color: #FFFEF9;
 }
 .rd-fb-card figcaption {
@@ -1005,7 +1005,7 @@ html, body { background: #21141A; }
 }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 18px; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 13px; padding: 7px 12px; color: #FFFEF9;
+  font-family: var(--body); font-size: 16px; padding: 7px 12px; color: #FFFEF9;
   border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
   text-transform: capitalize;
 }
