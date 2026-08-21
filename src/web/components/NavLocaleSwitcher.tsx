@@ -36,9 +36,18 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
     };
   }, [open]);
 
+  const rowH = compact ? 28 : 32;
+  const fontSize = compact ? 10 : 11;
+
   const chipBase: CSSProperties = {
+    boxSizing: "border-box",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: rowH,
+    margin: 0,
     fontFamily: "Inter, sans-serif",
-    fontSize: compact ? 10 : 11,
+    fontSize,
     fontWeight: 600,
     letterSpacing: "0.12em",
     textTransform: "uppercase",
@@ -46,8 +55,9 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
     background: "transparent",
     color: "#FFFEF9",
     cursor: "pointer",
-    padding: compact ? "6px 4px" : "6px 7px",
+    padding: compact ? "0 5px" : "0 7px",
     lineHeight: 1,
+    verticalAlign: "middle",
     transition: "opacity 0.15s, color 0.15s",
   };
 
@@ -55,16 +65,26 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
     <div
       ref={rootRef}
       style={{
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
-        gap: compact ? 2 : 6,
+        height: rowH,
+        gap: compact ? 4 : 8,
         position: "relative",
+        flexWrap: "nowrap",
       }}
       aria-label={t("nav.language")}
     >
-      {/* One-tap language toggle */}
-      <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-        {LANGS.map((lang, i) => {
+      {/* Language */}
+      <div
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          height: rowH,
+          gap: 0,
+          flexShrink: 0,
+        }}
+      >
+        {LANGS.map((lang) => {
           const active = language === lang.code;
           return (
             <button
@@ -76,8 +96,6 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
                 ...chipBase,
                 opacity: active ? 1 : 0.45,
                 color: active ? "#703C54" : "#FFFEF9",
-                paddingLeft: i === 0 ? (compact ? 4 : 6) : 4,
-                paddingRight: i === LANGS.length - 1 ? (compact ? 4 : 6) : 4,
               }}
             >
               {lang.label}
@@ -92,13 +110,21 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
           width: 1,
           height: 12,
           background: "rgba(255,254,249,0.25)",
-          margin: "0 2px",
           flexShrink: 0,
+          alignSelf: "center",
         }}
       />
 
-      {/* Currency — applies immediately */}
-      <div style={{ position: "relative" }}>
+      {/* Currency */}
+      <div
+        style={{
+          position: "relative",
+          display: "inline-flex",
+          alignItems: "center",
+          height: rowH,
+          flexShrink: 0,
+        }}
+      >
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -107,18 +133,22 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
           aria-label={t("locale.currency")}
           style={{
             ...chipBase,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 4,
+            gap: 5,
             opacity: 0.9,
-            paddingRight: compact ? 2 : 4,
           }}
         >
-          <span>
+          <span style={{ display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
             {CURRENCY_SYMBOLS[currency] ?? ""}
             {currency}
           </span>
-          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden>
+          <svg
+            width="8"
+            height="8"
+            viewBox="0 0 10 10"
+            fill="none"
+            aria-hidden
+            style={{ display: "block", flexShrink: 0 }}
+          >
             <path
               d="M2 3.5 5 6.5 8 3.5"
               stroke="currentColor"
@@ -136,7 +166,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
             style={{
               position: "absolute",
               top: "calc(100% + 10px)",
-              right: 0,
+              left: 0,
               minWidth: 128,
               background: "#21141A",
               border: "1px solid rgba(255,254,249,0.12)",
@@ -175,6 +205,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
                     borderRadius: 2,
                     cursor: "pointer",
                     textAlign: "left",
+                    lineHeight: 1,
                   }}
                 >
                   <span>
