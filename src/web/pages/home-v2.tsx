@@ -808,10 +808,12 @@ html, body { background: #21141A; }
 .rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
 .rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
 .rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--text-dark); }
-.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: var(--text-light); margin: 0; }
+.rd-lead { font-family: var(--body); font-size: 16px; line-height: 1.45; color: var(--text-light); margin: 0; }
 .rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
-.rd-split .rd-lead { max-width: 420px; }
+.rd-split .rd-lead {
+  max-width: 420px; justify-self: end; text-align: right;
+}
 
 /* hero — app shell already offsets fixed nav; center photo between nav and fold */
 .rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
@@ -1097,6 +1099,7 @@ html, body { background: #21141A; }
   .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
+  .rd-split .rd-lead { justify-self: start; text-align: left; max-width: none; }
   .rd-recog { grid-template-columns: 1fr; }
   .rd-recog-visual { aspect-ratio: 16 / 10; max-height: 420px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }

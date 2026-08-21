@@ -296,8 +296,9 @@ const CSS = `
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .iv-split p {
-  margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
+  margin: 0; font-size: 16px; line-height: 1.5;
   color: var(--white); max-width: 420px;
+  justify-self: end; text-align: right;
 }
 .iv-stats {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
@@ -375,8 +376,9 @@ const CSS = `
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .iv-panel-head p {
-  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+  margin: 0; font-size: 16px; line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 420px;
+  justify-self: end; text-align: right;
 }
 
 /* strategy accordion */
@@ -546,7 +548,7 @@ const CSS = `
   .iv-stats { grid-template-columns: repeat(2, 1fr); }
   .iv-adv-grid { grid-template-columns: repeat(2, 1fr); }
   .iv-hero-visual { justify-self: start; max-height: 480px; aspect-ratio: 16 / 11; }
-  .iv-panel-head p { justify-self: start; }
+  .iv-panel-head p, .iv-split p { justify-self: start; text-align: left; max-width: none; }
   .iv-acc-head { grid-template-columns: 1fr auto auto; gap: 10px; }
   .iv-acc-tag { display: none; }
   .iv-acc-body { padding-left: 0; }
