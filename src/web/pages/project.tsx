@@ -6,6 +6,7 @@ import { AppLink } from "../components/app-link";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
 import { RequestModal } from "../components/RequestModal";
+import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -398,17 +399,6 @@ function MapEmbed({ project }: { project: Project }) {
   </>);
 }
 
-// ─── Diamond bullet ───────────────────────────────────────────────────────────
-function Diamond() {
-  return (<>
-
-    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "7px" }} aria-hidden>
-      <rect x="5" y="0.5" width="6.36" height="6.36" rx="0.6" transform="rotate(45 5 0.5)" fill={C.teal} />
-    </svg>
-  
-  </>);
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ProjectPage() {
   const params = useParams<{ slug: string }>();
@@ -419,13 +409,17 @@ export default function ProjectPage() {
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
   const project = localizedList[idx];
 
   // Scroll to top on mount
-  useEffect(() => { window.scrollTo(0, 0); }, [params.slug]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setFeaturesOpen(false);
+  }, [params.slug]);
 
   if (!project) {
     return (<>
@@ -552,18 +546,14 @@ export default function ProjectPage() {
 
               <Divider />
 
-{/* Key Features */}
-              <div className="pr-reveal" style={{ margin: "40px 0" }}>
-                <Eyebrow>{t("project.features")}</Eyebrow>
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px 28px" }}>
-                  {p.features.map(f => (
-                    <div key={f} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-                      <Diamond />
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.dark, lineHeight: 1.55 }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+{/* Features */}
+              <ProjectFeatures
+                features={p.features}
+                open={featuresOpen}
+                onOpen={() => setFeaturesOpen(true)}
+                onClose={() => setFeaturesOpen(false)}
+                isMobile={isMobile}
+              />
 
               <Divider />
 
