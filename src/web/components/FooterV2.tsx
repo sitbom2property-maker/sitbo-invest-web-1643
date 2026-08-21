@@ -7,7 +7,7 @@ const TELEGRAM = "https://t.me/sitboinvest";
 const INSTAGRAM = "https://instagram.com/sitboinvest";
 const LINKEDIN = "https://www.linkedin.com/company/sitbo-invest";
 
-/** Luxury footer — centered 1240px canvas, light surface, left-aligned copy. */
+/** Luxury footer — centered site canvas, light surface, left-aligned copy. */
 export function FooterV2() {
   const t = useT();
 
@@ -22,15 +22,15 @@ export function FooterV2() {
           border-top: 1px solid rgba(33,20,26,.08);
         }
         .fv2-wrap {
-          max-width: 1240px;
+          max-width: var(--site-max, 1440px);
           margin: 0 auto;
-          padding: 0 clamp(40px, 6vw, 100px);
+          padding: 0 var(--site-gutter, clamp(32px, 5vw, 80px));
           box-sizing: border-box;
         }
         .fv2-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.6fr) auto auto;
-          gap: clamp(40px, 6vw, 96px);
+          grid-template-columns: minmax(0, 1.85fr) auto auto;
+          gap: clamp(48px, 7vw, 120px);
           align-items: start;
           text-align: left;
         }
@@ -53,7 +53,7 @@ export function FooterV2() {
           line-height: 1.65;
           color: #21141A;
           margin: 0;
-          max-width: 560px;
+          max-width: 760px;
         }
         .fv2-col-title {
           font-family: 'Inter', sans-serif;

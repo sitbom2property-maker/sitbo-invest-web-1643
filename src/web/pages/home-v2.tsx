@@ -770,9 +770,9 @@ html, body { background: #21141A; }
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
-  --rd-max: var(--site-max, 1240px);
-  --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
-  --rd-inset: clamp(24px, 3vw, 40px);
+  --rd-max: var(--site-max, 1440px);
+  --rd-gutter: var(--site-gutter, clamp(32px, 5vw, 80px));
+  --rd-inset: clamp(28px, 3.2vw, 48px);
   background: var(--bg);
   color: var(--text-light);
   overflow-x: hidden;
@@ -1064,7 +1064,7 @@ html, body { background: #21141A; }
   background-position: center;
   background-repeat: no-repeat;
 }
-.rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(780px + var(--rd-inset)); }
+.rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(920px + var(--rd-inset)); }
 .rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; color: #FFFEF9; }
 .rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
 .rd-news-row {
