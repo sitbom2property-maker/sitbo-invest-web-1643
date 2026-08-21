@@ -236,9 +236,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   color: var(--white); margin: 0; max-width: 420px;
 }
 .sv-hero-side {
-  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
-  color: var(--white); margin: 0; max-width: 380px;
-  justify-self: end;
+  font-size: 16px; line-height: 1.55;
+  color: var(--white); margin: 0; max-width: 420px;
+  justify-self: end; text-align: right;
 }
 .sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
 
@@ -261,8 +261,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .sv-list-head p {
-  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+  margin: 0; font-size: 16px; line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 420px;
+  justify-self: end; text-align: right;
 }
 
 .sv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
@@ -312,8 +313,8 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .sv-limits-head p {
-  margin: 0; font-size: 15px; line-height: 1.5; color: var(--white);
-  max-width: 360px; justify-self: end;
+  margin: 0; font-size: 16px; line-height: 1.5; color: var(--white);
+  max-width: 420px; justify-self: end; text-align: right;
 }
 .sv-limits-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -357,7 +358,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 @media (max-width: 900px) {
   .sv-hero { padding-top: 36px; }
   .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
-  .sv-hero-side, .sv-list-head p, .sv-limits-head p { justify-self: start; }
+  .sv-hero-side, .sv-list-head p, .sv-limits-head p {
+    justify-self: start; text-align: left; max-width: none;
+  }
   .sv-limits-grid { grid-template-columns: 1fr; }
   .sv-acc-body { padding-left: 0; }
   .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }
