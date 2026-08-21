@@ -567,7 +567,7 @@ const en = {
   "project.developerLogo": "Logo",
   "project.developerBody":
     "A construction company founded in 2015, which has established itself as a reliable partner in residential construction. It actively develops projects, including residential complexes in Batumi.",
-  "project.specs": "Technical Specifications",
+  "project.specs": "Property Details",
   "project.spec.area": "Area",
   "project.spec.ceilingHeight": "Ceiling Height",
   "project.spec.floors": "Floors",

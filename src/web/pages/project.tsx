@@ -476,9 +476,6 @@ export default function ProjectPage() {
         .layout-carousel::-webkit-scrollbar { display: none; }
         .layout-carousel { -ms-overflow-style: none; scrollbar-width: none; }
         @media (max-width: 767px) {
-          .project-specs-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
           .project-developer-card {
             flex-direction: column !important;
             align-items: flex-start !important;
@@ -658,24 +655,59 @@ export default function ProjectPage() {
                 </div>
               </div>
 
-{/* Specs grid */}
+{/* Specs — clean 2-column key/value list */}
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                <Eyebrow>{t("project.specs")}</Eyebrow>
-                <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: isMobile ? "10px" : "12px" }}>
-{[
-    { label: t("project.spec.area"), value: p.area },
-    { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
-    { label: t("project.spec.floors"), value: p.floors },
-    { label: t("project.spec.buildings"), value: p.buildings },
-    { label: t("project.spec.finishing"), value: p.finishing },
-    { label: t("project.spec.purchaseTax"), value: "0%" },
-                  ].map(s => (
-                    <div key={s.label} style={{ background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "2px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
+                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                  {t("project.specs")}
+                </h3>
+                {(() => {
+                  const specs = [
+                    { label: t("project.spec.area"), value: p.area },
+                    { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
+                    { label: t("project.spec.floors"), value: p.floors },
+                    { label: t("project.spec.buildings"), value: p.buildings },
+                    { label: t("project.spec.finishing"), value: p.finishing },
+                    { label: t("project.spec.purchaseTax"), value: "0%" },
+                  ];
+                  const columns = [specs.slice(0, 3), specs.slice(3, 6)];
+                  return (
+                    <div
+                      className="project-specs-grid"
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                        columnGap: isMobile ? 0 : 56,
+                        rowGap: isMobile ? 8 : 0,
+                      }}
+                    >
+                      {columns.map((col, colIdx) => (
+                        <div key={colIdx} style={{ minWidth: 0 }}>
+                          {col.map((s, i) => (
+                            <div
+                              key={s.label}
+                              style={{
+                                display: "flex",
+                                alignItems: "baseline",
+                                justifyContent: "space-between",
+                                gap: 16,
+                                padding: "14px 0",
+                                borderBottom: i < col.length - 1 ? "1px solid rgba(33,20,26,0.08)" : "none",
+                                borderRadius: 0,
+                              }}
+                            >
+                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", fontWeight: 400, color: "rgba(33,20,26,0.48)", lineHeight: 1.35 }}>
+                                {s.label}
+                              </span>
+                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1rem" : "1.08rem", fontWeight: 650, color: C.dark, lineHeight: 1.35, textAlign: "right" }}>
+                                {s.value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  );
+                })()}
               </div>
 
               <Divider />
