@@ -18,7 +18,7 @@ const inputStyle: CSSProperties = {
   boxSizing: "border-box",
   background: "rgba(255,254,249,0.05)",
   border: "1px solid rgba(140,178,192,0.1)",
-  borderRadius: 8,
+  borderRadius: 2,
   color: "#FFFEF9",
   fontFamily: "Inter, sans-serif",
   fontSize: 14,
@@ -118,7 +118,7 @@ export function RequestModal({
         .req-modal-card {
           position: relative; width: 100%; max-width: 470px;
           background: #21141A; border: 1px solid rgba(140,178,192,0.1);
-          border-radius: 10px; padding: 40px 36px 32px;
+          border-radius: 2px; padding: 40px 36px 32px;
           box-shadow: 0 30px 80px rgba(0,0,0,0.45);
           animation: reqRise 0.28s cubic-bezier(0.16,1,0.3,1);
           box-sizing: border-box; margin: 0 auto;
@@ -273,7 +273,7 @@ export function RequestModal({
                 style={{
                   marginTop: 4,
                   padding: "15px 18px",
-                  borderRadius: 8,
+                  borderRadius: 2,
                   border: "none",
                   background: "#703C54",
                   color: "#FFFEF9",

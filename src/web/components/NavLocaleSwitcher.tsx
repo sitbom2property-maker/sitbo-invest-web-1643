@@ -140,7 +140,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
               minWidth: 128,
               background: "#21141A",
               border: "1px solid rgba(255,254,249,0.12)",
-              borderRadius: 10,
+              borderRadius: 2,
               padding: 6,
               boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
               zIndex: 200,
@@ -172,7 +172,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
                     fontWeight: 600,
                     letterSpacing: "0.08em",
                     padding: "10px 12px",
-                    borderRadius: 8,
+                    borderRadius: 2,
                     cursor: "pointer",
                     textAlign: "left",
                   }}

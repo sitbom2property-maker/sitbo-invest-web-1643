@@ -119,7 +119,7 @@ const chip = (active: boolean): CSSProperties => ({
     letterSpacing: "0.06em",
     textTransform: "uppercase",
     padding: "7px 12px",
-    borderRadius: 6,
+    borderRadius: 2,
     cursor: "pointer",
     border: `1px solid ${active ? C.dark : "rgba(33,20,26,0.12)"}`,
     background: active ? C.dark : "transparent",
@@ -190,7 +190,7 @@ const chip = (active: boolean): CSSProperties => ({
           style={{
             fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
             background: C.light, border: "1px solid rgba(33,20,26,0.12)",
-            borderRadius: 8, padding: "8px 12px",
+            borderRadius: 2, padding: "8px 12px",
           }}
         >
           <option value="all">{t("chess.allFloors")}</option>
@@ -214,7 +214,7 @@ const chip = (active: boolean): CSSProperties => ({
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(260px,320px)", gap: 20, alignItems: "start" }} className="chess-layout">
-        <div style={{ overflowX: "auto", alignSelf: "start", border: "1px solid rgba(33,20,26,0.08)", borderRadius: 12, background: C.light }}>
+        <div style={{ overflowX: "auto", alignSelf: "start", border: "1px solid rgba(33,20,26,0.08)", borderRadius: 2, background: C.light }}>
           <div style={{ minWidth: 720, padding: 12 }}>
             <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${cols.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
               <div />
@@ -236,7 +236,7 @@ const chip = (active: boolean): CSSProperties => ({
                   gap: 3,
                   marginBottom: 3,
                   padding: focused && floorFilter !== "all" ? 3 : 0,
-                  borderRadius: 6,
+                  borderRadius: 2,
                   outline: floorFilter !== "all" && floor === floorFilter ? `2px solid ${C.teal}` : "none",
                   background: floorFilter !== "all" && floor === floorFilter ? "rgba(140,178,192,0.1)" : "transparent",
                   opacity: focused ? 1 : 0.38,
@@ -251,7 +251,7 @@ const chip = (active: boolean): CSSProperties => ({
                 {cols.map((col) => {
                   const cellUnits = unitsAt(floor, col);
                   if (!cellUnits.length) {
-                    return <div key={col} style={{ minHeight: 34, borderRadius: 4, background: "rgba(33,20,26,0.03)" }} />;
+                    return <div key={col} style={{ minHeight: 34, borderRadius: 2, background: "rgba(33,20,26,0.03)" }} />;
                   }
                   return (
                     <div key={col} style={{ display: "flex", flexDirection: "column", gap: 2, minHeight: 34 }}>
@@ -268,7 +268,7 @@ const chip = (active: boolean): CSSProperties => ({
                               flex: 1,
                               minHeight: cellUnits.length > 1 ? 16 : 34,
                               border: active ? `2px solid ${C.dark}` : "1px solid rgba(33,20,26,0.06)",
-                              borderRadius: 4,
+                              borderRadius: 2,
                               background: cellBg(u, dim),
                               cursor: "pointer",
                               padding: 0,
@@ -293,7 +293,7 @@ const chip = (active: boolean): CSSProperties => ({
         </div>
 
         <aside style={{
-          background: C.dark, borderRadius: 16, padding: 22,
+          background: C.dark, borderRadius: 2, padding: 22,
           color: C.light, minHeight: 280,
         }}>
           {!selected ? (
@@ -307,7 +307,7 @@ const chip = (active: boolean): CSSProperties => ({
                 style={{
                   width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                   letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
-                  border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
+                  border: "none", borderRadius: 2, padding: 14, cursor: "pointer",
                 }}
               >
                 {t("popup.submit")}
@@ -357,7 +357,7 @@ const chip = (active: boolean): CSSProperties => ({
                 <button type="button" onClick={() => setLayoutSrc(selected.g)} style={{
                   display: "block", width: "100%", border: "none", padding: 0, background: "transparent", cursor: "pointer", marginBottom: 16,
                 }}>
-                  <img src={selected.g} alt={selected.n} style={{ width: "100%", borderRadius: 8, display: "block", background: C.light }} />
+                  <img src={selected.g} alt={selected.n} style={{ width: "100%", borderRadius: 2, display: "block", background: C.light }} />
                 </button>
               ) : null}
               {SELECTABLE.includes(selected.s) ? (
@@ -367,7 +367,7 @@ const chip = (active: boolean): CSSProperties => ({
                   style={{
                     width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                     letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
-                    border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
+                    border: "none", borderRadius: 2, padding: 14, cursor: "pointer",
                   }}
                 >
                   {t("chess.request")}
@@ -399,7 +399,7 @@ const chip = (active: boolean): CSSProperties => ({
 
       {layoutSrc && (
         <div onClick={() => setLayoutSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, cursor: "pointer" }}>
-          <img src={layoutSrc} alt="" style={{ maxWidth: "90vw", maxHeight: "80vh", objectFit: "contain", borderRadius: 12 }} />
+          <img src={layoutSrc} alt="" style={{ maxWidth: "90vw", maxHeight: "80vh", objectFit: "contain", borderRadius: 2 }} />
         </div>
       )}
     </div>

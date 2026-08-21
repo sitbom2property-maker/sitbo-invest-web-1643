@@ -12,7 +12,7 @@ import { useT, type MessageKey } from "../i18n";
  *   --card-gray #463C41 · --card-green #48674D
  *   --accent-plum #703C54 (accent only, not container fill)
  *   --accent-blue #8CB2C0 at 10% mixes
- *   border-radius ≤ 10px
+ *   border-radius 2px
  */
 
 type ModalState = { open: boolean; source: string; topic?: string; title?: string };
@@ -760,7 +760,7 @@ html, body { background: #21141A; }
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 10px;
+  --radius: 2px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -770,7 +770,7 @@ html, body { background: #21141A; }
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
-  --rd-max: var(--site-max, 1440px);
+  --rd-max: var(--site-max, 1240px);
   --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --rd-inset: clamp(24px, 3vw, 40px);
   background: var(--bg);
@@ -787,11 +787,11 @@ html, body { background: #21141A; }
 .rd .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .rd .rv.in { opacity: 1; transform: none; }
 
-/* buttons — radius capped at 10px */
+/* buttons — radius capped at 2px */
 .rd-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--body); font-size: 15px; font-weight: 400;
-  padding: 15px 30px; border-radius: 10px; border: 1px solid transparent;
+  padding: 15px 30px; border-radius: 2px; border: 1px solid transparent;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
@@ -858,7 +858,7 @@ html, body { background: #21141A; }
 .rd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
 .rd-stat {
   aspect-ratio: 1 / 1; width: 100%; min-height: 0;
-  border-radius: 10px; padding: clamp(16px, 1.7vw, 26px);
+  border-radius: 2px; padding: clamp(16px, 1.7vw, 26px);
   display: flex; flex-direction: column; justify-content: space-between;
   box-sizing: border-box;
 }
@@ -866,7 +866,7 @@ html, body { background: #21141A; }
 .rd-stat-plum { background: #463C41; color: #FFFEF9; } /* legacy alias → gray */
 .rd-stat-green { background: #48674D; color: #FFFEF9; }
 .rd-stat-white { background: #FFFEF9; color: #21141A; }
-.rd-stat-img { padding: 0; overflow: hidden; border-radius: 10px; }
+.rd-stat-img { padding: 0; overflow: hidden; border-radius: 2px; }
 .rd-stat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .rd-stat-value { display: block; font-family: var(--body); font-weight: 500; font-size: clamp(28px, 3.6vw, 56px); line-height: 1.05; }
 .rd-stat-label { display: block; font-family: var(--body); font-size: clamp(13px, 1.25vw, 20px); margin-top: 10px; color: #FFFEF9; }
@@ -894,7 +894,7 @@ html, body { background: #21141A; }
 .rd-recog-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* panels — sit inside .rd-canvas so left content matches footer logo */
-.rd-panel { border-radius: 10px; margin: 0; }
+.rd-panel { border-radius: 2px; margin: 0; }
 .rd-panel-white { background: #FFFEF9; color: #21141A; }
 .rd-panel-light { background: #FFFEF9; color: #21141A; }
 .rd-projects-outer, .rd-fb-outer { padding-bottom: clamp(50px, 6vw, 90px); }
@@ -921,7 +921,7 @@ html, body { background: #21141A; }
   flex: 0 0 clamp(220px, 22vw, 313px);
   text-decoration: none; color: inherit; cursor: pointer;
 }
-.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 10px; }
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 2px; }
 .rd-proj-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
@@ -939,7 +939,7 @@ html, body { background: #21141A; }
 .rd-eco-row { display: flex; gap: 12px; align-items: stretch; }
 .rd-eco-card {
   position: relative; flex: 1 1 0; min-width: 0; overflow: hidden;
-  background: #463C41; border: none; border-radius: 10px; cursor: pointer;
+  background: #463C41; border: none; border-radius: 2px; cursor: pointer;
   min-height: clamp(320px, 44vw, 634px); padding: clamp(18px, 1.8vw, 28px);
   display: flex; flex-direction: column; justify-content: flex-start;
   text-align: left; color: var(--text-light); transition: flex-grow .45s ease;
@@ -1001,7 +1001,7 @@ html, body { background: #21141A; }
   width: var(--fb-size); min-height: calc(var(--fb-size) + 20px);
   scroll-snap-align: start;
   margin: 0; box-sizing: border-box;
-  background: #412835; border-radius: 10px;
+  background: #412835; border-radius: 2px;
   padding: clamp(22px, 2.2vw, 32px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
   pointer-events: none;
@@ -1017,7 +1017,7 @@ html, body { background: #21141A; }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 18px; }
 .rd-fb-tags span {
   font-family: var(--body); font-size: 16px; padding: 7px 12px; color: #FFFEF9;
-  border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
+  border: 1px solid rgba(255,254,249,.55); border-radius: 2px;
   text-transform: capitalize;
 }
 .rd-fb-track { margin-top: 18px; }
@@ -1028,7 +1028,7 @@ html, body { background: #21141A; }
 .rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
 .rd-plan {
   /* Express Audit / Discovery Tour */
-  background: #FFFEF9; color: #21141A; border-radius: 10px;
+  background: #FFFEF9; color: #21141A; border-radius: 2px;
   padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column;
 }
 .rd-plan.is-featured {
@@ -1052,12 +1052,12 @@ html, body { background: #21141A; }
   color: rgba(33,20,26,.55); margin: 0 0 18px;
 }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
-.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 14px 18px; border-radius: 10px; }
+.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 14px 18px; border-radius: 2px; }
 
 /* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); background: #21141A; }
 .rd-news {
-  position: relative; border-radius: 10px; overflow: hidden;
+  position: relative; border-radius: 2px; overflow: hidden;
   background-color: #21141A;
   background-image: url('/images/cta-bg.jpg');
   background-size: cover;
@@ -1074,10 +1074,10 @@ html, body { background: #21141A; }
 .rd-news-row input {
   flex: 1; min-width: 0; background: transparent; border: none; outline: none;
   font-family: var(--body); font-size: 16px; color: #FFFEF9; padding: 10px 0;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 .rd-news-row input::placeholder { color: rgba(255,254,249,.6); }
-.rd-news-row .rd-btn { min-width: 171px; border-radius: 10px; }
+.rd-news-row .rd-btn { min-width: 171px; border-radius: 2px; }
 .rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: #FFFEF9; cursor: pointer; }
 .rd-news-agree input { accent-color: #FFFEF9; margin-top: 2px; }
 .rd-news-agree a, .rd-news-privacy {

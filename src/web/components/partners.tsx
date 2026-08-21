@@ -33,7 +33,7 @@ const css = `
     width: 280px; height: 120px; flex-shrink: 0;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 2px;
     border: 1px solid rgba(255,255,255,0.95);
     box-shadow: 0 2px 12px rgba(33,20,26,0.07);
     display: flex; align-items: center; justify-content: center;

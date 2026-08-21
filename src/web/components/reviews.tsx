@@ -93,7 +93,7 @@ export function Reviews() {
                 position: "relative",
                 flex: "0 0 min(320px, 86vw)",
                 background: "#412835",
-                borderRadius: "10px",
+                borderRadius: "2px",
                 padding: "48px 64px 16px 18px",
                 minHeight: "300px",
                 display: "flex",
@@ -120,7 +120,7 @@ export function Reviews() {
                         fontSize: 12,
                         padding: "6px 12px",
                         border: "1px solid rgba(255,254,249,0.55)",
-                        borderRadius: 10,
+                        borderRadius: 2,
                         color: "#FFFEF9",
                       }}
                     >
@@ -140,7 +140,7 @@ export function Reviews() {
               flex: "0 0 min(320px, 86vw)",
               background: "#21141A",
               border: "1px solid rgba(33,20,26,0.12)",
-              borderRadius: "10px",
+              borderRadius: "2px",
               padding: "18px",
               minHeight: "300px",
               display: "flex",

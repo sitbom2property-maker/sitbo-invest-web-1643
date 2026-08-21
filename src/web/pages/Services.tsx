@@ -179,7 +179,7 @@ const CSS = `
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 10px;
+  --radius: 2px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -249,7 +249,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-list {
-  background: var(--panel); color: var(--bg); border-radius: 10px;
+  background: var(--panel); color: var(--bg); border-radius: 2px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .sv-list-head {
@@ -320,7 +320,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   gap: 12px;
 }
 .sv-limit {
-  background: var(--card); border-radius: 10px;
+  background: var(--card); border-radius: 2px;
   padding: clamp(22px, 2.4vw, 32px);
 }
 .sv-limit h3 {
@@ -338,7 +338,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-cta {
-  border-radius: 10px; overflow: hidden;
+  border-radius: 2px; overflow: hidden;
   background:
     radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
     var(--card);

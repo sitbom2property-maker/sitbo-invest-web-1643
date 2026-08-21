@@ -217,7 +217,7 @@ const CSS = `
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 10px;
+  --radius: 2px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -303,7 +303,7 @@ const CSS = `
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
 }
 .iv-stat {
-  aspect-ratio: 1 / 1; border-radius: 10px; padding: clamp(16px, 1.7vw, 26px);
+  aspect-ratio: 1 / 1; border-radius: 2px; padding: clamp(16px, 1.7vw, 26px);
   display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
 }
 .iv-stat-plum { background: var(--card); }
@@ -341,7 +341,7 @@ const CSS = `
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
 }
 .iv-adv-card {
-  background: var(--card); border-radius: 10px;
+  background: var(--card); border-radius: 2px;
   padding: clamp(20px, 2.2vw, 28px);
 }
 .iv-adv-card h3 {
@@ -359,7 +359,7 @@ const CSS = `
   box-sizing: border-box;
 }
 .iv-panel {
-  background: var(--panel); color: var(--bg); border-radius: 10px;
+  background: var(--panel); color: var(--bg); border-radius: 2px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .iv-panel-head {
@@ -447,10 +447,10 @@ const CSS = `
   font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white); min-width: 4.5ch; text-align: right;
 }
 .iv-bar-track {
-  height: 8px; border-radius: 10px; background: rgba(255,255,255,.08); overflow: hidden;
+  height: 8px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden;
 }
 .iv-bar-fill {
-  height: 100%; border-radius: 10px; background: var(--green);
+  height: 100%; border-radius: 2px; background: var(--green);
   transform-origin: left center;
 }
 
@@ -501,7 +501,7 @@ const CSS = `
   font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.68);
 }
 .iv-faq-aside {
-  background: var(--bg); color: var(--white); border-radius: 10px;
+  background: var(--bg); color: var(--white); border-radius: 2px;
   padding: clamp(24px, 3vw, 36px);
   position: sticky; top: calc(var(--nav-height, 88px) + 16px);
 }
@@ -520,7 +520,7 @@ const CSS = `
   box-sizing: border-box;
 }
 .iv-cta {
-  border-radius: 10px; overflow: hidden;
+  border-radius: 2px; overflow: hidden;
   background-color: #21141A;
   background-image: url('/images/cta-bg.jpg');
   background-size: cover;

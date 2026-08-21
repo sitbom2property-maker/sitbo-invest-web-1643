@@ -134,14 +134,14 @@ const CSS = `
   .pk-switch button {
     font-family: Inter, sans-serif; font-size: 0.72rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 8px 14px; border-radius: 8px; cursor: pointer;
+    padding: 8px 14px; border-radius: 2px; cursor: pointer;
     border: 1px solid rgba(33,20,26,0.12); background: transparent; color: ${C.dark};
   }
   .pk-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
   }
   .pk-frame {
-    position: relative; border-radius: 10px; overflow: hidden;
+    position: relative; border-radius: 2px; overflow: hidden;
     background: ${C.dark}; height: min(78vh, 760px); min-height: 480px;
   }
   .pk-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #21141A; }
@@ -150,7 +150,7 @@ const CSS = `
     position: absolute; top: 12px; right: 12px;
     font-family: Inter, sans-serif; font-size: 0.68rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
-    color: ${C.light}; background: ${C.teal}; border-radius: 8px;
+    color: ${C.light}; background: ${C.teal}; border-radius: 2px;
     padding: 8px 12px; text-decoration: none;
   }
   @media (max-width: 767px) {
