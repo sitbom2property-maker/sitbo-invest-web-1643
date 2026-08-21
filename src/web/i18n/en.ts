@@ -596,6 +596,7 @@ const en = {
   "project.downPayment": "Down Payment",
   "project.installment": "Installment",
   "project.liveCamera": "Live Camera",
+  "project.moreActions": "More options below",
   "project.floorPlans": "Floor Plans",
   "project.availableLayouts": "Available Layouts",
   "project.layoutComingSoon": "Layout {number} — Coming Soon",

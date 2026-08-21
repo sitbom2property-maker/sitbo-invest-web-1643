@@ -579,6 +579,7 @@ const ru: Record<MessageKey, string> = {
   "project.downPayment": "Первый взнос",
   "project.installment": "Рассрочка",
   "project.liveCamera": "Онлайн-камера",
+  "project.moreActions": "Ещё варианты ниже",
   "project.floorPlans": "Планировки",
   "project.availableLayouts": "Доступные планировки",
   "project.layoutComingSoon": "Планировка {number} — скоро",

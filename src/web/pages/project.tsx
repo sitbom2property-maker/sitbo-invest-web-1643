@@ -690,7 +690,7 @@ export default function ProjectPage() {
 
 {/* ── RIGHT col (4) — sticky sidebar ── */}
             <Col span={4}>
-              <div style={{ position: isMobile ? "relative" : "sticky", top: isMobile ? undefined : "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div style={{ position: isMobile ? "relative" : "sticky", top: isMobile ? undefined : "80px", display: "flex", flexDirection: "column" }}>
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "2px", padding: "28px 24px" }}>
@@ -712,24 +712,74 @@ export default function ProjectPage() {
                   )}
                 </div>
 
-{/* Live Camera Card */}
-                  {p.liveCameraUrl && (
-                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
-                    <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px rgba(255,60,60,0.45)" }} />
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("project.liveCamera")}</span>
-                  </a>
-                )}
-                {p.tourUrl && (
-                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
-                  </a>
-                )}
-                {p.panoramaUrl && (
-                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.viewPanorama")}</span>
-                  </a>
-                )}
+                {(p.liveCameraUrl || p.tourUrl || p.panoramaUrl) ? (
+                  <>
+                    <div
+                      style={{
+                        height: 100,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <button
+                        type="button"
+                        aria-label={t("project.moreActions")}
+                        onClick={() => {
+                          document.getElementById("project-sidebar-actions")?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                          });
+                        }}
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: "50%",
+                          border: "1px solid rgba(33,20,26,0.18)",
+                          background: C.light,
+                          color: C.dark,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                          padding: 0,
+                          transition: "border-color 0.2s, opacity 0.2s",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = "rgba(33,20,26,0.4)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = "rgba(33,20,26,0.18)";
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+                          <path d="M3.5 6.25 8 10.75l4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div id="project-sidebar-actions" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                      {p.liveCameraUrl && (
+                        <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px rgba(255,60,60,0.45)" }} />
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
+                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("project.liveCamera")}</span>
+                        </a>
+                      )}
+                      {p.tourUrl && (
+                        <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
+                        </a>
+                      )}
+                      {p.panoramaUrl && (
+                        <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.viewPanorama")}</span>
+                        </a>
+                      )}
+                    </div>
+                  </>
+                ) : null}
 
               </div>
             </Col>
