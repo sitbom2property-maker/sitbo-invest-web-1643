@@ -333,8 +333,6 @@ const PF_CSS = `
   font-size: 16px;
   line-height: 1.35;
   color: ${C.dark};
-  border-bottom: 1px solid ${C.line};
-  padding-bottom: 2px;
   white-space: normal;
   overflow: visible;
   text-overflow: unset;
