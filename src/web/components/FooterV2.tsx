@@ -49,6 +49,7 @@ export function FooterV2() {
           font-weight: 400;
         }
         .fv2-tagline {
+          /* footer-tagline-16 */
           font-size: 16px;
           line-height: 1.65;
           color: #21141A;
