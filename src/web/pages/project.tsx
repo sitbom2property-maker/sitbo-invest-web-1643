@@ -668,7 +668,7 @@ export default function ProjectPage() {
     { label: t("project.spec.floors"), value: p.floors },
     { label: t("project.spec.buildings"), value: p.buildings },
     { label: t("project.spec.finishing"), value: p.finishing },
-    { label: t("project.developer"), value: p.developer },
+    { label: t("project.spec.purchaseTax"), value: "0%" },
                   ].map(s => (
                     <div key={s.label} style={{ background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "2px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>

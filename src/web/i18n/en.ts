@@ -573,6 +573,7 @@ const en = {
   "project.spec.floors": "Floors",
   "project.spec.buildings": "Buildings",
   "project.spec.finishing": "Finishing",
+  "project.spec.purchaseTax": "Purchase tax",
   "project.features": "Features",
   "project.features.viewAll": "View all {count} features",
   "project.features.lot": "Lot",
