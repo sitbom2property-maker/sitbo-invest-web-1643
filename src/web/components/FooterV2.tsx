@@ -50,14 +50,15 @@ export function FooterV2() {
         }
         .fv2-tagline {
           font-size: 12px;
-          line-height: 1.65;
+          line-height: 1.7;
           color: #21141A;
           margin: 0;
-          max-width: 760px;
+          max-width: 34ch;
+          white-space: pre-line;
         }
         .fv2-col-title {
           font-family: 'Inter', sans-serif;
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: .08em;
           text-transform: uppercase;
@@ -72,7 +73,7 @@ export function FooterV2() {
           gap: 14px;
         }
         .fv2-col a {
-          font-size: 15px;
+          font-size: 12px;
           color: #21141A;
           text-decoration: none;
           transition: opacity .2s;
@@ -83,7 +84,7 @@ export function FooterV2() {
           margin-top: clamp(48px, 7vw, 88px);
           padding-top: 28px;
           border-top: 1px solid rgba(33,20,26,.1);
-          font-size: 13px;
+          font-size: 12px;
           color: rgba(33,20,26,.65);
         }
         .fv2-bottom a {
@@ -100,7 +101,7 @@ export function FooterV2() {
           .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
           .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
           .fv2-name { font-size: 15px; margin-bottom: 16px; }
-          .fv2-tagline { max-width: none; }
+          .fv2-tagline { max-width: 38ch; }
         }
       `}</style>
 

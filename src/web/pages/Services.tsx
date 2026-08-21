@@ -321,7 +321,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   gap: 12px;
 }
 .sv-limit {
-  background: var(--card); border-radius: 2px;
+  background: #412834; border-radius: 2px;
   padding: clamp(22px, 2.4vw, 32px);
 }
 .sv-limit h3 {
