@@ -42,12 +42,49 @@ export type Project = {
   installmentMonths?: number;
   /** YYYY-MM when installmentMonths was the remaining term. */
   installmentAnchorYm?: string;
+  /**
+   * Optional payment schedules shown as percentage bars.
+   * When omitted, derived from downPaymentPct / installment when possible.
+   */
+  paymentPlans?: PaymentPlan[];
   developerBody?: string;
   districtTitle?: string;
   districtBody?: string;
   districtBody2?: string;
   apartmentsKey?: "piazza" | "parkline";
 };
+
+export type PaymentStage = "down" | "construction" | "handover";
+
+export type PaymentSegment = {
+  pct: number;
+  stage: PaymentStage;
+};
+
+export type PaymentPlan = PaymentSegment[];
+
+/** Resolve displayable payment plans; empty means hide the Payment section. */
+export function resolvePaymentPlans(p: Project): PaymentPlan[] {
+  if (p.paymentPlans && p.paymentPlans.length > 0) {
+    return p.paymentPlans.filter((plan) => plan.length > 0 && plan.every((s) => s.pct > 0));
+  }
+
+  const fromDown = (down: number): PaymentPlan[] => {
+    const clamped = Math.min(90, Math.max(5, Math.round(down)));
+    return [[{ stage: "down", pct: clamped }, { stage: "construction", pct: 100 - clamped }]];
+  };
+
+  if (typeof p.downPaymentPct === "number" && p.downPaymentPct > 0 && p.downPaymentPct < 100) {
+    return fromDown(p.downPaymentPct);
+  }
+
+  const downMatch = p.installment.match(/(\d+)\s*%\s*(?:down|взнос|первоначальн)/i);
+  if (downMatch) {
+    return fromDown(Number(downMatch[1]));
+  }
+
+  return [];
+}
 
 export const projects: Project[] = [
   {

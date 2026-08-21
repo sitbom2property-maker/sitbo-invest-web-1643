@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "wouter";
-import { projects, type Project } from "../data/projects";
+import { projects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { AppLink } from "../components/app-link";
 import { PiazzaViewer } from "../components/PiazzaViewer";
@@ -447,8 +447,7 @@ export default function ProjectPage() {
   }
 
   const priceLabel = formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
-  const downPct = project.downPaymentPct ?? 30;
-  const restPct = 100 - downPct;
+  const paymentPlans = resolvePaymentPlans(project);
 
   const p = project;
   const propertyType = p.propertyType ?? "apartment";
@@ -482,13 +481,6 @@ export default function ProjectPage() {
           .project-developer-card {
             flex-direction: column !important;
             align-items: flex-start !important;
-          }
-          .project-payment-bar {
-            flex-direction: column !important;
-          }
-          .project-payment-bar > div:first-child {
-            flex: none !important;
-            width: 100% !important;
           }
         }
       `}</style>
@@ -636,26 +628,63 @@ export default function ProjectPage() {
                 </div>
               </div>
 
+{/* Payment — optional, depends on developer terms */}
+              {paymentPlans.length > 0 ? (
+              <>
               <Divider />
-
-{/* Payment */}
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
-                <Eyebrow>{t("project.payment")}</Eyebrow>
-                {/* Bar visual: left block = down payment, right block = installment remainder */}
-                <div className="project-payment-bar" style={{ display: "flex", borderRadius: "2px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
-                  {/* Filled / down payment portion */}
-                  <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.light, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: 0 }}>{t("project.downPayment")}</p>
-                  </div>
-                  {/* Remainder / installment portion */}
-                  <div style={{ flex: 1, padding: "22px 20px", minWidth: 0 }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.dark, margin: "0 0 4px", lineHeight: 1 }}>{restPct}%</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{t("project.installment")}</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.mutedDark, margin: 0 }}>{p.installment}</p>
-                  </div>
+                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 22px" }}>
+                  {t("project.payment")}
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 16 }}>
+                  {paymentPlans.map((plan, planIdx) => (
+                    <div
+                      key={`plan-${planIdx}`}
+                      className="project-payment-bar"
+                      style={{
+                        display: "flex",
+                        flexDirection: isMobile ? "column" : "row",
+                        gap: 8,
+                        alignItems: "stretch",
+                      }}
+                    >
+                      {plan.map((seg, segIdx) => {
+                        const isDown = seg.stage === "down";
+                        const label =
+                          seg.stage === "down"
+                            ? t("project.payment.down")
+                            : seg.stage === "handover"
+                              ? t("project.payment.handover")
+                              : t("project.payment.construction");
+                        return (
+                          <div
+                            key={`${planIdx}-${segIdx}-${seg.stage}`}
+                            style={{
+                              flex: isMobile ? "none" : `${seg.pct} 1 0`,
+                              minWidth: isMobile ? 0 : 96,
+                              boxSizing: "border-box",
+                              borderRadius: 2,
+                              padding: isMobile ? "18px 16px" : "20px 18px",
+                              background: isDown ? C.teal : C.light,
+                              border: `1px solid ${C.teal}`,
+                              color: isDown ? C.light : C.dark,
+                            }}
+                          >
+                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.55rem" : "1.75rem", fontWeight: 700, margin: "0 0 6px", lineHeight: 1, color: "inherit" }}>
+                              {seg.pct}%
+                            </p>
+                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 500, margin: 0, lineHeight: 1.3, color: "inherit", opacity: isDown ? 0.95 : 0.85 }}>
+                              {label}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
                 </div>
               </div>
+              </>
+              ) : null}
 
             </Col>
 
