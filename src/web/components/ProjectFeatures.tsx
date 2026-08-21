@@ -299,7 +299,7 @@ export function ProjectFeatures({ features, open, onOpen, onClose, isMobile }: P
 }
 
 const PF_CSS = `
-.pf-block { margin: 40px 0; }
+.pf-block { margin: 0; }
 .pf-title {
   font-family: Coolvetica, Inter, sans-serif;
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);

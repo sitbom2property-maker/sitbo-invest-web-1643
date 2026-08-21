@@ -79,7 +79,7 @@ function Eyebrow({ children, light }: { children: React.ReactNode; light?: boole
   );
 }
 function Divider() {
-  return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
+  return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "8px 0" }} />;
 }
 
 // ─── Gallery ─────────────────────────────────────────────────────────────────
@@ -497,7 +497,7 @@ export default function ProjectPage() {
             <Col span={8}>
 
 {/* Overview */}
-              <div className="pr-reveal" style={{ marginBottom: isMobile ? "36px" : "48px" }}>
+              <div className="pr-reveal" style={{ marginBottom: isMobile ? "48px" : "72px" }}>
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px" }}>
 {p.name}
                 </h2>
@@ -540,14 +540,14 @@ export default function ProjectPage() {
                 {/* Developer block */}
                 <div
                   className="project-developer-card"
-                  style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "2px", border: `1px solid rgba(33,20,26,0.07)` }}
+                  style={{ marginTop: isMobile ? "36px" : "44px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "2px", border: `1px solid rgba(33,20,26,0.07)` }}
                 >
                   {p.developerLogo ? (
-                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "2px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
-                      <img src={p.developerLogo} alt={p.developer} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+                    <div style={{ flexShrink: 0, width: isMobile ? "88px" : "104px", height: isMobile ? "88px" : "104px", aspectRatio: "1 / 1", borderRadius: "2px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: 8, boxSizing: "border-box" }}>
+                      <img src={p.developerLogo} alt={p.developer} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
                     </div>
                   ) : (
-                  <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "2px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ flexShrink: 0, width: isMobile ? "88px" : "104px", height: isMobile ? "88px" : "104px", aspectRatio: "1 / 1", borderRadius: "2px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
                   )}
@@ -561,10 +561,8 @@ export default function ProjectPage() {
                 </div>
               </div>
 
-              <Divider />
-
 {/* Specs grid */}
-              <div className="pr-reveal" style={{ margin: "40px 0" }}>
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
                 <Eyebrow>{t("project.specs")}</Eyebrow>
                 <div className="project-specs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: isMobile ? "10px" : "12px" }}>
 {[
@@ -586,6 +584,7 @@ export default function ProjectPage() {
               <Divider />
 
 {/* Features */}
+              <div style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
               <ProjectFeatures
                 features={p.features}
                 open={featuresOpen}
@@ -593,11 +592,12 @@ export default function ProjectPage() {
                 onClose={() => setFeaturesOpen(false)}
                 isMobile={isMobile}
               />
+              </div>
 
               <Divider />
 
 {/* Materials */}
-              <div className="pr-reveal" style={{ margin: "40px 0" }}>
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
                 <Eyebrow>{t("project.materials")}</Eyebrow>
                 <div style={{ background: "#FFFEF9", borderRadius: "2px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
                   {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
@@ -617,7 +617,7 @@ export default function ProjectPage() {
               <Divider />
 
 {/* Payment */}
-              <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
                 <Eyebrow>{t("project.payment")}</Eyebrow>
                 {/* Bar visual: left block = down payment, right block = installment remainder */}
                 <div className="project-payment-bar" style={{ display: "flex", borderRadius: "2px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>

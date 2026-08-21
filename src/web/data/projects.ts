@@ -150,7 +150,7 @@ export const projects: Project[] = [
     installment: "30% down / 0% over 40 months",
     downPaymentPct: 30,
     apartmentsKey: "parkline",
-    developerLogo: "/projects/parkline/brand/developer-logo.svg",
+    developerLogo: "/projects/parkline/brand/developer-logo.png",
     developerBody:
       "Artex is a Batumi developer behind Parkline — a mixed-use complex on the New Boulevard with hotel-grade infrastructure, jet-grouted foundations and seismic design above the mandatory standard.",
     districtTitle: "New Boulevard",
