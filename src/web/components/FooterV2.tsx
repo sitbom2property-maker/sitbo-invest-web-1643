@@ -49,7 +49,7 @@ export function FooterV2() {
           font-weight: 400;
         }
         .fv2-tagline {
-          font-size: clamp(14px, 1.1vw, 16px);
+          font-size: 16px;
           line-height: 1.65;
           color: #21141A;
           margin: 0;
@@ -100,7 +100,7 @@ export function FooterV2() {
           .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
           .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
           .fv2-name { font-size: 15px; margin-bottom: 16px; }
-          .fv2-tagline { font-size: 14px; max-width: none; }
+          .fv2-tagline { max-width: none; }
         }
       `}</style>
 
