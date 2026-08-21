@@ -37,24 +37,20 @@ export function FooterV2() {
         .fv2-brand { min-width: 0; }
         .fv2-name {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(16px, 1.2vw, 18px);
-          font-weight: 500;
+          font-size: 16px;
+          font-weight: 700;
           letter-spacing: .01em;
-          margin: 0 0 20px;
+          margin: 0 0 14px;
           color: #21141A;
-        }
-        .fv2-name em {
-          font-family: 'Inter', sans-serif;
-          font-style: italic;
-          font-weight: 400;
+          line-height: 1.35;
         }
         .fv2-tagline {
           font-size: 12px;
-          line-height: 1.7;
+          line-height: 1.5;
+          font-weight: 400;
           color: #21141A;
           margin: 0;
-          max-width: 34ch;
-          white-space: pre-line;
+          max-width: 560px;
         }
         .fv2-col-title {
           font-family: 'Inter', sans-serif;
@@ -100,8 +96,8 @@ export function FooterV2() {
         @media (max-width: 640px) {
           .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
           .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
-          .fv2-name { font-size: 15px; margin-bottom: 16px; }
-          .fv2-tagline { max-width: 38ch; }
+          .fv2-name { font-size: 15px; margin-bottom: 12px; }
+          .fv2-tagline { max-width: none; }
         }
       `}</style>
 
@@ -109,7 +105,7 @@ export function FooterV2() {
         <div className="fv2-grid">
           <section className="fv2-brand" aria-label="Arthur Arutyunyan">
             <h2 className="fv2-name">
-              Arthur Arutyunyan | <em>{t("v2.footer.role")}</em>
+              Arthur Arutyunyan | {t("v2.footer.role")}
             </h2>
             <p className="fv2-tagline">{t("v2.footer.tagline")}</p>
           </section>
