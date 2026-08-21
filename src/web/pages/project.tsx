@@ -683,20 +683,6 @@ export default function ProjectPage() {
                   )}
                 </div>
 
-{/* Quick facts */}
-                <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.light, borderRadius: "2px", padding: "20px 18px" }}>
-{[
-    { label: t("project.from"), value: priceLabel },
-    { label: t("project.ready"), value: p.completion },
-    { label: t("project.sea"), value: p.seaDistance },
-                  ].map((row, i, arr) => (
-                    <div key={row.label} style={{ display: "flex", justifyContent: "space-between", gap: 12, padding: "10px 0", borderBottom: i < arr.length - 1 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700, color: C.dark, textAlign: "right" }}>{row.value}</span>
-                    </div>
-                  ))}
-                </div>
-
 {/* Live Camera Card */}
                   {p.liveCameraUrl && (
                   <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
