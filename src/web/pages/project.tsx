@@ -698,7 +698,7 @@ export default function ProjectPage() {
                               <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", fontWeight: 400, color: "rgba(33,20,26,0.48)", lineHeight: 1.35 }}>
                                 {s.label}
                               </span>
-                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1rem" : "1.08rem", fontWeight: 650, color: C.dark, lineHeight: 1.35, textAlign: "right" }}>
+                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1rem" : "1.08rem", fontWeight: 600, color: C.dark, lineHeight: 1.35, textAlign: "right" }}>
                                 {s.value}
                               </span>
                             </div>
