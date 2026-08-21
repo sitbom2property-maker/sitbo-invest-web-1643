@@ -410,6 +410,7 @@ export default function ProjectPage() {
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
@@ -488,6 +489,88 @@ export default function ProjectPage() {
 {/* ── GALLERY — Full width ── */}
       <section style={{ paddingTop: 60 }}>
         <Container>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+              marginBottom: isMobile ? 14 : 18,
+            }}
+          >
+            <Link href="/catalog">
+              <a
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: isMobile ? "0.78rem" : "0.85rem",
+                  fontWeight: 500,
+                  color: C.dark,
+                  textDecoration: "none",
+                  opacity: 0.75,
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.75")}
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <path d="M10 3.5 5.5 8 10 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {t("project.backToSearch")}
+              </a>
+            </Link>
+
+            <button
+              type="button"
+              onClick={async () => {
+                const url = typeof window !== "undefined" ? window.location.href : "";
+                try {
+                  if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(url);
+                  } else {
+                    const input = document.createElement("input");
+                    input.value = url;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(input);
+                  }
+                  setLinkCopied(true);
+                  window.setTimeout(() => setLinkCopied(false), 2000);
+                } catch {
+                  /* ignore */
+                }
+              }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                fontFamily: "Inter, sans-serif",
+                fontSize: isMobile ? "0.78rem" : "0.85rem",
+                fontWeight: 500,
+                color: C.dark,
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "6px 0",
+                opacity: 0.75,
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.75")}
+              aria-live="polite"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="18" cy="19" r="3" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M8.6 10.7 15.4 6.8M8.6 13.3l6.8 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              {linkCopied ? t("project.linkCopied") : t("project.share")}
+            </button>
+          </div>
           <Gallery photos={p.photos} name={p.name} />
         </Container>
       </section>
