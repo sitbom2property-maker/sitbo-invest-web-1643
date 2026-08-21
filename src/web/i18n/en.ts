@@ -557,6 +557,14 @@ const en = {
 
   // Project page
   "project.overview": "Overview",
+  "project.meta.updated": "Updated: {date}",
+  "project.meta.viewsInfo": "Number of page views",
+  "project.propertyType": "Property type",
+  "project.pricePerSqm": "Price/sqm",
+  "project.propertyType.apartment": "Apartment",
+  "project.propertyType.residence": "Residence",
+  "project.propertyType.villa": "Villa",
+  "project.propertyType.townhouse": "Townhouse",
   "project.developer": "Developer",
   "project.developerLogo": "Logo",
   "project.developerBody":
