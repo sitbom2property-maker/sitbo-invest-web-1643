@@ -399,17 +399,6 @@ function MapEmbed({ project }: { project: Project }) {
   </>);
 }
 
-// ─── Diamond bullet ───────────────────────────────────────────────────────────
-function Diamond() {
-  return (<>
-
-    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "7px" }} aria-hidden>
-      <rect x="5" y="0.5" width="6.36" height="6.36" rx="0.6" transform="rotate(45 5 0.5)" fill={C.teal} />
-    </svg>
-  
-  </>);
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ProjectPage() {
   const params = useParams<{ slug: string }>();
