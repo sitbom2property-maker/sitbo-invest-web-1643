@@ -415,10 +415,22 @@ export default function ProjectPage() {
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
   const project = localizedList[idx];
 
-  // Scroll to top on mount
+  // Always open a project at the top — never jump to the apartment selector.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const hash = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+    if (/(apartments|2d|360|chess|floors|tour|pano|^3d$)/.test(hash)) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    const toTop = () => window.scrollTo(0, 0);
+    toTop();
+    // Beat delayed ScrollToHash / ScrollRestore timers
+    const t1 = window.setTimeout(toTop, 100);
+    const t2 = window.setTimeout(toTop, 320);
     setFeaturesOpen(false);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
   }, [params.slug]);
 
   if (!project) {

@@ -7,17 +7,26 @@ export function ScrollToHash() {
   const [location] = useLocation();
 
   useEffect(() => {
-    const scroll = () => {
+    const isApartmentHash = (raw: string) =>
+      /(apartments|2d|360|chess|floors|tour|pano|^3d$)/i.test(raw.replace(/^\/?/, ""));
+
+    const scroll = (fromHashChange: boolean) => {
       const hash = window.location.hash;
       if (!hash) return;
       const id = decodeURIComponent(hash.slice(1));
+      // On project open, never auto-jump into the apartment selector.
+      // In-page clicks still work via hashchange.
+      if (!fromHashChange && location.startsWith("/project") && isApartmentHash(id)) {
+        return;
+      }
       window.setTimeout(() => scrollToId(id), 80);
       window.setTimeout(() => scrollToId(id), 280);
     };
 
-    scroll();
-    window.addEventListener("hashchange", scroll);
-    return () => window.removeEventListener("hashchange", scroll);
+    scroll(false);
+    const onHash = () => scroll(true);
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, [location]);
 
   return null;
