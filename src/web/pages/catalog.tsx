@@ -5,6 +5,7 @@ import { localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
+import { RequestModal } from "../components/RequestModal";
 
 const C = {
   dark:      "#21141A",
@@ -67,12 +68,9 @@ function CatalogCard({ p }: { p: Project }) {
 
           {/* Info strip */}
           <div style={{ background: C.light, padding: "16px 16px 18px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "12px" }}>
-              <div>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area}</p>
-              </div>
-              <span style={{ flexShrink: 0, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted, paddingTop: "2px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "8px", marginBottom: "12px" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
+              <span style={{ flexShrink: 0, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>
                 {p.completion}
               </span>
             </div>
@@ -106,48 +104,7 @@ export default function CatalogPage() {
   const [city, setCity]     = useState<typeof CITIES[number]>("All");
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
-  const [showBookCall, setShowBookCall] = useState(false);
-  const [bookForm, setBookForm] = useState({ name: "", phone: "", email: "", message: "" });
-  const [bookLoading, setBookLoading] = useState(false);
-  const [bookError, setBookError] = useState("");
-  const [bookSent, setBookSent] = useState(false);
-
-  const submitBookCall = async () => {
-    setBookError("");
-    if (!bookForm.name.trim() || (!bookForm.phone.trim() && !bookForm.email.trim())) {
-      setBookError(t("home.contact.errorRequired"));
-      return;
-    }
-    setBookLoading(true);
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: bookForm.name.trim(),
-          phone: bookForm.phone.trim(),
-          email: bookForm.email.trim(),
-          message: bookForm.message.trim(),
-          source: "Catalog — Book a Call",
-          page: typeof window !== "undefined" ? window.location.pathname : undefined,
-        }),
-      });
-      if (res.ok) {
-        setBookSent(true);
-        setBookForm({ name: "", phone: "", email: "", message: "" });
-        window.setTimeout(() => {
-          setShowBookCall(false);
-          setBookSent(false);
-        }, 2000);
-      } else {
-        setBookError(t("home.contact.errorGeneric"));
-      }
-    } catch {
-      setBookError(t("home.contact.errorNetwork"));
-    } finally {
-      setBookLoading(false);
-    }
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   const sortOptions = [
     { value: "default", label: t("catalog.sortDefault") },
@@ -288,68 +245,74 @@ export default function CatalogPage() {
         </Container>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ background: C.dark, padding: "80px 0" }}>
-        <Container>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "48px", alignItems: "center" }}>
-            <div>
-              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, marginBottom: "16px" }}>
-                {t("catalog.cta.title")}
-              </h2>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7 }}>
-                {t("catalog.cta.body")}
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                {t("catalog.cta.bookCall")}
-              </button>
-            </div>
-          </div>
-        </Container>
+      {/* ── CTA (same as About / Services) ── */}
+      <section className="cat-cta-outer">
+        <style>{`
+          .cat-cta-outer {
+            max-width: var(--site-max, 1440px);
+            margin: 0 auto;
+            padding: 0 var(--site-gutter, clamp(30px, 5.5vw, 80px)) clamp(56px, 7vw, 100px);
+            box-sizing: border-box;
+            background: ${C.light};
+          }
+          .cat-cta {
+            border-radius: 2px;
+            overflow: hidden;
+            background:
+              radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
+              #463C41;
+            padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
+            text-align: center;
+            color: ${C.light};
+          }
+          .cat-cta h2 {
+            font-family: Coolvetica, Inter, sans-serif;
+            font-weight: 600;
+            margin: 0 0 14px;
+            font-size: clamp(28px, 3.6vw, 48px);
+            line-height: 1.12;
+            color: ${C.light};
+          }
+          .cat-cta p {
+            margin: 0 auto 28px;
+            max-width: 480px;
+            font-family: Inter, sans-serif;
+            font-size: clamp(15px, 1.3vw, 17px);
+            line-height: 1.5;
+            color: ${C.light};
+          }
+          .cat-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Inter, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 15px 30px;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            background: ${C.light};
+            color: ${C.dark};
+            transition: opacity .2s;
+          }
+          .cat-cta-btn:hover { opacity: .88; }
+        `}</style>
+        <div className="cat-cta">
+          <h2>{t("services.cta.title")}</h2>
+          <p>{t("services.cta.body")}</p>
+          <button type="button" className="cat-cta-btn" onClick={() => setModalOpen(true)}>
+            {t("services.cta.button")}
+          </button>
+        </div>
       </section>
 
-      {/* Book a Call popup */}
-      {showBookCall && (
-        <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "2px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
-            <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>✕</button>
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: C.light, marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              {[
-                { key: "name", placeholder: t("catalog.bookCall.name"), type: "text" },
-                { key: "phone", placeholder: t("catalog.bookCall.phone"), type: "tel" },
-                { key: "email", placeholder: t("catalog.bookCall.email"), type: "email" },
-              ].map(f => (
-                <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as any)[f.key]}
-                  onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "2px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
-                  onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,254,249,0.12)")} />
-              ))}
-              <textarea placeholder={t("catalog.bookCall.message")} value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "2px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
-                onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,254,249,0.12)")} />
-              <button
-                type="button"
-                onClick={submitBookCall}
-                disabled={bookLoading || bookSent}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = bookLoading ? "0.7" : "1")}
-              >
-                {bookSent ? t("home.contact.sentTitle") : bookLoading ? "…" : t("cta.sendRequest")}
-              </button>
-              {bookError ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.light, margin: "8px 0 0", textAlign: "center" }}>{bookError}</p>
-              ) : null}
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.light, marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,254,249,0.1)", textAlign: "center" }}>
-                {t("catalog.bookCall.direct")} <span style={{ color: C.light, fontWeight: 600 }}>+995 555 50 52 88</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      <RequestModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        source="Catalog page"
+        title={t("services.cta.button")}
+      />
     </div>
   );
 }
