@@ -299,12 +299,12 @@ const COOKIE_CSS = `
 .ck-lang-menu {
   position: absolute; right: 0; bottom: calc(100% + 8px);
   min-width: 72px; background: #21141A; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 8px; padding: 4px; z-index: 2;
+  border-radius: 2px; padding: 4px; z-index: 2;
 }
 .ck-lang-menu button {
   width: 100%; background: none; border: none; color: #FFFEF9;
   font-size: 11px; font-weight: 700; letter-spacing: .08em;
-  padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 6px;
+  padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 2px;
 }
 .ck-lang-menu button.is-active,
 .ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #FFFEF9; }
@@ -337,7 +337,7 @@ const COOKIE_CSS = `
 .ck-cat input { position: absolute; opacity: 0; pointer-events: none; }
 .ck-box {
   width: 16px; height: 16px; flex-shrink: 0;
-  border: 1.5px solid #FFFEF9; border-radius: 3px;
+  border: 1.5px solid #FFFEF9; border-radius: 2px;
   display: inline-flex; align-items: center; justify-content: center;
   background: transparent;
 }
@@ -347,7 +347,7 @@ const COOKIE_CSS = `
 .ck-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .ck-btn {
   background: transparent; color: #FFFEF9;
-  border: 1px solid #FFFEF9; border-radius: 10px;
+  border: 1px solid #FFFEF9; border-radius: 2px;
   padding: 10px 22px; cursor: pointer;
   font-size: 11px; font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; white-space: nowrap;

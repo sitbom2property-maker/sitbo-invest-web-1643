@@ -294,7 +294,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 							{isNew ? "Новый объект" : `Объект ${id}`}
 						</h1>
 					</div>
-					<button type="button" disabled={saving} onClick={handleSave} style={{ padding: "12px 24px", background: C.accent, color: C.light, border: "none", borderRadius: "8px", fontFamily: "Inter, sans-serif", fontWeight: 600, cursor: saving ? "wait" : "pointer", opacity: saving ? 0.7 : 1 }}>
+					<button type="button" disabled={saving} onClick={handleSave} style={{ padding: "12px 24px", background: C.accent, color: C.light, border: "none", borderRadius: "2px", fontFamily: "Inter, sans-serif", fontWeight: 600, cursor: saving ? "wait" : "pointer", opacity: saving ? 0.7 : 1 }}>
 						{saving ? "Сохранение…" : "Сохранить"}
 					</button>
 				</div>
@@ -496,7 +496,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
-		<div style={{ marginBottom: "28px", padding: "20px", background: "rgba(255,254,249,0.03)", border: `1px solid ${C.burgundy}`, borderRadius: "10px" }}>
+		<div style={{ marginBottom: "28px", padding: "20px", background: "rgba(255,254,249,0.03)", border: `1px solid ${C.burgundy}`, borderRadius: "2px" }}>
 			<h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.12em", color: C.light, margin: "0 0 16px" }}>{title}</h2>
 			{children}
 		</div>
@@ -531,7 +531,7 @@ const inputStyle: React.CSSProperties = {
 	padding: "10px 12px",
 	background: "rgba(33,20,26,0.6)",
 	border: `1px solid ${C.burgundy}`,
-	borderRadius: "6px",
+	borderRadius: "2px",
 	color: C.light,
 	fontFamily: "Inter, sans-serif",
 	fontSize: "0.85rem",

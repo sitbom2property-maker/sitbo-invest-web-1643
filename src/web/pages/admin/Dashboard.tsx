@@ -141,7 +141,7 @@ export default function AdminDashboard() {
 								background: C.accent,
 								color: C.light,
 								border: "none",
-								borderRadius: "8px",
+								borderRadius: "2px",
 								fontFamily: "Inter, sans-serif",
 								fontWeight: 600,
 								fontSize: "0.85rem",
@@ -158,7 +158,7 @@ export default function AdminDashboard() {
 								background: "transparent",
 								border: `1px solid ${C.burgundy}`,
 								color: C.light,
-								borderRadius: "8px",
+								borderRadius: "2px",
 								fontFamily: "Inter, sans-serif",
 								fontSize: "0.85rem",
 								cursor: "pointer",
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
 							style={{
 								background: "rgba(255,254,249,0.05)",
 								border: `1px solid ${C.burgundy}`,
-								borderRadius: "10px",
+								borderRadius: "2px",
 								padding: "20px",
 							}}
 						>
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
 					style={{
 						overflowX: "auto",
 						border: `1px solid ${C.burgundy}`,
-						borderRadius: "10px",
+						borderRadius: "2px",
 					}}
 				>
 					<table
@@ -308,7 +308,7 @@ export default function AdminDashboard() {
 												style={{
 													display: "inline-block",
 													padding: "2px 8px",
-													borderRadius: "4px",
+													borderRadius: "2px",
 													background: "rgba(140,178,192,0.1)",
 													color: C.light,
 													fontSize: "0.75rem",
@@ -350,7 +350,7 @@ const selectStyle: React.CSSProperties = {
 	padding: "10px 14px",
 	background: "rgba(33,20,26,0.8)",
 	border: `1px solid #703C54`,
-	borderRadius: "8px",
+	borderRadius: "2px",
 	color: "#FFFEF9",
 	fontFamily: "Inter, sans-serif",
 	fontSize: "0.85rem",
