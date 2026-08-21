@@ -97,7 +97,7 @@ export function FooterV2() {
           .fv2-brand { grid-column: 1 / -1; }
         }
         @media (max-width: 640px) {
-          .fv2-wrap { padding: 0 clamp(24px, 6vw, 40px); }
+          .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
           .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
           .fv2-name { font-size: 15px; margin-bottom: 16px; }
           .fv2-tagline { font-size: 14px; max-width: none; }
