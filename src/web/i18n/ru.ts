@@ -540,8 +540,6 @@ const ru: Record<MessageKey, string> = {
   "catalog.bookCall.direct": "Связаться напрямую:",
 
   "project.overview": "Обзор",
-  "project.meta.updated": "Обновлено: {date}",
-  "project.meta.viewsInfo": "Количество просмотров страницы",
   "project.propertyType": "Тип объекта",
   "project.pricePerSqm": "Цена/м²",
   "project.propertyType.apartment": "Квартира",

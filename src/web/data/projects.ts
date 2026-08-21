@@ -31,10 +31,6 @@ export type Project = {
   floorPlanLabels?: string[];
   floorPlanAreas?: string[];
   pricePerSqm?: string;
-  /** ISO date `YYYY-MM-DD` for listing freshness. */
-  updatedAt?: string;
-  views?: number;
-  likes?: number;
   /** Defaults to apartment when omitted. */
   propertyType?: "apartment" | "residence" | "villa" | "townhouse";
   liveCameraUrl?: string;
@@ -129,9 +125,6 @@ export const projects: Project[] = [
     floorPlanLabels: ["Studio", "1+1", "2+1", "3+1"],
     floorPlanAreas: ["35.7 m²", "53.5 m²", "76.9 m²", "134 m²"],
     pricePerSqm: "from $2,450/m²",
-    updatedAt: "2026-08-01",
-    views: 247,
-    likes: 2,
     propertyType: "apartment",
   },
   {

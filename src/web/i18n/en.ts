@@ -557,8 +557,6 @@ const en = {
 
   // Project page
   "project.overview": "Overview",
-  "project.meta.updated": "Updated: {date}",
-  "project.meta.viewsInfo": "Number of page views",
   "project.propertyType": "Property type",
   "project.pricePerSqm": "Price/sqm",
   "project.propertyType.apartment": "Apartment",

@@ -32,78 +32,6 @@ function useIsMobile(bp = 768) {
   return m;
 }
 
-function hashSlug(slug: string): number {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  return h;
-}
-
-function projectEngagement(p: Project) {
-  const h = hashSlug(p.slug);
-  const day = String((h % 27) + 1).padStart(2, "0");
-  return {
-    updatedAt: p.updatedAt ?? `2026-08-${day}`,
-    views: p.views ?? 160 + (h % 240),
-    likes: p.likes ?? 2 + (h % 11),
-    propertyType: p.propertyType ?? "apartment",
-  };
-}
-
-function formatUpdatedDate(iso: string, language: string): string {
-  const d = new Date(`${iso}T12:00:00`);
-  if (Number.isNaN(d.getTime())) return iso;
-  const locale = language.toLowerCase().startsWith("ru") ? "ru-RU" : "en-US";
-  return d.toLocaleDateString(locale, { month: "long", day: "numeric" });
-}
-
-const META_ICON = {
-  width: 14,
-  height: 14,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
-};
-
-function MetaClockIcon() {
-  return (
-    <svg {...META_ICON}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7v5l3 2" />
-    </svg>
-  );
-}
-
-function MetaEyeIcon() {
-  return (
-    <svg {...META_ICON}>
-      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function MetaHeartIcon() {
-  return (
-    <svg {...META_ICON}>
-      <path d="M12 20s-7-4.5-9.5-8.2C.7 9.2 1.6 5.8 4.6 4.6 6.6 3.8 8.9 4.3 10.3 5.8L12 7.5l1.7-1.7c1.4-1.5 3.7-2 5.7-1.2 3 1.2 3.9 4.6 2.1 7.2C19 15.5 12 20 12 20Z" />
-    </svg>
-  );
-}
-
-function MetaInfoIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 10v6" />
-      <circle cx="12" cy="7" r="0.8" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".pr-reveal");
@@ -511,16 +439,13 @@ export default function ProjectPage() {
   const restPct = 100 - downPct;
 
   const p = project;
-  const engagement = projectEngagement(p);
-  const updatedLabel = t("project.meta.updated", {
-    date: formatUpdatedDate(engagement.updatedAt, language),
-  });
+  const propertyType = p.propertyType ?? "apartment";
   const typeKey =
-    engagement.propertyType === "residence"
+    propertyType === "residence"
       ? "project.propertyType.residence"
-      : engagement.propertyType === "villa"
+      : propertyType === "villa"
         ? "project.propertyType.villa"
-        : engagement.propertyType === "townhouse"
+        : propertyType === "townhouse"
           ? "project.propertyType.townhouse"
           : "project.propertyType.apartment";
   const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
@@ -576,37 +501,6 @@ export default function ProjectPage() {
                 <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px" }}>
 {p.name}
                 </h2>
-
-                {/* Meta: updated / views / likes */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignItems: "center",
-                    gap: isMobile ? "12px 16px" : "12px 22px",
-                    marginBottom: "16px",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    color: "rgba(33,20,26,0.55)",
-                    lineHeight: 1,
-                  }}
-                >
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
-                    <MetaClockIcon />
-                    <span>{updatedLabel}</span>
-                  </span>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }} title={t("project.meta.viewsInfo")}>
-                    <MetaEyeIcon />
-                    <span>{engagement.views}</span>
-                    <span style={{ display: "inline-flex", opacity: 0.7 }} aria-hidden>
-                      <MetaInfoIcon />
-                    </span>
-                  </span>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
-                    <MetaHeartIcon />
-                    <span>{engagement.likes}</span>
-                  </span>
-                </div>
 
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
