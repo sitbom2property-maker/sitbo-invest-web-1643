@@ -315,7 +315,7 @@ const PF_CSS = `
 }
 .pf-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   min-width: 0;
 }
@@ -326,6 +326,7 @@ const PF_CSS = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1px;
 }
 .pf-label {
   font-family: Inter, sans-serif;
@@ -334,9 +335,10 @@ const PF_CSS = `
   color: ${C.dark};
   border-bottom: 1px solid ${C.line};
   padding-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
   min-width: 0;
 }
 .pf-view-all {
