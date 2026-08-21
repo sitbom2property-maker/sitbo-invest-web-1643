@@ -519,14 +519,16 @@ export default function ProjectPage() {
                   <span>{p.address} · {p.seaDistance}</span>
                 </p>
 
-                {/* Key params: property type / price per sqm */}
+                {/* Key params: property type / price per sqm / ready */}
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: isMobile ? "1fr 1fr" : "minmax(140px, max-content) minmax(140px, max-content)",
-                    columnGap: isMobile ? "24px" : "64px",
+                    gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(3, minmax(120px, max-content))",
+                    columnGap: isMobile ? "24px" : "48px",
                     rowGap: "16px",
-                    marginBottom: "22px",
+                    paddingTop: 30,
+                    paddingBottom: 30,
+                    marginBottom: 0,
                   }}
                 >
                   <div>
@@ -543,6 +545,14 @@ export default function ProjectPage() {
                     </p>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
                       {p.pricePerSqm ?? "—"}
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                      {t("project.ready")}
+                    </p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
+                      {p.completion}
                     </p>
                   </div>
                 </div>
@@ -676,34 +686,33 @@ export default function ProjectPage() {
 {/* Quick facts */}
                 <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.light, borderRadius: "2px", padding: "20px 18px" }}>
 {[
-    { label: t("project.estRoi"), value: p.yield },
     { label: t("project.from"), value: priceLabel },
     { label: t("project.ready"), value: p.completion },
     { label: t("project.sea"), value: p.seaDistance },
-                  ].map((row, i) => (
-                    <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: i < 3 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
+                  ].map((row, i, arr) => (
+                    <div key={row.label} style={{ display: "flex", justifyContent: "space-between", gap: 12, padding: "10px 0", borderBottom: i < arr.length - 1 ? "1px solid rgba(33,20,26,0.07)" : "none" }}>
                       <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted }}>{row.label}</span>
-                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700, color: C.dark }}>{row.value}</span>
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700, color: C.dark, textAlign: "right" }}>{row.value}</span>
                     </div>
                   ))}
                 </div>
 
 {/* Live Camera Card */}
                   {p.liveCameraUrl && (
-                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
-                    <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
+                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                    <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px rgba(255,60,60,0.45)" }} />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("project.liveCamera")}</span>
                   </a>
                 )}
                 {p.tourUrl && (
-                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.view3d")}</span>
+                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
                   </a>
                 )}
                 {p.panoramaUrl && (
-                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.viewPanorama")}</span>
+                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.viewPanorama")}</span>
                   </a>
                 )}
 
