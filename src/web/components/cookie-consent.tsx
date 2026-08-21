@@ -189,11 +189,13 @@ export function CookieConsent() {
             </div>
 
             <div className="ck-actions">
-              <button type="button" className="ck-btn" onClick={() => close(ALL_ON)}>
-                {t("cookie.acceptAll")}
+              <button type="button" className="ck-btn ck-btn-accept" onClick={() => close(ALL_ON)}>
+                <span className="ck-btn-full">{t("cookie.acceptAll")}</span>
+                <span className="ck-btn-short">{t("cookie.accept")}</span>
               </button>
-              <button type="button" className="ck-btn" onClick={() => close(NECESSARY_ONLY)}>
-                {t("cookie.declineAll")}
+              <button type="button" className="ck-btn ck-btn-decline" onClick={() => close(NECESSARY_ONLY)}>
+                <span className="ck-btn-full">{t("cookie.declineAll")}</span>
+                <span className="ck-btn-short">{t("cookie.decline")}</span>
               </button>
             </div>
           </div>
@@ -353,6 +355,7 @@ const COOKIE_CSS = `
   text-transform: uppercase; white-space: nowrap;
 }
 .ck-btn:hover { background: #FFFEF9; color: #21141A; }
+.ck-btn-short { display: none; }
 .ck-details-toggle {
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 14px; padding: 0;
@@ -375,10 +378,53 @@ const COOKIE_CSS = `
   font-weight: 400; text-transform: none; letter-spacing: 0;
 }
 @media (max-width: 720px) {
-  .ck-inner { padding: 16px var(--site-gutter, 20px) 14px; }
-  .ck-row { flex-direction: column; align-items: stretch; }
-  .ck-actions { width: 100%; }
-  .ck-btn { flex: 1; text-align: center; }
-  .ck-title { font-size: 15px; }
+  .ck {
+    max-height: 50vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ck-inner {
+    padding: 14px clamp(16px, 5vw, 24px) 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+  }
+  .ck-title { font-size: 15px; font-weight: 600; }
+  .ck-body {
+    margin: 0;
+    max-width: none;
+    font-size: 13px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ck-lang,
+  .ck-policy,
+  .ck-cats,
+  .ck-details-toggle,
+  .ck-details { display: none !important; }
+  .ck-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin: 0;
+  }
+  .ck-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .ck-btn {
+    flex: none;
+    width: 100%;
+    text-align: center;
+    padding: 12px 10px;
+  }
+  .ck-btn-full { display: none; }
+  .ck-btn-short { display: inline; }
 }
 `;
