@@ -564,6 +564,8 @@ const en = {
   "project.propertyType.villa": "Villa",
   "project.propertyType.townhouse": "Townhouse",
   "project.developer": "Developer",
+  "project.architecture": "Architecture",
+  "project.architectPlaceholder": "TBA",
   "project.developerLogo": "Logo",
   "project.developerBody":
     "A construction company founded in 2015, which has established itself as a reliable partner in residential construction. It actively develops projects, including residential complexes in Batumi.",

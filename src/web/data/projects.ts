@@ -10,6 +10,8 @@ export type Project = {
   desc: string;
   yield: string;
   developer: string;
+  /** Architect / architecture studio; placeholder until confirmed. */
+  architect?: string;
   priceFrom: string;
   priceUSD: number; // for sorting
   completion: string;
@@ -99,6 +101,7 @@ export const projects: Project[] = [
     desc: "A landmark residence in the historic heart of Old Batumi. Architecture that reads the neighbourhood's heritage, a private piazza with Venetian fountains, and a restored 119-year cultural monument. Step outside and you are already in the city's cultural district — the seafront is a ten-minute walk.",
     yield: "10–12%",
     developer: "Tower Group",
+    architect: "TBA",
     priceFrom: "From $89,250",
     priceUSD: 89250,
     completion: "Q4 2027",
@@ -176,6 +179,7 @@ export const projects: Project[] = [
     desc: "A business-class residence on Batumi’s New Boulevard: three towers of 26–28 floors around a landscaped courtyard with a pool, spa, kindergarten and coworking. Thoughtful layouts from studios to 2+1, park-front living, and a 3D apartment selector so you can pick a unit before you fly in.",
     yield: "9–11%",
     developer: "Artex",
+    architect: "Roman Aphakidze",
     priceFrom: "From $52,480",
     priceUSD: 52480,
     completion: "Q2 2029",
@@ -258,6 +262,7 @@ export const projects: Project[] = [
     desc: "Tbilisi’s first resort-style “city within a city” on 20 hectares in the prestigious Krtsanisi diplomatic quarter. About 70% of the land is gardens, terraces and recreation — French, tropical and Japanese landscapes, pools and sports courts — with apartments, townhouses, penthouses and a multifunctional hotel-style building.",
     yield: "10–14%",
     developer: "VR Holding",
+    architect: "TBA",
     priceFrom: "From $100,990",
     priceUSD: 100990,
     completion: "Q3 2026",
@@ -326,6 +331,7 @@ export const projects: Project[] = [
     desc: "A year-round Black Sea resort between a pine forest and 1,200 metres of private sand beach. Studios to penthouses and villas beside Paragraph Resort & Spa, with a seaside boulevard, Café del Mar beach club, wellness and cycling paths across a 40-hectare masterplan.",
     yield: "12–15%",
     developer: "VR Holding",
+    architect: "TBA",
     priceFrom: "From $53,430",
     priceUSD: 53430,
     completion: "Q3 2027",
@@ -392,6 +398,7 @@ export const projects: Project[] = [
     desc: "Georgia’s tallest tower — about 260 m and ~70 floors — on Chavchavadze Avenue opposite Vake Park. A multifunctional landmark with branded residences, Fashion Avenue retail, a Class A business centre, spa, pools and hotel-grade services in Tbilisi’s most prestigious district.",
     yield: "8–12%",
     developer: "VR Holding",
+    architect: "TBA",
     priceFrom: "From $110,600",
     priceUSD: 110600,
     completion: "Q3 2029",
@@ -455,6 +462,7 @@ export const projects: Project[] = [
     desc: "The project features two 16-storey buildings (Blocks A and B), 581 premium apartments, and a diverse infrastructure designed for both comfortable living and smart investment. Queen's Residence is the recipient of two prestigious international real estate awards as the Best Development Project in Georgia — Luxury Lifestyle Awards 2024 and European Property Awards 2024.",
     yield: "9–16%",
     developer: "Tempo Holding",
+    architect: "TBA",
     priceFrom: "From $95,000",
     priceUSD: 95000,
     completion: "Q1 2027",
@@ -493,6 +501,7 @@ export const projects: Project[] = [
     desc: "Luxury living meets ecological innovation on the historic first line. Featuring the region's grandest casino and a 20,000 m² private park by Masu Planning — the last of its kind on the Batumi coastline.",
     yield: "10–13%",
     developer: "Silk Road Developments",
+    architect: "TBA",
     priceFrom: "From $120,000",
     priceUSD: 120000,
     completion: "Q4 2026",
@@ -531,6 +540,7 @@ export const projects: Project[] = [
     desc: "A self-contained Swiss-standard village with breathtaking mountain and sea panoramas. From a private poker room and luxury spa to tennis courts and medical facilities — seclusion without compromise.",
     yield: "8–11%",
     developer: "Rogantini Group",
+    architect: "TBA",
     priceFrom: "From €55,000",
     priceUSD: 60000,
     completion: "Q3 2026",
@@ -569,6 +579,7 @@ export const projects: Project[] = [
     desc: "An 87-hectare man-made archipelago redefining luxury through eco-futurism. With 49% green infrastructure, a premier yacht club, and an elite private university — a sustainable sanctuary where technology meets nature.",
     yield: "12–14.5%",
     developer: "Ambassadori Holdings",
+    architect: "TBA",
     priceFrom: "From $180,000",
     priceUSD: 180000,
     completion: "Q2 2027",
@@ -607,6 +618,7 @@ export const projects: Project[] = [
     desc: "A private marina complex combining branded residences with resort hospitality infrastructure. Berths, a yacht club, and a waterfront promenade in one of Georgia's most scenic coastal settings.",
     yield: "11–14%",
     developer: "Marina Developments Georgia",
+    architect: "TBA",
     priceFrom: "From $150,000",
     priceUSD: 150000,
     completion: "Q1 2028",

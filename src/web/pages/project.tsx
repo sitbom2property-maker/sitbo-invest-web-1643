@@ -475,12 +475,6 @@ export default function ProjectPage() {
         }
         .layout-carousel::-webkit-scrollbar { display: none; }
         .layout-carousel { -ms-overflow-style: none; scrollbar-width: none; }
-        @media (max-width: 767px) {
-          .project-developer-card {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-          }
-        }
       `}</style>
 
 {/* ── GALLERY — Full width ── */}
@@ -631,25 +625,30 @@ export default function ProjectPage() {
 
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
 
-                {/* Developer block */}
+                {/* Developer / Architecture — minimal */}
                 <div
-                  className="project-developer-card"
-                  style={{ marginTop: isMobile ? "36px" : "44px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "2px", border: `1px solid rgba(33,20,26,0.07)` }}
+                  style={{
+                    marginTop: isMobile ? "36px" : "44px",
+                    display: "grid",
+                    gridTemplateColumns: isMobile ? "1fr" : "minmax(140px, max-content) minmax(140px, max-content)",
+                    columnGap: isMobile ? 0 : 64,
+                    rowGap: 20,
+                  }}
                 >
-                  {p.developerLogo ? (
-                    <div style={{ flexShrink: 0, width: isMobile ? "88px" : "104px", height: isMobile ? "88px" : "104px", aspectRatio: "1 / 1", borderRadius: "2px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: 8, boxSizing: "border-box" }}>
-                      <img src={p.developerLogo} alt={p.developer} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
-                    </div>
-                  ) : (
-                  <div style={{ flexShrink: 0, width: isMobile ? "88px" : "104px", height: isMobile ? "88px" : "104px", aspectRatio: "1 / 1", borderRadius: "2px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
+                  <div>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                      {t("project.developer")}
+                    </p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
+                      {p.developer}
+                    </p>
                   </div>
-                  )}
-                  <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: C.muted, margin: "0 0 6px" }}>{t("project.developer")}</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.15rem", fontWeight: 600, color: C.dark, margin: "0 0 8px" }}>{p.developer}</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, lineHeight: 1.7, margin: 0 }}>
-                      {p.developerBody ?? t("project.developerBody")}
+                  <div>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                      {t("project.architecture")}
+                    </p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
+                      {p.architect && p.architect !== "TBA" ? p.architect : t("project.architectPlaceholder")}
                     </p>
                   </div>
                 </div>

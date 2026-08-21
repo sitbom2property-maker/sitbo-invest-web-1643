@@ -547,6 +547,8 @@ const ru: Record<MessageKey, string> = {
   "project.propertyType.villa": "Вилла",
   "project.propertyType.townhouse": "Таунхаус",
   "project.developer": "Девелопер",
+  "project.architecture": "Архитектура",
+  "project.architectPlaceholder": "Уточняется",
   "project.developerLogo": "Лого",
   "project.developerBody":
     "Строительная компания, основанная в 2015 году, зарекомендовала себя как надёжный партнёр в жилом строительстве. Активно развивает проекты, включая жилые комплексы в Батуми.",
