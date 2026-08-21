@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { projects, type Project } from "../data/projects";
-import { localizeCityLabel, localizeProjects } from "../data/projects-locale";
+import { localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -37,7 +37,6 @@ const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri", "Sh
 function CatalogCard({ p }: { p: Project }) {
   const [hovered, setHovered] = useState(false);
   const { formatFromUSD } = useRates();
-  const { language } = useLocale();
   const t = useT();
   const priceLabel = formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
   return (
@@ -60,19 +59,8 @@ function CatalogCard({ p }: { p: Project }) {
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
-            {/* City badge */}
-            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>
-              {localizeCityLabel(p.city, language)}
-            </div>
-
-            {/* ROI badge */}
-            <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
-              {p.yield} {t("catalog.roi")}
-            </div>
-
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{p.tag}</p>
               <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
             </div>
           </div>
@@ -82,12 +70,11 @@ function CatalogCard({ p }: { p: Project }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "12px" }}>
               <div>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area} · {p.completion}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: C.muted, margin: "3px 0 0" }}>{p.area}</p>
               </div>
-              <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "5px" }}>
-                <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill={C.muted}/></svg>
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>{p.seaDistance}</span>
-              </div>
+              <span style={{ flexShrink: 0, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted, paddingTop: "2px" }}>
+                {p.completion}
+              </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.muted, margin: 0, lineHeight: 1.5, flex: 1, paddingRight: "12px" }}>
@@ -227,15 +214,9 @@ export default function CatalogPage() {
       {/* ── HERO ── */}
       <section style={{ background: C.dark }}>
         <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}>
-            <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.6vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, margin: 0, maxWidth: "920px" }}>
-              {t("catalog.title")}
-            </h1>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, maxWidth: "220px", lineHeight: 1.7, margin: 0 }}>
-              {localizedProjects.length}{" "}
-              {localizedProjects.length === 1 ? t("catalog.projectSingular") : t("catalog.projectPlural")}
-            </p>
-          </div>
+          <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.6vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, margin: 0, maxWidth: "920px" }}>
+            {t("catalog.title")}
+          </h1>
 
           {/* City tabs */}
           <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap" }}>
@@ -279,11 +260,6 @@ export default function CatalogPage() {
               style={{ ...inputStyle, cursor: "pointer", flex: "0 0 auto" }}>
               {sortOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
-
-            {/* Results count */}
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted, flexShrink: 0 }}>
-              {filtered.length} {filtered.length === 1 ? t("catalog.projectSingular") : t("catalog.projectPlural")}
-            </span>
           </div>
         </Container>
       </div>
