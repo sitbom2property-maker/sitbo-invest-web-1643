@@ -662,8 +662,34 @@ export const projects: Project[] = [
     ],
     materials:
       "Anti-Mold Facade: Swiss climate-protection cladding. 9+ Seismic Resilience: Structural design above code. Deep foundation: Engineered hill foundations. Knauf noise insulation: Acoustic partitions. Schüco Glazing: Premium aluminum systems.",
-    photos: ["/projects/rogantini/for-sale/card.png", "/home/lifestyle-coast.png", "/home/hero3.png"],
-    cardImage: "/projects/rogantini/for-sale/card.png",
+    photos: [
+      // Building / outdoor
+      "/projects/rogantini/for-sale/ext-hero.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-01.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-02.jpg",
+      "/projects/rogantini/for-sale/ext-view-real.jpg",
+      // Reception
+      "/projects/rogantini/marketing/reception-01.jpg",
+      "/projects/rogantini/marketing/reception-02.jpg",
+      "/projects/rogantini/marketing/reception-03.jpg",
+      // Apartments
+      "/projects/rogantini/interiors/apartment-01.jpg",
+      "/projects/rogantini/interiors/apartment-02.jpg",
+      "/projects/rogantini/interiors/apartment-03.jpg",
+      "/projects/rogantini/interiors/apartment-04.jpg",
+      "/projects/rogantini/interiors/apartment-05.jpg",
+      "/projects/rogantini/interiors/apartment-06.jpg",
+      "/projects/rogantini/interiors/apartment-07.jpg",
+      "/projects/rogantini/interiors/apartment-08.jpg",
+    ],
+    galleryPreview: [
+      "/projects/rogantini/for-sale/ext-hero.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-01.jpg",
+      "/projects/rogantini/marketing/reception-01.jpg",
+      "/projects/rogantini/interiors/apartment-01.jpg",
+      "/projects/rogantini/for-sale/ext-view-real.jpg",
+    ],
+    cardImage: "/projects/rogantini/for-sale/ext-hero.jpg",
     lat: 41.726315131195776,
     lng: 41.744580906746044,
     mapsQuery: "41.726315131195776,41.744580906746044",
