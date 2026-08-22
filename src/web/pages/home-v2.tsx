@@ -155,7 +155,7 @@ function Quote() {
             <h2 className="rd-h2">{t("v2.quote.eyebrow")}</h2>
             <blockquote>“{t("v2.quote.text")}”</blockquote>
             <p className="rd-quote-author">{t("v2.quote.author")}</p>
-            <AppLink href="/invest#notes" className="rd-btn rd-btn-white">
+            <AppLink href="/invest#strategies" className="rd-btn rd-btn-white">
               {t("v2.quote.cta")}
             </AppLink>
           </div>

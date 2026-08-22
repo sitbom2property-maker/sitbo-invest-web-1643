@@ -677,40 +677,50 @@ const en = {
   "chess.priceGel": "Price, GEL",
   "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is my chessboard.",
 
-  // Invest page
-  "invest.hero.eyebrow": "Why Georgia",
+  // Invest / Why Georgia page
   "invest.hero.line1": "One of Europe's",
-  "invest.hero.line2": "highest-yield",
-  "invest.hero.line3": "property markets.",
-  "invest.hero.line4": "",
+  "invest.hero.line2": "highest-yield property markets.",
   "invest.hero.body":
-    "I help international buyers enter Georgia with a clear strategy — yield, capital growth, or residency — without the noise of a sales floor.",
-  "invest.hero.ctaConsultation": "Book a consultation",
-  "invest.hero.ctaStrategies": "View strategies",
-  "invest.hero.imageAlt": "Batumi waterfront — investment property in Georgia",
-  "invest.hero.badgeLabel": "Max rental yield",
-  "invest.why.eyebrow": "Why Georgia",
-  "invest.why.title": "The numbers come first.",
-  "invest.why.body":
-    "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 13.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
-  "invest.why.quote":
-    "“Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here.”",
-  "invest.why.quoteAttr": "Mohamed Alabbar — Eagle Hills, UAE",
-  "invest.why.stat1": "Max rental yield on managed seafront units",
-  "invest.why.stat2": "World rank for rental profitability (Global Property Guide)",
-  "invest.why.stat3": "Purchase tax for foreign buyers",
-  "invest.why.stat4": "Title transfer via blockchain registry",
-  "invest.why.stat4Value": "1 day",
-  "invest.why.stat5": "Average price per sqm — Batumi new build",
-  "invest.why.stat6": "Tourists who visited Georgia in 2025",
-  "invest.advantage.purchaseTax.title": "0% purchase tax",
-  "invest.advantage.purchaseTax.sub": "No stamp duty, no buyer’s tax",
-  "invest.advantage.ownership.title": "Full foreign ownership",
-  "invest.advantage.ownership.sub": "Same rights as Georgian citizens",
-  "invest.advantage.registration.title": "1-day registration",
-  "invest.advantage.registration.sub": "Blockchain land registry",
-  "invest.advantage.residency.title": "Residency from $150K",
-  "invest.advantage.residency.sub": "Qualifying real estate investment",
+    "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 12.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
+  "invest.mosaic.visitorsValue": "7.8M+",
+  "invest.mosaic.visitorsLabel": "Annual international visitors",
+  "invest.mosaic.visitorsSource": "GNTA; GeoStat",
+  "invest.mosaic.destination": "Top destination for digital nomads, investors, and lifestyle seekers.",
+  "invest.mosaic.yieldValue": "12.2%",
+  "invest.mosaic.yieldLabel": "Max rental yield",
+  "invest.mosaic.yearsValue": "8,000",
+  "invest.mosaic.yearsLabel": "Years of Hospitality",
+  "invest.mosaic.yearsBody": "Unmatched culture driving year-round high tourist occupancy.",
+  "invest.mosaic.horseAlt": "Horseback riding in the Georgian mountains",
+  "invest.mosaic.seaAlt": "Paddleboarding at sunset on the Black Sea",
+  "invest.mosaic.foodAlt": "Georgian khinkali",
+  "invest.mosaic.wineAlt": "Georgian wine country",
+  "invest.diplomacy.next": "Next slide",
+  "invest.diplomacy1.title": "Georgia as a Strategic Gateway between the Black Sea and Caspian Region.",
+  "invest.diplomacy1.body":
+    "Nestled at the crossroads of Europe and Asia, Georgia serves as a critical transit, trade, and investment hub connecting Eastern and Western markets.",
+  "invest.diplomacy2.title": "High Security & Institutional Protections for Foreign Investment.",
+  "invest.diplomacy2.body":
+    "Through strategic alliances, liberal economic policies, and international trade agreements, Georgia guarantees low tax friction, maximum protection of private title, and frictionless capital mobility for international buyers.",
+  "invest.diplomacy3.title": "Global Diplomatic Reach with 180+ Sovereign Partners.",
+  "invest.diplomacy3.body":
+    "Georgia maintains formal diplomatic ties with over 186 UN member states and hosts international embassies from the USA, UK, EU nations, China, Japan, and the UAE, ensuring strong political and investment safeguards.",
+  "invest.chain.title": "World's 1st Blockchain-Backed Land Registry",
+  "invest.chain.body":
+    "100% Title Security via Bitcoin Blockchain. In 2016, Georgia became the first nation to secure property titles on the Bitcoin blockchain. Every ownership certificate generates an unalterable cryptographic proof, making title fraud physically impossible and enabling seamless 1-day remote registration.",
+  "invest.chain.2016.title": "2016",
+  "invest.chain.2016.body":
+    "In partnership with tech giant Bitfury Group, the Ministry of Justice of Georgia and the National Agency of Public Registry (NAPR) launched a pilot project to migrate the real estate land registry to the Bitcoin blockchain.",
+  "invest.chain.2017.title": "2017–2018",
+  "invest.chain.2017.body":
+    "Georgia became the first country in the world to fully integrate property ownership certificates into a public blockchain.",
+  "invest.chain.today.title": "Today",
+  "invest.chain.today.body":
+    "Every title check, purchase transaction, or mortgage registration is recorded in the Public Registry and automatically hashed onto the blockchain. The country is also actively adopting smart contracts for remote, instant transactions — executing payment and title transfer in a single second.",
+  "invest.awards.title": "One of Europe's highest-yield property markets.",
+  "invest.awards.alt": "Press and awards recognizing Georgia and Batumi",
+  "invest.early.line1": "Still early.",
+  "invest.early.line2": "Still affordable.",
   "invest.strategies.eyebrow": "Investment strategies",
   "invest.strategies.title": "Four ways I grow capital here.",
   "invest.strategies.body":
@@ -751,8 +761,7 @@ const en = {
   "invest.strategy4.desc":
     "I design and deliver premium interiors that justify 20–40% above-market rents. Fixed estimates, no surprise overruns — you do not manage contractors yourself.",
   "invest.strategy4.ideal": "Owners of unfinished units who want premium positioning.",
-  "invest.market.eyebrow": "Market context",
-  "invest.market.title": "Still early. Still affordable.",
+  "invest.market.title": "Market context",
   "invest.market.priceComparison": "Price per sqm · 2025",
   "invest.market.yieldComparison": "Gross rental yield · 2025",
   "invest.market.city.barcelona": "Barcelona",
@@ -760,7 +769,6 @@ const en = {
   "invest.market.city.athens": "Athens",
   "invest.market.city.tbilisi": "Tbilisi",
   "invest.market.city.batumi": "Batumi",
-  "invest.process.eyebrow": "How it works",
   "invest.process.title": "From first call to passive income.",
   "invest.process.body":
     "I keep the path short and clear. Most clients go from first contact to a registered title in under 30 days.",
@@ -784,10 +792,6 @@ const en = {
     "Furnishing, listing and day-to-day management — monthly reports, rent collection and maintenance handled for you.",
   "invest.faq.eyebrow": "FAQ",
   "invest.faq.title": "Common questions.",
-  "invest.faq.moreQuestions": "Still have questions?",
-  "invest.faq.talkDirectly": "Write to me directly — I answer myself.",
-  "invest.faq.body":
-    "Straight answers for non-resident buyers. No sales script.",
   "invest.faq.q1": "Can foreigners buy property in Georgia?",
   "invest.faq.a1":
     "Yes. Foreign nationals have the same property rights as Georgian citizens — buy, own and transfer with no ownership restrictions on residential property.",
@@ -802,7 +806,7 @@ const en = {
     "No. I can run the full process remotely with a notarised power of attorney. Many clients close before their first visit.",
   "invest.faq.q5": "What rental yield should I expect?",
   "invest.faq.a5":
-    "Well-located, professionally managed units in Batumi typically yield 9–13.2% a year. Turnkey finishes in strong locations can sit at the top of that range.",
+    "Well-located, professionally managed units in Batumi typically yield 9–12.2% a year. Turnkey finishes in strong locations can sit at the top of that range.",
   "invest.faq.q6": "How long does the purchase take?",
   "invest.faq.a6":
     "From signed offer to registered title: usually 1–3 business days. Selection and due diligence typically take 2–4 weeks.",

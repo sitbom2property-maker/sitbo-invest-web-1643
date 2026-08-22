@@ -3,32 +3,10 @@ import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
 /**
- * Why Georgia / Invest — first-person voice, home-v2 visual system:
- * Coolvetica / Inter · #21141A · wine #703C54 · light #FFFEF9 · teal #8CB2C0 at 10%
+ * Why Georgia / Invest — Figma redesign:
+ * light hero + mosaic, diplomacy slider, blockchain timeline,
+ * awards, early band, strategies, market, process, FAQ, CTA.
  */
-
-type StatItem = {
-  value?: string;
-  valueKey?: MessageKey;
-  labelKey: MessageKey;
-  tone: "plum" | "green" | "white";
-};
-
-const STATS: StatItem[] = [
-  { value: "13.2%", labelKey: "invest.why.stat1", tone: "green" },
-  { value: "#1", labelKey: "invest.why.stat2", tone: "plum" },
-  { value: "0%", labelKey: "invest.why.stat3", tone: "white" },
-  { valueKey: "invest.why.stat4Value", labelKey: "invest.why.stat4", tone: "plum" },
-  { value: "$1,420", labelKey: "invest.why.stat5", tone: "plum" },
-  { value: "3.7M", labelKey: "invest.why.stat6", tone: "green" },
-];
-
-const ADVANTAGES = [
-  { titleKey: "invest.advantage.purchaseTax.title" as MessageKey, subKey: "invest.advantage.purchaseTax.sub" as MessageKey },
-  { titleKey: "invest.advantage.ownership.title" as MessageKey, subKey: "invest.advantage.ownership.sub" as MessageKey },
-  { titleKey: "invest.advantage.registration.title" as MessageKey, subKey: "invest.advantage.registration.sub" as MessageKey },
-  { titleKey: "invest.advantage.residency.title" as MessageKey, subKey: "invest.advantage.residency.sub" as MessageKey },
-];
 
 type Strategy = {
   tagKey: MessageKey;
@@ -111,6 +89,30 @@ const YIELD_BARS = [
   { cityKey: "invest.market.city.athens" as MessageKey, value: "5.2%", pct: 39 },
   { cityKey: "invest.market.city.lisbon" as MessageKey, value: "3.8%", pct: 29 },
   { cityKey: "invest.market.city.barcelona" as MessageKey, value: "3.1%", pct: 23 },
+];
+
+const DIPLOMACY = [
+  { titleKey: "invest.diplomacy1.title" as MessageKey, bodyKey: "invest.diplomacy1.body" as MessageKey },
+  { titleKey: "invest.diplomacy2.title" as MessageKey, bodyKey: "invest.diplomacy2.body" as MessageKey },
+  { titleKey: "invest.diplomacy3.title" as MessageKey, bodyKey: "invest.diplomacy3.body" as MessageKey },
+];
+
+const CHAIN = [
+  {
+    titleKey: "invest.chain.2016.title" as MessageKey,
+    bodyKey: "invest.chain.2016.body" as MessageKey,
+    img: "/why-georgia/chain-2016.jpg",
+  },
+  {
+    titleKey: "invest.chain.2017.title" as MessageKey,
+    bodyKey: "invest.chain.2017.body" as MessageKey,
+    img: "/why-georgia/chain-2017.jpg",
+  },
+  {
+    titleKey: "invest.chain.today.title" as MessageKey,
+    bodyKey: "invest.chain.today.body" as MessageKey,
+    img: "/why-georgia/chain-today.jpg",
+  },
 ];
 
 function useReveal() {
@@ -212,23 +214,19 @@ const CSS = `
   --bg-light: #FFFEF9;
   --text-light: #FFFEF9;
   --text-dark: #21141A;
-  --card-gray: #463C41;
+  --card-plum: #412834;
   --card-green: #48674D;
-  --card-light: #FFFEF9;
-  --accent-plum: #703C54;
-  --accent-blue: #8CB2C0;
-  --radius: 2px;
-  --bg: var(--bg-dark);
-  --card: var(--card-gray);
-  --green: var(--card-green);
-  --white: var(--bg-light);
-  --panel: var(--bg-light);
+  --card-muted: #E8E4DF;
+  --green: #48674D;
+  --white: #FFFEF9;
   --display: 'Coolvetica', Inter, sans-serif;
   --body: 'Inter', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --max: var(--site-max, 1440px);
-  background: var(--bg);
-  color: var(--white);
+  --radius: 20px;
+  --radius-sm: 2px;
+  background: var(--bg-light);
+  color: var(--text-dark);
   font-family: var(--body);
   overflow-x: hidden;
   min-height: 100vh;
@@ -240,326 +238,317 @@ const CSS = `
 .iv-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--body); font-size: 15px; font-weight: 400;
-  padding: 15px 30px; border-radius: var(--radius); border: 1px solid transparent;
+  padding: 15px 30px; border-radius: var(--radius-sm); border: 1px solid transparent;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
-.iv-btn-white { background: var(--white); color: var(--bg); }
+.iv-btn-white { background: var(--white); color: var(--bg-dark); }
 .iv-btn-white:hover { opacity: .88; }
-.iv-btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
-.iv-btn-outline:hover { background: var(--white); color: var(--bg); }
-.iv-btn-dark { background: var(--bg); color: var(--white); }
+.iv-btn-dark { background: var(--bg-dark); color: var(--white); }
 .iv-btn-dark:hover { opacity: .9; }
 
 /* hero */
 .iv-hero {
-  position: relative;
-  padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 88px);
-  overflow: hidden;
-}
-.iv-hero-circle {
-  position: absolute; top: -180px; right: -140px; width: 640px; height: 640px;
-  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
+  background: var(--bg-light);
+  padding: clamp(48px, 7vw, 96px) 0 clamp(28px, 4vw, 48px);
 }
 .iv-hero-grid {
-  position: relative; z-index: 1;
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(28px, 4vw, 64px); align-items: center;
-}
-.iv-hero-eyebrow {
-  display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--white); margin: 0 0 16px;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(24px, 4vw, 64px); align-items: start;
 }
 .iv-hero h1 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 18px;
-  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(34px, 4.8vw, 64px); line-height: 1.05; letter-spacing: -.01em;
+  color: var(--text-dark);
 }
 .iv-hero-lead {
-  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
-  color: var(--white); margin: 0 0 28px; max-width: 460px;
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.78); max-width: 420px; justify-self: end;
 }
-.iv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-.iv-hero-visual {
-  border-radius: 2px; overflow: hidden; aspect-ratio: 4 / 5;
-  max-height: min(68svh, 620px); justify-self: end; width: 100%;
-}
-.iv-hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* why + stats */
-.iv-why { padding: clamp(48px, 6vw, 88px) 0; }
-.iv-split {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
-  margin-bottom: clamp(34px, 4vw, 58px);
+/* mosaic */
+.iv-mosaic {
+  padding: 0 0 clamp(48px, 6vw, 88px);
+  background: var(--bg-light);
 }
-.iv-split h2 {
+.iv-mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+}
+.iv-tile {
+  border-radius: var(--radius); overflow: hidden; min-height: 220px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 22px 20px; box-sizing: border-box;
+}
+.iv-tile-img { padding: 0; min-height: 220px; }
+.iv-tile-img img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 220px; }
+.iv-tile-plum { background: var(--card-plum); color: var(--white); }
+.iv-tile-green { background: var(--card-green); color: var(--white); }
+.iv-tile-muted { background: var(--card-muted); color: var(--text-dark); }
+.iv-tile-value {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(36px, 3.6vw, 52px); line-height: 1; margin: 0 0 10px;
+}
+.iv-tile-label { font-size: 14px; line-height: 1.35; margin: 0; }
+.iv-tile-source { font-size: 12px; opacity: .7; margin-top: auto; padding-top: 18px; }
+.iv-tile-center {
+  justify-content: center; text-align: center;
+  font-size: clamp(16px, 1.35vw, 20px); line-height: 1.35; font-weight: 500;
+}
+.iv-tile-body { font-size: 13px; line-height: 1.4; margin: 12px 0 0; opacity: .85; }
+
+/* diplomacy slider */
+.iv-diplomacy {
+  background: var(--bg-dark); color: var(--white);
+  padding: clamp(56px, 7vw, 100px) 0;
+}
+.iv-diplomacy-row {
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+}
+.iv-diplomacy h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 18px;
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; max-width: 720px;
+}
+.iv-diplomacy p {
+  margin: 0; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.5;
+  color: rgba(255,254,249,.82); max-width: 720px;
+}
+.iv-diplomacy-next {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid rgba(255,254,249,.45); background: transparent; color: var(--white);
+  font-size: 28px; line-height: 1; cursor: pointer; flex-shrink: 0;
+  transition: background .2s, color .2s;
+}
+.iv-diplomacy-next:hover { background: var(--white); color: var(--bg-dark); }
+.iv-diplomacy-dots { display: flex; gap: 8px; margin-top: 28px; }
+.iv-diplomacy-dots button {
+  width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
+  background: rgba(255,254,249,.28); cursor: pointer;
+}
+.iv-diplomacy-dots button.is-active { background: var(--white); }
+
+/* blockchain */
+.iv-chain {
+  background: var(--bg-light); color: var(--text-dark);
+  padding: clamp(56px, 7vw, 100px) 0;
+}
+.iv-chain-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.iv-chain-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
-.iv-split p {
-  margin: 0; font-size: 16px; line-height: 1.5;
-  color: var(--white); max-width: 420px;
-  justify-self: end; text-align: right;
+.iv-chain-head p {
+  margin: 0; font-size: 15px; line-height: 1.5; color: rgba(33,20,26,.78);
 }
-.iv-stats {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+.iv-chain-rail {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
 }
-.iv-stat {
-  aspect-ratio: 1 / 1; border-radius: 2px; padding: clamp(16px, 1.7vw, 26px);
-  display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
+.iv-chain-card {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  min-height: clamp(320px, 36vw, 460px);
+  background: var(--card-plum); color: var(--white);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px; box-sizing: border-box;
 }
-.iv-stat-plum { background: var(--card); }
-.iv-stat-green { background: var(--green); }
-.iv-stat-white { background: var(--white); color: var(--bg); }
-.iv-stat-value {
-  font-family: var(--body); font-weight: 600;
-  font-size: clamp(28px, 3.2vw, 42px); line-height: 1; letter-spacing: -.02em;
+.iv-chain-card img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
 }
-.iv-stat-label {
-  font-size: clamp(13px, 1.1vw, 15px); line-height: 1.35;
-  color: var(--white); max-width: 16ch;
+.iv-chain-card::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(33,20,26,.15) 20%, rgba(33,20,26,.88) 78%);
 }
-.iv-stat-white .iv-stat-label { color: inherit; opacity: .65; }
+.iv-chain-card > * { position: relative; z-index: 1; }
+.iv-chain-card h3 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 10px;
+  font-size: clamp(28px, 2.8vw, 40px); line-height: 1;
+}
+.iv-chain-card p { margin: 0; font-size: 13px; line-height: 1.45; color: rgba(255,254,249,.9); }
 
-.iv-quote {
-  margin-top: clamp(36px, 4vw, 56px);
-  padding-top: clamp(28px, 3vw, 40px);
-  border-top: 1px solid rgba(255,255,255,.12);
-  max-width: 720px;
-  scroll-margin-top: calc(var(--nav-height, 88px) + 24px);
+/* awards */
+.iv-awards {
+  background: var(--bg-light); color: var(--text-dark);
+  padding: 0 0 clamp(48px, 6vw, 80px);
+  text-align: center;
 }
-.iv-quote .iv-panel-eyebrow { display: block; margin-bottom: 14px; }
-.iv-quote blockquote {
-  font-family: var(--body); font-weight: 400; margin: 0 0 12px;
-  font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
+.iv-awards h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(28px, 4vw, 48px);
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
 }
-.iv-quote cite {
-  font-style: normal; font-size: 14px; color: var(--white);
-}
-
-/* advantages */
-.iv-adv { padding: 0 0 clamp(48px, 6vw, 88px); }
-.iv-adv-grid {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
-}
-.iv-adv-card {
-  background: var(--card); border-radius: 2px;
-  padding: clamp(20px, 2.2vw, 28px);
-}
-.iv-adv-card h3 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 8px;
-  font-size: clamp(17px, 1.5vw, 20px); line-height: 1.25;
-}
-.iv-adv-card p {
-  margin: 0; font-size: 14px; line-height: 1.45; color: var(--white);
+.iv-awards img {
+  width: 100%; max-width: 1100px; height: auto; display: block; margin: 0 auto;
 }
 
-/* panel sections */
+/* early band */
+.iv-early {
+  background: var(--bg-dark); color: var(--white);
+  padding: clamp(64px, 8vw, 120px) 0;
+}
+.iv-early h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(36px, 5vw, 64px); line-height: 1.08;
+}
+
+/* strategies panel */
 .iv-panel-outer {
-  max-width: var(--max); margin: 0 auto;
+  background: var(--bg-dark);
   padding: 0 var(--gutter) clamp(40px, 5vw, 72px);
-  box-sizing: border-box;
 }
 .iv-panel {
-  background: var(--panel); color: var(--bg); border-radius: 2px;
-  padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
+  max-width: var(--max); margin: 0 auto;
+  background: var(--bg-light); color: var(--text-dark);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: clamp(36px, 5vw, 64px) clamp(22px, 4vw, 56px);
 }
 .iv-panel-head {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  margin-bottom: clamp(28px, 4vw, 44px); align-items: start;
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: start;
+  margin-bottom: clamp(24px, 3vw, 36px);
 }
 .iv-panel-eyebrow {
-  display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(33,20,26,.4); margin: 0 0 10px;
+  display: block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(33,20,26,.45); margin: 0 0 10px;
 }
 .iv-panel-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
-  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12;
 }
 .iv-panel-head p {
-  margin: 0; font-size: 16px; line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 420px;
-  justify-self: end; text-align: right;
+  margin: 0; font-size: 14px; line-height: 1.5; color: rgba(33,20,26,.62);
+  text-align: right;
 }
 
-/* strategy accordion */
-.iv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
-.iv-acc:first-child { border-top: 1px solid rgba(33,20,26,.12); }
+.iv-acc { border-top: 1px solid rgba(33,20,26,.1); }
+.iv-acc:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
 .iv-acc-head {
   width: 100%; display: grid;
-  grid-template-columns: 110px 1fr auto auto;
-  gap: 16px; align-items: center; padding: 22px 0;
-  border: none; background: transparent; cursor: pointer; text-align: left;
+  grid-template-columns: 110px 1fr auto auto; gap: 16px; align-items: center;
+  padding: 22px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: inherit; font-family: inherit;
 }
-.iv-acc-tag {
-  font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
-  color: rgba(33,20,26,.4);
-}
-.iv-acc-title {
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(18px, 2vw, 26px); color: var(--bg); line-height: 1.2;
-}
-.iv-acc-yield {
-  font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--green);
-  white-space: nowrap;
-}
+.iv-acc-tag { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: rgba(33,20,26,.45); }
+.iv-acc-title { font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; }
+.iv-acc-yield { font-size: 15px; color: rgba(33,20,26,.7); white-space: nowrap; }
 .iv-acc-toggle {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: var(--bg); color: var(--white); font-size: 20px; line-height: 1;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--green); color: var(--white);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 20px;
 }
-.iv-acc.is-open .iv-acc-toggle { background: var(--green); }
-.iv-acc-panel { overflow: hidden; transition: max-height .4s ease; }
-.iv-acc-body { padding: 0 0 26px 126px; max-width: 720px; }
+.iv-acc-panel { overflow: hidden; transition: max-height .35s ease; }
+.iv-acc-body { padding: 0 0 24px 126px; max-width: 720px; }
 .iv-acc-meta {
-  display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 14px;
+  display: flex; gap: 32px; margin-bottom: 14px; flex-wrap: wrap;
 }
-.iv-acc-meta span {
-  display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
-  color: rgba(33,20,26,.4); margin-bottom: 4px;
-}
-.iv-acc-meta strong {
-  font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--bg);
-}
-.iv-acc-body p {
-  margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.72);
-}
-.iv-acc-ideal { color: rgba(33,20,26,.85) !important; }
+.iv-acc-meta span { display: block; font-size: 12px; color: rgba(33,20,26,.45); margin-bottom: 4px; }
+.iv-acc-meta strong { font-size: 14px; font-weight: 500; }
+.iv-acc-body p { margin: 0 0 12px; font-size: 15px; line-height: 1.5; color: rgba(33,20,26,.78); }
+.iv-acc-ideal { margin-bottom: 0 !important; }
 
-/* market */
-.iv-market { padding: clamp(48px, 6vw, 88px) 0; }
-.iv-market-head { margin-bottom: clamp(28px, 4vw, 44px); max-width: 560px; }
-.iv-market-head .iv-panel-eyebrow { color: var(--white); }
-.iv-market-head h2 {
-  font-family: var(--display); font-weight: 600; margin: 0;
-  font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
+/* market + process */
+.iv-market, .iv-process {
+  background: var(--bg-dark); color: var(--white);
+  padding: clamp(48px, 6vw, 88px) 0;
+}
+.iv-market h2, .iv-process h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(28px, 4vw, 44px);
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
 }
 .iv-charts {
   display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px);
 }
-.iv-chart h3 {
-  font-family: var(--body); font-size: 14px; font-weight: 500; margin: 0 0 20px;
-  color: var(--white);
-}
+.iv-chart h3 { margin: 0 0 20px; font-size: 15px; font-weight: 500; color: rgba(255,254,249,.75); }
 .iv-bar-row {
-  display: grid; grid-template-columns: 88px 1fr auto; gap: 12px;
-  align-items: center; margin-bottom: 12px;
+  display: grid; grid-template-columns: 90px 1fr 64px; gap: 12px; align-items: center;
+  margin-bottom: 12px; font-size: 13px;
 }
-.iv-bar-row span:first-child { font-size: 14px; color: var(--white); }
-.iv-bar-row span:last-child {
-  font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white); min-width: 4.5ch; text-align: right;
+.iv-bar-track { height: 10px; background: rgba(255,254,249,.12); border-radius: 2px; overflow: hidden; }
+.iv-bar-fill { height: 100%; background: var(--green); border-radius: 2px; }
+.iv-process-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start;
+  margin-bottom: clamp(28px, 4vw, 44px);
 }
-.iv-bar-track {
-  height: 8px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden;
-}
-.iv-bar-fill {
-  height: 100%; border-radius: 2px; background: var(--green);
-  transform-origin: left center;
-}
-
-/* process */
-.iv-process { padding: 0 0 clamp(48px, 6vw, 88px); }
+.iv-process-head h2 { margin: 0; }
+.iv-process-head p { margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,254,249,.78); }
 .iv-process-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px;
 }
-.iv-step {
-  display: grid; grid-template-columns: 48px 1fr; gap: 16px;
-  padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.1);
-}
+.iv-step { display: grid; grid-template-columns: 42px 1fr; gap: 14px; }
 .iv-step-n {
-  width: 48px; height: 48px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.28);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white);
+  font-family: var(--display); font-size: 22px; color: rgba(255,254,249,.45);
 }
-.iv-step h3 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 6px;
-  font-size: clamp(17px, 1.5vw, 20px);
-}
-.iv-step p {
-  margin: 0; font-size: 14px; line-height: 1.5; color: var(--white);
-}
+.iv-step h3 { margin: 0 0 6px; font-size: 17px; font-weight: 500; }
+.iv-step p { margin: 0; font-size: 14px; line-height: 1.45; color: rgba(255,254,249,.72); }
 
-/* faq */
-.iv-faq-grid {
-  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: clamp(28px, 4vw, 48px); align-items: start;
+/* FAQ */
+.iv-faq-outer {
+  background: var(--bg-dark);
+  padding: 0 var(--gutter) clamp(40px, 5vw, 72px);
 }
-.iv-faq { border-bottom: 1px solid rgba(33,20,26,.12); }
-.iv-faq:first-child { border-top: 1px solid rgba(33,20,26,.12); }
+.iv-faq-panel {
+  max-width: var(--max); margin: 0 auto;
+  background: var(--bg-light); color: var(--text-dark);
+  border-radius: var(--radius);
+  padding: clamp(36px, 5vw, 64px) clamp(22px, 4vw, 56px);
+}
+.iv-faq { border-top: 1px solid rgba(33,20,26,.1); }
+.iv-faq:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
 .iv-faq-head {
-  width: 100%; display: flex; justify-content: space-between; align-items: center;
-  gap: 16px; padding: 20px 0; border: none; background: transparent;
-  cursor: pointer; text-align: left;
-  font-family: var(--body); font-size: 16px; font-weight: 500; color: var(--bg);
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 20px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: inherit; font: inherit; font-size: 16px;
 }
 .iv-faq-toggle {
-  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: var(--bg); color: var(--white); font-size: 18px; line-height: 1;
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: var(--bg-dark); color: var(--white);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 20px;
 }
-.iv-faq.is-open .iv-faq-toggle { background: var(--green); }
 .iv-faq-body {
-  margin: 0 0 20px; padding-right: 40px;
-  font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.68);
-}
-.iv-faq-aside {
-  background: var(--bg); color: var(--white); border-radius: 2px;
-  padding: clamp(24px, 3vw, 36px);
-  position: sticky; top: calc(var(--nav-height, 88px) + 16px);
-}
-.iv-faq-aside h3 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 10px;
-  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2;
-}
-.iv-faq-aside p {
-  margin: 0 0 22px; font-size: 14px; line-height: 1.5; color: var(--white);
+  margin: 0 0 20px; max-width: 720px;
+  font-size: 15px; line-height: 1.5; color: rgba(33,20,26,.72);
 }
 
-/* cta */
+/* CTA */
 .iv-cta-outer {
-  max-width: var(--max); margin: 0 auto;
+  background: var(--bg-dark);
   padding: 0 var(--gutter) clamp(56px, 7vw, 100px);
-  box-sizing: border-box;
 }
 .iv-cta {
-  border-radius: 2px; overflow: hidden;
-  background-color: #21141A;
+  max-width: var(--max); margin: 0 auto;
+  border-radius: var(--radius-sm); overflow: hidden;
+  background-color: #412834;
   background-image: url('/images/cta-bg.jpg');
-  background-size: cover;
-  background-position: center right;
-  padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
-  text-align: center;
-  color: #FFFEF9;
+  background-size: cover; background-position: center;
+  padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 64px);
+  text-align: center; color: var(--white);
 }
-.iv-cta .iv-panel-eyebrow { color: var(--white); }
+.iv-cta .iv-panel-eyebrow { color: rgba(255,254,249,.65); }
 .iv-cta h2 {
   font-family: var(--display); font-weight: 600; margin: 0 0 14px;
   font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
 }
 .iv-cta p {
-  margin: 0 auto 28px; max-width: 480px;
-  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: var(--white);
+  margin: 0 auto 28px; max-width: 520px;
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: rgba(255,254,249,.85);
 }
 
-@media (max-width: 1024px) {
-  .iv-hero-grid, .iv-split, .iv-charts, .iv-process-grid, .iv-faq-grid, .iv-panel-head {
-    grid-template-columns: 1fr;
-  }
-  .iv-stats { grid-template-columns: repeat(2, 1fr); }
-  .iv-adv-grid { grid-template-columns: repeat(2, 1fr); }
-  .iv-hero-visual { justify-self: start; max-height: 480px; aspect-ratio: 16 / 11; }
-  .iv-panel-head p, .iv-split p { justify-self: start; text-align: left; max-width: none; }
-  .iv-acc-head { grid-template-columns: 1fr auto auto; gap: 10px; }
+@media (max-width: 1000px) {
+  .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts { grid-template-columns: 1fr; }
+  .iv-hero-lead, .iv-panel-head p { justify-self: start; text-align: left; max-width: none; }
+  .iv-mosaic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .iv-chain-rail { grid-template-columns: 1fr; }
+  .iv-acc-head { grid-template-columns: 1fr auto auto; }
   .iv-acc-tag { display: none; }
   .iv-acc-body { padding-left: 0; }
-  .iv-faq-aside { position: static; }
+  .iv-process-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .iv-hero { padding-top: 36px; }
-  .iv-hero-circle { width: 380px; height: 380px; top: -120px; right: -120px; }
-  .iv-hero-btns .iv-btn { width: 100%; }
-  .iv-adv-grid { grid-template-columns: 1fr; }
-  .iv-acc-yield { font-size: 13px; }
+  .iv-mosaic-grid { grid-template-columns: 1fr; }
+  .iv-diplomacy-row { grid-template-columns: 1fr; }
+  .iv-diplomacy-next { justify-self: start; }
 }
 `;
 
@@ -568,74 +557,128 @@ export default function InvestPage() {
   const [openStrategy, setOpenStrategy] = useState(0);
   const [openFaq, setOpenFaq] = useState(-1);
   const [modalOpen, setModalOpen] = useState(false);
+  const [diplomacyIndex, setDiplomacyIndex] = useState(0);
   useReveal();
+
+  const diplomacy = DIPLOMACY[diplomacyIndex];
 
   return (
     <div className="iv">
       <style>{CSS}</style>
 
-      <section className="iv-hero">
-        <span className="iv-hero-circle" aria-hidden="true" />
-        <div className="iv-wrap iv-hero-grid">
-          <div className="rv">
-            <span className="iv-hero-eyebrow">{t("invest.hero.eyebrow")}</span>
-            <h1>
-              {t("invest.hero.line1")}
-              <br />
-              {t("invest.hero.line2")}
-              <br />
-              {t("invest.hero.line3")}
-            </h1>
-            <p className="iv-hero-lead">{t("invest.hero.body")}</p>
-            <div className="iv-hero-btns">
-              <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
-                {t("invest.hero.ctaConsultation")}
-              </button>
-              <a href="#strategies" className="iv-btn iv-btn-outline">
-                {t("invest.hero.ctaStrategies")}
-              </a>
+      <section className="iv-hero" id="why-georgia">
+        <div className="iv-wrap iv-hero-grid rv">
+          <h1>
+            {t("invest.hero.line1")}
+            <br />
+            {t("invest.hero.line2")}
+          </h1>
+          <p className="iv-hero-lead">{t("invest.hero.body")}</p>
+        </div>
+      </section>
+
+      <section className="iv-mosaic">
+        <div className="iv-wrap">
+          <div className="iv-mosaic-grid rv">
+            <div className="iv-tile iv-tile-plum">
+              <div>
+                <p className="iv-tile-value">{t("invest.mosaic.visitorsValue")}</p>
+                <p className="iv-tile-label">{t("invest.mosaic.visitorsLabel")}</p>
+              </div>
+              <p className="iv-tile-source">{t("invest.mosaic.visitorsSource")}</p>
+            </div>
+            <div className="iv-tile iv-tile-img">
+              <img src="/why-georgia/img-horse.jpg" alt={t("invest.mosaic.horseAlt")} />
+            </div>
+            <div className="iv-tile iv-tile-plum iv-tile-center">{t("invest.mosaic.destination")}</div>
+            <div className="iv-tile iv-tile-img">
+              <img src="/why-georgia/img-sea.jpg" alt={t("invest.mosaic.seaAlt")} />
+            </div>
+            <div className="iv-tile iv-tile-img">
+              <img src="/why-georgia/img-food.jpg" alt={t("invest.mosaic.foodAlt")} />
+            </div>
+            <div className="iv-tile iv-tile-green">
+              <div>
+                <p className="iv-tile-value">{t("invest.mosaic.yieldValue")}</p>
+                <p className="iv-tile-label">{t("invest.mosaic.yieldLabel")}</p>
+              </div>
+            </div>
+            <div className="iv-tile iv-tile-muted">
+              <div>
+                <p className="iv-tile-value">{t("invest.mosaic.yearsValue")}</p>
+                <p className="iv-tile-label">{t("invest.mosaic.yearsLabel")}</p>
+                <p className="iv-tile-body">{t("invest.mosaic.yearsBody")}</p>
+              </div>
+            </div>
+            <div className="iv-tile iv-tile-img">
+              <img src="/why-georgia/img-wine.jpg" alt={t("invest.mosaic.wineAlt")} />
             </div>
           </div>
-          <div className="iv-hero-visual rv">
-            <img src="/home/rd-waterfront.jpg" alt={t("invest.hero.imageAlt")} />
+        </div>
+      </section>
+
+      <section className="iv-diplomacy">
+        <div className="iv-wrap">
+          <div className="iv-diplomacy-row rv">
+            <div>
+              <h2>{t(diplomacy.titleKey)}</h2>
+              <p>{t(diplomacy.bodyKey)}</p>
+              <div className="iv-diplomacy-dots" role="tablist" aria-label="Diplomacy slides">
+                {DIPLOMACY.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={i === diplomacyIndex ? "is-active" : undefined}
+                    aria-label={`Slide ${i + 1}`}
+                    onClick={() => setDiplomacyIndex(i)}
+                  />
+                ))}
+              </div>
+            </div>
+            <button
+              type="button"
+              className="iv-diplomacy-next"
+              aria-label={t("invest.diplomacy.next")}
+              onClick={() => setDiplomacyIndex((i) => (i + 1) % DIPLOMACY.length)}
+            >
+              ›
+            </button>
           </div>
         </div>
       </section>
 
-      <section className="iv-why" id="why-georgia">
+      <section className="iv-chain">
         <div className="iv-wrap">
-          <div className="iv-split rv">
-            <h2>{t("invest.why.title")}</h2>
-            <p>{t("invest.why.body")}</p>
+          <div className="iv-chain-head rv">
+            <h2>{t("invest.chain.title")}</h2>
+            <p>{t("invest.chain.body")}</p>
           </div>
-          <div className="iv-stats rv">
-            {STATS.map((s) => (
-              <div key={s.labelKey} className={`iv-stat iv-stat-${s.tone}`}>
-                <span className="iv-stat-value">{s.valueKey ? t(s.valueKey) : s.value}</span>
-                <span className="iv-stat-label">{t(s.labelKey)}</span>
-              </div>
+          <div className="iv-chain-rail rv">
+            {CHAIN.map((card) => (
+              <article key={card.titleKey} className="iv-chain-card">
+                <img src={card.img} alt="" />
+                <h3>{t(card.titleKey)}</h3>
+                <p>{t(card.bodyKey)}</p>
+              </article>
             ))}
-          </div>
-          <div className="iv-quote rv" id="notes">
-            <span className="iv-panel-eyebrow" style={{ color: "var(--white)" }}>
-              {t("v2.quote.eyebrow")}
-            </span>
-            <blockquote>{t("invest.why.quote")}</blockquote>
-            <cite>{t("invest.why.quoteAttr")}</cite>
           </div>
         </div>
       </section>
 
-      <section className="iv-adv">
-        <div className="iv-wrap">
-          <div className="iv-adv-grid rv">
-            {ADVANTAGES.map((a) => (
-              <div key={a.titleKey} className="iv-adv-card">
-                <h3>{t(a.titleKey)}</h3>
-                <p>{t(a.subKey)}</p>
-              </div>
-            ))}
-          </div>
+      <section className="iv-awards">
+        <div className="iv-wrap rv">
+          <h2>{t("invest.awards.title")}</h2>
+          <img src="/why-georgia/awards.png" alt={t("invest.awards.alt")} />
+        </div>
+      </section>
+
+      <section className="iv-early">
+        <div className="iv-wrap rv">
+          <h2>
+            {t("invest.early.line1")}
+            <br />
+            {t("invest.early.line2")}
+          </h2>
         </div>
       </section>
 
@@ -661,10 +704,7 @@ export default function InvestPage() {
 
       <section className="iv-market">
         <div className="iv-wrap">
-          <div className="iv-market-head rv">
-            <span className="iv-panel-eyebrow">{t("invest.market.eyebrow")}</span>
-            <h2>{t("invest.market.title")}</h2>
-          </div>
+          <h2 className="rv">{t("invest.market.title")}</h2>
           <div className="iv-charts rv">
             <div className="iv-chart">
               <h3>{t("invest.market.priceComparison")}</h3>
@@ -696,7 +736,7 @@ export default function InvestPage() {
 
       <section className="iv-process" id="process">
         <div className="iv-wrap">
-          <div className="iv-split rv">
+          <div className="iv-process-head rv">
             <h2>{t("invest.process.title")}</h2>
             <p>{t("invest.process.body")}</p>
           </div>
@@ -714,35 +754,21 @@ export default function InvestPage() {
         </div>
       </section>
 
-      <section className="iv-panel-outer">
-        <div className="iv-panel rv">
-          <div className="iv-panel-head">
-            <div>
-              <span className="iv-panel-eyebrow">{t("invest.faq.eyebrow")}</span>
-              <h2>{t("invest.faq.title")}</h2>
-            </div>
-            <p>{t("invest.faq.body")}</p>
-          </div>
-          <div className="iv-faq-grid">
-            <div>
-              {FAQS.map((faq, index) => (
-                <FaqItem
-                  key={faq.qKey}
-                  qKey={faq.qKey}
-                  aKey={faq.aKey}
-                  isOpen={openFaq === index}
-                  onToggle={() => setOpenFaq(openFaq === index ? -1 : index)}
-                />
-              ))}
-            </div>
-            <aside className="iv-faq-aside">
-              <h3>{t("invest.faq.moreQuestions")}</h3>
-              <p>{t("invest.faq.talkDirectly")}</p>
-              <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
-                {t("invest.cta.button")}
-              </button>
-            </aside>
-          </div>
+      <section className="iv-faq-outer">
+        <div className="iv-faq-panel rv">
+          <span className="iv-panel-eyebrow">{t("invest.faq.eyebrow")}</span>
+          <h2 style={{ fontFamily: "var(--display)", fontWeight: 600, margin: "0 0 28px", fontSize: "clamp(28px, 3.4vw, 44px)", lineHeight: 1.12 }}>
+            {t("invest.faq.title")}
+          </h2>
+          {FAQS.map((faq, index) => (
+            <FaqItem
+              key={faq.qKey}
+              qKey={faq.qKey}
+              aKey={faq.aKey}
+              isOpen={openFaq === index}
+              onToggle={() => setOpenFaq(openFaq === index ? -1 : index)}
+            />
+          ))}
         </div>
       </section>
 
