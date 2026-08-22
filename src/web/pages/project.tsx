@@ -712,6 +712,53 @@ export default function ProjectPage() {
                 </div>
               </div>
 
+              {p.awards && p.awards.length > 0 ? (
+                <>
+                  <Divider />
+                  <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                    <h3
+                      style={{
+                        fontFamily: "Coolvetica, Inter, sans-serif",
+                        fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
+                        fontWeight: 500,
+                        color: C.dark,
+                        lineHeight: 1.25,
+                        margin: "0 0 24px",
+                      }}
+                    >
+                      {t("project.awards")}
+                    </h3>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                        gap: isMobile ? 20 : 28,
+                      }}
+                    >
+                      {p.awards.map((award) => (
+                        <img
+                          key={award.src}
+                          src={award.src}
+                          alt={award.alt}
+                          style={{
+                            display: "block",
+                            height: "auto",
+                            width: "auto",
+                            maxHeight: isMobile ? 88 : 104,
+                            maxWidth: isMobile ? 200 : 240,
+                            objectFit: "contain",
+                            border: "none",
+                            background: "transparent",
+                            borderRadius: 0,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : null}
+
               <Divider />
 
 {/* Specs — 3×2 stacked label/value grid (no dividers) */}
@@ -869,51 +916,6 @@ export default function ProjectPage() {
                     </a>
                   )}
                 </div>
-
-                {p.awards && p.awards.length > 0 ? (
-                  <div className="pr-reveal" style={{ marginTop: isMobile ? 28 : 32 }}>
-                    <p
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "0.62rem",
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        color: "rgba(33,20,26,0.55)",
-                        margin: "0 0 12px",
-                      }}
-                    >
-                      {t("project.awards")}
-                    </p>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                      {p.awards.map((award) => (
-                        <div
-                          key={award.src}
-                          style={{
-                            background: C.light,
-                            borderRadius: 2,
-                            border: "1px solid rgba(33,20,26,0.1)",
-                            padding: "10px 12px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <img
-                            src={award.src}
-                            alt={award.alt}
-                            style={{
-                              width: "100%",
-                              maxWidth: 280,
-                              height: "auto",
-                              display: "block",
-                              objectFit: "contain",
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
 
                 {(p.liveCameraUrl || p.tourUrl || p.panoramaUrl) ? (
                   <>

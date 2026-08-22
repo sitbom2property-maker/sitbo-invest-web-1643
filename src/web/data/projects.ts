@@ -471,6 +471,12 @@ export const projects: Project[] = [
     floorPlanLabels: [],
     pricePerSqm: "from $1,800/m²",
     propertyType: "residence",
+    awards: [
+      {
+        src: "/projects/shekvetili/brand/epa-winner-2024-2025.svg",
+        alt: "European Property Awards 2024–2025 — Award Winner, Mixed Use Development",
+      },
+    ],
   },
   {
     name: "Vake Sky Tower",
