@@ -32,7 +32,7 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 }
 
 // ─── Cities & filter types ────────────────────────────────────────────────────
-const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri", "Shekvetili"] as const;
+const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi", "Gonio", "Makhinjauri", "Shekvetili"] as const;
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function CatalogCard({ p }: { p: Project }) {
@@ -117,7 +117,8 @@ export default function CatalogPage() {
     All: t("catalog.filterAll"),
     Batumi: t("catalog.city.batumi"),
     Tbilisi: t("catalog.city.tbilisi"),
-    "Chakvi / Gonio": t("catalog.city.chakviGonio"),
+    Chakvi: t("catalog.city.chakvi"),
+    Gonio: t("catalog.city.gonio"),
     Makhinjauri: t("catalog.city.makhinjauri"),
     Shekvetili: t("catalog.city.shekvetili"),
   };

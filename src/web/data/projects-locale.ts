@@ -229,32 +229,6 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     materials:
       "Инженерные решения международного уровня для высотного строительства: энергоэффективный фасад, централизованные технические ядра и премиальная отделка апартаментов отельного стандарта.",
   },
-  "queens-residence": {
-    tag: "Закрытое сообщество",
-    address: "Батуми, ул. Adlia, 53",
-    seaDistance: "8 минут до моря",
-    seaMeters: "620 м",
-    location: "Батуми, ул. Adlia, 53",
-    desc: "Комплекс включает два 16-этажных здания (корпуса A и B), 581 премиальную квартиру и развитую инфраструктуру для комфортной жизни и умной инвестиции. Queen's Residence — обладатель двух престижных международных наград в сфере недвижимости как лучший девелоперский проект в Грузии: Luxury Lifestyle Awards 2024 и European Property Awards 2024.",
-    area: "45–130 м²",
-    ceilingHeight: "3,1 м",
-    floors: "16",
-    buildings: "2",
-    finishing: "Белый каркас, С ремонтом, Под ключ",
-    installment: "30% / 70%",
-    features: [
-      "Закрытое частное сообщество",
-      "Инфраструктура пятизвёздочного отеля",
-      "Ресепшен и консьерж",
-      "Бассейн и wellness-центр",
-      "Персональный Property Manager",
-    ],
-    materials:
-      "Премиальный железобетонный каркас, итальянская отделка фасада, предустановленная проводка под умный дом.",
-    floorPlanLabels: ["Студия", "Джуниор сюит", "1+1"],
-    pricePerSqm: "Скоро",
-    priceFrom: "От $95,000",
-  },
   "silk-towers": {
     tag: "Первая линия · Вид на море",
     address: "Black Sea Blvd, 1",
@@ -398,7 +372,8 @@ export function localizeProjects(list: Project[], language: string): Project[] {
 const CITY_RU: Record<string, string> = {
   Batumi: "Батуми",
   Tbilisi: "Тбилиси",
-  "Chakvi / Gonio": "Чакви / Гонио",
+  Chakvi: "Чакви",
+  Gonio: "Гонио",
   Makhinjauri: "Махинджаури",
   Shekvetili: "Шекветили",
 };

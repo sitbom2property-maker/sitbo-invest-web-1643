@@ -2,7 +2,7 @@ export type Project = {
   name: string;
   slug: string;
   tag: string;
-  city: "Batumi" | "Tbilisi" | "Chakvi / Gonio" | "Makhinjauri" | "Shekvetili";
+  city: "Batumi" | "Tbilisi" | "Chakvi" | "Gonio" | "Makhinjauri" | "Shekvetili";
   address: string;
   seaDistance: string;
   seaMeters: string;
@@ -538,45 +538,6 @@ export const projects: Project[] = [
     pricePerSqm: "from $3,100/m²",
   },
   {
-    name: "Queen's Residence",
-    slug: "queens-residence",
-    tag: "Gated Community",
-    city: "Batumi",
-    address: "Batumi, Adlia St, 53",
-    seaDistance: "8 minutes to the sea",
-    seaMeters: "620 m",
-    location: "Batumi, Adlia St, 53",
-    desc: "The project features two 16-storey buildings (Blocks A and B), 581 premium apartments, and a diverse infrastructure designed for both comfortable living and smart investment. Queen's Residence is the recipient of two prestigious international real estate awards as the Best Development Project in Georgia — Luxury Lifestyle Awards 2024 and European Property Awards 2024.",
-    yield: "9–16%",
-    developer: "Tempo Holding",
-    architect: "TBA",
-    priceFrom: "From $95,000",
-    priceUSD: 95000,
-    completion: "Q1 2027",
-    area: "45–130 m²",
-    ceilingHeight: "3.1 m",
-    floors: "16",
-    buildings: "2",
-    finishing: "White Frame, Renovated, Turnkey",
-    installment: "30% / 70%",
-    features: [
-      "Gated private community",
-      "5-star hotel infrastructure",
-      "Reception & concierge",
-      "Pool & wellness centre",
-      "Personal Property Manager",
-    ],
-    materials: "Premium reinforced concrete frame, Italian facade cladding, smart home pre-wiring.",
-    photos: ["/projects/queens/for-sale/1.jpg", "/projects/queens/for-sale/2.png", "/projects/queens/for-sale/3.png", "/projects/queens/for-sale/4.png", "/projects/queens/for-sale/5.jpg", "/projects/queens/for-sale/6.jpg", "/projects/queens/for-sale/7.jpg", "/projects/queens/for-sale/8.jpg", "/projects/queens/for-sale/9.jpg", "/projects/queens/for-sale/10.jpg", "/projects/queens/for-sale/11.jpg", "/projects/queens/for-sale/12.jpg", "/projects/queens/for-sale/13.jpg"],
-    cardImage: "/projects/queens/for-sale/card.png",
-    lat: 41.6518,
-    lng: 41.6372,
-    floorPlans: ["/projects/queens/floor-plans/layout-1.png", "/projects/queens/floor-plans/layout-2.png", "/projects/queens/floor-plans/layout-3.png"],
-    floorPlanLabels: ["Studio", "Junior Suite", "1+1"],
-    pricePerSqm: "Coming Soon",
-    liveCameraUrl: "https://tempoholding.ge/eng/livecamera",
-  },
-  {
     name: "Silk Towers",
     slug: "silk-towers",
     tag: "First Line · Sea View",
@@ -619,7 +580,7 @@ export const projects: Project[] = [
     name: "Rogantini Swiss Village",
     slug: "rogantini-swiss-village",
     tag: "Chakvi · Alpine Quality",
-    city: "Chakvi / Gonio",
+    city: "Chakvi",
     address: "Chakvi, suburb of Batumi · 15 minutes by car",
     seaDistance: "5 minutes to the beach",
     seaMeters: "400 m",
@@ -684,8 +645,8 @@ export const projects: Project[] = [
     ],
     galleryPreview: [
       "/projects/rogantini/for-sale/ext-hero.jpg",
-      "/projects/rogantini/for-sale/ext-outdoor-01.jpg",
-      "/projects/rogantini/marketing/reception-01.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-02.jpg",
+      "/projects/rogantini/marketing/reception-02.jpg",
       "/projects/rogantini/interiors/apartment-01.jpg",
       "/projects/rogantini/for-sale/ext-view-real.jpg",
     ],
@@ -747,7 +708,7 @@ export const projects: Project[] = [
     name: "Gonio Yachts & Marina",
     slug: "gonio-yachts-marina",
     tag: "Gonio · Waterfront",
-    city: "Chakvi / Gonio",
+    city: "Gonio",
     address: "Gonio, 15 km from Batumi",
     seaDistance: "Direct waterfront",
     seaMeters: "0 m",
