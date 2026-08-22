@@ -539,7 +539,7 @@ function Feedback() {
                 <figcaption>— {t(f.authorKey)}</figcaption>
                 <div className="rd-fb-tags">
                   {f.tags.map((tag) => (
-                    <span key={tag}>{tag.replace(/^#/, "")}</span>
+                    <span key={tag}>{tag}</span>
                   ))}
                 </div>
               </figure>
@@ -1000,27 +1000,28 @@ html, body { background: #21141A; }
   --fb-size: clamp(240px, calc((100% - 32px) / 2.65), 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
-  width: var(--fb-size); min-height: calc(var(--fb-size) + 20px);
+  width: var(--fb-size); min-height: calc(var(--fb-size) + 28px);
   scroll-snap-align: start;
   margin: 0; box-sizing: border-box;
   background: #412835; border-radius: 2px;
-  padding: clamp(22px, 2.2vw, 32px);
+  padding: clamp(26px, 2.6vw, 36px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
   pointer-events: none;
 }
 .rd-fb-card blockquote {
   font-family: var(--body); font-weight: 700; font-size: 16px;
-  line-height: 1.35; margin: 0 0 18px; color: #FFFEF9;
+  line-height: 1.4; margin: 0 0 22px; color: #FFFEF9;
 }
 .rd-fb-card figcaption {
   font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px);
-  color: #FFFEF9; margin: 0 0 8px;
+  color: #FFFEF9; margin: 0 0 12px; line-height: 1.4;
 }
-.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 18px; }
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: auto; padding-top: 24px; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 16px; padding: 7px 12px; color: #FFFEF9;
-  border: 1px solid rgba(255,254,249,.55); border-radius: 2px;
-  text-transform: capitalize;
+  font-family: var(--body); font-size: 12px; line-height: 1.35;
+  padding: 0; color: rgba(255,254,249,.78);
+  border: none; border-radius: 0;
+  text-transform: none; letter-spacing: 0.01em;
 }
 .rd-fb-track { margin-top: 18px; }
 
