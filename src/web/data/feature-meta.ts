@@ -45,22 +45,24 @@ const RULES: Rule[] = [
   { category: "lot", icon: "building", test: /high-?yield|доходност|investment/i },
   { category: "outdoor", icon: "parking", test: /parking|паркинг/i },
   { category: "lot", icon: "park", test: /all-season|всесезон|инфраструктур/i },
+  { category: "lot", icon: "park", test: /clean air|aqi|чисты.\s*воздух/i },
   { category: "lot", icon: "sea", test: /\bsea\b|seaside|waterfront|black sea|boulevard/i },
   { category: "lot", icon: "beach", test: /beach|sand beach|beach club|café del mar|cafe del mar/i },
   { category: "lot", icon: "mountain", test: /mountain|hill panorama|city & hill/i },
   { category: "lot", icon: "panorama", test: /panoramic|scenic|glazing|views|остеклен/i },
   { category: "lot", icon: "park", test: /\bpark\b|forest|landscap|green|garden|recreation|hectare|archipelago/i },
   { category: "lot", icon: "building", test: /address|boulevard|historic|monument|new build|tower|tallest|fa[cç]ade|ventilated|concrete|construction|phased|university|diplomatic|vake|resort community|masterplan/i },
-  { category: "outdoor", icon: "pool", test: /outdoor pool|infinity pool|pools?,?\s*courts|pool & wellness|pools,/i },
-  { category: "outdoor", icon: "court", test: /tennis|basketball|\bcourts?\b|sport/i },
+  { category: "outdoor", icon: "pool", test: /outdoor pool|infinity pool|pools?,?\s*courts|pool & wellness|pools,|swimming pool/i },
+  { category: "outdoor", icon: "cinema", test: /outdoor cinema|open-?air cinema|летн.*кино|кинотеатр\s*на\s*открыт/i },
+  { category: "outdoor", icon: "court", test: /tennis|basketball|padel|\bcourts?\b|sport/i },
   { category: "outdoor", icon: "yacht", test: /yacht|marina|berth/i },
-  { category: "outdoor", icon: "balcony", test: /balcony|terrace|rooftop/i },
-  { category: "outdoor", icon: "kids", test: /play area|children|kindergarten|pet zone|детск|питомц|playroom|игровая/i },
+  { category: "outdoor", icon: "balcony", test: /balcony|terrace|rooftop|bbq/i },
+  { category: "outdoor", icon: "kids", test: /play area|children|kindergarten|pet zone|pet area|детск|питомц|playroom|игровая/i },
   { category: "indoor", icon: "pool", test: /indoor pool|spa with indoor/i },
   { category: "indoor", icon: "gym", test: /gym|fitness|wellness|spa(?! with)/i },
   { category: "indoor", icon: "cinema", test: /cinema|poker/i },
   { category: "indoor", icon: "elevator", test: /elevator|lift|лифт/i },
-  { category: "indoor", icon: "office", test: /office|business centre|business center/i },
+  { category: "indoor", icon: "office", test: /office|business centre|business center|conference|конференц|cowork/i },
   { category: "indoor", icon: "hotel", test: /concierge|reception|hotel|branded|hospitality|casino|manager|service 24|сервис 24/i },
   { category: "indoor", icon: "shop", test: /restaurant|café|cafe|retail|store|fashion|food/i },
   { category: "indoor", icon: "security", test: /security|gated|24\/7|охран/i },
@@ -104,6 +106,21 @@ function normalizeConstructionLabel(raw: string): string {
   if (/panoramic|панорамн/i.test(t) && /glaz|остек/i.test(t)) {
     return t.replace(/\s*&\s*/g, " & ");
   }
+  if (/anti-?mold|анти.?плесен/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Фасад Anti-Mold" : "Anti-Mold Facade";
+  }
+  if (/9\s*\+/i.test(t) && /seismic|сейсм|resilience|устойчив/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "9+ сейсмическая устойчивость" : "9+ Seismic Resilience";
+  }
+  if (/deep\s+foundation|глубок.*фундам/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Глубокий фундамент" : "Deep foundation";
+  }
+  if (/knauf/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Шумоизоляция Knauf" : "Knauf noise insulation";
+  }
+  if (/sch[uü]co/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Остекление Schüco" : "Schüco Glazing";
+  }
   if (/moisture|влаг|корроз/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Защита от влаги" : "Moisture protection";
   }
@@ -122,7 +139,7 @@ function normalizeConstructionLabel(raw: string): string {
   if (/climate|vrv|климат/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Климат-системы" : "Climate systems";
   }
-  if (/seismic|сейсм|8\s*\+|8\s*point|8\s*балл|frame|каркас/i.test(t)) {
+  if (/8\s*\+|seismic|сейсм|8\s*point|8\s*балл/i.test(t)) {
     return /[а-яё]/i.test(t) ? "8+ сейсмическая устойчивость" : "8+ Seismic Resilience";
   }
   if (/jet\s*grout/i.test(t)) return "Jet Grouting";
