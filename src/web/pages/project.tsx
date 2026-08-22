@@ -82,14 +82,27 @@ function Divider() {
 }
 
 // ─── Gallery (JamesEdition-style mosaic + lightbox) ───────────────────────────
-function Gallery({ photos, name }: { photos: string[]; name: string }) {
+function Gallery({
+  photos,
+  preview,
+  name,
+}: {
+  photos: string[];
+  preview?: string[];
+  name: string;
+}) {
   const t = useT();
   const isMobile = useIsMobile();
   const [lightbox, setLightbox] = useState<number | null>(null);
   const list = photos.length > 0 ? photos : [];
-  const hero = list[0];
-  const mosaic = list.slice(1, 5);
-  const openAt = (i: number) => setLightbox(i);
+  const reel = (preview && preview.length > 0 ? preview : list).slice(0, 5);
+  const hero = reel[0];
+  const mosaic = reel.slice(1, 5);
+  const openSrc = (src: string) => {
+    const idx = list.indexOf(src);
+    setLightbox(idx >= 0 ? idx : 0);
+  };
+  const openAll = () => setLightbox(0);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -98,11 +111,11 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
       if (e.key === "ArrowRight") setLightbox((i) => (i === null ? i : (i + 1) % list.length));
       if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? i : (i - 1 + list.length) % list.length));
     };
-    const prev = document.body.style.overflow;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", onKey);
     };
   }, [lightbox, list.length]);
@@ -151,7 +164,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
           background: C.light,
         }}
       >
-        <button type="button" onClick={() => openAt(0)} style={{ ...cellBtn, gridRow: isMobile ? "1" : "1 / -1" }} aria-label={name}>
+        <button type="button" onClick={() => openSrc(hero)} style={{ ...cellBtn, gridRow: isMobile ? "1" : "1 / -1" }} aria-label={name}>
           <img
             src={hero}
             alt={name}
@@ -175,31 +188,28 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
               minHeight: isMobile ? 160 : 0,
             }}
           >
-            {mosaic.slice(0, 4).map((src, i) => {
-              const photoIndex = i + 1;
-              return (
-                <button
-                  key={src + i}
-                  type="button"
-                  onClick={() => openAt(photoIndex)}
-                  style={cellBtn}
-                  aria-label={`${name} ${photoIndex + 1}`}
-                >
-                  <img
-                    src={src}
-                    alt=""
-                    style={cellImg}
-                    onMouseEnter={(e) => {
-                      if (!isMobile) e.currentTarget.style.transform = "scale(1.03)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                    }}
-                  />
-                </button>
-              );
-            })}
-            {!isMobile && mosaic.length > 0 && mosaic.length < 4
+            {mosaic.map((src, i) => (
+              <button
+                key={src + i}
+                type="button"
+                onClick={() => openSrc(src)}
+                style={cellBtn}
+                aria-label={`${name} ${i + 2}`}
+              >
+                <img
+                  src={src}
+                  alt=""
+                  style={cellImg}
+                  onMouseEnter={(e) => {
+                    if (!isMobile) e.currentTarget.style.transform = "scale(1.03)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                />
+              </button>
+            ))}
+            {!isMobile && mosaic.length < 4
               ? Array.from({ length: 4 - mosaic.length }).map((_, i) => (
                   <div key={`empty-${i}`} style={{ background: "rgba(33,20,26,0.04)", borderRadius: 2 }} />
                 ))
@@ -209,7 +219,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
 
         <button
           type="button"
-          onClick={() => openAt(0)}
+          onClick={openAll}
           style={{
             position: "absolute",
             right: isMobile ? 12 : 16,
@@ -217,9 +227,9 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
             zIndex: 2,
             display: "inline-flex",
             alignItems: "center",
-            gap: 8,
+            justifyContent: "center",
             padding: isMobile ? "10px 14px" : "11px 16px",
-            borderRadius: 999,
+            borderRadius: 2,
             border: "1px solid rgba(33,20,26,0.08)",
             background: "#FFFEF9",
             color: C.dark,
@@ -232,17 +242,6 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
             lineHeight: 1,
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
-            <rect x="1.5" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="6" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="10.5" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="1.5" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="6" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="10.5" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="1.5" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="6" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-            <rect x="10.5" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-          </svg>
           {t("project.showAllPhotos")}
         </button>
       </div>
@@ -621,7 +620,7 @@ export default function ProjectPage() {
               {linkCopied ? t("project.linkCopied") : t("project.share")}
             </button>
           </div>
-          <Gallery photos={p.photos} name={p.name} />
+          <Gallery photos={p.photos} preview={p.galleryPreview} name={p.name} />
         </Container>
       </section>
 

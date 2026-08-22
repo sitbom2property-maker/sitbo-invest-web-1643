@@ -27,6 +27,11 @@ export type Project = {
   materials: string;
   photos: string[];
   cardImage: string;
+  /**
+   * Optional 5-image showreel for the project-page mosaic (house / outdoor /
+   * reception / apartment mix). Lightbox always uses the full `photos` list.
+   */
+  galleryPreview?: string[];
   lat: number;
   lng: number;
   /** Google Maps search query for the embed pin; falls back to lat,lng. */
@@ -307,6 +312,14 @@ export const projects: Project[] = [
       "/projects/parkline/interiors/int-kitchen.jpg",
       "/projects/parkline/interiors/int-2br-bed.jpg",
       "/projects/parkline/interiors/int-bedroom-soft.jpg",
+    ],
+    // Mosaic showreel: house → outdoor → reception → apartment → outdoor
+    galleryPreview: [
+      "/projects/parkline/for-sale/ext-02.jpg",
+      "/projects/parkline/for-sale/ext-pool-deck.jpg",
+      "/projects/parkline/marketing/int-reception-2.jpg",
+      "/projects/parkline/interiors/int-2br-live.jpg",
+      "/projects/parkline/for-sale/ext-16.jpg",
     ],
     cardImage: "/projects/parkline/for-sale/ext-02.jpg",
     lat: 41.6282308808277,
