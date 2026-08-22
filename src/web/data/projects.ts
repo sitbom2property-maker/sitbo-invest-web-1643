@@ -56,6 +56,21 @@ export type Project = {
   districtBody?: string;
   districtBody2?: string;
   apartmentsKey?: "piazza" | "parkline";
+  /** Optional construction timeline; when omitted, derived from completion year. */
+  constructionProgress?: ConstructionProgress;
+};
+
+export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
+
+export type ConstructionStage = {
+  id: ConstructionStageId;
+  year: number;
+};
+
+export type ConstructionProgress = {
+  /** Last reached stage index (0-based); stages 0..activeIndex render as complete. */
+  activeIndex: number;
+  stages: ConstructionStage[];
 };
 
 export type PaymentStage = "down" | "construction" | "handover";
@@ -90,6 +105,28 @@ export function resolvePaymentPlans(p: Project): PaymentPlan[] {
   return [];
 }
 
+/** Resolve construction timeline for the Progress & Updates bar. */
+export function resolveConstructionProgress(p: Project): ConstructionProgress {
+  if (p.constructionProgress?.stages?.length) {
+    const stages = p.constructionProgress.stages;
+    const activeIndex = Math.max(0, Math.min(stages.length - 1, p.constructionProgress.activeIndex));
+    return { stages, activeIndex };
+  }
+
+  const match = p.completion.match(/20\d{2}/);
+  const handover = match ? Number(match[0]) : new Date().getFullYear() + 2;
+  const stages: ConstructionStage[] = [
+    { id: "foundation", year: handover - 3 },
+    { id: "construction", year: handover - 2 },
+    { id: "facade", year: handover - 1 },
+    { id: "handover", year: handover },
+  ];
+  const now = new Date().getFullYear();
+  let activeIndex = stages.findIndex((s) => s.year > now) - 1;
+  if (activeIndex < 0) activeIndex = stages.every((s) => s.year <= now) ? stages.length - 1 : 0;
+  return { stages, activeIndex };
+}
+
 export const projects: Project[] = [
   {
     name: "Piazza Residence",
@@ -118,6 +155,15 @@ export const projects: Project[] = [
     installmentAnchorYm: "2026-08",
     apartmentsKey: "piazza",
     developerLogo: "/projects/piazza/brand/developer-logo.png",
+    constructionProgress: {
+      activeIndex: 1,
+      stages: [
+        { id: "foundation", year: 2025 },
+        { id: "construction", year: 2026 },
+        { id: "facade", year: 2027 },
+        { id: "handover", year: 2028 },
+      ],
+    },
     developerBody:
       "Tower Group is a Batumi developer known for Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
     districtTitle: "Old Batumi",
@@ -193,6 +239,15 @@ export const projects: Project[] = [
     installment: "30% down / 0% over 40 months",
     downPaymentPct: 30,
     apartmentsKey: "parkline",
+    constructionProgress: {
+      activeIndex: 0,
+      stages: [
+        { id: "foundation", year: 2026 },
+        { id: "construction", year: 2027 },
+        { id: "facade", year: 2028 },
+        { id: "handover", year: 2029 },
+      ],
+    },
     developerLogo: "/projects/parkline/brand/developer-logo.png",
     developerBody:
       "Artex is a Batumi developer behind Parkline — a mixed-use complex on the New Boulevard with hotel-grade infrastructure, jet-grouted foundations and seismic design above the mandatory standard.",

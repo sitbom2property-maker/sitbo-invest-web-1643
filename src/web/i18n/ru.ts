@@ -594,6 +594,13 @@ const ru: Record<MessageKey, string> = {
   "project.layoutComingSoon": "Планировка {number} — скоро",
   "project.location": "Локация",
   "project.locationLifestyle": "Локация и lifestyle",
+  "project.progress.eyebrow": "{name} · Статус строительства",
+  "project.progress.title": "Прогресс и обновления",
+  "project.progress.subtitle": "Текущий статус строительства",
+  "project.progress.foundation": "Фундамент",
+  "project.progress.construction": "Строительство",
+  "project.progress.facade": "Фасад",
+  "project.progress.handover": "Сдача",
   "project.district.newBoulevard.title": "Новый бульвар",
   "project.district.newBoulevard.body":
     "Новый бульвар — самый зелёный и быстрорастущий приморский район Батуми. В отличие от шумного старого города и центра здесь спокойнее и семейнее: новая парковая аллея, парк Леха и Марии Качиньских и рядом побережье. Кафе, магазины и спорт — в шаговой доступности, а до аэропорта Батуми около 8 минут на машине.",

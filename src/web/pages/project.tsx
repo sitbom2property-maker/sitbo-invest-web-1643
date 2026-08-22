@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "wouter";
-import { projects, resolvePaymentPlans, type Project } from "../data/projects";
+import { projects, resolvePaymentPlans, resolveConstructionProgress, type ConstructionStageId, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
@@ -8,7 +8,7 @@ import { RequestModal } from "../components/RequestModal";
 import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
-import { useT } from "../i18n";
+import { useT, type MessageKey } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -992,6 +992,189 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
+
+{/* ── PROGRESS & UPDATES ── */}
+      {(() => {
+        const progress = resolveConstructionProgress(p);
+        const stageKey = (id: ConstructionStageId): MessageKey =>
+          id === "foundation"
+            ? "project.progress.foundation"
+            : id === "construction"
+              ? "project.progress.construction"
+              : id === "facade"
+                ? "project.progress.facade"
+                : "project.progress.handover";
+        const pct =
+          progress.stages.length <= 1
+            ? 100
+            : (progress.activeIndex / (progress.stages.length - 1)) * 100;
+
+        return (
+          <section className="pr-progress-outer">
+            <style>{`
+              .pr-progress-outer {
+                background: ${C.dark};
+                padding: clamp(56px, 7vw, 96px) 0;
+              }
+              .pr-progress-inner {
+                max-width: var(--site-max, 1440px);
+                margin: 0 auto;
+                padding: 0 var(--site-gutter, clamp(30px, 5.5vw, 80px));
+                box-sizing: border-box;
+                text-align: left;
+                color: ${C.light};
+              }
+              .pr-progress-eyebrow {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin: 0 0 22px;
+                font-family: Inter, sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: rgba(255,254,249,0.45);
+              }
+              .pr-progress-eyebrow::before,
+              .pr-progress-eyebrow::after {
+                content: "";
+                height: 1px;
+                background: rgba(255,254,249,0.22);
+              }
+              .pr-progress-eyebrow::before { width: 28px; flex-shrink: 0; }
+              .pr-progress-eyebrow::after { flex: 0 1 120px; max-width: 160px; }
+              .pr-progress-title {
+                margin: 0 0 10px;
+                font-family: Coolvetica, Inter, sans-serif;
+                font-weight: 500;
+                font-size: clamp(1.6rem, 3vw, 2.4rem);
+                line-height: 1.15;
+                color: ${C.light};
+                text-transform: uppercase;
+                letter-spacing: 0.02em;
+              }
+              .pr-progress-sub {
+                margin: 0 0 clamp(36px, 4.5vw, 56px);
+                font-family: Inter, sans-serif;
+                font-size: 15px;
+                line-height: 1.4;
+                color: rgba(255,254,249,0.5);
+              }
+              .pr-progress-track {
+                position: relative;
+                width: min(100%, 920px);
+                padding-top: 10px;
+              }
+              .pr-progress-line {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 17px;
+                height: 2px;
+                background: rgba(255,254,249,0.18);
+              }
+              .pr-progress-line-fill {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                background: ${C.light};
+              }
+              .pr-progress-steps {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 8px;
+              }
+              .pr-progress-step {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex: 0 0 auto;
+                width: 24%;
+                max-width: 140px;
+              }
+              .pr-progress-step:first-child {
+                align-items: flex-start;
+                width: auto;
+                max-width: 120px;
+              }
+              .pr-progress-step:last-child {
+                align-items: flex-end;
+                width: auto;
+                max-width: 120px;
+              }
+              .pr-progress-dot {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                box-sizing: border-box;
+                border: 2px solid rgba(255,254,249,0.28);
+                background: transparent;
+                position: relative;
+                z-index: 1;
+                flex-shrink: 0;
+              }
+              .pr-progress-dot.is-done {
+                border-color: ${C.light};
+                background: ${C.light};
+                box-shadow: inset 0 0 0 4px ${C.dark};
+              }
+              .pr-progress-label {
+                margin-top: 16px;
+                font-family: Inter, sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: rgba(255,254,249,0.35);
+                line-height: 1.35;
+                text-align: center;
+              }
+              .pr-progress-step:first-child .pr-progress-label { text-align: left; }
+              .pr-progress-step:last-child .pr-progress-label { text-align: right; }
+              .pr-progress-label.is-done {
+                color: ${C.light};
+              }
+              @media (max-width: 640px) {
+                .pr-progress-label {
+                  font-size: 10px;
+                  letter-spacing: 0.04em;
+                  max-width: 72px;
+                }
+                .pr-progress-eyebrow::after { max-width: 64px; }
+              }
+            `}</style>
+            <div className="pr-progress-inner pr-reveal">
+              <p className="pr-progress-eyebrow">
+                {t("project.progress.eyebrow", { name: p.name })}
+              </p>
+              <h3 className="pr-progress-title">{t("project.progress.title")}</h3>
+              <p className="pr-progress-sub">{t("project.progress.subtitle")}</p>
+              <div className="pr-progress-track" aria-label={t("project.progress.subtitle")}>
+                <div className="pr-progress-line">
+                  <div className="pr-progress-line-fill" style={{ width: `${pct}%` }} />
+                </div>
+                <div className="pr-progress-steps">
+                  {progress.stages.map((stage, i) => {
+                    const done = i <= progress.activeIndex;
+                    return (
+                      <div key={stage.id} className="pr-progress-step">
+                        <span className={`pr-progress-dot${done ? " is-done" : ""}`} />
+                        <span className={`pr-progress-label${done ? " is-done" : ""}`}>
+                          {t(stageKey(stage.id))} {stage.year}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
 {/* ── CTA (same as About / Catalog, bg #412834) ── */}
       <section className="pr-cta-outer">

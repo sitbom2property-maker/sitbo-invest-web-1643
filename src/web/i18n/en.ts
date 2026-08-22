@@ -611,6 +611,13 @@ const en = {
   "project.layoutComingSoon": "Layout {number} — Coming Soon",
   "project.location": "Location",
   "project.locationLifestyle": "Location & Lifestyle",
+  "project.progress.eyebrow": "{name} · Construction status",
+  "project.progress.title": "Progress & Updates",
+  "project.progress.subtitle": "Current construction status",
+  "project.progress.foundation": "Foundation",
+  "project.progress.construction": "Construction",
+  "project.progress.facade": "Facade",
+  "project.progress.handover": "Handover",
   "project.district.newBoulevard.title": "New Boulevard",
   "project.district.newBoulevard.body":
     "The New Boulevard is Batumi’s greenest and fastest-growing seaside district. Unlike the busy old town and center, it offers a calmer, family-oriented environment featuring a new park avenue, the expansive Lech and Maria Kaczynski Park, and the nearby coastline. Cafes, shops, and sports facilities are all within easy reach, while Batumi International Airport is just an 8-minute drive.",
