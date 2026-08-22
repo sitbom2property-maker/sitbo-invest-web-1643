@@ -1028,34 +1028,37 @@ html, body { background: #21141A; }
 /* pricing — dark page section; light cards + green featured */
 .rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); background: #21141A; color: #FFFEF9; }
 .rd-pricing .rd-h1 { margin-bottom: clamp(28px, 3.5vw, 56px); color: #FFFEF9; }
-.rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 24px); align-items: stretch; }
 .rd-plan {
-  /* Express Audit / Discovery Tour */
+  /* Express Audit / Discovery Tour — taller frame, more air */
   background: #FFFEF9; color: #21141A; border-radius: 2px;
-  padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column;
+  padding: clamp(36px, 3.4vw, 52px) clamp(28px, 2.8vw, 40px);
+  display: flex; flex-direction: column;
+  min-height: clamp(640px, 72vh, 820px);
+  box-sizing: border-box;
 }
 .rd-plan.is-featured {
   /* Strategic Deep-Dive */
   background: #48674D; color: #FFFEF9;
 }
 .rd-plan.is-featured .rd-plan-for { border-bottom-color: rgba(255,254,249,.2); }
-.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 8px; }
+.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 12px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: 16px; line-height: 1.3; margin: 0 0 16px;
-  padding-bottom: 16px; border-bottom: 1px solid rgba(33,20,26,.15);
+  font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 22px;
+  padding-bottom: 22px; border-bottom: 1px solid rgba(33,20,26,.15);
 }
-.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 28px; font-variant-numeric: tabular-nums; }
-.rd-plan ul { list-style: disc; margin: 0 0 26px; padding-left: 18px; display: grid; gap: 8px; }
-.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.35; }
-.rd-plan-block { margin-bottom: 20px; }
-.rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 6px; }
-.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
+.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 36px; font-variant-numeric: tabular-nums; }
+.rd-plan ul { list-style: disc; margin: 0 0 36px; padding-left: 18px; display: grid; gap: 12px; }
+.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.4; }
+.rd-plan-block { margin-bottom: 28px; }
+.rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.45; margin: 0; }
 .rd-plan-note {
-  font-family: var(--body); font-size: 13px; line-height: 1.4;
-  color: rgba(33,20,26,.55); margin: 0 0 18px;
+  font-family: var(--body); font-size: 13px; line-height: 1.45;
+  color: rgba(33,20,26,.55); margin: 4px 0 28px;
 }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
-.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 14px 18px; border-radius: 2px; }
+.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
 
 /* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); background: #21141A; }
@@ -1118,6 +1121,7 @@ html, body { background: #21141A; }
   .rd-eco-card .rd-eco-photo { opacity: .4; }
   .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
+  .rd-plan { min-height: 0; padding: clamp(32px, 5vw, 44px) clamp(24px, 4vw, 32px); }
 }
 @media (max-width: 640px) {
   .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
