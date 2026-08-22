@@ -132,102 +132,6 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
   </>);
 }
 
-// ─── Layout grid (minimal 2:3 cards) ──────────────────────────────────────────
-function layoutTypeLabel(raw: string | undefined, index: number): string {
-  const fallback = ["Studio", "1 BD", "2 BD", "3 BD"];
-  if (!raw) return fallback[index] ?? `Layout ${index + 1}`;
-  const s = raw.trim();
-  if (/studio|студ/i.test(s)) return "Studio";
-  if (/\b3\s*\+|3\s*bd|3\s*br|3bd/i.test(s)) return "3 BD";
-  if (/\b2\s*\+|2\s*bd|2\s*br|2bd/i.test(s)) return "2 BD";
-  if (/\b1\s*\+|1\s*bd|1\s*br|1bd|junior/i.test(s)) return "1 BD";
-  return fallback[index] ?? (s.replace(/\s+\d+[.,]?\d*\s*m².*/i, "").trim() || fallback[0]);
-}
-
-function LayoutGrid({
-  plans,
-  labels,
-  onOpen,
-}: {
-  plans: string[];
-  labels?: string[];
-  onOpen?: (src: string) => void;
-}) {
-  const isMobile = useIsMobile();
-
-  return (
-    <div
-      className="pr-reveal"
-      style={{
-        transitionDelay: "80ms",
-        display: "grid",
-        gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))",
-        gap: isMobile ? "20px 12px" : "28px 20px",
-      }}
-    >
-      {plans.map((src, i) => {
-        const label = layoutTypeLabel(labels?.[i], i);
-        return (
-          <button
-            key={src + i}
-            type="button"
-            onClick={() => onOpen?.(src)}
-            style={{
-              display: "block",
-              width: "100%",
-              padding: 0,
-              margin: 0,
-              border: "none",
-              background: "transparent",
-              cursor: onOpen ? "pointer" : "default",
-              textAlign: "left",
-            }}
-          >
-            <div
-              style={{
-                aspectRatio: "2 / 3",
-                width: "100%",
-                background: "transparent",
-                borderRadius: "2px",
-                overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src={src}
-                alt={label}
-                draggable={false}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "transparent",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                marginTop: 12,
-                fontFamily: "Inter, sans-serif",
-                fontSize: isMobile ? "0.78rem" : "0.88rem",
-                fontWeight: 600,
-                letterSpacing: "0.04em",
-                color: C.dark,
-                lineHeight: 1.3,
-              }}
-            >
-              {label}
-            </div>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 // ─── Map ──────────────────────────────────────────────────────────────────────
 function MapEmbed({ project }: { project: Project }) {
   const q = project.mapsQuery
@@ -258,7 +162,6 @@ export default function ProjectPage() {
   const { language } = useLocale();
   const t = useT();
   useReveal();
-  const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [showCtaForm, setShowCtaForm] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
@@ -760,40 +663,6 @@ export default function ProjectPage() {
         </section>
       )}
 
-{/* ── FLOOR PLANS ── */}
-      <section style={{ padding: "80px 0 0" }}>
-        <Container>
-          <div className="pr-reveal" style={{ marginBottom: "32px" }}>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, margin: 0, lineHeight: 1.25 }}>
-              {t("project.availableLayouts")}
-            </h3>
-          </div>
-          {p.floorPlans && p.floorPlans.length > 0 ? (
-            <LayoutGrid
-              plans={p.floorPlans}
-              labels={p.floorPlanLabels}
-              onOpen={setModalSrc}
-            />
-          ) : (
-          <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "20px 12px" : "28px 20px" }}>
-            {["Studio", "1 BD", "2 BD", "3 BD"].slice(0, 3).map((label, n) => (
-                <div key={n} style={{ background: "transparent" }}>
-                  <div style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "2px", aspectRatio: "2 / 3", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "transparent" }}>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="1"/>
-                      <path d="M3 9h18M9 9v12M3 15h6"/>
-                    </svg>
-                  </div>
-                  <div style={{ marginTop: 12, fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 600, letterSpacing: "0.04em", color: "rgba(33,20,26,0.35)" }}>
-                    {label}
-                  </div>
-                </div>
-            ))}
-          </div>
-          )}
-        </Container>
-      </section>
-
 {/* ── LOCATION & LIFESTYLE ── */}
       <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>
         <Container>
@@ -934,18 +803,6 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
-
-{/* Modal */}
-      {modalSrc && (
-        <div onClick={() => setModalSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, backdropFilter: "blur(4px)", cursor: "pointer" }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: "relative", maxWidth: "60vw", maxHeight: "70vh", cursor: "default" }}>
-            <img src={modalSrc} alt={t("project.modal.layoutPreview")} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "2px" }} />
-            <button onClick={() => setModalSrc(null)} style={{ position: "absolute", top: "-40px", right: "0", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "1px solid rgba(255,254,249,0.25)", color: "#FFFEF9", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
 
 {/* Offer Form Modal */}
       <RequestModal
