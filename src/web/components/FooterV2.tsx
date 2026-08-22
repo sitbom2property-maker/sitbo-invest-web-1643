@@ -34,6 +34,13 @@ export function FooterV2() {
           text-align: left;
         }
         .fv2-brand { min-width: 0; }
+        .fv2-logo {
+          display: block;
+          width: 28px;
+          height: 28px;
+          object-fit: contain;
+          margin: 0 0 14px;
+        }
         .fv2-name {
           font-family: 'Inter', sans-serif;
           font-size: 16px;
@@ -93,6 +100,7 @@ export function FooterV2() {
         @media (max-width: 640px) {
           .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
           .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
+          .fv2-logo { width: 24px; height: 24px; margin-bottom: 12px; }
           .fv2-name { font-size: 15px; margin-bottom: 12px; }
           .fv2-tagline { max-width: none; }
         }
@@ -101,6 +109,13 @@ export function FooterV2() {
       <div className="fv2-wrap">
         <div className="fv2-grid">
           <section className="fv2-brand" aria-label="Arthur Arutyunyan">
+            <img
+              className="fv2-logo"
+              src="/brand/sitbo-logo-s-light.png"
+              alt="Sitbo Invest"
+              width={28}
+              height={28}
+            />
             <h2 className="fv2-name">
               Arthur Arutyunyan | {t("v2.footer.role")}
             </h2>

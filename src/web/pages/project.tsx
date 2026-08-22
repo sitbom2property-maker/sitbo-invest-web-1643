@@ -854,7 +854,6 @@ export default function ProjectPage() {
                   {project.installmentMonths != null ? project.installment : t("project.payment.note")}
                 </p>
               </div>
-              <Divider />
               </>
               ) : null}
 

@@ -26,7 +26,7 @@ const en = {
 
   // Footer
   "footer.tagline":
-    "Arthur acts as your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution—including turnkey renovations, asset management, and technical delivery—operations are backed by Sitbo Invest.",
+    "I am your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution—including turnkey renovations, asset management, and technical delivery—my operations are backed by Sitbo Invest.",
   "footer.investments": "Investments",
   "footer.services": "Services",
   "footer.contact": "Contact",
@@ -224,7 +224,7 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "Arthur acts as your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution—including turnkey renovations, asset management, and technical delivery—operations are backed by Sitbo Invest.",
+    "I am your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution—including turnkey renovations, asset management, and technical delivery—my operations are backed by Sitbo Invest.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
