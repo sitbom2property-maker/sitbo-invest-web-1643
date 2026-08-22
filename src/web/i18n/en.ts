@@ -602,6 +602,7 @@ const en = {
   "project.backHome": "← Back to home",
   "project.backToSearch": "Back to search",
   "project.share": "Share",
+  "project.showAllPhotos": "Show all photos",
   "project.linkCopied": "Link copied",
   "project.downPayment": "Down Payment",
   "project.installment": "Installment",

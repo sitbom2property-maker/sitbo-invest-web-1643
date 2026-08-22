@@ -585,6 +585,7 @@ const ru: Record<MessageKey, string> = {
   "project.backHome": "← На главную",
   "project.backToSearch": "Назад к поиску",
   "project.share": "Поделиться",
+  "project.showAllPhotos": "Показать все фото",
   "project.linkCopied": "Ссылка скопирована",
   "project.downPayment": "Первый взнос",
   "project.installment": "Рассрочка",

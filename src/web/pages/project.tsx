@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { Link, useParams } from "wouter";
 import { projects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
@@ -81,55 +81,353 @@ function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "8px 0" }} />;
 }
 
-// ─── Gallery ─────────────────────────────────────────────────────────────────
+// ─── Gallery (JamesEdition-style mosaic + lightbox) ───────────────────────────
 function Gallery({ photos, name }: { photos: string[]; name: string }) {
-  const [active, setActive] = useState(0);
+  const t = useT();
   const isMobile = useIsMobile();
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const list = photos.length > 0 ? photos : [];
+  const hero = list[0];
+  const mosaic = list.slice(1, 5);
+  const openAt = (i: number) => setLightbox(i);
 
-  return (<>
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox((i) => (i === null ? i : (i + 1) % list.length));
+      if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? i : (i - 1 + list.length) % list.length));
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox, list.length]);
 
-    <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "8px", height: isMobile ? "auto" : "70vh", maxHeight: "600px" }}>
-{/* Main image */}
-      <div style={{ flex: "1 1 0", position: "relative", overflow: "hidden", borderRadius: "2px", background: C.dark, minHeight: isMobile ? "280px" : "auto" }}>
-        <img
-          key={active}
-          src={photos[active] || photos[0]}
-          alt={name}
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", animation: "fadeIn 0.3s ease" }}
-        />
-{/* Navigation arrows */}
-          {photos.length > 1 && (
-          <>
-            <button onClick={() => setActive(i => (i - 1 + photos.length) % photos.length)}
-              style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
-              ‹
-            </button>
-            <button onClick={() => setActive(i => (i + 1) % photos.length)}
-              style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
-              ›
-            </button>
-          </>
-        )}
-{/* Counter */}
-        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "2px", padding: "4px 12px", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light }}>
-          {active + 1} / {photos.length}
-        </div>
+  if (!hero) return null;
+
+  const cellBtn: CSSProperties = {
+    position: "relative",
+    display: "block",
+    width: "100%",
+    height: "100%",
+    margin: 0,
+    padding: 0,
+    border: "none",
+    background: C.dark,
+    borderRadius: 2,
+    overflow: "hidden",
+    cursor: "pointer",
+  };
+
+  const cellImg: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+    transition: "transform 0.45s ease",
+  };
+
+  return (
+    <>
+      <div
+        className="pr-gallery"
+        style={{
+          position: "relative",
+          display: "grid",
+          gridTemplateColumns: isMobile || mosaic.length === 0 ? "1fr" : "1.15fr 1fr",
+          gridTemplateRows: isMobile
+            ? mosaic.length > 0
+              ? "minmax(220px, 42vw) minmax(160px, 28vw)"
+              : "minmax(240px, 48vw)"
+            : "1fr",
+          gap: 6,
+          height: isMobile ? "auto" : "clamp(380px, 48vw, 560px)",
+          borderRadius: 2,
+          overflow: "hidden",
+          background: C.light,
+        }}
+      >
+        <button type="button" onClick={() => openAt(0)} style={{ ...cellBtn, gridRow: isMobile ? "1" : "1 / -1" }} aria-label={name}>
+          <img
+            src={hero}
+            alt={name}
+            style={cellImg}
+            onMouseEnter={(e) => {
+              if (!isMobile) e.currentTarget.style.transform = "scale(1.02)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          />
+        </button>
+
+        {mosaic.length > 0 ? (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gridTemplateRows: "1fr 1fr",
+              gap: 6,
+              minHeight: isMobile ? 160 : 0,
+            }}
+          >
+            {mosaic.slice(0, 4).map((src, i) => {
+              const photoIndex = i + 1;
+              return (
+                <button
+                  key={src + i}
+                  type="button"
+                  onClick={() => openAt(photoIndex)}
+                  style={cellBtn}
+                  aria-label={`${name} ${photoIndex + 1}`}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    style={cellImg}
+                    onMouseEnter={(e) => {
+                      if (!isMobile) e.currentTarget.style.transform = "scale(1.03)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                  />
+                </button>
+              );
+            })}
+            {!isMobile && mosaic.length > 0 && mosaic.length < 4
+              ? Array.from({ length: 4 - mosaic.length }).map((_, i) => (
+                  <div key={`empty-${i}`} style={{ background: "rgba(33,20,26,0.04)", borderRadius: 2 }} />
+                ))
+              : null}
+          </div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => openAt(0)}
+          style={{
+            position: "absolute",
+            right: isMobile ? 12 : 16,
+            bottom: isMobile ? 12 : 16,
+            zIndex: 2,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: isMobile ? "10px 14px" : "11px 16px",
+            borderRadius: 999,
+            border: "1px solid rgba(33,20,26,0.08)",
+            background: "#FFFEF9",
+            color: C.dark,
+            boxShadow: "0 8px 24px rgba(33,20,26,0.16)",
+            cursor: "pointer",
+            fontFamily: "Inter, sans-serif",
+            fontSize: isMobile ? "0.78rem" : "0.84rem",
+            fontWeight: 600,
+            letterSpacing: "0.01em",
+            lineHeight: 1,
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <rect x="1.5" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="6" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="10.5" y="1.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="1.5" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="6" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="10.5" y="6" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="1.5" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="6" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+            <rect x="10.5" y="10.5" width="4" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
+          </svg>
+          {t("project.showAllPhotos")}
+        </button>
       </div>
 
-{/* Thumbnails column */}
-        {photos.length > 1 && (
-        <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto" }}>
-          {photos.map((src, i) => (
-            <div key={i} onClick={() => setActive(i)}
-              style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "2px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
-              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: i === active ? 1 : 0.6, transition: "opacity 0.2s" }} />
+      {lightbox !== null ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={t("project.showAllPhotos")}
+          onClick={() => setLightbox(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1200,
+            background: "rgba(17,10,13,0.92)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            flexDirection: "column",
+            cursor: "zoom-out",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: isMobile ? "16px 18px" : "20px 28px",
+              color: C.light,
+              flexShrink: 0,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.85rem", fontWeight: 500, opacity: 0.85 }}>
+              {lightbox + 1} / {list.length}
+            </p>
+            <button
+              type="button"
+              onClick={() => setLightbox(null)}
+              aria-label={t("cookie.close")}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 2,
+                border: "1px solid rgba(255,254,249,0.18)",
+                background: "transparent",
+                color: C.light,
+                cursor: "pointer",
+                fontSize: "1.25rem",
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div
+            style={{
+              flex: 1,
+              minHeight: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: isMobile ? 0 : 20,
+              padding: isMobile ? "0 12px 20px" : "0 28px 28px",
+              position: "relative",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {list.length > 1 ? (
+              <button
+                type="button"
+                onClick={() => setLightbox((lightbox - 1 + list.length) % list.length)}
+                aria-label="Previous"
+                style={{
+                  display: isMobile ? "none" : "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 44,
+                  height: 44,
+                  borderRadius: 2,
+                  border: "1px solid rgba(255,254,249,0.2)",
+                  background: "rgba(255,254,249,0.06)",
+                  color: C.light,
+                  cursor: "pointer",
+                  fontSize: "1.4rem",
+                  flexShrink: 0,
+                }}
+              >
+                ‹
+              </button>
+            ) : null}
+
+            <div
+              style={{
+                flex: 1,
+                height: "100%",
+                maxWidth: "min(1100px, 92vw)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "default",
+              }}
+            >
+              <img
+                key={list[lightbox]}
+                src={list[lightbox]}
+                alt={`${name} ${lightbox + 1}`}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  width: "auto",
+                  height: "auto",
+                  objectFit: "contain",
+                  borderRadius: 2,
+                  display: "block",
+                  boxShadow: "0 24px 80px rgba(0,0,0,0.35)",
+                  animation: "fadeIn 0.25s ease",
+                }}
+              />
             </div>
-          ))}
+
+            {list.length > 1 ? (
+              <button
+                type="button"
+                onClick={() => setLightbox((lightbox + 1) % list.length)}
+                aria-label="Next"
+                style={{
+                  display: isMobile ? "none" : "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 44,
+                  height: 44,
+                  borderRadius: 2,
+                  border: "1px solid rgba(255,254,249,0.2)",
+                  background: "rgba(255,254,249,0.06)",
+                  color: C.light,
+                  cursor: "pointer",
+                  fontSize: "1.4rem",
+                  flexShrink: 0,
+                }}
+              >
+                ›
+              </button>
+            ) : null}
+          </div>
+
+          {list.length > 1 ? (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                flexShrink: 0,
+                display: "flex",
+                gap: 8,
+                overflowX: "auto",
+                padding: isMobile ? "0 16px 20px" : "0 28px 28px",
+                scrollbarWidth: "none",
+              }}
+            >
+              {list.map((src, i) => (
+                <button
+                  key={src + i}
+                  type="button"
+                  onClick={() => setLightbox(i)}
+                  style={{
+                    flex: "0 0 auto",
+                    width: isMobile ? 64 : 78,
+                    height: isMobile ? 48 : 56,
+                    padding: 0,
+                    borderRadius: 2,
+                    border: i === lightbox ? `1.5px solid ${C.light}` : "1.5px solid transparent",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    opacity: i === lightbox ? 1 : 0.55,
+                    background: C.dark,
+                  }}
+                >
+                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
-      )}
-    </div>
-  
-  </>);
+      ) : null}
+    </>
+  );
 }
 
 // ─── Map ──────────────────────────────────────────────────────────────────────
