@@ -89,27 +89,9 @@ export type PaymentSegment = {
 
 export type PaymentPlan = PaymentSegment[];
 
-/** Resolve displayable payment plans; empty means hide the Payment section. */
-export function resolvePaymentPlans(p: Project): PaymentPlan[] {
-  if (p.paymentPlans && p.paymentPlans.length > 0) {
-    return p.paymentPlans.filter((plan) => plan.length > 0 && plan.every((s) => s.pct > 0));
-  }
-
-  const fromDown = (down: number): PaymentPlan[] => {
-    const clamped = Math.min(90, Math.max(5, Math.round(down)));
-    return [[{ stage: "down", pct: clamped }, { stage: "construction", pct: 100 - clamped }]];
-  };
-
-  if (typeof p.downPaymentPct === "number" && p.downPaymentPct > 0 && p.downPaymentPct < 100) {
-    return fromDown(p.downPaymentPct);
-  }
-
-  const downMatch = p.installment.match(/(\d+)\s*%\s*(?:down|взнос|первоначальн)/i);
-  if (downMatch) {
-    return fromDown(Number(downMatch[1]));
-  }
-
-  return [];
+/** Resolve displayable payment plans; sitewide standard is 30% / 70%. */
+export function resolvePaymentPlans(_p: Project): PaymentPlan[] {
+  return [[{ stage: "down", pct: 30 }, { stage: "construction", pct: 70 }]];
 }
 
 /** Resolve construction timeline for the Progress & Updates bar. */
@@ -157,14 +139,7 @@ export const projects: Project[] = [
     buildings: "1",
     finishing: "White frame",
     climateAdaptation: "Yes",
-    installment: "20% / 30% / 50%",
-    paymentPlans: [
-      [
-        { stage: "down", pct: 20 },
-        { stage: "construction", pct: 30 },
-        { stage: "handover", pct: 50 },
-      ],
-    ],
+    installment: "30% / 70%",
     apartmentsKey: "piazza",
     developerLogo: "/projects/piazza/brand/developer-logo.png",
     constructionProgress: {
@@ -639,14 +614,7 @@ export const projects: Project[] = [
     buildings: "3",
     finishing: "Turnkey designer finish with European furniture & appliances",
     climateAdaptation: "Yes",
-    installment: "30% / 45% / 45%",
-    paymentPlans: [
-      [
-        { stage: "down", pct: 30 },
-        { stage: "construction", pct: 45 },
-        { stage: "handover", pct: 45 },
-      ],
-    ],
+    installment: "30% / 70%",
     developerBody:
       "Rogantini Development is a Swiss holding founded in 1967, bringing alpine construction precision and climate protection standards to boutique residences on Georgia’s Black Sea coast.",
     districtTitle: "Chakvi",

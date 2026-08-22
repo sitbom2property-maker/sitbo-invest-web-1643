@@ -840,6 +840,19 @@ export default function ProjectPage() {
                     </div>
                   ))}
                 </div>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: isMobile ? "0.72rem" : "0.75rem",
+                    fontWeight: 400,
+                    color: "rgba(33,20,26,0.45)",
+                    lineHeight: 1.45,
+                    margin: "18px 0 0",
+                    maxWidth: 520,
+                  }}
+                >
+                  {t("project.payment.note")}
+                </p>
               </div>
               </>
               ) : null}

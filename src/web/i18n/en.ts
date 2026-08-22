@@ -589,6 +589,7 @@ const en = {
   "project.payment.down": "Down Payment",
   "project.payment.construction": "During Construction",
   "project.payment.handover": "On key handover",
+  "project.payment.note": "Full payment and installment terms are individual and negotiable.",
   "project.interested": "Interested?",
   "project.awards": "Awards",
   "project.offerTitle": "Get a personal offer",

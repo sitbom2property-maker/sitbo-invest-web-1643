@@ -54,7 +54,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     buildings: "1",
     finishing: "Белый каркас",
     climateAdaptation: "Да",
-    installment: "20% / 30% / 50%",
+    installment: "30% / 70%",
     priceFrom: "От $89,250",
     pricePerSqm: "от $2,450/м²",
     floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
@@ -94,7 +94,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "26–28",
     buildings: "3",
     finishing: "Белый каркас",
-    installment: "30% взнос / 0% на 40 месяцев",
+    installment: "30% / 70%",
     features: [
       "Всесезонная инфраструктура",
       "Коммерция и коворкинг",
@@ -128,7 +128,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "6–8",
     buildings: "6 очередей · 20 га",
     finishing: "Зелёный каркас",
-    installment: "30% взнос / 70% по графику",
+    installment: "30% / 70%",
     priceFrom: "От $100,990",
     pricePerSqm: "от $2,050/м²",
     floorPlanLabels: ["Корпус 36", "Корпус 37", "Корпус 38", "Корпус 39"],
@@ -164,7 +164,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "2–11",
     buildings: "Корпуса A, B1, B2, C1, C2",
     finishing: "Под ключ (корпус A) / Зелёный каркас",
-    installment: "20% взнос / остаток по графику",
+    installment: "30% / 70%",
     priceFrom: "От $53,430",
     pricePerSqm: "от $1,800/м²",
     developerBody:
@@ -199,7 +199,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "70 · ~260 м",
     buildings: "1",
     finishing: "Под ключ / апартаменты отельного формата",
-    installment: "EOI / по графику",
+    installment: "30% / 70%",
     priceFrom: "От $110,600",
     pricePerSqm: "от $3,100/м²",
     developerBody:
@@ -234,7 +234,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "16",
     buildings: "2",
     finishing: "Белый каркас, С ремонтом, Под ключ",
-    installment: "30% первоначальный взнос / 70% ежеквартально",
+    installment: "30% / 70%",
     features: [
       "Закрытое частное сообщество",
       "Инфраструктура пятизвёздочного отеля",
@@ -260,7 +260,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "45",
     buildings: "2",
     finishing: "Белый каркас, Под ключ, Дизайнерская",
-    installment: "40% первоначальный взнос / 60% ежеквартально",
+    installment: "30% / 70%",
     features: [
       "Частный парк 20 000 м²",
       "Крупнейшее казино в регионе",
@@ -287,7 +287,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     buildings: "3",
     finishing: "Дизайнерский ремонт «под ключ» с европейской мебелью и техникой",
     climateAdaptation: "Да",
-    installment: "30% / 45% / 45%",
+    installment: "30% / 70%",
     features: [
       "Панорамные виды на горы и море",
       "Всесезонная инфраструктура",
@@ -328,7 +328,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "30",
     buildings: "8",
     finishing: "Белый каркас, Под ключ, Дизайнерская",
-    installment: "35% первоначальный взнос / 65% ежеквартально",
+    installment: "30% / 70%",
     features: [
       "Искусственный архипелаг 87 га",
       "49% зелёной инфраструктуры",
@@ -354,7 +354,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     floors: "14",
     buildings: "3",
     finishing: "Белый каркас, Под ключ",
-    installment: "30% первоначальный взнос / 70% ежеквартально",
+    installment: "30% / 70%",
     features: [
       "Частная марина с причалами",
       "Брендовые резиденции",
