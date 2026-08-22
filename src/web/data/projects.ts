@@ -198,9 +198,7 @@ export const projects: Project[] = [
       "Artex is a Batumi developer behind Parkline — a mixed-use complex on the New Boulevard with hotel-grade infrastructure, jet-grouted foundations and seismic design above the mandatory standard.",
     districtTitle: "New Boulevard",
     districtBody:
-      "The New Boulevard is Batumi’s fastest-growing seaside district: a new park avenue, the expanding waterfront and a short hop to the airport. Parkline sits at Angisa 1st lane 35b, about 800 m from the beach.",
-    districtBody2:
-      "Batumi International Airport is around 8 minutes by car. Schools, a kindergarten and everyday services are nearby, while the city’s largest park and the seafront are a 10-minute walk.",
+      "The New Boulevard is Batumi’s greenest and fastest-growing seaside district. Unlike the busy old town and center, it offers a calmer, family-oriented environment featuring a new park avenue, the expansive Lech and Maria Kaczynski Park, and the nearby coastline. Cafes, shops, and sports facilities are all within easy reach, while Batumi International Airport is just an 8-minute drive.",
     features: [
       "All-season infrastructure",
       "Commercial & coworking hub",

@@ -610,11 +610,11 @@ const en = {
   "project.availableLayouts": "Available Layouts",
   "project.layoutComingSoon": "Layout {number} — Coming Soon",
   "project.location": "Location",
+  "project.locationLifestyle": "Location & Lifestyle",
   "project.district.newBoulevard.title": "New Boulevard",
   "project.district.newBoulevard.body":
-    "A modern seaside district with developed infrastructure and a beautiful waterfront park. The property is located on the south-western edge of Batumi along the Black Sea coast, in a district that symbolizes the new, contemporary Batumi with innovative architecture and green leisure areas.",
-  "project.district.newBoulevard.body2":
-    "Batumi International Airport is only 8 minutes away, which is convenient for frequent travellers. Key social infrastructure is nearby: the school and dolphinarium are 11 minutes away by car, and the kindergarten is 12 minutes away.",
+    "The New Boulevard is Batumi’s greenest and fastest-growing seaside district. Unlike the busy old town and center, it offers a calmer, family-oriented environment featuring a new park avenue, the expansive Lech and Maria Kaczynski Park, and the nearby coastline. Cafes, shops, and sports facilities are all within easy reach, while Batumi International Airport is just an 8-minute drive.",
+  "project.district.newBoulevard.body2": "",
   "project.cta.title": "Ready to invest in",
   "project.cta.body":
     "I'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",

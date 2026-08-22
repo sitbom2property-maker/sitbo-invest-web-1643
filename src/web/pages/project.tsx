@@ -384,7 +384,7 @@ function MapEmbed({ project }: { project: Project }) {
   const mapUrl = `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
   return (<>
 
-    <div style={{ borderRadius: "2px", overflow: "hidden", height: "340px", background: C.light }}>
+    <div style={{ borderRadius: "2px", overflow: "hidden", height: "clamp(280px, 42vw, 420px)", background: C.light }}>
       <iframe
         title={`${project.name} location`}
         src={mapUrl}
@@ -943,25 +943,52 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-{/* ── MAP ── */}
-      <section style={{ padding: "80px 0 0" }}>
+{/* ── LOCATION & LIFESTYLE ── */}
+      <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>
         <Container>
-          <div className="pr-reveal" style={{ marginBottom: "24px" }}>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark }}>
-{p.location}
+          <Divider />
+          <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
+            <h3
+              style={{
+                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
+                fontWeight: 500,
+                color: C.dark,
+                lineHeight: 1.25,
+                margin: "0 0 28px",
+              }}
+            >
+              {t("project.locationLifestyle")}
             </h3>
-          </div>
-          <div className="pr-reveal" style={{ transitionDelay: "80ms" }}>
-            <MapEmbed project={p} />
-          </div>
-          {/* District description */}
-          <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "2px", padding: "28px 28px" }}>
-            <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
-              {p.districtBody ?? t("project.district.newBoulevard.body")}
-              <br /><br />
-              {p.districtBody2 ?? t("project.district.newBoulevard.body2")}
+            <h4
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: isMobile ? "1.15rem" : "1.25rem",
+                fontWeight: 700,
+                color: C.dark,
+                lineHeight: 1.3,
+                margin: "0 0 14px",
+              }}
+            >
+              {p.districtTitle ?? t("project.district.newBoulevard.title")}
+            </h4>
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "1.05rem",
+                color: C.mutedDark,
+                lineHeight: 1.7,
+                margin: "0 0 clamp(28px, 3.5vw, 40px)",
+                maxWidth: 820,
+              }}
+            >
+              {[p.districtBody ?? t("project.district.newBoulevard.body"), p.districtBody2]
+                .filter(Boolean)
+                .join(" ")}
             </p>
+            <div style={{ transitionDelay: "80ms" }}>
+              <MapEmbed project={p} />
+            </div>
           </div>
         </Container>
       </section>
