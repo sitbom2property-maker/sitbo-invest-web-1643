@@ -340,9 +340,11 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 }
 .sv-cta {
   border-radius: 2px; overflow: hidden;
-  background:
-    radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
-    #412834;
+  background-color: #412834;
+  background-image: url('/images/cta-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;
 }
