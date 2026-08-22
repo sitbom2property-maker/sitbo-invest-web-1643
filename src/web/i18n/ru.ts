@@ -425,7 +425,7 @@ const ru: Record<MessageKey, string> = {
   "home.contact.namePlaceholder": "Имя и фамилия",
   "home.contact.contact": "Телефон или email",
   "home.contact.phoneRequired": "WhatsApp / телефон *",
-  "home.contact.phonePlaceholder": "+995 555 50 52 88",
+  "home.contact.phonePlaceholder": "+995 ...",
   "home.contact.budget": "Инвестиционный бюджет",
   "home.contact.budgetPlaceholder": "Выберите диапазон бюджета",
   "home.contact.budget.50_100": "$50,000 – $100,000",
