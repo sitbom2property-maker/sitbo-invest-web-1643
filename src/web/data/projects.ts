@@ -210,7 +210,7 @@ export const projects: Project[] = [
       "High-yield investment",
     ],
     materials:
-      "Frame & seismic: Monolithic RC frame, resistance up to 8. Facade & insulation: Ventilated coastal hydro/thermal facade. Premium glazing: Aluminum double-glazed UV/noise windows. Elevators: Otis/Kone high-speed with backup power. Climate systems: Central VRV/VRF and ventilation. White frame: Screed, plaster, wiring, plumbing points.",
+      "Seismic resistance up to 8 points: Monolithic RC frame. Facade & insulation: Ventilated coastal hydro/thermal facade. Glazing UV and noise protection: Aluminum double-glazed windows. Elevators (Otis/Kone): High-speed with backup power. Climate systems: Central VRV/VRF and ventilation. White frame: Screed, plaster, wiring, plumbing points.",
     photos: [
       "/projects/parkline/for-sale/ext-01.jpg",
       "/projects/parkline/for-sale/ext-07.jpg",

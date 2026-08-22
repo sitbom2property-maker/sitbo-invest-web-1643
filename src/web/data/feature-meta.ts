@@ -109,17 +109,17 @@ function normalizeConstructionLabel(raw: string): string {
   if (/facade|фасад|insulat|изоляц/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Фасад и изоляция" : "Facade & insulation";
   }
-  if (/glaz|остек|панорам/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Панорамное остекление" : "Premium glazing";
+  if (/glaz|остек|панорам|uv|шум/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Остекление UV и шумозащита" : "Glazing UV and noise protection";
   }
-  if (/elevat|лифт/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Лифты" : "Elevators";
+  if (/elevat|лифт|otis|kone/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Лифты (Otis/Kone)" : "Elevators (Otis/Kone)";
   }
   if (/climate|vrv|климат/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Климат-системы" : "Climate systems";
   }
-  if (/seismic|сейсм|frame|каркас/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Каркас и сейсмика" : "Frame & seismic";
+  if (/seismic|сейсм|8\s*point|8\s*балл|frame|каркас/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Сейсмостойкость до 8 баллов" : "Seismic resistance up to 8 points";
   }
   if (/jet\s*grout/i.test(t)) return "Jet Grouting";
   return t.replace(/\s*&\s*/g, " & ");
