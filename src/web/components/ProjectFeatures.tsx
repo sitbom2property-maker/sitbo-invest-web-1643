@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   FEATURE_CATEGORY_ORDER,
   normalizeProjectFeatures,
+  parseConstructionFeatures,
   type FeatureCategory,
   type FeatureIconId,
   type ProjectFeatureItem,
@@ -20,6 +21,7 @@ const CATEGORY_KEYS: Record<FeatureCategory, MessageKey> = {
   lot: "project.features.lot",
   indoor: "project.features.indoor",
   outdoor: "project.features.outdoor",
+  construction: "project.features.construction",
 };
 
 function FeatureIcon({ id }: { id: FeatureIconId }) {
@@ -187,6 +189,30 @@ function FeatureIcon({ id }: { id: FeatureIconId }) {
           <path d="M9 20v-5h6v5M9 9h.01M12 9h.01M15 9h.01M9 12h.01M12 12h.01M15 12h.01" />
         </svg>
       );
+    case "grouting":
+      return (
+        <svg {...common}>
+          <path d="M12 3v11" />
+          <path d="M9 7h6" />
+          <path d="M8 14h8l-1.2 7H9.2L8 14Z" />
+          <path d="M10 18h4" />
+        </svg>
+      );
+    case "moisture":
+      return (
+        <svg {...common}>
+          <path d="M12 3c-3.5 4.2-5.5 7-5.5 9.5a5.5 5.5 0 0 0 11 0C17.5 10 15.5 7.2 12 3Z" />
+          <path d="M10 14.5c.6 1.2 1.6 1.8 2.8 1.8" />
+        </svg>
+      );
+    case "seismic":
+      return (
+        <svg {...common}>
+          <path d="M4 18h16" />
+          <path d="M7 18V9l5-4 5 4v9" />
+          <path d="M3 12c1.2-1 2.4-1 3.6 0s2.4 1 3.6 0 2.4-1 3.6 0 2.4 1 3.6 0" />
+        </svg>
+      );
     default:
       return (
         <svg {...common}>
@@ -197,9 +223,9 @@ function FeatureIcon({ id }: { id: FeatureIconId }) {
   }
 }
 
-function FeatureRow({ item }: { item: ProjectFeatureItem }) {
+function FeatureRow({ item, compact }: { item: ProjectFeatureItem; compact?: boolean }) {
   return (
-    <div className="pf-item">
+    <div className={`pf-item${compact ? " pf-item-compact" : ""}`}>
       <span className="pf-icon">
         <FeatureIcon id={item.icon} />
       </span>
@@ -212,15 +238,17 @@ function FeatureRow({ item }: { item: ProjectFeatureItem }) {
 
 type Props = {
   features: string[];
+  materials?: string;
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
   isMobile?: boolean;
 };
 
-export function ProjectFeatures({ features, open, onOpen, onClose, isMobile }: Props) {
+export function ProjectFeatures({ features, materials, open, onOpen, onClose, isMobile }: Props) {
   const t = useT();
   const items = normalizeProjectFeatures(features);
+  const constructionItems = parseConstructionFeatures(materials);
   const previewCount = isMobile ? 6 : 9;
   const preview = items.slice(0, previewCount);
 
@@ -240,7 +268,10 @@ export function ProjectFeatures({ features, open, onOpen, onClose, isMobile }: P
 
   const grouped = FEATURE_CATEGORY_ORDER.map((category) => ({
     category,
-    items: items.filter((f) => f.category === category),
+    items:
+      category === "construction"
+        ? constructionItems
+        : items.filter((f) => f.category === category),
   })).filter((g) => g.items.length > 0);
 
   return (
@@ -253,14 +284,21 @@ export function ProjectFeatures({ features, open, onOpen, onClose, isMobile }: P
             <FeatureRow key={item.id} item={item} />
           ))}
         </div>
-        {items.length > previewCount ? (
+        {items.length > 0 ? (
           <button type="button" className="pf-view-all" onClick={onOpen}>
-            {t("project.features.viewAll", { count: items.length })}
+            {t("project.features.viewAll", { count: items.length + constructionItems.length })}
           </button>
-        ) : items.length > 0 ? (
-          <button type="button" className="pf-view-all" onClick={onOpen}>
-            {t("project.features.viewAll", { count: items.length })}
-          </button>
+        ) : null}
+
+        {constructionItems.length > 0 ? (
+          <div className="pf-construction">
+            <h4 className="pf-construction-title">{t("project.features.construction")}</h4>
+            <div className="pf-grid pf-construction-grid">
+              {constructionItems.map((item) => (
+                <FeatureRow key={item.id} item={item} compact />
+              ))}
+            </div>
+          </div>
         ) : null}
       </div>
 
@@ -283,9 +321,9 @@ export function ProjectFeatures({ features, open, onOpen, onClose, isMobile }: P
               {grouped.map((group) => (
                 <section key={group.category} className="pf-section">
                   <h3>{t(CATEGORY_KEYS[group.category])}</h3>
-                  <div className="pf-grid pf-grid-modal">
+                  <div className={`pf-grid pf-grid-modal${group.category === "construction" ? " pf-construction-grid" : ""}`}>
                     {group.items.map((item) => (
-                      <FeatureRow key={item.id} item={item} />
+                      <FeatureRow key={item.id} item={item} compact={group.category === "construction"} />
                     ))}
                   </div>
                 </section>
@@ -319,6 +357,7 @@ const PF_CSS = `
   gap: 12px;
   min-width: 0;
 }
+.pf-item-compact { gap: 10px; }
 .pf-icon {
   flex-shrink: 0;
   width: 22px;
@@ -328,6 +367,9 @@ const PF_CSS = `
   align-items: center;
   justify-content: center;
   line-height: 0;
+}
+.pf-item-compact .pf-icon {
+  height: calc(15px * 1.35);
 }
 .pf-icon svg {
   display: block;
@@ -343,6 +385,10 @@ const PF_CSS = `
   text-overflow: unset;
   word-break: break-word;
   min-width: 0;
+}
+.pf-item-compact .pf-label {
+  font-size: 15px;
+  line-height: 1.35;
 }
 .pf-view-all {
   display: inline-flex;
@@ -360,6 +406,24 @@ const PF_CSS = `
 }
 .pf-view-all::after { content: " ›"; font-size: 1.1em; line-height: 1; }
 .pf-view-all:hover { opacity: .75; }
+.pf-construction {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(33,20,26,0.08);
+}
+.pf-construction-title {
+  margin: 0 0 16px;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(33,20,26,0.45);
+  line-height: 1.3;
+}
+.pf-construction-grid {
+  gap: 14px 28px;
+}
 .pf-overlay {
   position: fixed;
   inset: 0;
@@ -426,6 +490,8 @@ const PF_CSS = `
 .pf-grid-modal { gap: 18px 28px; }
 @media (max-width: 768px) {
   .pf-grid { grid-template-columns: 1fr; gap: 16px; }
+  .pf-construction-grid { grid-template-columns: 1fr; gap: 12px; }
+  .pf-construction { margin-top: 28px; padding-top: 22px; }
   .pf-overlay {
     align-items: flex-end;
     padding: 0;
@@ -442,5 +508,6 @@ const PF_CSS = `
 @media (min-width: 769px) and (max-width: 980px) {
   .pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pf-grid-modal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pf-construction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 `;

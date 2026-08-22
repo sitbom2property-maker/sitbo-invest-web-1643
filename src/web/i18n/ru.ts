@@ -566,6 +566,7 @@ const ru: Record<MessageKey, string> = {
   "project.features.lot": "Участок и локация",
   "project.features.indoor": "Внутри",
   "project.features.outdoor": "Снаружи",
+  "project.features.construction": "Строительство",
   "project.materials": "Материалы и строительство",
   "project.payment": "Оплата и рассрочка",
   "project.payment.down": "Первый взнос",

@@ -583,6 +583,7 @@ const en = {
   "project.features.lot": "Lot",
   "project.features.indoor": "Indoor",
   "project.features.outdoor": "Outdoor",
+  "project.features.construction": "Construction",
   "project.materials": "Materials & Construction",
   "project.payment": "Payment and Installment",
   "project.payment.down": "Down Payment",

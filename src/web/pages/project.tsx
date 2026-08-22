@@ -720,31 +720,12 @@ export default function ProjectPage() {
               <div style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
               <ProjectFeatures
                 features={p.features}
+                materials={p.materials}
                 open={featuresOpen}
                 onOpen={() => setFeaturesOpen(true)}
                 onClose={() => setFeaturesOpen(false)}
                 isMobile={isMobile}
               />
-              </div>
-
-              <Divider />
-
-{/* Materials */}
-              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                <Eyebrow>{t("project.materials")}</Eyebrow>
-                <div style={{ background: "#FFFEF9", borderRadius: "2px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
-                  {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
-                    const colonIdx = sentence.indexOf(":");
-                    const hasTitle = colonIdx > 0 && colonIdx < 40;
-                    return (
-                      <p key={i} style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.75, margin: 0 }}>
-                        {hasTitle ? (
-                          <><strong style={{ color: C.dark, fontWeight: 600 }}>{sentence.slice(0, colonIdx)}</strong>{sentence.slice(colonIdx)}</>
-                        ) : sentence + (sentence.endsWith(".") ? "" : ".")}
-                      </p>
-                    );
-                  })}
-                </div>
               </div>
 
 {/* Payment — optional, depends on developer terms */}
