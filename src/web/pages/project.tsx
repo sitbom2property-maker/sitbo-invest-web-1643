@@ -712,53 +712,6 @@ export default function ProjectPage() {
                 </div>
               </div>
 
-              {p.awards && p.awards.length > 0 ? (
-                <>
-                  <Divider />
-                  <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                    <h3
-                      style={{
-                        fontFamily: "Coolvetica, Inter, sans-serif",
-                        fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
-                        fontWeight: 500,
-                        color: C.dark,
-                        lineHeight: 1.25,
-                        margin: "0 0 24px",
-                      }}
-                    >
-                      {t("project.awards")}
-                    </h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        alignItems: "center",
-                        gap: isMobile ? 20 : 28,
-                      }}
-                    >
-                      {p.awards.map((award) => (
-                        <img
-                          key={award.src}
-                          src={award.src}
-                          alt={award.alt}
-                          style={{
-                            display: "block",
-                            height: "auto",
-                            width: "auto",
-                            maxHeight: isMobile ? 88 : 104,
-                            maxWidth: isMobile ? 200 : 240,
-                            objectFit: "contain",
-                            border: "none",
-                            background: "transparent",
-                            borderRadius: 0,
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </>
-              ) : null}
-
               <Divider />
 
 {/* Specs — 3×2 stacked label/value grid (no dividers) */}
