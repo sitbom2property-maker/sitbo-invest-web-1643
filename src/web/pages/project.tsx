@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
-import { projects, resolvePaymentPlans, resolveConstructionProgress, type ConstructionStageId, type Project } from "../data/projects";
+import { projects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
@@ -8,7 +8,7 @@ import { RequestModal } from "../components/RequestModal";
 import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
-import { useT, type MessageKey } from "../i18n";
+import { useT } from "../i18n";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -132,246 +132,98 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
   </>);
 }
 
-// ─── Layout carousel ──────────────────────────────────────────────────────────
-function LayoutCarousel({
+// ─── Layout grid (minimal 2:3 cards) ──────────────────────────────────────────
+function layoutTypeLabel(raw: string | undefined, index: number): string {
+  const fallback = ["Studio", "1 BD", "2 BD", "3 BD"];
+  if (!raw) return fallback[index] ?? `Layout ${index + 1}`;
+  const s = raw.trim();
+  if (/studio|студ/i.test(s)) return "Studio";
+  if (/\b3\s*\+|3\s*bd|3\s*br|3bd/i.test(s)) return "3 BD";
+  if (/\b2\s*\+|2\s*bd|2\s*br|2bd/i.test(s)) return "2 BD";
+  if (/\b1\s*\+|1\s*bd|1\s*br|1bd|junior/i.test(s)) return "1 BD";
+  return fallback[index] ?? (s.replace(/\s+\d+[.,]?\d*\s*m².*/i, "").trim() || fallback[0]);
+}
+
+function LayoutGrid({
   plans,
   labels,
-  areas,
   onOpen,
 }: {
   plans: string[];
   labels?: string[];
-  areas?: string[];
   onOpen?: (src: string) => void;
 }) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef({ x: 0, moved: false });
-  const [active, setActive] = useState(0);
   const isMobile = useIsMobile();
 
-  const goTo = (index: number) => {
-    const el = scrollerRef.current;
-    const slide = el?.children[index] as HTMLElement | undefined;
-    if (!el || !slide) return;
-    const left = slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2;
-    el.scrollTo({ left, behavior: "smooth" });
-  };
-
-  const onScroll = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const mid = el.scrollLeft + el.clientWidth / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    Array.from(el.children).forEach((node, i) => {
-      const s = node as HTMLElement;
-      const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    });
-    setActive(best);
-  };
-
   return (
-    <div className="pr-reveal layout-carousel-wrap" style={{ transitionDelay: "80ms" }}>
-      {labels && labels.length > 0 && (
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            WebkitOverflowScrolling: "touch",
-            marginBottom: isMobile ? "16px" : "20px",
-            paddingBottom: "2px",
-          }}
-        >
-          {labels.map((label, i) => {
-            const on = i === active;
-            return (
-              <button
-                key={label + i}
-                type="button"
-                onClick={() => goTo(i)}
-                style={{
-                  flexShrink: 0,
-                  border: on ? "none" : "1px solid rgba(33,20,26,0.12)",
-                  background: on ? C.dark : "transparent",
-                  color: on ? C.light : C.dark,
-                  borderRadius: "2px",
-                  padding: isMobile ? "8px 14px" : "8px 16px",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: isMobile ? "0.68rem" : "0.75rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
-                  transition: "background 0.25s ease, color 0.25s ease, border-color 0.25s ease",
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      <div style={{ position: "relative" }}>
-        <div
-          ref={scrollerRef}
-          onScroll={onScroll}
-          className="layout-carousel"
-          style={{
-            display: "flex",
-            gap: isMobile ? "12px" : "18px",
-            overflowX: "auto",
-            scrollSnapType: "x mandatory",
-            WebkitOverflowScrolling: "touch",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            padding: isMobile ? "0 6% 6px" : "0 11% 8px",
-          }}
-        >
-          {plans.map((src, i) => (
-            <article
-              key={src + i}
+    <div
+      className="pr-reveal"
+      style={{
+        transitionDelay: "80ms",
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))",
+        gap: isMobile ? "20px 12px" : "28px 20px",
+      }}
+    >
+      {plans.map((src, i) => {
+        const label = layoutTypeLabel(labels?.[i], i);
+        return (
+          <button
+            key={src + i}
+            type="button"
+            onClick={() => onOpen?.(src)}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: 0,
+              margin: 0,
+              border: "none",
+              background: "transparent",
+              cursor: onOpen ? "pointer" : "default",
+              textAlign: "left",
+            }}
+          >
+            <div
               style={{
-                flex: isMobile ? "0 0 88%" : "0 0 min(720px, 78%)",
-                scrollSnapAlign: "center",
-                scrollSnapStop: "always",
+                aspectRatio: "2 / 3",
+                width: "100%",
+                background: "transparent",
                 borderRadius: "2px",
                 overflow: "hidden",
-                background: "#FFFEF9",
-                border: "1px solid rgba(33,20,26,0.08)",
-                boxShadow: i === active ? "0 10px 28px rgba(33,20,26,0.08)" : "none",
-                transition: "box-shadow 0.3s ease",
-                cursor: onOpen ? "pointer" : "default",
-              }}
-              onPointerDown={(e) => {
-                dragRef.current = { x: e.clientX, moved: false };
-              }}
-              onPointerMove={(e) => {
-                if (Math.abs(e.clientX - dragRef.current.x) > 10) dragRef.current.moved = true;
-              }}
-              onClick={() => {
-                if (!dragRef.current.moved) onOpen?.(src);
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <div
+              <img
+                src={src}
+                alt={label}
+                draggable={false}
                 style={{
-                  aspectRatio: "16 / 10",
-                  background: "#FFFEF9",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: isMobile ? "10px" : "18px",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                  background: "transparent",
                 }}
-              >
-                <img
-                  src={src}
-                  alt={labels?.[i] || `Layout ${i + 1}`}
-                  draggable={false}
-                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", pointerEvents: "none" }}
-                />
-              </div>
-              {(labels?.[i] || areas?.[i]) && (
-                <div style={{ padding: isMobile ? "12px 14px 14px" : "14px 18px 16px", borderTop: "1px solid rgba(33,20,26,0.08)", textAlign: "center", background: "#FFFEF9" }}>
-                  {labels?.[i] && (
-                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: C.dark }}>
-                      {labels[i]}
-                    </div>
-                  )}
-                  {areas?.[i] && (
-                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 500, marginTop: "4px", color: C.mutedDark }}>
-                      {areas[i]}
-                    </div>
-                  )}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-
-        {!isMobile && plans.length > 1 && (
-          <>
-            <button
-              type="button"
-              aria-label="Previous layout"
-              onClick={() => goTo((active - 1 + plans.length) % plans.length)}
+              />
+            </div>
+            <div
               style={{
-                position: "absolute",
-                left: "8px",
-                top: "42%",
-                transform: "translateY(-50%)",
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                border: "1px solid rgba(33,20,26,0.12)",
-                background: "rgba(255,254,249,0.92)",
+                marginTop: 12,
+                fontFamily: "Inter, sans-serif",
+                fontSize: isMobile ? "0.78rem" : "0.88rem",
+                fontWeight: 600,
+                letterSpacing: "0.04em",
                 color: C.dark,
-                fontSize: "1.25rem",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 4px 16px rgba(33,20,26,0.1)",
+                lineHeight: 1.3,
               }}
             >
-              ‹
-            </button>
-            <button
-              type="button"
-              aria-label="Next layout"
-              onClick={() => goTo((active + 1) % plans.length)}
-              style={{
-                position: "absolute",
-                right: "8px",
-                top: "42%",
-                transform: "translateY(-50%)",
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                border: "1px solid rgba(33,20,26,0.12)",
-                background: "rgba(255,254,249,0.92)",
-                color: C.dark,
-                fontSize: "1.25rem",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 4px 16px rgba(33,20,26,0.1)",
-              }}
-            >
-              ›
-            </button>
-          </>
-        )}
-      </div>
-
-      {plans.length > 1 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "16px" }}>
-          {plans.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={labels?.[i] || `Layout ${i + 1}`}
-              onClick={() => goTo(i)}
-              style={{
-                width: i === active ? "22px" : "8px",
-                height: "8px",
-                borderRadius: "2px",
-                border: "none",
-                padding: 0,
-                background: i === active ? C.dark : "rgba(33,20,26,0.18)",
-                cursor: "pointer",
-                transition: "width 0.25s ease, background 0.25s ease",
-              }}
-            />
-          ))}
-        </div>
-      )}
+              {label}
+            </div>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -473,8 +325,6 @@ export default function ProjectPage() {
         .project-page p, .project-page h2, .project-page h3 {
           overflow-wrap: break-word;
         }
-        .layout-carousel::-webkit-scrollbar { display: none; }
-        .layout-carousel { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
 {/* ── GALLERY — Full width ── */}
@@ -913,29 +763,30 @@ export default function ProjectPage() {
 {/* ── FLOOR PLANS ── */}
       <section style={{ padding: "80px 0 0" }}>
         <Container>
-          <div className="pr-reveal" style={{ marginBottom: "40px" }}>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
+          <div className="pr-reveal" style={{ marginBottom: "32px" }}>
+            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, margin: 0, lineHeight: 1.25 }}>
               {t("project.availableLayouts")}
             </h3>
           </div>
           {p.floorPlans && p.floorPlans.length > 0 ? (
-            <LayoutCarousel
+            <LayoutGrid
               plans={p.floorPlans}
               labels={p.floorPlanLabels}
-              areas={p.floorPlanAreas}
               onOpen={setModalSrc}
             />
           ) : (
-          <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "10px" : "16px" }}>
-            {[null, null, null].map((_, n) => (
-                <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "2px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFEF9" }}>
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="1"/>
-                    <path d="M3 9h18M9 9v12M3 15h6"/>
-                  </svg>
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)" }}>
-                    {t("project.layoutComingSoon", { number: n + 1 })}
-                  </span>
+          <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "20px 12px" : "28px 20px" }}>
+            {["Studio", "1 BD", "2 BD", "3 BD"].slice(0, 3).map((label, n) => (
+                <div key={n} style={{ background: "transparent" }}>
+                  <div style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "2px", aspectRatio: "2 / 3", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "transparent" }}>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="1"/>
+                      <path d="M3 9h18M9 9v12M3 15h6"/>
+                    </svg>
+                  </div>
+                  <div style={{ marginTop: 12, fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 600, letterSpacing: "0.04em", color: "rgba(33,20,26,0.35)" }}>
+                    {label}
+                  </div>
                 </div>
             ))}
           </div>
@@ -992,189 +843,6 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
-
-{/* ── PROGRESS & UPDATES ── */}
-      {(() => {
-        const progress = resolveConstructionProgress(p);
-        const stageKey = (id: ConstructionStageId): MessageKey =>
-          id === "foundation"
-            ? "project.progress.foundation"
-            : id === "construction"
-              ? "project.progress.construction"
-              : id === "facade"
-                ? "project.progress.facade"
-                : "project.progress.handover";
-        const pct =
-          progress.stages.length <= 1
-            ? 100
-            : (progress.activeIndex / (progress.stages.length - 1)) * 100;
-
-        return (
-          <section className="pr-progress-outer">
-            <style>{`
-              .pr-progress-outer {
-                background: ${C.dark};
-                padding: clamp(56px, 7vw, 96px) 0;
-              }
-              .pr-progress-inner {
-                max-width: var(--site-max, 1440px);
-                margin: 0 auto;
-                padding: 0 var(--site-gutter, clamp(30px, 5.5vw, 80px));
-                box-sizing: border-box;
-                text-align: left;
-                color: ${C.light};
-              }
-              .pr-progress-eyebrow {
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                margin: 0 0 22px;
-                font-family: Inter, sans-serif;
-                font-size: 11px;
-                font-weight: 500;
-                letter-spacing: 0.14em;
-                text-transform: uppercase;
-                color: rgba(255,254,249,0.45);
-              }
-              .pr-progress-eyebrow::before,
-              .pr-progress-eyebrow::after {
-                content: "";
-                height: 1px;
-                background: rgba(255,254,249,0.22);
-              }
-              .pr-progress-eyebrow::before { width: 28px; flex-shrink: 0; }
-              .pr-progress-eyebrow::after { flex: 0 1 120px; max-width: 160px; }
-              .pr-progress-title {
-                margin: 0 0 10px;
-                font-family: Coolvetica, Inter, sans-serif;
-                font-weight: 500;
-                font-size: clamp(1.6rem, 3vw, 2.4rem);
-                line-height: 1.15;
-                color: ${C.light};
-                text-transform: uppercase;
-                letter-spacing: 0.02em;
-              }
-              .pr-progress-sub {
-                margin: 0 0 clamp(36px, 4.5vw, 56px);
-                font-family: Inter, sans-serif;
-                font-size: 15px;
-                line-height: 1.4;
-                color: rgba(255,254,249,0.5);
-              }
-              .pr-progress-track {
-                position: relative;
-                width: min(100%, 920px);
-                padding-top: 10px;
-              }
-              .pr-progress-line {
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 17px;
-                height: 2px;
-                background: rgba(255,254,249,0.18);
-              }
-              .pr-progress-line-fill {
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                background: ${C.light};
-              }
-              .pr-progress-steps {
-                position: relative;
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                gap: 8px;
-              }
-              .pr-progress-step {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                flex: 0 0 auto;
-                width: 24%;
-                max-width: 140px;
-              }
-              .pr-progress-step:first-child {
-                align-items: flex-start;
-                width: auto;
-                max-width: 120px;
-              }
-              .pr-progress-step:last-child {
-                align-items: flex-end;
-                width: auto;
-                max-width: 120px;
-              }
-              .pr-progress-dot {
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                box-sizing: border-box;
-                border: 2px solid rgba(255,254,249,0.28);
-                background: transparent;
-                position: relative;
-                z-index: 1;
-                flex-shrink: 0;
-              }
-              .pr-progress-dot.is-done {
-                border-color: ${C.light};
-                background: ${C.light};
-                box-shadow: inset 0 0 0 4px ${C.dark};
-              }
-              .pr-progress-label {
-                margin-top: 16px;
-                font-family: Inter, sans-serif;
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: rgba(255,254,249,0.35);
-                line-height: 1.35;
-                text-align: center;
-              }
-              .pr-progress-step:first-child .pr-progress-label { text-align: left; }
-              .pr-progress-step:last-child .pr-progress-label { text-align: right; }
-              .pr-progress-label.is-done {
-                color: ${C.light};
-              }
-              @media (max-width: 640px) {
-                .pr-progress-label {
-                  font-size: 10px;
-                  letter-spacing: 0.04em;
-                  max-width: 72px;
-                }
-                .pr-progress-eyebrow::after { max-width: 64px; }
-              }
-            `}</style>
-            <div className="pr-progress-inner pr-reveal">
-              <p className="pr-progress-eyebrow">
-                {t("project.progress.eyebrow", { name: p.name })}
-              </p>
-              <h3 className="pr-progress-title">{t("project.progress.title")}</h3>
-              <p className="pr-progress-sub">{t("project.progress.subtitle")}</p>
-              <div className="pr-progress-track" aria-label={t("project.progress.subtitle")}>
-                <div className="pr-progress-line">
-                  <div className="pr-progress-line-fill" style={{ width: `${pct}%` }} />
-                </div>
-                <div className="pr-progress-steps">
-                  {progress.stages.map((stage, i) => {
-                    const done = i <= progress.activeIndex;
-                    return (
-                      <div key={stage.id} className="pr-progress-step">
-                        <span className={`pr-progress-dot${done ? " is-done" : ""}`} />
-                        <span className={`pr-progress-label${done ? " is-done" : ""}`}>
-                          {t(stageKey(stage.id))} {stage.year}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      })()}
 
 {/* ── CTA (same as About / Catalog, bg #412834) ── */}
       <section className="pr-cta-outer">

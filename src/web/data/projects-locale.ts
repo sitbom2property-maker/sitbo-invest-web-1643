@@ -56,7 +56,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     installment: "30% взнос / 0% на 27 месяцев",
     priceFrom: "От $89,250",
     pricePerSqm: "от $2,450/м²",
-    floorPlanLabels: ["Студия", "1+1", "2+1", "3+1"],
+    floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
     floorPlanAreas: ["35,7 м²", "53,5 м²", "76,9 м²", "134 м²"],
     developerBody:
       "Tower Group — батумский девелопер Piazza Residence: премиальный комплекс с реставрацией охраняемого исторического здания и современной башней с инфраструктурой отельного уровня в старом городе.",
@@ -105,7 +105,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     ],
     materials:
       "Сейсмостойкость до 8 баллов: монолитный ЖБ каркас. Фасад и изоляция: вентилируемый фасад для морского климата. Остекление UV и шумозащита: алюминий, энергопакеты. Лифты (Otis/Kone): скоростные с резервным питанием. Климат-системы: центральный VRV/VRF и вентиляция. Белый каркас: стяжка, штукатурка, электрика, точки воды.",
-    floorPlanLabels: ["Студия 37,6 м²", "1+1 51,6 м²", "1+1 55,9 м²", "2+1 62,9 м²"],
+    floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
     pricePerSqm: "от $1,300/м²",
     priceFrom: "От $52,480",
     developerBody:
