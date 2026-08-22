@@ -281,9 +281,7 @@ export const projects: Project[] = [
       "8+ Seismic Resilience: Monolithic RC frame. Facade & insulation: Ventilated coastal hydro/thermal facade. Glazing UV and noise protection: Aluminum double-glazed windows. Elevators (Otis/Kone): High-speed with backup power. Climate systems: Central VRV/VRF and ventilation. White frame: Screed, plaster, wiring, plumbing points.",
     photos: [
       // Building renders
-      "/projects/parkline/for-sale/ext-02.jpg",
       "/projects/parkline/for-sale/ext-park-hero.jpg",
-      "/projects/parkline/for-sale/ext-11.jpg",
       "/projects/parkline/for-sale/ext-entrance-branded.jpg",
       "/projects/parkline/for-sale/ext-03.jpg",
       "/projects/parkline/for-sale/ext-01.jpg",
@@ -294,15 +292,14 @@ export const projects: Project[] = [
       "/projects/parkline/for-sale/ext-16.jpg",
       "/projects/parkline/for-sale/ext-terrace-sunset.jpg",
       "/projects/parkline/for-sale/ext-sunset-towers.jpg",
-      "/projects/parkline/for-sale/ext-23.jpg",
       "/projects/parkline/for-sale/ext-night-aerial.jpg",
-      "/projects/parkline/for-sale/ext-05.jpg",
+      // Indoor pool before reception
+      "/projects/parkline/marketing/int-pool-lounge.jpg",
       // Reception & common interiors
       "/projects/parkline/marketing/int-lobby.jpg",
       "/projects/parkline/marketing/int-lobby-2.jpg",
       "/projects/parkline/marketing/int-reception-2.jpg",
       "/projects/parkline/marketing/int-reception-1.jpg",
-      "/projects/parkline/marketing/int-pool-lounge.jpg",
       "/projects/parkline/marketing/int-kids-play.jpg",
       // Apartments
       "/projects/parkline/interiors/int-2br-live.jpg",
@@ -315,13 +312,13 @@ export const projects: Project[] = [
     ],
     // Mosaic showreel: house → outdoor → reception → apartment → outdoor
     galleryPreview: [
-      "/projects/parkline/for-sale/ext-02.jpg",
+      "/projects/parkline/for-sale/ext-park-hero.jpg",
       "/projects/parkline/for-sale/ext-pool-deck.jpg",
       "/projects/parkline/marketing/int-reception-2.jpg",
       "/projects/parkline/interiors/int-2br-live.jpg",
       "/projects/parkline/for-sale/ext-16.jpg",
     ],
-    cardImage: "/projects/parkline/for-sale/ext-02.jpg",
+    cardImage: "/projects/parkline/for-sale/ext-park-hero.jpg",
     lat: 41.6282308808277,
     lng: 41.60779103914824,
     floorPlans: [
