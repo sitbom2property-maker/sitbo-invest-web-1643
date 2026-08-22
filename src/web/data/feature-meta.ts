@@ -52,7 +52,7 @@ const RULES: Rule[] = [
   { category: "lot", icon: "park", test: /\bpark\b|forest|landscap|green|garden|recreation|hectare|archipelago/i },
   { category: "lot", icon: "building", test: /address|boulevard|historic|monument|new build|tower|tallest|fa[cç]ade|ventilated|concrete|construction|phased|university|diplomatic|vake|resort community|masterplan/i },
   { category: "outdoor", icon: "pool", test: /outdoor pool|infinity pool|pools?,?\s*courts|pool & wellness|pools,/i },
-  { category: "outdoor", icon: "court", test: /tennis|basketball|court|sport/i },
+  { category: "outdoor", icon: "court", test: /tennis|basketball|\bcourts?\b|sport/i },
   { category: "outdoor", icon: "yacht", test: /yacht|marina|berth/i },
   { category: "outdoor", icon: "balcony", test: /balcony|terrace|rooftop/i },
   { category: "outdoor", icon: "kids", test: /play area|children|kindergarten|pet zone|детск|питомц|playroom|игровая/i },
