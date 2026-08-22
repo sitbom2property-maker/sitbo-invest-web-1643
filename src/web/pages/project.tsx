@@ -654,6 +654,8 @@ export default function ProjectPage() {
                 </div>
               </div>
 
+              <Divider />
+
 {/* Specs — 3×2 stacked label/value grid (no dividers) */}
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
                 <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
