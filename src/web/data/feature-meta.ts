@@ -122,8 +122,8 @@ function normalizeConstructionLabel(raw: string): string {
   if (/climate|vrv|климат/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Климат-системы" : "Climate systems";
   }
-  if (/seismic|сейсм|8\s*point|8\s*балл|frame|каркас/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Сейсмостойкость до 8 баллов" : "Seismic resistance up to 8 points";
+  if (/seismic|сейсм|8\s*\+|8\s*point|8\s*балл|frame|каркас/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "8+ сейсмическая устойчивость" : "8+ Seismic Resilience";
   }
   if (/jet\s*grout/i.test(t)) return "Jet Grouting";
   return t.replace(/\s*&\s*/g, " & ");
