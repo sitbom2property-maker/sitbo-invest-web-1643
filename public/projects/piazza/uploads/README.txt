@@ -1,1 +1,1 @@
-Сюда перетащите новые рендеры Piazza (jpg/png/webp).
+Сюда новые рендеры Piazza (jpg/png/webp).
