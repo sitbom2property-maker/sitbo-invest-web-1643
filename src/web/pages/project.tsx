@@ -851,7 +851,7 @@ export default function ProjectPage() {
                     maxWidth: 560,
                   }}
                 >
-                  {t("project.payment.note")}
+                  {project.installmentMonths != null ? project.installment : t("project.payment.note")}
                 </p>
               </div>
               <Divider />
