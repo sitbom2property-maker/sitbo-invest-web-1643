@@ -565,6 +565,51 @@ export default function ProjectPage() {
                   )}
                 </div>
 
+                {p.awards && p.awards.length > 0 ? (
+                  <div className="pr-reveal" style={{ marginTop: isMobile ? 28 : 32 }}>
+                    <p
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "0.62rem",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "rgba(33,20,26,0.55)",
+                        margin: "0 0 12px",
+                      }}
+                    >
+                      {t("project.awards")}
+                    </p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                      {p.awards.map((award) => (
+                        <div
+                          key={award.src}
+                          style={{
+                            background: C.light,
+                            borderRadius: 2,
+                            border: "1px solid rgba(33,20,26,0.1)",
+                            padding: "10px 12px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <img
+                            src={award.src}
+                            alt={award.alt}
+                            style={{
+                              width: "100%",
+                              maxWidth: 280,
+                              height: "auto",
+                              display: "block",
+                              objectFit: "contain",
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
                 {(p.liveCameraUrl || p.tourUrl || p.panoramaUrl) ? (
                   <>
                     <div

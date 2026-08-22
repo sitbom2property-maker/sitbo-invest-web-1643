@@ -58,6 +58,8 @@ export type Project = {
   apartmentsKey?: "piazza" | "parkline";
   /** Optional construction timeline; when omitted, derived from completion year. */
   constructionProgress?: ConstructionProgress;
+  /** Optional award badges shown under the sidebar offer card. */
+  awards?: { src: string; alt: string }[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -649,6 +651,12 @@ export const projects: Project[] = [
     floorPlans: [],
     floorPlanLabels: [],
     pricePerSqm: "from €2,365–€4,510/m²",
+    awards: [
+      {
+        src: "/projects/rogantini/brand/lla-winner-2026.png",
+        alt: "Luxury Lifestyle Awards 2026 — Best Luxury Residential Development, Georgia",
+      },
+    ],
     liveCameraUrl: undefined,
   },
   {

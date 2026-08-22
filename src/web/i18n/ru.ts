@@ -573,6 +573,7 @@ const ru: Record<MessageKey, string> = {
   "project.payment.construction": "В период строительства",
   "project.payment.handover": "При получении ключей",
   "project.interested": "Интересно?",
+  "project.awards": "Награды",
   "project.offerTitle": "Получить персональное предложение",
   "project.offerBody":
     "Подготовим детальную смету и подбор планировок по этому проекту.",

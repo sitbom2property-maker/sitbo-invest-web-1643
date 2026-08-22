@@ -590,6 +590,7 @@ const en = {
   "project.payment.construction": "During Construction",
   "project.payment.handover": "On key handover",
   "project.interested": "Interested?",
+  "project.awards": "Awards",
   "project.offerTitle": "Get a personal offer",
   "project.offerBody":
     "I'll prepare a detailed cost estimate and floor plan selection for this project.",
