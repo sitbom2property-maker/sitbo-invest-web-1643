@@ -224,7 +224,7 @@ export const projects: Project[] = [
     floors: "26–28",
     buildings: "3",
     finishing: "White frame",
-    installment: "30% down / 0% over 40 months",
+    installment: "30% / 70%",
     downPaymentPct: 30,
     apartmentsKey: "parkline",
     constructionProgress: {
@@ -329,7 +329,7 @@ export const projects: Project[] = [
     floors: "6–8",
     buildings: "6 phases · 20 ha",
     finishing: "Green frame",
-    installment: "30% down / 70% by schedule",
+    installment: "30% / 70%",
     developerBody:
       "VR Holding is one of Georgia’s leading developers with a multi-billion portfolio spanning Tbilisi and the Black Sea coast — including Krtsanisi Resort Residence, Vake Sky Tower and Shekvetili Forest~Beach.",
     districtTitle: "Krtsanisi",
@@ -398,7 +398,7 @@ export const projects: Project[] = [
     floors: "2–11",
     buildings: "Blocks A, B1, B2, C1, C2",
     finishing: "Turnkey (Block A) / Green frame",
-    installment: "20% down / balance by schedule",
+    installment: "30% / 70%",
     developerBody:
       "VR Holding develops destination projects on Georgia’s Black Sea coast. Shekvetili Forest~Beach sits next to Paragraph Resort & Spa (Autograph Collection) and is positioned for both lifestyle buyers and rental investors.",
     districtTitle: "Shekvetili",
@@ -471,7 +471,7 @@ export const projects: Project[] = [
     floors: "70 · ~260 m",
     buildings: "1",
     finishing: "Turnkey / hotel-style apartments",
-    installment: "EOI / by schedule",
+    installment: "30% / 70%",
     developerBody:
       "VR Holding is delivering Vake Sky Tower as a new economic and cultural landmark for Tbilisi — residences with hotel services, Fashion Avenue and a Class A business centre on the site of the former Sports University.",
     districtTitle: "Vake",
@@ -535,7 +535,7 @@ export const projects: Project[] = [
     floors: "16",
     buildings: "2",
     finishing: "White Frame, Renovated, Turnkey",
-    installment: "30% down / 70% quarterly",
+    installment: "30% / 70%",
     features: [
       "Gated private community",
       "5-star hotel infrastructure",
@@ -574,7 +574,7 @@ export const projects: Project[] = [
     floors: "45",
     buildings: "2",
     finishing: "White frame, Turnkey, Designer",
-    installment: "40% down / 60% quarterly",
+    installment: "30% / 70%",
     features: [
       "20,000 m² private park",
       "Region's largest casino",
@@ -676,7 +676,7 @@ export const projects: Project[] = [
     floors: "30",
     buildings: "8",
     finishing: "White frame, Turnkey, Designer",
-    installment: "35% down / 65% quarterly",
+    installment: "30% / 70%",
     features: [
       "87-ha man-made archipelago",
       "49% green infrastructure",
@@ -715,7 +715,7 @@ export const projects: Project[] = [
     floors: "14",
     buildings: "3",
     finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
+    installment: "30% / 70%",
     features: [
       "Private marina with berths",
       "Branded residences",
