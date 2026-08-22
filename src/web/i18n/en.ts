@@ -600,6 +600,13 @@ const en = {
   "project.cta.body":
     "We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",
   "project.otherProjects": "Other Projects",
+  "project.gallery.showAll": "Show all photos",
+  "project.gallery.close": "Close gallery",
+  "project.gallery.prev": "Previous photo",
+  "project.gallery.next": "Next photo",
+  "project.gallery.counter": "{current} / {total}",
+  "project.gallery.lightbox": "Photo gallery",
+  "project.gallery.openPhoto": "Open photo in fullscreen",
   "project.modal.layoutPreview": "Layout preview",
   "project.offerModal.title": "Request Details",
   "project.offerModal.body": "Tell us about your interest in {project}. We'll prepare a personalized offer.",
