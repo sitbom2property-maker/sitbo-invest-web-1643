@@ -289,17 +289,6 @@ export function ProjectFeatures({ features, materials, open, onOpen, onClose, is
             {t("project.features.viewAll", { count: items.length + constructionItems.length })}
           </button>
         ) : null}
-
-        {constructionItems.length > 0 ? (
-          <div className="pf-construction">
-            <h4 className="pf-construction-title">{t("project.features.construction")}</h4>
-            <div className="pf-grid pf-construction-grid">
-              {constructionItems.map((item) => (
-                <FeatureRow key={item.id} item={item} compact />
-              ))}
-            </div>
-          </div>
-        ) : null}
       </div>
 
       {open ? (
@@ -406,24 +395,6 @@ const PF_CSS = `
 }
 .pf-view-all::after { content: " ›"; font-size: 1.1em; line-height: 1; }
 .pf-view-all:hover { opacity: .75; }
-.pf-construction {
-  margin-top: 36px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(33,20,26,0.08);
-}
-.pf-construction-title {
-  margin: 0 0 16px;
-  font-family: Inter, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(33,20,26,0.45);
-  line-height: 1.3;
-}
-.pf-construction-grid {
-  gap: 14px 28px;
-}
 .pf-overlay {
   position: fixed;
   inset: 0;
@@ -488,10 +459,9 @@ const PF_CSS = `
   color: ${C.dark};
 }
 .pf-grid-modal { gap: 18px 28px; }
+.pf-construction-grid { gap: 14px 28px; }
 @media (max-width: 768px) {
   .pf-grid { grid-template-columns: 1fr; gap: 16px; }
-  .pf-construction-grid { grid-template-columns: 1fr; gap: 12px; }
-  .pf-construction { margin-top: 28px; padding-top: 22px; }
   .pf-overlay {
     align-items: flex-end;
     padding: 0;

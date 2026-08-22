@@ -578,7 +578,7 @@ const en = {
   "project.spec.purchaseTax": "Purchase tax",
   "project.spec.climateAdaptation": "Climate Adaptation",
   "project.spec.climateYes": "Yes",
-  "project.features": "Features",
+  "project.features": "Features and construction",
   "project.features.viewAll": "View all {count} features",
   "project.features.lot": "Lot",
   "project.features.indoor": "Indoor",

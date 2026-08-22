@@ -561,7 +561,7 @@ const ru: Record<MessageKey, string> = {
   "project.spec.purchaseTax": "Налог на покупку",
   "project.spec.climateAdaptation": "Климат-адаптация",
   "project.spec.climateYes": "Да",
-  "project.features": "Особенности",
+  "project.features": "Особенности и строительство",
   "project.features.viewAll": "Смотреть все {count} особенностей",
   "project.features.lot": "Участок и локация",
   "project.features.indoor": "Внутри",
