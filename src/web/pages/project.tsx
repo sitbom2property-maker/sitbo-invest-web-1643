@@ -485,8 +485,8 @@ export default function ProjectPage() {
               {paymentPlans.length > 0 ? (
               <>
               <Divider />
-              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
-                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 22px" }}>
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
                   {t("project.payment")}
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 16 }}>
