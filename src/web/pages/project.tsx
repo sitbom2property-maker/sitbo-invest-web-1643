@@ -283,18 +283,22 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
               onClick={() => setLightbox(null)}
               aria-label={t("cookie.close")}
               style={{
-                width: 40,
-                height: 40,
-                borderRadius: 2,
-                border: "1px solid rgba(255,254,249,0.18)",
+                width: 44,
+                height: 44,
+                border: "none",
                 background: "transparent",
                 color: C.light,
                 cursor: "pointer",
-                fontSize: "1.25rem",
-                lineHeight: 1,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 0,
+                opacity: 0.9,
               }}
             >
-              ✕
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
             </button>
           </div>
 
@@ -305,8 +309,8 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: isMobile ? 0 : 20,
-              padding: isMobile ? "0 12px 20px" : "0 28px 28px",
+              gap: isMobile ? 0 : 12,
+              padding: isMobile ? "0 12px 20px" : "0 20px 28px",
               position: "relative",
             }}
             onClick={(e) => e.stopPropagation()}
@@ -320,18 +324,20 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
                   display: isMobile ? "none" : "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: 44,
-                  height: 44,
-                  borderRadius: 2,
-                  border: "1px solid rgba(255,254,249,0.2)",
-                  background: "rgba(255,254,249,0.06)",
+                  width: 48,
+                  height: 48,
+                  border: "none",
+                  background: "transparent",
                   color: C.light,
                   cursor: "pointer",
-                  fontSize: "1.4rem",
+                  padding: 0,
                   flexShrink: 0,
+                  opacity: 0.9,
                 }}
               >
-                ‹
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M15 5 8 12l7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
             ) : null}
 
@@ -373,18 +379,20 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
                   display: isMobile ? "none" : "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: 44,
-                  height: 44,
-                  borderRadius: 2,
-                  border: "1px solid rgba(255,254,249,0.2)",
-                  background: "rgba(255,254,249,0.06)",
+                  width: 48,
+                  height: 48,
+                  border: "none",
+                  background: "transparent",
                   color: C.light,
                   cursor: "pointer",
-                  fontSize: "1.4rem",
+                  padding: 0,
                   flexShrink: 0,
+                  opacity: 0.9,
                 }}
               >
-                ›
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
             ) : null}
           </div>
