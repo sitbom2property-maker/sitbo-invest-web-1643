@@ -801,8 +801,8 @@ export default function ProjectPage() {
                       className="project-payment-bar"
                       style={{
                         display: "flex",
-                        flexDirection: isMobile ? "column" : "row",
-                        gap: 8,
+                        flexDirection: "row",
+                        gap: isMobile ? 6 : 8,
                         alignItems: "stretch",
                       }}
                     >
@@ -818,20 +818,20 @@ export default function ProjectPage() {
                           <div
                             key={`${planIdx}-${segIdx}-${seg.stage}`}
                             style={{
-                              flex: isMobile ? "none" : `${seg.pct} 1 0`,
-                              minWidth: isMobile ? 0 : 96,
+                              flex: `${seg.pct} 1 0`,
+                              minWidth: 0,
                               boxSizing: "border-box",
                               borderRadius: 2,
-                              padding: isMobile ? "18px 16px" : "20px 18px",
+                              padding: isMobile ? "14px 12px" : "20px 18px",
                               background: isDown ? C.teal : C.light,
                               border: `1px solid ${C.teal}`,
                               color: isDown ? C.light : C.dark,
                             }}
                           >
-                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.55rem" : "1.75rem", fontWeight: 700, margin: "0 0 6px", lineHeight: 1, color: "inherit" }}>
+                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.35rem" : "1.75rem", fontWeight: 700, margin: "0 0 6px", lineHeight: 1, color: "inherit" }}>
                               {seg.pct}%
                             </p>
-                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 500, margin: 0, lineHeight: 1.3, color: "inherit", opacity: isDown ? 0.95 : 0.85 }}>
+                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", fontWeight: 500, margin: 0, lineHeight: 1.25, color: "inherit", opacity: isDown ? 0.95 : 0.85 }}>
                               {label}
                             </p>
                           </div>
@@ -843,17 +843,18 @@ export default function ProjectPage() {
                 <p
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontSize: isMobile ? "0.72rem" : "0.75rem",
+                    fontSize: isMobile ? "0.84rem" : "0.9rem",
                     fontWeight: 400,
-                    color: "rgba(33,20,26,0.45)",
+                    color: "rgba(33,20,26,0.5)",
                     lineHeight: 1.45,
-                    margin: "18px 0 0",
-                    maxWidth: 520,
+                    margin: "20px 0 0",
+                    maxWidth: 560,
                   }}
                 >
                   {t("project.payment.note")}
                 </p>
               </div>
+              <Divider />
               </>
               ) : null}
 
