@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "wouter";
 import { projects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
-import { AppLink } from "../components/app-link";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
 import { RequestModal } from "../components/RequestModal";
@@ -409,6 +408,7 @@ export default function ProjectPage() {
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
+  const [showCtaForm, setShowCtaForm] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
@@ -966,27 +966,67 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-{/* ── CTA FOOTER ── */}
-      <div style={{ background: C.dark, padding: "80px 0" }}>
-        <Container>
-          <Row>
-            <Col span={8} style={{ margin: "0 auto", textAlign: "center" }}>
-              <div className="pr-reveal">
-                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: C.light, marginBottom: "16px", lineHeight: 1.1, textAlign: "center" }}>
-                  {t("project.cta.title")}<br />
-                  <em style={{ color: C.light, fontStyle: "italic" }}>{p.name}?</em>
-                </h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
-                  {t("project.cta.body")}
-                </p>
-                <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "2px", padding: "15px 36px", textDecoration: "none" }}>
-                  {t("cta.getFreeOffer")}
-                </AppLink>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+{/* ── CTA (same as About / Catalog, bg #412834) ── */}
+      <section className="pr-cta-outer">
+        <style>{`
+          .pr-cta-outer {
+            max-width: var(--site-max, 1440px);
+            margin: 0 auto;
+            padding: 0 var(--site-gutter, clamp(30px, 5.5vw, 80px)) clamp(56px, 7vw, 100px);
+            box-sizing: border-box;
+            background: ${C.light};
+          }
+          .pr-cta {
+            border-radius: 2px;
+            overflow: hidden;
+            background:
+              radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
+              #412834;
+            padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
+            text-align: center;
+            color: ${C.light};
+          }
+          .pr-cta h2 {
+            font-family: Coolvetica, Inter, sans-serif;
+            font-weight: 600;
+            margin: 0 0 14px;
+            font-size: clamp(28px, 3.6vw, 48px);
+            line-height: 1.12;
+            color: ${C.light};
+          }
+          .pr-cta p {
+            margin: 0 auto 28px;
+            max-width: 480px;
+            font-family: Inter, sans-serif;
+            font-size: clamp(15px, 1.3vw, 17px);
+            line-height: 1.5;
+            color: ${C.light};
+          }
+          .pr-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Inter, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 15px 30px;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            background: ${C.light};
+            color: ${C.dark};
+            transition: opacity .2s;
+          }
+          .pr-cta-btn:hover { opacity: .88; }
+        `}</style>
+        <div className="pr-cta pr-reveal">
+          <h2>{t("services.cta.title")}</h2>
+          <p>{t("services.cta.body")}</p>
+          <button type="button" className="pr-cta-btn" onClick={() => setShowCtaForm(true)}>
+            {t("services.cta.button")}
+          </button>
+        </div>
+      </section>
 
 {/* ── NEXT / PREV projects ── */}
       <section style={{ padding: "80px 0" }}>
@@ -1036,6 +1076,13 @@ export default function ProjectPage() {
         title={t("popup.submit")}
         subtitle={t("project.offerModal.body", { project: project.name })}
         source="Project page"
+        topic={project.name}
+      />
+      <RequestModal
+        open={showCtaForm}
+        onClose={() => setShowCtaForm(false)}
+        source="Project page CTA"
+        title={t("services.cta.button")}
         topic={project.name}
       />
     </div>

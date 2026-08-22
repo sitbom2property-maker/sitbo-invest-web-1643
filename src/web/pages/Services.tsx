@@ -342,7 +342,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   border-radius: 2px; overflow: hidden;
   background:
     radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
-    var(--card);
+    #412834;
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;
 }

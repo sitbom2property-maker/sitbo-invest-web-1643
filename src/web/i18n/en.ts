@@ -40,20 +40,20 @@ const en = {
   "footer.management": "Property Management",
   "footer.residency": "Residency & Relocation",
   "footer.rights": "© 2026 Sitbo Invest. All rights reserved.",
-  "footer.review": "Leave us a Google Review ↗",
+  "footer.review": "Leave a Google Review ↗",
   "footer.legal": "Privacy Policy & Terms of Service",
 
   // Common CTAs and labels
   "cta.requestAccess": "Request Access",
   "cta.requestDetails": "Request Details",
-  "cta.seeWhatWeDo": "See What We Do",
+  "cta.seeWhatWeDo": "See What I Do",
   "cta.contact": "Contact",
   "cta.viewProject": "View Project",
   "cta.from": "From ",
   "cta.bookConsultation": "Book a Consultation",
   "cta.bookCall": "Book a Call",
   "cta.bookFreeConsultation": "Book a Free Consultation",
-  "cta.whatsappUs": "WhatsApp Us",
+  "cta.whatsappUs": "WhatsApp Me",
   "cta.learnMore": "Learn more",
   "cta.close": "Close",
   "cta.readMore": "Read More",
@@ -107,7 +107,7 @@ const en = {
 
   "v2.quote.eyebrow": "Global Recognition",
   "v2.quote.text":
-    "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
+    "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here.",
   "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
   "v2.quote2.text":
     "For international buyers, Georgia combines legal clarity, residency pathways, and yields that are hard to find in Europe today.",
@@ -263,7 +263,7 @@ const en = {
   "home.founder.aboutHeadline": "Market Expertise.",
   "home.founder.aboutHeadlineEm": "Personal Service.",
   "home.founder.aboutBody":
-    "From confusing paperwork to 'ghost' agents, the risks are real. With hundreds of successful deals behind us, we verify the legality, assess true value, and secure your ROI. Focus on the lifestyle; let us handle the complexity.",
+    "From confusing paperwork to 'ghost' agents, the risks are real. With hundreds of successful deals behind me, I verify the legality, assess true value, and secure your ROI. Focus on the lifestyle; I handle the complexity.",
   "home.founder.pillar1.title": "Investment & Access",
   "home.founder.pillar1.desc": "Exclusive deals unavailable to the public, backed by honest projection analysis.",
   "home.founder.pillar2.title": "Legal & Residency",
@@ -323,9 +323,9 @@ const en = {
 
   // Portfolio
   "home.portfolio.headline": "Premium projects,",
-  "home.portfolio.headlineEm": "filtered by us.",
+  "home.portfolio.headlineEm": "filtered by me.",
   "home.portfolio.quote":
-    '"Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."',
+    '"Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here."',
   "home.portfolio.quoteAttr": "Mohamed Alabbar — Eagle Hills, UAE",
   "home.portfolio.scrollNext": "Scroll to next project",
 
@@ -362,11 +362,11 @@ const en = {
   "home.discovery.stay.title": "Premium Stay",
   "home.discovery.stay.desc": "Curated 5-star accommodation selected for your comfort",
   "home.discovery.viewings.title": "Off-Market Viewings",
-  "home.discovery.viewings.desc": "Exclusive properties not listed publicly, shown only to our clients",
+  "home.discovery.viewings.desc": "Exclusive properties not listed publicly, shown only to my clients",
   "home.discovery.gastro.title": "Gastronomic Program",
   "home.discovery.gastro.desc": "Batumi's finest restaurants and experiences, arranged for you",
   "home.discovery.briefing.title": "Investment Briefing",
-  "home.discovery.briefing.desc": "Private session with our senior advisor on market and returns",
+  "home.discovery.briefing.desc": "Private session with me on market and returns",
   "home.discovery.legal.title": "Legal Consultation",
   "home.discovery.legal.desc": "Full legal review of shortlisted properties before you decide",
   "home.discovery.deposit": "Deposit",
@@ -379,12 +379,12 @@ const en = {
   "home.payment.headlineEm": "invest in Batumi.",
   "home.payment.bank.title": "Official Bank Transfers (GEL)",
   "home.payment.bank.body":
-    "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. We provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
+    "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. I provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
   "home.payment.bank.sub":
     "Secure, transparent, and 100% compliant with Georgian financial regulations.",
   "home.payment.crypto.title": "Cryptocurrency & Digital Assets",
   "home.payment.crypto.body":
-    "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. We facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
+    "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. I facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
   "home.payment.crypto.sub": "Full legal compliance. Blockchain-verified ownership transfer.",
   "home.payment.installment.title": "Interest-Free Installments",
   "home.payment.installment.desc":
@@ -430,7 +430,7 @@ const en = {
   "home.contact.eyebrow": "Private Consultation",
   "home.contact.headline": "Let's discuss",
   "home.contact.headlineEm": "your strategy.",
-  "home.contact.body": "We take on a limited number of clients each quarter. No obligation, full transparency.",
+  "home.contact.body": "I take on a limited number of clients each quarter. No obligation, full transparency.",
   "home.contact.name": "Your Name",
   "home.contact.nameRequired": "Your Name *",
   "home.contact.namePlaceholder": "Full name",
@@ -446,7 +446,7 @@ const en = {
   "home.contact.submit": "Request Private Consultation",
   "home.contact.loading": "Sending...",
   "home.contact.disclaimer": "By submitting you agree to be contacted by a Sitbo Invest advisor. No spam, ever.",
-  "home.contact.sentTitle": "We'll be in touch shortly.",
+  "home.contact.sentTitle": "I'll be in touch shortly.",
   "home.contact.sentBody": "Your inquiry has been received. Expect a personal call from Arthur within 24 hours.",
   "home.contact.errorRequired": "Please fill in your name and contact.",
   "home.contact.errorGeneric": "Something went wrong. Please try again.",
@@ -498,7 +498,7 @@ const en = {
   // Cookie consent
   "cookie.title": "This website uses cookies",
   "cookie.body":
-    "This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.",
+    "This website uses cookies to improve user experience. By using this website you consent to all cookies in accordance with the Cookie Policy.",
   "cookie.readMore": "Read more about Cookie Policy",
   "cookie.decline": "Decline",
   "cookie.accept": "Accept",
@@ -514,7 +514,7 @@ const en = {
   "cookie.functionality": "Functionality",
   "cookie.unclassified": "Unclassified",
   "cookie.necessaryDesc": "Required for the site to work — security, language, and cookie preferences. Always on.",
-  "cookie.performanceDesc": "Help us understand how the site is used so we can improve it.",
+  "cookie.performanceDesc": "Help understand how the site is used so it can be improved.",
   "cookie.targetingDesc": "Used to deliver more relevant content and measure campaigns.",
   "cookie.functionalityDesc": "Remember choices such as currency and display preferences.",
   "cookie.unclassifiedDesc": "Cookies that have not yet been assigned to a category.",
@@ -545,15 +545,15 @@ const en = {
   "catalog.emptyBody": "Try adjusting your filters",
   "catalog.cta.title": "Don't see what you're looking for?",
   "catalog.cta.body":
-    "We work with off-market inventory not listed publicly. Tell us your budget and preferences — we'll find the right match.",
+    "I work with off-market inventory not listed publicly. Tell me your budget and preferences — I'll find the right match.",
   "catalog.cta.bookCall": "Book a Call",
   "catalog.bookCall.title": "Book a Call",
-  "catalog.bookCall.body": "Leave your details and we'll reach out to schedule a convenient time.",
+  "catalog.bookCall.body": "Leave your details and I'll reach out to schedule a convenient time.",
   "catalog.bookCall.name": "Your Name",
   "catalog.bookCall.phone": "Phone Number",
   "catalog.bookCall.email": "Email Address",
   "catalog.bookCall.message": "Your request (optional)",
-  "catalog.bookCall.direct": "Contact us directly at:",
+  "catalog.bookCall.direct": "Contact me directly at:",
 
   // Project page
   "project.overview": "Overview",
@@ -592,7 +592,7 @@ const en = {
   "project.interested": "Interested?",
   "project.offerTitle": "Get a personal offer",
   "project.offerBody":
-    "We'll prepare a detailed cost estimate and floor plan selection for this project.",
+    "I'll prepare a detailed cost estimate and floor plan selection for this project.",
   "project.from": "From",
   "project.ready": "Ready",
   "project.sea": "Sea",
@@ -617,15 +617,15 @@ const en = {
     "Batumi International Airport is only 8 minutes away, which is convenient for frequent travellers. Key social infrastructure is nearby: the school and dolphinarium are 11 minutes away by car, and the kindergarten is 12 minutes away.",
   "project.cta.title": "Ready to invest in",
   "project.cta.body":
-    "We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",
+    "I'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",
   "project.otherProjects": "Other Projects",
   "project.modal.layoutPreview": "Layout preview",
   "project.offerModal.title": "Request Details",
-  "project.offerModal.body": "Tell us about your interest in {project}. We'll prepare a personalized offer.",
+  "project.offerModal.body": "Tell me about your interest in {project}. I'll prepare a personalized offer.",
   "project.offerModal.name": "Your Name",
   "project.offerModal.phone": "Phone Number",
   "project.offerModal.email": "Email Address",
-  "project.offerModal.direct": "Contact us directly at:",
+  "project.offerModal.direct": "Contact me directly at:",
 
   "chess.eyebrow": "Availability",
   "chess.title": "Choose a floor and apartment",
@@ -652,7 +652,7 @@ const en = {
   "chess.rooms": "Layout",
   "chess.priceOnRequest": "Price on request",
   "chess.request": "Request this apartment",
-  "chess.notSelectable": "This unit is not currently for sale. Pick an available cell or ask us for alternatives.",
+  "chess.notSelectable": "This unit is not currently for sale. Pick an available cell or ask me for alternatives.",
   "chess.chooseCta": "Choose an apartment",
   "chess.view3d": "360 3D view",
   "chess.view2d": "2D view",
@@ -664,7 +664,7 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
-  "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is our chessboard.",
+  "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is my chessboard.",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",
@@ -683,7 +683,7 @@ const en = {
   "invest.why.body":
     "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 13.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
   "invest.why.quote":
-    "“Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.”",
+    "“Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here.”",
   "invest.why.quoteAttr": "Mohamed Alabbar — Eagle Hills, UAE",
   "invest.why.stat1": "Max rental yield on managed seafront units",
   "invest.why.stat2": "World rank for rental profitability (Global Property Guide)",
@@ -888,23 +888,23 @@ const en = {
   "turnkey.hero.title": "Reality matches",
   "turnkey.hero.titleEm": "the render",
   "turnkey.hero.body":
-    "We renovate for those who notice every millimetre. You don't need to mediate between the designer and the builder, or find someone to blame when the furniture doesn't fit the doorway. We take care of everything: from the first line on paper to selecting the textiles.",
+    "I renovate for those who notice every millimetre. You don't need to mediate between the designer and the builder, or find someone to blame when the furniture doesn't fit the doorway. I take care of everything: from the first line on paper to selecting the textiles.",
   "turnkey.hero.ctaSelf": "I'm Renovating For Myself",
   "turnkey.hero.ctaInvest": "I'm Renovating For Investment",
   "turnkey.forSelf.eyebrow": "For Perfectionists",
   "turnkey.forSelf.title": "A Home That Reflects Your Vision",
   "turnkey.forSelf.body":
-    "We translate your personal style into a living space of uncompromising quality. Our process is designed for those who appreciate fine details and a seamless, stress-free experience.",
+    "I translate your personal style into a living space of uncompromising quality. The process is designed for those who appreciate fine details and a seamless, stress-free experience.",
   "turnkey.forSelf.item1.label": "Bespoke Design",
   "turnkey.forSelf.item1.desc": "A unique project crafted around your lifestyle and aesthetic vision.",
   "turnkey.forSelf.item2.label": "Master Craftsmanship",
   "turnkey.forSelf.item2.desc": "Meticulous attention to every seam, joint, and finish — no compromises.",
   "turnkey.forSelf.item3.label": "Premium Materials",
-  "turnkey.forSelf.item3.desc": "We source the best materials, including Italian tile and European fittings.",
+  "turnkey.forSelf.item3.desc": "I source the best materials, including Italian tile and European fittings.",
   "turnkey.forInvestors.eyebrow": "For Investors",
   "turnkey.forInvestors.title": "A Renovation That Delivers Profit",
   "turnkey.forInvestors.body":
-    "We create high-demand, low-maintenance rental properties that maximize your ROI. Our process is optimized for speed, durability, and market appeal in Batumi.",
+    "I create high-demand, low-maintenance rental properties that maximize your ROI. The process is optimized for speed, durability, and market appeal in Batumi.",
   "turnkey.forInvestors.item1.label": "ROI-Driven Design",
   "turnkey.forInvestors.item1.desc": "A proven aesthetic that attracts premium short-term tenants in Batumi.",
   "turnkey.forInvestors.item2.label": "Speed to Market",
@@ -913,13 +913,13 @@ const en = {
   "turnkey.forInvestors.item3.desc": "Vandal-proof, wear-resistant materials designed for Batumi's humid climate.",
   "turnkey.cta.discussProject": "Discuss My Project",
   "turnkey.cta.calculateRoi": "Calculate My ROI",
-  "turnkey.design.eyebrow": "Our Cornerstone",
+  "turnkey.design.eyebrow": "My Cornerstone",
   "turnkey.design.title": "Perfection is Planned.",
-  "turnkey.design.titleEm": "We Never Start Without a Design Project.",
+  "turnkey.design.titleEm": "I Never Start Without a Design Project.",
   "turnkey.design.body1":
-    "A complete, client-approved design project is our blueprint for success and your ultimate guarantee. It allows us to provide a 100% fixed budget and a precise timeline before a single wall is touched.",
+    "A complete, client-approved design project is my blueprint for success and your ultimate guarantee. It lets me provide a 100% fixed budget and a precise timeline before a single wall is touched.",
   "turnkey.design.body2":
-    "This eliminates unexpected costs, ensures every detail meets your expectations, and is the professional standard we proudly uphold on every project in Batumi.",
+    "This eliminates unexpected costs, ensures every detail meets your expectations, and is the professional standard I proudly uphold on every project in Batumi.",
   "turnkey.calculator.eyebrow": "Cost Estimator",
   "turnkey.calculator.title": "Get a Preliminary Estimate",
   "turnkey.calculator.body":
@@ -956,7 +956,7 @@ const en = {
   "turnkey.remote.step3.desc": "Real-time access to all documents, floor plans, photos, and financial reports in one place.",
   "turnkey.remote.step4.title": "Live Video Calls",
   "turnkey.remote.step4.desc": "Schedule a live call from your property at any time. Inspect the work yourself, remotely.",
-  "turnkey.portfolio.eyebrow": "Our Work",
+  "turnkey.portfolio.eyebrow": "My Work",
   "turnkey.portfolio.title": "Proof of",
   "turnkey.portfolio.titleEm": "Perfection",
   "turnkey.portfolio.all": "All Projects",
@@ -989,12 +989,12 @@ const en = {
   "turnkey.portfolio.project6.tag1": "Author Supervision",
   "turnkey.portfolio.project6.tag2": "Premium Materials",
   "turnkey.portfolio.project6.tag3": "6 Month Project",
-  "turnkey.guarantee.self.title": "We Guarantee Your Aesthetic Satisfaction",
+  "turnkey.guarantee.self.title": "I Guarantee Your Aesthetic Satisfaction",
   "turnkey.guarantee.self.body":
-    "We don't just guarantee the work — we guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, we'll redo it. That's our commitment to craftsmanship.",
+    "I don't just guarantee the work — I guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, I'll redo it. That's my commitment to craftsmanship.",
   "turnkey.guarantee.invest.title": "Fixed Budget. Fixed Timeline. In the Contract.",
   "turnkey.guarantee.invest.body":
-    "We put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.",
+    "I put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.",
   "turnkey.market.eyebrow": "Market Opportunity",
   "turnkey.market.title": "Why Batumi Works for Renovation & Rental",
   "turnkey.market.stat1.label": "Annual Tourists (2025)",
@@ -1115,9 +1115,9 @@ const en = {
   "mortgage.calculator.actualConditions": "Actual loan conditions depend on TBC Bank assessment.",
   "mortgage.calculator.yearsSuffix": "years",
   "mortgage.cta.eyebrow": "Ready to apply?",
-  "mortgage.cta.title": "We work with TBC Bank directly.",
+  "mortgage.cta.title": "I work with TBC Bank directly.",
   "mortgage.cta.body":
-    "No residency required. We guide you through the full process — documents, compliance, bank submission. Conditions change; we have live data.",
+    "No residency required. I guide you through the full process — documents, compliance, bank submission. Conditions change; I keep live data.",
 
   // History page
   "history.eyebrow": "History Timeline · Georgia",
@@ -1148,48 +1148,48 @@ const en = {
   "legal.termsTitle": "Terms of Service",
   "legal.privacy.introduction.heading": "1. Introduction",
   "legal.privacy.introduction.body":
-    "Welcome to sitboinvest.ge, operated by Sitbo Group. We are committed to protecting your privacy and ensuring that your personal data is handled securely and transparently. This Privacy Policy explains how we collect, use, and protect your information when you interact with our premium real estate platform.",
-  "legal.privacy.information.heading": "2. Information We Collect",
+    "Welcome to sitboinvest.ge, operated by Sitbo Group. Sitbo Group is committed to protecting your privacy and ensuring that personal data is handled securely and transparently. This Privacy Policy explains how information is collected, used, and protected when you interact with this premium real estate platform.",
+  "legal.privacy.information.heading": "2. Information Collected",
   "legal.privacy.information.body":
-    "We may collect personal information that you voluntarily provide to us, including but not limited to your name, contact details, and investment preferences. Additionally, we automatically collect certain technical data (such as IP addresses and browsing behavior) through cookies to enhance your experience on our site.",
-  "legal.privacy.use.heading": "3. How We Use Your Information",
-  "legal.privacy.use.body": "We utilize your data to:",
+    "Personal information that you voluntarily provide may be collected, including but not limited to your name, contact details, and investment preferences. Additionally, certain technical data (such as IP addresses and browsing behavior) may be collected automatically through cookies to enhance your experience on this site.",
+  "legal.privacy.use.heading": "3. How Your Information Is Used",
+  "legal.privacy.use.body": "Your data is used to:",
   "legal.privacy.use.list1": "Provide personalized real estate and investment recommendations in the Batumi market.",
   "legal.privacy.use.list2":
-    "Improve our website's functionality and user experience through advanced analytics and PropTech integrations.",
+    "Improve this website's functionality and user experience through advanced analytics and PropTech integrations.",
   "legal.privacy.use.list3":
     "Communicate with you regarding exclusive properties, market insights, and your inquiries.",
   "legal.privacy.use.list4": "Comply with applicable legal obligations.",
   "legal.privacy.sharing.heading": "4. Data Sharing and Security",
   "legal.privacy.sharing.body":
-    "We do not sell your personal information to third parties. We may share necessary data with trusted service providers who assist us in operating our platform, strictly under confidentiality agreements. We implement industry-standard security measures to protect your data against unauthorized access.",
+    "Personal information is not sold to third parties. Necessary data may be shared with trusted service providers who assist in operating this platform, strictly under confidentiality agreements. Industry-standard security measures are implemented to protect your data against unauthorized access.",
   "legal.privacy.rights.heading": "5. Your Rights",
   "legal.privacy.rights.body":
-    "Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You may also opt-out of marketing communications at any time. To exercise these rights, please contact us at sitboinvest@gmail.com.",
+    "Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You may also opt-out of marketing communications at any time. To exercise these rights, please contact sitboinvest@gmail.com.",
   "legal.privacy.changes.heading": "6. Changes to This Policy",
   "legal.privacy.changes.body":
-    "We may update this Privacy Policy periodically to reflect changes in our practices or regulatory requirements. The latest version will always be available on this page.",
+    "This Privacy Policy may be updated periodically to reflect changes in practices or regulatory requirements. The latest version will always be available on this page.",
   "legal.terms.acceptance.heading": "1. Acceptance of Terms",
   "legal.terms.acceptance.body":
-    "By accessing and using sitboinvest.ge, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please refrain from using our website.",
+    "By accessing and using sitboinvest.ge, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please refrain from using this website.",
   "legal.terms.services.heading": "2. Services and Content",
   "legal.terms.services.body":
     "Sitbo Group provides premium real estate consulting, investment opportunities, and property management insights in Batumi, Georgia. All information, including architectural renders, market data, and AI-driven analytics provided on this site, is for informational purposes only and does not constitute financial or legal advice.",
   "legal.terms.ip.heading": "3. Intellectual Property",
   "legal.terms.ip.body":
-    "All content, branding, designs, and materials on this website are the exclusive intellectual property of Sitbo Group. You may not copy, reproduce, distribute, or create derivative works from our content without explicit written permission.",
+    "All content, branding, designs, and materials on this website are the exclusive intellectual property of Sitbo Group. You may not copy, reproduce, distribute, or create derivative works from this content without explicit written permission.",
   "legal.terms.conduct.heading": "4. User Conduct",
   "legal.terms.conduct.body":
     "You agree to use this website only for lawful purposes. You must not engage in any activity that disrupts or interferes with the site's operations, including unauthorized data scraping, attempting to bypass security measures, or transmitting malicious code.",
   "legal.terms.liability.heading": "5. Limitation of Liability",
   "legal.terms.liability.body":
-    "While we strive for accuracy, Sitbo Group makes no warranties regarding the completeness or reliability of the information presented. Real estate investments carry inherent risks. We shall not be held liable for any direct, indirect, or consequential losses arising from your use of this website or reliance on its content.",
+    "While accuracy is a priority, Sitbo Group makes no warranties regarding the completeness or reliability of the information presented. Real estate investments carry inherent risks. Sitbo Group shall not be held liable for any direct, indirect, or consequential losses arising from your use of this website or reliance on its content.",
   "legal.terms.law.heading": "6. Governing Law",
   "legal.terms.law.body":
     "These Terms of Service are governed by and construed in accordance with the laws of Georgia. Any disputes arising from these terms or your use of the website shall be subject to the exclusive jurisdiction of the courts in Georgia.",
   "legal.terms.contact.heading": "7. Contact Information",
   "legal.terms.contact.body":
-    "If you have any questions regarding these Terms of Service, please contact us at sitboinvest@gmail.com.",
+    "If you have any questions regarding these Terms of Service, please contact sitboinvest@gmail.com.",
   "legal.backHome": "← Back to Home",
 } as const;
 

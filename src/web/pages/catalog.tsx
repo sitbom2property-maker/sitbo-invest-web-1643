@@ -260,7 +260,7 @@ export default function CatalogPage() {
             overflow: hidden;
             background:
               radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
-              #463C41;
+              #412834;
             padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
             text-align: center;
             color: ${C.light};
