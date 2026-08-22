@@ -7,7 +7,7 @@ const TELEGRAM = "https://t.me/sitboinvest";
 const INSTAGRAM = "https://instagram.com/sitboinvest";
 const LINKEDIN = "https://www.linkedin.com/company/sitbo-invest";
 
-/** Luxury footer — centered site canvas, light surface, left-aligned copy. */
+/** Luxury footer — centered site canvas, dark surface, left-aligned copy. */
 export function FooterV2() {
   const t = useT();
 
@@ -15,11 +15,10 @@ export function FooterV2() {
     <footer className="fv2" role="contentinfo">
       <style>{`
         .fv2 {
-          background: #FFFEF9;
-          color: #21141A;
+          background: #21141A;
+          color: #FFFEF9;
           font-family: 'Inter', sans-serif;
           padding: clamp(64px, 8vw, 112px) 0 clamp(32px, 4vw, 56px);
-          border-top: 1px solid rgba(33,20,26,.08);
         }
         .fv2-wrap {
           max-width: var(--site-max, 1440px);
@@ -41,14 +40,14 @@ export function FooterV2() {
           font-weight: 700;
           letter-spacing: .01em;
           margin: 0 0 14px;
-          color: #21141A;
+          color: #FFFEF9;
           line-height: 1.35;
         }
         .fv2-tagline {
           font-size: 12px;
           line-height: 1.5;
           font-weight: 400;
-          color: #21141A;
+          color: rgba(255,254,249,.78);
           margin: 0;
           max-width: 560px;
         }
@@ -59,7 +58,7 @@ export function FooterV2() {
           letter-spacing: .08em;
           text-transform: uppercase;
           margin: 0 0 22px;
-          color: #21141A;
+          color: #FFFEF9;
         }
         .fv2-col ul {
           list-style: none;
@@ -70,7 +69,7 @@ export function FooterV2() {
         }
         .fv2-col a {
           font-size: 12px;
-          color: #21141A;
+          color: rgba(255,254,249,.78);
           text-decoration: none;
           transition: opacity .2s;
           white-space: nowrap;
@@ -78,13 +77,11 @@ export function FooterV2() {
         .fv2-col a:hover { opacity: .55; }
         .fv2-bottom {
           margin-top: clamp(48px, 7vw, 88px);
-          padding-top: 28px;
-          border-top: 1px solid rgba(33,20,26,.1);
           font-size: 12px;
-          color: rgba(33,20,26,.65);
+          color: rgba(255,254,249,.55);
         }
         .fv2-bottom a {
-          color: #21141A;
+          color: rgba(255,254,249,.78);
           text-decoration: underline;
           text-underline-offset: 3px;
         }
