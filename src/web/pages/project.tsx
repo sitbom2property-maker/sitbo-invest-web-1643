@@ -654,54 +654,57 @@ export default function ProjectPage() {
                 </div>
               </div>
 
-{/* Specs — clean 2-column key/value list */}
+{/* Specs — 3×2 stacked label/value grid (no dividers) */}
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
                 <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
                   {t("project.specs")}
                 </h3>
                 {(() => {
                   const specs = [
-                    { label: t("project.spec.area"), value: p.area },
-                    { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
-                    { label: t("project.spec.floors"), value: p.floors },
                     { label: t("project.spec.buildings"), value: p.buildings },
+                    { label: t("project.spec.floors"), value: p.floors },
+                    { label: t("project.spec.ceilingHeight"), value: p.ceilingHeight },
+                    { label: t("project.spec.area"), value: p.area },
                     { label: t("project.spec.finishing"), value: p.finishing },
-                    { label: t("project.spec.purchaseTax"), value: "0%" },
+                    { label: t("project.spec.climateAdaptation"), value: p.climateAdaptation ?? t("project.spec.climateYes") },
                   ];
-                  const columns = [specs.slice(0, 3), specs.slice(3, 6)];
                   return (
                     <div
                       className="project-specs-grid"
                       style={{
                         display: "grid",
-                        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                        columnGap: isMobile ? 0 : 56,
-                        rowGap: isMobile ? 8 : 0,
+                        gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(3, minmax(0, 1fr))",
+                        columnGap: isMobile ? 24 : 48,
+                        rowGap: isMobile ? 20 : 28,
+                        alignItems: "start",
                       }}
                     >
-                      {columns.map((col, colIdx) => (
-                        <div key={colIdx} style={{ minWidth: 0 }}>
-                          {col.map((s, i) => (
-                            <div
-                              key={s.label}
-                              style={{
-                                display: "flex",
-                                alignItems: "baseline",
-                                justifyContent: "space-between",
-                                gap: 16,
-                                padding: "14px 0",
-                                borderBottom: i < col.length - 1 ? "1px solid rgba(33,20,26,0.08)" : "none",
-                                borderRadius: 0,
-                              }}
-                            >
-                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", fontWeight: 400, color: "rgba(33,20,26,0.48)", lineHeight: 1.35 }}>
-                                {s.label}
-                              </span>
-                              <span style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1rem" : "1.08rem", fontWeight: 600, color: C.dark, lineHeight: 1.35, textAlign: "right" }}>
-                                {s.value}
-                              </span>
-                            </div>
-                          ))}
+                      {specs.map((s) => (
+                        <div key={s.label} style={{ minWidth: 0 }}>
+                          <p
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontSize: "13px",
+                              fontWeight: 400,
+                              color: "rgba(33,20,26,0.45)",
+                              lineHeight: 1.3,
+                              margin: "0 0 6px",
+                            }}
+                          >
+                            {s.label}
+                          </p>
+                          <p
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontSize: "16px",
+                              fontWeight: 700,
+                              color: C.dark,
+                              lineHeight: 1.3,
+                              margin: 0,
+                            }}
+                          >
+                            {s.value}
+                          </p>
                         </div>
                       ))}
                     </div>

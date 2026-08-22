@@ -20,6 +20,8 @@ export type Project = {
   floors: string;
   buildings: string;
   finishing: string;
+  /** Optional; defaults to localized "Yes" in the Property Details grid. */
+  climateAdaptation?: string;
   installment: string;
   features: string[];
   materials: string;
@@ -107,8 +109,8 @@ export const projects: Project[] = [
     completion: "Q4 2027",
     area: "35.1–141.3 m²",
     ceilingHeight: "3.0 m",
-    floors: "24 floors",
-    buildings: "1 building",
+    floors: "24",
+    buildings: "1",
     finishing: "White frame",
     installment: "30% down / 0% over 27 months",
     downPaymentPct: 30,
@@ -183,10 +185,10 @@ export const projects: Project[] = [
     priceFrom: "From $52,480",
     priceUSD: 52480,
     completion: "Q2 2029",
-    area: "32.8–71.2 m²",
+    area: "32–71 m²",
     ceilingHeight: "2.9 m",
-    floors: "26–28 floors",
-    buildings: "3 buildings",
+    floors: "26–28",
+    buildings: "3",
     finishing: "White frame",
     installment: "30% down / 0% over 40 months",
     downPaymentPct: 30,
@@ -268,7 +270,7 @@ export const projects: Project[] = [
     completion: "Q3 2026",
     area: "32.6–519.7 m²",
     ceilingHeight: "3.0 m",
-    floors: "6–8 floors",
+    floors: "6–8",
     buildings: "6 phases · 20 ha",
     finishing: "Green frame",
     installment: "30% down / 70% by schedule",
@@ -337,7 +339,7 @@ export const projects: Project[] = [
     completion: "Q3 2027",
     area: "26.3–163 m²",
     ceilingHeight: "3.0 m",
-    floors: "2–11 floors",
+    floors: "2–11",
     buildings: "Blocks A, B1, B2, C1, C2",
     finishing: "Turnkey (Block A) / Green frame",
     installment: "20% down / balance by schedule",
@@ -404,8 +406,8 @@ export const projects: Project[] = [
     completion: "Q3 2029",
     area: "31.6–113.2 m²",
     ceilingHeight: "3.0 m",
-    floors: "70 floors · ~260 m",
-    buildings: "1 landmark tower",
+    floors: "70 · ~260 m",
+    buildings: "1",
     finishing: "Turnkey / hotel-style apartments",
     installment: "EOI / by schedule",
     developerBody:
@@ -468,8 +470,8 @@ export const projects: Project[] = [
     completion: "Q1 2027",
     area: "45–130 m²",
     ceilingHeight: "3.1 m",
-    floors: "16 floors",
-    buildings: "2 buildings",
+    floors: "16",
+    buildings: "2",
     finishing: "White Frame, Renovated, Turnkey",
     installment: "30% down / 70% quarterly",
     features: [
@@ -507,8 +509,8 @@ export const projects: Project[] = [
     completion: "Q4 2026",
     area: "50–200 m²",
     ceilingHeight: "3.2 m",
-    floors: "45 floors",
-    buildings: "2 towers",
+    floors: "45",
+    buildings: "2",
     finishing: "White frame, Turnkey, Designer",
     installment: "40% down / 60% quarterly",
     features: [
@@ -546,8 +548,8 @@ export const projects: Project[] = [
     completion: "Q3 2026",
     area: "38–110 m²",
     ceilingHeight: "2.85 m",
-    floors: "5 floors",
-    buildings: "12 buildings",
+    floors: "5",
+    buildings: "12",
     finishing: "White frame, Turnkey",
     installment: "25% down / 75% quarterly",
     features: [
@@ -585,8 +587,8 @@ export const projects: Project[] = [
     completion: "Q2 2027",
     area: "60–350 m²",
     ceilingHeight: "3.3 m",
-    floors: "30 floors",
-    buildings: "8 buildings",
+    floors: "30",
+    buildings: "8",
     finishing: "White frame, Turnkey, Designer",
     installment: "35% down / 65% quarterly",
     features: [
@@ -624,8 +626,8 @@ export const projects: Project[] = [
     completion: "Q1 2028",
     area: "55–180 m²",
     ceilingHeight: "3.0 m",
-    floors: "14 floors",
-    buildings: "3 buildings",
+    floors: "14",
+    buildings: "3",
     finishing: "White frame, Turnkey",
     installment: "30% down / 70% quarterly",
     features: [
