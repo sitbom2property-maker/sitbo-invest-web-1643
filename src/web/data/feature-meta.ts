@@ -46,6 +46,7 @@ const RULES: Rule[] = [
   { category: "outdoor", icon: "parking", test: /parking|паркинг/i },
   { category: "lot", icon: "park", test: /all-season|всесезон|инфраструктур/i },
   { category: "lot", icon: "park", test: /clean air|aqi|чисты.\s*воздух/i },
+  { category: "outdoor", icon: "beach", test: /beach shuttle|shuttle to the beach|трансфер на пляж/i },
   { category: "lot", icon: "sea", test: /\bsea\b|seaside|waterfront|black sea|boulevard/i },
   { category: "lot", icon: "beach", test: /beach|sand beach|beach club|café del mar|cafe del mar/i },
   { category: "lot", icon: "mountain", test: /mountain|hill panorama|city & hill/i },
