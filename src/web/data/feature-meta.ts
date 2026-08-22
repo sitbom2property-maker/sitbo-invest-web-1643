@@ -100,6 +100,10 @@ function constructionIcon(label: string): FeatureIconId {
 /** Shorten titled materials lines into compact Construction labels. */
 function normalizeConstructionLabel(raw: string): string {
   const t = raw.replace(/\s+/g, " ").trim();
+  // Keep long panoramic-glazing copy as-is (used as its own Construction row).
+  if (/panoramic|панорамн/i.test(t) && /glaz|остек/i.test(t)) {
+    return t.replace(/\s*&\s*/g, " & ");
+  }
   if (/moisture|влаг|корроз/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Защита от влаги" : "Moisture protection";
   }
@@ -109,7 +113,7 @@ function normalizeConstructionLabel(raw: string): string {
   if (/facade|фасад|insulat|изоляц/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Фасад и изоляция" : "Facade & insulation";
   }
-  if (/glaz|остек|панорам|uv|шум/i.test(t)) {
+  if (/glaz|остек|uv|шум/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Остекление UV и шумозащита" : "Glazing UV and noise protection";
   }
   if (/elevat|лифт|otis|kone/i.test(t)) {
@@ -140,7 +144,8 @@ export function parseConstructionFeatures(materials: string | undefined | null):
   const titled = chunks
     .map((chunk) => {
       const colon = chunk.indexOf(":");
-      if (colon <= 0 || colon > 48) return null;
+      // Allow longer titles (e.g. panoramic glazing copy).
+      if (colon <= 0 || colon > 96) return null;
       const rawLabel = chunk.slice(0, colon).trim();
       if (!rawLabel) return null;
       return normalizeConstructionLabel(rawLabel);

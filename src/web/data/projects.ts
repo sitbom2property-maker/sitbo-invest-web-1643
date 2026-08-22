@@ -188,10 +188,9 @@ export const projects: Project[] = [
       "Two-level underground parking",
       "24/7 security & service",
       "Barrier-free environment",
-      "Panoramic, energy-efficient glazing with sound and UV protection",
     ],
     materials:
-      "Energy-efficient monolithic-frame construction with a ventilated façade and premium finishes. The project restores a 119-year-old building officially recognised as a cultural heritage monument, combining historic fabric with a contemporary residential tower.",
+      "Seismic resistance up to 8 points: Monolithic RC frame. Panoramic, energy-efficient glazing with sound and UV protection: Floor-to-ceiling energy packages. Glazing UV and noise protection: Aluminum double glazing. Elevators (Otis/Kone): High-speed passenger lifts. Climate systems: Central climate adaptation.",
     photos: [
       "/projects/piazza/for-sale/exterior-tower.jpg",
       "/projects/piazza/for-sale/exterior-entrance.jpg",
