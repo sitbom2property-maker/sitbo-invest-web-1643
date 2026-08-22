@@ -202,17 +202,17 @@ export const projects: Project[] = [
     districtBody2:
       "Batumi International Airport is around 8 minutes by car. Schools, a kindergarten and everyday services are nearby, while the city’s largest park and the seafront are a 10-minute walk.",
     features: [
-      "Kindergarten & children’s playroom",
-      "SPA with indoor and outdoor pools",
-      "Fitness centre & coworking",
-      "Concierge 24/7",
+      "All-season infrastructure",
+      "Commercial & coworking hub",
+      "Smart living tech",
+      "24/7 security & service",
       "Underground parking for 120 cars",
+      "Kindergarten & playroom",
       "Pet zone with paw-wash",
-      "Rooftop terraces",
-      "Panoramic glazing",
+      "High-yield investment",
     ],
     materials:
-      "Jet Grouting: Deep soil cementation creates Soilcrete — a rock-like formation that removes deformation risk and keeps the towers static. Moisture & corrosion protection: Grade B30 waterproof concrete shields the reinforcement and extends the building’s life. Seismic resilience: The structure is designed for an 8-magnitude earthquake, above Georgia’s mandatory 7-magnitude standard.",
+      "Frame & seismic: Monolithic RC frame, resistance up to 8. Facade & insulation: Ventilated coastal hydro/thermal facade. Premium glazing: Aluminum double-glazed UV/noise windows. Elevators: Otis/Kone high-speed with backup power. Climate systems: Central VRV/VRF and ventilation. White frame: Screed, plaster, wiring, plumbing points.",
     photos: [
       "/projects/parkline/for-sale/ext-01.jpg",
       "/projects/parkline/for-sale/ext-07.jpg",

@@ -40,26 +40,30 @@ type Rule = {
 };
 
 const RULES: Rule[] = [
-  { category: "lot", icon: "sea", test: /sea|seaside|waterfront|black sea|boulevard/i },
+  { category: "indoor", icon: "office", test: /cowork|commercial|коворкинг|коммерц/i },
+  { category: "indoor", icon: "building", test: /smart living|smart living tech/i },
+  { category: "lot", icon: "building", test: /high-?yield|доходност|investment/i },
+  { category: "outdoor", icon: "parking", test: /parking|паркинг/i },
+  { category: "lot", icon: "park", test: /all-season|всесезон|инфраструктур/i },
+  { category: "lot", icon: "sea", test: /\bsea\b|seaside|waterfront|black sea|boulevard/i },
   { category: "lot", icon: "beach", test: /beach|sand beach|beach club|café del mar|cafe del mar/i },
   { category: "lot", icon: "mountain", test: /mountain|hill panorama|city & hill/i },
-  { category: "lot", icon: "panorama", test: /panoramic|scenic|glazing|views/i },
-  { category: "lot", icon: "park", test: /park|forest|landscap|green|garden|recreation|hectare|archipelago/i },
+  { category: "lot", icon: "panorama", test: /panoramic|scenic|glazing|views|остеклен/i },
+  { category: "lot", icon: "park", test: /\bpark\b|forest|landscap|green|garden|recreation|hectare|archipelago/i },
   { category: "lot", icon: "building", test: /address|boulevard|historic|monument|new build|tower|tallest|fa[cç]ade|ventilated|concrete|construction|phased|university|diplomatic|vake|resort community|masterplan/i },
   { category: "outdoor", icon: "pool", test: /outdoor pool|infinity pool|pools?,?\s*courts|pool & wellness|pools,/i },
   { category: "outdoor", icon: "court", test: /tennis|basketball|court|sport/i },
   { category: "outdoor", icon: "yacht", test: /yacht|marina|berth/i },
   { category: "outdoor", icon: "balcony", test: /balcony|terrace|rooftop/i },
-  { category: "outdoor", icon: "parking", test: /parking/i },
-  { category: "outdoor", icon: "kids", test: /play area|children|kindergarten|pet zone/i },
+  { category: "outdoor", icon: "kids", test: /play area|children|kindergarten|pet zone|детск|питомц|playroom|игровая/i },
   { category: "indoor", icon: "pool", test: /indoor pool|spa with indoor/i },
   { category: "indoor", icon: "gym", test: /gym|fitness|wellness|spa(?! with)/i },
   { category: "indoor", icon: "cinema", test: /cinema|poker/i },
-  { category: "indoor", icon: "elevator", test: /elevator|lift/i },
-  { category: "indoor", icon: "office", test: /cowork|office|business centre|business center/i },
-  { category: "indoor", icon: "hotel", test: /concierge|reception|hotel|branded|hospitality|casino|manager/i },
+  { category: "indoor", icon: "elevator", test: /elevator|lift|лифт/i },
+  { category: "indoor", icon: "office", test: /office|business centre|business center/i },
+  { category: "indoor", icon: "hotel", test: /concierge|reception|hotel|branded|hospitality|casino|manager|service 24|сервис 24/i },
   { category: "indoor", icon: "shop", test: /restaurant|café|cafe|retail|store|fashion|food/i },
-  { category: "indoor", icon: "security", test: /security|gated|24\/7/i },
+  { category: "indoor", icon: "security", test: /security|gated|24\/7|охран/i },
 ];
 
 function classify(label: string): { category: FeatureCategory; icon: FeatureIconId } {
@@ -83,9 +87,13 @@ export function normalizeProjectFeatures(features: string[]): ProjectFeatureItem
 
 function constructionIcon(label: string): FeatureIconId {
   if (/jet|grout|цемент|грунт|soilcrete/i.test(label)) return "grouting";
-  if (/moisture|влаг|корроз|hydro|водо/i.test(label)) return "moisture";
-  if (/seismic|сейсм|earthquake|землетряс/i.test(label)) return "seismic";
-  if (/concrete|бетон|frame|каркас|fa[cç]ade|фасад|glazing|остек/i.test(label)) return "building";
+  if (/finish|white frame|белы|отдел/i.test(label)) return "building";
+  if (/moisture|влаг|корроз|hydro|водо|insulat|изоляц|фасад|facade/i.test(label)) return "moisture";
+  if (/glaz|остек|window|панорам/i.test(label)) return "panorama";
+  if (/elevat|лифт|otis|kone/i.test(label)) return "elevator";
+  if (/climate|vrv|vrf|климат|ventil/i.test(label)) return "spa";
+  if (/seismic|сейсм|earthquake|землетряс|frame|каркас/i.test(label)) return "seismic";
+  if (/concrete|бетон/i.test(label)) return "building";
   return "generic";
 }
 
@@ -95,8 +103,23 @@ function normalizeConstructionLabel(raw: string): string {
   if (/moisture|влаг|корроз/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Защита от влаги" : "Moisture protection";
   }
-  if (/seismic|сейсм/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Сейсмостойкость" : "Seismic resilience";
+  if (/finish|white frame|белы/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Белый каркас" : "White frame";
+  }
+  if (/facade|фасад|insulat|изоляц/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Фасад и изоляция" : "Facade & insulation";
+  }
+  if (/glaz|остек|панорам/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Панорамное остекление" : "Premium glazing";
+  }
+  if (/elevat|лифт/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Лифты" : "Elevators";
+  }
+  if (/climate|vrv|климат/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Климат-системы" : "Climate systems";
+  }
+  if (/seismic|сейсм|frame|каркас/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Каркас и сейсмика" : "Frame & seismic";
   }
   if (/jet\s*grout/i.test(t)) return "Jet Grouting";
   return t.replace(/\s*&\s*/g, " & ");
