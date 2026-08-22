@@ -589,8 +589,8 @@ export const projects: Project[] = [
     yield: "8–11%",
     developer: "Rogantini Development",
     architect: "Alessandro Rogantini x Valerie Gogaba",
-    priceFrom: "From €89,160",
-    priceUSD: 96500,
+    priceFrom: "From €93,684",
+    priceUSD: 101400,
     completion: "Q4 2027",
     area: "34.1–193.6 m²",
     ceilingHeight: "3 m",
@@ -656,7 +656,7 @@ export const projects: Project[] = [
     mapsQuery: "41.726315131195776,41.744580906746044",
     floorPlans: [],
     floorPlanLabels: [],
-    pricePerSqm: "from €2,365–€4,510/m²",
+    pricePerSqm: "from €2,485–€4,735/m²",
     awards: [
       {
         src: "/projects/rogantini/brand/lla-winner-2026.png",
