@@ -6,7 +6,6 @@ import { AppLink } from "../components/app-link";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
 import { RequestModal } from "../components/RequestModal";
-import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -91,7 +90,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
 
     <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "8px", height: isMobile ? "auto" : "70vh", maxHeight: "600px" }}>
 {/* Main image */}
-      <div style={{ flex: "1 1 0", position: "relative", overflow: "hidden", borderRadius: "2px", background: C.dark, minHeight: isMobile ? "280px" : "auto" }}>
+      <div style={{ flex: "1 1 0", position: "relative", overflow: "hidden", borderRadius: "10px", background: C.dark, minHeight: isMobile ? "280px" : "auto" }}>
         <img
           key={active}
           src={photos[active] || photos[0]}
@@ -112,7 +111,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
           </>
         )}
 {/* Counter */}
-        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "2px", padding: "4px 12px", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light }}>
+        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "10px", padding: "4px 12px", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light }}>
           {active + 1} / {photos.length}
         </div>
       </div>
@@ -122,7 +121,7 @@ function Gallery({ photos, name }: { photos: string[]; name: string }) {
         <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto" }}>
           {photos.map((src, i) => (
             <div key={i} onClick={() => setActive(i)}
-              style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "2px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
+              style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "8px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
               <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: i === active ? 1 : 0.6, transition: "opacity 0.2s" }} />
             </div>
           ))}
@@ -201,7 +200,7 @@ function LayoutCarousel({
                   border: on ? "none" : "1px solid rgba(33,20,26,0.12)",
                   background: on ? C.dark : "transparent",
                   color: on ? C.light : C.dark,
-                  borderRadius: "2px",
+                  borderRadius: "10px",
                   padding: isMobile ? "8px 14px" : "8px 16px",
                   fontFamily: "Inter, sans-serif",
                   fontSize: isMobile ? "0.68rem" : "0.75rem",
@@ -242,7 +241,7 @@ function LayoutCarousel({
                 flex: isMobile ? "0 0 88%" : "0 0 min(720px, 78%)",
                 scrollSnapAlign: "center",
                 scrollSnapStop: "always",
-                borderRadius: "2px",
+                borderRadius: "10px",
                 overflow: "hidden",
                 background: "#FFFEF9",
                 border: "1px solid rgba(33,20,26,0.08)",
@@ -362,7 +361,7 @@ function LayoutCarousel({
               style={{
                 width: i === active ? "22px" : "8px",
                 height: "8px",
-                borderRadius: "2px",
+                borderRadius: "10px",
                 border: "none",
                 padding: 0,
                 background: i === active ? C.dark : "rgba(33,20,26,0.18)",
@@ -385,7 +384,7 @@ function MapEmbed({ project }: { project: Project }) {
   const mapUrl = `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
   return (<>
 
-    <div style={{ borderRadius: "2px", overflow: "hidden", height: "340px", background: C.light }}>
+    <div style={{ borderRadius: "10px", overflow: "hidden", height: "340px", background: C.light }}>
       <iframe
         title={`${project.name} location`}
         src={mapUrl}
@@ -395,6 +394,17 @@ function MapEmbed({ project }: { project: Project }) {
         referrerPolicy="no-referrer-when-downgrade"
       />
     </div>
+  
+  </>);
+}
+
+// ─── Diamond bullet ───────────────────────────────────────────────────────────
+function Diamond() {
+  return (<>
+
+    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginTop: "7px" }} aria-hidden>
+      <rect x="5" y="0.5" width="6.36" height="6.36" rx="0.6" transform="rotate(45 5 0.5)" fill={C.teal} />
+    </svg>
   
   </>);
 }
@@ -409,17 +419,13 @@ export default function ProjectPage() {
   useReveal();
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
-  const [featuresOpen, setFeaturesOpen] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
   const project = localizedList[idx];
 
   // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setFeaturesOpen(false);
-  }, [params.slug]);
+  useEffect(() => { window.scrollTo(0, 0); }, [params.slug]);
 
   if (!project) {
     return (<>
@@ -501,14 +507,14 @@ export default function ProjectPage() {
                 {/* Developer block */}
                 <div
                   className="project-developer-card"
-                  style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "2px", border: `1px solid rgba(33,20,26,0.07)` }}
+                  style={{ marginTop: "28px", display: "flex", alignItems: "flex-start", gap: "20px", padding: isMobile ? "18px" : "20px 22px", background: C.light, borderRadius: "10px", border: `1px solid rgba(33,20,26,0.07)` }}
                 >
                   {p.developerLogo ? (
-                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "2px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
+                    <div style={{ flexShrink: 0, width: isMobile ? "132px" : "160px", height: "64px", borderRadius: "8px", background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 12px" }}>
                       <img src={p.developerLogo} alt={p.developer} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
                     </div>
                   ) : (
-                  <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "2px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "8px", background: "rgba(33,20,26,0.06)", border: "1.5px dashed rgba(33,20,26,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(33,20,26,0.3)", textAlign: "center", lineHeight: 1.3 }}>{t("project.developerLogo")}</span>
                   </div>
                   )}
@@ -536,7 +542,7 @@ export default function ProjectPage() {
     { label: t("project.spec.finishing"), value: p.finishing },
     { label: t("project.developer"), value: p.developer },
                   ].map(s => (
-                    <div key={s.label} style={{ background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "2px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
+                    <div key={s.label} style={{ background: "#FFFEF9", border: "1px solid rgba(33,20,26,0.08)", borderRadius: "10px", padding: isMobile ? "16px 14px" : "20px 18px", minWidth: 0 }}>
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "#5c5558", margin: "0 0 8px", lineHeight: 1.35 }}>{s.label}</p>
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.35 }}>{s.value}</p>
                     </div>
@@ -546,21 +552,25 @@ export default function ProjectPage() {
 
               <Divider />
 
-{/* Features */}
-              <ProjectFeatures
-                features={p.features}
-                open={featuresOpen}
-                onOpen={() => setFeaturesOpen(true)}
-                onClose={() => setFeaturesOpen(false)}
-                isMobile={isMobile}
-              />
+{/* Key Features */}
+              <div className="pr-reveal" style={{ margin: "40px 0" }}>
+                <Eyebrow>{t("project.features")}</Eyebrow>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px 28px" }}>
+                  {p.features.map(f => (
+                    <div key={f} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                      <Diamond />
+                      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.dark, lineHeight: 1.55 }}>{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               <Divider />
 
 {/* Materials */}
               <div className="pr-reveal" style={{ margin: "40px 0" }}>
                 <Eyebrow>{t("project.materials")}</Eyebrow>
-                <div style={{ background: "#FFFEF9", borderRadius: "2px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ background: "#FFFEF9", borderRadius: "10px", padding: isMobile ? "20px 18px" : "24px 26px", border: "1px solid rgba(33,20,26,0.08)", display: "flex", flexDirection: "column", gap: "16px" }}>
                   {p.materials.split(". ").filter(Boolean).map((sentence, i) => {
                     const colonIdx = sentence.indexOf(":");
                     const hasTitle = colonIdx > 0 && colonIdx < 40;
@@ -581,7 +591,7 @@ export default function ProjectPage() {
               <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
                 <Eyebrow>{t("project.payment")}</Eyebrow>
                 {/* Bar visual: left block = down payment, right block = installment remainder */}
-                <div className="project-payment-bar" style={{ display: "flex", borderRadius: "2px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
+                <div className="project-payment-bar" style={{ display: "flex", borderRadius: "10px", overflow: "hidden", background: C.light, border: `1px solid rgba(33,20,26,0.08)` }}>
                   {/* Filled / down payment portion */}
                   <div style={{ flex: `0 0 ${downPct}%`, background: C.dark, padding: "22px 20px" }}>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 700, color: C.light, margin: "0 0 4px", lineHeight: 1 }}>{downPct}%</p>
@@ -603,7 +613,7 @@ export default function ProjectPage() {
               <div style={{ position: isMobile ? "relative" : "sticky", top: isMobile ? undefined : "80px", display: "flex", flexDirection: "column", gap: "16px" }}>
 
 {/* CTA card */}
-                <div className="pr-reveal" style={{ background: C.dark, borderRadius: "2px", padding: "28px 24px" }}>
+                <div className="pr-reveal" style={{ background: C.dark, borderRadius: "10px", padding: "28px 24px" }}>
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("project.interested")}</p>
                   <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
@@ -612,18 +622,18 @@ export default function ProjectPage() {
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
-                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
                   {p.apartmentsKey && (
-                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
+                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "8px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
                       {t("chess.chooseCta")}
                     </a>
                   )}
                 </div>
 
 {/* Quick facts */}
-                <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.light, borderRadius: "2px", padding: "20px 18px" }}>
+                <div className="pr-reveal" style={{ transitionDelay: "80ms", background: C.light, borderRadius: "10px", padding: "20px 18px" }}>
 {[
     { label: t("project.estRoi"), value: p.yield },
     { label: t("project.from"), value: priceLabel },
@@ -639,19 +649,19 @@ export default function ProjectPage() {
 
 {/* Live Camera Card */}
                   {p.liveCameraUrl && (
-                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
+                  <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "10px", padding: "20px 24px", border: "1px solid rgba(255,60,60,0.3)", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(255,60,60,0.2)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,60,60,0.3)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                     <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px #ff3c3c" }} />
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3c3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("project.liveCamera")}</span>
                   </a>
                 )}
                 {p.tourUrl && (
-                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
+                  <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "10px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.view3d")}</span>
                   </a>
                 )}
                 {p.panoramaUrl && (
-                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
+                  <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.dark, borderRadius: "10px", padding: "20px 24px", border: "1px solid rgba(140,178,192,0.1)", textDecoration: "none" }}>
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>{t("chess.viewPanorama")}</span>
                   </a>
                 )}
@@ -703,7 +713,7 @@ export default function ProjectPage() {
           ) : (
           <div className="pr-reveal pr-layouts" style={{ transitionDelay: "80ms", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? "10px" : "16px" }}>
             {[null, null, null].map((_, n) => (
-                <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "2px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFEF9" }}>
+                <div key={n} style={{ border: "1.5px dashed rgba(33,20,26,0.15)", borderRadius: "10px", aspectRatio: "3/4", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "14px", background: "#FFFEF9" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(33,20,26,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="1"/>
                     <path d="M3 9h18M9 9v12M3 15h6"/>
@@ -730,7 +740,7 @@ export default function ProjectPage() {
             <MapEmbed project={p} />
           </div>
           {/* District description */}
-          <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "2px", padding: "28px 28px" }}>
+          <div className="pr-reveal" style={{ transitionDelay: "140ms", marginTop: "32px", background: C.light, borderRadius: "10px", padding: "28px 28px" }}>
             <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.2rem", fontWeight: 400, color: C.dark, marginBottom: "12px" }}>{p.districtTitle ?? t("project.district.newBoulevard.title")}</h4>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: C.mutedDark, lineHeight: 1.8, margin: 0 }}>
               {p.districtBody ?? t("project.district.newBoulevard.body")}
@@ -754,7 +764,7 @@ export default function ProjectPage() {
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 32px" }}>
                   {t("project.cta.body")}
                 </p>
-                <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "2px", padding: "15px 36px", textDecoration: "none" }}>
+                <AppLink href="/#contact" style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, borderRadius: "8px", padding: "15px 36px", textDecoration: "none" }}>
                   {t("cta.getFreeOffer")}
                 </AppLink>
               </div>
@@ -772,7 +782,7 @@ export default function ProjectPage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px" }}>
 {[prev, next].map((proj) => (
               <Link key={proj.slug} href={`/project/${proj.slug}`}>
-                <a style={{ display: "block", textDecoration: "none", borderRadius: "2px", overflow: "hidden", position: "relative", height: "200px", background: C.dark }}>
+                <a style={{ display: "block", textDecoration: "none", borderRadius: "10px", overflow: "hidden", position: "relative", height: "200px", background: C.dark }}>
                   <img src={proj.cardImage} alt={proj.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s" }}
                     onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                     onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
@@ -782,7 +792,7 @@ export default function ProjectPage() {
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{proj.tag}</p>
                     <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
                   </div>
-                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
+                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "4px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
                     {proj.yield} {t("catalog.roi")}
                   </div>
                 </a>
@@ -796,7 +806,7 @@ export default function ProjectPage() {
       {modalSrc && (
         <div onClick={() => setModalSrc(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, backdropFilter: "blur(4px)", cursor: "pointer" }}>
           <div onClick={e => e.stopPropagation()} style={{ position: "relative", maxWidth: "60vw", maxHeight: "70vh", cursor: "default" }}>
-            <img src={modalSrc} alt={t("project.modal.layoutPreview")} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "2px" }} />
+            <img src={modalSrc} alt={t("project.modal.layoutPreview")} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "10px" }} />
             <button onClick={() => setModalSrc(null)} style={{ position: "absolute", top: "-40px", right: "0", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "1px solid rgba(255,254,249,0.25)", color: "#FFFEF9", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>
               ✕
             </button>

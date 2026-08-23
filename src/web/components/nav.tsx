@@ -263,7 +263,7 @@ export function Nav() {
                 style={{
                   marginLeft: 10,
                   padding: "12px 26px",
-                  borderRadius: 2,
+                  borderRadius: 4,
                   background: "transparent",
                   color: "#FFFEF9",
                   border: "1px solid rgba(255,255,255,0.55)",
@@ -380,7 +380,7 @@ export function Nav() {
               style={{
                 marginTop: 12,
                 padding: "15px 28px",
-                borderRadius: 2,
+                borderRadius: 8,
                 background: "#703C54",
                 color: "#FFFEF9",
                 fontFamily: "Inter, sans-serif",

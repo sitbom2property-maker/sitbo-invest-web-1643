@@ -87,7 +87,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           max-height: min(82vh, 720px);
           background: #21141A;
           border: 1px solid rgba(140,178,192,0.1);
-          border-radius: 2px;
+          border-radius: 10px;
           box-shadow: 0 24px 64px rgba(0,0,0,0.4);
           display: flex;
           flex-direction: column;
@@ -174,7 +174,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           .privacy-modal-card {
             width: 100%;
             max-height: 88vh;
-            border-radius: 2px 10px 0 0;
+            border-radius: 10px 10px 0 0;
           }
         }
       `}</style>

@@ -217,7 +217,7 @@ const CSS = `
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 2px;
+  --radius: 10px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -296,15 +296,14 @@ const CSS = `
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .iv-split p {
-  margin: 0; font-size: 16px; line-height: 1.5;
+  margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
   color: var(--white); max-width: 420px;
-  justify-self: end; text-align: right;
 }
 .iv-stats {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
 }
 .iv-stat {
-  aspect-ratio: 1 / 1; border-radius: 2px; padding: clamp(16px, 1.7vw, 26px);
+  aspect-ratio: 1 / 1; border-radius: 10px; padding: clamp(16px, 1.7vw, 26px);
   display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
 }
 .iv-stat-plum { background: var(--card); }
@@ -342,7 +341,7 @@ const CSS = `
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
 }
 .iv-adv-card {
-  background: var(--card); border-radius: 2px;
+  background: var(--card); border-radius: 10px;
   padding: clamp(20px, 2.2vw, 28px);
 }
 .iv-adv-card h3 {
@@ -360,7 +359,7 @@ const CSS = `
   box-sizing: border-box;
 }
 .iv-panel {
-  background: var(--panel); color: var(--bg); border-radius: 2px;
+  background: var(--panel); color: var(--bg); border-radius: 10px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .iv-panel-head {
@@ -376,9 +375,8 @@ const CSS = `
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .iv-panel-head p {
-  margin: 0; font-size: 16px; line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 420px;
-  justify-self: end; text-align: right;
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
 }
 
 /* strategy accordion */
@@ -449,10 +447,10 @@ const CSS = `
   font-size: 13px; font-variant-numeric: tabular-nums; color: var(--white); min-width: 4.5ch; text-align: right;
 }
 .iv-bar-track {
-  height: 8px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden;
+  height: 8px; border-radius: 10px; background: rgba(255,255,255,.08); overflow: hidden;
 }
 .iv-bar-fill {
-  height: 100%; border-radius: 2px; background: var(--green);
+  height: 100%; border-radius: 10px; background: var(--green);
   transform-origin: left center;
 }
 
@@ -503,7 +501,7 @@ const CSS = `
   font-size: 15px; line-height: 1.55; color: rgba(33,20,26,.68);
 }
 .iv-faq-aside {
-  background: var(--bg); color: var(--white); border-radius: 2px;
+  background: var(--bg); color: var(--white); border-radius: 10px;
   padding: clamp(24px, 3vw, 36px);
   position: sticky; top: calc(var(--nav-height, 88px) + 16px);
 }
@@ -522,7 +520,7 @@ const CSS = `
   box-sizing: border-box;
 }
 .iv-cta {
-  border-radius: 2px; overflow: hidden;
+  border-radius: 10px; overflow: hidden;
   background-color: #21141A;
   background-image: url('/images/cta-bg.jpg');
   background-size: cover;
@@ -548,7 +546,7 @@ const CSS = `
   .iv-stats { grid-template-columns: repeat(2, 1fr); }
   .iv-adv-grid { grid-template-columns: repeat(2, 1fr); }
   .iv-hero-visual { justify-self: start; max-height: 480px; aspect-ratio: 16 / 11; }
-  .iv-panel-head p, .iv-split p { justify-self: start; text-align: left; max-width: none; }
+  .iv-panel-head p { justify-self: start; }
   .iv-acc-head { grid-template-columns: 1fr auto auto; gap: 10px; }
   .iv-acc-tag { display: none; }
   .iv-acc-body { padding-left: 0; }

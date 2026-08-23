@@ -128,7 +128,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
     <div
       style={{
         background: C.dark,
-        borderRadius: "2px",
+        borderRadius: "10px",
         padding: isMobile ? "32px 24px" : "48px",
         marginTop: "48px",
         marginBottom: "48px",
@@ -173,7 +173,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
             alignItems: "center",
             justifyContent: "center",
             padding: "14px 28px",
-            borderRadius: "2px",
+            borderRadius: "8px",
             background: C.teal,
             color: C.light,
             fontFamily: "Inter, sans-serif",
@@ -197,7 +197,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
             alignItems: "center",
             justifyContent: "center",
             padding: "14px 28px",
-            borderRadius: "2px",
+            borderRadius: "8px",
             background: "transparent",
             border: "1px solid rgba(255,254,249,0.5)",
             color: C.light,
@@ -235,7 +235,7 @@ function AuthorBlock({ author }: { author: string }) {
         alignItems: "center",
         padding: "24px 28px",
         background: "#FFFEF9",
-        borderRadius: "2px",
+        borderRadius: "10px",
         border: "1px solid rgba(44,31,39,0.08)",
         boxShadow: "0 2px 12px rgba(33,20,26,0.04)",
       }}
@@ -388,7 +388,7 @@ export default function BlogPostPage() {
                   color: C.light,
                   border: `1px solid rgba(255,254,249,0.35)`,
                   padding: "5px 12px",
-                  borderRadius: "2px",
+                  borderRadius: "10px",
                 }}
               >
                 {post.category}

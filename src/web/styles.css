@@ -198,13 +198,13 @@ html {
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Strict site-wide radius: 2px for cards, buttons, inputs, containers. */
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
-  --radius-xl: 2px;
-  --radius-2xl: 2px;
-  --radius-3xl: 2px;
+  /* Cap every Tailwind radius step at 10px (no rounded-xl/2xl/3xl > 10px). */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 10px;
+  --radius-2xl: 10px;
+  --radius-3xl: 10px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -232,7 +232,7 @@ html {
        card-gray #463C41 · card-green #48674D · card-light #FFFEF9
      Accents:
        plum #703C54 · blue #8CB2C0 at 10% mixes
-     Geometry: border-radius 2px (true circular icon buttons may use 50%)
+     Geometry: border-radius max 10px (true circular icon buttons may use 50%)
   */
   --color-light:      #FFFEF9;
   --color-parchment:  #FFFEF9;
@@ -253,9 +253,9 @@ html {
 :root {
   /* Shared page canvas — header, footer and every public page use these */
   --site-max: 1440px;
-  --site-gutter: clamp(32px, 5vw, 80px);
-  --radius: 2px;
-  --radius-max: 2px;
+  --site-gutter: clamp(30px, 5.5vw, 80px);
+  --radius: 10px;
+  --radius-max: 10px;
   --background: #FFFEF9;
   --foreground: #21141A;
   --card: #FFFEF9;
@@ -301,7 +301,7 @@ body.has-cookie-banner {
     @apply border-border;
     box-sizing: border-box;
   }
-  /* Prefer --radius (2px). Circular icon controls may still use border-radius: 50%. */
+  /* Prefer --radius (≤10px). Circular icon controls may still use border-radius: 50%. */
   html {
   }
   body {
@@ -383,7 +383,7 @@ body.has-cookie-banner {
   padding: 14px 32px;
   border: none;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 8px;
   transition: background 0.3s, color 0.3s, transform 0.2s;
   display: inline-block;
   text-decoration: none;
@@ -406,7 +406,7 @@ body.has-cookie-banner {
   padding: 13px 32px;
   border: 1px solid #703C54;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 8px;
   transition: all 0.3s;
   display: inline-block;
   text-decoration: none;
@@ -434,7 +434,7 @@ body.has-cookie-banner {
   padding: 16px 20px;
   width: 100%;
   outline: none;
-  border-radius: 2px;
+  border-radius: 6px;
   transition: border-color 0.3s;
   font-size: 0.9rem;
 }
@@ -454,7 +454,7 @@ body.has-cookie-banner {
   padding: 16px 48px 16px 20px;
   width: 100%;
   outline: none;
-  border-radius: 2px;
+  border-radius: 6px;
   transition: border-color 0.3s;
   font-size: 0.9rem;
   -webkit-appearance: none;
@@ -950,7 +950,7 @@ input[type="range"]::-moz-range-track {
   /* ── Light cards inside dark sections ── */
   #about > div:first-child,
   #analytics > div:first-child {
-    border-radius: 2px !important;
+    border-radius: 10px !important;
     margin: 0 !important;
   }
 
@@ -990,7 +990,7 @@ input[type="range"]::-moz-range-track {
     padding: 0 !important;
   }
   #discovery-tour > div > div {
-    border-radius: 2px !important;
+    border-radius: 10px !important;
     padding: 40px 20px !important;
   }
 

@@ -47,7 +47,7 @@ function CatalogCard({ p }: { p: Project }) {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           style={{
-            borderRadius: "2px", overflow: "hidden", background: C.dark,
+            borderRadius: "10px", overflow: "hidden", background: C.dark,
             boxShadow: hovered ? "0 12px 40px rgba(33,20,26,0.15)" : "0 2px 16px rgba(33,20,26,0.06)",
             transition: "box-shadow 0.3s, transform 0.3s",
             transform: hovered ? "translateY(-4px)" : "none",
@@ -61,12 +61,12 @@ function CatalogCard({ p }: { p: Project }) {
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
             {/* City badge */}
-            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>
+            <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>
               {localizeCityLabel(p.city, language)}
             </div>
 
             {/* ROI badge */}
-            <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
+            <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "5px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
               {p.yield} {t("catalog.roi")}
             </div>
 
@@ -219,7 +219,7 @@ export default function CatalogPage() {
   const inputStyle: React.CSSProperties = {
     fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
     background: C.light, border: "1px solid rgba(33,20,26,0.12)",
-    borderRadius: "2px", padding: "10px 14px", outline: "none",
+    borderRadius: "8px", padding: "10px 14px", outline: "none",
   };
 
   return (
@@ -243,7 +243,7 @@ export default function CatalogPage() {
               <button key={c} onClick={() => setCity(c)} style={{
                 fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",
-                padding: "8px 18px", borderRadius: "2px", cursor: "pointer",
+                padding: "8px 18px", borderRadius: "6px", cursor: "pointer",
                 border: `1px solid ${city === c ? C.teal : "rgba(255,254,249,0.15)"}`,
                 background: city === c ? C.teal : "transparent",
                 color: C.light,
@@ -296,7 +296,7 @@ export default function CatalogPage() {
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
-                style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "2px", padding: "12px 28px", cursor: "pointer" }}>
+                style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "8px", padding: "12px 28px", cursor: "pointer" }}>
                 {t("cta.resetFilters")}
               </button>
             </div>
@@ -325,7 +325,7 @@ export default function CatalogPage() {
               </p>
             </div>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <button onClick={() => setShowBookCall(true)} style={{ display: "inline-block", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "15px 32px", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {t("catalog.cta.bookCall")}
               </button>
             </div>
@@ -336,7 +336,7 @@ export default function CatalogPage() {
       {/* Book a Call popup */}
       {showBookCall && (
         <div onClick={() => setShowBookCall(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, backdropFilter: "blur(4px)" }}>
-          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "2px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: C.dark, borderRadius: "10px", padding: "40px", maxWidth: "480px", width: "90%", border: "1px solid rgba(140,178,192,0.1)" }}>
             <button onClick={() => setShowBookCall(false)} style={{ position: "absolute", top: "16px", right: "16px", width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,254,249,0.1)", border: "none", color: C.light, fontSize: "20px", cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,254,249,0.2)")} onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,254,249,0.1)")}>✕</button>
             <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", fontWeight: 400, color: C.light, marginBottom: "8px" }}>{t("catalog.bookCall.title")}</h2>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.83rem", color: C.light, marginBottom: "24px" }}>{t("catalog.bookCall.body")}</p>
@@ -348,17 +348,17 @@ export default function CatalogPage() {
               ].map(f => (
                 <input key={f.key} type={f.type} placeholder={f.placeholder} value={(bookForm as any)[f.key]}
                   onChange={e => setBookForm({ ...bookForm, [f.key]: e.target.value })}
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "2px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", transition: "border-color 0.2s" }}
                   onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,254,249,0.12)")} />
               ))}
               <textarea placeholder={t("catalog.bookCall.message")} value={bookForm.message} onChange={e => setBookForm({ ...bookForm, message: e.target.value })} rows={3}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "2px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", background: "rgba(255,254,249,0.05)", border: "1px solid rgba(255,254,249,0.12)", borderRadius: "8px", color: C.light, padding: "12px 14px", outline: "none", resize: "none", transition: "border-color 0.2s" }}
                 onFocus={e => (e.target.style.borderColor = C.teal)} onBlur={e => (e.target.style.borderColor = "rgba(255,254,249,0.12)")} />
               <button
                 type="button"
                 onClick={submitBookCall}
                 disabled={bookLoading || bookSent}
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "8px", padding: "14px", cursor: bookLoading ? "wait" : "pointer", marginTop: "4px", transition: "opacity 0.2s", width: "100%", opacity: bookLoading ? 0.7 : 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = bookLoading ? "0.7" : "1")}
               >
