@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
-import { RequestModal } from "./RequestModal";
 import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
 
@@ -37,7 +36,6 @@ export function ParklineViewer({
 }) {
   const t = useT();
   const modalOpen = useSitboModalOpen();
-  const [requestOpen, setRequestOpen] = useState(false);
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
@@ -84,9 +82,6 @@ export function ParklineViewer({
               {t(label)}
             </button>
           ))}
-          <button type="button" className="is-call" onClick={() => setRequestOpen(true)}>
-            {t("popup.submit")}
-          </button>
         </div>
       </div>
 
@@ -114,15 +109,6 @@ export function ParklineViewer({
           </a>
         </div>
       )}
-
-      <RequestModal
-        open={requestOpen}
-        onClose={() => setRequestOpen(false)}
-        title={t("popup.submit")}
-        subtitle={t("chess.flatshowCallBody", { project: projectName })}
-        source={`Flat.show 3D — ${projectName}`}
-        topic={projectName}
-      />
 
       <style>{CSS}</style>
     </div>
@@ -153,9 +139,6 @@ const CSS = `
   }
   .pk-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
-  }
-  .pk-switch button.is-call {
-    background: ${C.teal}; color: ${C.light}; border-color: ${C.teal};
   }
   .pk-frame {
     position: relative; border-radius: 2px; overflow: hidden;

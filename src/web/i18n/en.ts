@@ -646,8 +646,6 @@ const en = {
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
   "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is our chessboard.",
-  "chess.flatshowCallBody":
-    "Request a call from the 3D tour comes to Arthur — not the developer. Tell us which apartment you want in {project}.",
 
   // Invest page
   "invest.hero.eyebrow": "Why Georgia",

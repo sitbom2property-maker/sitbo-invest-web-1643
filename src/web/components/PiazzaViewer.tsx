@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
-import { RequestModal } from "./RequestModal";
 import { useLocale } from "../context/LocaleContext";
 import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
@@ -12,7 +11,7 @@ const C = {
   muted: "rgba(33,20,26,0.55)",
 };
 
-/** Official Piazza module — same embed Visarteam uses, so apartments render. */
+/** Allowlisted Piazza module — same embed Visarteam uses. */
 const CLIENT_EN = "https://www.visarteam.tech/interactive-tools/piazza";
 const CLIENT_RU = "https://centralmg.ge/ru/piazza/apartments";
 const INDEX = "https://pro-api.flat.show/api/complex/website/index_html";
@@ -38,7 +37,6 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
-  const [requestOpen, setRequestOpen] = useState(false);
   const src = useMemo(() => viewerSrc(ru), [ru]);
   const modalOpen = useSitboModalOpen();
 
@@ -81,9 +79,6 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
               {t(label)}
             </button>
           ))}
-          <button type="button" className="is-call" onClick={() => setRequestOpen(true)}>
-            {t("popup.submit")}
-          </button>
         </div>
       </div>
 
@@ -105,15 +100,6 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
           )}
         </div>
       )}
-
-      <RequestModal
-        open={requestOpen}
-        onClose={() => setRequestOpen(false)}
-        title={t("popup.submit")}
-        subtitle={t("chess.flatshowCallBody", { project: projectName })}
-        source={`Flat.show 3D — ${projectName}`}
-        topic={projectName}
-      />
 
       <style>{CSS}</style>
     </div>
@@ -144,9 +130,6 @@ const CSS = `
   }
   .pz-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
-  }
-  .pz-switch button.is-call {
-    background: ${C.teal}; color: ${C.light}; border-color: ${C.teal};
   }
   .pz-frame {
     position: relative; border-radius: 2px; overflow: hidden;
