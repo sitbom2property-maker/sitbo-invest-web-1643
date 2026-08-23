@@ -79,7 +79,7 @@ app.get('/api/hello', (c) => c.json({ message: 'Hello' }));
 
 The GA4 tag lives in `src/web/lib/analytics.ts` and is started from `src/web/main.tsx`.
 
-- Measurement ID defaults to the `sitboinvest.ge` stream (`G-17F8GJ7K0P`); override with `VITE_GA_MEASUREMENT_ID` at build time, or set it empty to disable tracking.
+- Measurement ID defaults to the `sitboinvest.ge` stream (`G-BTHRL2KV6K`); override with `VITE_GA_MEASUREMENT_ID` at build time, or set it empty to disable tracking.
 - Localhost is excluded so development traffic never reaches the production property. Append `?ga_debug=1` to any URL to force the tag on and stream events to GA4 DebugView (sticky for the browser tab; `?ga_debug=0` clears it).
 - Page views come from GA4 **enhanced measurement**, which already covers SPA navigation via browser history events — keep "Page views" (page loads *and* page changes based on browser history events) enabled in the web data stream, and do not add manual `page_view` calls or they will be counted twice.
 - Consent is wired to the cookie banner through [Google Consent Mode v2](https://developers.google.com/tag-platform/security/guides/consent). Everything except `security_storage` starts denied, so pre-consent traffic is measured with cookieless pings; the banner's "Performance" category grants `analytics_storage` and "Targeting" grants the ad signals.
