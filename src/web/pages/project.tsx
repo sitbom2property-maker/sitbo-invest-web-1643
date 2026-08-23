@@ -576,6 +576,7 @@ export default function ProjectPage() {
   const [showCtaForm, setShowCtaForm] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [ownershipOpen, setOwnershipOpen] = useState(false);
+  const [propertyTypeInfoOpen, setPropertyTypeInfoOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
@@ -595,6 +596,7 @@ export default function ProjectPage() {
     const t2 = window.setTimeout(toTop, 320);
     setFeaturesOpen(false);
     setOwnershipOpen(false);
+    setPropertyTypeInfoOpen(false);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
@@ -602,9 +604,12 @@ export default function ProjectPage() {
   }, [params.slug]);
 
   useEffect(() => {
-    if (!ownershipOpen) return;
+    if (!ownershipOpen && !propertyTypeInfoOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOwnershipOpen(false);
+      if (e.key === "Escape") {
+        setOwnershipOpen(false);
+        setPropertyTypeInfoOpen(false);
+      }
     };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -613,7 +618,7 @@ export default function ProjectPage() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [ownershipOpen]);
+  }, [ownershipOpen, propertyTypeInfoOpen]);
 
   if (!project) {
     return (<>
@@ -640,7 +645,11 @@ export default function ProjectPage() {
         ? "project.propertyType.villa"
         : propertyType === "townhouse"
           ? "project.propertyType.townhouse"
-          : "project.propertyType.apartment";
+          : propertyType === "aparthotel"
+            ? "project.propertyType.aparthotel"
+            : propertyType === "apartment-aparthotel"
+              ? "project.propertyType.apartmentAparthotel"
+              : "project.propertyType.apartment";
   const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
   const next = localizedList[(idx + 1) % localizedList.length];
 
@@ -812,8 +821,44 @@ export default function ProjectPage() {
                   }}
                 >
                   <div>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                    <p
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "13px",
+                        color: "rgba(33,20,26,0.45)",
+                        margin: "0 0 6px",
+                        lineHeight: 1.3,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
                       {t("project.propertyType")}
+                      <button
+                        type="button"
+                        onClick={() => setPropertyTypeInfoOpen(true)}
+                        aria-label={t("project.propertyType.infoAria")}
+                        style={{
+                          width: 16,
+                          height: 16,
+                          borderRadius: "50%",
+                          border: "1px solid rgba(33,20,26,0.35)",
+                          background: "transparent",
+                          color: "rgba(33,20,26,0.55)",
+                          cursor: "pointer",
+                          padding: 0,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: 11,
+                          fontWeight: 600,
+                          lineHeight: 1,
+                          flexShrink: 0,
+                        }}
+                      >
+                        i
+                      </button>
                     </p>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
                       {t(typeKey)}
@@ -1452,6 +1497,128 @@ export default function ProjectPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      ) : null}
+
+      {propertyTypeInfoOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={t("project.propertyType.infoTitle")}
+          onClick={() => setPropertyTypeInfoOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1300,
+            background: "rgba(33,20,26,0.55)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: isMobile ? 20 : 32,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: 560,
+              maxHeight: "min(80vh, 720px)",
+              overflowY: "auto",
+              background: C.light,
+              borderRadius: 2,
+              padding: isMobile ? "28px 22px 24px" : "36px 32px 28px",
+              boxShadow: "0 24px 64px rgba(33,20,26,0.28)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 22 }}>
+              <h3
+                style={{
+                  fontFamily: "Coolvetica, Inter, sans-serif",
+                  fontSize: isMobile ? "1.35rem" : "1.55rem",
+                  fontWeight: 500,
+                  color: C.dark,
+                  margin: 0,
+                  lineHeight: 1.25,
+                }}
+              >
+                {t("project.propertyType.infoTitle")}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setPropertyTypeInfoOpen(false)}
+                aria-label={t("project.propertyType.infoClose")}
+                style={{
+                  width: 36,
+                  height: 36,
+                  border: "none",
+                  background: "transparent",
+                  color: C.dark,
+                  cursor: "pointer",
+                  flexShrink: 0,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 0,
+                  opacity: 0.7,
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+
+            {([
+              {
+                title: "project.propertyType.residentialTitle",
+                lines: [
+                  "project.propertyType.residentialStatus",
+                  "project.propertyType.residentialUtilities",
+                  "project.propertyType.residentialTaxes",
+                ],
+              },
+              {
+                title: "project.propertyType.commercialTitle",
+                lines: [
+                  "project.propertyType.commercialStatus",
+                  "project.propertyType.commercialUtilities",
+                  "project.propertyType.commercialTaxes",
+                ],
+              },
+            ] as const).map((block) => (
+              <div key={block.title} style={{ marginBottom: 22 }}>
+                <h4
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: isMobile ? "0.98rem" : "1.05rem",
+                    fontWeight: 700,
+                    color: C.dark,
+                    margin: "0 0 10px",
+                    lineHeight: 1.35,
+                  }}
+                >
+                  {t(block.title)}
+                </h4>
+                <div style={{ display: "grid", gap: 8 }}>
+                  {block.lines.map((line) => (
+                    <p
+                      key={line}
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: isMobile ? "0.9rem" : "0.95rem",
+                        lineHeight: 1.55,
+                        color: C.mutedDark,
+                        margin: 0,
+                      }}
+                    >
+                      {t(line)}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       ) : null}

@@ -544,9 +544,28 @@ const ru: Record<MessageKey, string> = {
   "project.propertyType": "Тип объекта",
   "project.pricePerSqm": "Цена/м²",
   "project.propertyType.apartment": "Квартира",
+  "project.propertyType.aparthotel": "Апарт-отель",
+  "project.propertyType.apartmentAparthotel": "Квартира и апарт-отель",
   "project.propertyType.residence": "Резиденция",
   "project.propertyType.villa": "Вилла",
   "project.propertyType.townhouse": "Таунхаус",
+  "project.propertyType.infoAria": "Квартира и апарт-отель — пояснение",
+  "project.propertyType.infoTitle": "Квартира vs. апарт-отель",
+  "project.propertyType.infoClose": "Закрыть",
+  "project.propertyType.residentialTitle": "Квартиры (жилые)",
+  "project.propertyType.residentialStatus":
+    "Статус: жилая недвижимость (регистрация и ВНЖ разрешены).",
+  "project.propertyType.residentialUtilities":
+    "Коммунальные: стандартные государственные тарифы для жилья.",
+  "project.propertyType.residentialTaxes":
+    "Налоги: 5% на доходы от долгосрочной/краткосрочной аренды, 0% при перепродаже после 2 лет владения.",
+  "project.propertyType.commercialTitle": "Апарт-отель (коммерческие)",
+  "project.propertyType.commercialStatus":
+    "Статус: коммерческая / нежилая (постоянная регистрация не предусмотрена).",
+  "project.propertyType.commercialUtilities":
+    "Коммунальные: более высокие коммерческие тарифы управляющей компании.",
+  "project.propertyType.commercialTaxes":
+    "Налоги: 20% на доходы от аренды и 20% при перепродаже.",
   "project.developer": "Девелопер",
   "project.architecture": "Архитектура",
   "project.architectPlaceholder": "Уточняется",

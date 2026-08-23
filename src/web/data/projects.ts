@@ -41,7 +41,7 @@ export type Project = {
   floorPlanAreas?: string[];
   pricePerSqm?: string;
   /** Defaults to apartment when omitted. */
-  propertyType?: "apartment" | "residence" | "villa" | "townhouse";
+  propertyType?: "apartment" | "aparthotel" | "apartment-aparthotel" | "residence" | "villa" | "townhouse";
   liveCameraUrl?: string;
   tourUrl?: string;
   panoramaUrl?: string;
@@ -253,6 +253,7 @@ export const projects: Project[] = [
     buildings: "3",
     finishing: "White frame",
     installment: "30% / 70%",
+    propertyType: "apartment",
     downPaymentPct: 30,
     apartmentsKey: "parkline",
     constructionProgress: {
@@ -366,6 +367,7 @@ export const projects: Project[] = [
     finishing: "Turnkey designer finish with European furniture & appliances",
     climateAdaptation: "Yes",
     installment: "30% / 70%",
+    propertyType: "apartment-aparthotel",
     developerBody:
       "Rogantini Development is a Swiss holding founded in 1967, bringing alpine construction precision and climate protection standards to boutique residences on Georgia’s Black Sea coast.",
     districtTitle: "Chakvi",
@@ -455,6 +457,7 @@ export const projects: Project[] = [
     finishing: "Turnkey",
     climateAdaptation: "Yes",
     installment: "30% / 70%",
+    propertyType: "aparthotel",
     trophyProperty: true,
     developerLogo: "/projects/silk/brand/developer-logo.png",
     districtTitle: "Old Batumi",
@@ -560,6 +563,7 @@ export const projects: Project[] = [
     buildings: "Blocks A, B1, B2, C1, C2",
     finishing: "Turnkey (Block A) / Green frame",
     installment: "30% / 70%",
+    propertyType: "apartment-aparthotel",
     developerBody:
       "VR Holding develops destination projects on Georgia’s Black Sea coast. Shekvetili Forest~Beach sits next to Paragraph Resort & Spa (Autograph Collection) and is positioned for both lifestyle buyers and rental investors.",
     districtTitle: "Shekvetili",
@@ -603,7 +607,6 @@ export const projects: Project[] = [
     floorPlans: [],
     floorPlanLabels: [],
     pricePerSqm: "from $1,800/m²",
-    propertyType: "residence",
     awards: [
       {
         src: "/projects/shekvetili/brand/epa-winner-2024-2025.svg",

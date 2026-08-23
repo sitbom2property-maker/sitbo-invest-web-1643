@@ -561,9 +561,28 @@ const en = {
   "project.propertyType": "Property type",
   "project.pricePerSqm": "Price/sqm",
   "project.propertyType.apartment": "Apartment",
+  "project.propertyType.aparthotel": "Aparthotel",
+  "project.propertyType.apartmentAparthotel": "Apartment & Aparthotel",
   "project.propertyType.residence": "Residence",
   "project.propertyType.villa": "Villa",
   "project.propertyType.townhouse": "Townhouse",
+  "project.propertyType.infoAria": "Apartment vs Aparthotel explained",
+  "project.propertyType.infoTitle": "Apartment vs. Aparthotel",
+  "project.propertyType.infoClose": "Close",
+  "project.propertyType.residentialTitle": "Apartments (Residential)",
+  "project.propertyType.residentialStatus":
+    "Status: Residential property (registration & residency allowed).",
+  "project.propertyType.residentialUtilities":
+    "Utilities: Standard residential state utility tariffs.",
+  "project.propertyType.residentialTaxes":
+    "Taxes: 5% income tax on long-term/short-term rentals, 0% on resale after 2 years of ownership.",
+  "project.propertyType.commercialTitle": "Aparthotel (Commercial)",
+  "project.propertyType.commercialStatus":
+    "Status: Commercial / non-residential (no permanent residency).",
+  "project.propertyType.commercialUtilities":
+    "Utilities: Higher commercial utility rates set by management.",
+  "project.propertyType.commercialTaxes":
+    "Taxes: 20% income tax on rental yields and 20% on resale.",
   "project.developer": "Developer",
   "project.architecture": "Architecture",
   "project.architectPlaceholder": "TBA",
