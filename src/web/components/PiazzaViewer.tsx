@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
+import { FlatshowFrame } from "./FlatshowFrame";
+import { RequestModal } from "./RequestModal";
 import { useLocale } from "../context/LocaleContext";
-import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
+import { useFlatshowLeadCatch } from "../hooks/useFlatshowLeadCatch";
 import { useT, type MessageKey } from "../i18n";
 
 const C = {
@@ -11,11 +13,6 @@ const C = {
   muted: "rgba(33,20,26,0.55)",
 };
 
-/** Allowlisted Piazza module — same embed Visarteam uses. */
-const CLIENT_EN = "https://www.visarteam.tech/interactive-tools/piazza";
-const CLIENT_RU = "https://centralmg.ge/ru/piazza/apartments";
-const INDEX = "https://pro-api.flat.show/api/complex/website/index_html";
-
 type ViewMode = "3d" | "2d";
 
 function hashToMode(hash: string): ViewMode | null {
@@ -24,21 +21,21 @@ function hashToMode(hash: string): ViewMode | null {
   return null;
 }
 
-function viewerSrc(ru: boolean) {
-  const client = ru ? CLIENT_RU : CLIENT_EN;
-  const hash = typeof window === "undefined" ? "#/" : window.location.hash.toLowerCase().includes("floors") ? "#/floors" : "#/";
-  return `${INDEX}?clientPageUrl=${encodeURIComponent(client)}${hash}`;
-}
-
 export function PiazzaViewer({ projectName }: { projectName: string }) {
   const t = useT();
   const { language } = useLocale();
   const ru = language.toLowerCase().startsWith("ru");
+  const { open, setOpen } = useFlatshowLeadCatch();
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
-  const src = useMemo(() => viewerSrc(ru), [ru]);
-  const modalOpen = useSitboModalOpen();
+  const tourHash = useMemo(
+    () =>
+      typeof window !== "undefined" && window.location.hash.toLowerCase().includes("floors")
+        ? "#/floors"
+        : "#/",
+    [mode],
+  );
 
   useEffect(() => {
     const apply = () => {
@@ -79,6 +76,11 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
               {t(label)}
             </button>
           ))}
+          {mode === "3d" ? (
+            <button type="button" className="is-call" onClick={() => setOpen(true)}>
+              {t("popup.submit")}
+            </button>
+          ) : null}
         </div>
       </div>
 
@@ -86,20 +88,23 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
         <ApartmentChessboard projectName={projectName} embedded source="Piazza chessboard" />
       ) : (
         <div className="pz-frame">
-          {modalOpen ? (
-            <div className="pz-paused" aria-hidden="true" />
-          ) : (
-            <iframe
-              title={`${projectName} — Flat.show`}
-              src={src}
-              allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
-              allowFullScreen
-              loading="eager"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          )}
+          <FlatshowFrame
+            projectKey="piazza"
+            lang={ru ? "ru" : "en"}
+            hash={tourHash}
+            title={`${projectName} — Flat.show`}
+          />
         </div>
       )}
+
+      <RequestModal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={t("popup.submit")}
+        subtitle={t("chess.flatshowCallBody", { project: projectName })}
+        source={`Flat.show 3D — ${projectName}`}
+        topic={projectName}
+      />
 
       <style>{CSS}</style>
     </div>
@@ -131,12 +136,14 @@ const CSS = `
   .pz-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
   }
+  .pz-switch button.is-call {
+    background: ${C.teal}; color: ${C.light}; border-color: ${C.teal};
+  }
   .pz-frame {
     position: relative; border-radius: 2px; overflow: hidden;
     background: #FFFEF9; height: min(82vh, 860px); min-height: 520px;
   }
   .pz-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #FFFEF9; }
-  .pz-paused { width: 100%; height: 100%; background: #21141A; }
   @media (max-width: 767px) {
     .pz-frame { height: 75vh; min-height: 460px; }
   }

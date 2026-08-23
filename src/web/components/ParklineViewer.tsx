@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
+import { FlatshowFrame } from "./FlatshowFrame";
+import { RequestModal } from "./RequestModal";
+import { useLocale } from "../context/LocaleContext";
 import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
+import { useFlatshowLeadCatch } from "../hooks/useFlatshowLeadCatch";
 import { useT, type MessageKey } from "../i18n";
 
 const C = {
@@ -27,15 +31,18 @@ function modeToHash(mode: ViewMode) {
 
 export function ParklineViewer({
   projectName,
-  tourUrl,
   panoramaUrl,
 }: {
   projectName: string;
-  tourUrl: string;
+  tourUrl?: string;
   panoramaUrl?: string;
 }) {
   const t = useT();
+  const { language } = useLocale();
+  const ru = language.toLowerCase().startsWith("ru");
   const modalOpen = useSitboModalOpen();
+  const { open, setOpen } = useFlatshowLeadCatch();
+  const frameRef = useRef<HTMLDivElement | null>(null);
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
@@ -55,13 +62,24 @@ export function ParklineViewer({
     if (window.location.hash !== hash) history.replaceState(null, "", hash);
   };
 
-  const tourSrc = tourUrl;
-
   const tabs: Array<[ViewMode, MessageKey, boolean]> = [
     ["3d", "chess.view3d", true],
     ["2d", "chess.view2d", true],
     ["360", "chess.viewPanorama", Boolean(panoramaUrl)],
   ];
+
+  const openFullscreen = () => {
+    if (mode === "360" && panoramaUrl) {
+      window.open(panoramaUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    const node = frameRef.current;
+    if (!node) return;
+    const req =
+      node.requestFullscreen ||
+      (node as HTMLDivElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen;
+    void req?.call(node);
+  };
 
   return (
     <div id="apartments" className="pk">
@@ -82,33 +100,50 @@ export function ParklineViewer({
               {t(label)}
             </button>
           ))}
+          {mode === "3d" ? (
+            <button type="button" className="is-call" onClick={() => setOpen(true)}>
+              {t("popup.submit")}
+            </button>
+          ) : null}
         </div>
       </div>
 
       {mode === "2d" ? (
         <ApartmentChessboard projectName={projectName} projectKey="parkline" embedded source="Parkline chessboard" />
       ) : (
-        <div className="pk-frame">
-          {modalOpen ? (
-            <div className="pk-paused" aria-hidden="true" />
+        <div className="pk-frame" ref={frameRef}>
+          {mode === "360" && panoramaUrl ? (
+            modalOpen ? (
+              <div className="pk-paused" aria-hidden="true" />
+            ) : (
+              <iframe
+                src={panoramaUrl}
+                title={`${projectName} 360`}
+                allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
+                allowFullScreen
+              />
+            )
           ) : (
-            <iframe
-              src={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
-              title={mode === "360" ? `${projectName} 360` : `${projectName} 3D`}
-              allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
-              allowFullScreen
+            <FlatshowFrame
+              projectKey="parkline"
+              lang={ru ? "ru" : "en"}
+              title={`${projectName} 3D`}
             />
           )}
-          <a
-            className="pk-open"
-            href={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <button type="button" className="pk-open" onClick={openFullscreen}>
             {t("chess.openFullscreen")}
-          </a>
+          </button>
         </div>
       )}
+
+      <RequestModal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={t("popup.submit")}
+        subtitle={t("chess.flatshowCallBody", { project: projectName })}
+        source={`Flat.show 3D — ${projectName}`}
+        topic={projectName}
+      />
 
       <style>{CSS}</style>
     </div>
@@ -140,6 +175,9 @@ const CSS = `
   .pk-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
   }
+  .pk-switch button.is-call {
+    background: ${C.teal}; color: ${C.light}; border-color: ${C.teal};
+  }
   .pk-frame {
     position: relative; border-radius: 2px; overflow: hidden;
     background: ${C.dark}; height: min(78vh, 760px); min-height: 480px;
@@ -151,7 +189,7 @@ const CSS = `
     font-family: Inter, sans-serif; font-size: 0.68rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: ${C.light}; background: ${C.teal}; border-radius: 2px;
-    padding: 8px 12px; text-decoration: none;
+    padding: 8px 12px; border: none; cursor: pointer;
   }
   @media (max-width: 767px) {
     .pk-frame { height: 70vh; min-height: 420px; }

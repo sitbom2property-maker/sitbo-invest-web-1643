@@ -629,6 +629,8 @@ const ru: Record<MessageKey, string> = {
   "chess.priceUsd": "Цена, USD",
   "chess.priceGel": "Цена, GEL",
   "chess.officialHint": "Официальная 3D Flat.show — так выглядит интерактивная шахматка. 2D — наша сетка.",
+  "chess.flatshowCallBody":
+    "Заявка из 3D-тура приходит Артуру, а не застройщику. Напишите, какую квартиру в {project} хотите.",
 
   "invest.hero.eyebrow": "Почему Грузия",
   "invest.hero.line1": "Один из самых",
