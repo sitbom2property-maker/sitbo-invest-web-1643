@@ -31,7 +31,7 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 }
 
 // ─── Cities & filter types ────────────────────────────────────────────────────
-const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri", "Shekvetili"] as const;
+const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri", "Shekvetili", "Pasanauri"] as const;
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function CatalogCard({ p }: { p: Project }) {
@@ -65,9 +65,11 @@ function CatalogCard({ p }: { p: Project }) {
               {localizeCityLabel(p.city, language)}
             </div>
 
-            {/* ROI badge */}
+            {/* ROI / guaranteed-income badge */}
             <div style={{ position: "absolute", top: "12px", right: "12px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em", color: C.dark }}>
-              {p.yield} {t("catalog.roi")}
+              {p.guaranteedYield
+                ? `${p.guaranteedYield} ${t("catalog.guaranteed")}`
+                : `${p.yield} ${t("catalog.roi")}`}
             </div>
 
             {/* Name over image */}
@@ -176,6 +178,7 @@ export default function CatalogPage() {
     "Chakvi / Gonio": t("catalog.city.chakviGonio"),
     Makhinjauri: t("catalog.city.makhinjauri"),
     Shekvetili: t("catalog.city.shekvetili"),
+    Pasanauri: t("catalog.city.pasanauri"),
   };
 
   // Scroll top on mount
