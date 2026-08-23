@@ -553,10 +553,10 @@ export const projects: Project[] = [
     yield: "12–15%",
     developer: "VR Holding",
     architect: "TBA",
-    priceFrom: "From $53,430",
-    priceUSD: 53430,
-    completion: "Q3 2027",
-    area: "26.3–163 m²",
+    priceFrom: "From $61,910",
+    priceUSD: 61910,
+    completion: "From Q3 2027",
+    area: "26–161.3 m²",
     ceilingHeight: "3.0 m",
     floors: "2–11",
     buildings: "Blocks A, B1, B2, C1, C2",
@@ -605,7 +605,7 @@ export const projects: Project[] = [
     mapsQuery: "VR Shekvetili Forest Beach, Shekvetili, Georgia",
     floorPlans: [],
     floorPlanLabels: [],
-    pricePerSqm: "from $1,800/m²",
+    pricePerSqm: "from $1,218/m²",
     awards: [
       {
         src: "/projects/shekvetili/brand/epa-winner-2024-2025.svg",
