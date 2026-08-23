@@ -222,7 +222,7 @@ const ru: Record<MessageKey, string> = {
 
   "v2.footer.role": "частный консультант по недвижимости",
   "v2.footer.tagline":
-    "Артур — ваш персональный консультант по недвижимости в Грузии. Родился и вырос здесь, 7 лет опыта в Батуми. Защищает и приумножает ваш капитал: подбирает только ликвидные объекты, убирает риски и эмоции. Полный цикл в интересах покупателя — от due diligence до ремонта «под ключ» и долгосрочных отношений.",
+    "Родился и вырос здесь, 7 лет опыта в Батуми. Защищаю и приумножаю ваш капитал: подбираю только ликвидные объекты, убираю риски и эмоции. Полный цикл в интересах покупателя — от due diligence до ремонта «под ключ» и долгосрочных отношений.",
   "v2.footer.investment": "Инвестиции",
   "v2.footer.contact": "Контакты и ссылки",
   "v2.footer.properties": "Объекты",
@@ -550,11 +550,7 @@ const ru: Record<MessageKey, string> = {
   "project.spec.floors": "Этажность",
   "project.spec.buildings": "Корпуса",
   "project.spec.finishing": "Отделка",
-  "project.features": "Особенности",
-  "project.features.viewAll": "Смотреть все {count} особенностей",
-  "project.features.lot": "Участок и локация",
-  "project.features.indoor": "Внутри",
-  "project.features.outdoor": "Снаружи",
+  "project.features": "Ключевые особенности",
   "project.materials": "Материалы и строительство",
   "project.payment": "Оплата и рассрочка",
   "project.interested": "Интересно?",

@@ -224,7 +224,7 @@ const en = {
 
   "v2.footer.role": "Private Property Advisor",
   "v2.footer.tagline":
-    "Arthur is your personal real estate advisor in Georgia, born and raised locally with 7 years of experience in Batumi. Dedicated to protecting and growing your capital, selecting only liquid properties, and eliminating risks and emotions. Full-cycle service in the buyer’s interest — from due diligence to turnkey renovation, building long-term relationships.",
+    "Born and raised locally with 7 years of experience in Batumi. Dedicated to protecting and growing your capital, selecting only liquid properties, and eliminating risks and emotions. Full-cycle service in the buyer’s interest from due diligence to turnkey renovation, building long-term relationships.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
@@ -567,11 +567,7 @@ const en = {
   "project.spec.floors": "Floors",
   "project.spec.buildings": "Buildings",
   "project.spec.finishing": "Finishing",
-  "project.features": "Features",
-  "project.features.viewAll": "View all {count} features",
-  "project.features.lot": "Lot",
-  "project.features.indoor": "Indoor",
-  "project.features.outdoor": "Outdoor",
+  "project.features": "Key Features",
   "project.materials": "Materials & Construction",
   "project.payment": "Payment & Installment",
   "project.interested": "Interested?",

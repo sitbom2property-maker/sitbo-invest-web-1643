@@ -179,7 +179,7 @@ const CSS = `
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 2px;
+  --radius: 10px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -236,9 +236,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   color: var(--white); margin: 0; max-width: 420px;
 }
 .sv-hero-side {
-  font-size: 16px; line-height: 1.55;
-  color: var(--white); margin: 0; max-width: 420px;
-  justify-self: end; text-align: right;
+  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
+  color: var(--white); margin: 0; max-width: 380px;
+  justify-self: end;
 }
 .sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
 
@@ -249,7 +249,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-list {
-  background: var(--panel); color: var(--bg); border-radius: 2px;
+  background: var(--panel); color: var(--bg); border-radius: 10px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .sv-list-head {
@@ -261,9 +261,8 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .sv-list-head p {
-  margin: 0; font-size: 16px; line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 420px;
-  justify-self: end; text-align: right;
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
 }
 
 .sv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
@@ -313,15 +312,15 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .sv-limits-head p {
-  margin: 0; font-size: 16px; line-height: 1.5; color: var(--white);
-  max-width: 420px; justify-self: end; text-align: right;
+  margin: 0; font-size: 15px; line-height: 1.5; color: var(--white);
+  max-width: 360px; justify-self: end;
 }
 .sv-limits-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 .sv-limit {
-  background: var(--card); border-radius: 2px;
+  background: var(--card); border-radius: 10px;
   padding: clamp(22px, 2.4vw, 32px);
 }
 .sv-limit h3 {
@@ -339,7 +338,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-cta {
-  border-radius: 2px; overflow: hidden;
+  border-radius: 10px; overflow: hidden;
   background:
     radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
     var(--card);
@@ -358,9 +357,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 @media (max-width: 900px) {
   .sv-hero { padding-top: 36px; }
   .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
-  .sv-hero-side, .sv-list-head p, .sv-limits-head p {
-    justify-self: start; text-align: left; max-width: none;
-  }
+  .sv-hero-side, .sv-list-head p, .sv-limits-head p { justify-self: start; }
   .sv-limits-grid { grid-template-columns: 1fr; }
   .sv-acc-body { padding-left: 0; }
   .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }

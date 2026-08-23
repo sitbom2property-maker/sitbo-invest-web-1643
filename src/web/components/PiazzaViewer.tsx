@@ -125,14 +125,14 @@ const CSS = `
   .pz-switch button {
     font-family: Inter, sans-serif; font-size: 0.72rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 8px 14px; border-radius: 2px; cursor: pointer;
+    padding: 8px 14px; border-radius: 8px; cursor: pointer;
     border: 1px solid rgba(33,20,26,0.12); background: transparent; color: ${C.dark};
   }
   .pz-switch button.is-on {
     background: ${C.dark}; color: ${C.light}; border-color: ${C.dark};
   }
   .pz-frame {
-    position: relative; border-radius: 2px; overflow: hidden;
+    position: relative; border-radius: 10px; overflow: hidden;
     background: #FFFEF9; height: min(82vh, 860px); min-height: 520px;
   }
   .pz-frame iframe { width: 100%; height: 100%; border: 0; display: block; background: #FFFEF9; }
