@@ -78,6 +78,10 @@ function Eyebrow({ children, light }: { children: React.ReactNode; light?: boole
     </h3>
   );
 }
+function Divider() {
+  return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
+}
+
 function youtubeId(url: string): string | null {
   const m = url.match(/(?:youtu\.be\/|v=)([A-Za-z0-9_-]{6,})/);
   return m?.[1] ?? null;
