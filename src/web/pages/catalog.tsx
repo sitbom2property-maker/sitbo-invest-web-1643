@@ -187,7 +187,9 @@ export default function CatalogPage() {
               maxWidth: "760px",
             }}
           >
-            {t("catalog.title")}
+            {t("catalog.titleLine1")}
+            <br />
+            {t("catalog.titleLine2")}
           </h1>
 
           {/* City tabs + trophy filter */}

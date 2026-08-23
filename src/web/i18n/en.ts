@@ -522,6 +522,8 @@ const en = {
   // Catalog
   "catalog.title":
     "Handpicked residential and investment properties across Batumi and Georgia",
+  "catalog.titleLine1": "Handpicked residential and investment",
+  "catalog.titleLine2": "properties across Batumi and Georgia",
   "catalog.subtitle":
     "Handpicked residential and investment properties across Batumi and Georgia.",
   "catalog.eyebrow": "Georgia Real Estate",

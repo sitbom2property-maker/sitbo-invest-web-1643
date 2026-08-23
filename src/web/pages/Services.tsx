@@ -228,6 +228,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
   font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
 }
+.sv-hero-line { display: block; }
 .sv-hero h1 em {
   font-style: normal; color: var(--white);
 }
@@ -384,9 +385,10 @@ export default function ServicesPage() {
         <div className="sv-wrap sv-hero-grid">
           <div className="rv">
             <h1>
-              {t("services.hero.title")}
-              <br />
-              <em>{t("services.hero.titleEm")}</em>
+              <span className="sv-hero-line">{t("services.hero.title")}</span>
+              <span className="sv-hero-line">
+                <em>{t("services.hero.titleEm")}</em>
+              </span>
             </h1>
             <div className="sv-hero-btns">
               <button type="button" className="sv-btn sv-btn-white" onClick={() => setModalOpen(true)}>
