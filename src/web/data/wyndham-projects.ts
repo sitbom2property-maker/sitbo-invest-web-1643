@@ -1,4 +1,7 @@
-import type { Project } from "./projects";
+import type { CatalogAllocation, Project } from "./projects";
+
+const INCOME: CatalogAllocation[] = ["guaranteed-income"];
+const TROPHY: CatalogAllocation[] = ["trophy", "guaranteed-income"];
 
 const GONIO_VIDEOS = {
   ru: "https://www.youtube.com/watch?v=twJRJsng_QE",
@@ -19,6 +22,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-grand-aqua",
     tag: "Gonio · All Inclusive 5★",
     city: "Chakvi / Gonio",
+    allocations: TROPHY,
     address: "Tsminda Andria Pirveltsodebuli Highway 67b, Gonio",
     seaDistance: "3 minutes to the sea",
     seaMeters: "250 m",
@@ -98,6 +102,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-grand-family-club",
     tag: "Gonio · Family 5★ Club",
     city: "Chakvi / Gonio",
+    allocations: INCOME,
     address: "Tsminda Andria Pirveltsodebuli Highway 67b, Gonio",
     seaDistance: "4 minutes to the sea",
     seaMeters: "350 m",
@@ -176,6 +181,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-grand-riviera",
     tag: "Gonio · Townhouses",
     city: "Chakvi / Gonio",
+    allocations: TROPHY,
     address: "Tsminda Andria Pirveltsodebuli Highway 67b, Gonio",
     seaDistance: "8 minutes to the sea",
     seaMeters: "800 m",
@@ -246,6 +252,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-grand-villas",
     tag: "Gonio · 16 exclusive villas",
     city: "Chakvi / Gonio",
+    allocations: TROPHY,
     address: "Tsminda Andria Pirveltsodebuli Highway 67b, Gonio",
     seaDistance: "5 minutes to the sea",
     seaMeters: "400 m",
@@ -322,6 +329,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-grand-sky-castle",
     tag: "Gonio · Castle landmark",
     city: "Chakvi / Gonio",
+    allocations: TROPHY,
     address: "Tsminda Andria Pirveltsodebuli Highway 67b, Gonio",
     seaDistance: "4 minutes to the sea",
     seaMeters: "300 m",
@@ -389,6 +397,7 @@ export const wyndhamProjects: Project[] = [
     slug: "grand-life-worldhotels",
     tag: "Batumi · Wine & city hotel",
     city: "Batumi",
+    allocations: INCOME,
     address: "Batumi · 8 min to the airport · 7 min to the beach",
     seaDistance: "7 minutes to the beach",
     seaMeters: "800 m",
@@ -461,6 +470,7 @@ export const wyndhamProjects: Project[] = [
     slug: "elite-family-residence",
     tag: "Gonio · Completed clubhouse",
     city: "Chakvi / Gonio",
+    allocations: INCOME,
     address: "1st dead-end of St. Nino, 11a, Gonio-Kvariati",
     seaDistance: "10 minutes to the beach",
     seaMeters: "750 m",
@@ -531,6 +541,7 @@ export const wyndhamProjects: Project[] = [
     slug: "wyndham-garden-pasanauri",
     tag: "Caucasus · Spa & Wellness",
     city: "Pasanauri",
+    allocations: INCOME,
     address: "Pasanauri, Dusheti Municipality · near Gudauri",
     seaDistance: "Mountain spa · Gudauri 30 min",
     seaMeters: "Inland",
