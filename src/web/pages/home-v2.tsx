@@ -4,6 +4,7 @@ import { PrivacyModal } from "../components/PrivacyModal";
 import { RequestModal } from "../components/RequestModal";
 import { AppLink } from "../components/app-link";
 import { useT, type MessageKey } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 /**
  * Homepage rebuilt from the Figma export (Desktop - 1.pdf, 1440 × 7851).
@@ -688,6 +689,7 @@ function Newsletter() {
         setState("idle");
         return;
       }
+      trackLead({ source: "Newsletter subscribe" });
       setState("done");
       setEmail("");
     } catch {

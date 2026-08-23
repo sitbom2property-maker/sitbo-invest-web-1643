@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 /**
  * Soft lead capture:
@@ -149,6 +150,7 @@ export function LeadPopup() {
         setError(t("popup.errorGeneric"));
         return;
       }
+      trackLead({ source: "Website popup" });
       setSubmitted(true);
       writeState({ submitted: true });
       window.setTimeout(() => setOpen(false), 2600);

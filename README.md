@@ -75,6 +75,31 @@ app.get('/api/hello', (c) => c.json({ message: 'Hello' }));
 
 `website.config.json` contains the site name, description, and URL — use it as the source of truth for site-wide values.
 
+## Analytics (Google Analytics 4)
+
+The GA4 tag lives in `src/web/lib/analytics.ts` and is started from `src/web/main.tsx`.
+
+- Measurement ID defaults to the `sitboinvest.ge` stream (`G-17F8GJ7K0P`); override with `VITE_GA_MEASUREMENT_ID` at build time, or set it empty to disable tracking.
+- Localhost is excluded so development traffic never reaches the production property. Append `?ga_debug=1` to any URL to force the tag on and stream events to GA4 DebugView (sticky for the browser tab; `?ga_debug=0` clears it).
+- Page views come from GA4 **enhanced measurement**, which already covers SPA navigation via browser history events — keep "Page views" (page loads *and* page changes based on browser history events) enabled in the web data stream, and do not add manual `page_view` calls or they will be counted twice.
+- Consent is wired to the cookie banner through [Google Consent Mode v2](https://developers.google.com/tag-platform/security/guides/consent). Everything except `security_storage` starts denied, so pre-consent traffic is measured with cookieless pings; the banner's "Performance" category grants `analytics_storage` and "Targeting" grants the ad signals.
+
+Custom events sent by the app:
+
+| Event | When | Parameters |
+| --- | --- | --- |
+| `generate_lead` | any lead form submits successfully | `lead_source`, `lead_budget`, `lead_project` |
+| `contact_click` | a WhatsApp / Telegram / `tel:` / `mailto:` link is clicked | `contact_method`, `link_url` |
+
+Register those parameters as custom dimensions in GA4 (Admin → Custom definitions) to break the events down by form or contact channel, and mark `generate_lead` as a key event to track it as a conversion.
+
+```ts
+import { trackEvent, trackLead } from "@/lib/analytics";
+
+trackLead({ source: "Website popup" });
+trackEvent("brochure_download", { project: "Piazza" });
+```
+
 ## Agent Rules
 
 **CRITICAL: This project uses Tailwind CSS v4.** No `tailwind.config.js`, no `postcss.config.js`, no `@tailwind` directives. All configuration is CSS-first via `@theme` in `src/web/styles.css` and the `@tailwindcss/vite` plugin. Do NOT use Tailwind v3 syntax.
