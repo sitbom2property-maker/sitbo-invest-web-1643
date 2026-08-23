@@ -213,6 +213,18 @@ function FeatureIcon({ id }: { id: FeatureIconId }) {
           <path d="M3 12c1.2-1 2.4-1 3.6 0s2.4 1 3.6 0 2.4-1 3.6 0 2.4 1 3.6 0" />
         </svg>
       );
+    case "fingerprint":
+      return (
+        <svg {...common}>
+          <path d="M12 11a3 3 0 0 0-3 3v4" />
+          <path d="M12 7a6 6 0 0 0-6 6v2" />
+          <path d="M12 7a6 6 0 0 1 6 6v1" />
+          <path d="M9 18c.5 1.2 1.6 2 3 2s2.5-.8 3-2" />
+          <path d="M15 14v2" />
+          <path d="M12 3.5A8.5 8.5 0 0 0 3.5 12" />
+          <path d="M20.5 12A8.5 8.5 0 0 0 12 3.5" />
+        </svg>
+      );
     default:
       return (
         <svg {...common}>

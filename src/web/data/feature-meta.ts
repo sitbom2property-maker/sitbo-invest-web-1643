@@ -31,6 +31,7 @@ export type FeatureIconId =
   | "grouting"
   | "moisture"
   | "seismic"
+  | "fingerprint"
   | "generic";
 
 type Rule = {
@@ -40,25 +41,29 @@ type Rule = {
 };
 
 const RULES: Rule[] = [
-  { category: "indoor", icon: "office", test: /cowork|commercial|коворкинг|коммерц/i },
+  { category: "lot", icon: "fingerprint", test: /kkaa|masterpiece|шедевр|отпечаток/i },
+  { category: "indoor", icon: "office", test: /cowork|commercial|коворкинг|коммерц|performance hall|концертн|зал\s*мероприят/i },
   { category: "indoor", icon: "building", test: /smart living|smart living tech/i },
   { category: "lot", icon: "building", test: /high-?yield|доходност|investment/i },
+  { category: "indoor", icon: "parking", test: /private parking|частн.*парк|подземн.*парк/i },
   { category: "outdoor", icon: "parking", test: /parking|паркинг/i },
   { category: "lot", icon: "park", test: /all-season|всесезон|инфраструктур/i },
   { category: "lot", icon: "park", test: /clean air|aqi|чисты.\s*воздух/i },
+  { category: "lot", icon: "hotel", test: /5\s*star|five.?star|managed property|full managed|управляем|5\s*зв[её]зд/i },
   { category: "outdoor", icon: "beach", test: /beach shuttle|shuttle to the beach|трансфер на пляж/i },
   { category: "lot", icon: "sea", test: /\bsea\b|seaside|waterfront|black sea|boulevard/i },
   { category: "lot", icon: "beach", test: /beach|sand beach|beach club|café del mar|cafe del mar/i },
-  { category: "lot", icon: "mountain", test: /mountain|hill panorama|city & hill/i },
+  { category: "lot", icon: "mountain", test: /mountain|hill panorama|city & hill|mountain\s*&\s*sea/i },
+  { category: "indoor", icon: "balcony", test: /panoramic rooftop|панорамн.*крыш|rooftop lounge/i },
   { category: "lot", icon: "panorama", test: /panoramic|scenic|glazing|views|остеклен/i },
-  { category: "lot", icon: "park", test: /\bpark\b|forest|landscap|green|garden|recreation|hectare|archipelago/i },
+  { category: "lot", icon: "park", test: /\bpark\b|forest|landscap|green|garden|recreation|hectare|archipelago|masu/i },
   { category: "lot", icon: "building", test: /address|boulevard|historic|monument|new build|tower|tallest|fa[cç]ade|ventilated|concrete|construction|phased|university|diplomatic|vake|resort community|masterplan/i },
   { category: "outdoor", icon: "pool", test: /outdoor pool|открытый\s+бассейн|infinity pool|pools?,?\s*courts|pool & wellness|pools,|swimming pool/i },
   { category: "outdoor", icon: "cinema", test: /outdoor cinema|open-?air cinema|летн.*кино|кинотеатр\s*на\s*открыт/i },
   { category: "outdoor", icon: "court", test: /tennis|basketball|padel|\bcourts?\b|sport/i },
   { category: "outdoor", icon: "yacht", test: /yacht|marina|berth/i },
   { category: "outdoor", icon: "balcony", test: /balcony|terrace|rooftop|bbq/i },
-  { category: "outdoor", icon: "kids", test: /playground|площадк|play area|pet zone|pet area|питомц/i },
+  { category: "outdoor", icon: "kids", test: /playground|площадк|play area|pet zone|pet area|питомц|children'?s play/i },
   { category: "indoor", icon: "kids", test: /kindergarten|детский\s+сад|playroom|игровая|children/i },
   { category: "indoor", icon: "pool", test: /indoor pool|крытый\s+бассейн|spa with indoor/i },
   { category: "indoor", icon: "spa", test: /\bspa\b|wellness/i },
@@ -67,6 +72,7 @@ const RULES: Rule[] = [
   { category: "indoor", icon: "elevator", test: /elevator|lift|лифт/i },
   { category: "indoor", icon: "office", test: /office|business centre|business center|conference|конференц|cowork/i },
   { category: "indoor", icon: "hotel", test: /concierge|reception|hotel|branded|hospitality|casino|manager|service 24|сервис 24/i },
+  { category: "outdoor", icon: "shop", test: /retail promenade|fine dining|променад|ритейл/i },
   { category: "indoor", icon: "shop", test: /pharmacy|аптек|restaurant|café|cafe|retail|store|fashion|food/i },
   { category: "indoor", icon: "security", test: /security|gated|24\/7|охран/i },
 ];
@@ -93,12 +99,12 @@ export function normalizeProjectFeatures(features: string[]): ProjectFeatureItem
 function constructionIcon(label: string): FeatureIconId {
   if (/jet|grout|цемент|грунт|soilcrete/i.test(label)) return "grouting";
   if (/finish|white frame|белы|отдел/i.test(label)) return "building";
-  if (/moisture|влаг|корроз|hydro|водо|insulat|изоляц|фасад|facade/i.test(label)) return "moisture";
+  if (/moisture|влаг|корроз|hydro|водо|insulat|изоляц|фасад|facade|noise|шум|anti-?mold/i.test(label)) return "moisture";
   if (/glaz|остек|window|панорам/i.test(label)) return "panorama";
   if (/elevat|лифт|otis|kone/i.test(label)) return "elevator";
   if (/climate|vrv|vrf|климат|ventil/i.test(label)) return "spa";
   if (/seismic|сейсм|earthquake|землетряс|frame|каркас/i.test(label)) return "seismic";
-  if (/concrete|бетон/i.test(label)) return "building";
+  if (/concrete|бетон|foundation|фундам/i.test(label)) return "building";
   return "generic";
 }
 
@@ -118,8 +124,11 @@ function normalizeConstructionLabel(raw: string): string {
   if (/deep\s+foundation|глубок.*фундам/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Глубокий фундамент" : "Deep foundation";
   }
-  if (/knauf/i.test(t)) {
-    return /[а-яё]/i.test(t) ? "Шумоизоляция Knauf" : "Knauf noise insulation";
+  if (/knauf|noise insulation|шумоизоляц/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Шумоизоляция" : "Noise insulation";
+  }
+  if (/advanced facade|защита фасада/i.test(t)) {
+    return /[а-яё]/i.test(t) ? "Защита фасада" : "Advanced Facade Protection";
   }
   if (/sch[uü]co/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Остекление Schüco" : "Schüco Glazing";
@@ -130,7 +139,7 @@ function normalizeConstructionLabel(raw: string): string {
   if (/finish|white frame|белы/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Белый каркас" : "White frame";
   }
-  if (/facade|фасад|insulat|изоляц/i.test(t)) {
+  if (/facade|фасад|insulat|изоляц|noise|шум|advanced facade/i.test(t)) {
     return /[а-яё]/i.test(t) ? "Фасад и изоляция" : "Facade & insulation";
   }
   if (/glaz|остек|uv|шум/i.test(t)) {

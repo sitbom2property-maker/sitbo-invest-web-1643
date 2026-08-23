@@ -109,7 +109,7 @@ const bloomCalendar = [
 
 const cardImages = [
   "/projects/parkline/for-sale/ext-park-hero.jpg",
-  "/projects/silk/for-sale/card.png",
+  "/projects/silk/for-sale/card.jpg",
   "/projects/rogantini/for-sale/card.jpg",
   "/projects/ambassadori/for-sale/card.png",
   "/projects/gonio/for-sale/card.png",
