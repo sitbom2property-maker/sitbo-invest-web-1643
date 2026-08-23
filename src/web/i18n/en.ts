@@ -147,25 +147,25 @@ const en = {
   "v2.fb.google": "Google Reviews 5/5",
   "v2.fb.q1":
     "Found a buyer for my apartment in just 9 days and completely handled the sale process end-to-end. True full VIP service.",
-  "v2.fb.a1": "Anastasia S. (USA)",
+  "v2.fb.a1": "Anastasia S.",
   "v2.fb.q2":
     "Helped negotiate the price and met tight deadlines for mortgage approval. The team you can rely on in Batumi.",
-  "v2.fb.a2": "Tamar Kh., Buyer (Yerevan)",
+  "v2.fb.a2": "Tamar Kh.",
   "v2.fb.q3":
     "Selected an investment project on highly favorable terms and even handled all utility setups after the deal.",
-  "v2.fb.a3": "Milana S., Investor (Russia)",
+  "v2.fb.a3": "Milana S.",
   "v2.fb.q4":
     "Seamlessly coordinated the seller, bank, developer, and public registry. Always calm, supportive, and highly professional.",
-  "v2.fb.a4": "Natalia P., Homeowner (Crimea)",
+  "v2.fb.a4": "Natalia P.",
   "v2.fb.q5":
     "The seller canceled at 10 PM. By midnight, Arthur already had me standing inside a new, even better apartment. Absolute game-changer!",
-  "v2.fb.a5": "Arman A., Buyer (Yerevan)",
+  "v2.fb.a5": "Arman A.",
   "v2.fb.q6":
     "Flew from Batumi to Tbilisi to negotiate with the developer and review every contract detail in person.",
-  "v2.fb.a6": "Teona T., Buyer (Moscow)",
+  "v2.fb.a6": "Teona T.",
   "v2.fb.q7":
     "Resolved complex developer conflicts and legal flaws instantly with complete diplomacy and expertise.",
-  "v2.fb.a7": "Maya S., Homeowner (Georgia)",
+  "v2.fb.a7": "Maya S.",
 
   "v2.pricing.title": "It always starts with a call...",
   "v2.pricing.requestLabel": "Request",

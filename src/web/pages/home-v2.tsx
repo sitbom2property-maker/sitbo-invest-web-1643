@@ -1020,13 +1020,13 @@ html, body { background: #21141A; }
   min-height: 0;
 }
 .rd-fb-card blockquote {
-  font-family: var(--body); font-weight: 400; font-size: 16px;
-  line-height: 1.45; margin: 0 0 18px; color: #FFFEF9;
+  font-family: var(--body); font-weight: 400; font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.45; margin: 0 0 16px; color: #FFFEF9;
   text-align: left;
 }
 .rd-fb-card figcaption {
-  font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px);
-  font-weight: 400; color: #FFFEF9; margin: 0; line-height: 1.4;
+  font-family: var(--body); font-size: clamp(12px, 1vw, 14px);
+  font-weight: 400; color: rgba(255,254,249,.78); margin: 0; line-height: 1.4;
   text-align: left;
 }
 .rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: auto; padding-top: 28px; flex-shrink: 0; }
