@@ -686,7 +686,7 @@ export const projects: Project[] = [
       "Advanced Facade Protection: Coastal-grade envelope systems. 9+ Seismic Resilience: Structural design above code. Deep foundation: Engineered foundations for high-rise towers. Anti-Mold Facade: Climate-protection cladding. Noise insulation: Acoustic partitions throughout residential floors.",
     ownershipBenefits: {
       title: "Silk Rewards",
-      body: "When you purchase an apartment at Silk Towers, you are automatically granted Silk Rewards Gold Status.\n\nSilk Rewards is a loyalty app that offers real, everyday benefits across all Silk Hospitality venues.",
+      body: "When you purchase an apartment at Silk Towers, you are automatically granted Silk Rewards Gold Status. Silk Rewards is a loyalty app that offers real, everyday benefits across all Silk Hospitality venues.",
       linkLabel: "Your benefits here",
       popupItems: [
         "10% cashback on every payment",
