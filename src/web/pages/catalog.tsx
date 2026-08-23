@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
-import { projects, type Project } from "../data/projects";
+import { projects, projectAllocations, type Project } from "../data/projects";
 import { localizeCityLabel, localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
-import { useT } from "../i18n";
+import { useT, type MessageKey } from "../i18n";
 
 const C = {
   dark:      "#21141A",
@@ -30,8 +30,16 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
   return <div className="site-wrap" style={style}>{children}</div>;
 }
 
-// ─── Cities & filter types ────────────────────────────────────────────────────
-const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi / Gonio", "Makhinjauri", "Shekvetili", "Pasanauri"] as const;
+// ─── Allocation chips (overlapping: trophy can also be guaranteed-income) ─────
+const ALLOCATIONS = ["All", "trophy", "guaranteed-income", "residence"] as const;
+type AllocationFilter = (typeof ALLOCATIONS)[number];
+
+function cardKindLabel(p: Project, language: string, t: (key: MessageKey) => string): string {
+  const a = projectAllocations(p);
+  if (a.includes("trophy")) return t("catalog.badge.trophy");
+  if (a.includes("guaranteed-income")) return t("catalog.badge.income");
+  return localizeCityLabel(p.city, language);
+}
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function CatalogCard({ p }: { p: Project }) {
@@ -60,9 +68,9 @@ function CatalogCard({ p }: { p: Project }) {
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
-            {/* City badge */}
+            {/* Allocation badge */}
             <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(33,20,26,0.65)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,254,249,0.15)", borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light }}>
-              {localizeCityLabel(p.city, language)}
+              {cardKindLabel(p, language, t)}
             </div>
 
             {/* ROI / guaranteed-income badge */}
@@ -118,7 +126,7 @@ export default function CatalogPage() {
     [language],
   );
 
-  const [city, setCity]     = useState<typeof CITIES[number]>("All");
+  const [allocation, setAllocation] = useState<AllocationFilter>("All");
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
   const [showBookCall, setShowBookCall] = useState(false);
@@ -171,14 +179,11 @@ export default function CatalogPage() {
     { value: "yield-desc", label: t("catalog.sortYield") },
   ];
 
-  const cityLabels: Record<typeof CITIES[number], string> = {
+  const allocationLabels: Record<AllocationFilter, string> = {
     All: t("catalog.filterAll"),
-    Batumi: t("catalog.city.batumi"),
-    Tbilisi: t("catalog.city.tbilisi"),
-    "Chakvi / Gonio": t("catalog.city.chakviGonio"),
-    Makhinjauri: t("catalog.city.makhinjauri"),
-    Shekvetili: t("catalog.city.shekvetili"),
-    Pasanauri: t("catalog.city.pasanauri"),
+    trophy: t("catalog.allocation.trophy"),
+    "guaranteed-income": t("catalog.allocation.income"),
+    residence: t("catalog.allocation.residence"),
   };
 
   // Scroll top on mount
@@ -187,8 +192,10 @@ export default function CatalogPage() {
   const filtered = useMemo(() => {
     let list = [...localizedProjects];
 
-    // City (canonical English keys on Project.city)
-    if (city !== "All") list = list.filter(p => p.city === city);
+    // Allocation (overlapping tags)
+    if (allocation !== "All") {
+      list = list.filter((p) => projectAllocations(p).includes(allocation));
+    }
 
     // Search
     if (search.trim()) {
@@ -198,7 +205,8 @@ export default function CatalogPage() {
         p.tag.toLowerCase().includes(q) ||
         p.city.toLowerCase().includes(q) ||
         p.address.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q)
+        p.desc.toLowerCase().includes(q) ||
+        projectAllocations(p).some((a) => allocationLabels[a].toLowerCase().includes(q))
       );
     }
 
@@ -211,11 +219,15 @@ export default function CatalogPage() {
     });
 
     return list;
-  }, [city, sort, search, localizedProjects]);
+  }, [allocation, sort, search, localizedProjects, allocationLabels]);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = { All: localizedProjects.length };
-    localizedProjects.forEach(p => { map[p.city] = (map[p.city] || 0) + 1; });
+    for (const p of localizedProjects) {
+      for (const a of projectAllocations(p)) {
+        map[a] = (map[a] || 0) + 1;
+      }
+    }
     return map;
   }, [localizedProjects]);
 
@@ -240,19 +252,19 @@ export default function CatalogPage() {
             </p>
           </div>
 
-          {/* City tabs */}
+          {/* Allocation tabs */}
           <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap" }}>
-            {CITIES.map(c => (
-              <button key={c} onClick={() => setCity(c)} style={{
+            {ALLOCATIONS.map(c => (
+              <button key={c} onClick={() => setAllocation(c)} style={{
                 fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",
                 padding: "8px 18px", borderRadius: "2px", cursor: "pointer",
-                border: `1px solid ${city === c ? C.teal : "rgba(255,254,249,0.15)"}`,
-                background: city === c ? C.teal : "transparent",
+                border: `1px solid ${allocation === c ? C.teal : "rgba(255,254,249,0.15)"}`,
+                background: allocation === c ? C.teal : "transparent",
                 color: C.light,
                 transition: "all 0.2s",
               }}>
-                {cityLabels[c]} {counts[c] ? <span style={{ fontWeight: 400 }}>({counts[c]})</span> : ""}
+                {allocationLabels[c]} {counts[c] ? <span style={{ fontWeight: 400 }}>({counts[c]})</span> : ""}
               </button>
             ))}
           </div>
@@ -298,7 +310,7 @@ export default function CatalogPage() {
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
-              <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
+              <button onClick={() => { setAllocation("All"); setSearch(""); setSort("default"); }}
                 style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "2px", padding: "12px 28px", cursor: "pointer" }}>
                 {t("cta.resetFilters")}
               </button>
