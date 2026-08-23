@@ -5,6 +5,7 @@ import { localizeCityLabel, localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 const C = {
   dark:      "#21141A",
@@ -146,6 +147,7 @@ export default function CatalogPage() {
         }),
       });
       if (res.ok) {
+        trackLead({ source: "Catalog — Book a Call" });
         setBookSent(true);
         setBookForm({ name: "", phone: "", email: "", message: "" });
         window.setTimeout(() => {

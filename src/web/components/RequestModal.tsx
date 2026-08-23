@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 export type RequestModalProps = {
   open: boolean;
@@ -93,6 +94,7 @@ export function RequestModal({
         setError(t("popup.errorGeneric"));
         return;
       }
+      trackLead({ source, project: topic });
       setSubmitted(true);
       setForm({ name: "", contact: "", message: "" });
       window.setTimeout(onClose, 2600);

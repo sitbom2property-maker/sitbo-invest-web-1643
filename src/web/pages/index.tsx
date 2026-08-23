@@ -6,6 +6,7 @@ import { projects as catalogProjects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark
@@ -1531,8 +1532,10 @@ function Contact() {
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
         }),
       });
-      if (res.ok) setSubmitted(true);
-      else setError(t("home.contact.errorGeneric"));
+      if (res.ok) {
+        trackLead({ source: "Homepage Contact" });
+        setSubmitted(true);
+      } else setError(t("home.contact.errorGeneric"));
     } catch { setError(t("home.contact.errorNetwork")); }
     finally { setLoading(false); }
   };

@@ -2,32 +2,13 @@ import { useEffect, useState } from "react";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 import { PrivacyModal } from "./PrivacyModal";
-
-type CookiePrefs = {
-  necessary: boolean;
-  performance: boolean;
-  targeting: boolean;
-  functionality: boolean;
-  unclassified: boolean;
-};
-
-const STORAGE_KEY = "sitbo_cookie_consent";
-
-const ALL_ON: CookiePrefs = {
-  necessary: true,
-  performance: true,
-  targeting: true,
-  functionality: true,
-  unclassified: true,
-};
-
-const NECESSARY_ONLY: CookiePrefs = {
-  necessary: true,
-  performance: false,
-  targeting: false,
-  functionality: false,
-  unclassified: false,
-};
+import {
+  CONSENT_ALL_ON as ALL_ON,
+  CONSENT_NECESSARY_ONLY as NECESSARY_ONLY,
+  readConsent,
+  writeConsent,
+  type CookiePrefs,
+} from "../lib/consent";
 
 const CATEGORIES: {
   key: keyof CookiePrefs;
@@ -52,10 +33,6 @@ const CATEGORIES: {
   { key: "unclassified", labelKey: "cookie.unclassified", descKey: "cookie.unclassifiedDesc" },
 ];
 
-function persist(prefs: CookiePrefs) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
-}
-
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
   const [prefs, setPrefs] = useState<CookiePrefs>(NECESSARY_ONLY);
@@ -66,8 +43,7 @@ export function CookieConsent() {
   const { language, setLocale } = useLocale();
 
   useEffect(() => {
-    const consent = localStorage.getItem(STORAGE_KEY);
-    if (!consent) setShowBanner(true);
+    if (!readConsent()) setShowBanner(true);
   }, []);
 
   useEffect(() => {
@@ -93,7 +69,8 @@ export function CookieConsent() {
   }, [showBanner, details]);
 
   const close = (next: CookiePrefs) => {
-    persist(next);
+    // Saving also notifies analytics, which updates Google Consent Mode.
+    writeConsent(next);
     setShowBanner(false);
   };
 
