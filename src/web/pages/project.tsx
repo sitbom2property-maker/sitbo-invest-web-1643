@@ -650,13 +650,14 @@ export default function ProjectPage() {
 
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "48px" : "72px" }}>
-                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px 12px" }}>
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 20 }}>
                   <span>{p.name}</span>
                   {p.trophyProperty ? (
                     <span
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
+                        alignSelf: "center",
                         gap: 6,
                         fontFamily: "Inter, sans-serif",
                         fontSize: isMobile ? "0.62rem" : "0.68rem",
@@ -669,7 +670,6 @@ export default function ProjectPage() {
                         padding: isMobile ? "6px 10px" : "7px 12px",
                         lineHeight: 1,
                         whiteSpace: "nowrap",
-                        verticalAlign: "middle",
                       }}
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>

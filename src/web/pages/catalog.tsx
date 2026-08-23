@@ -102,6 +102,7 @@ export default function CatalogPage() {
   );
 
   const [city, setCity]     = useState<typeof CITIES[number]>("All");
+  const [trophyOnly, setTrophyOnly] = useState(false);
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -132,6 +133,8 @@ export default function CatalogPage() {
     // City (canonical English keys on Project.city)
     if (city !== "All") list = list.filter(p => p.city === city);
 
+    if (trophyOnly) list = list.filter(p => p.trophyProperty);
+
     // Search
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -153,11 +156,12 @@ export default function CatalogPage() {
     });
 
     return list;
-  }, [city, sort, search, localizedProjects]);
+  }, [city, trophyOnly, sort, search, localizedProjects]);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = { All: localizedProjects.length };
     localizedProjects.forEach(p => { map[p.city] = (map[p.city] || 0) + 1; });
+    map.trophy = localizedProjects.filter(p => p.trophyProperty).length;
     return map;
   }, [localizedProjects]);
 
@@ -176,8 +180,8 @@ export default function CatalogPage() {
             {t("catalog.title")}
           </h1>
 
-          {/* City tabs */}
-          <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap" }}>
+          {/* City tabs + trophy filter */}
+          <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap", alignItems: "center" }}>
             {CITIES.map(c => (
               <button key={c} onClick={() => setCity(c)} style={{
                 fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
@@ -191,6 +195,45 @@ export default function CatalogPage() {
                 {cityLabels[c]} {counts[c] ? <span style={{ fontWeight: 400 }}>({counts[c]})</span> : ""}
               </button>
             ))}
+            <span
+              aria-hidden
+              style={{
+                width: 1,
+                height: 22,
+                background: "rgba(255,254,249,0.2)",
+                margin: "0 4px",
+                flexShrink: 0,
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setTrophyOnly(v => !v)}
+              aria-pressed={trophyOnly}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                padding: "8px 18px",
+                borderRadius: "2px",
+                cursor: "pointer",
+                border: `1px solid ${trophyOnly ? C.light : "rgba(255,254,249,0.15)"}`,
+                background: trophyOnly ? C.light : "transparent",
+                color: trophyOnly ? C.dark : C.light,
+                transition: "all 0.2s",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M7 4h10v3a5 5 0 0 1-4 4.9V15h3v2H8v-2h3v-3.1A5 5 0 0 1 7 7V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                <path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3M8 19h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              {t("catalog.trophyProperty")}
+              {counts.trophy ? <span style={{ fontWeight: 400 }}>({counts.trophy})</span> : null}
+            </button>
           </div>
         </Container>
       </section>
@@ -229,7 +272,7 @@ export default function CatalogPage() {
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
               <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
-              <button onClick={() => { setCity("All"); setSearch(""); setSort("default"); }}
+              <button onClick={() => { setCity("All"); setTrophyOnly(false); setSearch(""); setSort("default"); }}
                 style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "2px", padding: "12px 28px", cursor: "pointer" }}>
                 {t("cta.resetFilters")}
               </button>
