@@ -41,7 +41,7 @@ export function FloatingConsultation() {
           gap: 10px;
           padding: 14px 20px;
           border: none;
-          border-radius: 2px;
+          border-radius: 10px;
           background: #FFFEF9;
           color: #21141A;
           font-family: Inter, sans-serif;

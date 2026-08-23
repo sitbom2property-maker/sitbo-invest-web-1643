@@ -53,7 +53,7 @@ export default function AdminLogin() {
 					maxWidth: "400px",
 					background: "rgba(255,254,249,0.04)",
 					border: `1px solid ${C.burgundy}`,
-					borderRadius: "2px",
+					borderRadius: "10px",
 					padding: "40px 32px",
 				}}
 			>
@@ -103,7 +103,7 @@ export default function AdminLogin() {
 						padding: "12px 14px",
 						background: "rgba(33,20,26,0.6)",
 						border: `1px solid ${C.burgundy}`,
-						borderRadius: "2px",
+						borderRadius: "8px",
 						color: C.light,
 						fontFamily: "Inter, sans-serif",
 						fontSize: "0.95rem",
@@ -135,7 +135,7 @@ export default function AdminLogin() {
 						background: C.accent,
 						color: C.light,
 						border: "none",
-						borderRadius: "2px",
+						borderRadius: "8px",
 						fontFamily: "Inter, sans-serif",
 						fontSize: "0.9rem",
 						fontWeight: 600,

@@ -50,7 +50,7 @@ function ArticleCard({
         onMouseLeave={() => setHovered(false)}
         style={{
           background: "#FFFEF9",
-          borderRadius: "2px",
+          borderRadius: "10px",
           padding: "clamp(24px,3vw,32px)",
           height: "100%",
           display: "flex",
@@ -75,7 +75,7 @@ function ArticleCard({
             color: C.teal,
             border: `1px solid ${C.teal}`,
             padding: "5px 12px",
-            borderRadius: "2px",
+            borderRadius: "10px",
             marginBottom: "18px",
           }}
         >

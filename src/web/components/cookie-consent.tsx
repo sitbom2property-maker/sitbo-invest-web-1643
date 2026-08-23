@@ -2,32 +2,13 @@ import { useEffect, useState } from "react";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 import { PrivacyModal } from "./PrivacyModal";
-
-type CookiePrefs = {
-  necessary: boolean;
-  performance: boolean;
-  targeting: boolean;
-  functionality: boolean;
-  unclassified: boolean;
-};
-
-const STORAGE_KEY = "sitbo_cookie_consent";
-
-const ALL_ON: CookiePrefs = {
-  necessary: true,
-  performance: true,
-  targeting: true,
-  functionality: true,
-  unclassified: true,
-};
-
-const NECESSARY_ONLY: CookiePrefs = {
-  necessary: true,
-  performance: false,
-  targeting: false,
-  functionality: false,
-  unclassified: false,
-};
+import {
+  CONSENT_ALL_ON as ALL_ON,
+  CONSENT_NECESSARY_ONLY as NECESSARY_ONLY,
+  readConsent,
+  writeConsent,
+  type CookiePrefs,
+} from "../lib/consent";
 
 const CATEGORIES: {
   key: keyof CookiePrefs;
@@ -52,10 +33,6 @@ const CATEGORIES: {
   { key: "unclassified", labelKey: "cookie.unclassified", descKey: "cookie.unclassifiedDesc" },
 ];
 
-function persist(prefs: CookiePrefs) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
-}
-
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
   const [prefs, setPrefs] = useState<CookiePrefs>(NECESSARY_ONLY);
@@ -66,8 +43,7 @@ export function CookieConsent() {
   const { language, setLocale } = useLocale();
 
   useEffect(() => {
-    const consent = localStorage.getItem(STORAGE_KEY);
-    if (!consent) setShowBanner(true);
+    if (!readConsent()) setShowBanner(true);
   }, []);
 
   useEffect(() => {
@@ -93,7 +69,8 @@ export function CookieConsent() {
   }, [showBanner, details]);
 
   const close = (next: CookiePrefs) => {
-    persist(next);
+    // Saving also notifies analytics, which updates Google Consent Mode.
+    writeConsent(next);
     setShowBanner(false);
   };
 
@@ -189,13 +166,11 @@ export function CookieConsent() {
             </div>
 
             <div className="ck-actions">
-              <button type="button" className="ck-btn ck-btn-accept" onClick={() => close(ALL_ON)}>
-                <span className="ck-btn-full">{t("cookie.acceptAll")}</span>
-                <span className="ck-btn-short">{t("cookie.accept")}</span>
+              <button type="button" className="ck-btn" onClick={() => close(ALL_ON)}>
+                {t("cookie.acceptAll")}
               </button>
-              <button type="button" className="ck-btn ck-btn-decline" onClick={() => close(NECESSARY_ONLY)}>
-                <span className="ck-btn-full">{t("cookie.declineAll")}</span>
-                <span className="ck-btn-short">{t("cookie.decline")}</span>
+              <button type="button" className="ck-btn" onClick={() => close(NECESSARY_ONLY)}>
+                {t("cookie.declineAll")}
               </button>
             </div>
           </div>
@@ -301,12 +276,12 @@ const COOKIE_CSS = `
 .ck-lang-menu {
   position: absolute; right: 0; bottom: calc(100% + 8px);
   min-width: 72px; background: #21141A; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 2px; padding: 4px; z-index: 2;
+  border-radius: 8px; padding: 4px; z-index: 2;
 }
 .ck-lang-menu button {
   width: 100%; background: none; border: none; color: #FFFEF9;
   font-size: 11px; font-weight: 700; letter-spacing: .08em;
-  padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 2px;
+  padding: 8px 10px; cursor: pointer; text-align: left; border-radius: 6px;
 }
 .ck-lang-menu button.is-active,
 .ck-lang-menu button:hover { background: rgba(255,255,255,.08); color: #FFFEF9; }
@@ -339,7 +314,7 @@ const COOKIE_CSS = `
 .ck-cat input { position: absolute; opacity: 0; pointer-events: none; }
 .ck-box {
   width: 16px; height: 16px; flex-shrink: 0;
-  border: 1.5px solid #FFFEF9; border-radius: 2px;
+  border: 1.5px solid #FFFEF9; border-radius: 3px;
   display: inline-flex; align-items: center; justify-content: center;
   background: transparent;
 }
@@ -349,13 +324,12 @@ const COOKIE_CSS = `
 .ck-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .ck-btn {
   background: transparent; color: #FFFEF9;
-  border: 1px solid #FFFEF9; border-radius: 2px;
+  border: 1px solid #FFFEF9; border-radius: 10px;
   padding: 10px 22px; cursor: pointer;
   font-size: 11px; font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; white-space: nowrap;
 }
 .ck-btn:hover { background: #FFFEF9; color: #21141A; }
-.ck-btn-short { display: none; }
 .ck-details-toggle {
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 14px; padding: 0;
@@ -378,53 +352,10 @@ const COOKIE_CSS = `
   font-weight: 400; text-transform: none; letter-spacing: 0;
 }
 @media (max-width: 720px) {
-  .ck {
-    max-height: 50vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .ck-inner {
-    padding: 14px clamp(16px, 5vw, 24px) 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 0;
-  }
-  .ck-title { font-size: 15px; font-weight: 600; }
-  .ck-body {
-    margin: 0;
-    max-width: none;
-    font-size: 13px;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .ck-lang,
-  .ck-policy,
-  .ck-cats,
-  .ck-details-toggle,
-  .ck-details { display: none !important; }
-  .ck-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    margin: 0;
-  }
-  .ck-actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .ck-btn {
-    flex: none;
-    width: 100%;
-    text-align: center;
-    padding: 12px 10px;
-  }
-  .ck-btn-full { display: none; }
-  .ck-btn-short { display: inline; }
+  .ck-inner { padding: 16px var(--site-gutter, 20px) 14px; }
+  .ck-row { flex-direction: column; align-items: stretch; }
+  .ck-actions { width: 100%; }
+  .ck-btn { flex: 1; text-align: center; }
+  .ck-title { font-size: 15px; }
 }
 `;

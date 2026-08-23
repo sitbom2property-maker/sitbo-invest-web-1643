@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type FormEvent } from "react";
+import { trackLead } from "../lib/analytics";
 
 const labelStyle: CSSProperties = {
   display: "block",
@@ -54,6 +55,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         }),
       });
       if (res.ok) {
+        trackLead({ source, budget: form.budget });
         setSubmitted(true);
         window.setTimeout(() => onSuccess?.(), 2500);
       } else {

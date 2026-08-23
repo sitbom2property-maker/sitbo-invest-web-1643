@@ -6,6 +6,7 @@ import { projects as catalogProjects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // #21141A  → primary dark
@@ -376,12 +377,12 @@ function FounderNote() {
   const t = useT();
   return (
     <section id="founder-note" className="snap-screen" style={{ background: "#21141A", padding: "10px" }}>
-      <div style={{ background: "#FFFEF9", borderRadius: "2px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "10px", overflow: "hidden", padding: "clamp(48px,8vw,80px) 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
 
           {/* Left: photo */}
           <div className="reveal">
-            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "2px", background: "#FFFEF9" }}>
+            <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: "4px", background: "#FFFEF9" }}>
               <img
                 src="/home/arthur-founder.jpg"
                 alt={t("home.founder.imageAlt")}
@@ -434,7 +435,7 @@ function FounderNote() {
                 background: "#21141A",
                 padding: "14px 28px",
                 textDecoration: "none",
-                borderRadius: "2px",
+                borderRadius: "8px",
                 transition: "background 0.2s, color 0.2s",
               }}
               onMouseEnter={(e) => {
@@ -485,7 +486,7 @@ function Founder() {
       <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
 
       {/* Big frame card */}
-      <div style={{ background: "#FFFEF9", borderRadius: "2px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "hidden", padding: "80px 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "10px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "hidden", padding: "80px 0" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
       <div className="founder-grid">
 
@@ -546,7 +547,7 @@ function Analytics() {
   const t = useT();
   return (
     <section id="analytics" style={{ background: "#21141A", padding: "10px", overflow: "hidden" }}>
-      <div style={{ background: "#FFFEF9", borderRadius: "2px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
+      <div style={{ background: "#FFFEF9", borderRadius: "10px", overflow: "hidden", padding: "clamp(40px,5vw,72px) 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ marginBottom: isMobile ? "20px" : "56px" }}>
           {!isMobile && (
@@ -656,7 +657,7 @@ function Portfolio() {
   return (
     <section id="portfolio" style={{ background: C.darkTeal, padding: "20px 0 20px" }}>
       {/* Big frame card */}
-      <div style={{ margin: "0 10px", background: "#FFFEF9", borderRadius: "2px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "visible" }}>
+      <div style={{ margin: "0 10px", background: "#FFFEF9", borderRadius: "10px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
           <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
@@ -773,7 +774,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
   return (
     <Link href={`/project/${project.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
-        <div className="property-card" style={{ width: cardW, minWidth: cardW, flexShrink: 0, scrollSnapAlign: "start", cursor: "pointer", borderRadius: "2px", overflow: "hidden", position: "relative" }}
+        <div className="property-card" style={{ width: cardW, minWidth: cardW, flexShrink: 0, scrollSnapAlign: "start", cursor: "pointer", borderRadius: "10px", overflow: "hidden", position: "relative" }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
@@ -789,7 +790,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
           <div style={{
             position: "absolute", top: "14px", left: "14px",
             background: "rgba(255,254,249,0.12)", backdropFilter: "blur(6px)",
-            border: "1px solid rgba(255,254,249,0.2)", borderRadius: "2px",
+            border: "1px solid rgba(255,254,249,0.2)", borderRadius: "6px",
             padding: "4px 10px", fontSize: "0.58rem", fontFamily: "Inter, sans-serif",
             color: "#FFFEF9", letterSpacing: "0.08em", textTransform: "uppercase",
             opacity: hovered ? 1 : 0, transition: "opacity 0.3s",
@@ -932,7 +933,7 @@ function DiscoveryTour() {
 
 
 
-      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFEF9", borderRadius: "2px", paddingTop: isMobile ? "40px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "40px" : "clamp(60px,7vw,100px)" }}>
+      <div style={{ width: "100%", position: "relative", zIndex: 1, background: "#FFFEF9", borderRadius: "10px", paddingTop: isMobile ? "40px" : "clamp(60px,7vw,100px)", paddingBottom: isMobile ? "40px" : "clamp(60px,7vw,100px)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
 
           {/* HEADER: centered */}
@@ -994,7 +995,7 @@ function DiscoveryTour() {
                       strokeWidth: 1,
                     })
                   ) : (
-                    <div style={{ width: "52px", height: "52px", borderRadius: "2px", background: "rgba(140,178,192,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "52px", height: "52px", borderRadius: "10px", background: "rgba(140,178,192,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {React.cloneElement(item.svg, { width: 28, height: 28 })}
                     </div>
                   )}
@@ -1025,7 +1026,7 @@ function DiscoveryTour() {
             flexWrap: "wrap", gap: "20px",
             background: "rgba(140,178,192,0.08)",
             border: "1px solid rgba(140,178,192,0.1)",
-            borderRadius: "2px", padding: "24px 32px",
+            borderRadius: "10px", padding: "24px 32px",
             opacity: visible ? 1 : 0,
             transition: "opacity 0.9s ease 0.4s",
           }}>
@@ -1040,7 +1041,7 @@ function DiscoveryTour() {
             </div>
             <a href="#contact" style={{
               display: "inline-block", padding: "14px 32px", flexShrink: 0,
-              background: "#703C54", borderRadius: "2px", textDecoration: "none",
+              background: "#703C54", borderRadius: "6px", textDecoration: "none",
               fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700,
               color: "#FFFEF9", letterSpacing: "0.1em", textTransform: "uppercase",
               transition: "opacity 0.2s, transform 0.2s",
@@ -1087,7 +1088,7 @@ function DiscoveryTour() {
               "/home/card1.png",
               "/home/card2.png",
             ].map((src, i) => (
-              <div key={i} style={{ width: "280px", height: "280px", flexShrink: 0, overflow: "hidden", borderRadius: "2px" }}>
+              <div key={i} style={{ width: "280px", height: "280px", flexShrink: 0, overflow: "hidden", borderRadius: "10px" }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
@@ -1214,11 +1215,11 @@ function Payment() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginBottom: "48px" }}>
           {cards.map((card) => (
             <div key={card.title} className="reveal"
-              style={{ background: "#FFFEF9", borderRadius: "2px", padding: "56px 32px", border: "1px solid rgba(140,178,192,0.1)", transition: "transform 0.3s, box-shadow 0.3s", cursor: "default" }}
+              style={{ background: "#FFFEF9", borderRadius: "10px", padding: "56px 32px", border: "1px solid rgba(140,178,192,0.1)", transition: "transform 0.3s, box-shadow 0.3s", cursor: "default" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.3)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; }}
             >
-              <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.1)", borderRadius: "2px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
+              <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
                 {card.icon}
               </div>
               <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
@@ -1231,8 +1232,8 @@ function Payment() {
         {/* Three features — in boxes */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px", borderTop: "1px solid rgba(140,178,192,0.1)", paddingTop: "40px" }}>
           {features.map((f) => (
-            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", padding: "28px 24px", background: "rgba(255,254,249,0.07)", borderRadius: "2px", border: "1px solid rgba(255,254,249,0.1)", textAlign: "center", alignItems: "center" }}>
-              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.1)", borderRadius: "2px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div key={f.title} className="reveal" style={{ display: "flex", flexDirection: "column", gap: "18px", padding: "28px 24px", background: "rgba(255,254,249,0.07)", borderRadius: "10px", border: "1px solid rgba(255,254,249,0.1)", textAlign: "center", alignItems: "center" }}>
+              <div style={{ width: "48px", height: "48px", background: "rgba(140,178,192,0.1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {f.icon}
               </div>
               <div>
@@ -1338,11 +1339,11 @@ function Calculator() {
         </div>
 
         {/* Mode toggle */}
-        <div style={{ display: isMobile ? "flex" : "inline-flex", width: isMobile ? "100%" : "auto", background: "rgba(255,254,249,0.07)", borderRadius: "2px", padding: "4px", marginBottom: "32px", border: "1px solid rgba(255,254,249,0.1)" }}>
+        <div style={{ display: isMobile ? "flex" : "inline-flex", width: isMobile ? "100%" : "auto", background: "rgba(255,254,249,0.07)", borderRadius: "10px", padding: "4px", marginBottom: "32px", border: "1px solid rgba(255,254,249,0.1)" }}>
           {(["installment", "mortgage"] as const).map((m) => (
             <button key={m} onClick={() => setMode(m)} style={{
               flex: isMobile ? 1 : undefined,
-              padding: "9px 22px", borderRadius: "2px", border: "none", cursor: "pointer",
+              padding: "9px 22px", borderRadius: "7px", border: "none", cursor: "pointer",
               fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", letterSpacing: "0.04em", fontWeight: 600,
               transition: "all 0.2s",
               background: mode === m ? "#703C54" : "transparent",
@@ -1357,7 +1358,7 @@ function Calculator() {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 360px", gap: "32px", alignItems: "start" }}>
 
           {/* ── LEFT: Inputs ── */}
-          <div style={{ background: "#FFFEF9", borderRadius: "2px", padding: "36px", border: "1px solid rgba(33,20,26,0.12)" }}>
+          <div style={{ background: "#FFFEF9", borderRadius: "10px", padding: "36px", border: "1px solid rgba(33,20,26,0.12)" }}>
 
             {mode === "installment" ? (
               <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -1443,7 +1444,7 @@ function Calculator() {
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
             {/* Result card */}
-            <div style={{ background: "#FFFEF9", borderRadius: "2px", border: "1px solid rgba(33,20,26,0.15)", padding: "28px" }}>
+            <div style={{ background: "#FFFEF9", borderRadius: "10px", border: "1px solid rgba(33,20,26,0.15)", padding: "28px" }}>
 
               {mode === "installment" ? (
                 <>
@@ -1480,7 +1481,7 @@ function Calculator() {
             </div>
 
             {/* ROI Preview */}
-            <div style={{ background: "#FFFEF9", borderRadius: "2px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
+            <div style={{ background: "#FFFEF9", borderRadius: "10px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px" }}>9–14%</p>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
@@ -1491,7 +1492,7 @@ function Calculator() {
             {/* CTA */}
             <a href="#contact" style={{
               display: "block", textAlign: "center", padding: "14px 20px",
-              background: "#703C54", borderRadius: "2px", textDecoration: "none",
+              background: "#703C54", borderRadius: "10px", textDecoration: "none",
               fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700,
               color: "#FFFEF9", letterSpacing: "0.04em", transition: "opacity 0.2s",
             }}
@@ -1530,8 +1531,10 @@ function Contact() {
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
         }),
       });
-      if (res.ok) setSubmitted(true);
-      else setError(t("home.contact.errorGeneric"));
+      if (res.ok) {
+        trackLead({ source: "Homepage Contact" });
+        setSubmitted(true);
+      } else setError(t("home.contact.errorGeneric"));
     } catch { setError(t("home.contact.errorNetwork")); }
     finally { setLoading(false); }
   };

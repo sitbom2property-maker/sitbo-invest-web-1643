@@ -150,7 +150,7 @@ export default function HistoryPage() {
           border: 1px solid rgba(255,254,249,0.16);
           color: ${C.light};
           background: transparent;
-          border-radius: 2px;
+          border-radius: 10px;
         }
 
         .ht-region-chip--live {
@@ -181,7 +181,7 @@ export default function HistoryPage() {
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(255,254,249,0.1);
-          border-radius: 2px;
+          border-radius: 10px;
         }
 
         .ht-sticky strong {
@@ -267,7 +267,7 @@ export default function HistoryPage() {
         .ht-item__card {
           padding: clamp(22px, 4vw, 30px);
           border: 1px solid rgba(255,254,249,0.1);
-          border-radius: 2px;
+          border-radius: 10px;
           background: rgba(255,254,249,0.03);
           transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease;
         }

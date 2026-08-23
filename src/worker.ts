@@ -83,6 +83,20 @@ function applySeoMeta(response: Response, pathname: string, origin: string): Res
     .transform(response);
 }
 
+function withHtmlNoCache(response: Response): Response {
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("text/html")) return response;
+  const headers = new Headers(response.headers);
+  headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
+  headers.set("Pragma", "no-cache");
+  headers.set("Expires", "0");
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 export default {
   async fetch(request: Request, env: any, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -98,7 +112,7 @@ export default {
 
     const contentType = assetResponse.headers.get("content-type") || "";
     if (contentType.includes("text/html")) {
-      return applySeoMeta(assetResponse, url.pathname, url.origin);
+      return withHtmlNoCache(applySeoMeta(assetResponse, url.pathname, url.origin));
     }
 
     return assetResponse;

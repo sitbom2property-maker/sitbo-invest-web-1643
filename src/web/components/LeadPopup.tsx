@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
+import { trackLead } from "../lib/analytics";
 
 /**
  * Soft lead capture:
@@ -45,7 +46,7 @@ const inputStyle: CSSProperties = {
   boxSizing: "border-box",
   background: "rgba(255,254,249,0.05)",
   border: "1px solid rgba(140,178,192,0.1)",
-  borderRadius: 2,
+  borderRadius: 8,
   color: "#FFFEF9",
   fontFamily: "Inter, sans-serif",
   fontSize: 14,
@@ -149,6 +150,7 @@ export function LeadPopup() {
         setError(t("popup.errorGeneric"));
         return;
       }
+      trackLead({ source: "Website popup" });
       setSubmitted(true);
       writeState({ submitted: true });
       window.setTimeout(() => setOpen(false), 2600);
@@ -187,7 +189,7 @@ export function LeadPopup() {
           max-width: 420px;
           background: #21141A;
           border: 1px solid rgba(140,178,192,0.1);
-          border-radius: 2px;
+          border-radius: 10px;
           padding: 28px 24px 22px;
           box-shadow: 0 18px 48px rgba(0,0,0,0.35);
           animation: leadPopupRise 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -311,7 +313,7 @@ export function LeadPopup() {
                 style={{
                   marginTop: 4,
                   border: "none",
-                  borderRadius: 2,
+                  borderRadius: 6,
                   background: "#FFFEF9",
                   color: "#21141A",
                   fontFamily: "Inter, sans-serif",
