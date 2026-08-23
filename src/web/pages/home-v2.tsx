@@ -536,8 +536,10 @@ function Feedback() {
           >
             {FEEDBACK.map((f) => (
               <figure key={f.quoteKey} className="rd-fb-card rv">
-                <blockquote>“{t(f.quoteKey)}”</blockquote>
-                <figcaption>— {t(f.authorKey)}</figcaption>
+                <div className="rd-fb-copy">
+                  <blockquote>“{t(f.quoteKey)}”</blockquote>
+                  <figcaption>— {t(f.authorKey)}</figcaption>
+                </div>
                 <div className="rd-fb-tags">
                   {f.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
@@ -1001,23 +1003,33 @@ html, body { background: #21141A; }
   --fb-size: clamp(240px, calc((100% - 32px) / 2.65), 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
-  width: var(--fb-size); min-height: calc(var(--fb-size) + 28px);
+  width: var(--fb-size);
+  min-height: calc(var(--fb-size) + 120px);
   scroll-snap-align: start;
   margin: 0; box-sizing: border-box;
   background: #412835; border-radius: 2px;
-  padding: clamp(26px, 2.6vw, 36px);
+  padding: clamp(28px, 2.8vw, 40px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
   pointer-events: none;
 }
+.rd-fb-copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
 .rd-fb-card blockquote {
-  font-family: var(--body); font-weight: 700; font-size: 16px;
-  line-height: 1.4; margin: 0 0 22px; color: #FFFEF9;
+  font-family: var(--body); font-weight: 400; font-size: 16px;
+  line-height: 1.45; margin: 0 0 18px; color: #FFFEF9;
+  text-align: left;
 }
 .rd-fb-card figcaption {
   font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px);
-  color: #FFFEF9; margin: 0 0 12px; line-height: 1.4;
+  font-weight: 400; color: #FFFEF9; margin: 0; line-height: 1.4;
+  text-align: left;
 }
-.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: auto; padding-top: 24px; }
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: auto; padding-top: 28px; flex-shrink: 0; }
 .rd-fb-tags span {
   font-family: var(--body); font-size: 12px; line-height: 1.35;
   padding: 0; color: rgba(255,254,249,.78);
