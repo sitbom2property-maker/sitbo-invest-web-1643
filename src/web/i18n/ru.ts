@@ -583,6 +583,13 @@ const ru: Record<MessageKey, string> = {
   "project.cta.body":
     "Подготовим персональное предложение с подбором планировок, графиком платежей и прогнозом доходности.",
   "project.otherProjects": "Другие проекты",
+  "project.gallery.showAll": "Все фото",
+  "project.gallery.close": "Закрыть галерею",
+  "project.gallery.prev": "Предыдущее фото",
+  "project.gallery.next": "Следующее фото",
+  "project.gallery.counter": "{current} / {total}",
+  "project.gallery.lightbox": "Галерея фотографий",
+  "project.gallery.openPhoto": "Открыть фото на весь экран",
   "project.modal.layoutPreview": "Предпросмотр планировки",
   "project.offerModal.title": "Запросить детали",
   "project.offerModal.body": "Расскажите об интересе к {project}. Мы подготовим персональное предложение.",

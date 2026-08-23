@@ -7,6 +7,7 @@ import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
 import { RequestModal } from "../components/RequestModal";
 import { ProjectFeatures } from "../components/ProjectFeatures";
+import { PropertyGallery } from "../components/PropertyGallery";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
@@ -80,57 +81,6 @@ function Eyebrow({ children, light }: { children: React.ReactNode; light?: boole
 }
 function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
-}
-
-// ─── Gallery ─────────────────────────────────────────────────────────────────
-function Gallery({ photos, name }: { photos: string[]; name: string }) {
-  const [active, setActive] = useState(0);
-  const isMobile = useIsMobile();
-
-  return (<>
-
-    <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "8px", height: isMobile ? "auto" : "70vh", maxHeight: "600px" }}>
-{/* Main image */}
-      <div style={{ flex: "1 1 0", position: "relative", overflow: "hidden", borderRadius: "2px", background: C.dark, minHeight: isMobile ? "280px" : "auto" }}>
-        <img
-          key={active}
-          src={photos[active] || photos[0]}
-          alt={name}
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", animation: "fadeIn 0.3s ease" }}
-        />
-{/* Navigation arrows */}
-          {photos.length > 1 && (
-          <>
-            <button onClick={() => setActive(i => (i - 1 + photos.length) % photos.length)}
-              style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
-              ‹
-            </button>
-            <button onClick={() => setActive(i => (i + 1) % photos.length)}
-              style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(33,20,26,0.55)", border: "1px solid rgba(255,254,249,0.2)", color: C.light, fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
-              ›
-            </button>
-          </>
-        )}
-{/* Counter */}
-        <div style={{ position: "absolute", bottom: "14px", right: "14px", background: "rgba(33,20,26,0.6)", backdropFilter: "blur(6px)", borderRadius: "2px", padding: "4px 12px", fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light }}>
-          {active + 1} / {photos.length}
-        </div>
-      </div>
-
-{/* Thumbnails column */}
-        {photos.length > 1 && (
-        <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: "8px", width: isMobile ? "100%" : "140px", flexShrink: 0, overflowX: isMobile ? "auto" : "visible", overflowY: isMobile ? "visible" : "auto" }}>
-          {photos.map((src, i) => (
-            <div key={i} onClick={() => setActive(i)}
-              style={{ flexShrink: 0, width: isMobile ? "80px" : "100%", height: isMobile ? "56px" : "calc((560px - 16px) / 3)", borderRadius: "2px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === active ? C.teal : "transparent"}`, transition: "border-color 0.2s", background: C.dark }}>
-              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: i === active ? 1 : 0.6, transition: "opacity 0.2s" }} />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  
-  </>);
 }
 
 // ─── Layout carousel ──────────────────────────────────────────────────────────
@@ -475,7 +425,7 @@ export default function ProjectPage() {
 {/* ── GALLERY — Full width ── */}
       <section style={{ paddingTop: 60 }}>
         <Container>
-          <Gallery photos={p.photos} name={p.name} />
+          <PropertyGallery photos={p.photos} name={p.name} />
         </Container>
       </section>
 
