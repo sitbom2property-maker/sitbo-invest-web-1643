@@ -75,6 +75,8 @@ export type Project = {
     linkLabel: string;
     popupItems: string[];
   };
+  /** Show a “Trophy property” badge next to the project name. */
+  trophyProperty?: boolean;
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -658,6 +660,7 @@ export const projects: Project[] = [
     buildings: "2",
     finishing: "White frame, Turnkey, Designer",
     installment: "30% / 70%",
+    trophyProperty: true,
     features: [
       "20,000 m² private park",
       "Region's largest casino",

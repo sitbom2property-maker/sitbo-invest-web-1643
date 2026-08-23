@@ -650,8 +650,35 @@ export default function ProjectPage() {
 
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "48px" : "72px" }}>
-                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px" }}>
-{p.name}
+                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px 12px" }}>
+                  <span>{p.name}</span>
+                  {p.trophyProperty ? (
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: isMobile ? "0.62rem" : "0.68rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        color: C.light,
+                        background: C.dark,
+                        borderRadius: 2,
+                        padding: isMobile ? "6px 10px" : "7px 12px",
+                        lineHeight: 1,
+                        whiteSpace: "nowrap",
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
+                        <path d="M7 4h10v3a5 5 0 0 1-4 4.9V15h3v2H8v-2h3v-3.1A5 5 0 0 1 7 7V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                        <path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3M8 19h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                      </svg>
+                      {t("project.trophyProperty")}
+                    </span>
+                  ) : null}
                 </h2>
 
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>

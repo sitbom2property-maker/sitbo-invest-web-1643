@@ -593,6 +593,7 @@ const en = {
   "project.payment.note": "Full payment and installment terms are individual and negotiable.",
   "project.ownershipBenefits": "Ownership benefits",
   "project.ownershipBenefits.close": "Close",
+  "project.trophyProperty": "Trophy property",
   "project.interested": "Interested?",
   "project.awards": "Awards",
   "project.offerTitle": "Get a personal offer",

@@ -576,6 +576,7 @@ const ru: Record<MessageKey, string> = {
   "project.payment.note": "Условия полной оплаты и рассрочки индивидуальны и обсуждаемы.",
   "project.ownershipBenefits": "Преимущества владения",
   "project.ownershipBenefits.close": "Закрыть",
+  "project.trophyProperty": "Trophy property",
   "project.interested": "Интересно?",
   "project.awards": "Награды",
   "project.offerTitle": "Получить персональное предложение",
