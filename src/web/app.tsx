@@ -26,6 +26,7 @@ import { LeadPopup } from "./components/LeadPopup";
 import { FloatingConsultation } from "./components/FloatingConsultation";
 import { ScrollToHash } from "./components/scroll-to-hash";
 import { ScrollRestore } from "./components/scroll-restore";
+import { PageMeta } from "./components/PageMeta";
 
 function AppFooter() {
 	const [location] = useLocation();
@@ -52,6 +53,7 @@ function App() {
 		<Provider>
 			<ScrollRestore />
 			<ScrollToHash />
+			<PageMeta />
 			<Nav />
 			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>
 				<Switch>
