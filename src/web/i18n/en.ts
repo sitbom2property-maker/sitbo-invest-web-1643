@@ -521,9 +521,9 @@ const en = {
 
   // Catalog
   "catalog.title":
-    "Curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan",
+    "Handpicked residential and investment properties across Batumi and Georgia",
   "catalog.subtitle":
-    "curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan.",
+    "Handpicked residential and investment properties across Batumi and Georgia.",
   "catalog.eyebrow": "Georgia Real Estate",
   "catalog.sort": "Sort",
   "catalog.sortDefault": "Featured",

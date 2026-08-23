@@ -174,14 +174,24 @@ export default function CatalogPage() {
   return (
     <div style={{ background: C.light, minHeight: "100vh" }}>
       {/* ── HERO ── */}
-      <section style={{ background: C.dark }}>
-        <Container style={{ paddingTop: "56px", paddingBottom: "56px" }}>
-          <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.6vw,3.2rem)", fontWeight: 400, color: C.light, lineHeight: 1.15, margin: 0, maxWidth: "920px" }}>
+      <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
+        <Container>
+          <h1
+            style={{
+              fontFamily: "Coolvetica, Inter, sans-serif",
+              fontSize: "clamp(1.35rem, 2.2vw, 1.9rem)",
+              fontWeight: 400,
+              color: C.light,
+              lineHeight: 1.3,
+              margin: "0 0 clamp(36px, 4vw, 56px)",
+              maxWidth: "760px",
+            }}
+          >
             {t("catalog.title")}
           </h1>
 
           {/* City tabs + trophy filter */}
-          <div style={{ display: "flex", gap: "8px", marginTop: "40px", flexWrap: "wrap", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "8px", marginTop: 0, flexWrap: "wrap", alignItems: "center" }}>
             {CITIES.map(c => (
               <button key={c} onClick={() => setCity(c)} style={{
                 fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
