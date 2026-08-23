@@ -82,20 +82,6 @@ function Divider() {
   return <div style={{ height: "1px", background: "rgba(33,20,26,0.08)", margin: "0" }} />;
 }
 
-function youtubeId(url: string): string | null {
-  const m = url.match(/(?:youtu\.be\/|v=)([A-Za-z0-9_-]{6,})/);
-  return m?.[1] ?? null;
-}
-
-function pickVideoUrl(p: Project, language: string): string | undefined {
-  const urls = p.videoUrls;
-  if (!urls) return undefined;
-  const lang = language.toLowerCase();
-  if (lang.startsWith("ru")) return urls.ru || urls.en;
-  if (lang.startsWith("tr")) return urls.tr || urls.en;
-  return urls.en || urls.ru;
-}
-
 // ─── Gallery ─────────────────────────────────────────────────────────────────
 function Gallery({ photos, name }: { photos: string[]; name: string }) {
   const [active, setActive] = useState(0);
@@ -493,30 +479,6 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-      {(() => {
-        const video = pickVideoUrl(p, language);
-        const id = video ? youtubeId(video) : null;
-        if (!id) return null;
-        return (
-          <section style={{ padding: isMobile ? "28px 0 0" : "40px 0 0" }}>
-            <Container>
-              <div className="pr-reveal">
-                <Eyebrow>{t("project.video")}</Eyebrow>
-                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, borderRadius: "2px", overflow: "hidden", background: C.dark }}>
-                  <iframe
-                    title={`${p.name} video`}
-                    src={`https://www.youtube.com/embed/${id}`}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </Container>
-          </section>
-        );
-      })()}
-
 {/* ── MAIN CONTENT ── */}
       <section style={{ padding: isMobile ? "36px 0 0" : "64px 0 0" }}>
         <Container>
@@ -633,30 +595,6 @@ export default function ProjectPage() {
                   </div>
                 </div>
               </div>
-
-              {p.guaranteedYield && (
-                <>
-                  <Divider />
-                  <div className="pr-reveal" style={{ margin: "40px 0 0" }}>
-                    <Eyebrow>{t("project.income.title")}</Eyebrow>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, lineHeight: 1.7, margin: "0 0 16px" }}>
-                      {t("project.income.body")}
-                    </p>
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "12px" }}>
-                      {[
-                        { label: t("project.guaranteedYield"), value: p.guaranteedYield },
-                        { label: t("project.realYield"), value: p.realYield ?? p.yield },
-                        { label: t("project.buyback"), value: p.buyback ?? "—" },
-                      ].map((row) => (
-                        <div key={row.label} style={{ background: C.dark, borderRadius: "2px", padding: isMobile ? "18px 16px" : "22px 20px" }}>
-                          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: "0 0 8px" }}>{row.label}</p>
-                          <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.2rem" : "1.35rem", fontWeight: 700, color: C.light, margin: 0, lineHeight: 1.3 }}>{row.value}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
 
             </Col>
 
