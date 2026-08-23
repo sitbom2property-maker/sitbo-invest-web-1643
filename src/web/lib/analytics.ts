@@ -5,7 +5,7 @@ import { CONSENT_CHANGE_EVENT, readConsent, type CookiePrefs } from "./consent";
  * environment with `VITE_GA_MEASUREMENT_ID` (empty value disables tracking).
  */
 export const GA_MEASUREMENT_ID = (
-  import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-17F8GJ7K0P"
+  import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-BTHRL2KV6K"
 ).trim();
 
 /** `?ga_debug=1` forces tracking on (incl. localhost) and streams to GA DebugView. */
@@ -44,13 +44,18 @@ export function initAnalytics(): void {
 
   applyConsent(readConsent(), "default");
 
-  window.gtag("js", new Date());
-  // No `send_page_view: false` here: GA4 enhanced measurement already reports
-  // both page loads and wouter's history-based SPA navigations, so sending our
-  // own page_view events would double-count them.
-  window.gtag("config", GA_MEASUREMENT_ID, isDebugRequested() ? { debug_mode: true } : {});
-
-  loadTagScript();
+  // The official snippet in index.html already loads gtag.js and calls config.
+  // Do not add a second tag — Google rejects pages with more than one.
+  const htmlTag = document.querySelector(
+    `script[src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`,
+  );
+  if (!htmlTag) {
+    window.gtag("js", new Date());
+    window.gtag("config", GA_MEASUREMENT_ID, isDebugRequested() ? { debug_mode: true } : {});
+    loadTagScript();
+  } else if (isDebugRequested()) {
+    window.gtag("config", GA_MEASUREMENT_ID, { debug_mode: true });
+  }
 
   window.addEventListener(CONSENT_CHANGE_EVENT, (event) => {
     applyConsent((event as CustomEvent<CookiePrefs>).detail ?? readConsent(), "update");
