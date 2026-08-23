@@ -95,6 +95,13 @@ function Gallery({
   const isMobile = useIsMobile();
   const [lightbox, setLightbox] = useState<number | null>(null);
   const thumbsRef = useRef<HTMLDivElement>(null);
+  const thumbDragRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startScroll: number;
+    moved: boolean;
+  } | null>(null);
+  const suppressThumbClickRef = useRef(false);
   const list = photos.length > 0 ? photos : [];
   const reel = (preview && preview.length > 0 ? preview : list).slice(0, 5);
   const hero = reel[0];
@@ -123,8 +130,77 @@ function Gallery({
 
   useEffect(() => {
     if (lightbox === null || !thumbsRef.current) return;
-    const active = thumbsRef.current.querySelector<HTMLElement>(`[data-thumb-index="${lightbox}"]`);
-    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    const rail = thumbsRef.current;
+    const active = rail.querySelector<HTMLElement>(`[data-thumb-index="${lightbox}"]`);
+    if (!active) return;
+    const left = active.offsetLeft - (rail.clientWidth - active.offsetWidth) / 2;
+    const max = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    rail.scrollTo({ left: Math.min(max, Math.max(0, left)), behavior: "smooth" });
+  }, [lightbox]);
+
+  // Desktop: drag-to-scroll + map vertical wheel to horizontal scroll.
+  useEffect(() => {
+    if (lightbox === null) return;
+    const rail = thumbsRef.current;
+    if (!rail) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      if (max <= 0) return;
+      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (dx === 0) return;
+      e.preventDefault();
+      rail.scrollLeft += dx;
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
+      if (e.button !== 0) return;
+      thumbDragRef.current = {
+        pointerId: e.pointerId,
+        startX: e.clientX,
+        startScroll: rail.scrollLeft,
+        moved: false,
+      };
+      rail.setPointerCapture(e.pointerId);
+      rail.style.cursor = "grabbing";
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const drag = thumbDragRef.current;
+      if (!drag || drag.pointerId !== e.pointerId) return;
+      const dx = e.clientX - drag.startX;
+      if (Math.abs(dx) > 4) drag.moved = true;
+      if (!drag.moved) return;
+      e.preventDefault();
+      rail.scrollLeft = drag.startScroll - dx;
+    };
+
+    const endDrag = (e: PointerEvent) => {
+      const drag = thumbDragRef.current;
+      if (!drag || drag.pointerId !== e.pointerId) return;
+      if (drag.moved) suppressThumbClickRef.current = true;
+      thumbDragRef.current = null;
+      try {
+        rail.releasePointerCapture(e.pointerId);
+      } catch {
+        /* already released */
+      }
+      rail.style.cursor = "grab";
+    };
+
+    rail.addEventListener("wheel", onWheel, { passive: false });
+    rail.addEventListener("pointerdown", onPointerDown);
+    rail.addEventListener("pointermove", onPointerMove);
+    rail.addEventListener("pointerup", endDrag);
+    rail.addEventListener("pointercancel", endDrag);
+    return () => {
+      rail.removeEventListener("wheel", onWheel);
+      rail.removeEventListener("pointerdown", onPointerDown);
+      rail.removeEventListener("pointermove", onPointerMove);
+      rail.removeEventListener("pointerup", endDrag);
+      rail.removeEventListener("pointercancel", endDrag);
+    };
   }, [lightbox]);
 
   if (!hero) return null;
@@ -410,15 +486,20 @@ function Gallery({
               className="pr-lightbox-thumbs"
               style={{
                 flexShrink: 0,
+                width: "100%",
+                maxWidth: "100%",
+                minWidth: 0,
                 display: "flex",
                 gap: 8,
                 overflowX: "auto",
                 overflowY: "hidden",
                 WebkitOverflowScrolling: "touch",
                 overscrollBehaviorX: "contain",
+                touchAction: "pan-x",
                 scrollSnapType: "x proximity",
                 padding: isMobile ? "0 16px 20px" : "0 28px 28px",
                 cursor: "grab",
+                userSelect: "none",
               }}
             >
               {list.map((src, i) => (
@@ -426,7 +507,15 @@ function Gallery({
                   key={src + i}
                   type="button"
                   data-thumb-index={i}
-                  onClick={() => setLightbox(i)}
+                  onClick={(e) => {
+                    if (suppressThumbClickRef.current) {
+                      suppressThumbClickRef.current = false;
+                      e.preventDefault();
+                      e.stopPropagation();
+                      return;
+                    }
+                    setLightbox(i);
+                  }}
                   style={{
                     flex: "0 0 auto",
                     width: isMobile ? 64 : 78,
@@ -435,13 +524,14 @@ function Gallery({
                     borderRadius: 2,
                     border: i === lightbox ? `1.5px solid ${C.light}` : "1.5px solid transparent",
                     overflow: "hidden",
-                    cursor: "pointer",
+                    cursor: "inherit",
                     opacity: i === lightbox ? 1 : 0.55,
                     background: C.dark,
                     scrollSnapAlign: "center",
+                    touchAction: "pan-x",
                   }}
                 >
-                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }} />
+                  <img src={src} alt="" draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }} />
                 </button>
               ))}
             </div>
@@ -566,16 +656,17 @@ export default function ProjectPage() {
         }
         .pr-lightbox-thumbs {
           scrollbar-width: thin;
-          scrollbar-color: rgba(255,254,249,0.35) transparent;
+          scrollbar-color: rgba(255,254,249,0.45) rgba(255,254,249,0.08);
         }
         .pr-lightbox-thumbs::-webkit-scrollbar {
-          height: 6px;
+          height: 8px;
         }
         .pr-lightbox-thumbs::-webkit-scrollbar-track {
-          background: transparent;
+          background: rgba(255,254,249,0.08);
+          border-radius: 999px;
         }
         .pr-lightbox-thumbs::-webkit-scrollbar-thumb {
-          background: rgba(255,254,249,0.35);
+          background: rgba(255,254,249,0.45);
           border-radius: 999px;
         }
       `}</style>
