@@ -29,6 +29,7 @@ export type ProjectLocaleFields = Partial<
     | "districtTitle"
     | "districtBody"
     | "districtBody2"
+    | "ownershipBenefits"
   >
 >;
 
@@ -251,6 +252,19 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     ],
     materials:
       "Высококачественный монолитный бетон, остекление от пола до потолка, швейцарские стандарты строительства.",
+    ownershipBenefits: {
+      title: "Silk Rewards",
+      body: "При покупке квартиры в Silk Towers вы автоматически получаете статус Silk Rewards Gold.\n\nSilk Rewards — программа лояльности с реальными повседневными привилегиями во всех заведениях Silk Hospitality.",
+      linkLabel: "Ваши привилегии здесь",
+      popupItems: [
+        "10% кэшбэк с каждого платежа",
+        "Начисление и списание баллов во всех локациях",
+        "Бронирование отелей и ресторанов по лучшим доступным тарифам",
+        "Эксклюзивные предложения и персональные привилегии",
+        "Обмен баллов на услуги (проживание, рестораны, доступ в бассейн и другое)",
+        "Бонусы и специальные подарки для участников программы",
+      ],
+    },
     floorPlanLabels: [],
     pricePerSqm: "Скоро",
     priceFrom: "От $120,000",

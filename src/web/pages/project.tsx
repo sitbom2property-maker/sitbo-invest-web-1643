@@ -470,6 +470,7 @@ export default function ProjectPage() {
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [showCtaForm, setShowCtaForm] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [ownershipOpen, setOwnershipOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
@@ -488,11 +489,26 @@ export default function ProjectPage() {
     const t1 = window.setTimeout(toTop, 100);
     const t2 = window.setTimeout(toTop, 320);
     setFeaturesOpen(false);
+    setOwnershipOpen(false);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
     };
   }, [params.slug]);
+
+  useEffect(() => {
+    if (!ownershipOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOwnershipOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [ownershipOpen]);
 
   if (!project) {
     return (<>
@@ -785,6 +801,57 @@ export default function ProjectPage() {
                 isMobile={isMobile}
               />
               </div>
+
+{/* Ownership benefits — optional (e.g. Silk Rewards) */}
+              {p.ownershipBenefits ? (
+              <>
+              <Divider />
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                  {t("project.ownershipBenefits")}
+                </h3>
+                <h4 style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 700, color: C.dark, lineHeight: 1.3, margin: "0 0 14px" }}>
+                  {p.ownershipBenefits.title}
+                </h4>
+                {p.ownershipBenefits.body.split(/\n\n+/).map((para, i) => (
+                  <p
+                    key={i}
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: isMobile ? "0.95rem" : "1.05rem",
+                      color: C.mutedDark,
+                      lineHeight: 1.7,
+                      margin: "0 0 14px",
+                      maxWidth: 640,
+                    }}
+                  >
+                    {para}
+                  </p>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setOwnershipOpen(true)}
+                  style={{
+                    display: "inline",
+                    marginTop: 4,
+                    padding: 0,
+                    border: "none",
+                    background: "none",
+                    color: "#2B6CB0",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: isMobile ? "0.95rem" : "1.05rem",
+                    fontWeight: 500,
+                    lineHeight: 1.5,
+                    textDecoration: "underline",
+                    textUnderlineOffset: 3,
+                    cursor: "pointer",
+                  }}
+                >
+                  {p.ownershipBenefits.linkLabel}
+                </button>
+              </div>
+              </>
+              ) : null}
 
 {/* Payment — optional, depends on developer terms */}
               {paymentPlans.length > 0 ? (
@@ -1138,6 +1205,116 @@ export default function ProjectPage() {
         title={t("services.cta.button")}
         topic={project.name}
       />
+
+      {ownershipOpen && p.ownershipBenefits ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={p.ownershipBenefits.title}
+          onClick={() => setOwnershipOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1300,
+            background: "rgba(33,20,26,0.55)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: isMobile ? 20 : 32,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: 520,
+              maxHeight: "min(80vh, 640px)",
+              overflowY: "auto",
+              background: C.light,
+              borderRadius: 2,
+              padding: isMobile ? "28px 22px 24px" : "36px 32px 28px",
+              boxShadow: "0 24px 64px rgba(33,20,26,0.28)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 18 }}>
+              <h3
+                style={{
+                  fontFamily: "Coolvetica, Inter, sans-serif",
+                  fontSize: isMobile ? "1.35rem" : "1.55rem",
+                  fontWeight: 500,
+                  color: C.dark,
+                  margin: 0,
+                  lineHeight: 1.25,
+                }}
+              >
+                {p.ownershipBenefits.title}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setOwnershipOpen(false)}
+                aria-label={t("project.ownershipBenefits.close")}
+                style={{
+                  width: 36,
+                  height: 36,
+                  border: "none",
+                  background: "transparent",
+                  color: C.dark,
+                  cursor: "pointer",
+                  flexShrink: 0,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 0,
+                  opacity: 0.7,
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "grid",
+                gap: 14,
+              }}
+            >
+              {p.ownershipBenefits.popupItems.map((item) => (
+                <li
+                  key={item}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "18px 1fr",
+                    gap: 12,
+                    alignItems: "start",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: isMobile ? "0.92rem" : "0.98rem",
+                    lineHeight: 1.5,
+                    color: C.dark,
+                  }}
+                >
+                  <span
+                    aria-hidden
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: "50%",
+                      background: "#2B6CB0",
+                      marginTop: 8,
+                      display: "block",
+                    }}
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
     </div>
   </>);
 }

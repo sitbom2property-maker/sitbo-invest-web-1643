@@ -65,6 +65,16 @@ export type Project = {
   constructionProgress?: ConstructionProgress;
   /** Optional award badges shown under the sidebar offer card. */
   awards?: { src: string; alt: string }[];
+  /**
+   * Optional ownership / loyalty benefits block (e.g. Silk Rewards).
+   * When set, shown as “Ownership benefits” with a popup for the full list.
+   */
+  ownershipBenefits?: {
+    title: string;
+    body: string;
+    linkLabel: string;
+    popupItems: string[];
+  };
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -656,6 +666,19 @@ export const projects: Project[] = [
       "Swiss-grade construction",
     ],
     materials: "High-grade monolithic concrete, floor-to-ceiling glazing, Swiss engineering standards.",
+    ownershipBenefits: {
+      title: "Silk Rewards",
+      body: "When you purchase an apartment at Silk Towers, you are automatically granted Silk Rewards Gold Status.\n\nSilk Rewards is a loyalty app that offers real, everyday benefits across all Silk Hospitality venues.",
+      linkLabel: "Your benefits here",
+      popupItems: [
+        "10% cashback on every payment",
+        "Earn and redeem points across all locations",
+        "Book hotels and restaurants at the best available rates",
+        "Access exclusive offers and personalized benefits",
+        "Redeem points for a variety of services (hotel stays, restaurants, pool access, and more)",
+        "Enjoy bonuses and special gifts as a program member",
+      ],
+    },
     photos: ["/projects/silk/for-sale/card.png", "/home/hero2.png", "/home/interior-bedroom.png"],
     cardImage: "/projects/silk/for-sale/card.png",
     lat: 41.6568,
