@@ -1,8 +1,10 @@
+import { wyndhamProjects } from "./wyndham-projects";
+
 export type Project = {
   name: string;
   slug: string;
   tag: string;
-  city: "Batumi" | "Tbilisi" | "Chakvi / Gonio" | "Makhinjauri" | "Shekvetili";
+  city: "Batumi" | "Tbilisi" | "Chakvi / Gonio" | "Makhinjauri" | "Shekvetili" | "Pasanauri";
   address: string;
   seaDistance: string;
   seaMeters: string;
@@ -45,9 +47,18 @@ export type Project = {
   districtBody?: string;
   districtBody2?: string;
   apartmentsKey?: "piazza" | "parkline";
+  /** Contractual guaranteed hotel-management yield (Wyndham / branded residences). */
+  guaranteedYield?: string;
+  /** Expected / real hotel-management yield quoted by the developer. */
+  realYield?: string;
+  /** Buy-back / repurchase terms. */
+  buyback?: string;
+  /** YouTube videos about the project, keyed by language. */
+  videoUrls?: { ru?: string; en?: string; tr?: string };
 };
 
 export const projects: Project[] = [
+  ...wyndhamProjects,
   {
     name: "Piazza Residence",
     slug: "piazza-residence",
