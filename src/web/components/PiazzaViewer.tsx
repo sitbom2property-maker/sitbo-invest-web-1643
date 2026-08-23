@@ -93,6 +93,11 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
             lang={ru ? "ru" : "en"}
             hash={tourHash}
             title={`${projectName} — Flat.show`}
+            fallbackSrc={
+              ru
+                ? "https://pro-api.flat.show/api/complex/website/index_html?clientPageUrl=https%3A%2F%2Fcentralmg.ge%2Fru%2Fpiazza%2Fapartments#/"
+                : "https://pro-api.flat.show/api/complex/website/index_html?clientPageUrl=https%3A%2F%2Fwww.visarteam.tech%2Finteractive-tools%2Fpiazza#/"
+            }
           />
         </div>
       )}

@@ -7,12 +7,10 @@ export function isFlatshowLeadMessage(data: unknown): boolean {
   return msg.source === FLATSHOW_LEAD_SOURCE && msg.event === FLATSHOW_LEAD_EVENT;
 }
 
-export function flatshowEmbedSrc(
-  key: "piazza" | "parkline",
-  lang: "en" | "ru",
-  hash = "#/",
-) {
-  const parent = encodeURIComponent(window.location.href);
-  const suffix = hash.startsWith("#") ? hash : `#${hash}`;
-  return `/api/flatshow/embed/${key}?lang=${lang}&parent=${parent}${suffix}`;
+/** Fetch URL for the proxied widget HTML (XHR/fetch, not a document navigation). */
+export function flatshowEmbedFetchUrl(key: "piazza" | "parkline", lang: "en" | "ru") {
+  const parent = encodeURIComponent(
+    `${window.location.origin}${window.location.pathname}${window.location.search}`,
+  );
+  return `/api/flatshow/embed/${key}?lang=${lang}&parent=${parent}`;
 }

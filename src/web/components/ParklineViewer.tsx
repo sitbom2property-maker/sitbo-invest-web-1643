@@ -128,6 +128,7 @@ export function ParklineViewer({
               projectKey="parkline"
               lang={ru ? "ru" : "en"}
               title={`${projectName} 3D`}
+              fallbackSrc="https://flatshow.property/ru/Parkline#/"
             />
           )}
           <button type="button" className="pk-open" onClick={openFullscreen}>

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { flatshowEmbedSrc, isFlatshowLeadMessage } from "./flatshow";
+import { flatshowEmbedFetchUrl, isFlatshowLeadMessage } from "./flatshow";
 
 describe("isFlatshowLeadMessage", () => {
   test("accepts the intercept payload", () => {
@@ -13,15 +13,20 @@ describe("isFlatshowLeadMessage", () => {
   });
 });
 
-describe("flatshowEmbedSrc", () => {
-  test("keeps the widget hash after the query string", () => {
-    (globalThis as { window?: { location: { href: string } } }).window = {
-      location: { href: "https://sitboinvest.ge/project/piazza-residence" },
+describe("flatshowEmbedFetchUrl", () => {
+  test("does not put the page hash into the query string", () => {
+    (globalThis as { window?: { location: { origin: string; pathname: string; search: string } } }).window = {
+      location: {
+        origin: "https://sitboinvest.ge",
+        pathname: "/project/piazza-residence",
+        search: "",
+      },
     };
-    const src = flatshowEmbedSrc("piazza", "ru", "#/floors");
-    expect(src.startsWith("/api/flatshow/embed/piazza?")).toBe(true);
-    expect(src).toContain("lang=ru");
-    expect(src).toContain("parent=" + encodeURIComponent("https://sitboinvest.ge/project/piazza-residence"));
-    expect(src.endsWith("#/floors")).toBe(true);
+    const src = flatshowEmbedFetchUrl("piazza", "ru");
+    expect(src).toBe(
+      "/api/flatshow/embed/piazza?lang=ru&parent=" +
+        encodeURIComponent("https://sitboinvest.ge/project/piazza-residence"),
+    );
+    expect(src.includes("#")).toBe(false);
   });
 });
