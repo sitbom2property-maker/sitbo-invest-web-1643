@@ -309,6 +309,19 @@ body.has-cookie-banner {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  input, textarea, select, [contenteditable="true"], .allow-content-select {
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+  }
+  img, picture, svg, video, canvas {
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Coolvetica', Inter, sans-serif;

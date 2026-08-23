@@ -9,6 +9,7 @@ import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
+import { allowShareCopy } from "../lib/content-protection";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -713,6 +714,7 @@ export default function ProjectPage() {
               type="button"
               onClick={async () => {
                 const url = typeof window !== "undefined" ? window.location.href : "";
+                allowShareCopy();
                 try {
                   if (navigator.clipboard?.writeText) {
                     await navigator.clipboard.writeText(url);
@@ -730,6 +732,7 @@ export default function ProjectPage() {
                   /* ignore */
                 }
               }}
+              data-share-link="true"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

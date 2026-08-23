@@ -27,6 +27,7 @@ import { FloatingConsultation } from "./components/FloatingConsultation";
 import { ScrollToHash } from "./components/scroll-to-hash";
 import { ScrollRestore } from "./components/scroll-restore";
 import { PageMeta } from "./components/PageMeta";
+import { ContentProtection } from "./components/ContentProtection";
 
 function AppFooter() {
 	const [location] = useLocation();
@@ -54,6 +55,7 @@ function App() {
 			<ScrollRestore />
 			<ScrollToHash />
 			<PageMeta />
+			<ContentProtection />
 			<Nav />
 			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>
 				<Switch>
