@@ -592,7 +592,7 @@ const ru: Record<MessageKey, string> = {
   "project.materials": "Материалы и строительство",
   "project.payment": "Оплата и рассрочка",
   "project.payment.down": "Первый взнос",
-  "project.payment.construction": "В период строительства",
+  "project.payment.construction": "В период строительства на 36 месяцев",
   "project.payment.handover": "При получении ключей",
   "project.payment.note": "Условия полной оплаты и рассрочки индивидуальны и обсуждаемы.",
   "project.ownershipBenefits": "Преимущества владения",

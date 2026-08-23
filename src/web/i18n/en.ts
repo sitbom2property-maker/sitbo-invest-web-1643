@@ -609,7 +609,7 @@ const en = {
   "project.materials": "Materials & Construction",
   "project.payment": "Payment and Installment",
   "project.payment.down": "Down Payment",
-  "project.payment.construction": "During Construction",
+  "project.payment.construction": "During construction for 36 months",
   "project.payment.handover": "On key handover",
   "project.payment.note": "Full payment and installment terms are individual and negotiable.",
   "project.ownershipBenefits": "Ownership benefits",
