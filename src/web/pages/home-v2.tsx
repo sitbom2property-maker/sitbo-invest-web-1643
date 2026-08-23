@@ -338,7 +338,7 @@ const PROJECTS = [
   { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-park-hero.jpg", href: "/project/artex-parkline" },
   { name: "Rogantini Swiss Village", img: "/projects/rogantini/for-sale/ext-hero.jpg", href: "/project/rogantini-swiss-village" },
   { name: "Silk Towers", img: "/projects/silk/for-sale/card.jpg", href: "/project/silk-towers" },
-  { name: "Shekvetili Forest - Beach", img: "/projects/shekvetili/for-sale/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
+  { name: "Shekvetili Forest - Beach", img: "", href: "/project/shekvetili-forest-beach" },
   { name: "Krtsanisi Resort Residence", img: "/projects/krtsanisi/for-sale/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
   { name: "Vake Sky Tower", img: "/projects/vake-sky/for-sale/ext-01.jpg", href: "/project/vake-sky-tower" },
 ];
@@ -383,7 +383,9 @@ function SelectedProjects() {
                   aria-label={p.name}
                 >
                   <div className="rd-proj-img">
-                    <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
+                    {p.img ? (
+                      <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
+                    ) : null}
                   </div>
                   <span className="rd-proj-name">{p.name}</span>
                 </Link>

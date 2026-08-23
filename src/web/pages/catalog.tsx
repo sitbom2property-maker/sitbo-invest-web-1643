@@ -55,9 +55,11 @@ function CatalogCard({ p }: { p: Project }) {
           }}
         >
           {/* Image */}
-          <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
-            <img src={p.cardImage} alt={p.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }} />
+          <div style={{ position: "relative", height: "240px", overflow: "hidden", background: C.dark }}>
+            {p.cardImage ? (
+              <img src={p.cardImage} alt={p.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }} />
+            ) : null}
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
 
             {/* Name over image */}

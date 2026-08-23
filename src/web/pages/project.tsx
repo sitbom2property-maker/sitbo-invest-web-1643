@@ -1371,10 +1371,12 @@ export default function ProjectPage() {
 {[prev, next].map((proj) => (
               <Link key={proj.slug} href={`/project/${proj.slug}`}>
                 <a style={{ display: "block", textDecoration: "none", borderRadius: "2px", overflow: "hidden", position: "relative", height: "200px", background: C.dark }}>
-                  <img src={proj.cardImage} alt={proj.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s" }}
-                    onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
-                    onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-                  />
+                  {proj.cardImage ? (
+                    <img src={proj.cardImage} alt={proj.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s" }}
+                      onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                      onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                    />
+                  ) : null}
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{proj.tag}</p>
