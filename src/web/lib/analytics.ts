@@ -5,7 +5,7 @@ import { CONSENT_CHANGE_EVENT, readConsent, type CookiePrefs } from "./consent";
  * environment with `VITE_GA_MEASUREMENT_ID` (empty value disables tracking).
  */
 export const GA_MEASUREMENT_ID = (
-  import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-17F8GJ7K0P"
+  import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-BTHRL2KV6K"
 ).trim();
 
 /** `?ga_debug=1` forces tracking on (incl. localhost) and streams to GA DebugView. */
