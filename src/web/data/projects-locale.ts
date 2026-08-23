@@ -1,6 +1,5 @@
 import { formatInstallmentLine, remainingInstallmentMonths } from "./installment";
 import type { Project } from "./projects";
-import { wyndhamRuBySlug } from "./wyndham-projects-locale";
 
 export type ProjectLocaleFields = Partial<
   Pick<
@@ -29,7 +28,6 @@ export type ProjectLocaleFields = Partial<
     | "districtTitle"
     | "districtBody"
     | "districtBody2"
-    | "buyback"
   >
 >;
 
@@ -42,7 +40,6 @@ function localizeCompletion(value: string): string {
 }
 
 export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
-  ...wyndhamRuBySlug,
   "piazza-residence": {
     tag: "Старый Батуми · Исторический центр",
     address: "ул. Вахтанга Горгасали 59–61, Старый Батуми",
@@ -382,7 +379,6 @@ const CITY_RU: Record<string, string> = {
   "Chakvi / Gonio": "Чакви / Гонио",
   Makhinjauri: "Махинджаури",
   Shekvetili: "Шекветили",
-  Pasanauri: "Пасанаури",
 };
 
 export function localizeCityLabel(city: string, language: string): string {

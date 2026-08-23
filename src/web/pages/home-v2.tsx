@@ -334,9 +334,6 @@ function useDragRail(cardSelector: string, gap = 12) {
 // ─── Selected projects ────────────────────────────────────────────────────────
 
 const PROJECTS = [
-  { name: "Wyndham Grand Aqua", img: "/projects/wyndham-aqua/for-sale/ext-pool.jpg", href: "/project/wyndham-grand-aqua" },
-  { name: "Wyndham Grand Sky Castle", img: "/projects/wyndham-sky-castle/for-sale/ext-sunset.jpg", href: "/project/wyndham-grand-sky-castle" },
-  { name: "Wyndham Garden Pasanauri", img: "/projects/wyndham-garden-pasanauri/for-sale/ext-01.jpg", href: "/project/wyndham-garden-pasanauri" },
   { name: "Piazza Residence", img: "/projects/piazza/for-sale/exterior-tower.jpg", href: "/project/piazza-residence" },
   { name: "Krtsanisi Resort Residence", img: "/projects/krtsanisi/for-sale/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
   { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-01.jpg", href: "/project/artex-parkline" },
