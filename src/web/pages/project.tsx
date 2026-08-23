@@ -163,7 +163,7 @@ function Gallery({
         startScroll: rail.scrollLeft,
         moved: false,
       };
-      rail.setPointerCapture(e.pointerId);
+      // Do not capture yet — capturing immediately steals click from thumb buttons.
       rail.style.cursor = "grabbing";
     };
 
@@ -171,8 +171,15 @@ function Gallery({
       const drag = thumbDragRef.current;
       if (!drag || drag.pointerId !== e.pointerId) return;
       const dx = e.clientX - drag.startX;
-      if (Math.abs(dx) > 4) drag.moved = true;
-      if (!drag.moved) return;
+      if (Math.abs(dx) <= 4) return;
+      if (!drag.moved) {
+        drag.moved = true;
+        try {
+          rail.setPointerCapture(e.pointerId);
+        } catch {
+          /* ignore */
+        }
+      }
       e.preventDefault();
       rail.scrollLeft = drag.startScroll - dx;
     };
@@ -183,7 +190,7 @@ function Gallery({
       if (drag.moved) suppressThumbClickRef.current = true;
       thumbDragRef.current = null;
       try {
-        rail.releasePointerCapture(e.pointerId);
+        if (rail.hasPointerCapture?.(e.pointerId)) rail.releasePointerCapture(e.pointerId);
       } catch {
         /* already released */
       }
@@ -509,12 +516,18 @@ function Gallery({
                   type="button"
                   data-thumb-index={i}
                   onClick={(e) => {
+                    e.stopPropagation();
                     if (suppressThumbClickRef.current) {
                       suppressThumbClickRef.current = false;
                       e.preventDefault();
-                      e.stopPropagation();
                       return;
                     }
+                    setLightbox(i);
+                  }}
+                  onPointerUp={(e) => {
+                    // Touch / delayed-click fallback if click is swallowed by drag handlers.
+                    if (e.pointerType === "mouse") return;
+                    if (suppressThumbClickRef.current || thumbDragRef.current?.moved) return;
                     setLightbox(i);
                   }}
                   style={{

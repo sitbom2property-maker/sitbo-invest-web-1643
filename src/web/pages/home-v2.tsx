@@ -335,7 +335,7 @@ function useDragRail(cardSelector: string, gap = 12) {
 
 const PROJECTS = [
   { name: "Piazza Residence", img: "/projects/piazza/for-sale/exterior-tower.jpg", href: "/project/piazza-residence" },
-  { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-01.jpg", href: "/project/artex-parkline" },
+  { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-park-hero.jpg", href: "/project/artex-parkline" },
   { name: "Rogantini Swiss Village", img: "/projects/rogantini/for-sale/ext-hero.jpg", href: "/project/rogantini-swiss-village" },
   { name: "Silk Towers", img: "/projects/silk/for-sale/card.jpg", href: "/project/silk-towers" },
   { name: "Shekvetili Forest - Beach", img: "/projects/shekvetili/for-sale/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
