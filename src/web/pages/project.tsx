@@ -1,4 +1,4 @@
-import { useState, useEffect, type CSSProperties } from "react";
+import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Link, useParams } from "wouter";
 import { projects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
@@ -94,6 +94,7 @@ function Gallery({
   const t = useT();
   const isMobile = useIsMobile();
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const thumbsRef = useRef<HTMLDivElement>(null);
   const list = photos.length > 0 ? photos : [];
   const reel = (preview && preview.length > 0 ? preview : list).slice(0, 5);
   const hero = reel[0];
@@ -119,6 +120,12 @@ function Gallery({
       window.removeEventListener("keydown", onKey);
     };
   }, [lightbox, list.length]);
+
+  useEffect(() => {
+    if (lightbox === null || !thumbsRef.current) return;
+    const active = thumbsRef.current.querySelector<HTMLElement>(`[data-thumb-index="${lightbox}"]`);
+    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [lightbox]);
 
   if (!hero) return null;
 
@@ -398,20 +405,27 @@ function Gallery({
 
           {list.length > 1 ? (
             <div
+              ref={thumbsRef}
               onClick={(e) => e.stopPropagation()}
+              className="pr-lightbox-thumbs"
               style={{
                 flexShrink: 0,
                 display: "flex",
                 gap: 8,
                 overflowX: "auto",
+                overflowY: "hidden",
+                WebkitOverflowScrolling: "touch",
+                overscrollBehaviorX: "contain",
+                scrollSnapType: "x proximity",
                 padding: isMobile ? "0 16px 20px" : "0 28px 28px",
-                scrollbarWidth: "none",
+                cursor: "grab",
               }}
             >
               {list.map((src, i) => (
                 <button
                   key={src + i}
                   type="button"
+                  data-thumb-index={i}
                   onClick={() => setLightbox(i)}
                   style={{
                     flex: "0 0 auto",
@@ -424,9 +438,10 @@ function Gallery({
                     cursor: "pointer",
                     opacity: i === lightbox ? 1 : 0.55,
                     background: C.dark,
+                    scrollSnapAlign: "center",
                   }}
                 >
-                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }} />
                 </button>
               ))}
             </div>
@@ -549,6 +564,20 @@ export default function ProjectPage() {
         .project-page p, .project-page h2, .project-page h3 {
           overflow-wrap: break-word;
         }
+        .pr-lightbox-thumbs {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,254,249,0.35) transparent;
+        }
+        .pr-lightbox-thumbs::-webkit-scrollbar {
+          height: 6px;
+        }
+        .pr-lightbox-thumbs::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .pr-lightbox-thumbs::-webkit-scrollbar-thumb {
+          background: rgba(255,254,249,0.35);
+          border-radius: 999px;
+        }
       `}</style>
 
 {/* ── GALLERY — Full width ── */}
@@ -560,7 +589,7 @@ export default function ProjectPage() {
               alignItems: "center",
               justifyContent: "space-between",
               gap: 12,
-              marginBottom: isMobile ? 14 : 18,
+              marginBottom: 10,
             }}
           >
             <Link href="/catalog">
