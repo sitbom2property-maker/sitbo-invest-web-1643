@@ -1,8 +1,5 @@
 import { wyndhamProjects } from "./wyndham-projects";
 
-/** Overlapping catalog chips — a project can be trophy and guaranteed-income. */
-export type CatalogAllocation = "trophy" | "guaranteed-income" | "residence";
-
 export type Project = {
   name: string;
   slug: string;
@@ -58,15 +55,7 @@ export type Project = {
   buyback?: string;
   /** YouTube videos about the project, keyed by language. */
   videoUrls?: { ru?: string; en?: string; tr?: string };
-  /** Catalog allocation chips. Defaults to residence, or guaranteed-income when yield is contractual. */
-  allocations?: CatalogAllocation[];
 };
-
-export function projectAllocations(p: Project): CatalogAllocation[] {
-  if (p.allocations && p.allocations.length > 0) return p.allocations;
-  if (p.guaranteedYield) return ["guaranteed-income"];
-  return ["residence"];
-}
 
 export const projects: Project[] = [
   ...wyndhamProjects,
