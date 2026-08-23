@@ -655,19 +655,12 @@ export default function ProjectPage() {
           overflow-wrap: break-word;
         }
         .pr-lightbox-thumbs {
-          scrollbar-width: thin;
-          scrollbar-color: rgba(255,254,249,0.45) rgba(255,254,249,0.08);
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
         .pr-lightbox-thumbs::-webkit-scrollbar {
-          height: 8px;
-        }
-        .pr-lightbox-thumbs::-webkit-scrollbar-track {
-          background: rgba(255,254,249,0.08);
-          border-radius: 999px;
-        }
-        .pr-lightbox-thumbs::-webkit-scrollbar-thumb {
-          background: rgba(255,254,249,0.45);
-          border-radius: 999px;
+          display: none;
+          height: 0;
         }
       `}</style>
 
