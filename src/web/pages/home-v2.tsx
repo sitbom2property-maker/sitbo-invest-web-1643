@@ -1038,6 +1038,27 @@ html, body { background: #21141A; }
   line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
 }
 
+/* what to buy — bridge before projects */
+.rd-what {
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: #21141A;
+  color: #FFFEF9;
+}
+.rd-what-inner {
+  max-width: 720px;
+  display: grid;
+  gap: 16px;
+}
+.rd-what-inner .rd-h2 {
+  color: #FFFEF9;
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 48px);
+}
+.rd-what-inner .rd-lead {
+  color: rgba(255,254,249,.82);
+  max-width: 560px;
+}
+
 /* why + stats — perfect squares; dark page section #21141A / #FFFEF9 */
 .rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); background: #21141A; color: #FFFEF9; }
 .rd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
