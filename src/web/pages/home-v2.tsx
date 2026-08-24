@@ -148,16 +148,9 @@ function WhyGeorgia() {
   return (
     <section id="why-georgia" className="rd-why">
       <div className="rd-wrap">
-        <div className="rd-split rv">
-          <h2 className="rd-h2">{t("v2.why.title")}</h2>
-          <div className="rd-why-copy">
-            <p className="rd-why-lead">{t("v2.why.bodyLead")}</p>
-            <p className="rd-lead">{t("v2.why.body")}</p>
-            <AppLink href="/invest" className="rd-why-link">
-              {t("v2.why.cta")}
-            </AppLink>
-          </div>
-        </div>
+        <h2 className="rd-h2 rv" style={{ marginBottom: "clamp(28px, 4vw, 48px)", maxWidth: 720 }}>
+          {t("v2.why.title")}
+        </h2>
 
         <div className="rd-stats rv">
           {STATS.map((s, i) =>
@@ -175,6 +168,27 @@ function WhyGeorgia() {
               </div>
             ),
           )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhatToBuy() {
+  const t = useT();
+  return (
+    <section className="rd-what" id="what-to-buy">
+      <div className="rd-wrap">
+        <div className="rd-what-inner rv">
+          <h2 className="rd-h2">
+            {t("v2.why.bodyLead")}
+            <br />
+            {t("v2.what.question")}
+          </h2>
+          <p className="rd-lead">{t("v2.why.body")}</p>
+          <AppLink href="/invest" className="rd-why-link">
+            {t("v2.why.cta")}
+          </AppLink>
         </div>
       </div>
     </section>
@@ -1359,6 +1373,7 @@ export default function HomeV2() {
         <Faq />
       </div>
       <WhyGeorgia />
+      <WhatToBuy />
       <div className="rd-canvas">
         <SelectedProjects />
       </div>

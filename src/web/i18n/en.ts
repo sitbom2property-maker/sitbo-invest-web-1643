@@ -104,8 +104,9 @@ const en = {
 
   "v2.why.title": "Why investors choose Georgia?",
   "v2.why.bodyLead": "Georgia is easy to enter.",
+  "v2.what.question": "The real question is what to buy.",
   "v2.why.body":
-    "The real question is what to buy. Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
+    "Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
   "v2.why.cta": "Read more about Georgia →",
   "v2.stats.tax": "Purchase Tax",
   "v2.stats.taxNote": "On residential property",
