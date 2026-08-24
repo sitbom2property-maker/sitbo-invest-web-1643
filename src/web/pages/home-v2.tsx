@@ -1087,7 +1087,7 @@ html, body { background: #21141A; }
 }
 .rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(920px + var(--rd-inset)); }
 .rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; color: #FFFEF9; }
-.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
+.rd-news-inner > p { font-family: var(--body); font-size: clamp(13px, 1.15vw, 16px); line-height: 1.4; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
 .rd-news-row {
   display: flex; align-items: flex-end; gap: 16px;
   border-bottom: 1px solid rgba(255,254,249,.4); padding-bottom: 8px;
