@@ -70,9 +70,10 @@ const RULES: Rule[] = [
   { category: "indoor", icon: "gym", test: /gym|fitness|тренаж/i },
   { category: "indoor", icon: "cinema", test: /cinema|кинотеатр|poker/i },
   { category: "indoor", icon: "elevator", test: /elevator|lift|лифт/i },
-  { category: "indoor", icon: "office", test: /office|business centre|business center|conference|конференц|cowork/i },
+  { category: "indoor", icon: "office", test: /office|business lounge|business centre|business center|conference|конференц|бизнес.?лаунж|cowork/i },
   { category: "indoor", icon: "hotel", test: /concierge|reception|hotel|branded|hospitality|casino|manager|service 24|сервис 24/i },
-  { category: "outdoor", icon: "shop", test: /retail promenade|fine dining|променад|ритейл/i },
+  { category: "outdoor", icon: "shop", test: /retail promenade|fine dining|bars?\s*&\s*clubs|бары|променад|ритейл/i },
+  { category: "outdoor", icon: "court", test: /cycling|велодорож|bike path|cycle path/i },
   { category: "indoor", icon: "shop", test: /pharmacy|аптек|restaurant|café|cafe|retail|store|fashion|food/i },
   { category: "indoor", icon: "security", test: /security|gated|24\/7|охран/i },
 ];
