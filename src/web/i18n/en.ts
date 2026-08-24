@@ -845,25 +845,40 @@ const en = {
   "invest.process6.desc":
     "Furnishing, listing and day-to-day management — monthly reports, rent collection and maintenance handled for you.",
   "invest.faq.eyebrow": "FAQ",
-  "invest.faq.title": "Common questions.",
+  "invest.faq.title": "Common questions about buying property in Georgia.",
   "invest.faq.q1": "Can foreigners buy property in Georgia?",
   "invest.faq.a1":
-    "Yes. Foreign nationals have the same property rights as Georgian citizens — buy, own and transfer with no ownership restrictions on residential property.",
-  "invest.faq.q2": "Is rental income taxed?",
+    "Yes. Foreigners can buy apartments, houses and commercial property in Georgia with a relatively simple ownership registration process. However, there are restrictions on agricultural land, and every deal should still be checked properly: ownership, land status, developer reputation, contract terms and hidden risks. 0% tax on buying property.",
+  "invest.faq.q2": "Can foreigners get a mortgage in Georgia?",
   "invest.faq.a2":
-    "Rental income is taxed at a 5% flat rate in Georgia when declared under the simplified regime (otherwise 20%). One of the lowest rates in Europe.",
-  "invest.faq.q3": "What is the minimum budget to invest?",
+    "In some cases, yes. Foreigners may be able to get mortgage financing in Georgia, but approval depends on the bank, the client’s documents, income, residency status, property type and risk profile. Mortgage conditions for foreigners are usually more individual, so it is better to check options before choosing the property.",
+  "invest.faq.q3": "Is rental income taxed in Georgia?",
   "invest.faq.a3":
-    "Workable investments start from about $60,000–$80,000 for a studio. Residency-qualifying purchases require $150,000+.",
-  "invest.faq.q4": "Do I need to be in Georgia to buy?",
+    "Yes, rental income is taxable in Georgia. The exact tax treatment depends on how the rental is structured: long-term rent, short-term rental, individual ownership, company ownership or commercial activity. Before buying for rental income, it is important to understand not only the expected yield, but also taxes, management fees, maintenance, seasonality and vacancy periods.",
+  "invest.faq.q4": "What budget makes sense for buying property in Georgia?",
   "invest.faq.a4":
-    "No. I can run the full process remotely with a notarised power of attorney. Many clients close before their first visit.",
-  "invest.faq.q5": "What rental yield should I expect?",
+    "It depends on your goal. A smaller budget can be enough for an entry-level apartment, but a serious investment strategy usually requires looking beyond the lowest price. Location, building quality, liquidity, rental demand and exit potential matter more than just the purchase price. For most clients, I first recommend defining the goal: relocation, capital preservation, rental income or future resale.",
+  "invest.faq.q5": "Can I buy property remotely?",
   "invest.faq.a5":
-    "Well-located, professionally managed units in Batumi typically yield 9–12.2% a year. Turnkey finishes in strong locations can sit at the top of that range.",
-  "invest.faq.q6": "How long does the purchase take?",
+    "Yes, remote purchase is possible in Georgia, often through a power of attorney and proper legal representation. But buying remotely without independent due diligence is risky. Photos, renders and sales presentations do not show the full picture. Before sending a deposit, it is important to check the property, developer, documents, location, real market price and legal structure.",
+  "invest.faq.q6": "What rental yield should I realistically expect?",
   "invest.faq.a6":
-    "From signed offer to registered title: usually 1–3 business days. Selection and due diligence typically take 2–4 weeks.",
+    "It depends on the city, location, building, management, season, purchase price and rental strategy. In Batumi, short-term rental can look attractive on paper, but seasonality, competition, management fees, maintenance and vacancy periods can reduce the real return. I prefer to calculate several scenarios: optimistic, realistic and conservative.",
+  "invest.faq.q7": "How long does the purchase process take?",
+  "invest.faq.a7":
+    "The technical registration process in Georgia can be very fast, sometimes within a few business days if everything is ready. But a safe purchase takes longer because the most important part happens before signing: checking the property, seller, developer, documents, price, risks and contract terms. Fast registration does not mean you should make a fast decision.",
+  "invest.faq.q8": "What are the main risks when buying property in Georgia?",
+  "invest.faq.a8":
+    "The main risks are not always visible in the listing. They can include: unclear land or ownership status; weak developer reputation; unrealistic rental income promises; overpriced properties; poor construction quality; bad location for your goal; unclear management terms; future liquidity problems; contract details that buyers often miss. This is why independent review before purchase is important.",
+  "invest.faq.q9": "What extra costs should I expect besides the property price?",
+  "invest.faq.a9":
+    "Besides the property price, you may need to consider legal support, registration, bank fees, renovation, furniture, property management, maintenance fees, taxes and possible agency or advisory costs. For investment properties, it is especially important to calculate the full cost, not just the purchase price.",
+  "invest.faq.q10": "Is Batumi or Tbilisi better for investment?",
+  "invest.faq.a10":
+    "There is no universal answer. Batumi is often attractive for seaside property, tourism and short-term rental, but it is more seasonal and can be sensitive to oversupply. Tbilisi is more stable for long-term rental, business activity and year-round demand, but entry prices and neighborhood logic are different. The right choice depends on your budget, risk tolerance, rental strategy and exit plan. Currently, there is a shortage of 1–2‑bedroom apartments with high‑quality renovations in Batumi; they are rented out immediately for long‑term use.",
+  "invest.faq.q11": "Is Georgia a good place to preserve capital?",
+  "invest.faq.a11":
+    "Georgia can be interesting for capital preservation because of its simple property registration, relatively open market, strategic location and demand from locals, expats and investors. But capital preservation does not mean buying any apartment. The key is choosing the right property, location, legal structure and entry price. A bad object in a good country is still a bad investment.",
   "invest.cta.eyebrow": "Ready to invest?",
   "invest.cta.title": "Your first property in Georgia starts with one call.",
   "invest.cta.body":
@@ -875,7 +890,7 @@ const en = {
   "services.hero.title": "I protect your capital first,",
   "services.hero.titleEm": "then multiply it.",
   "services.hero.body":
-    "When you work with me, you get my full attention — not a call centre and not a sales floor.",
+    "Clients come to me not only because I know the market, but because I tell the truth, protect their interests and stay involved when the situation becomes difficult. You can find real reviews and recommendations from people I have worked with in public sources. For me, reputation is more important than a quick deal.",
   "services.item1.title": "Due Diligence",
   "services.item1.desc":
     "Before you buy, I run a full-layer check on the property, the developer, and the legal title. You get a written conclusion from me — not a verbal opinion.",

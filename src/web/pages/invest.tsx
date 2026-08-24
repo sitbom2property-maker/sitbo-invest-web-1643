@@ -73,6 +73,11 @@ const FAQS = [
   { qKey: "invest.faq.q4" as MessageKey, aKey: "invest.faq.a4" as MessageKey },
   { qKey: "invest.faq.q5" as MessageKey, aKey: "invest.faq.a5" as MessageKey },
   { qKey: "invest.faq.q6" as MessageKey, aKey: "invest.faq.a6" as MessageKey },
+  { qKey: "invest.faq.q7" as MessageKey, aKey: "invest.faq.a7" as MessageKey },
+  { qKey: "invest.faq.q8" as MessageKey, aKey: "invest.faq.a8" as MessageKey },
+  { qKey: "invest.faq.q9" as MessageKey, aKey: "invest.faq.a9" as MessageKey },
+  { qKey: "invest.faq.q10" as MessageKey, aKey: "invest.faq.a10" as MessageKey },
+  { qKey: "invest.faq.q11" as MessageKey, aKey: "invest.faq.a11" as MessageKey },
 ];
 
 const PRICE_BARS = [
