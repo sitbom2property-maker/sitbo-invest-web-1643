@@ -150,7 +150,13 @@ function WhyGeorgia() {
       <div className="rd-wrap">
         <div className="rd-split rv">
           <h2 className="rd-h2">{t("v2.why.title")}</h2>
-          <p className="rd-lead">{t("v2.why.body")}</p>
+          <div className="rd-why-copy">
+            <p className="rd-why-lead">{t("v2.why.bodyLead")}</p>
+            <p className="rd-lead">{t("v2.why.body")}</p>
+            <AppLink href="/invest" className="rd-why-link">
+              {t("v2.why.cta")}
+            </AppLink>
+          </div>
         </div>
 
         <div className="rd-stats rv">
@@ -919,6 +925,21 @@ html, body { background: #21141A; }
 .rd-split .rd-lead {
   max-width: 420px; justify-self: end; text-align: right;
 }
+.rd-why-copy {
+  max-width: 440px; justify-self: end; text-align: left;
+  display: grid; gap: 14px;
+}
+.rd-why-lead {
+  font-family: var(--body); font-size: clamp(18px, 1.5vw, 22px); font-weight: 600;
+  line-height: 1.35; color: #FFFEF9; margin: 0;
+}
+.rd-why-copy .rd-lead { max-width: none; justify-self: start; text-align: left; color: rgba(255,254,249,.82); }
+.rd-why-link {
+  display: inline-flex; align-items: center; margin-top: 4px;
+  font-family: var(--body); font-size: 15px; font-weight: 500;
+  color: #FFFEF9; text-decoration: underline; text-underline-offset: 3px;
+}
+.rd-why-link:hover { opacity: .85; }
 
 /* hero — app shell already offsets fixed nav; center photo between nav and fold */
 .rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
@@ -1285,6 +1306,7 @@ html, body { background: #21141A; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
   .rd-split .rd-lead { justify-self: start; text-align: left; max-width: none; }
+  .rd-why-copy { justify-self: start; max-width: none; }
   .rd-recog { grid-template-columns: 1fr; }
   .rd-recog-visual { aspect-ratio: 16 / 10; max-height: 420px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }

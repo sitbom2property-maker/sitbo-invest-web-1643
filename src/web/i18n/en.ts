@@ -103,8 +103,10 @@ const en = {
     "I do not offer free property chats, random listing searches or unpaid calls. I work with clients who value professional guidance, respect expertise and want to make serious decisions in a foreign real estate market. If you are looking for the cheapest broker, we are probably not a match. If you want a trusted person inside the Georgian market, we should talk.",
 
   "v2.why.title": "Why investors choose Georgia?",
+  "v2.why.bodyLead": "Georgia is easy to enter.",
   "v2.why.body":
-    "One of the world's most accessible, low-tax, and fast-growing real estate hubs.",
+    "The real question is what to buy. Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
+  "v2.why.cta": "Read more about Georgia →",
   "v2.stats.tax": "Purchase Tax",
   "v2.stats.taxNote": "On residential property",
   "v2.stats.residency": "Residency Permit",
