@@ -1143,7 +1143,7 @@ html, body { background: #21141A; }
 .rd-faq-body {
   margin: 0 0 18px; max-width: 760px;
   font-family: var(--body); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
-  color: rgba(33,20,26,.72); white-space: pre-line;
+  color: rgba(33,20,26,.72);
 }
 
 /* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */

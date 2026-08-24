@@ -210,7 +210,7 @@ const en = {
     "Because you are not paying for a “conversation” — you are paying for my experience, market knowledge, access to people, the ability to verify information quickly, and to see risks a buyer from the outside may miss. I was born and raised in Georgia, I know the market from the inside, I personally know many key people in development, and I can solve issues most people will not even take on. My time and resources have a price. A paid consultation also removes the conflict of interest: my job is not to talk you into buying a property, but to help you make a strong and safe decision.",
   "v2.faq.q2": "How are you different from a regular realtor?",
   "v2.faq.a2":
-    "A regular realtor often earns on the deal and works around the property: show it, sell it, close it.\n\nI close your request, protect and grow capital, and become your trusted person in Georgia. I can quickly reach the right people: a director, an owner, an architect, a bank representative, a developer, or someone who knows the real situation on a project.\n\nFor me, real estate in Georgia is not a catalogue of listings. It is a system of people, decisions, documents, negotiations, and risks.",
+    "A regular realtor often earns on the deal and works around the property: show it, sell it, close it. I close your request, protect and grow capital, and become your trusted person in Georgia. I can quickly reach the right people: a director, an owner, an architect, a bank representative, a developer, or someone who knows the real situation on a project. For me, real estate in Georgia is not a catalogue of listings. It is a system of people, decisions, documents, negotiations, and risks.",
   "v2.faq.q3": "Are you a broker, a consultant, or an agency?",
   "v2.faq.a3":
     "I am a private advisor and real-estate strategist in Georgia. I can take different roles depending on the task: give an independent consultation, analyse a property, help with negotiations, connect you with the right people, organise due diligence, support with the bank, renovation, or purchase accompaniment. My value is to guide you through the market from a strong position. My operating system is SITBO, because there is a digital specialist and a renovation team behind it.",
@@ -219,13 +219,13 @@ const en = {
     "Yes. I can help you understand mortgage options and connect you with a bank. I have a working relationship with TBC Bank, and we are building a model for mortgage clients. The credit decision is always made by the bank, and terms depend on the client profile, documents, income, and the property.",
   "v2.faq.q5": "Can you check documents and the registry?",
   "v2.faq.a5":
-    "Yes. I run full due diligence on the property, the land, and the developer, based on registry data and more.\nAt the same time, a specialised lawyer should review the contract and legal documents. I do not replace a lawyer, but I help you see where risks may sit and what needs a deeper check.",
+    "Yes. I run full due diligence on the property, the land, and the developer, based on registry data and more. At the same time, a specialised lawyer should review the contract and legal documents. I do not replace a lawyer, but I help you see where risks may sit and what needs a deeper check.",
   "v2.faq.q6": "Can we have a free call first?",
   "v2.faq.a6":
     "No. I do not offer free consultations. Because of the volume of requests, I cannot review cases in chat or on free calls. You can contact my assistant to book a consultation and get answers to organisational questions: +995 510 00 27 22",
   "v2.faq.q7": "Which plan should I choose?",
   "v2.faq.a7":
-    "If you have one short question — Just Ask for $79.\nIf you are already considering a purchase, choosing a city, district, or property, or want to understand the risks — Deep Dive for $279.\nIf you are an investor or buyer who wants to go deep into the market and move toward a deal — Invest Discovery Tour for $1999.",
+    "If you have one short question — Just Ask for $79. If you are already considering a purchase, choosing a city, district, or property, or want to understand the risks — Deep Dive for $279. If you are an investor or buyer who wants to go deep into the market and move toward a deal — Invest Discovery Tour for $1999.",
   "v2.faq.q8": "Do you work with everyone?",
   "v2.faq.a8":
     "No. I work with clients who value a professional approach, respect time, and want to make deliberate decisions. If someone needs a free agent, chaotic messaging, or “just give me something cheaper” — we are unlikely to be a fit.",
@@ -945,6 +945,28 @@ const en = {
   "services.limit3.text": "I do not suggest an asset before I understand your objective, timeline, and risk tolerance.",
   "services.limit4.title": "No overloaded client roster",
   "services.limit4.text": "A limited number of mandates per quarter is a structural decision, not a marketing line.",
+  "services.faq.title": "FAQ",
+  "services.faq.q1": "Why can you be trusted?",
+  "services.faq.a1":
+    "Behind me are dozens of deals, hundreds of negotiations, and experience across different tasks on Georgia’s real estate market: purchase, investment, renovation, developers, banks, documents, and non-standard situations. I know the market not only as an intermediary. I understand property from the inside: I can assess an asset, negotiate with the right people, see the risks, and understand what happens after the purchase. I also have reviews and recommendations from real clients in open access. I have a name in the city, and I protect my reputation.",
+  "services.faq.q2": "What is your main value for the client?",
+  "services.faq.a2":
+    "I build long-term relationships and work for reputation, covering the full cycle from selection and renovation to further rental and resale. Throughout the deal I am your personal translator, psychologist, lawyer, analyst, and negotiator. Just let me do my job.",
+  "services.faq.q3": "Do you know developers and people on the market?",
+  "services.faq.a3":
+    "Yes. I was born and raised in Georgia, I have worked on this market for a long time, and I know many people in development, construction, banking, and adjacent fields. Batumi grew before my eyes — where you see 50-storey buildings, I saw untouched land. I can often reach the right person quickly: a director, an owner, an architect, a bank representative, a developer, or a contractor. That helps get information faster and understand the situation more deeply than advertising or a presentation shows.",
+  "services.faq.q4": "Do you understand renovations?",
+  "services.faq.a4":
+    "Yes. I control renovation from the inside and do it for people who notice every millimetre. I understand materials, timelines, workmanship, contractors, weak points of a property, and the real complications that start after purchase. I can assess renovation not only as a consultant, but as someone who understands the process hands-on. Renovation by my designer and crew can put your property into the city’s top 30.",
+  "services.faq.q5": "Do you help with mortgages?",
+  "services.faq.a5":
+    "Yes. I can help a client navigate mortgage options in Georgia and connect with a bank. I have a working relationship with TBC Bank for mortgage clients. The final decision on the loan, rate, and terms is always made by the bank. If there is a partner fee from the bank in the process, it is discussed transparently.",
+  "services.faq.q6": "Do you have partner terms for clients?",
+  "services.faq.a6":
+    "Yes. I am building my partner network. To learn the details, write to my assistant — they will tell you which partner options are available in your case.",
+  "services.faq.q7": "What is your working style?",
+  "services.faq.a7":
+    "Direct, fast, and practical. I speak honestly, do not sell illusions, and do not smooth over risks. If a property is weak, I explain why. If there is room to negotiate, I look for a path. I build long-term relationships and value reputation more than a quick deal. More than 80% of my clients came back to me again or recommended me to people close to them.",
   "services.cta.title": "Ready to begin?",
   "services.cta.body":
     "Write to me for a private consultation. No obligation, no pitch — just an honest assessment of your situation.",

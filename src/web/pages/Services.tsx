@@ -108,6 +108,16 @@ const LIMITS = [
   { titleKey: "services.limit4.title" as MessageKey, textKey: "services.limit4.text" as MessageKey },
 ];
 
+const ABOUT_FAQS: { qKey: MessageKey; aKey: MessageKey }[] = [
+  { qKey: "services.faq.q1", aKey: "services.faq.a1" },
+  { qKey: "services.faq.q2", aKey: "services.faq.a2" },
+  { qKey: "services.faq.q3", aKey: "services.faq.a3" },
+  { qKey: "services.faq.q4", aKey: "services.faq.a4" },
+  { qKey: "services.faq.q5", aKey: "services.faq.a5" },
+  { qKey: "services.faq.q6", aKey: "services.faq.a6" },
+  { qKey: "services.faq.q7", aKey: "services.faq.a7" },
+];
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".sv .rv");
@@ -329,6 +339,39 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   margin: 0; font-size: 14px; line-height: 1.5; color: var(--white);
 }
 
+/* FAQ */
+.sv-faq-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(40px, 5vw, 72px);
+  box-sizing: border-box;
+}
+.sv-faq-panel {
+  background: var(--panel); color: var(--bg); border-radius: 2px;
+  padding: clamp(34px, 4.4vw, 64px) clamp(22px, 4vw, 56px);
+}
+.sv-faq-panel h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(22px, 3vw, 36px);
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; color: var(--bg);
+}
+.sv-faq { border-top: 1px solid rgba(33,20,26,.1); }
+.sv-faq:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
+.sv-faq-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: var(--bg); font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 17px); font-weight: 500; line-height: 1.35;
+}
+.sv-faq-toggle {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--bg); color: var(--white);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;
+}
+.sv-faq-body {
+  margin: 0 0 18px; max-width: 760px;
+  font-family: var(--body); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(33,20,26,.72);
+}
+
 /* cta */
 .sv-cta-outer {
   max-width: var(--max); margin: 0 auto;
@@ -369,6 +412,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 export default function ServicesPage() {
   const t = useT();
   const [openIndex, setOpenIndex] = useState(0);
+  const [faqOpenIndex, setFaqOpenIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   useReveal();
 
@@ -419,6 +463,33 @@ export default function ServicesPage() {
                 <p>{t(item.textKey)}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sv-faq-outer" id="faq">
+        <div className="sv-faq-panel rv">
+          <h2>{t("services.faq.title")}</h2>
+          <div>
+            {ABOUT_FAQS.map((item, index) => {
+              const isOpen = faqOpenIndex === index;
+              return (
+                <div key={item.qKey} className={`sv-faq${isOpen ? " is-open" : ""}`}>
+                  <button
+                    type="button"
+                    className="sv-faq-head"
+                    onClick={() => setFaqOpenIndex(isOpen ? -1 : index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span>{t(item.qKey)}</span>
+                    <span className="sv-faq-toggle" aria-hidden>
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+                  {isOpen ? <p className="sv-faq-body">{t(item.aKey)}</p> : null}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
