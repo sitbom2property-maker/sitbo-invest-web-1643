@@ -66,7 +66,7 @@ function Col({ span = 12, spanMd, children, style }: { span?: number; spanMd?: n
 function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (
     <h3 style={{
-      fontFamily: "Coolvetica, Inter, sans-serif",
+      fontFamily: "JUN, Georgia, serif",
       fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
       fontWeight: 500,
       color: light ? C.light : C.dark,
@@ -326,7 +326,7 @@ function Gallery({
             color: C.dark,
             boxShadow: "0 8px 24px rgba(33,20,26,0.16)",
             cursor: "pointer",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: isMobile ? "0.78rem" : "0.84rem",
             fontWeight: 600,
             letterSpacing: "0.01em",
@@ -365,7 +365,7 @@ function Gallery({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.85rem", fontWeight: 500, opacity: 0.85 }}>
+            <p style={{ margin: 0, fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", fontWeight: 500, opacity: 0.85 }}>
               {lightbox + 1} / {list.length}
             </p>
             <button
@@ -639,8 +639,8 @@ export default function ProjectPage() {
 
       <div style={{ background: C.light, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
-          <Link href="/"><a style={{ fontFamily: "Inter, sans-serif", color: C.teal }}>{t("project.backHome")}</a></Link>
+          <h1 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "2rem", color: C.dark }}>{t("project.notFound")}</h1>
+          <Link href="/"><a style={{ fontFamily: "Nunito, sans-serif", color: C.teal }}>{t("project.backHome")}</a></Link>
         </div>
       </div>
     
@@ -667,7 +667,7 @@ export default function ProjectPage() {
   const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
   const next = localizedList[(idx + 1) % localizedList.length];
   const metaLabel: CSSProperties = {
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     fontSize: "13px",
     color: "rgba(33,20,26,0.45)",
     margin: 0,
@@ -678,7 +678,7 @@ export default function ProjectPage() {
     gap: 6,
   };
   const metaValue: CSSProperties = {
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     fontSize: "16px",
     fontWeight: 700,
     color: C.dark,
@@ -730,7 +730,7 @@ export default function ProjectPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: isMobile ? "0.78rem" : "0.85rem",
                   fontWeight: 500,
                   color: C.dark,
@@ -775,7 +775,7 @@ export default function ProjectPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: isMobile ? "0.78rem" : "0.85rem",
                 fontWeight: 500,
                 color: C.dark,
@@ -813,7 +813,7 @@ export default function ProjectPage() {
 
 {/* Overview */}
               <div className="pr-reveal" style={{ marginBottom: isMobile ? "48px" : "72px" }}>
-                <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 20 }}>
+                <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.15, marginBottom: "12px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 20 }}>
                   <span>{p.name}</span>
                   {p.trophyProperty ? (
                     <span
@@ -822,7 +822,7 @@ export default function ProjectPage() {
                         alignItems: "center",
                         alignSelf: "center",
                         gap: 6,
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "Nunito, sans-serif",
                         fontSize: isMobile ? "0.62rem" : "0.68rem",
                         fontWeight: 600,
                         letterSpacing: "0.06em",
@@ -844,7 +844,7 @@ export default function ProjectPage() {
                   ) : null}
                 </h2>
 
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
                   <span>{p.address} · {p.seaDistance}</span>
                 </p>
@@ -881,7 +881,7 @@ export default function ProjectPage() {
                           display: "inline-flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          fontFamily: "Inter, sans-serif",
+                          fontFamily: "Nunito, sans-serif",
                           fontSize: 10,
                           fontWeight: 600,
                           lineHeight: 1,
@@ -903,7 +903,7 @@ export default function ProjectPage() {
                   </div>
                 </div>
 
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.05rem", color: C.mutedDark, lineHeight: 1.75 }}>{p.desc}</p>
 
                 {/* Developer / Architecture — minimal */}
                 <div
@@ -916,18 +916,18 @@ export default function ProjectPage() {
                   }}
                 >
                   <div>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
                       {t("project.developer")}
                     </p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
                       {p.developer}
                     </p>
                   </div>
                   <div>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
                       {t("project.architecture")}
                     </p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "16px", fontWeight: 600, color: C.dark, margin: 0, lineHeight: 1.3 }}>
                       {p.architect && p.architect !== "TBA" ? p.architect : t("project.architectPlaceholder")}
                     </p>
                   </div>
@@ -938,7 +938,7 @@ export default function ProjectPage() {
 
 {/* Specs — 3×2 stacked label/value grid (no dividers) */}
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
                   {t("project.specs")}
                 </h3>
                 {(() => {
@@ -965,7 +965,7 @@ export default function ProjectPage() {
                         <div key={s.label} style={{ minWidth: 0 }}>
                           <p
                             style={{
-                              fontFamily: "Inter, sans-serif",
+                              fontFamily: "Nunito, sans-serif",
                               fontSize: "13px",
                               fontWeight: 400,
                               color: "rgba(33,20,26,0.45)",
@@ -977,7 +977,7 @@ export default function ProjectPage() {
                           </p>
                           <p
                             style={{
-                              fontFamily: "Inter, sans-serif",
+                              fontFamily: "Nunito, sans-serif",
                               fontSize: "16px",
                               fontWeight: 700,
                               color: C.dark,
@@ -1013,17 +1013,17 @@ export default function ProjectPage() {
               <>
               <Divider />
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
                   {t("project.ownershipBenefits")}
                 </h3>
-                <h4 style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 700, color: C.dark, lineHeight: 1.3, margin: "0 0 14px" }}>
+                <h4 style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "1.05rem" : "1.15rem", fontWeight: 700, color: C.dark, lineHeight: 1.3, margin: "0 0 14px" }}>
                   {p.ownershipBenefits.title}
                 </h4>
                 {p.ownershipBenefits.body.split(/\n\n+/).map((para, i) => (
                   <p
                     key={i}
                     style={{
-                      fontFamily: "Inter, sans-serif",
+                      fontFamily: "Nunito, sans-serif",
                       fontSize: isMobile ? "0.95rem" : "1.05rem",
                       color: C.mutedDark,
                       lineHeight: 1.7,
@@ -1044,7 +1044,7 @@ export default function ProjectPage() {
                     border: "none",
                     background: "none",
                     color: "#2B6CB0",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: isMobile ? "0.95rem" : "1.05rem",
                     fontWeight: 500,
                     lineHeight: 1.5,
@@ -1064,7 +1064,7 @@ export default function ProjectPage() {
               <>
               <Divider />
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
-                <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
                   {t("project.payment")}
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 16 }}>
@@ -1101,10 +1101,10 @@ export default function ProjectPage() {
                               color: isDown ? C.light : C.dark,
                             }}
                           >
-                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "1.35rem" : "1.75rem", fontWeight: 700, margin: "0 0 6px", lineHeight: 1, color: "inherit" }}>
+                            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "1.35rem" : "1.75rem", fontWeight: 700, margin: "0 0 6px", lineHeight: 1, color: "inherit" }}>
                               {seg.pct}%
                             </p>
-                            <p style={{ fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", fontWeight: 500, margin: 0, lineHeight: 1.25, color: "inherit", opacity: isDown ? 0.95 : 0.85 }}>
+                            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", fontWeight: 500, margin: 0, lineHeight: 1.25, color: "inherit", opacity: isDown ? 0.95 : 0.85 }}>
                               {label}
                             </p>
                           </div>
@@ -1115,7 +1115,7 @@ export default function ProjectPage() {
                 </div>
                 <p
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: isMobile ? "0.84rem" : "0.9rem",
                     fontWeight: 400,
                     color: "rgba(33,20,26,0.5)",
@@ -1138,19 +1138,19 @@ export default function ProjectPage() {
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "2px", padding: "28px 24px" }}>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("project.interested")}</p>
-                  <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("project.interested")}</p>
+                  <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
                   </h3>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.light, marginBottom: "16px" }}>{priceLabel}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.light, marginBottom: "16px" }}>{priceLabel}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
                     {t("project.offerBody")}
                   </p>
-                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                  <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
                   {p.apartmentsKey && (
-                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
+                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
                       {t("chess.chooseCta")}
                     </a>
                   )}
@@ -1208,17 +1208,17 @@ export default function ProjectPage() {
                         <a href={p.liveCameraUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "160ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s, background 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
                           <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff3c3c", flexShrink: 0, boxShadow: "0 0 8px rgba(255,60,60,0.45)" }} />
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="15" height="10" rx="1"/><polyline points="17 9 22 6 22 18 17 15"/></svg>
-                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("project.liveCamera")}</span>
+                          <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("project.liveCamera")}</span>
                         </a>
                       )}
                       {p.tourUrl && (
                         <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
-                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
+                          <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
                         </a>
                       )}
                       {p.panoramaUrl && (
                         <a href={p.panoramaUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "240ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
-                          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.viewPanorama")}</span>
+                          <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.viewPanorama")}</span>
                         </a>
                       )}
                     </div>
@@ -1261,7 +1261,7 @@ export default function ProjectPage() {
           <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
             <h3
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
                 fontWeight: 500,
                 color: C.dark,
@@ -1273,7 +1273,7 @@ export default function ProjectPage() {
             </h3>
             <h4
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: isMobile ? "1.15rem" : "1.25rem",
                 fontWeight: 700,
                 color: C.dark,
@@ -1285,7 +1285,7 @@ export default function ProjectPage() {
             </h4>
             <p
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "1.05rem",
                 color: C.mutedDark,
                 lineHeight: 1.7,
@@ -1325,7 +1325,7 @@ export default function ProjectPage() {
             color: ${C.light};
           }
           .pr-cta h2 {
-            font-family: Coolvetica, Inter, sans-serif;
+            font-family: JUN, Georgia, serif;
             font-weight: 600;
             margin: 0 0 14px;
             font-size: clamp(28px, 3.6vw, 48px);
@@ -1335,7 +1335,7 @@ export default function ProjectPage() {
           .pr-cta p {
             margin: 0 auto 28px;
             max-width: 480px;
-            font-family: Inter, sans-serif;
+            font-family: Nunito, sans-serif;
             font-size: clamp(15px, 1.3vw, 17px);
             line-height: 1.5;
             color: ${C.light};
@@ -1344,7 +1344,7 @@ export default function ProjectPage() {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: Inter, sans-serif;
+            font-family: Nunito, sans-serif;
             font-size: 15px;
             font-weight: 400;
             padding: 15px 30px;
@@ -1384,10 +1384,10 @@ export default function ProjectPage() {
                   ) : null}
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.8) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: "16px", left: "20px" }}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{proj.tag}</p>
-                    <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "4px" }}>{proj.tag}</p>
+                    <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
                   </div>
-                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Inter, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
+                  <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
                     {proj.yield} {t("catalog.roi")}
                   </div>
                 </a>
@@ -1448,7 +1448,7 @@ export default function ProjectPage() {
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 18 }}>
               <h3
                 style={{
-                  fontFamily: "Coolvetica, Inter, sans-serif",
+                  fontFamily: "JUN, Georgia, serif",
                   fontSize: isMobile ? "1.35rem" : "1.55rem",
                   fontWeight: 500,
                   color: C.dark,
@@ -1499,7 +1499,7 @@ export default function ProjectPage() {
                     gridTemplateColumns: "18px 1fr",
                     gap: 12,
                     alignItems: "start",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: isMobile ? "0.92rem" : "0.98rem",
                     lineHeight: 1.5,
                     color: C.dark,
@@ -1558,7 +1558,7 @@ export default function ProjectPage() {
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 22 }}>
               <h3
                 style={{
-                  fontFamily: "Coolvetica, Inter, sans-serif",
+                  fontFamily: "JUN, Georgia, serif",
                   fontSize: isMobile ? "1.35rem" : "1.55rem",
                   fontWeight: 500,
                   color: C.dark,
@@ -1614,7 +1614,7 @@ export default function ProjectPage() {
               <div key={block.title} style={{ marginBottom: 22 }}>
                 <h4
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: isMobile ? "0.98rem" : "1.05rem",
                     fontWeight: 700,
                     color: C.dark,
@@ -1629,7 +1629,7 @@ export default function ProjectPage() {
                     <p
                       key={line}
                       style={{
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "Nunito, sans-serif",
                         fontSize: isMobile ? "0.9rem" : "0.95rem",
                         lineHeight: 1.55,
                         color: C.mutedDark,

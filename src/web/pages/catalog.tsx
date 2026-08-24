@@ -123,7 +123,7 @@ function DepositChecklist() {
           <h2
             id="deposit-checklist-title"
             style={{
-              fontFamily: "Coolvetica, Inter, sans-serif",
+              fontFamily: "JUN, Georgia, serif",
               fontWeight: 600,
               fontSize: "clamp(26px, 3.2vw, 40px)",
               lineHeight: 1.15,
@@ -137,7 +137,7 @@ function DepositChecklist() {
             style={{
               margin: "0 0 28px",
               maxWidth: 680,
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Nunito, sans-serif",
               fontSize: "clamp(14px, 1.2vw, 16px)",
               lineHeight: 1.5,
               color: "rgba(255,254,249,.78)",
@@ -174,7 +174,7 @@ function DepositChecklist() {
                     background: on ? "rgba(255,254,249,.08)" : "transparent",
                     color: C.light,
                     cursor: "pointer",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: 15,
                     lineHeight: 1.4,
                   }}
@@ -237,7 +237,7 @@ function DepositChecklist() {
             >
               <span
                 style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: 13,
                   fontWeight: 500,
                   letterSpacing: "0.02em",
@@ -252,7 +252,7 @@ function DepositChecklist() {
                   alignItems: "center",
                   padding: "4px 10px",
                   borderRadius: 999,
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: 12,
                   fontWeight: 600,
                   letterSpacing: "0.04em",
@@ -266,7 +266,7 @@ function DepositChecklist() {
 
             <h3
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontWeight: 600,
                 fontSize: "clamp(20px, 2.2vw, 28px)",
                 lineHeight: 1.2,
@@ -280,7 +280,7 @@ function DepositChecklist() {
               style={{
                 margin: "0 0 20px",
                 maxWidth: 720,
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "clamp(14px, 1.2vw, 16px)",
                 lineHeight: 1.55,
                 color: "rgba(255,254,249,.82)",
@@ -302,7 +302,7 @@ function DepositChecklist() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 15,
                 fontWeight: 500,
                 padding: "15px 28px",
@@ -320,7 +320,7 @@ function DepositChecklist() {
             <p
               style={{
                 margin: "16px 0 0",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 12,
                 lineHeight: 1.45,
                 color: "rgba(255,254,249,.55)",
@@ -366,20 +366,20 @@ function CatalogCard({ p }: { p: Project }) {
 
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>
-              <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
+              <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.3rem", fontWeight: 500, color: C.light, margin: 0, lineHeight: 1.2 }}>{p.name}</h3>
             </div>
           </div>
 
           {/* Info strip */}
           <div style={{ background: C.light, padding: "16px 16px 18px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "8px", marginBottom: "12px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
-              <span style={{ flexShrink: 0, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1 }}>{priceLabel}</p>
+              <span style={{ flexShrink: 0, fontFamily: "Nunito, sans-serif", fontSize: "0.72rem", color: C.muted }}>
                 {p.completion}
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.muted, margin: 0, lineHeight: 1.5, flex: 1, paddingRight: "12px" }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", color: C.muted, margin: 0, lineHeight: 1.5, flex: 1, paddingRight: "12px" }}>
                 {p.desc.length > 80 ? p.desc.slice(0, 78) + "…" : p.desc}
               </p>
               <div style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "50%", border: `1px solid rgba(33,20,26,0.15)`, display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s, border-color 0.2s", background: hovered ? C.dark : "transparent", borderColor: hovered ? C.dark : "rgba(33,20,26,0.15)" }}>
@@ -470,7 +470,7 @@ export default function CatalogPage() {
   }, [localizedProjects]);
 
   const inputStyle: React.CSSProperties = {
-    fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
+    fontFamily: "Nunito, sans-serif", fontSize: "0.82rem", color: C.dark,
     background: C.light, border: "1px solid rgba(33,20,26,0.12)",
     borderRadius: "2px", padding: "10px 14px", outline: "none",
   };
@@ -482,7 +482,7 @@ export default function CatalogPage() {
         <Container>
           <h1
             style={{
-              fontFamily: "Coolvetica, Inter, sans-serif",
+              fontFamily: "JUN, Georgia, serif",
               fontSize: "clamp(1.35rem, 2.2vw, 1.9rem)",
               fontWeight: 400,
               color: C.light,
@@ -500,7 +500,7 @@ export default function CatalogPage() {
           <div style={{ display: "flex", gap: "8px", marginTop: 0, flexWrap: "wrap", alignItems: "center" }}>
             {CITIES.map(c => (
               <button key={c} onClick={() => setCity(c)} style={{
-                fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
+                fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",
                 padding: "8px 18px", borderRadius: "2px", cursor: "pointer",
                 border: `1px solid ${city === c ? C.teal : "rgba(255,254,249,0.15)"}`,
@@ -526,7 +526,7 @@ export default function CatalogPage() {
               onClick={() => setTrophyOnly(v => !v)}
               aria-pressed={trophyOnly}
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.75rem",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
@@ -586,10 +586,10 @@ export default function CatalogPage() {
         <Container>
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "96px 24px" }}>
-              <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
+              <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "2rem", fontWeight: 400, color: C.muted, marginBottom: "12px" }}>{t("catalog.emptyTitle")}</h2>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: C.muted }}>{t("catalog.emptyBody")}</p>
               <button onClick={() => { setCity("All"); setTrophyOnly(false); setSearch(""); setSort("default"); }}
-                style={{ marginTop: "20px", fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "2px", padding: "12px 28px", cursor: "pointer" }}>
+                style={{ marginTop: "20px", fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.dark, border: "none", borderRadius: "2px", padding: "12px 28px", cursor: "pointer" }}>
                 {t("cta.resetFilters")}
               </button>
             </div>
@@ -628,7 +628,7 @@ export default function CatalogPage() {
             color: ${C.light};
           }
           .cat-cta h2 {
-            font-family: Coolvetica, Inter, sans-serif;
+            font-family: JUN, Georgia, serif;
             font-weight: 600;
             margin: 0 0 14px;
             font-size: clamp(28px, 3.6vw, 48px);
@@ -638,7 +638,7 @@ export default function CatalogPage() {
           .cat-cta p {
             margin: 0 auto 28px;
             max-width: 480px;
-            font-family: Inter, sans-serif;
+            font-family: Nunito, sans-serif;
             font-size: clamp(15px, 1.3vw, 17px);
             line-height: 1.5;
             color: ${C.light};
@@ -647,7 +647,7 @@ export default function CatalogPage() {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: Inter, sans-serif;
+            font-family: Nunito, sans-serif;
             font-size: 15px;
             font-weight: 400;
             padding: 15px 30px;

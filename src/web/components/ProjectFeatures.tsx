@@ -340,7 +340,7 @@ export function ProjectFeatures({ features, materials, open, onOpen, onClose, is
 const PF_CSS = `
 .pf-block { margin: 0; }
 .pf-title {
-  font-family: Coolvetica, Inter, sans-serif;
+  font-family: JUN, Georgia, serif;
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
   font-weight: 500;
   color: ${C.dark};
@@ -377,7 +377,7 @@ const PF_CSS = `
   flex-shrink: 0;
 }
 .pf-label {
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 16px;
   line-height: 1.35;
   color: ${C.dark};
@@ -400,7 +400,7 @@ const PF_CSS = `
   border: none;
   background: none;
   cursor: pointer;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: ${C.teal};
@@ -440,7 +440,7 @@ const PF_CSS = `
 }
 .pf-modal-head h2 {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: ${C.dark};
@@ -465,7 +465,7 @@ const PF_CSS = `
 .pf-section:last-child { border-bottom: none; padding-bottom: 8px; }
 .pf-section h3 {
   margin: 0 0 18px;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: ${C.dark};

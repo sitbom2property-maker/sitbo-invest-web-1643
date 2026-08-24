@@ -92,10 +92,10 @@ export default function LegalPage() {
             
             {/* Page title */}
             <div style={{ marginBottom: "64px" }}>
-              <h1 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, margin: "0 0 12px" }}>
+              <h1 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, margin: "0 0 12px" }}>
                 {t("legal.title")}
               </h1>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: C.muted, lineHeight: 1.7, margin: 0 }}>
                 {t("legal.updated")}
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function LegalPage() {
               <div key={section.title} style={{ marginBottom: si < sections.length - 1 ? "72px" : 0 }}>
                 {/* Section title */}
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px", paddingBottom: "20px", borderBottom: `2px solid ${C.teal}` }}>
-                  <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,3vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
+                  <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.6rem,3vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
                     {section.title}
                   </h2>
                 </div>
@@ -112,16 +112,16 @@ export default function LegalPage() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
                   {section.items.map(item => (
                     <div key={item.heading}>
-                      <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 600, color: C.dark, margin: "0 0 10px", letterSpacing: "0.01em" }}>
+                      <h3 style={{ fontFamily: "Nunito, sans-serif", fontSize: "1rem", fontWeight: 600, color: C.dark, margin: "0 0 10px", letterSpacing: "0.01em" }}>
                         {item.heading}
                       </h3>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, margin: 0 }}>
+                      <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, margin: 0 }}>
                         {item.body}
                       </p>
                       {item.list && (
                         <ul style={{ margin: "10px 0 0 0", padding: "0 0 0 20px" }}>
                           {item.list.map(li => (
-                            <li key={li} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "4px" }}>
+                            <li key={li} style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.55)", lineHeight: 1.8, marginBottom: "4px" }}>
                               {li}
                             </li>
                           ))}
@@ -136,7 +136,7 @@ export default function LegalPage() {
             {/* Back link */}
             <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(33,20,26,0.1)" }}>
               <Link href="/">
-                <a style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.teal, textDecoration: "none", letterSpacing: "0.06em" }}>
+                <a style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.teal, textDecoration: "none", letterSpacing: "0.06em" }}>
                   {t("legal.backHome")}
                 </a>
               </Link>

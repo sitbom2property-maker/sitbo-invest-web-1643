@@ -67,7 +67,7 @@ function ArticleCard({
           style={{
             display: "inline-block",
             alignSelf: "flex-start",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.62rem",
             fontWeight: 600,
             letterSpacing: "0.12em",
@@ -83,7 +83,7 @@ function ArticleCard({
         </span>
         <h2
           style={{
-            fontFamily: "Coolvetica, Inter, sans-serif",
+            fontFamily: "JUN, Georgia, serif",
             fontSize: "clamp(1.25rem,2.5vw,1.5rem)",
             fontWeight: 400,
             color: C.dark,
@@ -95,7 +95,7 @@ function ArticleCard({
         </h2>
         <p
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.88rem",
             color: C.muted,
             lineHeight: 1.75,
@@ -120,7 +120,7 @@ function ArticleCard({
               display: "flex",
               flexWrap: "wrap",
               gap: "6px 12px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Nunito, sans-serif",
               fontSize: "0.75rem",
               color: C.muted,
             }}
@@ -178,7 +178,7 @@ export default function BlogPage() {
           <div className="site-wrap">
             <h1
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: "clamp(2.4rem,5vw,4rem)",
                 fontWeight: 400,
                 color: C.light,
@@ -191,7 +191,7 @@ export default function BlogPage() {
             </h1>
             <p
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.88rem",
                 color: C.light,
                 lineHeight: 1.7,

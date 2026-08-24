@@ -113,7 +113,7 @@ export function ApartmentChessboard({
   };
 
 const chip = (active: boolean): CSSProperties => ({
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     fontSize: "0.72rem",
     fontWeight: 600,
     letterSpacing: "0.06em",
@@ -135,10 +135,10 @@ const chip = (active: boolean): CSSProperties => ({
       {!embedded && (
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 22 }}>
         <div>
-          <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
+          <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.6rem,2.5vw,2.2rem)", fontWeight: 400, color: C.dark, margin: 0 }}>
             {t("chess.title")}
           </h3>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.muted, margin: "8px 0 0" }}>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: C.muted, margin: "8px 0 0" }}>
             {t("chess.availableCount", { count: counts.available })}
             {counts.reserved ? ` · ${t("chess.reservedCount", { count: counts.reserved })}` : ""}
           </p>
@@ -181,14 +181,14 @@ const chip = (active: boolean): CSSProperties => ({
       </div>
 
       <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap", marginBottom: 16 }}>
-        <label style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted }}>
+        <label style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted }}>
           {t("chess.floor")}
         </label>
         <select
           value={floorFilter === "all" ? "all" : String(floorFilter)}
           onChange={(e) => setFloorFilter(e.target.value === "all" ? "all" : Number(e.target.value))}
           style={{
-            fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.dark,
+            fontFamily: "Nunito, sans-serif", fontSize: "0.82rem", color: C.dark,
             background: C.light, border: "1px solid rgba(33,20,26,0.12)",
             borderRadius: 8, padding: "8px 12px",
           }}
@@ -205,7 +205,7 @@ const chip = (active: boolean): CSSProperties => ({
             ["sold", t("chess.status.sold")],
             ["unavailable", t("chess.status.unavailable")],
           ] as const).map(([st, label]) => (
-            <span key={st} style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.muted }}>
+            <span key={st} style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "Nunito, sans-serif", fontSize: "0.72rem", color: C.muted }}>
               <span style={{ width: 10, height: 10, borderRadius: 2, background: STATUS_COLOR[st as ApartmentStatus] }} />
               {label}
             </span>
@@ -219,7 +219,7 @@ const chip = (active: boolean): CSSProperties => ({
             <div style={{ display: "grid", gridTemplateColumns: `36px repeat(${cols.length}, minmax(34px,1fr))`, gap: 3, marginBottom: 6 }}>
               <div />
               {cols.map((c) => (
-                <div key={c} style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "0.62rem", color: C.muted }}>
+                <div key={c} style={{ textAlign: "center", fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", color: C.muted }}>
                   {c}
                 </div>
               ))}
@@ -243,7 +243,7 @@ const chip = (active: boolean): CSSProperties => ({
                 }}
               >
                 <div style={{
-                  fontFamily: "Inter, sans-serif", fontSize: "0.68rem", fontWeight: 700, color: C.dark,
+                  fontFamily: "Nunito, sans-serif", fontSize: "0.68rem", fontWeight: 700, color: C.dark,
                   display: "flex", alignItems: "center", justifyContent: "center",
                 }}>
                   {floor}
@@ -274,7 +274,7 @@ const chip = (active: boolean): CSSProperties => ({
                               padding: 0,
                               opacity: dim ? 0.35 : 1,
                               color: u.s === "available" || u.s === "reserved" ? C.dark : "rgba(33,20,26,0.45)",
-                              fontFamily: "Inter, sans-serif",
+                              fontFamily: "Nunito, sans-serif",
                               fontSize: "0.55rem",
                               fontWeight: 700,
                             }}
@@ -298,14 +298,14 @@ const chip = (active: boolean): CSSProperties => ({
         }}>
           {!selected ? (
             <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, margin: "0 0 20px" }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7, margin: "0 0 20px" }}>
                 {t("chess.pickHint")}
               </p>
               <button
                 type="button"
                 onClick={() => setRequestOpen(true)}
                 style={{
-                  width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
+                  width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                   letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
                   border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
                 }}
@@ -315,10 +315,10 @@ const chip = (active: boolean): CSSProperties => ({
             </div>
           ) : (
             <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, margin: "0 0 8px" }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, margin: "0 0 8px" }}>
                 {t("chess.unit")} {selected.n}
               </p>
-              <h4 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
+              <h4 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.55rem", fontWeight: 400, margin: "0 0 14px", lineHeight: 1.2 }}>
                 {ru ? selected.tr : selected.t}
               </h4>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 16px", marginBottom: 16 }}>
@@ -329,27 +329,27 @@ const chip = (active: boolean): CSSProperties => ({
                   [t("chess.status.label"), t(STATUS_KEYS[selected.s])],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: "0 0 4px" }}>{label}</p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, margin: "0 0 4px" }}>{label}</p>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", fontWeight: 600, margin: 0 }}>{value}</p>
                   </div>
                 ))}
               </div>
               {selected.p ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.light, margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.light, margin: "0 0 4px" }}>
                   {formatFromUSD(selected.p)}
                 </p>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.light, margin: "0 0 4px" }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: C.light, margin: "0 0 4px" }}>
                   {t("chess.priceOnRequest")}
                 </p>
               )}
               {selected.m ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: C.light, margin: "0 0 14px" }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", color: C.light, margin: "0 0 14px" }}>
                   {formatFromUSD(selected.m)} / m²
                 </p>
               ) : <div style={{ height: 14 }} />}
               {(ru ? selected.vr || selected.hr : selected.v || selected.h) ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, margin: "0 0 16px" }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.light, margin: "0 0 16px" }}>
                   {[ru ? selected.vr : selected.v, ru ? selected.hr : selected.h].filter(Boolean).join(" · ")}
                 </p>
               ) : null}
@@ -365,7 +365,7 @@ const chip = (active: boolean): CSSProperties => ({
                   type="button"
                   onClick={() => setRequestOpen(true)}
                   style={{
-                    width: "100%", fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 600,
+                    width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                     letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal,
                     border: "none", borderRadius: 8, padding: 14, cursor: "pointer",
                   }}
@@ -373,7 +373,7 @@ const chip = (active: boolean): CSSProperties => ({
                   {t("chess.request")}
                 </button>
               ) : (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.light, margin: 0 }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", color: C.light, margin: 0 }}>
                   {t("chess.notSelectable")}
                 </p>
               )}

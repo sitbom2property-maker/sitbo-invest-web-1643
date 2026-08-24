@@ -21,7 +21,7 @@ const inputStyle: CSSProperties = {
   border: "1px solid rgba(140,178,192,0.1)",
   borderRadius: 8,
   color: "#FFFEF9",
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 14,
   padding: "13px 15px",
   outline: "none",
@@ -173,7 +173,7 @@ export function RequestModal({
             </div>
             <h2
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: 24,
                 fontWeight: 400,
                 color: "#FFFEF9",
@@ -184,7 +184,7 @@ export function RequestModal({
             </h2>
             <p
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.6,
                 color: "#FFFEF9",
@@ -199,7 +199,7 @@ export function RequestModal({
             {topic ? (
               <p
                 style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: 10,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -212,7 +212,7 @@ export function RequestModal({
             ) : null}
             <h2
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: "clamp(23px, 5vw, 29px)",
                 fontWeight: 400,
                 lineHeight: 1.2,
@@ -224,7 +224,7 @@ export function RequestModal({
             </h2>
             <p
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 14,
                 lineHeight: 1.65,
                 color: "#FFFEF9",
@@ -263,7 +263,7 @@ export function RequestModal({
               />
 
               {error ? (
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#FFFEF9", margin: 0 }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: 13, color: "#FFFEF9", margin: 0 }}>
                   {error}
                 </p>
               ) : null}
@@ -279,7 +279,7 @@ export function RequestModal({
                   border: "none",
                   background: "#703C54",
                   color: "#FFFEF9",
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: "0.16em",

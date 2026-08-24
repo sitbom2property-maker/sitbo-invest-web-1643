@@ -11,7 +11,7 @@ const C = {
 };
 
 const colTitleStyle: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 10,
   fontWeight: 500,
   letterSpacing: "0.28em",
@@ -21,7 +21,7 @@ const colTitleStyle: CSSProperties = {
 };
 
 const linkStyle: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 13,
   fontWeight: 400,
   color: C.light,
@@ -212,7 +212,7 @@ export function Footer() {
         >
           <p
             style={{
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Nunito, sans-serif",
               fontSize: 13,
               fontWeight: 400,
               lineHeight: 1.7,
@@ -304,7 +304,7 @@ export function Footer() {
           alignItems: "center",
           justifyItems: isBarStacked ? "center" : undefined,
           textAlign: isBarStacked ? "center" : undefined,
-          fontFamily: "Inter, sans-serif",
+          fontFamily: "Nunito, sans-serif",
           fontSize: 11,
           fontWeight: 400,
           color: C.light,

@@ -242,7 +242,7 @@ const COOKIE_CSS = `
   z-index: 9999;
   background: #21141A;
   color: #FFFEF9;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   box-shadow: 0 -8px 32px rgba(0,0,0,.35);
 }
 .ck-inner {
@@ -259,7 +259,7 @@ const COOKIE_CSS = `
 }
 .ck-title {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0;

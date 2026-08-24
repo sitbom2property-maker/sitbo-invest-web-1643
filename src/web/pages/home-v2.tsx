@@ -1011,8 +1011,8 @@ html, body { background: #21141A; }
   --white: var(--bg-light);
   --panel: var(--bg-light);
   --blue: color-mix(in srgb, var(--accent-blue) 10%, var(--bg-light));
-  --display: 'Coolvetica', Inter, sans-serif;
-  --body: 'Inter', sans-serif;
+  --display: 'JUN', Georgia, serif;
+  --body: 'Nunito', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
   --rd-max: var(--site-max, 1440px);
   --rd-gutter: var(--site-gutter, clamp(32px, 5vw, 80px));

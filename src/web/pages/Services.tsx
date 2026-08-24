@@ -4,7 +4,7 @@ import { useT, type MessageKey } from "../i18n";
 
 /**
  * Services page — first-person voice, aligned with home-v2 visual system:
- * Coolvetica / Inter · #21141A · wine #703C54 · light #FFFEF9 · teal #8CB2C0 at 10%
+ * JUN / Inter · #21141A · wine #703C54 · light #FFFEF9 · teal #8CB2C0 at 10%
  */
 
 type ServiceItem = {
@@ -194,8 +194,8 @@ const CSS = `
   --green: var(--card-green);
   --white: var(--bg-light);
   --panel: var(--bg-light);
-  --display: 'Coolvetica', Inter, sans-serif;
-  --body: 'Inter', sans-serif;
+  --display: 'JUN', Georgia, serif;
+  --body: 'Nunito', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --max: var(--site-max, 1440px);
   background: var(--bg);

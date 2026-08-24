@@ -224,8 +224,8 @@ const CSS = `
   --card-muted: #E8E4DF;
   --green: #48674D;
   --white: #FFFEF9;
-  --display: 'Coolvetica', Inter, sans-serif;
-  --body: 'Inter', sans-serif;
+  --display: 'JUN', Georgia, serif;
+  --body: 'Nunito', sans-serif;
   --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
   --max: var(--site-max, 1440px);
   --radius: 20px;

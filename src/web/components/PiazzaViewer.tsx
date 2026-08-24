@@ -113,17 +113,17 @@ const CSS = `
     gap: 16px; flex-wrap: wrap; margin-bottom: 22px;
   }
   .pz-title {
-    font-family: Coolvetica, Inter, sans-serif;
+    font-family: JUN, Georgia, serif;
     font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     font-weight: 400; margin: 0;
   }
   .pz-sub {
-    font-family: Inter, sans-serif; font-size: 0.85rem;
+    font-family: Nunito, sans-serif; font-size: 0.85rem;
     color: ${C.muted}; margin: 8px 0 0; line-height: 1.55;
   }
   .pz-switch { display: flex; gap: 8px; flex-wrap: wrap; }
   .pz-switch button {
-    font-family: Inter, sans-serif; font-size: 0.72rem; font-weight: 600;
+    font-family: Nunito, sans-serif; font-size: 0.72rem; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
     padding: 8px 14px; border-radius: 8px; cursor: pointer;
     border: 1px solid rgba(33,20,26,0.12); background: transparent; color: ${C.dark};

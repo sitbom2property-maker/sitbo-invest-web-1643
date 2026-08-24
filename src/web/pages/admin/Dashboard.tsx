@@ -113,7 +113,7 @@ export default function AdminDashboard() {
 					<div>
 						<h1
 							style={{
-								fontFamily: "Coolvetica, Inter, sans-serif",
+								fontFamily: "JUN, Georgia, serif",
 								fontSize: "2rem",
 								margin: 0,
 								fontWeight: 500,
@@ -123,7 +123,7 @@ export default function AdminDashboard() {
 						</h1>
 						<p
 							style={{
-								fontFamily: "Inter, sans-serif",
+								fontFamily: "Nunito, sans-serif",
 								color: "#FFFEF9",
 								margin: "8px 0 0",
 								fontSize: "0.9rem",
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
 								color: C.light,
 								border: "none",
 								borderRadius: "8px",
-								fontFamily: "Inter, sans-serif",
+								fontFamily: "Nunito, sans-serif",
 								fontWeight: 600,
 								fontSize: "0.85rem",
 								cursor: "pointer",
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
 								border: `1px solid ${C.burgundy}`,
 								color: C.light,
 								borderRadius: "8px",
-								fontFamily: "Inter, sans-serif",
+								fontFamily: "Nunito, sans-serif",
 								fontSize: "0.85rem",
 								cursor: "pointer",
 							}}
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
 						>
 							<p
 								style={{
-									fontFamily: "Inter, sans-serif",
+									fontFamily: "Nunito, sans-serif",
 									fontSize: "0.7rem",
 									textTransform: "uppercase",
 									letterSpacing: "0.1em",
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
 							</p>
 							<p
 								style={{
-									fontFamily: "Inter, sans-serif",
+									fontFamily: "Nunito, sans-serif",
 									fontSize: "2.2rem",
 									margin: 0,
 									fontWeight: 600,
@@ -255,7 +255,7 @@ export default function AdminDashboard() {
 						style={{
 							width: "100%",
 							borderCollapse: "collapse",
-							fontFamily: "Inter, sans-serif",
+							fontFamily: "Nunito, sans-serif",
 							fontSize: "0.85rem",
 						}}
 					>
@@ -352,7 +352,7 @@ const selectStyle: React.CSSProperties = {
 	border: `1px solid #703C54`,
 	borderRadius: "8px",
 	color: "#FFFEF9",
-	fontFamily: "Inter, sans-serif",
+	fontFamily: "Nunito, sans-serif",
 	fontSize: "0.85rem",
 	outline: "none",
 };

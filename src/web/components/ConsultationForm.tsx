@@ -3,7 +3,7 @@ import { trackLead } from "../lib/analytics";
 
 const labelStyle: CSSProperties = {
   display: "block",
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: "0.62rem",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
@@ -17,7 +17,7 @@ const inputStyle: CSSProperties = {
   background: "rgba(255,254,249,0.05)",
   border: "1px solid rgba(140,178,192,0.1)",
   color: "#FFFEF9",
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: "14px",
   padding: "14px 16px",
   outline: "none",
@@ -72,7 +72,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
     return (
       <p
         style={{
-          fontFamily: "Inter, sans-serif",
+          fontFamily: "Nunito, sans-serif",
           fontSize: "15px",
           color: "#FFFEF9",
           textAlign: "center",
@@ -151,7 +151,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
         </div>
 
         {error && (
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#FFFEF9", margin: "16px 0 0" }}>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "13px", color: "#FFFEF9", margin: "16px 0 0" }}>
             {error}
           </p>
         )}
@@ -163,7 +163,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
             width: "100%",
             background: loading ? "rgba(112,60,84,0.6)" : "#703C54",
             color: "#FFFEF9",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.7rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",

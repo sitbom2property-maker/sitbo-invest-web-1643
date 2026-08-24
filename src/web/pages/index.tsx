@@ -131,7 +131,7 @@ const HERO_STYLES = `
     color: #FFFEF9 !important;
   }
   .hero-video-section .hero-roulette {
-    font-family: 'Coolvetica, Inter, sans-serif';
+    font-family: 'JUN, Georgia, serif';
     font-style: italic;
     font-weight: 400;
     color: #FFFEF9;
@@ -152,7 +152,7 @@ const HERO_STYLES = `
     box-sizing: border-box;
     border-radius: 0;
     padding: 16px 18px;
-    font-family: Inter, sans-serif;
+    font-family: Nunito, sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -174,7 +174,7 @@ const HERO_STYLES = `
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    font-family: Inter, sans-serif;
+    font-family: Nunito, sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -309,7 +309,7 @@ function Hero() {
           <h1
             className="hero-h1-video"
             style={{
-              fontFamily: "Coolvetica, Inter, sans-serif",
+              fontFamily: "JUN, Georgia, serif",
               fontSize: "clamp(48px, 6.5vw, 92px)",
               fontWeight: 400,
               color: "#FFFEF9",
@@ -347,7 +347,7 @@ function Hero() {
             display: "inline-block",
             color: C.light,
             textDecoration: "none",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "13px",
             letterSpacing: "0.08em",
             transition: "color 0.2s",
@@ -395,26 +395,26 @@ function FounderNote() {
           <div className="reveal reveal-delay-2">
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
               <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
-              <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "Inter, sans-serif" }}>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", fontFamily: "Nunito, sans-serif" }}>
                 {t("home.founder.eyebrow")}
               </span>
             </div>
 
-            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Inter, sans-serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
+            <blockquote style={{ margin: "0 0 32px", padding: 0, fontFamily: "Nunito, sans-serif", fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#21141A", lineHeight: 1.25 }}>
               &ldquo;{t("home.founder.quote")}&rdquo;
             </blockquote>
 
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
               {t("home.founder.body1")}
             </p>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "20px" }}>
               {t("home.founder.body2")}
             </p>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "28px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.6)", lineHeight: 1.8, marginBottom: "28px" }}>
               {t("home.founder.body3")}
             </p>
 
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.1rem", fontStyle: "italic", color: "#21141A", margin: "0 0 28px" }}>
               {t("home.founder.signature")}
             </p>
 
@@ -425,7 +425,7 @@ function FounderNote() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "8px",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.72rem",
                 fontWeight: 600,
                 letterSpacing: "0.14em",
@@ -483,7 +483,7 @@ function Founder() {
   const t = useT();
   return (
     <section id="about" className="scroll-mt-24" style={{ background: "#21141A", padding: "10px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Inter, sans-serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
+      <div style={{ position: "absolute", top: "50%", right: "-20px", transform: "translateY(-50%)", fontSize: "clamp(60px,15vw,180px)", fontFamily: "Nunito, sans-serif", fontWeight: 700, color: "rgba(140,178,192,0.06)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>{t("catalog.city.batumi").toUpperCase()}</div>
 
       {/* Big frame card */}
       <div style={{ background: "#FFFEF9", borderRadius: "10px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "hidden", padding: "80px 0" }}>
@@ -496,8 +496,8 @@ function Founder() {
             <img src="/home/arthur-founder.jpg" alt={t("home.founder.imageAlt")}
               style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(transparent, rgba(33,20,26,0.92))" }}>
-              <p style={{ color: "#FFFEF9", fontFamily: "Inter, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
-              <p style={{ color: C.light, fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "Inter, sans-serif", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
+              <p style={{ color: "#FFFEF9", fontFamily: "Nunito, sans-serif", fontSize: "1.3rem", fontWeight: 500, margin: 0 }}>Arthur Arutuniyan</p>
+              <p style={{ color: C.light, fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "4px 0 0", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}>{t("home.founder.eyebrow")}</p>
             </div>
           </div>
         </div>
@@ -508,12 +508,12 @@ function Founder() {
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "Inter, sans-serif" }}>{t("home.founder.aboutEyebrow")}</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "Nunito, sans-serif" }}>{t("home.founder.aboutEyebrow")}</span>
             </div>
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
+            <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: "40px" }}>
               {t("home.founder.aboutHeadline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.founder.aboutHeadlineEm")}</em>
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "rgba(33,20,26,0.7)", lineHeight: 1.85, marginBottom: "60px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "rgba(33,20,26,0.7)", lineHeight: 1.85, marginBottom: "60px" }}>
               {t("home.founder.aboutBody")}
             </p>
           </div>
@@ -527,8 +527,8 @@ function Founder() {
               { label: t("home.founder.pillar4.title"),  desc: t("home.founder.pillar4.desc") },
             ].map((item) => (
               <div key={item.label} style={{ borderLeft: "2px solid #703C54", paddingLeft: "18px", paddingTop: "4px", paddingBottom: "4px" }}>
-                <p style={{ color: C.dark, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", marginBottom: "8px", fontWeight: 700 }}>{item.label}</p>
-                <p style={{ color: "rgba(33,20,26,0.7)", fontSize: "0.84rem", fontFamily: "Inter, sans-serif", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+                <p style={{ color: C.dark, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "Nunito, sans-serif", marginBottom: "8px", fontWeight: 700 }}>{item.label}</p>
+                <p style={{ color: "rgba(33,20,26,0.7)", fontSize: "0.84rem", fontFamily: "Nunito, sans-serif", lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -553,10 +553,10 @@ function Analytics() {
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "Inter, sans-serif" }}>{t("home.analytics.eyebrow")}</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted, fontFamily: "Nunito, sans-serif" }}>{t("home.analytics.eyebrow")}</span>
             </div>
           )}
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1, marginBottom: isMobile ? "4px" : "8px" }}>
             {isMobile ? (
               <>
                 {t("home.analytics.headline")}
@@ -571,7 +571,7 @@ function Analytics() {
               </>
             )}
           </h2>
-          <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "Inter, sans-serif", marginBottom: isMobile ? "12px" : "24px" }}>{t("home.analytics.source")}</p>
+          <p style={{ fontSize: "0.82rem", color: C.muted, fontFamily: "Nunito, sans-serif", marginBottom: isMobile ? "12px" : "24px" }}>{t("home.analytics.source")}</p>
         </div>
 
         {/* Stats */}
@@ -582,7 +582,7 @@ function Analytics() {
               onMouseLeave={(e) => (e.currentTarget.style.borderBottomColor = "transparent")}
             >
               <p className="stat-number">{s.value}</p>
-              <p style={{ color: C.muted, fontSize: "0.78rem", fontFamily: "Inter, sans-serif", marginTop: "6px" }}>{t(s.labelKey)}</p>
+              <p style={{ color: C.muted, fontSize: "0.78rem", fontFamily: "Nunito, sans-serif", marginTop: "6px" }}>{t(s.labelKey)}</p>
             </div>
           ))}
         </div>
@@ -590,20 +590,20 @@ function Analytics() {
         {/* Triggers + Chart */}
         <div className="analytics-grid" style={{ marginTop: isMobile ? "20px" : "56px" }}>
           <div className="reveal">
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
+            <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 400, color: C.dark, marginBottom: "28px", lineHeight: 1.2 }}>
               {t("home.analytics.whyTitle")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.analytics.whyTitleEm")}</em>
             </h3>
             {triggers.map((triggerKey) => (
               <div key={triggerKey} style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "6px" }}>
                 <div style={{ width: "6px", height: "6px", background: "#703C54", flexShrink: 0, marginTop: "6px", borderRadius: "50%" }} />
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{t(triggerKey)}</p>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: C.muted, lineHeight: 1.6, margin: 0 }}>{t(triggerKey)}</p>
               </div>
             ))}
           </div>
 
           <div className="reveal reveal-delay-2">
             <div style={{ background: "#FFFEF9", padding: "32px", maxWidth: "420px", border: "2px solid #21141A" }}>
-              <p style={{ color: "#21141A", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", fontWeight: 600, marginBottom: "24px" }}>{t("home.analytics.rentalYieldComparison")}</p>
+              <p style={{ color: "#21141A", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "Nunito, sans-serif", fontWeight: 600, marginBottom: "24px" }}>{t("home.analytics.rentalYieldComparison")}</p>
               {[
                 { city: t("home.analytics.city.batumiFirstLine"), pct: 87, label: "8–14.5%" },
                 { city: t("home.analytics.city.tbilisi"),   pct: 60, label: "5–8%" },
@@ -613,8 +613,8 @@ function Analytics() {
               ].map((row, i) => (
                 <div key={row.city} style={{ marginBottom: "18px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-                    <span style={{ color: "#21141A", fontSize: "0.75rem", fontFamily: "Inter, sans-serif", fontWeight: 500 }}>{row.city}</span>
-                    <span style={{ color: i === 0 ? "#21141A" : "#21141A", fontSize: "0.75rem", fontFamily: "Inter, sans-serif", fontWeight: 500 }}>{row.label}</span>
+                    <span style={{ color: "#21141A", fontSize: "0.75rem", fontFamily: "Nunito, sans-serif", fontWeight: 500 }}>{row.city}</span>
+                    <span style={{ color: i === 0 ? "#21141A" : "#21141A", fontSize: "0.75rem", fontFamily: "Nunito, sans-serif", fontWeight: 500 }}>{row.label}</span>
                   </div>
                   <div style={{ height: "2px", background: "rgba(33,20,26,0.12)" }}>
                     <div style={{ height: "100%", width: `${row.pct}%`, background: i === 0 ? "#21141A" : "rgba(33,20,26,0.25)" }} />
@@ -660,7 +660,7 @@ function Portfolio() {
       <div style={{ margin: "0 10px", background: "#FFFEF9", borderRadius: "10px", padding: "50px 20px", position: "relative", zIndex: 2, border: "1px solid rgba(140,178,192,0.1)", overflow: "visible" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto 8px", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal">
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,4vw,3.2rem)", fontWeight: 400, color: C.dark, lineHeight: 1.1 }}>
             {t("home.portfolio.headline")}<br /><em style={{ fontStyle: "italic", color: C.teal }}>{t("home.portfolio.headlineEm")}</em>
           </h2>
         </div>
@@ -729,10 +729,10 @@ function Portfolio() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
         <div className="reveal" style={{ padding: isMobile ? "40px 0 8px" : "56px 0 25px", maxWidth: "860px", margin: "0 auto" }}>
           <div style={{ borderLeft: `2px solid ${C.teal}`, paddingLeft: "24px" }}>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "clamp(1.2rem,2.2vw,1.8rem)", fontWeight: 300, fontStyle: "italic", color: "#21141A", lineHeight: 1.5, marginBottom: "16px" }}>
               {t("home.portfolio.quote")}
             </p>
-            <p style={{ color: C.teal, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", margin: 0 }}>
+            <p style={{ color: C.teal, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "Nunito, sans-serif", margin: 0 }}>
               {t("home.portfolio.quoteAttr")}
             </p>
           </div>
@@ -783,7 +783,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
 
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0.08) 65%, transparent 100%)" }} />
 
-          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FFFEF9", color: "#21141A", padding: "4px 10px", fontSize: "0.62rem", fontFamily: "Inter, sans-serif", fontWeight: 700, letterSpacing: "0.06em" }}>
+          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FFFEF9", color: "#21141A", padding: "4px 10px", fontSize: "0.62rem", fontFamily: "Nunito, sans-serif", fontWeight: 700, letterSpacing: "0.06em" }}>
             {project.yield} {t("catalog.roi")}
           </div>
 
@@ -791,15 +791,15 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
             position: "absolute", top: "14px", left: "14px",
             background: "rgba(255,254,249,0.12)", backdropFilter: "blur(6px)",
             border: "1px solid rgba(255,254,249,0.2)", borderRadius: "6px",
-            padding: "4px 10px", fontSize: "0.58rem", fontFamily: "Inter, sans-serif",
+            padding: "4px 10px", fontSize: "0.58rem", fontFamily: "Nunito, sans-serif",
             color: "#FFFEF9", letterSpacing: "0.08em", textTransform: "uppercase",
             opacity: hovered ? 1 : 0, transition: "opacity 0.3s",
           }}>{t("cta.viewProject")}</div>
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px 24px", minHeight: "140px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-            <p style={{ color: C.light, fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", marginBottom: "6px" }}>{project.tag}</p>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFEF9", margin: "0 0 8px" }}>{project.name}</h3>
-            <p style={{ color: C.light, fontSize: "0.75rem", fontFamily: "Inter, sans-serif", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
+            <p style={{ color: C.light, fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", fontFamily: "Nunito, sans-serif", marginBottom: "6px" }}>{project.tag}</p>
+            <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.45rem", fontWeight: 500, color: "#FFFEF9", margin: "0 0 8px" }}>{project.name}</h3>
+            <p style={{ color: C.light, fontSize: "0.75rem", fontFamily: "Nunito, sans-serif", lineHeight: 1.55, margin: 0 }}>{teaser}</p>
           </div>
         </div>
       </a>
@@ -842,20 +842,20 @@ function Lifestyle() {
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
-              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Inter, sans-serif" }}>{t("home.lifestyle.eyebrow")}</span>
+              <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Nunito, sans-serif" }}>{t("home.lifestyle.eyebrow")}</span>
             </div>
           )}
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "20px" }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,3.5vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "20px" }}>
             {t("home.lifestyle.headline")}<br /><em style={{ fontStyle: "italic", color: C.light }}>{t("home.lifestyle.headlineEm")}</em>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.8, marginBottom: isMobile ? "52px" : "32px" }}>
             {t("home.lifestyle.body")}
           </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, marginBottom: "20px" }}>{t("home.lifestyle.calendar")}</p>
           {bloomCalendar.map((item, i) => (
             <div key={item.monthKey} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "16px", alignItems: "center", padding: "11px 0", borderBottom: i < bloomCalendar.length - 1 ? "1px solid rgba(255,254,249,0.08)" : "none" }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", fontWeight: 600, color: C.light }}>{t(item.monthKey)}</span>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: C.light }}>{t(item.flowersKey)}</span>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", fontWeight: 600, color: C.light }}>{t(item.monthKey)}</span>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.82rem", color: C.light }}>{t(item.flowersKey)}</span>
             </div>
           ))}
         </div>
@@ -945,16 +945,16 @@ function DiscoveryTour() {
           }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "24px" }}>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
-              <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "Inter, sans-serif", fontWeight: 600 }}>{t("home.discovery.eyebrow")}</span>
+              <span style={{ fontSize: "0.6rem", letterSpacing: "0.24em", textTransform: "uppercase", color: C.muted, fontFamily: "Nunito, sans-serif", fontWeight: 600 }}>{t("home.discovery.eyebrow")}</span>
               <div style={{ width: "28px", height: "1px", background: C.wine }} />
             </div>
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, color: C.dark, lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headline")}{" "}
             </h2>
-            <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#703C54", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
+            <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(2.6rem, 5.5vw, 4.4rem)", fontWeight: 400, fontStyle: "italic", color: "#703C54", lineHeight: 1.05, margin: "0", letterSpacing: "-0.02em", display: "inline" }}>
               {t("home.discovery.headlineEm")}
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.2rem", color: C.muted, lineHeight: 1.7, margin: "20px 0 0", fontStyle: "italic" }}>
               {t("home.discovery.subheadline")}
             </p>
           </div>
@@ -1001,7 +1001,7 @@ function DiscoveryTour() {
                   )}
                 </div>
                 <p style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: isMobile ? "0.7rem" : "0.82rem",
                   fontWeight: isMobile ? 600 : 700,
                   color: isMobile ? "#21141A" : C.dark,
@@ -1010,7 +1010,7 @@ function DiscoveryTour() {
                   textTransform: "uppercase",
                 }}>{item.label}</p>
                 <p style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: isMobile ? "0.72rem" : "0.8rem",
                   color: isMobile ? "rgba(33,20,26,0.55)" : C.muted,
                   margin: 0,
@@ -1031,18 +1031,18 @@ function DiscoveryTour() {
             transition: "opacity 0.9s ease 0.4s",
           }}>
             <div>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.6rem", fontWeight: 700, color: C.dark, marginRight: "10px" }}>
                 $2,000
               </span>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>{t("home.discovery.deposit")}</span>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.muted, margin: "6px 0 0", lineHeight: 1.5 }}>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.muted }}>{t("home.discovery.deposit")}</span>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", color: C.muted, margin: "6px 0 0", lineHeight: 1.5 }}>
                 {t("home.discovery.depositBody")}
               </p>
             </div>
             <a href="#contact" style={{
               display: "inline-block", padding: "14px 32px", flexShrink: 0,
               background: "#703C54", borderRadius: "6px", textDecoration: "none",
-              fontFamily: "Inter, sans-serif", fontSize: "0.72rem", fontWeight: 700,
+              fontFamily: "Nunito, sans-serif", fontSize: "0.72rem", fontWeight: 700,
               color: "#FFFEF9", letterSpacing: "0.1em", textTransform: "uppercase",
               transition: "opacity 0.2s, transform 0.2s",
             }}
@@ -1150,7 +1150,7 @@ function Payment() {
       icon: (
         <span
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.95rem",
             fontWeight: 700,
             color: C.light,
@@ -1181,7 +1181,7 @@ function Payment() {
       icon: (
         <span
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.62rem",
             fontWeight: 700,
             color: C.light,
@@ -1204,9 +1204,9 @@ function Payment() {
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Inter, sans-serif" }}>{t("home.payment.eyebrow")}</span>
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Nunito, sans-serif" }}>{t("home.payment.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,4vw,3rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1 }}>
             {t("home.payment.headline")}<br /><em style={{ fontStyle: "italic", color: C.light }}>{t("home.payment.headlineEm")}</em>
           </h2>
         </div>
@@ -1222,9 +1222,9 @@ function Payment() {
               <div style={{ width: "52px", height: "52px", background: "rgba(140,178,192,0.1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
                 {card.icon}
               </div>
-              <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.7)", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: "#703C54", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.1)", paddingTop: "16px" }}>{card.sub}</p>
+              <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.6rem", fontWeight: 500, color: "#21141A", marginBottom: "16px", lineHeight: 1.2 }}>{card.title}</h3>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: "rgba(33,20,26,0.7)", lineHeight: 1.8, marginBottom: "20px" }}>{card.body}</p>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", color: "#703C54", lineHeight: 1.6, borderTop: "1px solid rgba(140,178,192,0.1)", paddingTop: "16px" }}>{card.sub}</p>
             </div>
           ))}
         </div>
@@ -1237,8 +1237,8 @@ function Payment() {
                 {f.icon}
               </div>
               <div>
-                <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.9rem", color: "#FFFEF9", marginBottom: "8px" }}>{f.title}</p>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.7 }}>{f.desc}</p>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.9rem", color: "#FFFEF9", marginBottom: "8px" }}>{f.title}</p>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.7 }}>{f.desc}</p>
               </div>
             </div>
           ))}
@@ -1301,23 +1301,23 @@ function Calculator() {
   const fmtInst = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 
   const inputStyle: React.CSSProperties = {
-    width: "100%", background: "rgba(33,20,26,0.06)", border: "1px solid rgba(33,20,26,0.2)", padding: "10px 14px", color: "#21141A", fontFamily: "Inter, sans-serif",
+    width: "100%", background: "rgba(33,20,26,0.06)", border: "1px solid rgba(33,20,26,0.2)", padding: "10px 14px", color: "#21141A", fontFamily: "Nunito, sans-serif",
     fontSize: "0.9rem", outline: "none", boxSizing: "border-box",
   };
   const labelStyle: React.CSSProperties = {
     display: "block", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase",
-    color: "rgba(33,20,26,0.7)", fontFamily: "Inter, sans-serif", marginBottom: "6px",
+    color: "rgba(33,20,26,0.7)", fontFamily: "Nunito, sans-serif", marginBottom: "6px",
   };
   const statRow = (label: string, value: string, label2?: string, value2?: string) => (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", padding: "12px 0", borderBottom: "1px solid rgba(33,20,26,0.1)" }}>
       <div>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</p>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
+        <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</p>
+        <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value}</p>
       </div>
       {label2 && (
         <div>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label2}</p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", color: "rgba(33,20,26,0.5)", margin: "0 0 4px", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label2}</p>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.05rem", color: "#21141A", margin: 0, fontWeight: 600 }}>{value2}</p>
         </div>
       )}
     </div>
@@ -1331,9 +1331,9 @@ function Calculator() {
         <div className="reveal" style={{ marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "#703C54" }} />
-            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.light, fontFamily: "Inter, sans-serif" }}>{t("home.calculator.eyebrow")}</span>
+            <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.light, fontFamily: "Nunito, sans-serif" }}>{t("home.calculator.eyebrow")}</span>
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFEF9", margin: 0, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 400, color: "#FFFEF9", margin: 0, lineHeight: 1.1 }}>
             {t("home.calculator.headline")}<br /><em style={{ fontStyle: "italic", color: C.light }}>{t("home.calculator.headlineEm")}</em>
           </h2>
         </div>
@@ -1344,7 +1344,7 @@ function Calculator() {
             <button key={m} onClick={() => setMode(m)} style={{
               flex: isMobile ? 1 : undefined,
               padding: "9px 22px", borderRadius: "7px", border: "none", cursor: "pointer",
-              fontFamily: "Inter, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", letterSpacing: "0.04em", fontWeight: 600,
+              fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.68rem" : "0.78rem", letterSpacing: "0.04em", fontWeight: 600,
               transition: "all 0.2s",
               background: mode === m ? "#703C54" : "transparent",
               color: mode === m ? "#FFFEF9" : C.light,
@@ -1370,7 +1370,7 @@ function Calculator() {
                   <label style={labelStyle}>{t("home.calculator.downPayment")} — {instDown}%&nbsp;&nbsp;<span style={{ color: "#703C54" }}>{fmtInst(instPrice * instDown / 100)}</span></label>
                   <input type="range" min={10} max={70} value={instDown} onChange={e => setInstDown(+e.target.value)}
                     style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Nunito, sans-serif", marginTop: "4px" }}>
                     <span>10%</span><span>70%</span>
                   </div>
                 </div>
@@ -1378,7 +1378,7 @@ function Calculator() {
                   <label style={labelStyle}>{t("home.calculator.durationMonths", { months: instMonths })}</label>
                   <input type="range" min={24} max={48} step={6} value={instMonths} onChange={e => setInstMonths(+e.target.value)}
                     style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Nunito, sans-serif", marginTop: "4px" }}>
                     <span>24</span><span>48</span>
                   </div>
                 </div>
@@ -1390,7 +1390,7 @@ function Calculator() {
                   {(["amount", "income"] as const).map((tab) => (
                     <button key={tab} onClick={() => setMortTab(tab)} style={{
                       flex: 1, padding: "8px 4px", border: "none", cursor: "pointer",
-                      fontFamily: "Inter, sans-serif", fontSize: "0.7rem", fontWeight: 600, transition: "all 0.2s",
+                      fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", fontWeight: 600, transition: "all 0.2s",
                       background: mortTab === tab ? "#21141A" : "transparent",
                       color: mortTab === tab ? "#FFFEF9" : "rgba(33,20,26,0.5)",
                     }}>
@@ -1411,7 +1411,7 @@ function Calculator() {
                       <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortYears })}</label>
                       <input type="range" min={1} max={20} value={mortYears} onChange={e => setMortYears(+e.target.value)}
                         style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
-                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Nunito, sans-serif", marginTop: "4px" }}>
                         {[1,5,9,13,17,20].map(v => <span key={v}>{v}</span>)}
                       </div>
                     </div>
@@ -1429,7 +1429,7 @@ function Calculator() {
                       <label style={labelStyle}>{t("home.calculator.periodYears", { years: mortIncomeYears })}</label>
                       <input type="range" min={1} max={20} value={mortIncomeYears} onChange={e => setMortIncomeYears(+e.target.value)}
                         style={{ width: "100%", accentColor: "#703C54", cursor: "pointer" }} />
-                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Inter, sans-serif", marginTop: "4px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.62rem", color: "rgba(33,20,26,0.4)", fontFamily: "Nunito, sans-serif", marginTop: "4px" }}>
                         {[1,5,9,13,17,20].map(v => <span key={v}>{v}</span>)}
                       </div>
                     </div>
@@ -1448,31 +1448,31 @@ function Calculator() {
 
               {mode === "installment" ? (
                 <>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.monthlyPayment")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.monthlyPayment")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmtInst(instMonthly)}
                   </p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.interestFreeNote", { months: instMonths })}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.interestFreeNote", { months: instMonths })}</p>
                   {statRow(t("home.calculator.loanAmount", { currency: "USD" }), fmtInst(instLoan), t("home.calculator.downPayment"), fmtInst(instPrice * instDown / 100))}
                   {statRow(t("home.calculator.totalPrice"), fmtInst(instPrice), t("home.calculator.duration"), t("home.calculator.durationMonths", { months: instMonths }))}
                 </>
               ) : mortTab === "amount" ? (
                 <>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.monthlyContribution")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.monthlyContribution")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(mortMonthly, currencySymbol)}
                   </p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.annuityPayment")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.annuityPayment")}</p>
                   {statRow(t("home.calculator.amount"), fmt(mortAmount, currencySymbol), t("home.calculator.period"), t("home.calculator.periodYears", { years: mortYears }))}
                   {statRow(t("home.calculator.interestRateNir"), NIR + "%", t("home.calculator.effectiveRateEir"), EIR + "%")}
                 </>
               ) : (
                 <>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.maxLoanAmount")}</p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(33,20,26,0.7)", margin: "0 0 10px" }}>{t("home.calculator.maxLoanAmount")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "2.6rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px", lineHeight: 1 }}>
                     {fmt(maxLoan, currencySymbol)}
                   </p>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.basedOnIncome")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: "0 0 16px" }}>{t("home.calculator.basedOnIncome")}</p>
                   {statRow(t("home.calculator.monthlyContribution"), fmt(maxMonthlyPayment, currencySymbol), t("home.calculator.period"), t("home.calculator.periodYears", { years: mortIncomeYears }))}
                   {statRow(t("home.calculator.interestRateNir"), NIR + "%", t("home.calculator.effectiveRateEir"), EIR + "%")}
                 </>
@@ -1482,9 +1482,9 @@ function Calculator() {
 
             {/* ROI Preview */}
             <div style={{ background: "#FFFEF9", borderRadius: "10px", border: "1px solid rgba(33,20,26,0.15)", padding: "20px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px" }}>9–14%</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(33,20,26,0.5)", margin: "0 0 6px" }}>{t("home.calculator.roiPreview")}</p>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.8rem", fontWeight: 600, color: "#703C54", margin: "0 0 4px" }}>9–14%</p>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", color: "rgba(33,20,26,0.5)", margin: 0, lineHeight: 1.6 }}>
                 {t("home.calculator.roiPreviewBody")}
               </p>
             </div>
@@ -1493,7 +1493,7 @@ function Calculator() {
             <a href="#contact" style={{
               display: "block", textAlign: "center", padding: "14px 20px",
               background: "#703C54", borderRadius: "10px", textDecoration: "none",
-              fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 700,
+              fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 700,
               color: "#FFFEF9", letterSpacing: "0.04em", transition: "opacity 0.2s",
             }}
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
@@ -1545,7 +1545,7 @@ function Contact() {
     fontSize: "0.65rem",
     letterSpacing: "0.1em",
     textTransform: "uppercase",
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     marginBottom: "6px",
   };
   const contactInputStyle: React.CSSProperties = {
@@ -1554,7 +1554,7 @@ function Contact() {
     background: "rgba(255,254,249,0.08)",
     border: "1px solid rgba(255,254,249,0.15)",
     color: "#FFFEF9",
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     fontSize: "0.9rem",
     padding: "12px 14px",
     outline: "none",
@@ -1572,13 +1572,13 @@ function Contact() {
         <div className="reveal" style={{ textAlign: "center", marginBottom: "48px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,254,249,0.3)" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Inter, sans-serif" }}>{t("home.contact.eyebrow")}</span>
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.16em", textTransform: "uppercase", color: C.light, fontFamily: "Nunito, sans-serif" }}>{t("home.contact.eyebrow")}</span>
             <div style={{ width: "28px", height: "1px", background: "rgba(255,254,249,0.3)" }} />
           </div>
-          <h2 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.8rem,4vw,3.4rem)", fontWeight: 400, color: "#FFFEF9", lineHeight: 1.1, marginBottom: "16px" }}>
             {t("home.contact.headline")}<br /><em style={{ fontStyle: "italic", color: C.light }}>{t("home.contact.headlineEm")}</em>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: C.light, lineHeight: 1.7 }}>
             {t("home.contact.body")}
           </p>
         </div>
@@ -1588,8 +1588,8 @@ function Contact() {
             <div style={{ width: "64px", height: "64px", border: `1px solid ${C.teal}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
               <span style={{ color: C.light, fontSize: "1.4rem" }}>✓</span>
             </div>
-            <h3 style={{ fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "1.8rem", color: "#FFFEF9", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7 }}>
+            <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.8rem", color: "#FFFEF9", marginBottom: "12px" }}>{t("home.contact.sentTitle")}</h3>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.88rem", color: C.light, lineHeight: 1.7 }}>
               {t("home.contact.sentBody")}
             </p>
           </div>
@@ -1615,14 +1615,14 @@ function Contact() {
                 <option value="500k+">{t("home.contact.budget.500plus")}</option>
               </select>
             </div>
-            {error && <p style={{ color: C.light, fontSize: "0.8rem", fontFamily: "Inter, sans-serif" }}>{error}</p>}
+            {error && <p style={{ color: C.light, fontSize: "0.8rem", fontFamily: "Nunito, sans-serif" }}>{error}</p>}
             <button type="submit" className="btn-gold" disabled={loading}
               style={{ marginTop: "6px", width: "100%", padding: "16px", fontSize: "0.78rem", opacity: loading ? 0.7 : 1, cursor: loading ? "wait" : "pointer", color: "#FFFEF9", background: "#703C54" }}
               onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = loading ? "0.7" : "1"; }}>
               {loading ? t("home.contact.loading") : t("home.contact.submit")}
             </button>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.72rem", color: C.light, textAlign: "center" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.72rem", color: C.light, textAlign: "center" }}>
               {t("home.contact.disclaimer")}
             </p>
           </form>
@@ -1777,7 +1777,7 @@ function SocialProofToast() {
         border: "1px solid rgba(140,178,192,0.1)",
         borderRadius: 999,
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.24)",
-        fontFamily: "Inter, sans-serif",
+        fontFamily: "Nunito, sans-serif",
         fontSize: isNarrow ? 11 : 12,
         fontWeight: 400,
         letterSpacing: "0.04em",

@@ -68,7 +68,7 @@ function NavItem({
   onNavigate?: () => void;
 }) {
   const style = {
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Nunito', sans-serif",
     fontSize: 15,
     fontWeight: 400,
     letterSpacing: 0,
@@ -267,7 +267,7 @@ export function Nav() {
                   background: "transparent",
                   color: "#FFFEF9",
                   border: "1px solid rgba(255,255,255,0.55)",
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Nunito', sans-serif",
                   fontSize: 15,
                   fontWeight: 400,
                   letterSpacing: 0,
@@ -335,7 +335,7 @@ export function Nav() {
                   href={l.href}
                   onNavigate={() => setMenuOpen(false)}
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
                     color: "#FFFEF9",
@@ -354,7 +354,7 @@ export function Nav() {
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Nunito, sans-serif",
                     fontSize: "clamp(26px, 6.5vw, 40px)",
                     fontWeight: 400,
                     color: "#FFFEF9",
@@ -383,7 +383,7 @@ export function Nav() {
                 borderRadius: 8,
                 background: "#703C54",
                 color: "#FFFEF9",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 11,
                 fontWeight: 700,
                 letterSpacing: "0.16em",

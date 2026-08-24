@@ -58,7 +58,7 @@ export function Partners() {
     <section style={{ background: '#FFFEF9', padding: 'clamp(48px,6vw,96px) 0', overflow: 'hidden' }}>
       <style>{css}</style>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
-        <h2 style={{ fontFamily: 'Coolvetica, Inter, sans-serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>{t("partners.headline")}</h2>
+        <h2 style={{ fontFamily: 'JUN, Georgia, serif', fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 400, color: '#21141A', margin: 0 }}>{t("partners.headline")}</h2>
       </div>
       <div style={{ position: 'relative', marginTop: '48px' }}>
         <div className='p-fade-l' />

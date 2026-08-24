@@ -17,7 +17,7 @@ export function FooterV2() {
         .fv2 {
           background: #21141A;
           color: #FFFEF9;
-          font-family: 'Inter', sans-serif;
+          font-family: 'Nunito', sans-serif;
           padding: clamp(64px, 8vw, 112px) 0 clamp(32px, 4vw, 56px);
         }
         .fv2-wrap {
@@ -42,7 +42,7 @@ export function FooterV2() {
           margin: 0 0 14px;
         }
         .fv2-name {
-          font-family: 'Inter', sans-serif;
+          font-family: 'Nunito', sans-serif;
           font-size: 16px;
           font-weight: 700;
           letter-spacing: .01em;
@@ -72,7 +72,7 @@ export function FooterV2() {
           max-width: 560px;
         }
         .fv2-col-title {
-          font-family: 'Inter', sans-serif;
+          font-family: 'Nunito', sans-serif;
           font-size: 12px;
           font-weight: 600;
           letter-spacing: .08em;

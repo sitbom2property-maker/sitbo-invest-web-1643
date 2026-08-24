@@ -20,7 +20,7 @@ const CURRENCY_OPTIONS = [
 ] as const;
 
 const FIELD_LABEL: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 11,
   fontWeight: 500,
   letterSpacing: "0.22em",
@@ -116,7 +116,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
             <p
               style={{
                 margin: "10px 0 0",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 11,
                 color: "rgba(33,20,26,0.55)",
                 lineHeight: 1.45,
