@@ -89,6 +89,21 @@ const en = {
   "v2.hero.ctaSecondary": "Sell with me",
   "v2.hero.scroll": "Scroll For More",
 
+  "v2.market.title": "Your person inside the Georgian property market.",
+  "v2.market.body1":
+    "Buying property in Georgia is not just about listings and beautiful developer presentations. It is about land, ownership, developers, banks, negotiations, renovation, hidden risks and people who make decisions.",
+  "v2.market.body2":
+    "I know this market from the inside. Behind me are dozens of transactions, hundreds of negotiations, real reviews from clients and a reputation I protect in the city.",
+  "v2.market.card1": "Born and raised in Georgia",
+  "v2.market.card2": "Dozens of transactions",
+  "v2.market.card3": "Hundreds of negotiations",
+  "v2.market.card4": "Real reviews and recommendations",
+
+  "v2.notes.title1": "I do not work with everyone.",
+  "v2.notes.title2": "My time and resources are limited.",
+  "v2.notes.body":
+    "I do not offer free property chats, random listing searches or unpaid calls. I work with clients who value professional guidance, respect expertise and want to make serious decisions in a foreign real estate market. If you are looking for the cheapest broker, we are probably not a match. If you want a trusted person inside the Georgian market, we should talk.",
+
   "v2.why.title": "Why investors choose Georgia?",
   "v2.why.body":
     "One of the world's most accessible, low-tax, and fast-growing real estate hubs.",
@@ -167,7 +182,7 @@ const en = {
     "Resolved complex developer conflicts and legal flaws instantly with complete diplomacy and expertise.",
   "v2.fb.a7": "Maya S.",
 
-  "v2.pricing.title": "It always starts with a call...",
+  "v2.pricing.title": "Choose how you want to work with me",
   "v2.pricing.requestLabel": "Request",
   "v2.pricing.resultLabel": "Result",
   "v2.pricing.choose": "Choose",

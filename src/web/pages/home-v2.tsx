@@ -94,6 +94,39 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
   );
 }
 
+// ─── Your person inside the market ────────────────────────────────────────────
+
+const MARKET_CARDS: { key: MessageKey; tone: "gray" | "green" | "white" | "plum" }[] = [
+  { key: "v2.market.card1", tone: "gray" },
+  { key: "v2.market.card2", tone: "green" },
+  { key: "v2.market.card3", tone: "white" },
+  { key: "v2.market.card4", tone: "plum" },
+];
+
+function MarketPerson() {
+  const t = useT();
+  return (
+    <section className="rd-market" id="inside-market">
+      <div className="rd-wrap">
+        <div className="rd-market-head rv">
+          <h2 className="rd-h2">{t("v2.market.title")}</h2>
+          <div className="rd-market-copy">
+            <p>{t("v2.market.body1")}</p>
+            <p>{t("v2.market.body2")}</p>
+          </div>
+        </div>
+        <div className="rd-market-grid rv">
+          {MARKET_CARDS.map((card) => (
+            <div key={card.key} className={`rd-market-card rd-market-card-${card.tone}`}>
+              <span>{t(card.key)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Why Georgia + stats ──────────────────────────────────────────────────────
 
 type Stat =
@@ -709,6 +742,26 @@ function Faq() {
   );
 }
 
+// ─── Notes (selectivity) ──────────────────────────────────────────────────────
+
+function Notes() {
+  const t = useT();
+  return (
+    <section className="rd-notes" id="notes">
+      <div className="rd-wrap">
+        <div className="rd-notes-inner rv">
+          <h2 className="rd-h2">
+            {t("v2.notes.title1")}
+            <br />
+            {t("v2.notes.title2")}
+          </h2>
+          <p>{t("v2.notes.body")}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Newsletter ───────────────────────────────────────────────────────────────
 
 function Newsletter() {
@@ -907,6 +960,49 @@ html, body { background: #21141A; }
 
 .rd-hero-band { position: relative; line-height: 0; }
 .rd-hero-band img { width: 100%; height: clamp(280px, 58vw, 838px); object-fit: cover; display: block; }
+
+/* market person */
+.rd-market { padding: clamp(48px, 6vw, 96px) 0; background: #21141A; color: #FFFEF9; }
+.rd-market-head {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4vw, 56px); align-items: start;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.rd-market-head .rd-h2 { max-width: 640px; color: #FFFEF9; }
+.rd-market-copy {
+  display: grid; gap: 16px; max-width: 520px; justify-self: end;
+}
+.rd-market-copy p {
+  margin: 0; font-family: var(--body); font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5; color: rgba(255,254,249,.82);
+}
+.rd-market-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+}
+.rd-market-card {
+  border-radius: 2px; min-height: clamp(140px, 16vw, 180px);
+  padding: clamp(18px, 2vw, 24px);
+  display: flex; align-items: flex-end;
+  box-sizing: border-box;
+}
+.rd-market-card span {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(18px, 1.7vw, 24px); line-height: 1.2;
+}
+.rd-market-card-gray { background: #463C41; color: #FFFEF9; }
+.rd-market-card-green { background: #48674D; color: #FFFEF9; }
+.rd-market-card-white { background: #FFFEF9; color: #21141A; }
+.rd-market-card-plum { background: #703C54; color: #FFFEF9; }
+
+/* notes */
+.rd-notes { padding: clamp(48px, 6vw, 96px) 0; background: #21141A; color: #FFFEF9; }
+.rd-notes-inner { max-width: 820px; }
+.rd-notes-inner .rd-h2 { color: #FFFEF9; margin: 0 0 22px; }
+.rd-notes-inner p {
+  margin: 0; font-family: var(--body); font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
+}
 
 /* why + stats — perfect squares; dark page section #21141A / #FFFEF9 */
 .rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); background: #21141A; color: #FFFEF9; }
@@ -1208,6 +1304,9 @@ html, body { background: #21141A; }
   .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
   .rd-plan { min-height: 0; padding: clamp(32px, 5vw, 44px) clamp(24px, 4vw, 32px); }
+  .rd-market-head { grid-template-columns: 1fr; gap: 18px; }
+  .rd-market-copy { justify-self: start; max-width: none; }
+  .rd-market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
@@ -1218,6 +1317,7 @@ html, body { background: #21141A; }
   .rd-fb-card { --fb-size: min(78vw, 300px); }
   .rd-fb-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .rd-fb-rail { padding-right: 56px; }
+  .rd-market-grid { grid-template-columns: 1fr; }
 }
 `;
 
@@ -1232,18 +1332,20 @@ export default function HomeV2() {
       <style>{CSS}</style>
 
       <Hero onRequest={setModal} />
-      <WhyGeorgia />
-      <Quote />
-      <div className="rd-canvas">
-        <SelectedProjects />
-      </div>
-      <Ecosystem />
-      <div className="rd-canvas">
-        <Feedback />
-      </div>
+      <MarketPerson />
       <Pricing onRequest={setModal} />
       <div className="rd-canvas">
         <Faq />
+      </div>
+      <WhyGeorgia />
+      <div className="rd-canvas">
+        <SelectedProjects />
+      </div>
+      <div className="rd-canvas">
+        <Feedback />
+      </div>
+      <Notes />
+      <div className="rd-canvas">
         <Newsletter />
       </div>
 
