@@ -363,7 +363,7 @@ export const projects: Project[] = [
     ceilingHeight: "3 m",
     floors: "2–12",
     buildings: "3",
-    finishing: "Turnkey designer finish with European furniture & appliances",
+    finishing: "Turnkey",
     climateAdaptation: "Yes",
     installment: "30% / 70%",
     propertyType: "apartment-aparthotel",

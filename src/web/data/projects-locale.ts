@@ -315,7 +315,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
     ceilingHeight: "3 м",
     floors: "2–12",
     buildings: "3",
-    finishing: "Дизайнерский ремонт «под ключ» с европейской мебелью и техникой",
+    finishing: "Под ключ",
     climateAdaptation: "Да",
     installment: "30% / 70%",
     features: [

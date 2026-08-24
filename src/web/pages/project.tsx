@@ -666,6 +666,31 @@ export default function ProjectPage() {
               : "project.propertyType.apartment";
   const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
   const next = localizedList[(idx + 1) % localizedList.length];
+  const metaLabel: CSSProperties = {
+    fontFamily: "Inter, sans-serif",
+    fontSize: "13px",
+    color: "rgba(33,20,26,0.45)",
+    margin: 0,
+    lineHeight: "16px",
+    height: 16,
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+  };
+  const metaValue: CSSProperties = {
+    fontFamily: "Inter, sans-serif",
+    fontSize: "16px",
+    fontWeight: 700,
+    color: C.dark,
+    margin: 0,
+    lineHeight: 1.3,
+  };
+  const metaCol: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6,
+    alignItems: "flex-start",
+  };
 
   return (<>
 
@@ -834,29 +859,19 @@ export default function ProjectPage() {
                     paddingTop: 30,
                     paddingBottom: 30,
                     marginBottom: 0,
+                    alignItems: "start",
                   }}
                 >
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        color: "rgba(33,20,26,0.45)",
-                        margin: "0 0 6px",
-                        lineHeight: 1.3,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                      }}
-                    >
+                  <div style={metaCol}>
+                    <p style={metaLabel}>
                       {t("project.propertyType")}
                       <button
                         type="button"
                         onClick={() => setPropertyTypeInfoOpen(true)}
                         aria-label={t("project.propertyType.infoAria")}
                         style={{
-                          width: 16,
-                          height: 16,
+                          width: 14,
+                          height: 14,
                           borderRadius: "50%",
                           border: "1px solid rgba(33,20,26,0.35)",
                           background: "transparent",
@@ -867,7 +882,7 @@ export default function ProjectPage() {
                           alignItems: "center",
                           justifyContent: "center",
                           fontFamily: "Inter, sans-serif",
-                          fontSize: 11,
+                          fontSize: 10,
                           fontWeight: 600,
                           lineHeight: 1,
                           flexShrink: 0,
@@ -876,25 +891,15 @@ export default function ProjectPage() {
                         i
                       </button>
                     </p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
-                      {t(typeKey)}
-                    </p>
+                    <p style={metaValue}>{t(typeKey)}</p>
                   </div>
-                  <div>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
-                      {t("project.pricePerSqm")}
-                    </p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
-                      {p.pricePerSqm ?? "—"}
-                    </p>
+                  <div style={metaCol}>
+                    <p style={metaLabel}>{t("project.pricePerSqm")}</p>
+                    <p style={metaValue}>{p.pricePerSqm ?? "—"}</p>
                   </div>
-                  <div>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(33,20,26,0.45)", margin: "0 0 6px", lineHeight: 1.3 }}>
-                      {t("project.ready")}
-                    </p>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0, lineHeight: 1.3 }}>
-                      {p.completion}
-                    </p>
+                  <div style={metaCol}>
+                    <p style={metaLabel}>{t("project.ready")}</p>
+                    <p style={metaValue}>{p.completion}</p>
                   </div>
                 </div>
 
