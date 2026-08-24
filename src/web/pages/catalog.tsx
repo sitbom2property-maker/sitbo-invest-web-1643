@@ -6,6 +6,8 @@ import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT, type MessageKey } from "../i18n";
 import { RequestModal } from "../components/RequestModal";
+import { AppLink } from "../components/app-link";
+import { trackEvent } from "../lib/analytics";
 
 const C = {
   dark:      "#21141A",
@@ -47,12 +49,54 @@ const CHECKLIST_ITEMS: MessageKey[] = [
   "catalog.checklist.i10",
 ];
 
-function DepositChecklist({ onCta }: { onCta: () => void }) {
+/** Ownership, land, contract terms, independent advice — indices in CHECKLIST_ITEMS */
+const CRITICAL_INDEXES = new Set([0, 1, 4, 9]);
+
+type RiskLevel = "high" | "review" | "ready";
+
+function resolveRiskLevel(checked: boolean[]): RiskLevel {
+  const done = checked.filter(Boolean).length;
+  let level: RiskLevel = done <= 4 ? "high" : done <= 7 ? "review" : "ready";
+  const criticalMissing = [...CRITICAL_INDEXES].some((i) => !checked[i]);
+  if (criticalMissing && level === "ready") level = "review";
+  return level;
+}
+
+function DepositChecklist() {
   const t = useT();
   const isMobile = useIsMobile();
   const [checked, setChecked] = useState<boolean[]>(() => CHECKLIST_ITEMS.map(() => false));
   const done = checked.filter(Boolean).length;
-  const almostReady = done >= 8;
+  const total = CHECKLIST_ITEMS.length;
+  const level = resolveRiskLevel(checked);
+
+  const result = {
+    high: {
+      badge: "catalog.checklist.high.badge" as MessageKey,
+      title: "catalog.checklist.high.title" as MessageKey,
+      body: "catalog.checklist.high.body" as MessageKey,
+      cta: "catalog.checklist.high.cta" as MessageKey,
+    },
+    review: {
+      badge: "catalog.checklist.review.badge" as MessageKey,
+      title: "catalog.checklist.review.title" as MessageKey,
+      body: "catalog.checklist.review.body" as MessageKey,
+      cta: "catalog.checklist.review.cta" as MessageKey,
+    },
+    ready: {
+      badge: "catalog.checklist.ready.badge" as MessageKey,
+      title: "catalog.checklist.ready.title" as MessageKey,
+      body: "catalog.checklist.ready.body" as MessageKey,
+      cta: "catalog.checklist.ready.cta" as MessageKey,
+    },
+  }[level];
+
+  const badgeStyle =
+    level === "high"
+      ? { border: "1px solid rgba(255,254,249,.35)", color: "rgba(255,254,249,.92)", background: "rgba(255,254,249,.06)" }
+      : level === "review"
+        ? { border: "1px solid rgba(140,178,192,.45)", color: "#C9DCE4", background: "rgba(140,178,192,.1)" }
+        : { border: "1px solid rgba(72,103,77,.55)", color: "#C8D6C9", background: "rgba(72,103,77,.18)" };
 
   const toggle = (index: number) => {
     setChecked((prev) => prev.map((v, i) => (i === index ? !v : v)));
@@ -60,6 +104,7 @@ function DepositChecklist({ onCta }: { onCta: () => void }) {
 
   return (
     <section
+      aria-labelledby="deposit-checklist-title"
       style={{
         padding: "0 0 clamp(48px, 6vw, 80px)",
         background: C.light,
@@ -72,22 +117,38 @@ function DepositChecklist({ onCta }: { onCta: () => void }) {
             background: C.dark,
             color: C.light,
             padding: isMobile ? "28px 20px" : "clamp(36px, 4vw, 56px)",
+            border: "1px solid rgba(255,254,249,.08)",
           }}
         >
           <h2
+            id="deposit-checklist-title"
             style={{
               fontFamily: "Coolvetica, Inter, sans-serif",
               fontWeight: 600,
               fontSize: "clamp(26px, 3.2vw, 40px)",
               lineHeight: 1.15,
-              margin: "0 0 28px",
-              maxWidth: 720,
+              margin: "0 0 12px",
+              maxWidth: 760,
             }}
           >
             {t("catalog.checklist.title")}
           </h2>
+          <p
+            style={{
+              margin: "0 0 28px",
+              maxWidth: 680,
+              fontFamily: "Inter, sans-serif",
+              fontSize: "clamp(14px, 1.2vw, 16px)",
+              lineHeight: 1.5,
+              color: "rgba(255,254,249,.78)",
+            }}
+          >
+            {t("catalog.checklist.subtitle")}
+          </p>
 
           <div
+            role="group"
+            aria-label={t("catalog.checklist.title")}
             style={{
               display: "grid",
               gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
@@ -97,12 +158,11 @@ function DepositChecklist({ onCta }: { onCta: () => void }) {
           >
             {CHECKLIST_ITEMS.map((key, index) => {
               const on = checked[index];
+              const id = `deposit-check-${index}`;
               return (
-                <button
+                <label
                   key={key}
-                  type="button"
-                  onClick={() => toggle(index)}
-                  aria-pressed={on}
+                  htmlFor={id}
                   style={{
                     display: "flex",
                     alignItems: "flex-start",
@@ -119,6 +179,19 @@ function DepositChecklist({ onCta }: { onCta: () => void }) {
                     lineHeight: 1.4,
                   }}
                 >
+                  <input
+                    id={id}
+                    type="checkbox"
+                    checked={on}
+                    onChange={() => toggle(index)}
+                    style={{
+                      position: "absolute",
+                      opacity: 0,
+                      width: 1,
+                      height: 1,
+                      pointerEvents: "none",
+                    }}
+                  />
                   <span
                     aria-hidden
                     style={{
@@ -140,44 +213,123 @@ function DepositChecklist({ onCta }: { onCta: () => void }) {
                     {on ? "✓" : ""}
                   </span>
                   <span>{t(key)}</span>
-                </button>
+                </label>
               );
             })}
           </div>
 
-          <p
+          <div
             style={{
-              margin: "0 0 22px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "clamp(15px, 1.25vw, 17px)",
-              lineHeight: 1.5,
-              color: "rgba(255,254,249,.88)",
-              maxWidth: 720,
-            }}
-          >
-            {almostReady ? t("catalog.checklist.ok") : t("catalog.checklist.warn")}
-          </p>
-
-          <button
-            type="button"
-            onClick={onCta}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "Inter, sans-serif",
-              fontSize: 15,
-              fontWeight: 500,
-              padding: "15px 28px",
               borderRadius: 2,
-              border: "none",
-              cursor: "pointer",
-              background: C.light,
-              color: C.dark,
+              border: "1px solid rgba(255,254,249,.14)",
+              background: "rgba(255,254,249,.04)",
+              padding: isMobile ? "20px 16px" : "24px 28px",
             }}
           >
-            {t("catalog.checklist.cta")}
-          </button>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 14,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  letterSpacing: "0.02em",
+                  color: "rgba(255,254,249,.75)",
+                }}
+              >
+                {t("catalog.checklist.progress", { done, total })}
+              </span>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  ...badgeStyle,
+                }}
+              >
+                {t(result.badge)}
+              </span>
+            </div>
+
+            <h3
+              style={{
+                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(20px, 2.2vw, 28px)",
+                lineHeight: 1.2,
+                margin: "0 0 12px",
+                maxWidth: 720,
+              }}
+            >
+              {t(result.title)}
+            </h3>
+            <p
+              style={{
+                margin: "0 0 20px",
+                maxWidth: 720,
+                fontFamily: "Inter, sans-serif",
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                lineHeight: 1.55,
+                color: "rgba(255,254,249,.82)",
+              }}
+            >
+              {t(result.body)}
+            </p>
+
+            <AppLink
+              href="/#consultation"
+              className="cat-checklist-cta"
+              onNavigate={() =>
+                trackEvent("deposit_check_deep_dive_click", {
+                  risk_level: level,
+                  checks_completed: done,
+                })
+              }
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "Inter, sans-serif",
+                fontSize: 15,
+                fontWeight: 500,
+                padding: "15px 28px",
+                borderRadius: 2,
+                border: "none",
+                cursor: "pointer",
+                background: C.light,
+                color: C.dark,
+                textDecoration: "none",
+              }}
+            >
+              {t(result.cta)}
+            </AppLink>
+
+            <p
+              style={{
+                margin: "16px 0 0",
+                fontFamily: "Inter, sans-serif",
+                fontSize: 12,
+                lineHeight: 1.45,
+                color: "rgba(255,254,249,.55)",
+                maxWidth: 640,
+              }}
+            >
+              {t("catalog.checklist.disclaimer")}
+            </p>
+          </div>
         </div>
       </Container>
     </section>
@@ -258,8 +410,6 @@ export default function CatalogPage() {
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState<string | undefined>(undefined);
-  const [modalTopic, setModalTopic] = useState<string | undefined>(undefined);
 
   const sortOptions = [
     { value: "default", label: t("catalog.sortDefault") },
@@ -455,13 +605,7 @@ export default function CatalogPage() {
         </Container>
       </section>
 
-      <DepositChecklist
-        onCta={() => {
-          setModalTitle(t("catalog.checklist.cta"));
-          setModalTopic(t("v2.plan2.name"));
-          setModalOpen(true);
-        }}
-      />
+      <DepositChecklist />
 
       {/* ── CTA (same as About / Services) ── */}
       <section className="cat-cta-outer">
@@ -522,11 +666,7 @@ export default function CatalogPage() {
           <button
             type="button"
             className="cat-cta-btn"
-            onClick={() => {
-              setModalTitle(t("services.cta.button"));
-              setModalTopic(undefined);
-              setModalOpen(true);
-            }}
+            onClick={() => setModalOpen(true)}
           >
             {t("services.cta.button")}
           </button>
@@ -537,8 +677,7 @@ export default function CatalogPage() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         source="Catalog page"
-        title={modalTitle ?? t("services.cta.button")}
-        topic={modalTopic}
+        title={t("services.cta.button")}
       />
     </div>
   );

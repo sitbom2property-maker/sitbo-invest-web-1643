@@ -602,21 +602,37 @@ const en = {
   "catalog.bookCall.message": "Your request (optional)",
   "catalog.bookCall.direct": "Contact me directly at:",
 
-  "catalog.checklist.title": "Before you pay a deposit in Georgia",
+  "catalog.checklist.title": "Before paying a deposit in Georgia",
+  "catalog.checklist.subtitle":
+    "A quick checklist to see whether you have enough information before sending money, signing anything or reserving a property.",
   "catalog.checklist.i1": "I checked the ownership",
   "catalog.checklist.i2": "I checked the land status",
   "catalog.checklist.i3": "I understand who the developer is",
   "catalog.checklist.i4": "I know the real market price",
-  "catalog.checklist.i5": "I read the contract",
+  "catalog.checklist.i5": "I reviewed the contract terms",
   "catalog.checklist.i6": "I understand the payment schedule",
-  "catalog.checklist.i7": "I checked rental assumptions",
-  "catalog.checklist.i8": "I know maintenance fees",
+  "catalog.checklist.i7": "I checked the rental assumptions",
+  "catalog.checklist.i8": "I know all maintenance and management fees",
   "catalog.checklist.i9": "I understand resale liquidity",
-  "catalog.checklist.i10": "I have independent advice",
-  "catalog.checklist.warn": "You are not ready to pay a deposit yet.",
-  "catalog.checklist.ok":
-    "You may be closer to a safe decision, but final review is still recommended.",
-  "catalog.checklist.cta": "Book a Deep Dive before deposit",
+  "catalog.checklist.i10": "I got independent advice before deposit",
+  "catalog.checklist.progress": "{done} / {total} checks completed",
+  "catalog.checklist.high.badge": "High risk",
+  "catalog.checklist.high.title": "Pause before paying a deposit.",
+  "catalog.checklist.high.body":
+    "You are missing several key checks that should be done before sending money or signing anything in Georgia. A deposit can be easy to pay and difficult to recover. Before moving forward, check the property, developer, documents, real price, contract terms and risks with someone independent.",
+  "catalog.checklist.high.cta": "Book a Deep Dive before deposit",
+  "catalog.checklist.review.badge": "Needs review",
+  "catalog.checklist.review.title": "You are closer, but there are still important gaps.",
+  "catalog.checklist.review.body":
+    "You have checked part of the deal, but some important areas may still be unclear. Before paying a deposit, it is better to review the missing points and understand whether the property really fits your goal, budget and risk profile.",
+  "catalog.checklist.review.cta": "Review this property with Arthur",
+  "catalog.checklist.ready.badge": "Almost ready",
+  "catalog.checklist.ready.title": "You seem better prepared — but final review still matters.",
+  "catalog.checklist.ready.body":
+    "You have covered most of the important checks. Before making the final move, make sure the documents, contract, price, developer background and investment logic are reviewed properly. A second opinion before deposit can still protect you from an expensive mistake.",
+  "catalog.checklist.ready.cta": "Get a final review before deposit",
+  "catalog.checklist.disclaimer":
+    "This checklist is not legal advice. It is a quick risk filter before making a property decision.",
 
   // Project page
   "project.overview": "Overview",
