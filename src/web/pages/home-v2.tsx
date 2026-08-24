@@ -661,6 +661,54 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
   );
 }
 
+// ─── FAQ ──────────────────────────────────────────────────────────────────────
+
+const HOME_FAQS: { qKey: MessageKey; aKey: MessageKey }[] = [
+  { qKey: "v2.faq.q1", aKey: "v2.faq.a1" },
+  { qKey: "v2.faq.q2", aKey: "v2.faq.a2" },
+  { qKey: "v2.faq.q3", aKey: "v2.faq.a3" },
+  { qKey: "v2.faq.q4", aKey: "v2.faq.a4" },
+  { qKey: "v2.faq.q5", aKey: "v2.faq.a5" },
+  { qKey: "v2.faq.q6", aKey: "v2.faq.a6" },
+  { qKey: "v2.faq.q7", aKey: "v2.faq.a7" },
+  { qKey: "v2.faq.q8", aKey: "v2.faq.a8" },
+  { qKey: "v2.faq.q9", aKey: "v2.faq.a9" },
+];
+
+function Faq() {
+  const t = useT();
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <section id="faq" className="rd-faq-outer">
+      <div className="rd-panel rd-panel-white rd-faq-panel">
+        <h2 className="rd-h2 rv">{t("v2.faq.title")}</h2>
+        <div className="rd-faq-list rv">
+          {HOME_FAQS.map((item, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div key={item.qKey} className={`rd-faq${isOpen ? " is-open" : ""}`}>
+                <button
+                  type="button"
+                  className="rd-faq-head"
+                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span>{t(item.qKey)}</span>
+                  <span className="rd-faq-toggle" aria-hidden>
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                {isOpen ? <p className="rd-faq-body">{t(item.aKey)}</p> : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Newsletter ───────────────────────────────────────────────────────────────
 
 function Newsletter() {
@@ -1075,6 +1123,29 @@ html, body { background: #21141A; }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
 .rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
 
+/* FAQ — after pricing */
+.rd-faq-outer { padding-bottom: clamp(40px, 5vw, 72px); }
+.rd-faq-panel { padding: clamp(34px, 4.4vw, 68px) var(--rd-inset); }
+.rd-faq-panel .rd-h2 { margin: 0 0 clamp(22px, 3vw, 36px); color: #21141A; }
+.rd-faq { border-top: 1px solid rgba(33,20,26,.1); }
+.rd-faq:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
+.rd-faq-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: #21141A; font-family: var(--body); font-size: clamp(15px, 1.25vw, 17px);
+  font-weight: 500; line-height: 1.35;
+}
+.rd-faq-toggle {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: #21141A; color: #FFFEF9;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;
+}
+.rd-faq-body {
+  margin: 0 0 18px; max-width: 760px;
+  font-family: var(--body); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(33,20,26,.72); white-space: pre-line;
+}
+
 /* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); background: #21141A; }
 .rd-news {
@@ -1172,6 +1243,7 @@ export default function HomeV2() {
       </div>
       <Pricing onRequest={setModal} />
       <div className="rd-canvas">
+        <Faq />
         <Newsletter />
       </div>
 

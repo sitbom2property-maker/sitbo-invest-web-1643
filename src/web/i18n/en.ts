@@ -204,6 +204,35 @@ const en = {
     "*100% Refundable: The $1,999 tour fee is fully credited toward your property purchase upon deal completion.",
   "v2.plan3.cta": "Apply for Discovery Tour",
 
+  "v2.faq.title": "FAQ",
+  "v2.faq.q1": "Why is the consultation paid?",
+  "v2.faq.a1":
+    "Because you are not paying for a “conversation” — you are paying for my experience, market knowledge, access to people, the ability to verify information quickly, and to see risks a buyer from the outside may miss. I was born and raised in Georgia, I know the market from the inside, I personally know many key people in development, and I can solve issues most people will not even take on. My time and resources have a price. A paid consultation also removes the conflict of interest: my job is not to talk you into buying a property, but to help you make a strong and safe decision.",
+  "v2.faq.q2": "How are you different from a regular realtor?",
+  "v2.faq.a2":
+    "A regular realtor often earns on the deal and works around the property: show it, sell it, close it.\n\nI close your request, protect and grow capital, and become your trusted person in Georgia. I can quickly reach the right people: a director, an owner, an architect, a bank representative, a developer, or someone who knows the real situation on a project.\n\nFor me, real estate in Georgia is not a catalogue of listings. It is a system of people, decisions, documents, negotiations, and risks.",
+  "v2.faq.q3": "Are you a broker, a consultant, or an agency?",
+  "v2.faq.a3":
+    "I am a private advisor and real-estate strategist in Georgia. I can take different roles depending on the task: give an independent consultation, analyse a property, help with negotiations, connect you with the right people, organise due diligence, support with the bank, renovation, or purchase accompaniment. My value is to guide you through the market from a strong position. My operating system is SITBO, because there is a digital specialist and a renovation team behind it.",
+  "v2.faq.q4": "Do you help with mortgages in Georgia?",
+  "v2.faq.a4":
+    "Yes. I can help you understand mortgage options and connect you with a bank. I have a working relationship with TBC Bank, and we are building a model for mortgage clients. The credit decision is always made by the bank, and terms depend on the client profile, documents, income, and the property.",
+  "v2.faq.q5": "Can you check documents and the registry?",
+  "v2.faq.a5":
+    "Yes. I run full due diligence on the property, the land, and the developer, based on registry data and more.\nAt the same time, a specialised lawyer should review the contract and legal documents. I do not replace a lawyer, but I help you see where risks may sit and what needs a deeper check.",
+  "v2.faq.q6": "Can we have a free call first?",
+  "v2.faq.a6":
+    "No. I do not offer free consultations. Because of the volume of requests, I cannot review cases in chat or on free calls. You can contact my assistant to book a consultation and get answers to organisational questions: +995 510 00 27 22",
+  "v2.faq.q7": "Which plan should I choose?",
+  "v2.faq.a7":
+    "If you have one short question — Just Ask for $79.\nIf you are already considering a purchase, choosing a city, district, or property, or want to understand the risks — Deep Dive for $279.\nIf you are an investor or buyer who wants to go deep into the market and move toward a deal — Invest Discovery Tour for $1999.",
+  "v2.faq.q8": "Do you work with everyone?",
+  "v2.faq.a8":
+    "No. I work with clients who value a professional approach, respect time, and want to make deliberate decisions. If someone needs a free agent, chaotic messaging, or “just give me something cheaper” — we are unlikely to be a fit.",
+  "v2.faq.q9": "Can I just message the assistant with a question?",
+  "v2.faq.a9":
+    "The assistant helps with booking, payment, the questionnaire, and organisational questions. She does not advise on real estate and does not analyse properties. All expert questions are discussed only within the paid format you choose.",
+
   "v2.news.title": "Let's stay in touch",
   "v2.news.body":
     "Subscribe and get the updates that actually matter. The real numbers, the real opportunities, and the reality behind the pretty listings.",
