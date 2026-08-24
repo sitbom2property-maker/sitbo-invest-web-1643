@@ -234,9 +234,12 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 }
 .sv-hero h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
-  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
+  font-size: clamp(30px, 4.2vw, 56px); line-height: 1.1; letter-spacing: -.01em;
 }
 .sv-hero-line { display: block; }
+@media (min-width: 720px) {
+  .sv-hero-line { white-space: nowrap; }
+}
 .sv-hero h1 em {
   font-style: normal; color: var(--white);
 }

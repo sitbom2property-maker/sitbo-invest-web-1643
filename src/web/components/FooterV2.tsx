@@ -49,6 +49,19 @@ export function FooterV2() {
           margin: 0 0 14px;
           color: #FFFEF9;
           line-height: 1.35;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .fv2-name-person { display: block; }
+        .fv2-name-role {
+          display: block;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: .01em;
+          color: rgba(255,254,249,.88);
+          line-height: 1.4;
+          max-width: 420px;
         }
         .fv2-tagline {
           font-size: 12px;
@@ -117,7 +130,8 @@ export function FooterV2() {
               height={14}
             />
             <h2 className="fv2-name">
-              Arthur Arutyunyan | {t("v2.footer.role")}
+              <span className="fv2-name-person">Arthur Arutyunyan</span>
+              <span className="fv2-name-role">{t("v2.footer.role")}</span>
             </h2>
             <p className="fv2-tagline">{t("v2.footer.tagline")}</p>
           </section>

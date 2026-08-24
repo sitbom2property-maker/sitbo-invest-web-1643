@@ -251,7 +251,7 @@ const en = {
   "v2.modal.messagePlaceholder": "What would you like to discuss? (optional)",
   "v2.modal.direct": "Or reach out directly:",
 
-  "v2.footer.role": "Private Property Advisor",
+  "v2.footer.role": "Private Real Estate Advisor & Deal Strategist in Georgia",
   "v2.footer.tagline":
     "I am your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution, including turnkey renovations, asset management, and technical delivery my operations are backed by Sitbo Invest.",
   "v2.footer.investment": "Investment",
