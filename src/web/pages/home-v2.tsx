@@ -358,7 +358,7 @@ function SelectedProjects() {
               <br />
               {t("v2.projects.titleEm")}
             </h2>
-            <p className="rd-small">{t("v2.projects.body")}</p>
+            <p className="rd-small" style={{ whiteSpace: "pre-line" }}>{t("v2.projects.body")}</p>
             <Link href="/catalog" className="rd-btn rd-btn-dark-outline">
               {t("v2.projects.viewAll")}
             </Link>

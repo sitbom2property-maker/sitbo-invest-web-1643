@@ -117,7 +117,7 @@ const en = {
   "v2.projects.title": "Selected Projects",
   "v2.projects.titleEm": "Filtered By Me",
   "v2.projects.body":
-    "I reject 85% of market listings so you only see the assets worth holding.",
+    "I reject 85% of market listings so you only\nsee the assets worth holding.",
   "v2.projects.viewAll": "View All",
 
   "v2.eco.title": "Ecosystem of",
