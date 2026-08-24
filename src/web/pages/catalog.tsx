@@ -4,7 +4,7 @@ import { projects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
-import { useT } from "../i18n";
+import { useT, type MessageKey } from "../i18n";
 import { RequestModal } from "../components/RequestModal";
 
 const C = {
@@ -33,6 +33,156 @@ function Container({ children, style }: { children: React.ReactNode; style?: Rea
 
 // ─── Cities & filter types ────────────────────────────────────────────────────
 const CITIES = ["All", "Batumi", "Tbilisi", "Chakvi", "Gonio", "Makhinjauri", "Shekvetili"] as const;
+
+const CHECKLIST_ITEMS: MessageKey[] = [
+  "catalog.checklist.i1",
+  "catalog.checklist.i2",
+  "catalog.checklist.i3",
+  "catalog.checklist.i4",
+  "catalog.checklist.i5",
+  "catalog.checklist.i6",
+  "catalog.checklist.i7",
+  "catalog.checklist.i8",
+  "catalog.checklist.i9",
+  "catalog.checklist.i10",
+];
+
+function DepositChecklist({ onCta }: { onCta: () => void }) {
+  const t = useT();
+  const isMobile = useIsMobile();
+  const [checked, setChecked] = useState<boolean[]>(() => CHECKLIST_ITEMS.map(() => false));
+  const done = checked.filter(Boolean).length;
+  const almostReady = done >= 8;
+
+  const toggle = (index: number) => {
+    setChecked((prev) => prev.map((v, i) => (i === index ? !v : v)));
+  };
+
+  return (
+    <section
+      style={{
+        padding: "0 0 clamp(48px, 6vw, 80px)",
+        background: C.light,
+      }}
+    >
+      <Container>
+        <div
+          style={{
+            borderRadius: 2,
+            background: C.dark,
+            color: C.light,
+            padding: isMobile ? "28px 20px" : "clamp(36px, 4vw, 56px)",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "Coolvetica, Inter, sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(26px, 3.2vw, 40px)",
+              lineHeight: 1.15,
+              margin: "0 0 28px",
+              maxWidth: 720,
+            }}
+          >
+            {t("catalog.checklist.title")}
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: isMobile ? 10 : "10px 28px",
+              marginBottom: 28,
+            }}
+          >
+            {CHECKLIST_ITEMS.map((key, index) => {
+              const on = checked[index];
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => toggle(index)}
+                  aria-pressed={on}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 12,
+                    textAlign: "left",
+                    padding: "12px 14px",
+                    borderRadius: 2,
+                    border: `1px solid ${on ? "rgba(255,254,249,.45)" : "rgba(255,254,249,.16)"}`,
+                    background: on ? "rgba(255,254,249,.08)" : "transparent",
+                    color: C.light,
+                    cursor: "pointer",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 15,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  <span
+                    aria-hidden
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 2,
+                      flexShrink: 0,
+                      marginTop: 1,
+                      border: `1.5px solid ${on ? C.light : "rgba(255,254,249,.45)"}`,
+                      background: on ? C.light : "transparent",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: C.dark,
+                      fontSize: 13,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {on ? "✓" : ""}
+                  </span>
+                  <span>{t(key)}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <p
+            style={{
+              margin: "0 0 22px",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "clamp(15px, 1.25vw, 17px)",
+              lineHeight: 1.5,
+              color: "rgba(255,254,249,.88)",
+              maxWidth: 720,
+            }}
+          >
+            {almostReady ? t("catalog.checklist.ok") : t("catalog.checklist.warn")}
+          </p>
+
+          <button
+            type="button"
+            onClick={onCta}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 15,
+              fontWeight: 500,
+              padding: "15px 28px",
+              borderRadius: 2,
+              border: "none",
+              cursor: "pointer",
+              background: C.light,
+              color: C.dark,
+            }}
+          >
+            {t("catalog.checklist.cta")}
+          </button>
+        </div>
+      </Container>
+    </section>
+  );
+}
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function CatalogCard({ p }: { p: Project }) {
@@ -108,6 +258,8 @@ export default function CatalogPage() {
   const [sort, setSort]     = useState<string>("default");
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState<string | undefined>(undefined);
+  const [modalTopic, setModalTopic] = useState<string | undefined>(undefined);
 
   const sortOptions = [
     { value: "default", label: t("catalog.sortDefault") },
@@ -303,6 +455,14 @@ export default function CatalogPage() {
         </Container>
       </section>
 
+      <DepositChecklist
+        onCta={() => {
+          setModalTitle(t("catalog.checklist.cta"));
+          setModalTopic(t("v2.plan2.name"));
+          setModalOpen(true);
+        }}
+      />
+
       {/* ── CTA (same as About / Services) ── */}
       <section className="cat-cta-outer">
         <style>{`
@@ -359,7 +519,15 @@ export default function CatalogPage() {
         <div className="cat-cta">
           <h2>{t("services.cta.title")}</h2>
           <p>{t("services.cta.body")}</p>
-          <button type="button" className="cat-cta-btn" onClick={() => setModalOpen(true)}>
+          <button
+            type="button"
+            className="cat-cta-btn"
+            onClick={() => {
+              setModalTitle(t("services.cta.button"));
+              setModalTopic(undefined);
+              setModalOpen(true);
+            }}
+          >
             {t("services.cta.button")}
           </button>
         </div>
@@ -369,7 +537,8 @@ export default function CatalogPage() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         source="Catalog page"
-        title={t("services.cta.button")}
+        title={modalTitle ?? t("services.cta.button")}
+        topic={modalTopic}
       />
     </div>
   );

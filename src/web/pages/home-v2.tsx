@@ -112,7 +112,6 @@ function MarketPerson() {
           <h2 className="rd-h2">{t("v2.market.title")}</h2>
           <div className="rd-market-copy">
             <p>{t("v2.market.body1")}</p>
-            <p>{t("v2.market.body2")}</p>
           </div>
         </div>
         <div className="rd-market-grid rv">
@@ -1341,10 +1340,10 @@ export default function HomeV2() {
       <div className="rd-canvas">
         <SelectedProjects />
       </div>
+      <Notes />
       <div className="rd-canvas">
         <Feedback />
       </div>
-      <Notes />
       <div className="rd-canvas">
         <Newsletter />
       </div>

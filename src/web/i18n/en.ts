@@ -92,8 +92,6 @@ const en = {
   "v2.market.title": "Your person inside the Georgian property market.",
   "v2.market.body1":
     "Buying property in Georgia is not just about listings and beautiful developer presentations. It is about land, ownership, developers, banks, negotiations, renovation, hidden risks and people who make decisions.",
-  "v2.market.body2":
-    "I know this market from the inside. Behind me are dozens of transactions, hundreds of negotiations, real reviews from clients and a reputation I protect in the city.",
   "v2.market.card1": "Born and raised in Georgia",
   "v2.market.card2": "Dozens of transactions",
   "v2.market.card3": "Hundreds of negotiations",
@@ -601,6 +599,22 @@ const en = {
   "catalog.bookCall.email": "Email Address",
   "catalog.bookCall.message": "Your request (optional)",
   "catalog.bookCall.direct": "Contact me directly at:",
+
+  "catalog.checklist.title": "Before you pay a deposit in Georgia",
+  "catalog.checklist.i1": "I checked the ownership",
+  "catalog.checklist.i2": "I checked the land status",
+  "catalog.checklist.i3": "I understand who the developer is",
+  "catalog.checklist.i4": "I know the real market price",
+  "catalog.checklist.i5": "I read the contract",
+  "catalog.checklist.i6": "I understand the payment schedule",
+  "catalog.checklist.i7": "I checked rental assumptions",
+  "catalog.checklist.i8": "I know maintenance fees",
+  "catalog.checklist.i9": "I understand resale liquidity",
+  "catalog.checklist.i10": "I have independent advice",
+  "catalog.checklist.warn": "You are not ready to pay a deposit yet.",
+  "catalog.checklist.ok":
+    "You may be closer to a safe decision, but final review is still recommended.",
+  "catalog.checklist.cta": "Book a Deep Dive before deposit",
 
   // Project page
   "project.overview": "Overview",
