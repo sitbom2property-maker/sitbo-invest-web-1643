@@ -108,6 +108,46 @@ const en = {
   "v2.why.body":
     "Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
   "v2.why.cta": "Read more about Georgia →",
+
+  "v2.myths.title": "Georgia real estate myths",
+  "v2.myths.subtitle":
+    "Georgia is easy to enter. The real decisions start after the beautiful presentation.",
+  "v2.myths.intro":
+    "Before looking at projects, it is important to separate sales narratives from reality. These are the myths I see buyers repeat most often.",
+  "v2.myths.reality": "Reality",
+  "v2.myths.m1": "“Rental yield in Batumi is always 12–13%”",
+  "v2.myths.r1":
+    "Only in selected cases, with the right location, entry price, management and realistic seasonality assumptions. Many buyers calculate gross yield and forget vacancy, management fees, maintenance, taxes and competition.",
+  "v2.myths.m2": "“A free broker is free”",
+  "v2.myths.r2":
+    "Someone always pays. The real question is whose interest the advisor represents. If the income depends on closing the deal, the advice may not be fully independent.",
+  "v2.myths.m3": "“Any property in Georgia is good for capital preservation”",
+  "v2.myths.r3":
+    "A bad asset in a good country is still a bad asset. Capital preservation depends on location, entry price, legal clarity, liquidity, building quality and future demand.",
+  "v2.myths.m4": "“Buying remotely is simple”",
+  "v2.myths.r4":
+    "Technically, remote purchase can be simple. Strategically, it is risky without proper checks. Photos, renders and sales presentations do not show ownership issues, land status, contract risks, real market price or local problems.",
+  "v2.myths.m5": "“New builds are always safer than resale”",
+  "v2.myths.r5":
+    "New builds can be attractive, but they come with risks: developer reliability, construction quality, delays, contract terms, building management and future oversupply. Resale can sometimes be more transparent because the asset already exists.",
+  "v2.myths.m6": "“If the developer is famous, the deal is safe”",
+  "v2.myths.r6":
+    "A strong developer name helps, but it does not replace due diligence. Every project has its own land, contract, payment schedule, construction quality, management model and resale logic.",
+  "v2.myths.m7": "“Sea view means good investment”",
+  "v2.myths.r7":
+    "Sea view can help, but it is not enough. Investors should check location, building quality, rental demand, seasonality, service fees, competition, management and resale liquidity.",
+  "v2.myths.m8": "“The cheapest entry price is the best deal”",
+  "v2.myths.r8":
+    "Cheap can become expensive if the location is weak, the building is hard to rent, the developer has problems, renovation costs are high or the property is difficult to resell.",
+  "v2.myths.m9": "“Georgia is easy, so I do not need independent advice”",
+  "v2.myths.r9":
+    "Georgia can be easy to enter, but not every property decision is simple. The registration process may be fast, but the real work is checking the property, people, documents, price, risks and long-term logic before you commit money.",
+  "v2.myths.ctaTitle": "Want to check the reality behind a property?",
+  "v2.myths.ctaBody":
+    "If you are considering a property in Georgia, I can help you review the object, developer, price, risks and negotiation position before you pay a deposit.",
+  "v2.myths.ctaPrimary": "Book a Deep Dive",
+  "v2.myths.ctaSecondary": "Not sure which format fits you? Take the consultation quiz.",
+
   "v2.stats.tax": "Purchase Tax",
   "v2.stats.taxNote": "On residential property",
   "v2.stats.residency": "Residency Permit",

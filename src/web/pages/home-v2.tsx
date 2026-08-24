@@ -195,6 +195,125 @@ function WhatToBuy() {
   );
 }
 
+const MYTHS: { mythKey: MessageKey; realityKey: MessageKey; id: string }[] = [
+  { id: "yield", mythKey: "v2.myths.m1", realityKey: "v2.myths.r1" },
+  { id: "free-broker", mythKey: "v2.myths.m2", realityKey: "v2.myths.r2" },
+  { id: "capital", mythKey: "v2.myths.m3", realityKey: "v2.myths.r3" },
+  { id: "remote", mythKey: "v2.myths.m4", realityKey: "v2.myths.r4" },
+  { id: "new-builds", mythKey: "v2.myths.m5", realityKey: "v2.myths.r5" },
+  { id: "famous-dev", mythKey: "v2.myths.m6", realityKey: "v2.myths.r6" },
+  { id: "sea-view", mythKey: "v2.myths.m7", realityKey: "v2.myths.r7" },
+  { id: "cheap", mythKey: "v2.myths.m8", realityKey: "v2.myths.r8" },
+  { id: "no-advice", mythKey: "v2.myths.m9", realityKey: "v2.myths.r9" },
+];
+
+function trackMythEvent(name: string, label?: string) {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", name, {
+      event_category: "market_myths",
+      ...(label ? { event_label: label } : {}),
+    });
+  }
+}
+
+function MarketMyths() {
+  const t = useT();
+  const [openId, setOpenId] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting) && !viewedRef.current) {
+          viewedRef.current = true;
+          trackMythEvent("market_myths_view");
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const toggle = (id: string) => {
+    setOpenId((prev) => {
+      const next = prev === id ? null : id;
+      if (next) trackMythEvent("market_myth_card_open", next);
+      return next;
+    });
+  };
+
+  return (
+    <section ref={sectionRef} className="rd-myths" id="market-myths" aria-labelledby="myths-title">
+      <div className="rd-wrap">
+        <div className="rd-myths-head rv">
+          <h2 id="myths-title" className="rd-h2">
+            {t("v2.myths.title")}
+          </h2>
+          <p className="rd-myths-sub">{t("v2.myths.subtitle")}</p>
+          <p className="rd-myths-intro">{t("v2.myths.intro")}</p>
+        </div>
+
+        <div className="rd-myths-grid rv">
+          {MYTHS.map((item) => {
+            const open = openId === item.id;
+            const panelId = `myth-panel-${item.id}`;
+            return (
+              <div key={item.id} className={`rd-myth-card${open ? " is-open" : ""}`}>
+                <button
+                  type="button"
+                  className="rd-myth-trigger"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => toggle(item.id)}
+                >
+                  <span className="rd-myth-quote">{t(item.mythKey)}</span>
+                  <span className="rd-myth-toggle" aria-hidden>
+                    {open ? "−" : "+"}
+                  </span>
+                </button>
+                <div
+                  id={panelId}
+                  className="rd-myth-panel"
+                  role="region"
+                  aria-hidden={!open}
+                >
+                  <p className="rd-myth-reality-label">{t("v2.myths.reality")}</p>
+                  <p className="rd-myth-reality-text">{t(item.realityKey)}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="rd-myths-cta rv">
+          <h3>{t("v2.myths.ctaTitle")}</h3>
+          <p>{t("v2.myths.ctaBody")}</p>
+          <div className="rd-myths-cta-actions">
+            <AppLink
+              href="/#consultation"
+              className="rd-btn rd-btn-white"
+              onNavigate={() => trackMythEvent("market_myths_deep_dive_click")}
+            >
+              {t("v2.myths.ctaPrimary")}
+            </AppLink>
+            <AppLink
+              href="/#faq"
+              className="rd-myths-secondary"
+              onNavigate={() => trackMythEvent("market_myths_quiz_click")}
+            >
+              {t("v2.myths.ctaSecondary")}
+            </AppLink>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Quote ────────────────────────────────────────────────────────────────────
 
 function Quote() {
@@ -1059,6 +1178,162 @@ html, body { background: #21141A; }
   max-width: 560px;
 }
 
+/* market myths */
+.rd-myths {
+  padding: clamp(48px, 6vw, 88px) 0;
+  background: #21141A;
+  color: #FFFEF9;
+}
+.rd-myths-head { max-width: 760px; margin-bottom: clamp(28px, 4vw, 44px); }
+.rd-myths-head .rd-h2 { color: #FFFEF9; margin: 0 0 14px; }
+.rd-myths-sub {
+  margin: 0 0 12px;
+  font-family: var(--body);
+  font-size: clamp(16px, 1.35vw, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #FFFEF9;
+}
+.rd-myths-intro {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5;
+  color: rgba(255,254,249,.78);
+  max-width: 640px;
+}
+.rd-myths-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+.rd-myth-card {
+  border-radius: 2px;
+  border: 1px solid rgba(255,254,249,.12);
+  background: rgba(255,254,249,.03);
+  overflow: hidden;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.rd-myth-card:hover {
+  border-color: rgba(255,254,249,.28);
+  background: rgba(255,254,249,.05);
+}
+.rd-myth-card.is-open {
+  border-color: rgba(255,254,249,.32);
+  background: rgba(255,254,249,.06);
+}
+.rd-myth-trigger {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: clamp(18px, 2vw, 22px);
+  border: none;
+  background: transparent;
+  color: #FFFEF9;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+.rd-myth-trigger:focus-visible {
+  outline: 2px solid #8CB2C0;
+  outline-offset: -2px;
+}
+.rd-myth-quote {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(17px, 1.55vw, 21px);
+  line-height: 1.25;
+}
+.rd-myth-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,254,249,.35);
+  font-size: 18px;
+  line-height: 1;
+  color: #FFFEF9;
+}
+.rd-myth-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 clamp(18px, 2vw, 22px);
+  transition: max-height .28s ease, opacity .2s ease, padding .28s ease;
+}
+.rd-myth-card.is-open .rd-myth-panel {
+  max-height: 420px;
+  opacity: 1;
+  padding: 0 clamp(18px, 2vw, 22px) clamp(18px, 2vw, 22px);
+}
+.rd-myth-reality-label {
+  margin: 0 0 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,254,249,.55);
+}
+.rd-myth-reality-text {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255,254,249,.82);
+}
+.rd-myths-cta {
+  max-width: 720px;
+  padding-top: 8px;
+}
+.rd-myths-cta h3 {
+  margin: 0 0 12px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.2;
+  color: #FFFEF9;
+}
+.rd-myths-cta p {
+  margin: 0 0 22px;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5;
+  color: rgba(255,254,249,.78);
+  max-width: 620px;
+}
+.rd-myths-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+.rd-myths-secondary {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255,254,249,.88);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rd-myths-secondary:hover { opacity: .85; }
+.rd-myths-secondary:focus-visible {
+  outline: 2px solid #8CB2C0;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rd-myth-card,
+  .rd-myth-panel {
+    transition: none;
+  }
+}
+
 /* why + stats — perfect squares; dark page section #21141A / #FFFEF9 */
 .rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); background: #21141A; color: #FFFEF9; }
 .rd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
@@ -1363,6 +1638,7 @@ html, body { background: #21141A; }
   .rd-market-head { grid-template-columns: 1fr; gap: 18px; }
   .rd-market-copy { justify-self: start; max-width: none; }
   .rd-market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rd-myths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
@@ -1374,6 +1650,8 @@ html, body { background: #21141A; }
   .rd-fb-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .rd-fb-rail { padding-right: 56px; }
   .rd-market-grid { grid-template-columns: 1fr; }
+  .rd-myths-grid { grid-template-columns: 1fr; }
+  .rd-myths-cta-actions { flex-direction: column; align-items: flex-start; }
 }
 `;
 
@@ -1395,6 +1673,7 @@ export default function HomeV2() {
       </div>
       <WhyGeorgia />
       <WhatToBuy />
+      <MarketMyths />
       <div className="rd-canvas">
         <SelectedProjects />
       </div>
