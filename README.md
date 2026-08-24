@@ -100,6 +100,30 @@ trackLead({ source: "Website popup" });
 trackEvent("brochure_download", { project: "Piazza" });
 ```
 
+## Telegram bot
+
+The Sitbo Telegram bot runs on the same Cloudflare Worker as the site (`/api/telegram/webhook`). It shows curated projects, answers “why Georgia”, and writes consultation requests into Odoo CRM.
+
+1. In Telegram, open [@BotFather](https://t.me/BotFather) → `/newbot` (or `/mybots` if the bot already exists) and copy the token.
+2. Add the token as a Worker secret (do not commit it):
+
+```bash
+bunx wrangler secret put TELEGRAM_BOT_TOKEN
+# optional: your personal Telegram chat id, so new leads are forwarded to you
+bunx wrangler secret put TELEGRAM_ADMIN_CHAT_ID
+```
+
+3. After deploy, register the webhook (use the same token as the `Authorization` bearer):
+
+```bash
+curl -X POST https://sitboinvest.ge/api/telegram/setup \
+  -H "Authorization: Bearer $TELEGRAM_BOT_TOKEN"
+```
+
+4. Open the bot in Telegram and send `/start`. Deep links work: `https://t.me/<bot>/start?start=piazza-residence`.
+
+Local checks: `bun test src/api`.
+
 ## Agent Rules
 
 **CRITICAL: This project uses Tailwind CSS v4.** No `tailwind.config.js`, no `postcss.config.js`, no `@tailwind` directives. All configuration is CSS-first via `@theme` in `src/web/styles.css` and the `@tailwindcss/vite` plugin. Do NOT use Tailwind v3 syntax.

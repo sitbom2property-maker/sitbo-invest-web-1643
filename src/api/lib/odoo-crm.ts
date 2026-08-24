@@ -63,10 +63,15 @@ function parseIdList(value: string | undefined, fallback: number[]): number[] {
     .filter((n) => Number.isFinite(n) && n > 0);
 }
 
+function leadChannel(lead: WebsiteLead): string {
+  return lead.source?.toLowerCase().includes("telegram") ? "Telegram" : "Сайт";
+}
+
 function buildLeadTitle(lead: WebsiteLead): string {
-  if (lead.project) return `Сайт — ${lead.project}`;
-  if (lead.source) return `Сайт — ${lead.source}`;
-  return "Сайт — заявка";
+  const channel = leadChannel(lead);
+  if (lead.project) return `${channel} — ${lead.project}`;
+  if (lead.source) return `${channel} — ${lead.source}`;
+  return `${channel} — заявка`;
 }
 
 function buildDescription(lead: WebsiteLead): string {

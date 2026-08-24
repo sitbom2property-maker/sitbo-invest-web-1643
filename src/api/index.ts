@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { cors } from "hono/cors";
 import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
+import telegram from "./routes/telegram";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -9,11 +10,15 @@ type Bindings = {
   ODOO_LOGIN?: string;
   ODOO_API_KEY?: string;
   ODOO_USER_ID?: string;
+  TELEGRAM_BOT_TOKEN?: string;
+  TELEGRAM_ADMIN_CHAT_ID?: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>().basePath('api');
 
 app.use(cors({ origin: "*" }));
+
+app.route("/telegram", telegram);
 
 app.get('/ping', (c) =>
   c.json({
