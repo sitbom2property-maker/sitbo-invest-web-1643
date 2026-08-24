@@ -824,7 +824,7 @@ const ru: Record<MessageKey, string> = {
   "invest.cta.button": "Записаться на консультацию",
 
   "services.hero.eyebrow": "Как я работаю",
-  "services.hero.title": "Сначала я защищаю ваш капитал,",
+  "services.hero.title": "Сначала я защищаю ваш\u00A0капитал,",
   "services.hero.titleEm": "затем приумножаю его.",
   "services.hero.body":
     "Когда вы работаете со мной, вы получаете моё полное внимание — не колл-центр и не отдел продаж.",

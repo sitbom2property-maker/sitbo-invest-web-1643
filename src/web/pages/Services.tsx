@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { AppLink } from "../components/app-link";
 import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
@@ -219,10 +218,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 8vw, 110px);
   overflow: hidden;
 }
-.sv-hero-grid {
+.sv-hero-inner {
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(28px, 4vw, 64px); align-items: end;
+  max-width: min(920px, 100%);
 }
 .sv-hero h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
@@ -233,15 +231,13 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-style: normal; color: var(--white);
 }
 .sv-hero-lead {
-  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
-  color: var(--white); margin: 0; max-width: 420px;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.45;
+  color: rgba(255,254,249,.82);
+  margin: 0;
+  max-width: 540px;
 }
-.sv-hero-side {
-  font-size: 16px; line-height: 1.55;
-  color: var(--white); margin: 0; max-width: 420px;
-  justify-self: end; text-align: right;
-}
-.sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
 
 /* services list */
 .sv-list-outer {
@@ -360,14 +356,13 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 
 @media (max-width: 900px) {
   .sv-hero { padding-top: 36px; }
-  .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
-  .sv-hero-side, .sv-list-head p, .sv-limits-head p {
+  .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
+  .sv-list-head p, .sv-limits-head p {
     justify-self: start; text-align: left; max-width: none;
   }
   .sv-limits-grid { grid-template-columns: 1fr; }
   .sv-acc-body { padding-left: 0; }
   .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }
-  .sv-hero-btns .sv-btn { width: 100%; }
 }
 `;
 
@@ -382,24 +377,14 @@ export default function ServicesPage() {
       <style>{CSS}</style>
 
       <section className="sv-hero">
-        <div className="sv-wrap sv-hero-grid">
-          <div className="rv">
+        <div className="sv-wrap">
+          <div className="sv-hero-inner rv">
             <h1>
               <span className="sv-hero-line">{t("services.hero.title")}</span>
-              <span className="sv-hero-line">
-                <em>{t("services.hero.titleEm")}</em>
-              </span>
+              <span className="sv-hero-line">{t("services.hero.titleEm")}</span>
             </h1>
-            <div className="sv-hero-btns">
-              <button type="button" className="sv-btn sv-btn-white" onClick={() => setModalOpen(true)}>
-                {t("services.cta.button")}
-              </button>
-              <AppLink href="/#consultation" className="sv-btn sv-btn-outline">
-                {t("nav.pricing")}
-              </AppLink>
-            </div>
+            <p className="sv-hero-lead">{t("services.hero.body")}</p>
           </div>
-          <p className="sv-hero-side rv">{t("services.hero.body")}</p>
         </div>
       </section>
 
