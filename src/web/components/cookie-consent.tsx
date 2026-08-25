@@ -246,7 +246,7 @@ const COOKIE_CSS = `
   box-shadow: 0 -8px 32px rgba(0,0,0,.35);
 }
 .ck-inner {
-  max-width: var(--site-max, 1440px);
+  max-width: var(--site-max, 1680px);
   margin: 0 auto;
   padding: 18px var(--site-gutter, 32px) 16px;
   box-sizing: border-box;

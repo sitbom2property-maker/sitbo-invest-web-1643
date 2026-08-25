@@ -21,9 +21,9 @@ export function FooterV2() {
           padding: clamp(64px, 8vw, 112px) 0 clamp(32px, 4vw, 56px);
         }
         .fv2-wrap {
-          max-width: var(--site-max, 1440px);
+          max-width: var(--site-max, 1680px);
           margin: 0 auto;
-          padding: 0 var(--site-gutter, clamp(32px, 5vw, 80px));
+          padding: 0 var(--site-gutter, clamp(16px, 2.8vw, 40px));
           box-sizing: border-box;
         }
         .fv2-grid {

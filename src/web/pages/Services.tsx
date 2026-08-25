@@ -196,8 +196,8 @@ const CSS = `
   --panel: var(--bg-light);
   --display: 'JUN', Georgia, serif;
   --body: 'Nunito', sans-serif;
-  --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
-  --max: var(--site-max, 1440px);
+  --gutter: var(--site-gutter, clamp(16px, 2.8vw, 40px));
+  --max: var(--site-max, 1680px);
   background: var(--bg);
   color: var(--white);
   font-family: var(--body);

@@ -1308,9 +1308,9 @@ export default function ProjectPage() {
       <section className="pr-cta-outer">
         <style>{`
           .pr-cta-outer {
-            max-width: var(--site-max, 1440px);
+            max-width: var(--site-max, 1680px);
             margin: 0 auto;
-            padding: 0 var(--site-gutter, clamp(30px, 5.5vw, 80px)) clamp(56px, 7vw, 100px);
+            padding: 0 var(--site-gutter, clamp(16px, 2.8vw, 40px)) clamp(56px, 7vw, 100px);
             box-sizing: border-box;
             background: ${C.light};
           }

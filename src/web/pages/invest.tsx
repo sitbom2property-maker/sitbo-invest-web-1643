@@ -226,8 +226,8 @@ const CSS = `
   --white: #FFFEF9;
   --display: 'JUN', Georgia, serif;
   --body: 'Nunito', sans-serif;
-  --gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
-  --max: var(--site-max, 1440px);
+  --gutter: var(--site-gutter, clamp(16px, 2.8vw, 40px));
+  --max: var(--site-max, 1680px);
   --radius: 20px;
   --radius-sm: 2px;
   background: var(--bg-light);

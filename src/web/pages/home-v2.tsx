@@ -955,16 +955,16 @@ html, body { background: #21141A; }
   --display: 'JUN', Georgia, serif;
   --body: 'Nunito', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
-  --rd-max: var(--site-max, 1440px);
-  --rd-gutter: var(--site-gutter, clamp(32px, 5vw, 80px));
-  --rd-inset: clamp(28px, 3.2vw, 48px);
+  --rd-max: var(--site-max, 1680px);
+  --rd-gutter: var(--site-gutter, clamp(16px, 2.8vw, 40px));
+  --rd-inset: clamp(16px, 2.2vw, 28px);
   background: var(--bg);
   color: var(--text-light);
   overflow-x: hidden;
   font-family: var(--body);
 }
 .rd-wrap { max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-gutter); box-sizing: border-box; }
-/* Panels share the same 1440 canvas and side gutters as every other block */
+/* Panels share the same wide canvas and side gutters as every other block */
 .rd-canvas {
   max-width: var(--rd-max); margin: 0 auto; padding: 0 var(--rd-gutter);
   box-sizing: border-box;
@@ -1044,14 +1044,14 @@ html, body { background: #21141A; }
   padding-top: calc(var(--nav-height, 88px) + clamp(24px, 4vw, 48px));
   padding-bottom: clamp(48px, 7vw, 88px);
 }
-.rd-hero-copy { max-width: 560px; }
+.rd-hero-copy { max-width: 600px; margin-left: 0; }
 .rd-hero-copy h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 22px;
   font-size: clamp(34px, 4.6vw, 58px); line-height: 1.08; letter-spacing: -.015em;
   color: #FFFEF9;
 }
 .rd-hero-copy p {
-  margin: 0 0 28px; max-width: 480px;
+  margin: 0 0 28px; max-width: 520px;
   font-family: var(--body);
   font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
   color: rgba(255,254,249,.9);
