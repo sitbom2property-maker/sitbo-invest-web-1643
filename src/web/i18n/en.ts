@@ -98,9 +98,10 @@ const en = {
   "v2.market.card4": "Real reviews and recommendations",
 
   /* Sticky storytelling chapters (home, after hero) */
-  "v2.sticky1.title": "Georgia is easy to enter. The real question is what to buy.",
+  "v2.sticky1.title":
+    "My clients do not come to me for random listings. They come for judgment, access, strategy and protection from expensive mistakes.",
   "v2.sticky1.body1":
-    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations.",
+    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who brings together local knowledge, negotiation experience, market access and practical real estate expertise.",
   "v2.sticky1.body2":
     "Or you can work with someone who was born here, knows the market from the inside, understands the people behind the projects and can help you move faster, safer and stronger. I do not promise miracles. I know what I am doing.",
   "v2.sticky2.title": "I stay close when things get difficult.",

@@ -140,11 +140,11 @@ function WhatToBuy() {
   );
 }
 
-/** Second home band — image-home + equal body copy (no Georgia title) */
+/** Second home band — image-home, editorial JUN headline + body */
 function HomePhotoBand() {
   const t = useT();
   return (
-    <section className="rd-home-photo" aria-label={t("v2.sticky1.body1")}>
+    <section className="rd-home-photo" aria-labelledby="home-photo-title">
       <img
         className="rd-home-photo-bg"
         src="/home/sticky-enter.jpg"
@@ -153,9 +153,13 @@ function HomePhotoBand() {
         loading="eager"
       />
       <span className="rd-home-photo-scrim" aria-hidden="true" />
-      <div className="rd-wrap rd-home-photo-copy rv">
-        <p>{t("v2.sticky1.body1")}</p>
-        <p>{t("v2.sticky1.body2")}</p>
+      <div className="rd-wrap rd-home-photo-inner">
+        <div className="rd-home-photo-copy rv">
+          <h2 id="home-photo-title" className="rd-home-photo-title">
+            {t("v2.sticky1.title")}
+          </h2>
+          <p className="rd-home-photo-body">{t("v2.sticky1.body1")}</p>
+        </div>
       </div>
     </section>
   );
@@ -1104,7 +1108,7 @@ html, body { background: #21141A; }
   line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
 }
 
-/* second band — image-home, copy raised, equal paragraph size */
+/* second band — image-home, editorial JUN headline + body (center-right) */
 .rd-home-photo {
   position: relative;
   min-height: min(92svh, 920px);
@@ -1123,24 +1127,49 @@ html, body { background: #21141A; }
 .rd-home-photo-scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(20,14,16,.72) 0%, rgba(20,14,16,.4) 48%, rgba(20,14,16,.18) 100%),
-    linear-gradient(180deg, rgba(20,14,16,.2) 0%, transparent 40%, rgba(20,14,16,.35) 100%);
+    linear-gradient(90deg, rgba(20,14,16,.15) 0%, rgba(20,14,16,.28) 42%, rgba(20,14,16,.55) 100%),
+    linear-gradient(180deg, rgba(20,14,16,.18) 0%, transparent 38%, rgba(20,14,16,.28) 100%);
   pointer-events: none;
 }
-.rd-home-photo-copy {
+.rd-home-photo-inner {
   position: relative; z-index: 1;
-  padding-top: calc(var(--nav-height, 88px) + clamp(28px, 5vw, 64px));
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: calc(var(--nav-height, 88px) + clamp(20px, 4vw, 48px));
   padding-bottom: clamp(48px, 7vw, 88px);
-  max-width: 640px;
+  box-sizing: border-box;
 }
-.rd-home-photo-copy p {
-  margin: 0 0 18px;
+.rd-home-photo-copy {
+  width: min(560px, 100%);
+  max-width: 560px;
+  margin-right: clamp(0px, 4vw, 48px);
+}
+.rd-home-photo-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: #FFFEF9;
+  margin: 0 0 clamp(18px, 2.2vw, 28px);
+}
+.rd-home-photo-body {
+  margin: 0;
   font-family: var(--body);
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-size: clamp(14px, 1.15vw, 16px);
   line-height: 1.55;
   color: rgba(255,254,249,.92);
 }
-.rd-home-photo-copy p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+  .rd-home-photo-inner { justify-content: flex-start; }
+  .rd-home-photo-copy { margin-right: 0; max-width: 100%; }
+  .rd-home-photo-scrim {
+    background:
+      linear-gradient(180deg, rgba(20,14,16,.35) 0%, rgba(20,14,16,.45) 50%, rgba(20,14,16,.55) 100%),
+      linear-gradient(90deg, rgba(20,14,16,.5) 0%, rgba(20,14,16,.25) 100%);
+  }
+}
 
 /* after Why Georgia — sunset photo + CTA */
 .rd-easy-photo {
