@@ -1159,16 +1159,16 @@ html, body { background: #21141A; }
 .rd-home-photo-title {
   font-family: var(--display);
   font-weight: 600;
-  /* Same scale as hero h1 “Don’t play real estate roulette” */
-  font-size: clamp(34px, 4.6vw, 58px);
-  line-height: 1.08;
+  /* Slightly under hero h1 — long statement must not feel larger */
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.14;
   letter-spacing: -0.015em;
   color: #FFFEF9;
-  margin: 0 0 clamp(18px, 2.2vw, 28px);
+  margin: 0 0 clamp(16px, 2vw, 24px);
   white-space: pre-line;
 }
 @media (max-width: 640px) {
-  .rd-home-photo-title { font-size: clamp(30px, 8.2vw, 40px); }
+  .rd-home-photo-title { font-size: clamp(26px, 7vw, 34px); }
 }
 .rd-home-photo-body {
   margin: 0;
@@ -1729,7 +1729,6 @@ export default function HomeV2() {
     <div className="rd">
       <style>{CSS}</style>
 
-      <Hero />
       <Hero />
       <HomePhotoBand />
       <Pricing onRequest={setModal} />
