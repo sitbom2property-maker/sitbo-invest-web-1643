@@ -70,6 +70,14 @@ const FAQS = [
   { qKey: "invest.faq.q1" as MessageKey, aKey: "invest.faq.a1" as MessageKey },
   { qKey: "invest.faq.q2" as MessageKey, aKey: "invest.faq.a2" as MessageKey },
   { qKey: "invest.faq.q3" as MessageKey, aKey: "invest.faq.a3" as MessageKey },
+  { qKey: "invest.faq.q4" as MessageKey, aKey: "invest.faq.a4" as MessageKey },
+  { qKey: "invest.faq.q5" as MessageKey, aKey: "invest.faq.a5" as MessageKey },
+  { qKey: "invest.faq.q6" as MessageKey, aKey: "invest.faq.a6" as MessageKey },
+  { qKey: "invest.faq.q7" as MessageKey, aKey: "invest.faq.a7" as MessageKey },
+  { qKey: "invest.faq.q8" as MessageKey, aKey: "invest.faq.a8" as MessageKey },
+  { qKey: "invest.faq.q9" as MessageKey, aKey: "invest.faq.a9" as MessageKey },
+  { qKey: "invest.faq.q10" as MessageKey, aKey: "invest.faq.a10" as MessageKey },
+  { qKey: "invest.faq.q11" as MessageKey, aKey: "invest.faq.a11" as MessageKey },
 ];
 
 const PRICE_BARS = [
@@ -89,26 +97,49 @@ const YIELD_BARS = [
 ];
 
 const DIPLOMACY = [
-  { titleKey: "invest.diplomacy1.title" as MessageKey, bodyKey: "invest.diplomacy1.body" as MessageKey },
-  { titleKey: "invest.diplomacy2.title" as MessageKey, bodyKey: "invest.diplomacy2.body" as MessageKey },
-  { titleKey: "invest.diplomacy3.title" as MessageKey, bodyKey: "invest.diplomacy3.body" as MessageKey },
+  {
+    titleKey: "invest.diplomacy1.title" as MessageKey,
+    bodyKey: "invest.diplomacy1.body" as MessageKey,
+    img: "/why-georgia/slider-1.jpg",
+  },
+  {
+    titleKey: "invest.diplomacy2.title" as MessageKey,
+    bodyKey: "invest.diplomacy2.body" as MessageKey,
+    img: "/why-georgia/slider-2.jpg",
+  },
+  {
+    titleKey: "invest.diplomacy3.title" as MessageKey,
+    bodyKey: "invest.diplomacy3.body" as MessageKey,
+    img: "/why-georgia/slider-3.jpg",
+  },
+  {
+    titleKey: "invest.diplomacy4.title" as MessageKey,
+    bodyKey: "invest.diplomacy4.body" as MessageKey,
+    img: "/why-georgia/img-wine.jpg",
+  },
 ];
 
 const CHAIN = [
   {
+    id: "2016",
     titleKey: "invest.chain.2016.title" as MessageKey,
     bodyKey: "invest.chain.2016.body" as MessageKey,
-    img: "/why-georgia/chain-2016.jpg",
+    img: "/why-georgia/chain-card-1.jpg",
+    thumb: "/why-georgia/chain-2016.png",
   },
   {
+    id: "2017",
     titleKey: "invest.chain.2017.title" as MessageKey,
     bodyKey: "invest.chain.2017.body" as MessageKey,
-    img: "/why-georgia/chain-2017.jpg",
+    img: "/why-georgia/chain-card-2.jpg",
+    thumb: "/why-georgia/chain-2017.png",
   },
   {
+    id: "today",
     titleKey: "invest.chain.today.title" as MessageKey,
     bodyKey: "invest.chain.today.body" as MessageKey,
-    img: "/why-georgia/chain-today.jpg",
+    img: "/why-georgia/chain-card-3.jpg",
+    thumb: "/why-georgia/chain-today.png",
   },
 ];
 
@@ -123,9 +154,18 @@ function useReveal() {
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.12 },
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" },
     );
     els.forEach((el) => io.observe(el));
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95 && r.bottom > 0) {
+          el.classList.add("in");
+          io.unobserve(el);
+        }
+      });
+    });
     return () => io.disconnect();
   }, []);
 }
@@ -295,21 +335,41 @@ const CSS = `
 }
 .iv-tile-body { font-size: 13px; line-height: 1.4; margin: 12px 0 0; opacity: .85; }
 
-/* diplomacy slider */
+/* diplomacy slider — fixed frame so only copy/image swap */
 .iv-diplomacy {
   background: var(--bg-dark); color: var(--white);
   padding: clamp(56px, 7vw, 100px) 0;
 }
-.iv-diplomacy-row {
-  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+.iv-diplomacy-stage {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(20px, 3vw, 40px); align-items: stretch;
+  min-height: clamp(340px, 42vw, 460px);
 }
-.iv-diplomacy h2 {
+.iv-diplomacy-copy {
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 100%; box-sizing: border-box;
+}
+.iv-diplomacy-copy h2 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
-  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; max-width: 720px;
+  font-size: clamp(28px, 3.4vw, 46px); line-height: 1.12;
+  min-height: 3.4em;
 }
-.iv-diplomacy p {
-  margin: 0; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.5;
-  color: rgba(255,254,249,.82); max-width: 720px;
+.iv-diplomacy-copy p {
+  margin: 0; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.55;
+  color: rgba(255,254,249,.82); max-width: 56ch;
+  min-height: 6.2em;
+}
+.iv-diplomacy-media {
+  border-radius: var(--radius); overflow: hidden; min-height: clamp(280px, 36vw, 460px);
+  background: #160e12;
+}
+.iv-diplomacy-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  min-height: clamp(280px, 36vw, 460px);
+}
+.iv-diplomacy-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-top: 22px;
 }
 .iv-diplomacy-next {
   width: 56px; height: 56px; border-radius: 50%;
@@ -318,28 +378,46 @@ const CSS = `
   transition: background .2s, color .2s;
 }
 .iv-diplomacy-next:hover { background: var(--white); color: var(--bg-dark); }
-.iv-diplomacy-dots { display: flex; gap: 8px; margin-top: 28px; }
+.iv-diplomacy-dots { display: flex; gap: 8px; }
 .iv-diplomacy-dots button {
   width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
   background: rgba(255,254,249,.28); cursor: pointer;
 }
 .iv-diplomacy-dots button.is-active { background: var(--white); }
 
-/* blockchain */
+/* blockchain cover + expandable cards */
 .iv-chain {
   background: var(--bg-light); color: var(--text-dark);
-  padding: clamp(56px, 7vw, 100px) 0;
+  padding: 0 0 clamp(56px, 7vw, 100px);
+}
+.iv-chain-cover {
+  position: relative; min-height: clamp(420px, 56vw, 620px);
+  display: flex; align-items: flex-start; overflow: hidden;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.iv-chain-cover-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.iv-chain-cover-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,254,249,.72) 0%, rgba(255,254,249,.28) 42%, rgba(255,254,249,.08) 100%);
+}
+.iv-chain-cover-inner {
+  position: relative; z-index: 1; width: 100%;
+  padding: clamp(48px, 7vw, 88px) 0 clamp(36px, 5vw, 64px);
 }
 .iv-chain-head {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
-  margin-bottom: clamp(28px, 4vw, 44px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start;
 }
 .iv-chain-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
-  font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
+  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.06; letter-spacing: -0.02em;
+  color: var(--text-dark);
 }
 .iv-chain-head p {
-  margin: 0; font-size: 15px; line-height: 1.5; color: rgba(33,20,26,.78);
+  margin: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.55;
+  color: rgba(33,20,26,.82); max-width: 48ch;
 }
 .iv-chain-rail {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -347,38 +425,91 @@ const CSS = `
 }
 .iv-chain-card {
   position: relative; border-radius: var(--radius); overflow: hidden;
-  min-height: clamp(320px, 36vw, 460px);
-  background: var(--card-plum); color: var(--white);
+  min-height: clamp(300px, 34vw, 420px);
+  background: #21141A; color: var(--white);
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 24px; box-sizing: border-box;
+  box-sizing: border-box; border: none; padding: 0; cursor: pointer;
+  text-align: left; transition: min-height .35s ease, transform .25s ease;
 }
-.iv-chain-card img {
+.iv-chain-card.is-open { min-height: clamp(380px, 44vw, 520px); }
+.iv-chain-card img.iv-chain-card-bg {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block;
+  object-fit: cover; display: block; transition: transform .5s ease;
 }
+.iv-chain-card.is-open img.iv-chain-card-bg { transform: scale(1.04); }
 .iv-chain-card::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(33,20,26,.15) 20%, rgba(33,20,26,.88) 78%);
+  background: linear-gradient(180deg, rgba(33,20,26,.12) 15%, rgba(33,20,26,.88) 78%);
 }
-.iv-chain-card > * { position: relative; z-index: 1; }
+.iv-chain-card-inner {
+  position: relative; z-index: 1; padding: 22px 22px 24px;
+  display: flex; flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box;
+}
+.iv-chain-card-top {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+}
 .iv-chain-card h3 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 10px;
+  font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(28px, 2.8vw, 40px); line-height: 1;
 }
-.iv-chain-card p { margin: 0; font-size: 13px; line-height: 1.45; color: rgba(255,254,249,.9); }
+.iv-chain-card-toggle {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,254,249,.92); color: #21141A;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; line-height: 1;
+}
+.iv-chain-card-body {
+  margin: 0; max-height: 0; opacity: 0; overflow: hidden;
+  font-size: 14px; line-height: 1.5; color: rgba(255,254,249,.9);
+  transition: max-height .35s ease, opacity .25s ease, margin .25s ease;
+}
+.iv-chain-card.is-open .iv-chain-card-body {
+  max-height: 220px; opacity: 1; margin-top: 4px;
+}
+.iv-chain-card-thumb {
+  width: 72px; height: 56px; object-fit: cover; border-radius: 2px;
+  position: absolute; top: 18px; left: 18px; z-index: 2;
+  border: 1px solid rgba(255,254,249,.25);
+}
 
-/* awards */
+/* awards marquee */
 .iv-awards {
   background: var(--bg-light); color: var(--text-dark);
-  padding: 0 0 clamp(48px, 6vw, 80px);
-  text-align: center;
+  padding: clamp(48px, 6vw, 88px) 0;
+  overflow: hidden;
 }
-.iv-awards h2 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(28px, 4vw, 48px);
-  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
+.iv-awards-head {
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter);
+  margin-bottom: clamp(28px, 4vw, 44px);
 }
-.iv-awards img {
-  width: 100%; max-width: 1100px; height: auto; display: block; margin: 0 auto;
+.iv-awards-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(30px, 3.8vw, 52px); line-height: 1.12; max-width: 16ch;
+}
+.iv-awards-marquee {
+  position: relative; overflow: hidden;
+}
+.iv-awards-track {
+  display: flex; width: max-content; gap: 0;
+  animation: ivAwardsMarquee 42s linear infinite;
+}
+.iv-awards-track img {
+  height: clamp(88px, 12vw, 140px); width: auto; display: block;
+  flex-shrink: 0;
+}
+.iv-awards-fade-l, .iv-awards-fade-r {
+  position: absolute; top: 0; bottom: 0; width: clamp(48px, 10vw, 140px);
+  pointer-events: none; z-index: 2;
+}
+.iv-awards-fade-l {
+  left: 0; background: linear-gradient(to right, #FFFEF9 18%, transparent);
+}
+.iv-awards-fade-r {
+  right: 0; background: linear-gradient(to left, #FFFEF9 18%, transparent);
+}
+@keyframes ivAwardsMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* early band */
@@ -534,10 +665,11 @@ const CSS = `
 }
 
 @media (max-width: 1000px) {
-  .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts { grid-template-columns: 1fr; }
+  .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts, .iv-diplomacy-stage { grid-template-columns: 1fr; }
   .iv-hero-lead, .iv-panel-head p { justify-self: start; text-align: left; max-width: none; }
   .iv-mosaic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .iv-chain-rail { grid-template-columns: 1fr; }
+  .iv-diplomacy-copy h2, .iv-diplomacy-copy p { min-height: 0; }
   .iv-acc-head { grid-template-columns: 1fr auto auto; }
   .iv-acc-tag { display: none; }
   .iv-acc-body { padding-left: 0; }
@@ -545,8 +677,6 @@ const CSS = `
 }
 @media (max-width: 640px) {
   .iv-mosaic-grid { grid-template-columns: 1fr; }
-  .iv-diplomacy-row { grid-template-columns: 1fr; }
-  .iv-diplomacy-next { justify-self: start; }
 }
 `;
 
@@ -556,6 +686,7 @@ export default function InvestPage() {
   const [openFaq, setOpenFaq] = useState(-1);
   const [modalOpen, setModalOpen] = useState(false);
   const [diplomacyIndex, setDiplomacyIndex] = useState(0);
+  const [openChainId, setOpenChainId] = useState<string | null>("2016");
   useReveal();
 
   const diplomacy = DIPLOMACY[diplomacyIndex];
@@ -617,56 +748,103 @@ export default function InvestPage() {
 
       <section className="iv-diplomacy">
         <div className="iv-wrap">
-          <div className="iv-diplomacy-row rv">
-            <div>
-              <h2>{t(diplomacy.titleKey)}</h2>
-              <p>{t(diplomacy.bodyKey)}</p>
-              <div className="iv-diplomacy-dots" role="tablist" aria-label="Diplomacy slides">
-                {DIPLOMACY.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className={i === diplomacyIndex ? "is-active" : undefined}
-                    aria-label={`Slide ${i + 1}`}
-                    onClick={() => setDiplomacyIndex(i)}
-                  />
-                ))}
+          <div className="iv-diplomacy-stage rv">
+            <div className="iv-diplomacy-copy">
+              <div>
+                <h2>{t(diplomacy.titleKey)}</h2>
+                <p>{t(diplomacy.bodyKey)}</p>
+              </div>
+              <div className="iv-diplomacy-controls">
+                <div className="iv-diplomacy-dots" role="tablist" aria-label="Diplomacy slides">
+                  {DIPLOMACY.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={i === diplomacyIndex ? "is-active" : undefined}
+                      aria-label={`Slide ${i + 1}`}
+                      onClick={() => setDiplomacyIndex(i)}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="iv-diplomacy-next"
+                  aria-label={t("invest.diplomacy.next")}
+                  onClick={() => setDiplomacyIndex((i) => (i + 1) % DIPLOMACY.length)}
+                >
+                  ›
+                </button>
               </div>
             </div>
-            <button
-              type="button"
-              className="iv-diplomacy-next"
-              aria-label={t("invest.diplomacy.next")}
-              onClick={() => setDiplomacyIndex((i) => (i + 1) % DIPLOMACY.length)}
-            >
-              ›
-            </button>
+            <div className="iv-diplomacy-media">
+              <img src={diplomacy.img} alt="" key={diplomacy.img} />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="iv-chain">
-        <div className="iv-wrap">
-          <div className="iv-chain-head rv">
-            <h2>{t("invest.chain.title")}</h2>
-            <p>{t("invest.chain.body")}</p>
+        <div className="iv-chain-cover">
+          <img className="iv-chain-cover-bg" src="/why-georgia/blockchain-cover.jpg" alt="" />
+          <span className="iv-chain-cover-scrim" aria-hidden="true" />
+          <div className="iv-wrap iv-chain-cover-inner">
+            <div className="iv-chain-head rv">
+              <h2>
+                {t("invest.chain.line1")}
+                <br />
+                {t("invest.chain.line2")}
+                <br />
+                {t("invest.chain.line3")}
+              </h2>
+              <p>{t("invest.chain.body")}</p>
+            </div>
           </div>
+        </div>
+        <div className="iv-wrap">
           <div className="iv-chain-rail rv">
-            {CHAIN.map((card) => (
-              <article key={card.titleKey} className="iv-chain-card">
-                <img src={card.img} alt="" />
-                <h3>{t(card.titleKey)}</h3>
-                <p>{t(card.bodyKey)}</p>
-              </article>
-            ))}
+            {CHAIN.map((card) => {
+              const open = openChainId === card.id;
+              return (
+                <button
+                  key={card.id}
+                  type="button"
+                  className={`iv-chain-card${open ? " is-open" : ""}`}
+                  aria-expanded={open}
+                  onClick={() => setOpenChainId(open ? null : card.id)}
+                >
+                  <img className="iv-chain-card-bg" src={card.img} alt="" />
+                  <img className="iv-chain-card-thumb" src={card.thumb} alt="" />
+                  <div className="iv-chain-card-inner">
+                    <div className="iv-chain-card-top">
+                      <h3>{t(card.titleKey)}</h3>
+                      <span className="iv-chain-card-toggle" aria-hidden>
+                        {open ? "−" : "+"}
+                      </span>
+                    </div>
+                    <p className="iv-chain-card-body">{t(card.bodyKey)}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
       <section className="iv-awards">
-        <div className="iv-wrap rv">
-          <h2>{t("invest.awards.title")}</h2>
-          <img src="/why-georgia/awards.png" alt={t("invest.awards.alt")} />
+        <div className="iv-awards-head rv">
+          <h2>
+            {t("invest.awards.line1")}
+            <br />
+            {t("invest.awards.line2")}
+          </h2>
+        </div>
+        <div className="iv-awards-marquee rv" aria-label={t("invest.awards.alt")}>
+          <div className="iv-awards-fade-l" />
+          <div className="iv-awards-fade-r" />
+          <div className="iv-awards-track">
+            <img src="/why-georgia/awards-logos.png" alt="" />
+            <img src="/why-georgia/awards-logos.png" alt="" />
+          </div>
         </div>
       </section>
 

@@ -864,7 +864,13 @@ const en = {
   "invest.diplomacy3.title": "Global Diplomatic Reach with 180+ Sovereign Partners.",
   "invest.diplomacy3.body":
     "Georgia maintains formal diplomatic ties with over 186 UN member states and hosts international embassies from the USA, UK, EU nations, China, Japan, and the UAE, ensuring strong political and investment safeguards.",
+  "invest.diplomacy4.title": "A magnet for slow-life seekers.",
+  "invest.diplomacy4.body":
+    "Resorts and the wellness industry are growing fast in Georgia, along with luxury leisure — lifting tourist flow and lifestyle demand.",
   "invest.chain.title": "World's 1st Blockchain-Backed Land Registry",
+  "invest.chain.line1": "World's 1st",
+  "invest.chain.line2": "Blockchain-Backed",
+  "invest.chain.line3": "Land Registry",
   "invest.chain.body":
     "100% Title Security via Bitcoin Blockchain. In 2016, Georgia became the first nation to secure property titles on the Bitcoin blockchain. Every ownership certificate generates an unalterable cryptographic proof, making title fraud physically impossible and enabling seamless 1-day remote registration.",
   "invest.chain.2016.title": "2016",
@@ -877,6 +883,8 @@ const en = {
   "invest.chain.today.body":
     "Every title check, purchase transaction, or mortgage registration is recorded in the Public Registry and automatically hashed onto the blockchain. The country is also actively adopting smart contracts for remote, instant transactions — executing payment and title transfer in a single second.",
   "invest.awards.title": "One of Europe's highest-yield property markets.",
+  "invest.awards.line1": "One of Europe's highest-yield",
+  "invest.awards.line2": "property markets.",
   "invest.awards.alt": "Press and awards recognizing Georgia and Batumi",
   "invest.early.line1": "Still early.",
   "invest.early.line2": "Still affordable.",
@@ -1430,7 +1438,7 @@ const en = {
     "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who brings together local knowledge, negotiation experience, market access and practical real estate expertise.",
 
   "amina.why.body":
-    "Before you buy, it helps to understand taxes, residency paths, rental logic, market risks, and the difference between Batumi and Tbilisi — calmly, without sales theatre.",
+    "Tax haven for investors, ease of doing business, a growing wellness industry, a major regional IT hub, rich nature and culture, a path to residency — and rental yields about twice as high as in Europe.",
 
   "amina.pricing.note":
     "Booking and payment go through the assistant. Choose a format — she will confirm the slot and send payment details.",
