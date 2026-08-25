@@ -194,6 +194,7 @@ export function Nav() {
           transition: "background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease",
           background: overHero ? "transparent" : navBackground,
           backgroundColor: overHero ? "transparent" : undefined,
+          backgroundImage: overHero ? "none" : undefined,
           backdropFilter: overHero ? "none" : "blur(14px) saturate(1.15)",
           WebkitBackdropFilter: overHero ? "none" : "blur(14px) saturate(1.15)",
           borderBottom: overHero ? "none" : "1px solid rgba(255,255,249,0.08)",

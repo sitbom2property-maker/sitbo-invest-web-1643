@@ -1061,8 +1061,9 @@ html, body { background: #21141A; }
 .rd-hero-scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(20,14,16,.72) 0%, rgba(20,14,16,.42) 42%, rgba(20,14,16,.12) 68%, rgba(20,14,16,.05) 100%),
-    linear-gradient(180deg, rgba(20,14,16,.35) 0%, transparent 28%, transparent 70%, rgba(20,14,16,.45) 100%);
+    /* Side fade for copy only — no top bar darkening (nav stays visually clear over photo) */
+    linear-gradient(90deg, rgba(20,14,16,.68) 0%, rgba(20,14,16,.38) 42%, rgba(20,14,16,.1) 68%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, transparent 72%, rgba(20,14,16,.42) 100%);
   pointer-events: none;
 }
 .rd-hero-inner {
