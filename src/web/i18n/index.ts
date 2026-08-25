@@ -3,10 +3,12 @@ import { normalizeLanguage, useLocale, type LanguageCode } from "../context/Loca
 import { fixTypography, normalizeTypografLang } from "../lib/typograf";
 import en, { type MessageKey } from "./en";
 import ru from "./ru";
+import ka from "./ka";
 
 const catalogs: Record<LanguageCode, Record<MessageKey, string>> = {
   en,
   ru,
+  ka,
 };
 
 export type { LanguageCode };

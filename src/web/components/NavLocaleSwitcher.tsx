@@ -6,6 +6,7 @@ import { CURRENCY_SYMBOLS } from "../lib/money";
 const LANGS = [
   { code: "en" as const, label: "EN" },
   { code: "ru" as const, label: "RU" },
+  { code: "ka" as const, label: "KA" },
 ];
 
 const CURRENCIES: SupportedCurrency[] = ["USD", "EUR", "GEL", "RUB"];
@@ -65,7 +66,7 @@ export function NavLocaleSwitcher({
     background: "transparent",
     color: ink,
     cursor: "pointer",
-    padding: compact ? "0 5px" : "0 7px",
+    padding: compact ? "0 4px" : "0 6px",
     lineHeight: 1,
     verticalAlign: "middle",
     transition: "opacity 0.15s, color 0.15s",

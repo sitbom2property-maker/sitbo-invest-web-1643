@@ -103,7 +103,7 @@ export function CookieConsent() {
                 </button>
                 {langOpen && (
                   <div className="ck-lang-menu" role="listbox" aria-label={t("cookie.language")}>
-                    {(["en", "ru"] as const).map((code) => (
+                    {(["en", "ru", "ka"] as const).map((code) => (
                       <button
                         key={code}
                         type="button"

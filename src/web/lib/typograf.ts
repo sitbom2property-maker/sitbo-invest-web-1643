@@ -323,5 +323,8 @@ export function typografDeep<T>(value: T, lang: TypografLang): T {
 }
 
 export function normalizeTypografLang(language: string): TypografLang {
-  return language.toLowerCase().startsWith("ru") ? "ru" : "en";
+  const c = language.toLowerCase();
+  if (c === "ru" || c.startsWith("ru-") || c.startsWith("ru_")) return "ru";
+  // Georgian uses Latin-script hanging rules poorly; EN spacing is safer
+  return "en";
 }

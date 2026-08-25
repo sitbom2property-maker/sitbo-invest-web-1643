@@ -65,7 +65,7 @@ export function formatMoney(
   opts?: { compact?: boolean; maximumFractionDigits?: number }
 ): string {
   const code = currency.toUpperCase();
-  const locale = language === "ru" ? "ru-RU" : "en-US";
+  const locale = language === "ru" ? "ru-RU" : language === "ka" ? "ka-GE" : "en-US";
   const symbol = CURRENCY_SYMBOLS[code] ?? `${code} `;
   const digits = opts?.maximumFractionDigits ?? (Math.abs(amount) >= 100 ? 0 : 2);
 
@@ -75,9 +75,11 @@ export function formatMoney(
       minimumFractionDigits: 0,
     }).format(Math.round(amount * Math.pow(10, digits)) / Math.pow(10, digits));
 
-    // Symbol before for most; RUB often after in RU — keep symbol before for consistency
+    // Symbol before for most; RUB/GEL often after in RU/KA
     if (code === "GEL" || code === "RUB") {
-      return language === "ru" ? `${formatted} ${symbol}` : `${symbol}${formatted}`;
+      return language === "ru" || language === "ka"
+        ? `${formatted} ${symbol}`
+        : `${symbol}${formatted}`;
     }
     return `${symbol}${formatted}`;
   } catch {

@@ -7,6 +7,7 @@ import { LocaleSelect } from "./LocaleSelect";
 const LANGUAGE_OPTIONS = [
   { code: "en", label: "English" },
   { code: "ru", label: "Русский" },
+  { code: "ka", label: "ქართული" },
 ] as const;
 
 const CURRENCY_OPTIONS = [
@@ -69,7 +70,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
 
   const handleSave = () => {
     setLocale({
-      language: draftLang as "en" | "ru",
+      language: draftLang as "en" | "ru" | "ka",
       currency: draftCurrency as typeof currency,
     });
     onClose();
