@@ -372,16 +372,17 @@ const CSS = `
   padding: clamp(56px, 7vw, 100px) 0;
 }
 .iv-chain-head {
-  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start;
-  margin-bottom: clamp(28px, 4vw, 44px);
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.25fr);
+  gap: clamp(28px, 3.5vw, 48px); align-items: start;
+  margin-bottom: clamp(48px, 6.5vw, 80px);
 }
 .iv-chain-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(34px, 4.6vw, 64px); line-height: 1.06; letter-spacing: -0.02em;
 }
 .iv-chain-head p {
-  margin: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.55;
-  color: rgba(33,20,26,.78); max-width: 48ch;
+  margin: 0; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.6;
+  color: rgba(33,20,26,.78); max-width: 58ch; justify-self: stretch;
 }
 .iv-chain-rail {
   display: flex; gap: 8px; align-items: stretch;
@@ -640,7 +641,6 @@ const CSS = `
   padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 64px);
   text-align: center; color: var(--white);
 }
-.iv-cta .iv-panel-eyebrow { color: rgba(255,254,249,.65); }
 .iv-cta h2 {
   font-family: var(--display); font-weight: 600; margin: 0 0 14px;
   font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
@@ -941,8 +941,11 @@ export default function InvestPage() {
 
       <section className="iv-cta-outer">
         <div className="iv-cta rv">
-          <span className="iv-panel-eyebrow">{t("invest.cta.eyebrow")}</span>
-          <h2>{t("invest.cta.title")}</h2>
+          <h2>
+            {t("invest.cta.line1")}
+            <br />
+            {t("invest.cta.line2")}
+          </h2>
           <p>{t("invest.cta.body")}</p>
           <button type="button" className="iv-btn iv-btn-white" onClick={() => setModalOpen(true)}>
             {t("invest.cta.button")}

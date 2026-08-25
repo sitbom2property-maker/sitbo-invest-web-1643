@@ -992,10 +992,10 @@ const en = {
   "invest.faq.q11": "Is Georgia a good place to preserve capital?",
   "invest.faq.a11":
     "Georgia can be interesting for capital preservation because of its simple property registration, relatively open market, strategic location and demand from locals, expats and investors. But capital preservation does not mean buying any apartment. The key is choosing the right property, location, legal structure and entry price. A bad object in a good country is still a bad investment.",
-  "invest.cta.eyebrow": "Ready to invest?",
-  "invest.cta.title": "Your first property in Georgia starts with one call.",
+  "invest.cta.line1": "Your first property in Georgia",
+  "invest.cta.line2": "starts with one call",
   "invest.cta.body":
-    "Thirty minutes. No obligation. I look at your budget, goals and timeline — then tell you what is realistically possible now.",
+    "Thirty minutes. No obligation. I look at your budget, goals and timeline — then tell you what is realistically possible now. Consultation is paid.",
   "invest.cta.button": "Book a consultation",
 
   // Services page — first person (Arthur)
