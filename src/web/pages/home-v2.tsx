@@ -29,9 +29,19 @@ function useReveal() {
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.1 },
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" },
     );
     els.forEach((el) => io.observe(el));
+    // Reveal anything already in view (e.g. below fold after layout)
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95 && r.bottom > 0) {
+          el.classList.add("in");
+          io.unobserve(el);
+        }
+      });
+    });
     return () => io.disconnect();
   }, []);
 }
@@ -154,7 +164,7 @@ function HomePhotoBand() {
       />
       <span className="rd-home-photo-scrim" aria-hidden="true" />
       <div className="rd-wrap rd-home-photo-inner">
-        <div className="rd-home-photo-copy rv">
+        <div className="rd-home-photo-copy">
           <h2 id="home-photo-title" className="rd-home-photo-title">
             {t("v2.sticky1.title")}
           </h2>
@@ -1141,25 +1151,29 @@ html, body { background: #21141A; }
   box-sizing: border-box;
 }
 .rd-home-photo-copy {
-  width: min(560px, 100%);
-  max-width: 560px;
-  margin-right: clamp(0px, 4vw, 48px);
+  width: min(580px, 100%);
+  max-width: 580px;
+  margin-right: clamp(0px, 5vw, 64px);
+  opacity: 1;
 }
 .rd-home-photo-title {
   font-family: var(--display);
   font-weight: 600;
-  font-size: clamp(28px, 3.6vw, 44px);
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  font-size: clamp(30px, 3.85vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #FFFEF9;
-  margin: 0 0 clamp(18px, 2.2vw, 28px);
+  margin: 0 0 clamp(20px, 2.4vw, 32px);
+  text-wrap: pretty;
 }
 .rd-home-photo-body {
   margin: 0;
   font-family: var(--body);
-  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 400;
+  font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.55;
-  color: rgba(255,254,249,.92);
+  color: rgba(255,254,249,.94);
+  text-wrap: pretty;
 }
 @media (max-width: 768px) {
   .rd-home-photo-inner { justify-content: flex-start; }
