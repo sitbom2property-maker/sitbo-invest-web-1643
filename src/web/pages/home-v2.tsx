@@ -806,26 +806,24 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
                 <p>{t(plan.resultKey)}</p>
               </div>
 
-              <div className="rd-plan-foot">
-                <div className="rd-plan-price">{plan.price}</div>
-                <p className={`rd-plan-note${plan.noteKey ? "" : " is-empty"}`}>
-                  {plan.noteKey ? t(plan.noteKey) : "\u00A0"}
-                </p>
-                <button
-                  type="button"
-                  className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
-                  onClick={() =>
-                    onRequest({
-                      open: true,
-                      source: `Pricing — ${plan.id}`,
-                      topic: `${t(plan.nameKey)} · ${plan.price}`,
-                      title: t(plan.nameKey),
-                    })
-                  }
-                >
-                  {t(plan.ctaKey ?? "v2.pricing.choose")}
-                </button>
-              </div>
+              <div className="rd-plan-price">{plan.price}</div>
+              <p className={`rd-plan-note${plan.noteKey ? "" : " is-empty"}`}>
+                {plan.noteKey ? t(plan.noteKey) : "\u00A0"}
+              </p>
+              <button
+                type="button"
+                className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
+                onClick={() =>
+                  onRequest({
+                    open: true,
+                    source: `Pricing — ${plan.id}`,
+                    topic: `${t(plan.nameKey)} · ${plan.price}`,
+                    title: t(plan.nameKey),
+                  })
+                }
+              >
+                {t(plan.ctaKey ?? "v2.pricing.choose")}
+              </button>
             </div>
           ))}
         </div>
@@ -1570,15 +1568,9 @@ html, body { background: #21141A; }
   font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 26px;
   padding-bottom: 24px; border-bottom: 1px solid rgba(33,20,26,.15);
 }
-.rd-plan-foot {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  padding-top: 12px;
-}
 .rd-plan-price {
   font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.4vw, 58px); line-height: 1.05;
-  margin: 0 0 20px; font-variant-numeric: tabular-nums;
+  margin: auto 0 18px; font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
 .rd-plan ul { list-style: disc; margin: 0 0 28px; padding-left: 18px; display: grid; gap: 14px; }
@@ -1589,7 +1581,7 @@ html, body { background: #21141A; }
 .rd-plan-note {
   font-family: var(--body); font-size: 13px; line-height: 1.5;
   color: rgba(33,20,26,.55); margin: 0 0 22px;
-  min-height: 4.2em;
+  min-height: 5.6em;
 }
 .rd-plan-note.is-empty { visibility: hidden; }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }

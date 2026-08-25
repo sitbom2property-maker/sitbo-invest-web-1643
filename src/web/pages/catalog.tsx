@@ -483,7 +483,7 @@ export default function CatalogPage() {
         style={{
           background: C.dark,
           width: "100%",
-          minHeight: "clamp(300px, 42vh, 440px)",
+          minHeight: "clamp(380px, 46vh, 480px)",
           padding: "clamp(72px, 8vw, 120px) 0",
           display: "flex",
           alignItems: "center",
