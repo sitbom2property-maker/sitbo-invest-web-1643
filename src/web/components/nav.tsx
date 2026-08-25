@@ -172,13 +172,13 @@ export function Nav() {
     };
   }, [menuOpen]);
 
-  // Home top: glass over photo. Elsewhere / scrolled: solid dark.
+  // Home top: fully transparent. Home scrolled: soft frosted glass. Other pages: solid dark.
   const overHero = isHome && !scrolled && !menuOpen;
   const navBackground = overHero
     ? "transparent"
-    : isMobile
-      ? "rgba(33, 20, 26, 0.94)"
-      : "rgba(33, 20, 26, 0.96)";
+    : isHome
+      ? "rgba(33, 20, 26, 0.42)"
+      : "rgba(33, 20, 26, 0.94)";
 
   return (
     <>
@@ -191,11 +191,11 @@ export function Nav() {
           width: "100%",
           zIndex: 100,
           height: navHeight,
-          transition: "background 0.3s ease, backdrop-filter 0.3s ease",
+          transition: "background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease",
           background: navBackground,
-          backdropFilter: overHero ? "none" : "blur(14px)",
-          WebkitBackdropFilter: overHero ? "none" : "blur(14px)",
-          borderBottom: overHero ? "none" : "1px solid rgba(255,255,255,0.06)",
+          backdropFilter: overHero ? "none" : "blur(14px) saturate(1.15)",
+          WebkitBackdropFilter: overHero ? "none" : "blur(14px) saturate(1.15)",
+          borderBottom: overHero ? "none" : "1px solid rgba(255,255,249,0.08)",
         }}
       >
         <div

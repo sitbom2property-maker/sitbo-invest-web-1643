@@ -136,6 +136,31 @@ function WhatToBuy() {
   );
 }
 
+/** Sticky storytelling chapter — designxhand-inspired, CSS-only */
+function StickyStory() {
+  const t = useT();
+  return (
+    <section className="rd-sticky-story" aria-labelledby="sticky-story-title">
+      <div className="rd-sticky-story-pin">
+        <img
+          className="rd-sticky-story-bg"
+          src="/home/rd-waterfront.jpg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <span className="rd-sticky-story-scrim" aria-hidden="true" />
+        <div className="rd-wrap rd-sticky-story-copy rv">
+          <h2 id="sticky-story-title" className="rd-h2">
+            {t("v2.market.title")}
+          </h2>
+          <p>{t("v2.market.body1")}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const MYTHS: { mythKey: MessageKey; realityKey: MessageKey; id: string }[] = [
   { id: "yield", mythKey: "v2.myths.m1", realityKey: "v2.myths.r1" },
   { id: "free-broker", mythKey: "v2.myths.m2", realityKey: "v2.myths.r2" },
@@ -711,7 +736,7 @@ const PLANS: Plan[] = [
     id: "discovery-tour",
     nameKey: "v2.plan3.name",
     forKey: "v2.plan3.for",
-    price: "$1999*",
+    price: "$1999",
     featureKeys: ["v2.plan3.f1", "v2.plan3.f2", "v2.plan3.f3", "v2.plan3.f4"],
     requestKey: "v2.plan3.request",
     resultKey: "v2.plan3.result",
@@ -732,7 +757,6 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
             <div key={plan.id} className={`rd-plan rv${plan.featured ? " is-featured" : ""}`}>
               <h3>{t(plan.nameKey)}</h3>
               <p className="rd-plan-for">{t(plan.forKey)}</p>
-              <div className="rd-plan-price">{plan.price}</div>
 
               <ul>
                 {plan.featureKeys.map((k) => (
@@ -748,6 +772,8 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
                 <strong>{t("v2.pricing.resultLabel")}</strong>
                 <p>{t(plan.resultKey)}</p>
               </div>
+
+              <div className="rd-plan-price">{plan.price}</div>
 
               {plan.noteKey ? <p className="rd-plan-note">{t(plan.noteKey)}</p> : null}
 
@@ -990,11 +1016,12 @@ html, body { background: #21141A; }
 .rd-btn-dark-outline:hover { background: #21141A; color: #FFFEF9; }
 
 /* type */
-.rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
-.rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
-.rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--text-dark); }
-.rd-lead { font-family: var(--body); font-size: 16px; line-height: 1.45; color: var(--text-light); margin: 0; }
-.rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
+/* mood: editorial spacing + type */
+.rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; letter-spacing: -0.02em; margin: 0; }
+.rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; letter-spacing: -0.015em; margin: 0; }
+.rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; letter-spacing: -0.012em; margin: 0; color: var(--text-dark); }
+.rd-lead { font-family: var(--body); font-size: 16px; line-height: 1.6; color: var(--text-light); margin: 0; }
+.rd-small { font-family: var(--body); font-size: 16px; line-height: 1.55; color: rgba(33,20,26,.75); margin: 0; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
 .rd-split .rd-lead {
   max-width: 420px; justify-self: end; text-align: right;
@@ -1076,9 +1103,54 @@ html, body { background: #21141A; }
   line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
 }
 
+/* sticky storytelling */
+.rd-sticky-story {
+  position: relative;
+  height: 160vh;
+  background: #21141A;
+}
+.rd-sticky-story-pin {
+  position: sticky; top: 0;
+  height: 100svh;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.rd-sticky-story-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.rd-sticky-story-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20,14,16,.25) 0%, rgba(20,14,16,.55) 55%, rgba(20,14,16,.82) 100%),
+    linear-gradient(90deg, rgba(20,14,16,.55) 0%, rgba(20,14,16,.2) 70%, transparent 100%);
+  pointer-events: none;
+}
+.rd-sticky-story-copy {
+  position: relative; z-index: 1;
+  padding-top: calc(var(--nav-height, 88px) + 40px);
+  padding-bottom: clamp(48px, 8vw, 96px);
+  max-width: var(--rd-max);
+}
+.rd-sticky-story-copy .rd-h2 {
+  color: #FFFEF9; max-width: 720px; margin: 0 0 18px;
+}
+.rd-sticky-story-copy p {
+  margin: 0; max-width: 560px;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 17px); line-height: 1.6;
+  color: rgba(255,254,249,.88);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rd-sticky-story { height: auto; }
+  .rd-sticky-story-pin { position: relative; height: auto; min-height: 70svh; }
+}
+
 /* what to buy — bridge before projects */
 .rd-what {
-  padding: clamp(40px, 5vw, 72px) 0;
+  padding: clamp(56px, 7vw, 100px) 0;
   background: #21141A;
   color: #FFFEF9;
 }
@@ -1434,8 +1506,8 @@ html, body { background: #21141A; }
 .rd-fb-track { margin-top: 18px; }
 
 /* pricing — dark page section; light cards + green featured */
-.rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); background: #21141A; color: #FFFEF9; }
-.rd-pricing .rd-h1 { margin-bottom: clamp(28px, 3.5vw, 56px); color: #FFFEF9; }
+.rd-pricing { padding: clamp(48px, 6vw, 96px) 0 clamp(64px, 8vw, 120px); background: #21141A; color: #FFFEF9; }
+.rd-pricing .rd-h1 { margin-bottom: clamp(32px, 4vw, 64px); color: #FFFEF9; }
 .rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 24px); align-items: stretch; }
 .rd-plan {
   /* Express Audit / Discovery Tour — taller frame, more air */
@@ -1455,15 +1527,18 @@ html, body { background: #21141A; }
   font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 22px;
   padding-bottom: 22px; border-bottom: 1px solid rgba(33,20,26,.15);
 }
-.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 36px; font-variant-numeric: tabular-nums; }
-.rd-plan ul { list-style: disc; margin: 0 0 36px; padding-left: 18px; display: grid; gap: 12px; }
+.rd-plan-price {
+  font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1;
+  margin: 8px 0 18px; font-variant-numeric: tabular-nums;
+}
+.rd-plan ul { list-style: disc; margin: 0 0 28px; padding-left: 18px; display: grid; gap: 12px; }
 .rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.4; }
-.rd-plan-block { margin-bottom: 28px; }
+.rd-plan-block { margin-bottom: 22px; }
 .rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
 .rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.45; margin: 0; }
 .rd-plan-note {
-  font-family: var(--body); font-size: 13px; line-height: 1.45;
-  color: rgba(33,20,26,.55); margin: 4px 0 28px;
+  font-family: var(--body); font-size: 13px; line-height: 1.5;
+  color: rgba(33,20,26,.55); margin: 0 0 22px;
 }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
 .rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
@@ -1551,19 +1626,22 @@ html, body { background: #21141A; }
   .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
   .rd-plan { min-height: 0; padding: clamp(32px, 5vw, 44px) clamp(24px, 4vw, 32px); }
+  .rd-plan h3 { font-size: clamp(28px, 5.5vw, 36px); line-height: 1.15; }
   .rd-myths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   .rd-hero { min-height: 100svh; align-items: flex-end; }
-  .rd-hero-media img { object-position: 78% 20%; }
+  .rd-hero-media img { object-position: center center; }
   .rd-hero-scrim {
     background:
-      linear-gradient(180deg, rgba(20,14,16,.45) 0%, rgba(20,14,16,.15) 35%, rgba(20,14,16,.75) 100%),
-      linear-gradient(90deg, rgba(20,14,16,.55) 0%, rgba(20,14,16,.2) 100%);
+      linear-gradient(180deg, rgba(20,14,16,.4) 0%, rgba(20,14,16,.12) 38%, rgba(20,14,16,.78) 100%),
+      linear-gradient(90deg, rgba(20,14,16,.45) 0%, rgba(20,14,16,.15) 55%, rgba(20,14,16,.2) 100%);
   }
   .rd-hero-inner { padding-bottom: clamp(36px, 8vw, 56px); }
   .rd-hero-copy h1 { font-size: clamp(30px, 8.2vw, 40px); }
   .rd-btn-hero-ghost { width: 100%; justify-content: center; }
+  .rd-plan h3 { font-size: clamp(30px, 8vw, 38px); }
+  .rd-plan-price { font-size: clamp(40px, 10vw, 48px); }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
   .rd-fb-card { --fb-size: min(78vw, 300px); }
@@ -1591,6 +1669,7 @@ export default function HomeV2() {
       </div>
       <WhyGeorgia />
       <WhatToBuy />
+      <StickyStory />
       <MarketMyths />
       <div className="rd-canvas">
         <SelectedProjects />

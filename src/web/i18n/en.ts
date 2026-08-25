@@ -244,10 +244,10 @@ const en = {
   "v2.plan2.request":
     "You planning an investment and want to develop a strategy from scratch",
   "v2.plan2.result": "Financial model, legal summary, step-by-step plan",
-  "v2.plan3.name": "Discovery Tour",
+  "v2.plan3.name": "Invest Discovery Tour",
   "v2.plan3.for": "Arrive as a guest. Leave as an investor.",
   "v2.plan3.f1": "2 Days & 3 Nights of personal immersion",
-  "v2.plan3.f2": "1-on-1 Guidance with Artur (Private Advisor)",
+  "v2.plan3.f2": "1-on-1 Guidance with Arthur (Private Advisor)",
   "v2.plan3.f3":
     "On-Site Inspections: Active developments, completed units & premium locations",
   "v2.plan3.f4":
@@ -257,7 +257,7 @@ const en = {
   "v2.plan3.result":
     "A clear investment decision, deep local context, and a fully prepared strategy to close the deal.",
   "v2.plan3.note":
-    "*100% Refundable: The $1,999 tour fee is fully credited toward your property purchase upon deal completion.",
+    "If after the Invest Discovery Tour you buy a property with my accompaniment, the tour fee may be refunded or credited toward further work. Terms are fixed in advance.",
   "v2.plan3.cta": "Apply for Discovery Tour",
 
   "v2.faq.title": "FAQ",
