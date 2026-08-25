@@ -38,52 +38,29 @@ function useReveal() {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
+function Hero() {
   const t = useT();
   return (
-    <section className="rd-hero">
-      <span className="rd-hero-circle" aria-hidden="true" />
-      <div className="rd-wrap rd-hero-grid">
-        <div className="rd-hero-photo">
-          <img src="/home/rd-arthur.jpg" alt="Arthur Arutyunyan" />
-        </div>
-
+    <section className="rd-hero" aria-labelledby="hero-title">
+      <div className="rd-hero-media" aria-hidden="true">
+        <img
+          src="/home/hero-arthur-terrace.jpg"
+          alt=""
+          fetchPriority="high"
+        />
+        <span className="rd-hero-scrim" />
+      </div>
+      <div className="rd-wrap rd-hero-inner">
         <div className="rd-hero-copy">
-          <h1>
+          <h1 id="hero-title">
             {t("v2.hero.line1")}
             <br />
             {t("v2.hero.line2")}
           </h1>
           <p>{t("v2.hero.body")}</p>
-          <div className="rd-hero-btns">
-            <button
-              type="button"
-              className="rd-btn rd-btn-outline"
-              onClick={() =>
-                onRequest({
-                  open: true,
-                  source: "Hero — Consultation",
-                  title: t("v2.hero.ctaPrimary"),
-                })
-              }
-            >
-              {t("v2.hero.ctaPrimary")}
-            </button>
-            <button
-              type="button"
-              className="rd-btn rd-btn-outline"
-              onClick={() =>
-                onRequest({
-                  open: true,
-                  source: "Hero — Sell with me",
-                  title: t("v2.hero.ctaSecondary"),
-                  topic: t("v2.hero.ctaSecondary"),
-                })
-              }
-            >
-              {t("v2.hero.ctaSecondary")}
-            </button>
-          </div>
+          <a href="#consultation" className="rd-btn rd-btn-hero-ghost">
+            {t("v2.hero.ctaPrimary")}
+          </a>
         </div>
       </div>
     </section>
@@ -1038,42 +1015,57 @@ html, body { background: #21141A; }
 }
 .rd-why-link:hover { opacity: .85; }
 
-/* hero — app shell already offsets fixed nav; center photo between nav and fold */
-.rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
-.rd-hero-circle {
-  position: absolute; top: -190px; right: -120px; width: 760px; height: 760px;
-  border: 1px solid var(--green); border-radius: 50%; pointer-events: none;
+/* hero — full-bleed photo under transparent nav */
+.rd-hero {
+  position: relative;
+  margin-top: calc(-1 * var(--nav-height, 88px));
+  min-height: min(100svh, 980px);
+  display: flex;
+  align-items: center;
+  color: #FFFEF9;
+  overflow: hidden;
 }
-.rd-hero-grid {
-  position: relative; z-index: 2;
-  display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr); align-items: center;
-  gap: 0;
-  box-sizing: border-box;
-  min-height: calc(100svh - var(--nav-height, 88px) - clamp(16px, 2vw, 28px));
-  padding-bottom: clamp(28px, 3.5vw, 48px);
+.rd-hero-media { position: absolute; inset: 0; }
+.rd-hero-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: 68% center;
+  display: block;
 }
-.rd-hero-photo {
-  border-radius: 2px; overflow: hidden; aspect-ratio: 508 / 680; z-index: 1;
-  justify-self: start; width: 100%;
-  max-height: min(72svh, 640px);
-  max-width: min(100%, calc(min(72svh, 640px) * 508 / 680));
+.rd-hero-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(20,14,16,.72) 0%, rgba(20,14,16,.42) 42%, rgba(20,14,16,.12) 68%, rgba(20,14,16,.05) 100%),
+    linear-gradient(180deg, rgba(20,14,16,.35) 0%, transparent 28%, transparent 70%, rgba(20,14,16,.45) 100%);
+  pointer-events: none;
 }
-.rd-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.rd-hero-copy {
-  position: relative; z-index: 2;
-  margin-left: clamp(-48px, -6vw, -18px);
-  padding-left: clamp(12px, 2vw, 28px);
+.rd-hero-inner {
+  position: relative; z-index: 1;
+  width: 100%;
+  padding-top: calc(var(--nav-height, 88px) + clamp(24px, 4vw, 48px));
+  padding-bottom: clamp(48px, 7vw, 88px);
 }
+.rd-hero-copy { max-width: 560px; }
 .rd-hero-copy h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 22px;
-  font-size: clamp(32px, 3.9vw, 56px); line-height: 1.07; letter-spacing: -.01em;
+  font-size: clamp(34px, 4.6vw, 58px); line-height: 1.08; letter-spacing: -.015em;
+  color: #FFFEF9;
 }
 .rd-hero-copy p {
-  font-family: var(--body); font-size: clamp(14px, 1.04vw, 15px); line-height: 1.45;
-  color: var(--white); margin: 0 0 30px; max-width: 500px;
+  margin: 0 0 28px; max-width: 480px;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(255,254,249,.9);
 }
-.rd-hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
-.rd-hero-btns .rd-btn { min-width: 166px; }
+.rd-btn-hero-ghost {
+  background: transparent; color: #FFFEF9;
+  border: 1px solid rgba(255,254,249,.7);
+  border-radius: 2px;
+  padding: 14px 28px;
+}
+.rd-btn-hero-ghost:hover {
+  background: rgba(255,254,249,.12);
+  border-color: #FFFEF9;
+}
 
 /* notes */
 .rd-notes { padding: clamp(48px, 6vw, 96px) 0; background: #21141A; color: #FFFEF9; }
@@ -1535,12 +1527,9 @@ html, body { background: #21141A; }
 
 /* responsive */
 @media (max-width: 1024px) {
-  .rd-hero-grid {
-    grid-template-columns: 1fr; align-items: start; gap: clamp(20px, 3vw, 32px);
-    min-height: 0;
-  }
-  .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
-  .rd-hero-copy { margin-left: 0; padding-left: 0; }
+  .rd-hero { min-height: min(100svh, 860px); }
+  .rd-hero-media img { object-position: 72% center; }
+  .rd-hero-copy { max-width: 520px; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
   .rd-split .rd-lead { justify-self: start; text-align: left; max-width: none; }
   .rd-why-copy { justify-self: start; max-width: none; }
@@ -1565,9 +1554,16 @@ html, body { background: #21141A; }
   .rd-myths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
-  .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
-  .rd-hero-btns { flex-direction: column; align-items: stretch; }
-  .rd-hero-btns .rd-btn { width: 100%; }
+  .rd-hero { min-height: 100svh; align-items: flex-end; }
+  .rd-hero-media img { object-position: 78% 20%; }
+  .rd-hero-scrim {
+    background:
+      linear-gradient(180deg, rgba(20,14,16,.45) 0%, rgba(20,14,16,.15) 35%, rgba(20,14,16,.75) 100%),
+      linear-gradient(90deg, rgba(20,14,16,.55) 0%, rgba(20,14,16,.2) 100%);
+  }
+  .rd-hero-inner { padding-bottom: clamp(36px, 8vw, 56px); }
+  .rd-hero-copy h1 { font-size: clamp(30px, 8.2vw, 40px); }
+  .rd-btn-hero-ghost { width: 100%; justify-content: center; }
   .rd-news-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .rd-news-row .rd-btn { width: 100%; }
   .rd-fb-card { --fb-size: min(78vw, 300px); }
@@ -1588,7 +1584,7 @@ export default function HomeV2() {
     <div className="rd">
       <style>{CSS}</style>
 
-      <Hero onRequest={setModal} />
+      <Hero />
       <Pricing onRequest={setModal} />
       <div className="rd-canvas">
         <Faq />

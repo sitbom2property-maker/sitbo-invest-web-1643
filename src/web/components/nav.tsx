@@ -10,12 +10,12 @@ export const NAV_HEIGHT_MOBILE = 72;
 
 const MOBILE_BP = 1024;
 
+/** Matches hero mockup order */
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
   { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.about", href: "/services" },
   { labelKey: "nav.properties", href: "/catalog" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
-  { labelKey: "nav.pricing", href: "/#consultation" },
   { labelKey: "nav.notes", href: "/blog" },
   { labelKey: "nav.feedback", href: "/#feedback" },
 ];
@@ -23,7 +23,7 @@ const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
 function useNavActive() {
   const [location] = useLocation();
   const [hash, setHash] = useState(() =>
-    typeof window !== "undefined" ? window.location.hash : ""
+    typeof window !== "undefined" ? window.location.hash : "",
   );
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function useNavActive() {
 
 function useIsMobile(bp = MOBILE_BP) {
   const [mobile, setMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth <= bp : false
+    typeof window !== "undefined" ? window.innerWidth <= bp : false,
   );
   useEffect(() => {
     const onResize = () => setMobile(window.innerWidth <= bp);
@@ -82,13 +82,12 @@ function NavItem({
   };
 
   const onMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (!isActive) e.currentTarget.style.opacity = "0.6";
+    if (!isActive) e.currentTarget.style.opacity = "0.65";
   };
   const onMouseLeave = (e: MouseEvent<HTMLAnchorElement>) => {
     e.currentTarget.style.opacity = "1";
   };
 
-  // Hash links need AppLink so /#consultation scrolls to pricing on the homepage
   if (href.includes("#")) {
     return (
       <AppLink
@@ -151,7 +150,7 @@ export function Nav() {
   }, [isMobile]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -173,14 +172,13 @@ export function Nav() {
     };
   }, [menuOpen]);
 
-  const transparent = isHome && !scrolled && !menuOpen;
-  const showSolid = !transparent;
-
-  const navBackground = !showSolid
-    ? "#21141A"
+  // Home top: glass over photo. Elsewhere / scrolled: solid dark.
+  const overHero = isHome && !scrolled && !menuOpen;
+  const navBackground = overHero
+    ? "transparent"
     : isMobile
-      ? "rgba(33, 20, 26, 0.92)"
-      : "rgba(33, 20, 26, 0.94)";
+      ? "rgba(33, 20, 26, 0.94)"
+      : "rgba(33, 20, 26, 0.96)";
 
   return (
     <>
@@ -195,9 +193,9 @@ export function Nav() {
           height: navHeight,
           transition: "background 0.3s ease, backdrop-filter 0.3s ease",
           background: navBackground,
-          backdropFilter: showSolid ? "blur(14px)" : "none",
-          WebkitBackdropFilter: showSolid ? "blur(14px)" : "none",
-          borderBottom: showSolid ? "1px solid rgba(255,255,255,0.06)" : "none",
+          backdropFilter: overHero ? "none" : "blur(14px)",
+          WebkitBackdropFilter: overHero ? "none" : "blur(14px)",
+          borderBottom: overHero ? "none" : "1px solid rgba(255,255,255,0.06)",
         }}
       >
         <div
@@ -208,34 +206,43 @@ export function Nav() {
             margin: "0 auto",
             padding: "0 var(--site-gutter)",
             display: "grid",
-            // Mobile: language | menu — no logo
-            gridTemplateColumns: isMobile ? "1fr auto" : "auto 1fr auto",
+            gridTemplateColumns: isMobile ? "auto 1fr auto" : "auto 1fr auto",
             alignItems: "center",
-            columnGap: isMobile ? 8 : 32,
+            columnGap: isMobile ? 12 : 28,
             boxSizing: "border-box",
           }}
         >
-          {/* Left: language switcher */}
-          <div
+          {/* Left: arthur's logo */}
+          <Link
+            href="/"
             style={{
               justifySelf: "start",
               display: "flex",
               alignItems: "center",
-              gap: isMobile ? 0 : 22,
-              minWidth: 0,
+              textDecoration: "none",
+              lineHeight: 0,
             }}
+            aria-label="Arthur — Real Estate Strategist"
           >
-            <NavLocaleSwitcher compact={isMobile} />
-          </div>
+            <img
+              src="/brand/arthur-logo-white.png"
+              alt="arthur's — Real Estate Strategist"
+              style={{
+                height: isMobile ? 36 : 48,
+                width: "auto",
+                display: "block",
+              }}
+            />
+          </Link>
 
-          {/* Center: desktop links only */}
+          {/* Center: desktop links */}
           {!isMobile ? (
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 28,
+                gap: 26,
                 flexWrap: "wrap",
               }}
             >
@@ -245,49 +252,20 @@ export function Nav() {
                 </NavItem>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <div />
+          )}
 
-          {/* Contact CTA + menu — right */}
+          {/* Right: locale + mobile menu */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifySelf: "end",
-              gap: isMobile ? 2 : 8,
+              gap: isMobile ? 4 : 8,
             }}
           >
-            {!isMobile && (
-              <button
-                type="button"
-                onClick={openContact}
-                style={{
-                  marginLeft: 10,
-                  padding: "12px 26px",
-                  borderRadius: 4,
-                  background: "transparent",
-                  color: "#FFFEF9",
-                  border: "1px solid rgba(255,255,255,0.55)",
-                  fontFamily: "'Nunito', sans-serif",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  letterSpacing: 0,
-                  textTransform: "none",
-                  whiteSpace: "nowrap",
-                  cursor: "pointer",
-                  transition: "background 0.2s, color 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#FFFEF9";
-                  e.currentTarget.style.color = "#21141A";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#FFFEF9";
-                }}
-              >
-                {t("nav.contactArthur")}
-              </button>
-            )}
+            <NavLocaleSwitcher compact={isMobile} />
 
             {isMobile && (
               <button
@@ -342,7 +320,6 @@ export function Nav() {
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
-                    transition: "color 0.2s ease",
                     textAlign: "center",
                   }}
                 >
@@ -361,13 +338,8 @@ export function Nav() {
                     textTransform: "none",
                     letterSpacing: 0,
                     textDecoration: "none",
-                    transition: "color 0.2s ease",
                     textAlign: "center",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFEF9")}
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "#FFFEF9")
-                  }
                 >
                   {t(l.labelKey)}
                 </Link>
@@ -384,10 +356,8 @@ export function Nav() {
                 background: "#703C54",
                 color: "#FFFEF9",
                 fontFamily: "Nunito, sans-serif",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
+                fontSize: 15,
+                fontWeight: 500,
                 border: "none",
                 cursor: "pointer",
               }}

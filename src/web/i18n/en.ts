@@ -84,9 +84,9 @@ const en = {
   "v2.hero.line1": "Don't play real estate",
   "v2.hero.line2": "roulette in Georgia",
   "v2.hero.body":
-    "Private Property Advisor — Arthur Arutyunyan. Born and raised in Georgia. Combining investment analytics, legal protection, and end-to-end management for high-net-worth buyers in Georgia.",
-  "v2.hero.ctaPrimary": "Consultation",
-  "v2.hero.ctaSecondary": "Sell with me",
+    "I am Arthur Arutyunyan — a private real estate advisor born and raised in Georgia. I help buyers, investors and relocation clients navigate the Georgian property market with insider knowledge, strong negotiation, risk control and access to the right people.",
+  "v2.hero.ctaPrimary": "How we can work",
+  "v2.hero.ctaSecondary": "View selected projects",
   "v2.hero.scroll": "Scroll For More",
 
   "v2.market.title": "Your person inside the Georgian property market.",
