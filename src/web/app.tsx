@@ -12,6 +12,7 @@ import LegalPage from "./pages/legal";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog-post";
 import HistoryPage from "./pages/history";
+import AminaPage from "./pages/amina";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PropertyForm from "./pages/admin/PropertyForm";
@@ -29,35 +30,47 @@ import { ScrollRestore } from "./components/scroll-restore";
 import { PageMeta } from "./components/PageMeta";
 import { ContentProtection } from "./components/ContentProtection";
 
+function isAminaPath(location: string) {
+	return location === "/amina" || location.startsWith("/amina/");
+}
+
+function AppNav() {
+	const [location] = useLocation();
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
+	return <Nav />;
+}
+
 function AppFooter() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <Footer />;
 }
 
 function AppLeadPopup() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <LeadPopup />;
 }
 
 function AppFloatingConsult() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <FloatingConsultation />;
 }
 
 function AppMain() {
 	const [location] = useLocation();
 	const isHome = location === "/";
+	const isAmina = isAminaPath(location);
 	return (
 		<div
 			style={{
-				paddingTop: isHome ? 0 : `var(--nav-height, ${NAV_HEIGHT}px)`,
+				paddingTop: isHome || isAmina ? 0 : `var(--nav-height, ${NAV_HEIGHT}px)`,
 			}}
 		>
 			<Switch>
 				<Route path="/" component={Index} />
+				<Route path="/amina" component={AminaPage} />
 				<Route path="/mortgage" component={MortgagePage} />
 				<Route path="/invest" component={InvestPage} />
 				<Route path="/history" component={HistoryPage} />
@@ -90,7 +103,7 @@ function App() {
 			<ScrollToHash />
 			<PageMeta />
 			<ContentProtection />
-			<Nav />
+			<AppNav />
 			<AppMain />
 			<AppFooter />
 			<AppLeadPopup />

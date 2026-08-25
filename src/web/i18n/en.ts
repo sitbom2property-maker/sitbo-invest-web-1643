@@ -1402,6 +1402,77 @@ const en = {
   "legal.terms.contact.body":
     "If you have any questions regarding these Terms of Service, please contact sitboinvest@gmail.com.",
   "legal.backHome": "← Back to Home",
+
+  // ── Amina landing (/amina) — direct-link funnel, not linked from main nav ──
+  "amina.nav.hero": "Welcome",
+  "amina.nav.market": "Inside the market",
+  "amina.nav.why": "Why Georgia",
+  "amina.nav.tariffs": "Tariffs",
+  "amina.nav.faq": "FAQ",
+  "amina.nav.assistant": "Message assistant",
+
+  "amina.hero.eyebrow": "From Amina",
+  "amina.hero.title": "If you came from Amina, welcome.",
+  "amina.hero.p1":
+    "I accompanied her property purchase in Georgia, and you can come to me with a similar task: buying for life, relocation, capital preservation, or investment.",
+  "amina.hero.p2":
+    "Important to say upfront: I do not work as a free realtor and I do not unpack complex questions in chat. My time, experience, network, and market access have a price. Work starts with a paid consultation or an accompaniment request.",
+  "amina.hero.ctaTariffs": "See tariffs",
+  "amina.hero.ctaAssistant": "Write to the assistant",
+  "amina.hero.videoLabel": "Amina stories video",
+
+  "amina.market.eyebrow": "Your person inside the market",
+  "amina.market.title": "Judgment, access, strategy — not random listings.",
+  "amina.market.body1":
+    "My clients do not come to me for random listings. They come for judgment, access, strategy and protection from expensive mistakes.",
+  "amina.market.body2":
+    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who brings together local knowledge, negotiation experience, market access and practical real estate expertise.",
+
+  "amina.why.body":
+    "Before you buy, it helps to understand taxes, residency paths, rental logic, market risks, and the difference between Batumi and Tbilisi — calmly, without sales theatre.",
+
+  "amina.pricing.note":
+    "Booking and payment go through the assistant. Choose a format — she will confirm the slot and send payment details.",
+  "amina.pricing.choose": "Book via assistant",
+
+  "amina.how.title": "Payment, the assistant, and how I work.",
+  "amina.how.lead":
+    "The landing is simple on purpose: clear tariffs, a human assistant for logistics, and paid expert time with me.",
+  "amina.how.payTitle": "How payment works",
+  "amina.how.payBody":
+    "After you choose a tariff, the assistant sends payment details (bank transfer or another agreed method). Work starts once payment is confirmed. No free deep-dive calls in chat.",
+  "amina.how.assistantTitle": "What the assistant does",
+  "amina.how.assistantBody":
+    "She helps with booking, questionnaires, payment, and logistics. She does not advise on property, objects, or strategy — that stays inside the paid format with me.",
+  "amina.how.arthurTitle": "About Arthur",
+  "amina.how.arthurBody":
+    "I am a private real estate advisor and deal strategist in Georgia. Born and raised here. Clients come for judgment, access to the market, and protection from expensive mistakes — not for a free listing feed.",
+  "amina.how.bandTitle": "Georgia rewards clarity.",
+  "amina.how.bandBody":
+    "Easy entry is not the same as an easy decision. The right object, price, documents, and people still decide the outcome.",
+
+  "amina.faq.title": "FAQ",
+  "amina.faq.lead": "Open a square — tariffs & payment, about me, or Georgia.",
+  "amina.faq.empty": "Choose a square above to open the answers.",
+  "amina.faq.backTariffs": "Back to tariffs",
+  "amina.faq.writeAssistant": "Write to the assistant",
+  "amina.faq.tab.pay": "Tariffs & payment",
+  "amina.faq.tab.payTeaser": "Formats, booking, what the assistant handles.",
+  "amina.faq.tab.me": "About me",
+  "amina.faq.tab.meTeaser": "How I work, who I take, what I am not.",
+  "amina.faq.tab.georgia": "Why Georgia",
+  "amina.faq.tab.georgiaTeaser": "Buying as a foreigner, risks, Batumi vs Tbilisi.",
+  "amina.faq.pay.q1": "How do I pay for a consultation?",
+  "amina.faq.pay.a1":
+    "Write to the assistant, confirm the tariff and time, and she will send payment details. After confirmation, we lock the slot and send the brief for the call.",
+  "amina.faq.pay.q2": "Can I start with a free chat review of an object?",
+  "amina.faq.pay.a2":
+    "No. Complex questions and object reviews are not handled in free correspondence. Choose a paid format — that is how the work begins.",
+  "amina.faq.me.q1": "You accompanied Amina — can I come with the same request?",
+  "amina.faq.me.a1":
+    "Yes. Life, relocation, capital preservation, or investment — if the task is serious and you are ready for a paid format, we can start.",
+
+  "amina.footer.page": "This page",
 } as const;
 
 export type MessageKey = keyof typeof en;

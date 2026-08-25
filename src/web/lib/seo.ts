@@ -76,6 +76,7 @@ export function resolvePageMeta(pathname: string): PageMeta {
 
   const pageTitles: Record<string, string> = {
     "/": SITE_NAME,
+    "/amina": `Amina | ${SITE_NAME}`,
     "/catalog": `Catalog | ${SITE_NAME}`,
     "/invest": `Why Georgia | ${SITE_NAME}`,
     "/mortgage": `Mortgage | ${SITE_NAME}`,
@@ -85,6 +86,19 @@ export function resolvePageMeta(pathname: string): PageMeta {
     "/blog": `Blog | ${SITE_NAME}`,
     "/history": `History | ${SITE_NAME}`,
   };
+
+  if (path === "/amina") {
+    return {
+      title: pageTitles["/amina"],
+      description:
+        "If you came from Amina — welcome. Paid consultation and property accompaniment in Georgia with Arthur Arutyunyan.",
+      imagePath: DEFAULT_OG_IMAGE,
+      imageWidth: DEFAULT_OG_IMAGE_WIDTH,
+      imageHeight: DEFAULT_OG_IMAGE_HEIGHT,
+      path,
+      type: "website",
+    };
+  }
 
   if (path === "/catalog") {
     return {
