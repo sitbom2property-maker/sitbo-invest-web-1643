@@ -12,13 +12,20 @@ const CURRENCIES: SupportedCurrency[] = ["USD", "EUR", "GEL", "RUB"];
 
 type NavLocaleSwitcherProps = {
   compact?: boolean;
+  /** Match nav chrome: light surface → dark text, dark surface → light text */
+  tone?: "dark" | "light";
 };
 
-export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
+export function NavLocaleSwitcher({
+  compact = false,
+  tone = "dark",
+}: NavLocaleSwitcherProps) {
   const { language, currency, setLocale } = useLocale();
   const t = useT();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const ink = tone === "light" ? "#21141A" : "#FFFEF9";
+  const divider = tone === "light" ? "rgba(33,20,26,0.2)" : "rgba(255,254,249,0.25)";
 
   useEffect(() => {
     if (!open) return;
@@ -53,7 +60,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
     textTransform: "uppercase",
     border: "none",
     background: "transparent",
-    color: "#FFFEF9",
+    color: ink,
     cursor: "pointer",
     padding: compact ? "0 5px" : "0 7px",
     lineHeight: 1,
@@ -95,7 +102,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
               style={{
                 ...chipBase,
                 opacity: active ? 1 : 0.45,
-                color: active ? "#703C54" : "#FFFEF9",
+                color: active ? "#703C54" : ink,
               }}
             >
               {lang.label}
@@ -109,7 +116,7 @@ export function NavLocaleSwitcher({ compact = false }: NavLocaleSwitcherProps) {
         style={{
           width: 1,
           height: 12,
-          background: "rgba(255,254,249,0.25)",
+          background: divider,
           flexShrink: 0,
           alignSelf: "center",
         }}
