@@ -12,6 +12,7 @@ import LegalPage from "./pages/legal";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog-post";
 import HistoryPage from "./pages/history";
+import AminaPage from "./pages/amina";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PropertyForm from "./pages/admin/PropertyForm";
@@ -45,17 +46,18 @@ function AppFloatingConsult() {
 	return <FloatingConsultation />;
 }
 
-function App() {
+function AppChrome() {
+	const [location] = useLocation();
+	// Focused blogger landing: no global nav/footer/popups so the whole page
+	// funnels to the assistant's WhatsApp instead of the main site number.
+	const bare = location === "/amina";
 	return (
-		<LocaleProvider>
-		<RatesProvider>
-		<Provider>
-			<ScrollRestore />
-			<ScrollToHash />
-			<Nav />
-			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>
+		<>
+			{!bare && <Nav />}
+			<div style={{ paddingTop: bare ? 0 : `var(--nav-height, ${NAV_HEIGHT}px)` }}>
 				<Switch>
 					<Route path="/" component={Index} />
+					<Route path="/amina" component={AminaPage} />
 					<Route path="/mortgage" component={MortgagePage} />
 					<Route path="/invest" component={InvestPage} />
 					<Route path="/history" component={HistoryPage} />
@@ -76,9 +78,21 @@ function App() {
 					<Route path="/admin" component={AdminDashboard} />
 				</Switch>
 			</div>
-			<AppFooter />
-			<AppLeadPopup />
-			<AppFloatingConsult />
+			{!bare && <AppFooter />}
+			{!bare && <AppLeadPopup />}
+			{!bare && <AppFloatingConsult />}
+		</>
+	);
+}
+
+function App() {
+	return (
+		<LocaleProvider>
+		<RatesProvider>
+		<Provider>
+			<ScrollRestore />
+			<ScrollToHash />
+			<AppChrome />
 			<CookieConsent />
 			{/* Do not remove — off by default, activated by parent iframe via postMessage */}
 		</Provider>
