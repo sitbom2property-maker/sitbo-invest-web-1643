@@ -14,11 +14,14 @@ type NavLocaleSwitcherProps = {
   compact?: boolean;
   /** Match nav chrome: light surface → dark text, dark surface → light text */
   tone?: "dark" | "light";
+  /** Hide currency picker (language only). Default true. */
+  showCurrency?: boolean;
 };
 
 export function NavLocaleSwitcher({
   compact = false,
   tone = "dark",
+  showCurrency = true,
 }: NavLocaleSwitcherProps) {
   const { language, currency, setLocale } = useLocale();
   const t = useT();
@@ -28,7 +31,7 @@ export function NavLocaleSwitcher({
   const divider = tone === "light" ? "rgba(33,20,26,0.2)" : "rgba(255,254,249,0.25)";
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || !showCurrency) return;
     const onPointer = (e: MouseEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
@@ -41,7 +44,7 @@ export function NavLocaleSwitcher({
       document.removeEventListener("mousedown", onPointer);
       document.removeEventListener("keydown", onKey);
     };
-  }, [open]);
+  }, [open, showCurrency]);
 
   const rowH = compact ? 28 : 32;
   const fontSize = compact ? 10 : 11;
@@ -111,120 +114,124 @@ export function NavLocaleSwitcher({
         })}
       </div>
 
-      <span
-        aria-hidden
-        style={{
-          width: 1,
-          height: 12,
-          background: divider,
-          flexShrink: 0,
-          alignSelf: "center",
-        }}
-      />
-
-      {/* Currency */}
-      <div
-        style={{
-          position: "relative",
-          display: "inline-flex",
-          alignItems: "center",
-          height: rowH,
-          flexShrink: 0,
-        }}
-      >
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          aria-label={t("locale.currency")}
-          style={{
-            ...chipBase,
-            gap: 5,
-            opacity: 0.9,
-          }}
-        >
-          <span style={{ display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
-            {CURRENCY_SYMBOLS[currency] ?? ""}
-            {currency}
-          </span>
-          <svg
-            width="8"
-            height="8"
-            viewBox="0 0 10 10"
-            fill="none"
+      {showCurrency ? (
+        <>
+          <span
             aria-hidden
-            style={{ display: "block", flexShrink: 0 }}
-          >
-            <path
-              d="M2 3.5 5 6.5 8 3.5"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-
-        {open && (
-          <div
-            role="listbox"
-            aria-label={t("locale.currency")}
             style={{
-              position: "absolute",
-              top: "calc(100% + 10px)",
-              left: 0,
-              minWidth: 128,
-              background: "#21141A",
-              border: "1px solid rgba(255,254,249,0.12)",
-              borderRadius: 10,
-              padding: 6,
-              boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
-              zIndex: 200,
+              width: 1,
+              height: 12,
+              background: divider,
+              flexShrink: 0,
+              alignSelf: "center",
+            }}
+          />
+
+          {/* Currency */}
+          <div
+            style={{
+              position: "relative",
+              display: "inline-flex",
+              alignItems: "center",
+              height: rowH,
+              flexShrink: 0,
             }}
           >
-            {CURRENCIES.map((code) => {
-              const active = currency === code;
-              return (
-                <button
-                  key={code}
-                  type="button"
-                  role="option"
-                  aria-selected={active}
-                  onClick={() => {
-                    setLocale({ currency: code });
-                    setOpen(false);
-                  }}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 12,
-                    border: "none",
-                    background: active ? "rgba(140,178,192,0.1)" : "transparent",
-                    color: active ? "#703C54" : "#FFFEF9",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: 12,
-                    fontWeight: 600,
-                    letterSpacing: "0.08em",
-                    padding: "10px 12px",
-                    borderRadius: 8,
-                    cursor: "pointer",
-                    textAlign: "left",
-                    lineHeight: 1,
-                  }}
-                >
-                  <span>
-                    {CURRENCY_SYMBOLS[code]} {code}
-                  </span>
-                  {active ? "✓" : ""}
-                </button>
-              );
-            })}
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-haspopup="listbox"
+              aria-label={t("locale.currency")}
+              style={{
+                ...chipBase,
+                gap: 5,
+                opacity: 0.9,
+              }}
+            >
+              <span style={{ display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
+                {CURRENCY_SYMBOLS[currency] ?? ""}
+                {currency}
+              </span>
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden
+                style={{ display: "block", flexShrink: 0 }}
+              >
+                <path
+                  d="M2 3.5 5 6.5 8 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            {open && (
+              <div
+                role="listbox"
+                aria-label={t("locale.currency")}
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 10px)",
+                  left: 0,
+                  minWidth: 128,
+                  background: "#21141A",
+                  border: "1px solid rgba(255,254,249,0.12)",
+                  borderRadius: 10,
+                  padding: 6,
+                  boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
+                  zIndex: 200,
+                }}
+              >
+                {CURRENCIES.map((code) => {
+                  const active = currency === code;
+                  return (
+                    <button
+                      key={code}
+                      type="button"
+                      role="option"
+                      aria-selected={active}
+                      onClick={() => {
+                        setLocale({ currency: code });
+                        setOpen(false);
+                      }}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        border: "none",
+                        background: active ? "rgba(140,178,192,0.1)" : "transparent",
+                        color: active ? "#703C54" : "#FFFEF9",
+                        fontFamily: "Nunito, sans-serif",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        letterSpacing: "0.08em",
+                        padding: "10px 12px",
+                        borderRadius: 8,
+                        cursor: "pointer",
+                        textAlign: "left",
+                        lineHeight: 1,
+                      }}
+                    >
+                      <span>
+                        {CURRENCY_SYMBOLS[code]} {code}
+                      </span>
+                      {active ? "✓" : ""}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      ) : null}
     </div>
   );
 }

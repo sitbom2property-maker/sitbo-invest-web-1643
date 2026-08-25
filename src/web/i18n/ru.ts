@@ -1382,6 +1382,7 @@ const ru: Record<MessageKey, string> = {
   "amina.nav.market": "Внутри рынка",
   "amina.nav.why": "Почему Грузия",
   "amina.nav.tariffs": "Тарифы",
+  "amina.nav.consultation": "Consultation",
   "amina.nav.faq": "FAQ",
   "amina.nav.assistant": "Написать ассистенту",
 

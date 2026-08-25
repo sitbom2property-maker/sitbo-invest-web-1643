@@ -1408,6 +1408,7 @@ const en = {
   "amina.nav.market": "Inside the market",
   "amina.nav.why": "Why Georgia",
   "amina.nav.tariffs": "Tariffs",
+  "amina.nav.consultation": "Consultation",
   "amina.nav.faq": "FAQ",
   "amina.nav.assistant": "Message assistant",
 

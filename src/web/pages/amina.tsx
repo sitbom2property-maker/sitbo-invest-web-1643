@@ -167,10 +167,7 @@ function AminaNav() {
   }, [open]);
 
   const links: { href: string; labelKey: MessageKey }[] = [
-    { href: "#hero", labelKey: "amina.nav.hero" },
-    { href: "#market", labelKey: "amina.nav.market" },
-    { href: "#why-georgia", labelKey: "amina.nav.why" },
-    { href: "#tariffs", labelKey: "amina.nav.tariffs" },
+    { href: "#tariffs", labelKey: "amina.nav.consultation" },
     { href: "#faq", labelKey: "amina.nav.faq" },
   ];
 
@@ -185,26 +182,36 @@ function AminaNav() {
     <>
       <header className={`am-nav${scrolled ? " is-scrolled" : ""}`}>
         <div className="am-nav-inner">
-          <a href="#hero" className="am-nav-logo" onClick={(e) => { e.preventDefault(); go("#hero"); }}>
-            <img className="am-nav-logo-light" src="/brand/sitbo-wordmark-light.png" alt="Sitbo" height={14} />
-            <img className="am-nav-logo-dark" src="/brand/sitbo-wordmark-dark.png" alt="Sitbo" height={14} />
-          </a>
+          <Link href="/" className="am-nav-logo" aria-label="Arthur — Real Estate Strategist">
+            <img
+              className="am-nav-logo-light"
+              src="/brand/arthur-logo-white.png"
+              alt="arthur's — Real Estate Strategist"
+            />
+            <img
+              className="am-nav-logo-dark"
+              src="/brand/arthur-logo-black.png"
+              alt="arthur's — Real Estate Strategist"
+            />
+          </Link>
           <nav className="am-nav-links" aria-label="Amina landing">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(l.href);
-                }}
-              >
-                {t(l.labelKey)}
-              </a>
-            ))}
+            <div className="am-nav-frame">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    go(l.href);
+                  }}
+                >
+                  {t(l.labelKey)}
+                </a>
+              ))}
+            </div>
           </nav>
           <div className="am-nav-right">
-            <NavLocaleSwitcher tone={scrolled ? "light" : "dark"} />
+            <NavLocaleSwitcher tone={scrolled ? "light" : "dark"} showCurrency={false} />
             <a className="am-nav-wa" href={ASSISTANT_HREF} target="_blank" rel="noopener noreferrer">
               {t("amina.nav.assistant")}
             </a>
@@ -252,18 +259,17 @@ function Hero() {
     <section id="hero" className="am-hero">
       <div className="am-wrap am-hero-grid">
         <div className="am-hero-copy rv">
-          <p className="am-eyebrow">{t("amina.hero.eyebrow")}</p>
           <h1 className="am-h1">{t("amina.hero.title")}</h1>
           <div className="am-hero-body">
             <p>{t("amina.hero.p1")}</p>
             <p>{t("amina.hero.p2")}</p>
           </div>
-          <div className="am-hero-actions">
-            <a href="#tariffs" className="am-btn am-btn-dark">
-              {t("amina.hero.ctaTariffs")}
+          <div className="am-hero-frame">
+            <a href="#tariffs" className="am-btn am-btn-ghost">
+              {t("amina.nav.consultation")}
             </a>
-            <a className="am-btn am-btn-ghost" href={ASSISTANT_HREF} target="_blank" rel="noopener noreferrer">
-              {t("amina.hero.ctaAssistant")}
+            <a href="#faq" className="am-btn am-btn-ghost">
+              {t("amina.nav.faq")}
             </a>
           </div>
         </div>
@@ -301,13 +307,12 @@ function Market() {
     <section id="market" className="am-market">
       <div className="am-wrap am-market-grid">
         <div className="am-market-copy rv">
-          <p className="am-eyebrow am-eyebrow-dark">{t("amina.market.eyebrow")}</p>
           <h2 className="am-h2">{t("amina.market.title")}</h2>
           <p className="am-lead">{t("amina.market.body1")}</p>
           <p className="am-lead">{t("amina.market.body2")}</p>
         </div>
         <figure className="am-market-fig rv">
-          <img src="/amina/market.jpg" alt="" loading="lazy" />
+          <img src="/home/hero-arthur-terrace.jpg" alt="" loading="lazy" />
         </figure>
       </div>
     </section>
@@ -641,16 +646,29 @@ const STYLES = `
   width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter);
   display: flex; align-items: center; gap: 28px; box-sizing: border-box;
 }
-.am-nav-logo { display: flex; align-items: center; flex-shrink: 0; }
-.am-nav-logo img { height: 14px; width: auto; display: block; }
+.am-nav-logo { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; line-height: 0; }
+.am-nav-logo img { height: 44px; width: auto; display: block; }
 .am-nav.is-scrolled .am-nav-logo-light { display: none; }
 .am-nav:not(.is-scrolled) .am-nav-logo-dark { display: none; }
-.am-nav-links { display: flex; gap: clamp(16px, 2vw, 28px); flex: 1; }
-.am-nav-links a {
+.am-nav-links { display: flex; gap: clamp(16px, 2vw, 28px); flex: 1; justify-content: center; }
+.am-nav-frame {
+  display: inline-flex; align-items: stretch; gap: 0;
+  border: 1px solid color-mix(in srgb, var(--am-nav-ink) 40%, transparent);
+  border-radius: 2px; overflow: hidden;
+}
+.am-nav-frame a {
+  font-size: 13px; font-weight: 600; color: var(--am-nav-ink); text-decoration: none;
+  letter-spacing: .04em; padding: 10px 18px;
+  border-right: 1px solid color-mix(in srgb, var(--am-nav-ink) 28%, transparent);
+  opacity: .92; transition: background .2s, opacity .2s;
+}
+.am-nav-frame a:last-child { border-right: none; }
+.am-nav-frame a:hover { opacity: 1; background: color-mix(in srgb, var(--am-nav-ink) 10%, transparent); }
+.am-nav-links > a {
   font-size: 13px; font-weight: 500; color: var(--am-nav-ink); text-decoration: none;
   letter-spacing: .02em; opacity: .78;
 }
-.am-nav-links a:hover { opacity: 1; }
+.am-nav-links > a:hover { opacity: 1; }
 .am-nav-right { display: flex; align-items: center; gap: 14px; margin-left: auto; }
 .am-nav-wa {
   font-size: 13px; font-weight: 600; color: var(--am-nav-ink); text-decoration: none;
@@ -686,6 +704,16 @@ const STYLES = `
   margin: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.65;
   color: rgba(255,254,249,.82);
 }
+.am-hero-frame {
+  display: inline-flex; align-items: stretch; gap: 0;
+  border: 1px solid rgba(255,254,249,.45); border-radius: 2px; overflow: hidden;
+}
+.am-hero-frame .am-btn {
+  border: none; border-radius: 0; border-right: 1px solid rgba(255,254,249,.28);
+  padding: 14px 26px;
+}
+.am-hero-frame .am-btn:last-child { border-right: none; }
+.am-hero-frame .am-btn:hover { background: #FFFEF9; color: #21141A; }
 .am-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .am-hero-media { display: flex; justify-content: center; }
 .am-phone {
@@ -885,7 +913,10 @@ const STYLES = `
 @media (max-width: 640px) {
   .am-stats { grid-template-columns: 1fr; }
   .am-hero-actions, .am-faq-actions { flex-direction: column; align-items: stretch; }
+  .am-hero-frame { width: 100%; display: flex; }
+  .am-hero-frame .am-btn { flex: 1; }
   .am-btn { width: 100%; }
+  .am-nav-logo img { height: 36px; }
 }
 `;
 
