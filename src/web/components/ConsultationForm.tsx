@@ -1,5 +1,6 @@
 import { useState, type CSSProperties, type FormEvent } from "react";
 import { trackLead } from "../lib/analytics";
+import { openWhatsApp } from "../lib/whatsapp";
 
 const labelStyle: CSSProperties = {
   display: "block",
@@ -44,6 +45,14 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
       return;
     }
     setLoading(true);
+    // Route the request to WhatsApp alongside the Odoo CRM lead. Opened
+    // synchronously inside the submit gesture so the browser does not block it.
+    openWhatsApp({
+      name: form.name.trim(),
+      contact: form.contact.trim(),
+      budget: form.budget || undefined,
+      source,
+    });
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
