@@ -96,12 +96,9 @@ const FAQ_GROUPS: {
     titleKey: "amina.faq.tab.georgia",
     teaserKey: "amina.faq.tab.georgiaTeaser",
     items: [
-      { qKey: "invest.faq.q1", aKey: "invest.faq.a1" },
-      { qKey: "invest.faq.q2", aKey: "invest.faq.a2" },
-      { qKey: "invest.faq.q5", aKey: "invest.faq.a5" },
-      { qKey: "invest.faq.q8", aKey: "invest.faq.a8" },
-      { qKey: "invest.faq.q10", aKey: "invest.faq.a10" },
-      { qKey: "invest.faq.q11", aKey: "invest.faq.a11" },
+      { qKey: "amina.faq.georgia.q1", aKey: "amina.faq.georgia.a1" },
+      { qKey: "amina.faq.georgia.q2", aKey: "amina.faq.georgia.a2" },
+      { qKey: "amina.faq.georgia.q3", aKey: "amina.faq.georgia.a3" },
     ],
   },
 ];
@@ -898,6 +895,7 @@ const STYLES = `
 .am-faq-a {
   margin: 0 0 16px; max-width: 760px;
   font-size: clamp(14px, 1.1vw, 16px); line-height: 1.6; color: rgba(33,20,26,.72);
+  white-space: pre-line;
 }
 .am-faq-actions {
   display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 3vw, 36px);

@@ -1462,7 +1462,7 @@ const en = {
   "amina.faq.tab.me": "About me",
   "amina.faq.tab.meTeaser": "How I work, who I take, what I am not.",
   "amina.faq.tab.georgia": "Why Georgia",
-  "amina.faq.tab.georgiaTeaser": "Buying as a foreigner, risks, Batumi vs Tbilisi.",
+  "amina.faq.tab.georgiaTeaser": "Ownership, documents, and taxes for foreigners.",
   "amina.faq.pay.q1": "How do I pay for a consultation?",
   "amina.faq.pay.a1":
     "Write to the assistant, confirm the tariff and time, and she will send payment details. After confirmation, we lock the slot and send the brief for the call.",
@@ -1472,6 +1472,15 @@ const en = {
   "amina.faq.me.q1": "You accompanied Amina — can I come with the same request?",
   "amina.faq.me.a1":
     "Yes. Life, relocation, capital preservation, or investment — if the task is serious and you are ready for a paid format, we can start.",
+  "amina.faq.georgia.q1": "Can foreigners own property in Georgia?",
+  "amina.faq.georgia.a1":
+    "Yes. You can freely buy residential property, commercial property, and non-agricultural land. You become a full owner and can register the property in the public registry. Georgia uses a blockchain system, so documentation is transparent and digitized.",
+  "amina.faq.georgia.q2": "What documents are needed to buy?",
+  "amina.faq.georgia.a2":
+    "A foreign passport. For a mortgage, you will also need proof of income.",
+  "amina.faq.georgia.q3": "What taxes apply to purchase, ownership, and resale?",
+  "amina.faq.georgia.a3":
+    "0% — purchase tax.\n0.1–1% per year — ownership.\n0% — resale of residential property after 2 years of ownership.\n5% — resale of residential property within 2 years of ownership.\n20% — resale of commercial property.",
 
   "amina.footer.page": "This page",
 } as const;
