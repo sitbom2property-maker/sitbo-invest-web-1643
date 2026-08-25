@@ -118,79 +118,46 @@ function WhyGeorgia() {
 function WhatToBuy() {
   const t = useT();
   return (
-    <section className="rd-what" id="what-to-buy">
-      <div className="rd-wrap">
-        <div className="rd-what-inner rv">
-          <p className="rd-lead">{t("v2.why.body")}</p>
-          <AppLink href="/invest" className="rd-why-link">
-            {t("v2.why.cta")}
-          </AppLink>
-        </div>
+    <section className="rd-easy-photo" id="what-to-buy" aria-labelledby="easy-photo-title">
+      <img
+        className="rd-easy-photo-bg"
+        src="/home/sticky-sunset.jpg"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+      <span className="rd-easy-photo-scrim" aria-hidden="true" />
+      <div className="rd-wrap rd-easy-photo-copy rv">
+        <h2 id="easy-photo-title" className="rd-h2">
+          {t("v2.why.bodyLead")} {t("v2.what.question")}
+        </h2>
+        <p className="rd-easy-photo-sub">{t("v2.why.body")}</p>
+        <AppLink href="/invest" className="rd-btn rd-btn-white rd-easy-photo-cta">
+          {t("v2.why.cta")}
+        </AppLink>
       </div>
     </section>
   );
 }
 
-const STICKY_CHAPTERS: {
-  id: string;
-  img: string;
-  titleKey: MessageKey;
-  bodyKeys: MessageKey[];
-}[] = [
-  {
-    id: "enter",
-    img: "/home/sticky-enter.jpg",
-    titleKey: "v2.sticky1.title",
-    bodyKeys: ["v2.sticky1.body1", "v2.sticky1.body2"],
-  },
-  {
-    id: "beside",
-    img: "/home/sticky-portrait.jpg",
-    titleKey: "v2.sticky2.title",
-    bodyKeys: ["v2.sticky2.body"],
-  },
-  {
-    id: "name",
-    img: "/home/sticky-sunset.jpg",
-    titleKey: "v2.sticky3.title",
-    bodyKeys: ["v2.sticky3.body1", "v2.sticky3.body2"],
-  },
-];
-
-/** Multi-chapter sticky storytelling — full-bleed photo + editorial copy */
-function StickyStory() {
+/** Second home band — image-home + equal body copy (no Georgia title) */
+function HomePhotoBand() {
   const t = useT();
   return (
-    <div className="rd-sticky-stack">
-      {STICKY_CHAPTERS.map((ch, i) => (
-        <section
-          key={ch.id}
-          className="rd-sticky-story"
-          aria-labelledby={`sticky-story-title-${ch.id}`}
-        >
-          <div className="rd-sticky-story-pin">
-            <img
-              className="rd-sticky-story-bg"
-              src={ch.img}
-              alt=""
-              aria-hidden="true"
-              loading={i === 0 ? "eager" : "lazy"}
-            />
-            <span className="rd-sticky-story-scrim" aria-hidden="true" />
-            <div className="rd-wrap rd-sticky-story-copy rv">
-              <h2 id={`sticky-story-title-${ch.id}`} className="rd-h2">
-                {t(ch.titleKey)}
-              </h2>
-              {ch.bodyKeys.map((k, bi) => (
-                <p key={k} className={bi === ch.bodyKeys.length - 1 && ch.bodyKeys.length > 1 ? "is-lead" : undefined}>
-                  {t(k)}
-                </p>
-              ))}
-            </div>
-          </div>
-        </section>
-      ))}
-    </div>
+    <section className="rd-home-photo" aria-label={t("v2.sticky1.body1")}>
+      <img
+        className="rd-home-photo-bg"
+        src="/home/sticky-enter.jpg"
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+      />
+      <span className="rd-home-photo-scrim" aria-hidden="true" />
+      <div className="rd-wrap rd-home-photo-copy rv">
+        <p>{t("v2.sticky1.body1")}</p>
+        <p>{t("v2.sticky1.body2")}</p>
+      </div>
+    </section>
   );
 }
 
@@ -1137,79 +1104,88 @@ html, body { background: #21141A; }
   line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
 }
 
-/* sticky storytelling — full-bleed photo chapters */
-.rd-sticky-stack { background: #21141A; }
-.rd-sticky-story {
+/* second band — image-home, copy raised, equal paragraph size */
+.rd-home-photo {
   position: relative;
-  height: 160vh;
-  background: #21141A;
-}
-.rd-sticky-story-pin {
-  position: sticky; top: 0;
-  height: 100svh;
-  display: flex; align-items: flex-end;
+  min-height: min(92svh, 920px);
+  display: flex;
+  align-items: center;
   overflow: hidden;
+  background: #21141A;
+  color: #FFFEF9;
 }
-.rd-sticky-story-bg {
+.rd-home-photo-bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover; object-position: center;
   display: block;
 }
-.rd-sticky-story-scrim {
+.rd-home-photo-scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(20,14,16,.18) 0%, rgba(20,14,16,.42) 48%, rgba(20,14,16,.78) 100%),
-    linear-gradient(90deg, rgba(20,14,16,.5) 0%, rgba(20,14,16,.18) 62%, transparent 100%);
+    linear-gradient(90deg, rgba(20,14,16,.72) 0%, rgba(20,14,16,.4) 48%, rgba(20,14,16,.18) 100%),
+    linear-gradient(180deg, rgba(20,14,16,.2) 0%, transparent 40%, rgba(20,14,16,.35) 100%);
   pointer-events: none;
 }
-.rd-sticky-story-copy {
+.rd-home-photo-copy {
   position: relative; z-index: 1;
-  padding-top: calc(var(--nav-height, 88px) + 40px);
-  padding-bottom: clamp(48px, 8vw, 96px);
-  max-width: var(--rd-max);
-}
-.rd-sticky-story-copy .rd-h2 {
-  color: #FFFEF9; max-width: 760px; margin: 0 0 18px;
-}
-.rd-sticky-story-copy p {
-  margin: 0 0 14px; max-width: 580px;
-  font-family: var(--body);
-  font-size: clamp(15px, 1.25vw, 17px); line-height: 1.6;
-  color: rgba(255,254,249,.88);
-}
-.rd-sticky-story-copy p:last-child { margin-bottom: 0; }
-.rd-sticky-story-copy p.is-lead {
-  font-size: clamp(17px, 1.55vw, 21px);
-  line-height: 1.5;
-  color: #FFFEF9;
+  padding-top: calc(var(--nav-height, 88px) + clamp(28px, 5vw, 64px));
+  padding-bottom: clamp(48px, 7vw, 88px);
   max-width: 640px;
-  margin-top: 6px;
 }
-@media (prefers-reduced-motion: reduce) {
-  .rd-sticky-story { height: auto; }
-  .rd-sticky-story-pin { position: relative; height: auto; min-height: 70svh; }
+.rd-home-photo-copy p {
+  margin: 0 0 18px;
+  font-family: var(--body);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.55;
+  color: rgba(255,254,249,.92);
 }
+.rd-home-photo-copy p:last-child { margin-bottom: 0; }
 
-/* what to buy — bridge before projects */
-.rd-what {
-  padding: clamp(56px, 7vw, 100px) 0;
+/* after Why Georgia — sunset photo + CTA */
+.rd-easy-photo {
+  position: relative;
+  min-height: min(88svh, 880px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
   background: #21141A;
   color: #FFFEF9;
 }
-.rd-what-inner {
+.rd-easy-photo-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.rd-easy-photo-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(20,14,16,.7) 0%, rgba(20,14,16,.38) 55%, rgba(20,14,16,.15) 100%),
+    linear-gradient(180deg, rgba(20,14,16,.25) 0%, transparent 45%, rgba(20,14,16,.4) 100%);
+  pointer-events: none;
+}
+.rd-easy-photo-copy {
+  position: relative; z-index: 1;
+  padding-top: calc(var(--nav-height, 88px) + clamp(24px, 4vw, 48px));
+  padding-bottom: clamp(48px, 7vw, 88px);
   max-width: 720px;
-  display: grid;
-  gap: 16px;
 }
-.rd-what-inner .rd-h2 {
+.rd-easy-photo-copy .rd-h2 {
   color: #FFFEF9;
-  margin: 0;
-  font-size: clamp(28px, 3.6vw, 48px);
+  margin: 0 0 18px;
+  max-width: 720px;
 }
-.rd-what-inner .rd-lead {
-  color: rgba(255,254,249,.82);
+.rd-easy-photo-sub {
+  margin: 0 0 28px;
   max-width: 560px;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.6;
+  color: rgba(255,254,249,.9);
+}
+.rd-easy-photo-cta {
+  display: inline-flex;
 }
 
 /* market myths */
@@ -1707,7 +1683,8 @@ export default function HomeV2() {
       <style>{CSS}</style>
 
       <Hero />
-      <StickyStory />
+      <Hero />
+      <HomePhotoBand />
       <Pricing onRequest={setModal} />
       <div className="rd-canvas">
         <Faq />

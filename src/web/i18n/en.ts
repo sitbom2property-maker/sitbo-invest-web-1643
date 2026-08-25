@@ -122,7 +122,7 @@ const en = {
   "v2.what.question": "The real question is what to buy.",
   "v2.why.body":
     "Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
-  "v2.why.cta": "Read more about Georgia →",
+  "v2.why.cta": "Why Georgia?",
 
   "v2.myths.title": "Georgia real estate myths",
   "v2.myths.subtitle":
