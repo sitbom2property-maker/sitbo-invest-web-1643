@@ -15,7 +15,7 @@ type NavTone = "dark" | "light";
 /** Matches hero mockup order */
 const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
   { labelKey: "nav.home", href: "/" },
-  { labelKey: "nav.about", href: "/services" },
+  { labelKey: "nav.about", href: "/about" },
   { labelKey: "nav.properties", href: "/catalog" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
   { labelKey: "nav.notes", href: "/blog" },

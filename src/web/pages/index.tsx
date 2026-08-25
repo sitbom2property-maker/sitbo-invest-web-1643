@@ -419,7 +419,7 @@ function FounderNote() {
             </p>
 
             <Link
-              href="/services"
+              href="/about"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

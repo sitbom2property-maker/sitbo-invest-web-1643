@@ -120,22 +120,16 @@ const CHAIN = [
     id: "2016",
     titleKey: "invest.chain.2016.title" as MessageKey,
     bodyKey: "invest.chain.2016.body" as MessageKey,
-    img: "/why-georgia/chain-card-1.jpg",
-    thumb: "/why-georgia/chain-2016.png",
   },
   {
     id: "2017",
     titleKey: "invest.chain.2017.title" as MessageKey,
     bodyKey: "invest.chain.2017.body" as MessageKey,
-    img: "/why-georgia/chain-card-2.jpg",
-    thumb: "/why-georgia/chain-2017.png",
   },
   {
     id: "today",
     titleKey: "invest.chain.today.title" as MessageKey,
     bodyKey: "invest.chain.today.body" as MessageKey,
-    img: "/why-georgia/chain-card-3.jpg",
-    thumb: "/why-georgia/chain-today.png",
   },
 ];
 
@@ -368,91 +362,75 @@ const CSS = `
 }
 .iv-diplomacy-dots button.is-active { background: var(--white); }
 
-/* blockchain cover + expandable cards */
+/* blockchain — text accordion, no images */
 .iv-chain {
   background: var(--bg-light); color: var(--text-dark);
-  padding: 0 0 clamp(56px, 7vw, 100px);
-}
-.iv-chain-cover {
-  position: relative; min-height: clamp(420px, 56vw, 620px);
-  display: flex; align-items: flex-start; overflow: hidden;
-  margin-bottom: clamp(28px, 4vw, 48px);
-}
-.iv-chain-cover-bg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
-.iv-chain-cover-scrim {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(255,254,249,.72) 0%, rgba(255,254,249,.28) 42%, rgba(255,254,249,.08) 100%);
-}
-.iv-chain-cover-inner {
-  position: relative; z-index: 1; width: 100%;
-  padding: clamp(48px, 7vw, 88px) 0 clamp(36px, 5vw, 64px);
+  padding: clamp(56px, 7vw, 100px) 0;
 }
 .iv-chain-head {
   display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start;
+  margin-bottom: clamp(28px, 4vw, 44px);
 }
 .iv-chain-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(34px, 4.6vw, 64px); line-height: 1.06; letter-spacing: -0.02em;
-  color: var(--text-dark);
 }
 .iv-chain-head p {
   margin: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.55;
-  color: rgba(33,20,26,.82); max-width: 48ch;
+  color: rgba(33,20,26,.78); max-width: 48ch;
 }
 .iv-chain-rail {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(12px, 1.4vw, 18px);
+  display: flex; gap: 8px; align-items: stretch;
+  height: clamp(300px, 36vw, 380px);
+  padding: 8px; box-sizing: border-box;
+  background: #21141A; border-radius: 2px;
 }
 .iv-chain-card {
-  position: relative; border-radius: var(--radius); overflow: hidden;
-  min-height: clamp(300px, 34vw, 420px);
-  background: #21141A; color: var(--white);
+  flex: 0 0 clamp(64px, 8vw, 88px);
+  min-width: 0; height: 100%;
+  border: none; border-radius: 2px; cursor: pointer;
+  background: #463C41; color: #FFFEF9;
+  text-align: left; padding: 0;
+  overflow: hidden;
+  transition: flex .4s ease, background .25s ease;
   display: flex; flex-direction: column; justify-content: flex-end;
-  box-sizing: border-box; border: none; padding: 0; cursor: pointer;
-  text-align: left; transition: min-height .35s ease, transform .25s ease;
+  position: relative;
 }
-.iv-chain-card.is-open { min-height: clamp(380px, 44vw, 520px); }
-.iv-chain-card img.iv-chain-card-bg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block; transition: transform .5s ease;
-}
-.iv-chain-card.is-open img.iv-chain-card-bg { transform: scale(1.04); }
-.iv-chain-card::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(33,20,26,.12) 15%, rgba(33,20,26,.88) 78%);
+.iv-chain-card.is-open {
+  flex: 1 1 auto;
+  background: #2a1b22;
 }
 .iv-chain-card-inner {
-  position: relative; z-index: 1; padding: 22px 22px 24px;
-  display: flex; flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box;
+  padding: 22px 24px; box-sizing: border-box; height: 100%;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 12px;
+}
+.iv-chain-card:not(.is-open) .iv-chain-card-inner {
+  align-items: center; justify-content: flex-end; padding: 18px 10px;
 }
 .iv-chain-card-top {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.iv-chain-card:not(.is-open) .iv-chain-card-top {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  height: 100%; justify-content: flex-start;
 }
 .iv-chain-card h3 {
   font-family: var(--display); font-weight: 600; margin: 0;
-  font-size: clamp(28px, 2.8vw, 40px); line-height: 1;
+  font-size: clamp(26px, 2.6vw, 40px); line-height: 1; white-space: nowrap;
 }
+.iv-chain-card:not(.is-open) h3 { font-size: clamp(18px, 1.8vw, 24px); }
 .iv-chain-card-toggle {
   width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,254,249,.92); color: #21141A;
+  background: #FFFEF9; color: #21141A;
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 20px; line-height: 1;
 }
+.iv-chain-card:not(.is-open) .iv-chain-card-toggle,
+.iv-chain-card:not(.is-open) .iv-chain-card-body { display: none; }
 .iv-chain-card-body {
-  margin: 0; max-height: 0; opacity: 0; overflow: hidden;
-  font-size: 14px; line-height: 1.5; color: rgba(255,254,249,.9);
-  transition: max-height .35s ease, opacity .25s ease, margin .25s ease;
-}
-.iv-chain-card.is-open .iv-chain-card-body {
-  max-height: 220px; opacity: 1; margin-top: 4px;
-}
-.iv-chain-card-thumb {
-  width: 72px; height: 56px; object-fit: cover; border-radius: 2px;
-  position: absolute; top: 18px; left: 18px; z-index: 2;
-  border: 1px solid rgba(255,254,249,.25);
+  margin: 0; max-width: 52ch;
+  font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(255,254,249,.88);
 }
 
 /* awards marquee */
@@ -651,7 +629,19 @@ const CSS = `
   .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts { grid-template-columns: 1fr; }
   .iv-hero-lead, .iv-panel-head p { justify-self: start; text-align: left; max-width: none; }
   .iv-mosaic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .iv-chain-rail { grid-template-columns: 1fr; }
+  .iv-chain-rail { flex-direction: column; height: auto; }
+  .iv-chain-card { flex: none !important; min-height: 72px; height: auto; }
+  .iv-chain-card.is-open { min-height: 0; }
+  .iv-chain-card:not(.is-open) .iv-chain-card-inner {
+    align-items: flex-start; flex-direction: row; justify-content: space-between;
+    padding: 18px 20px;
+  }
+  .iv-chain-card:not(.is-open) .iv-chain-card-top {
+    writing-mode: horizontal-tb; transform: none; height: auto; width: 100%;
+    justify-content: space-between;
+  }
+  .iv-chain-card:not(.is-open) .iv-chain-card-toggle { display: inline-flex; }
+  .iv-chain-card:not(.is-open) h3 { font-size: clamp(22px, 4vw, 28px); }
   .iv-diplomacy-panel h2, .iv-diplomacy-panel p { min-height: 0; }
   .iv-acc-head { grid-template-columns: 1fr auto auto; }
   .iv-acc-tag { display: none; }
@@ -671,7 +661,7 @@ export default function InvestPage() {
   const [openFaq, setOpenFaq] = useState(-1);
   const [modalOpen, setModalOpen] = useState(false);
   const [diplomacyIndex, setDiplomacyIndex] = useState(0);
-  const [openChainId, setOpenChainId] = useState<string | null>("2016");
+  const [openChainId, setOpenChainId] = useState("2016");
   useReveal();
 
   const diplomacy = DIPLOMACY[diplomacyIndex];
@@ -764,36 +754,29 @@ export default function InvestPage() {
       </section>
 
       <section className="iv-chain">
-        <div className="iv-chain-cover">
-          <img className="iv-chain-cover-bg" src="/why-georgia/blockchain-cover.jpg" alt="" />
-          <span className="iv-chain-cover-scrim" aria-hidden="true" />
-          <div className="iv-wrap iv-chain-cover-inner">
-            <div className="iv-chain-head rv">
-              <h2>
-                {t("invest.chain.line1")}
-                <br />
-                {t("invest.chain.line2")}
-                <br />
-                {t("invest.chain.line3")}
-              </h2>
-              <p>{t("invest.chain.body")}</p>
-            </div>
-          </div>
-        </div>
         <div className="iv-wrap">
-          <div className="iv-chain-rail rv">
+          <div className="iv-chain-head rv">
+            <h2>
+              {t("invest.chain.line1")}
+              <br />
+              {t("invest.chain.line2")}
+              <br />
+              {t("invest.chain.line3")}
+            </h2>
+            <p>{t("invest.chain.body")}</p>
+          </div>
+          <div className="iv-chain-rail rv" role="tablist" aria-label={t("invest.chain.title")}>
             {CHAIN.map((card) => {
               const open = openChainId === card.id;
               return (
                 <button
                   key={card.id}
                   type="button"
+                  role="tab"
                   className={`iv-chain-card${open ? " is-open" : ""}`}
                   aria-expanded={open}
-                  onClick={() => setOpenChainId(open ? null : card.id)}
+                  onClick={() => setOpenChainId(card.id)}
                 >
-                  <img className="iv-chain-card-bg" src={card.img} alt="" />
-                  <img className="iv-chain-card-thumb" src={card.thumb} alt="" />
                   <div className="iv-chain-card-inner">
                     <div className="iv-chain-card-top">
                       <h3>{t(card.titleKey)}</h3>
@@ -801,7 +784,7 @@ export default function InvestPage() {
                         {open ? "−" : "+"}
                       </span>
                     </div>
-                    <p className="iv-chain-card-body">{t(card.bodyKey)}</p>
+                    {open ? <p className="iv-chain-card-body">{t(card.bodyKey)}</p> : null}
                   </div>
                 </button>
               );

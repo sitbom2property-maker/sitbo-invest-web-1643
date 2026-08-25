@@ -246,11 +246,11 @@ export function Footer() {
           <FooterCol
             title={t("footer.services")}
             links={[
-              { label: t("footer.dueDiligence"), href: "/services#due-diligence" },
-              { label: t("footer.discoveryTour"), href: "/services#discovery-tour" },
-              { label: t("footer.mortgage"), href: "/services#mortgage" },
-              { label: t("footer.management"), href: "/services#management" },
-              { label: t("footer.residency"), href: "/services#residency" },
+              { label: t("footer.dueDiligence"), href: "/about#due-diligence" },
+              { label: t("footer.discoveryTour"), href: "/about#discovery-tour" },
+              { label: t("footer.mortgage"), href: "/about#mortgage" },
+              { label: t("footer.management"), href: "/about#management" },
+              { label: t("footer.residency"), href: "/about#residency" },
             ]}
           />
 

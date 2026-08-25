@@ -1,4 +1,4 @@
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch, useLocation, Redirect } from "wouter";
 // Redesigned homepage. To roll back to the previous design, swap this import
 // for `./pages/index` (the old page is still in the repo, untouched).
 import Index from "./pages/home-v2";
@@ -79,7 +79,10 @@ function AppMain() {
 				<Route path="/project/:slug" component={ProjectPage} />
 				<Route path="/catalog" component={CatalogPage} />
 				<Route path="/turnkey" component={TurnkeyPage} />
-				<Route path="/services" component={ServicesPage} />
+				<Route path="/about" component={ServicesPage} />
+				<Route path="/services">
+					{() => <Redirect to="/about" />}
+				</Route>
 				<Route path="/legal" component={LegalPage} />
 				<Route path="/admin/login" component={AdminLogin} />
 				<Route path="/admin/property/new">

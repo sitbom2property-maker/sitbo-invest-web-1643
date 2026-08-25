@@ -146,7 +146,7 @@ export function FooterV2() {
                 <Link href="/catalog">{t("v2.footer.properties")}</Link>
               </li>
               <li>
-                <Link href="/services">{t("v2.footer.partnership")}</Link>
+                <Link href="/about">{t("v2.footer.partnership")}</Link>
               </li>
             </ul>
           </nav>
