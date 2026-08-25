@@ -115,6 +115,10 @@ const DIPLOMACY = [
   },
 ];
 
+const AWARD_LOGOS = Array.from({ length: 13 }, (_, i) => `/why-georgia/awards/${String(i + 1).padStart(2, "0")}.png`);
+/** Triple track so translateX(-100%/3) loops seamlessly like Partners. */
+const AWARD_TRACK = [...AWARD_LOGOS, ...AWARD_LOGOS, ...AWARD_LOGOS];
+
 const CHAIN = [
   {
     id: "2016",
@@ -433,7 +437,7 @@ const CSS = `
   color: rgba(255,254,249,.88);
 }
 
-/* awards marquee */
+/* awards marquee — individual logos, Partners-style loop */
 .iv-awards {
   background: var(--bg-light); color: var(--text-dark);
   padding: clamp(48px, 6vw, 88px) 0;
@@ -451,26 +455,47 @@ const CSS = `
   position: relative; overflow: hidden;
 }
 .iv-awards-track {
-  display: flex; width: max-content; gap: 0;
-  animation: ivAwardsMarquee 42s linear infinite;
+  display: flex; width: max-content; gap: clamp(14px, 1.8vw, 22px);
+  padding: 16px 0;
+  animation: ivAwardsMarquee 55s linear infinite;
+  will-change: transform;
 }
-.iv-awards-track img {
-  height: clamp(88px, 12vw, 140px); width: auto; display: block;
+.iv-awards-marquee:hover .iv-awards-track { animation-play-state: paused; }
+.iv-awards-card {
   flex-shrink: 0;
+  width: clamp(128px, 15vw, 180px);
+  height: clamp(168px, 19vw, 236px);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(33,20,26,.08);
+  box-shadow: 0 2px 14px rgba(33,20,26,.06);
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(16px, 1.8vw, 26px);
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.iv-awards-card:hover {
+  box-shadow: 0 8px 28px rgba(33,20,26,.12);
+  border-color: rgba(140,178,192,.18);
+  transform: translateY(-3px);
+}
+.iv-awards-card img {
+  width: 100%; height: 100%; object-fit: contain; display: block;
 }
 .iv-awards-fade-l, .iv-awards-fade-r {
-  position: absolute; top: 0; bottom: 0; width: clamp(48px, 10vw, 140px);
+  position: absolute; top: 0; bottom: 0; width: clamp(56px, 12vw, 140px);
   pointer-events: none; z-index: 2;
 }
 .iv-awards-fade-l {
-  left: 0; background: linear-gradient(to right, #FFFEF9 18%, transparent);
+  left: 0; background: linear-gradient(to right, #FFFEF9 20%, transparent);
 }
 .iv-awards-fade-r {
-  right: 0; background: linear-gradient(to left, #FFFEF9 18%, transparent);
+  right: 0; background: linear-gradient(to left, #FFFEF9 20%, transparent);
 }
 @keyframes ivAwardsMarquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(calc(-100% / 3)); }
 }
 
 /* early band */
@@ -805,8 +830,11 @@ export default function InvestPage() {
           <div className="iv-awards-fade-l" />
           <div className="iv-awards-fade-r" />
           <div className="iv-awards-track">
-            <img src="/why-georgia/awards-logos.png" alt="" />
-            <img src="/why-georgia/awards-logos.png" alt="" />
+            {AWARD_TRACK.map((src, i) => (
+              <div key={`${src}-${i}`} className="iv-awards-card">
+                <img src={src} alt="" loading="lazy" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
