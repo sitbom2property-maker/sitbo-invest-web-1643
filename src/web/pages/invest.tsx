@@ -70,14 +70,6 @@ const FAQS = [
   { qKey: "invest.faq.q1" as MessageKey, aKey: "invest.faq.a1" as MessageKey },
   { qKey: "invest.faq.q2" as MessageKey, aKey: "invest.faq.a2" as MessageKey },
   { qKey: "invest.faq.q3" as MessageKey, aKey: "invest.faq.a3" as MessageKey },
-  { qKey: "invest.faq.q4" as MessageKey, aKey: "invest.faq.a4" as MessageKey },
-  { qKey: "invest.faq.q5" as MessageKey, aKey: "invest.faq.a5" as MessageKey },
-  { qKey: "invest.faq.q6" as MessageKey, aKey: "invest.faq.a6" as MessageKey },
-  { qKey: "invest.faq.q7" as MessageKey, aKey: "invest.faq.a7" as MessageKey },
-  { qKey: "invest.faq.q8" as MessageKey, aKey: "invest.faq.a8" as MessageKey },
-  { qKey: "invest.faq.q9" as MessageKey, aKey: "invest.faq.a9" as MessageKey },
-  { qKey: "invest.faq.q10" as MessageKey, aKey: "invest.faq.a10" as MessageKey },
-  { qKey: "invest.faq.q11" as MessageKey, aKey: "invest.faq.a11" as MessageKey },
 ];
 
 const PRICE_BARS = [
@@ -514,6 +506,7 @@ const CSS = `
 .iv-faq-body {
   margin: 0 0 20px; max-width: 720px;
   font-size: 15px; line-height: 1.5; color: rgba(33,20,26,.72);
+  white-space: pre-line;
 }
 
 /* CTA */

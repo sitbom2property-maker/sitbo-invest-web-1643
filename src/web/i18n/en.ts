@@ -951,15 +951,15 @@ const en = {
     "Furnishing, listing and day-to-day management — monthly reports, rent collection and maintenance handled for you.",
   "invest.faq.eyebrow": "FAQ",
   "invest.faq.title": "Common questions about buying property in Georgia.",
-  "invest.faq.q1": "Can foreigners buy property in Georgia?",
+  "invest.faq.q1": "Can foreigners own property in Georgia?",
   "invest.faq.a1":
-    "Yes. Foreigners can buy apartments, houses and commercial property in Georgia with a relatively simple ownership registration process. However, there are restrictions on agricultural land, and every deal should still be checked properly: ownership, land status, developer reputation, contract terms and hidden risks. 0% tax on buying property.",
-  "invest.faq.q2": "Can foreigners get a mortgage in Georgia?",
+    "Yes. You can freely buy residential property, commercial property, and non-agricultural land. You become a full owner and can register the property in the public registry. Georgia uses a blockchain system, so documentation is transparent and digitized.",
+  "invest.faq.q2": "What documents are needed to buy?",
   "invest.faq.a2":
-    "In some cases, yes. Foreigners may be able to get mortgage financing in Georgia, but approval depends on the bank, the client’s documents, income, residency status, property type and risk profile. Mortgage conditions for foreigners are usually more individual, so it is better to check options before choosing the property.",
-  "invest.faq.q3": "Is rental income taxed in Georgia?",
+    "A foreign passport. For a mortgage, you will also need proof of income.",
+  "invest.faq.q3": "What taxes apply to purchase, ownership, and resale?",
   "invest.faq.a3":
-    "Yes, rental income is taxable in Georgia. The exact tax treatment depends on how the rental is structured: long-term rent, short-term rental, individual ownership, company ownership or commercial activity. Before buying for rental income, it is important to understand not only the expected yield, but also taxes, management fees, maintenance, seasonality and vacancy periods.",
+    "0% — purchase tax.\n0.1–1% per year — ownership.\n0% — resale of residential property after 2 years of ownership.\n5% — resale of residential property within 2 years of ownership.\n20% — resale of commercial property.",
   "invest.faq.q4": "What budget makes sense for buying property in Georgia?",
   "invest.faq.a4":
     "It depends on your goal. A smaller budget can be enough for an entry-level apartment, but a serious investment strategy usually requires looking beyond the lowest price. Location, building quality, liquidity, rental demand and exit potential matter more than just the purchase price. For most clients, I first recommend defining the goal: relocation, capital preservation, rental income or future resale.",
