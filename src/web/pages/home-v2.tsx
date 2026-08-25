@@ -808,7 +808,9 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
 
               <div className="rd-plan-foot">
                 <div className="rd-plan-price">{plan.price}</div>
-                {plan.noteKey ? <p className="rd-plan-note">{t(plan.noteKey)}</p> : null}
+                <p className={`rd-plan-note${plan.noteKey ? "" : " is-empty"}`}>
+                  {plan.noteKey ? t(plan.noteKey) : "\u00A0"}
+                </p>
                 <button
                   type="button"
                   className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
@@ -1587,7 +1589,9 @@ html, body { background: #21141A; }
 .rd-plan-note {
   font-family: var(--body); font-size: 13px; line-height: 1.5;
   color: rgba(33,20,26,.55); margin: 0 0 22px;
+  min-height: 4.2em;
 }
+.rd-plan-note.is-empty { visibility: hidden; }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
 .rd-plan-cta { width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
 
