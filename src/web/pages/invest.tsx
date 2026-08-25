@@ -100,22 +100,18 @@ const DIPLOMACY = [
   {
     titleKey: "invest.diplomacy1.title" as MessageKey,
     bodyKey: "invest.diplomacy1.body" as MessageKey,
-    img: "/why-georgia/slider-1.jpg",
   },
   {
     titleKey: "invest.diplomacy2.title" as MessageKey,
     bodyKey: "invest.diplomacy2.body" as MessageKey,
-    img: "/why-georgia/slider-2.jpg",
   },
   {
     titleKey: "invest.diplomacy3.title" as MessageKey,
     bodyKey: "invest.diplomacy3.body" as MessageKey,
-    img: "/why-georgia/slider-3.jpg",
   },
   {
     titleKey: "invest.diplomacy4.title" as MessageKey,
     bodyKey: "invest.diplomacy4.body" as MessageKey,
-    img: "/why-georgia/img-wine.jpg",
   },
 ];
 
@@ -335,41 +331,28 @@ const CSS = `
 }
 .iv-tile-body { font-size: 13px; line-height: 1.4; margin: 12px 0 0; opacity: .85; }
 
-/* diplomacy slider — fixed frame so only copy/image swap */
+/* diplomacy slider — fixed panel size; text only */
 .iv-diplomacy {
   background: var(--bg-dark); color: var(--white);
   padding: clamp(56px, 7vw, 100px) 0;
 }
-.iv-diplomacy-stage {
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(20px, 3vw, 40px); align-items: stretch;
-  min-height: clamp(340px, 42vw, 460px);
+.iv-diplomacy-row {
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
 }
-.iv-diplomacy-copy {
+.iv-diplomacy-panel {
+  min-height: clamp(220px, 28vw, 280px);
   display: flex; flex-direction: column; justify-content: space-between;
-  min-height: 100%; box-sizing: border-box;
+  box-sizing: border-box;
 }
-.iv-diplomacy-copy h2 {
+.iv-diplomacy-panel h2 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
-  font-size: clamp(28px, 3.4vw, 46px); line-height: 1.12;
-  min-height: 3.4em;
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; max-width: 720px;
+  min-height: 2.4em;
 }
-.iv-diplomacy-copy p {
-  margin: 0; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.55;
-  color: rgba(255,254,249,.82); max-width: 56ch;
-  min-height: 6.2em;
-}
-.iv-diplomacy-media {
-  border-radius: var(--radius); overflow: hidden; min-height: clamp(280px, 36vw, 460px);
-  background: #160e12;
-}
-.iv-diplomacy-media img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  min-height: clamp(280px, 36vw, 460px);
-}
-.iv-diplomacy-controls {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; margin-top: 22px;
+.iv-diplomacy-panel p {
+  margin: 0; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.5;
+  color: rgba(255,254,249,.82); max-width: 720px;
+  min-height: 4.8em;
 }
 .iv-diplomacy-next {
   width: 56px; height: 56px; border-radius: 50%;
@@ -378,7 +361,7 @@ const CSS = `
   transition: background .2s, color .2s;
 }
 .iv-diplomacy-next:hover { background: var(--white); color: var(--bg-dark); }
-.iv-diplomacy-dots { display: flex; gap: 8px; }
+.iv-diplomacy-dots { display: flex; gap: 8px; margin-top: 28px; }
 .iv-diplomacy-dots button {
   width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
   background: rgba(255,254,249,.28); cursor: pointer;
@@ -665,11 +648,11 @@ const CSS = `
 }
 
 @media (max-width: 1000px) {
-  .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts, .iv-diplomacy-stage { grid-template-columns: 1fr; }
+  .iv-hero-grid, .iv-chain-head, .iv-panel-head, .iv-process-head, .iv-charts { grid-template-columns: 1fr; }
   .iv-hero-lead, .iv-panel-head p { justify-self: start; text-align: left; max-width: none; }
   .iv-mosaic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .iv-chain-rail { grid-template-columns: 1fr; }
-  .iv-diplomacy-copy h2, .iv-diplomacy-copy p { min-height: 0; }
+  .iv-diplomacy-panel h2, .iv-diplomacy-panel p { min-height: 0; }
   .iv-acc-head { grid-template-columns: 1fr auto auto; }
   .iv-acc-tag { display: none; }
   .iv-acc-body { padding-left: 0; }
@@ -677,6 +660,8 @@ const CSS = `
 }
 @media (max-width: 640px) {
   .iv-mosaic-grid { grid-template-columns: 1fr; }
+  .iv-diplomacy-row { grid-template-columns: 1fr; }
+  .iv-diplomacy-next { justify-self: start; }
 }
 `;
 
@@ -748,37 +733,32 @@ export default function InvestPage() {
 
       <section className="iv-diplomacy">
         <div className="iv-wrap">
-          <div className="iv-diplomacy-stage rv">
-            <div className="iv-diplomacy-copy">
+          <div className="iv-diplomacy-row rv">
+            <div className="iv-diplomacy-panel">
               <div>
                 <h2>{t(diplomacy.titleKey)}</h2>
                 <p>{t(diplomacy.bodyKey)}</p>
               </div>
-              <div className="iv-diplomacy-controls">
-                <div className="iv-diplomacy-dots" role="tablist" aria-label="Diplomacy slides">
-                  {DIPLOMACY.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      className={i === diplomacyIndex ? "is-active" : undefined}
-                      aria-label={`Slide ${i + 1}`}
-                      onClick={() => setDiplomacyIndex(i)}
-                    />
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className="iv-diplomacy-next"
-                  aria-label={t("invest.diplomacy.next")}
-                  onClick={() => setDiplomacyIndex((i) => (i + 1) % DIPLOMACY.length)}
-                >
-                  ›
-                </button>
+              <div className="iv-diplomacy-dots" role="tablist" aria-label="Diplomacy slides">
+                {DIPLOMACY.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={i === diplomacyIndex ? "is-active" : undefined}
+                    aria-label={`Slide ${i + 1}`}
+                    onClick={() => setDiplomacyIndex(i)}
+                  />
+                ))}
               </div>
             </div>
-            <div className="iv-diplomacy-media">
-              <img src={diplomacy.img} alt="" key={diplomacy.img} />
-            </div>
+            <button
+              type="button"
+              className="iv-diplomacy-next"
+              aria-label={t("invest.diplomacy.next")}
+              onClick={() => setDiplomacyIndex((i) => (i + 1) % DIPLOMACY.length)}
+            >
+              ›
+            </button>
           </div>
         </div>
       </section>
