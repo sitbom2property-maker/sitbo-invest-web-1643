@@ -3,9 +3,14 @@ import { projects } from "../data/projects";
 export const SITE_NAME = "Arthur Arutiunyan — Private Property Advisor";
 export const DEFAULT_DESCRIPTION =
   "Premium real estate investment advisory in Batumi, Georgia. Off-market deals, legal verification, and honest ROI analysis.";
+/** Sitewide social preview (Drive metatag). Not used for /catalog or /project/*. */
 export const DEFAULT_OG_IMAGE = "/brand/og-default.jpg";
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 591;
+/** Catalog keeps its own preview (not the sitewide metatag). */
+export const CATALOG_OG_IMAGE = "/brand/og-image.png";
+export const CATALOG_OG_IMAGE_WIDTH = 1200;
+export const CATALOG_OG_IMAGE_HEIGHT = 630;
 
 export type PageMeta = {
   title: string;
@@ -80,6 +85,18 @@ export function resolvePageMeta(pathname: string): PageMeta {
     "/blog": `Blog | ${SITE_NAME}`,
     "/history": `History | ${SITE_NAME}`,
   };
+
+  if (path === "/catalog") {
+    return {
+      title: pageTitles["/catalog"],
+      description: DEFAULT_DESCRIPTION,
+      imagePath: CATALOG_OG_IMAGE,
+      imageWidth: CATALOG_OG_IMAGE_WIDTH,
+      imageHeight: CATALOG_OG_IMAGE_HEIGHT,
+      path,
+      type: "website",
+    };
+  }
 
   return {
     title: pageTitles[path] || SITE_NAME,
