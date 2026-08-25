@@ -47,6 +47,40 @@ function AppFloatingConsult() {
 	return <FloatingConsultation />;
 }
 
+function AppMain() {
+	const [location] = useLocation();
+	const isHome = location === "/";
+	return (
+		<div
+			style={{
+				paddingTop: isHome ? 0 : `var(--nav-height, ${NAV_HEIGHT}px)`,
+			}}
+		>
+			<Switch>
+				<Route path="/" component={Index} />
+				<Route path="/mortgage" component={MortgagePage} />
+				<Route path="/invest" component={InvestPage} />
+				<Route path="/history" component={HistoryPage} />
+				<Route path="/blog/:slug" component={BlogPostPage} />
+				<Route path="/blog" component={BlogPage} />
+				<Route path="/project/:slug" component={ProjectPage} />
+				<Route path="/catalog" component={CatalogPage} />
+				<Route path="/turnkey" component={TurnkeyPage} />
+				<Route path="/services" component={ServicesPage} />
+				<Route path="/legal" component={LegalPage} />
+				<Route path="/admin/login" component={AdminLogin} />
+				<Route path="/admin/property/new">
+					{() => <PropertyForm />}
+				</Route>
+				<Route path="/admin/property/:id">
+					{(params) => <PropertyForm propertyId={params.id} />}
+				</Route>
+				<Route path="/admin" component={AdminDashboard} />
+			</Switch>
+		</div>
+	);
+}
+
 function App() {
 	return (
 		<LocaleProvider>
@@ -57,29 +91,7 @@ function App() {
 			<PageMeta />
 			<ContentProtection />
 			<Nav />
-			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>
-				<Switch>
-					<Route path="/" component={Index} />
-					<Route path="/mortgage" component={MortgagePage} />
-					<Route path="/invest" component={InvestPage} />
-					<Route path="/history" component={HistoryPage} />
-					<Route path="/blog/:slug" component={BlogPostPage} />
-					<Route path="/blog" component={BlogPage} />
-					<Route path="/project/:slug" component={ProjectPage} />
-					<Route path="/catalog" component={CatalogPage} />
-					<Route path="/turnkey" component={TurnkeyPage} />
-					<Route path="/services" component={ServicesPage} />
-					<Route path="/legal" component={LegalPage} />
-					<Route path="/admin/login" component={AdminLogin} />
-					<Route path="/admin/property/new">
-						{() => <PropertyForm />}
-					</Route>
-					<Route path="/admin/property/:id">
-						{(params) => <PropertyForm propertyId={params.id} />}
-					</Route>
-					<Route path="/admin" component={AdminDashboard} />
-				</Switch>
-			</div>
+			<AppMain />
 			<AppFooter />
 			<AppLeadPopup />
 			<AppFloatingConsult />

@@ -1042,10 +1042,10 @@ html, body { background: #21141A; }
 }
 .rd-why-link:hover { opacity: .85; }
 
-/* hero — full-bleed photo under transparent nav */
+/* hero — full-bleed under transparent nav (home has no app padding-top) */
 .rd-hero {
   position: relative;
-  margin-top: calc(-1 * var(--nav-height, 88px));
+  margin-top: 0;
   min-height: min(100svh, 980px);
   display: flex;
   align-items: center;
