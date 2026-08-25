@@ -1151,8 +1151,8 @@ html, body { background: #21141A; }
   box-sizing: border-box;
 }
 .rd-home-photo-copy {
-  width: min(580px, 100%);
-  max-width: 580px;
+  width: min(640px, 100%);
+  max-width: 640px;
   margin-right: clamp(0px, 5vw, 64px);
   opacity: 1;
 }
