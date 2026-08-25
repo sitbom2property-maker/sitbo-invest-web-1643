@@ -121,11 +121,6 @@ function WhatToBuy() {
     <section className="rd-what" id="what-to-buy">
       <div className="rd-wrap">
         <div className="rd-what-inner rv">
-          <h2 className="rd-h2">
-            {t("v2.why.bodyLead")}
-            <br />
-            {t("v2.what.question")}
-          </h2>
           <p className="rd-lead">{t("v2.why.body")}</p>
           <AppLink href="/invest" className="rd-why-link">
             {t("v2.why.cta")}
@@ -136,28 +131,66 @@ function WhatToBuy() {
   );
 }
 
-/** Sticky storytelling chapter — designxhand-inspired, CSS-only */
+const STICKY_CHAPTERS: {
+  id: string;
+  img: string;
+  titleKey: MessageKey;
+  bodyKeys: MessageKey[];
+}[] = [
+  {
+    id: "enter",
+    img: "/home/sticky-enter.jpg",
+    titleKey: "v2.sticky1.title",
+    bodyKeys: ["v2.sticky1.body1", "v2.sticky1.body2"],
+  },
+  {
+    id: "beside",
+    img: "/home/sticky-portrait.jpg",
+    titleKey: "v2.sticky2.title",
+    bodyKeys: ["v2.sticky2.body"],
+  },
+  {
+    id: "name",
+    img: "/home/sticky-sunset.jpg",
+    titleKey: "v2.sticky3.title",
+    bodyKeys: ["v2.sticky3.body1", "v2.sticky3.body2"],
+  },
+];
+
+/** Multi-chapter sticky storytelling — full-bleed photo + editorial copy */
 function StickyStory() {
   const t = useT();
   return (
-    <section className="rd-sticky-story" aria-labelledby="sticky-story-title">
-      <div className="rd-sticky-story-pin">
-        <img
-          className="rd-sticky-story-bg"
-          src="/home/rd-waterfront.jpg"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-        />
-        <span className="rd-sticky-story-scrim" aria-hidden="true" />
-        <div className="rd-wrap rd-sticky-story-copy rv">
-          <h2 id="sticky-story-title" className="rd-h2">
-            {t("v2.market.title")}
-          </h2>
-          <p>{t("v2.market.body1")}</p>
-        </div>
-      </div>
-    </section>
+    <div className="rd-sticky-stack">
+      {STICKY_CHAPTERS.map((ch, i) => (
+        <section
+          key={ch.id}
+          className="rd-sticky-story"
+          aria-labelledby={`sticky-story-title-${ch.id}`}
+        >
+          <div className="rd-sticky-story-pin">
+            <img
+              className="rd-sticky-story-bg"
+              src={ch.img}
+              alt=""
+              aria-hidden="true"
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+            <span className="rd-sticky-story-scrim" aria-hidden="true" />
+            <div className="rd-wrap rd-sticky-story-copy rv">
+              <h2 id={`sticky-story-title-${ch.id}`} className="rd-h2">
+                {t(ch.titleKey)}
+              </h2>
+              {ch.bodyKeys.map((k, bi) => (
+                <p key={k} className={bi === ch.bodyKeys.length - 1 && ch.bodyKeys.length > 1 ? "is-lead" : undefined}>
+                  {t(k)}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
   );
 }
 
@@ -773,24 +806,24 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
                 <p>{t(plan.resultKey)}</p>
               </div>
 
-              <div className="rd-plan-price">{plan.price}</div>
-
-              {plan.noteKey ? <p className="rd-plan-note">{t(plan.noteKey)}</p> : null}
-
-              <button
-                type="button"
-                className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
-                onClick={() =>
-                  onRequest({
-                    open: true,
-                    source: `Pricing — ${plan.id}`,
-                    topic: `${t(plan.nameKey)} · ${plan.price}`,
-                    title: t(plan.nameKey),
-                  })
-                }
-              >
-                {t(plan.ctaKey ?? "v2.pricing.choose")}
-              </button>
+              <div className="rd-plan-foot">
+                <div className="rd-plan-price">{plan.price}</div>
+                {plan.noteKey ? <p className="rd-plan-note">{t(plan.noteKey)}</p> : null}
+                <button
+                  type="button"
+                  className={`rd-btn rd-plan-cta ${plan.featured ? "rd-btn-white" : "rd-btn-dark"}`}
+                  onClick={() =>
+                    onRequest({
+                      open: true,
+                      source: `Pricing — ${plan.id}`,
+                      topic: `${t(plan.nameKey)} · ${plan.price}`,
+                      title: t(plan.nameKey),
+                    })
+                  }
+                >
+                  {t(plan.ctaKey ?? "v2.pricing.choose")}
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -1104,7 +1137,8 @@ html, body { background: #21141A; }
   line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
 }
 
-/* sticky storytelling */
+/* sticky storytelling — full-bleed photo chapters */
+.rd-sticky-stack { background: #21141A; }
 .rd-sticky-story {
   position: relative;
   height: 160vh;
@@ -1125,8 +1159,8 @@ html, body { background: #21141A; }
 .rd-sticky-story-scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(20,14,16,.25) 0%, rgba(20,14,16,.55) 55%, rgba(20,14,16,.82) 100%),
-    linear-gradient(90deg, rgba(20,14,16,.55) 0%, rgba(20,14,16,.2) 70%, transparent 100%);
+    linear-gradient(180deg, rgba(20,14,16,.18) 0%, rgba(20,14,16,.42) 48%, rgba(20,14,16,.78) 100%),
+    linear-gradient(90deg, rgba(20,14,16,.5) 0%, rgba(20,14,16,.18) 62%, transparent 100%);
   pointer-events: none;
 }
 .rd-sticky-story-copy {
@@ -1136,13 +1170,21 @@ html, body { background: #21141A; }
   max-width: var(--rd-max);
 }
 .rd-sticky-story-copy .rd-h2 {
-  color: #FFFEF9; max-width: 720px; margin: 0 0 18px;
+  color: #FFFEF9; max-width: 760px; margin: 0 0 18px;
 }
 .rd-sticky-story-copy p {
-  margin: 0; max-width: 560px;
+  margin: 0 0 14px; max-width: 580px;
   font-family: var(--body);
   font-size: clamp(15px, 1.25vw, 17px); line-height: 1.6;
   color: rgba(255,254,249,.88);
+}
+.rd-sticky-story-copy p:last-child { margin-bottom: 0; }
+.rd-sticky-story-copy p.is-lead {
+  font-size: clamp(17px, 1.55vw, 21px);
+  line-height: 1.5;
+  color: #FFFEF9;
+  max-width: 640px;
+  margin-top: 6px;
 }
 @media (prefers-reduced-motion: reduce) {
   .rd-sticky-story { height: auto; }
@@ -1511,38 +1553,43 @@ html, body { background: #21141A; }
 .rd-pricing .rd-h1 { margin-bottom: clamp(32px, 4vw, 64px); color: #FFFEF9; }
 .rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 24px); align-items: stretch; }
 .rd-plan {
-  /* Express Audit / Discovery Tour — taller frame, more air */
   background: #FFFEF9; color: #21141A; border-radius: 2px;
-  padding: clamp(36px, 3.4vw, 52px) clamp(28px, 2.8vw, 40px);
+  padding: clamp(40px, 3.8vw, 56px) clamp(30px, 3vw, 44px);
   display: flex; flex-direction: column;
-  min-height: clamp(640px, 72vh, 820px);
+  min-height: clamp(680px, 74vh, 860px);
   box-sizing: border-box;
 }
 .rd-plan.is-featured {
-  /* Strategic Deep-Dive */
   background: #48674D; color: #FFFEF9;
 }
 .rd-plan.is-featured .rd-plan-for { border-bottom-color: rgba(255,254,249,.2); }
-.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 12px; }
+.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 14px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 22px;
-  padding-bottom: 22px; border-bottom: 1px solid rgba(33,20,26,.15);
+  font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 26px;
+  padding-bottom: 24px; border-bottom: 1px solid rgba(33,20,26,.15);
+}
+.rd-plan-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
 }
 .rd-plan-price {
-  font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1;
-  margin: 8px 0 18px; font-variant-numeric: tabular-nums;
+  font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.4vw, 58px); line-height: 1.05;
+  margin: 0 0 20px; font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
-.rd-plan ul { list-style: disc; margin: 0 0 28px; padding-left: 18px; display: grid; gap: 12px; }
-.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.4; }
-.rd-plan-block { margin-bottom: 22px; }
+.rd-plan ul { list-style: disc; margin: 0 0 28px; padding-left: 18px; display: grid; gap: 14px; }
+.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.45; }
+.rd-plan-block { margin-bottom: 24px; }
 .rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
-.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.45; margin: 0; }
+.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.5; margin: 0; }
 .rd-plan-note {
   font-family: var(--body); font-size: 13px; line-height: 1.5;
   color: rgba(33,20,26,.55); margin: 0 0 22px;
 }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
-.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
+.rd-plan-cta { width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
 
 /* FAQ — after pricing */
 .rd-faq-outer { padding-bottom: clamp(40px, 5vw, 72px); }
@@ -1664,13 +1711,13 @@ export default function HomeV2() {
       <style>{CSS}</style>
 
       <Hero />
+      <StickyStory />
       <Pricing onRequest={setModal} />
       <div className="rd-canvas">
         <Faq />
       </div>
       <WhyGeorgia />
       <WhatToBuy />
-      <StickyStory />
       <MarketMyths />
       <div className="rd-canvas">
         <SelectedProjects />

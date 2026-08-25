@@ -112,10 +112,13 @@ export function FooterV2() {
         }
         @media (max-width: 640px) {
           .fv2-wrap { padding: 0 clamp(20px, 5vw, 32px); }
-          .fv2-grid { grid-template-columns: 1fr; gap: 36px; }
+          /* Keep the two link columns side-by-side; brand stays full-width above */
+          .fv2-grid { grid-template-columns: 1fr 1fr; gap: 32px 28px; }
+          .fv2-brand { grid-column: 1 / -1; }
           .fv2-logo { height: 12px; margin-bottom: 12px; }
           .fv2-name { font-size: 15px; margin-bottom: 12px; }
           .fv2-tagline { max-width: none; }
+          .fv2-col a { white-space: normal; }
         }
       `}</style>
 

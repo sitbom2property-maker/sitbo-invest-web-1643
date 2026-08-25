@@ -174,15 +174,26 @@ export default function BlogPage() {
   return (
     <>
       <div style={{ background: C.light, minHeight: "100vh" }}>
-        <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
-          <div className="site-wrap">
+        <section
+          className="page-hero-block"
+          style={{
+            background: C.dark,
+            width: "100%",
+            minHeight: "clamp(300px, 42vh, 440px)",
+            padding: "clamp(72px, 8vw, 120px) 0",
+            display: "flex",
+            alignItems: "center",
+            boxSizing: "border-box",
+          }}
+        >
+          <div className="site-wrap" style={{ width: "100%" }}>
             <h1
               style={{
                 fontFamily: "JUN, Georgia, serif",
-                fontSize: "clamp(2.4rem,5vw,4rem)",
+                fontSize: "clamp(1.85rem, 3.4vw, 2.75rem)",
                 fontWeight: 400,
                 color: C.light,
-                lineHeight: 1.05,
+                lineHeight: 1.15,
                 margin: "0 0 20px",
                 maxWidth: "720px",
               }}

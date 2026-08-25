@@ -352,10 +352,38 @@ const COOKIE_CSS = `
   font-weight: 400; text-transform: none; letter-spacing: 0;
 }
 @media (max-width: 720px) {
-  .ck-inner { padding: 16px var(--site-gutter, 20px) 14px; }
-  .ck-row { flex-direction: column; align-items: stretch; }
+  .ck {
+    /* Compact bottom bar — not a full-screen sheet */
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    border-radius: 14px;
+    box-shadow: 0 10px 36px rgba(0,0,0,.45);
+  }
+  .ck-inner { padding: 14px 14px 12px; }
+  .ck-title { font-size: 14px; }
+  .ck-body {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 6px 0 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    max-width: none;
+  }
+  .ck-policy { margin: 6px 0 10px; font-size: 12.5px; }
+  .ck-cats { display: none; }
+  .ck-row { flex-direction: column; align-items: stretch; gap: 10px; }
   .ck-actions { width: 100%; }
-  .ck-btn { flex: 1; text-align: center; }
-  .ck-title { font-size: 15px; }
+  .ck-btn { flex: 1; text-align: center; padding: 11px 14px; }
+  .ck-details-toggle { margin-top: 10px; }
+  .ck-details {
+    grid-template-columns: 1fr;
+    max-height: 36vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 `;

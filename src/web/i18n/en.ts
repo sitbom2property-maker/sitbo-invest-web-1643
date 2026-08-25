@@ -97,6 +97,21 @@ const en = {
   "v2.market.card3": "Hundreds of negotiations",
   "v2.market.card4": "Real reviews and recommendations",
 
+  /* Sticky storytelling chapters (home, after hero) */
+  "v2.sticky1.title": "Georgia is easy to enter. The real question is what to buy.",
+  "v2.sticky1.body1":
+    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations.",
+  "v2.sticky1.body2":
+    "Or you can work with someone who was born here, knows the market from the inside, understands the people behind the projects and can help you move faster, safer and stronger. I do not promise miracles. I know what I am doing.",
+  "v2.sticky2.title": "I stay close when things get difficult.",
+  "v2.sticky2.body":
+    "I remain by your side if complications and unexpected situations arise — not only while the deal looks easy.",
+  "v2.sticky3.title": "I have a name in the city, and I care about it.",
+  "v2.sticky3.body1":
+    "My business is built on trust, recommendations and long-term relationships. Clients come to me not only because I know the market, but because I tell the truth, protect their interests and stay involved when the situation becomes difficult.",
+  "v2.sticky3.body2":
+    "You can find real reviews and recommendations from people I have worked with in public sources. For me, reputation is more important than a quick deal.",
+
   "v2.notes.title1": "I do not work with everyone.",
   "v2.notes.title2": "My time and resources are limited.",
   "v2.notes.body":
@@ -232,7 +247,8 @@ const en = {
   "v2.plan1.f1": "45–60 minutes",
   "v2.plan1.f2": "Online call (WhatsApp / Google Meet)",
   "v2.plan1.f3": "Real-time answers to questions",
-  "v2.plan1.request": "You have a specific question or 1-2 objects to check",
+  "v2.plan1.request":
+    "You are only exploring Georgia and want to understand where to start. You are unsure about the district, the city or the buying idea. You want a clear direction, fast.",
   "v2.plan1.result": "Quick verdict: 'Yes, let's do it' / 'No, it's too risky'",
   "v2.plan2.name": "Strategic Deep-Dive",
   "v2.plan2.for": "Ready to buy",

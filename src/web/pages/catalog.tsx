@@ -478,16 +478,27 @@ export default function CatalogPage() {
   return (
     <div style={{ background: C.light, minHeight: "100vh" }}>
       {/* ── HERO ── */}
-      <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
+      <section
+        className="page-hero-block"
+        style={{
+          background: C.dark,
+          width: "100%",
+          minHeight: "clamp(300px, 42vh, 440px)",
+          padding: "clamp(72px, 8vw, 120px) 0",
+          display: "flex",
+          alignItems: "center",
+          boxSizing: "border-box",
+        }}
+      >
         <Container>
           <h1
             style={{
               fontFamily: "JUN, Georgia, serif",
-              fontSize: "clamp(1.35rem, 2.2vw, 1.9rem)",
+              fontSize: "clamp(1.85rem, 3.4vw, 2.75rem)",
               fontWeight: 400,
               color: C.light,
-              lineHeight: 1.3,
-              margin: "0 0 clamp(36px, 4vw, 56px)",
+              lineHeight: 1.2,
+              margin: "0 0 clamp(28px, 3.2vw, 40px)",
               maxWidth: "760px",
             }}
           >
