@@ -15,6 +15,15 @@ export function ScrollRestore() {
   }, []);
 
   useEffect(() => {
+    // Amina funnel: always start at top even if URL had a leftover #hash.
+    if (location === "/amina" || location.startsWith("/amina/")) {
+      if (window.location.hash) {
+        window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      }
+      window.scrollTo(0, 0);
+      const t = window.setTimeout(() => window.scrollTo(0, 0), 0);
+      return () => window.clearTimeout(t);
+    }
     if (window.location.hash) return;
     // Project / apartment flows handle their own top scroll.
     window.scrollTo(0, 0);

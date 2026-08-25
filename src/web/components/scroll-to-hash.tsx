@@ -7,6 +7,9 @@ export function ScrollToHash() {
   const [location] = useLocation();
 
   useEffect(() => {
+    // Amina ad landing: never auto-jump on open — user scrolls themselves.
+    if (location === "/amina" || location.startsWith("/amina/")) return;
+
     const isApartmentHash = (raw: string) =>
       /(apartments|2d|360|chess|floors|tour|pano|^3d$)/i.test(raw.replace(/^\/?/, ""));
 

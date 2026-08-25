@@ -167,10 +167,14 @@ function AminaNav() {
   }, [open]);
 
   const links: { href: string; labelKey: MessageKey }[] = [
-    { href: "#tariffs", labelKey: "amina.nav.consultation" },
+    { href: "#hero", labelKey: "amina.nav.hero" },
+    { href: "#market", labelKey: "amina.nav.market" },
+    { href: "#why-georgia", labelKey: "amina.nav.why" },
+    { href: "#tariffs", labelKey: "amina.nav.tariffs" },
     { href: "#faq", labelKey: "amina.nav.faq" },
   ];
 
+  /** In-page jump without leaving #hash in the URL (keeps next open at the top). */
   const go = (href: string) => {
     setOpen(false);
     const id = href.replace("#", "");
@@ -195,20 +199,18 @@ function AminaNav() {
             />
           </Link>
           <nav className="am-nav-links" aria-label="Amina landing">
-            <div className="am-nav-frame">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    go(l.href);
-                  }}
-                >
-                  {t(l.labelKey)}
-                </a>
-              ))}
-            </div>
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  go(l.href);
+                }}
+              >
+                {t(l.labelKey)}
+              </a>
+            ))}
           </nav>
           <div className="am-nav-right">
             <NavLocaleSwitcher tone={scrolled ? "light" : "dark"} showCurrency={false} />
@@ -265,10 +267,24 @@ function Hero() {
             <p>{t("amina.hero.p2")}</p>
           </div>
           <div className="am-hero-frame">
-            <a href="#tariffs" className="am-btn am-btn-ghost">
+            <a
+              href="#tariffs"
+              className="am-btn am-btn-ghost"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("tariffs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
               {t("amina.nav.consultation")}
             </a>
-            <a href="#faq" className="am-btn am-btn-ghost">
+            <a
+              href="#faq"
+              className="am-btn am-btn-ghost"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("faq")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
               {t("amina.nav.faq")}
             </a>
           </div>
@@ -285,6 +301,8 @@ function Hero() {
                 muted
                 loop
                 playsInline
+                preload="metadata"
+                tabIndex={-1}
                 onError={() => setHasVideo(false)}
               />
             ) : (
@@ -507,7 +525,14 @@ function FaqWidget() {
           )}
 
           <div className="am-faq-actions">
-            <a href="#tariffs" className="am-btn am-btn-dark">
+            <a
+              href="#tariffs"
+              className="am-btn am-btn-dark"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("tariffs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
               {t("amina.faq.backTariffs")}
             </a>
             <a className="am-btn am-btn-ghost-dark" href={ASSISTANT_HREF} target="_blank" rel="noopener noreferrer">
@@ -542,17 +567,41 @@ function AminaFooter() {
 
         <nav className="am-footer-col" aria-label={t("amina.footer.page")}>
           <h3>{t("amina.footer.page")}</h3>
-          <ul>
-            <li>
-              <a href="#tariffs">{t("amina.nav.tariffs")}</a>
-            </li>
-            <li>
-              <a href="#faq">{t("amina.nav.faq")}</a>
-            </li>
-            <li>
-              <a href="#why-georgia">{t("amina.nav.why")}</a>
-            </li>
-          </ul>
+            <ul>
+              <li>
+                <a
+                  href="#tariffs"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("tariffs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  {t("amina.nav.tariffs")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("faq")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  {t("amina.nav.faq")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#why-georgia"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("why-georgia")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  {t("amina.nav.why")}
+                </a>
+              </li>
+            </ul>
         </nav>
 
         <nav className="am-footer-col" aria-label={t("v2.footer.contact")}>
@@ -651,24 +700,11 @@ const STYLES = `
 .am-nav.is-scrolled .am-nav-logo-light { display: none; }
 .am-nav:not(.is-scrolled) .am-nav-logo-dark { display: none; }
 .am-nav-links { display: flex; gap: clamp(16px, 2vw, 28px); flex: 1; justify-content: center; }
-.am-nav-frame {
-  display: inline-flex; align-items: stretch; gap: 0;
-  border: 1px solid color-mix(in srgb, var(--am-nav-ink) 40%, transparent);
-  border-radius: 2px; overflow: hidden;
-}
-.am-nav-frame a {
-  font-size: 13px; font-weight: 600; color: var(--am-nav-ink); text-decoration: none;
-  letter-spacing: .04em; padding: 10px 18px;
-  border-right: 1px solid color-mix(in srgb, var(--am-nav-ink) 28%, transparent);
-  opacity: .92; transition: background .2s, opacity .2s;
-}
-.am-nav-frame a:last-child { border-right: none; }
-.am-nav-frame a:hover { opacity: 1; background: color-mix(in srgb, var(--am-nav-ink) 10%, transparent); }
-.am-nav-links > a {
+.am-nav-links a {
   font-size: 13px; font-weight: 500; color: var(--am-nav-ink); text-decoration: none;
   letter-spacing: .02em; opacity: .78;
 }
-.am-nav-links > a:hover { opacity: 1; }
+.am-nav-links a:hover { opacity: 1; }
 .am-nav-right { display: flex; align-items: center; gap: 14px; margin-left: auto; }
 .am-nav-wa {
   font-size: 13px; font-weight: 600; color: var(--am-nav-ink); text-decoration: none;
@@ -924,7 +960,21 @@ export default function AminaPage() {
   useReveal();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Always open landing at the top. Ads / leftover #hash must not jump mid-page.
+    if (window.location.hash) {
+      const clean = `${window.location.pathname}${window.location.search}`;
+      window.history.replaceState(null, "", clean);
+    }
+    const toTop = () => window.scrollTo(0, 0);
+    toTop();
+    const t0 = window.setTimeout(toTop, 0);
+    const t1 = window.setTimeout(toTop, 100);
+    const t2 = window.setTimeout(toTop, 350);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
   }, []);
 
   return (
