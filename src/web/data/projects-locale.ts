@@ -1,5 +1,6 @@
 import { formatInstallmentLine, remainingInstallmentMonths } from "./installment";
 import type { Project } from "./projects";
+import { normalizeTypografLang, typografDeep } from "../lib/typograf";
 
 export type ProjectLocaleFields = Partial<
   Pick<
@@ -401,7 +402,7 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
 };
 
 export function localizeProject(p: Project, language: string): Project {
-  const lang = language.toLowerCase().startsWith("ru") ? "ru" : "en";
+  const lang = normalizeTypografLang(language);
   const ru = lang === "ru" ? projectRuBySlug[p.slug] : undefined;
   const merged: Project = ru ? { ...p, ...ru } : { ...p };
   if (lang === "ru" && !ru?.completion) {
@@ -411,7 +412,7 @@ export function localizeProject(p: Project, language: string): Project {
     const months = remainingInstallmentMonths(p.installmentMonths, p.installmentAnchorYm);
     merged.installment = formatInstallmentLine(p.downPaymentPct ?? 30, months, lang === "ru");
   }
-  return merged;
+  return typografDeep(merged, lang);
 }
 
 export function localizeProjects(list: Project[], language: string): Project[] {

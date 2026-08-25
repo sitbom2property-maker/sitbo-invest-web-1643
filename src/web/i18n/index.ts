@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { normalizeLanguage, useLocale, type LanguageCode } from "../context/LocaleContext";
+import { fixTypography, normalizeTypografLang } from "../lib/typograf";
 import en, { type MessageKey } from "./en";
 import ru from "./ru";
 
@@ -22,7 +23,7 @@ export function translate(
       text = text.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
     }
   }
-  return text;
+  return fixTypography(text, normalizeTypografLang(lang));
 }
 
 export function useT() {

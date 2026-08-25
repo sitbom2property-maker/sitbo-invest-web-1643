@@ -1,5 +1,6 @@
 import type { HistoryRegion } from "./history-regions";
 import { HISTORY_REGIONS } from "./history-regions";
+import { normalizeTypografLang, typografDeep } from "../lib/typograf";
 
 export const HISTORY_REGIONS_RU: HistoryRegion[] = [
   {
@@ -64,8 +65,9 @@ export const HISTORY_REGIONS_RU: HistoryRegion[] = [
 ];
 
 export function getHistoryRegions(language: string): HistoryRegion[] {
-  const lang = language.toLowerCase().startsWith("ru") ? "ru" : "en";
-  return lang === "ru" ? HISTORY_REGIONS_RU : HISTORY_REGIONS;
+  const lang = normalizeTypografLang(language);
+  const regions = lang === "ru" ? HISTORY_REGIONS_RU : HISTORY_REGIONS;
+  return typografDeep(regions, lang);
 }
 
 export function getLiveRegion(language: string): HistoryRegion {
