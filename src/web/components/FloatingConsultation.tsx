@@ -79,17 +79,8 @@ export function FloatingConsultation() {
           .float-consult {
             right: max(12px, env(safe-area-inset-right));
             bottom: calc(var(--cookie-banner-height, 0px) + max(16px, env(safe-area-inset-bottom)));
-            width: 52px;
-            height: 52px;
-            padding: 0;
-            border-radius: 50%;
-            justify-content: center;
-            gap: 0;
-          }
-          .float-consult-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-          .float-consult-dot {
-            width: 10px; height: 10px;
-            margin: 0;
+            padding: 13px 18px;
+            font-size: 13px;
           }
         }
       `}</style>
@@ -101,7 +92,7 @@ export function FloatingConsultation() {
         aria-label={t("float.consult")}
       >
         <span className="float-consult-dot" aria-hidden="true" />
-        <span className="float-consult-label">{t("float.consult")}</span>
+        {t("float.consult")}
       </button>
 
       <RequestModal

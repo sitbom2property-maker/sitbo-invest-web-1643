@@ -1165,31 +1165,14 @@ html, body { background: #21141A; }
   font-weight: 600;
   /* Slightly under hero h1 — long statement must not feel larger */
   font-size: clamp(28px, 3.2vw, 40px);
-  line-height: 1.18;
+  line-height: 1.14;
   letter-spacing: -0.015em;
   color: #FFFEF9;
   margin: 0 0 clamp(16px, 2vw, 24px);
   white-space: pre-line;
-  text-wrap: pretty;
-  overflow-wrap: normal;
-  word-break: normal;
-  hyphens: none;
 }
 @media (max-width: 640px) {
-  .rd-home-photo-title {
-    font-size: clamp(22px, 5.8vw, 28px);
-    line-height: 1.22;
-    letter-spacing: -0.01em;
-    padding-right: 64px; /* keep clear of floating CTA */
-  }
-  .rd-home-photo-body {
-    font-size: clamp(13px, 3.6vw, 15px);
-    padding-right: 8px;
-  }
-  .rd-pricing .rd-h1,
-  .rd-h1 {
-    padding-right: 64px;
-  }
+  .rd-home-photo-title { font-size: clamp(26px, 7vw, 34px); }
 }
 .rd-home-photo-body {
   margin: 0;

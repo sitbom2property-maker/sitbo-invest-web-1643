@@ -235,16 +235,10 @@ html {
   --font-body: 'Nunito', system-ui, sans-serif;
 }
 
-/* Georgian UI: proper Mkhedruli face + smaller type so long lines fit */
+/* Georgian UI: proper Mkhedruli face + ~2–3pt smaller type so long lines fit */
 html[lang="ka"],
 html[data-lang="ka"] {
-  zoom: 0.8;
-}
-@media (max-width: 768px) {
-  html[lang="ka"],
-  html[data-lang="ka"] {
-    zoom: 0.72;
-  }
+  zoom: 0.88;
 }
 html[lang="ka"] body,
 html[data-lang="ka"] body {
