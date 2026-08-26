@@ -114,7 +114,7 @@ const FAQ_GROUPS: {
 const WHY_STATS: { value: string; labelKey: MessageKey; noteKey: MessageKey; tone: "gray" | "green" | "white" }[] = [
   { value: "0%", labelKey: "v2.stats.tax", noteKey: "v2.stats.taxNote", tone: "gray" },
   { value: "$150k", labelKey: "v2.stats.residency", noteKey: "v2.stats.residencyNote", tone: "green" },
-  { value: "30–70%", labelKey: "v2.stats.capital", noteKey: "v2.stats.capitalNote", tone: "white" },
+  { value: "30–70%", labelKey: "v2.stats.capital", noteKey: "v2.stats.capitalNote", tone: "green" },
   { value: "3.7M", labelKey: "v2.stats.tourists", noteKey: "v2.stats.touristsNote", tone: "gray" },
   { value: "13.2%", labelKey: "v2.stats.yield", noteKey: "v2.stats.yieldNote", tone: "green" },
 ];
@@ -929,10 +929,11 @@ const STYLES = `
 .am-price-spots {
   font-family: var(--body);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  opacity: 0.78;
+  color: var(--green);
+  opacity: 1;
   margin-top: 4px;
 }
 .am-plan-note { font-size: 13px; line-height: 1.5; color: rgba(33,20,26,.55); margin: 0 0 18px; min-height: 5.2em; }
@@ -976,15 +977,18 @@ const STYLES = `
   margin-bottom: clamp(20px, 3vw, 32px);
 }
 .am-faq-tab {
-  text-align: left; border-radius: 2px; border: 1px solid rgba(33,20,26,.14);
-  background: #fff; padding: clamp(22px, 2.6vw, 32px); cursor: pointer;
+  text-align: left; border-radius: 2px; border: 1px solid transparent;
+  background: var(--green); color: var(--bg); padding: clamp(22px, 2.6vw, 32px); cursor: pointer;
   min-height: 148px; display: flex; flex-direction: column; gap: 10px;
-  transition: background .2s, color .2s, border-color .2s;
+  transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
-.am-faq-tab:hover { border-color: rgba(33,20,26,.35); }
-.am-faq-tab.is-on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.am-faq-tab:hover { opacity: .92; }
+.am-faq-tab.is-on {
+  background: var(--ink); color: var(--bg); border-color: var(--ink);
+  box-shadow: inset 0 0 0 2px rgba(255,254,249,.12);
+}
 .am-faq-tab-title { font-family: var(--display); font-size: clamp(22px, 2.2vw, 30px); font-weight: 500; line-height: 1.15; }
-.am-faq-tab-teaser { font-size: 14px; line-height: 1.45; opacity: .72; }
+.am-faq-tab-teaser { font-size: 14px; line-height: 1.45; opacity: .78; }
 .am-faq-panel {
   border: 1px solid rgba(33,20,26,.1); border-radius: 2px; background: #fff;
   padding: clamp(24px, 3.2vw, 44px);
