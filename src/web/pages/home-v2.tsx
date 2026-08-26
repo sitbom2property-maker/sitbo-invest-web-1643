@@ -166,7 +166,13 @@ function HomePhotoBand() {
       <div className="rd-wrap rd-home-photo-inner">
         <div className="rd-home-photo-copy">
           <h2 id="home-photo-title" className="rd-home-photo-title">
-            {t("v2.sticky1.title")}
+            {t("v2.sticky1.title")
+              .split("\n")
+              .map((line, i) => (
+                <span key={i} className="rd-home-photo-title-line">
+                  {line}
+                </span>
+              ))}
           </h2>
           <p className="rd-home-photo-body">{t("v2.sticky1.body1")}</p>
         </div>
@@ -1168,18 +1174,22 @@ html, body { background: #21141A; }
   letter-spacing: -0.015em;
   color: #FFFEF9;
   margin: 0 0 clamp(16px, 2vw, 24px);
-  white-space: pre-line;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;
 }
+.rd-home-photo-title-line {
+  display: block;
+}
 @media (max-width: 640px) {
-  /* Lock editorial line breaks — no soft reflow that "jumps" words */
+  /* Exact editorial breaks — never soft-wrap mid-line */
   .rd-home-photo-title {
-    font-size: clamp(22px, 5.6vw, 28px);
-    line-height: 1.2;
-    white-space: pre-line;
-    max-width: 17.5em;
+    font-size: clamp(18px, 4.9vw, 26px);
+    line-height: 1.22;
+    max-width: none;
+  }
+  .rd-home-photo-title-line {
+    white-space: nowrap;
   }
 }
 .rd-home-photo-body {
