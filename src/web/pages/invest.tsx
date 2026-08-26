@@ -81,19 +81,19 @@ const FAQS = [
 ];
 
 const PRICE_BARS = [
-  { cityKey: "invest.market.city.barcelona" as MessageKey, value: 5200, pct: 100 },
-  { cityKey: "invest.market.city.lisbon" as MessageKey, value: 4800, pct: 92 },
-  { cityKey: "invest.market.city.athens" as MessageKey, value: 3100, pct: 60 },
-  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: 1650, pct: 32 },
-  { cityKey: "invest.market.city.batumi" as MessageKey, value: 1420, pct: 27 },
+  { cityKey: "invest.market.city.lisbon" as MessageKey, value: 7970, pct: 100 },
+  { cityKey: "invest.market.city.barcelona" as MessageKey, value: 7730, pct: 97 },
+  { cityKey: "invest.market.city.athens" as MessageKey, value: 4100, pct: 51 },
+  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: 2510, pct: 31 },
+  { cityKey: "invest.market.city.batumi" as MessageKey, value: 1710, pct: 21 },
 ];
 
 const YIELD_BARS = [
-  { cityKey: "invest.market.city.batumi" as MessageKey, value: "13.2%", pct: 100 },
-  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: "8.5%", pct: 64 },
-  { cityKey: "invest.market.city.athens" as MessageKey, value: "5.2%", pct: 39 },
-  { cityKey: "invest.market.city.lisbon" as MessageKey, value: "3.8%", pct: 29 },
-  { cityKey: "invest.market.city.barcelona" as MessageKey, value: "3.1%", pct: 23 },
+  { cityKey: "invest.market.city.batumi" as MessageKey, value: "7.28%", pct: 100 },
+  { cityKey: "invest.market.city.tbilisi" as MessageKey, value: "7.23%", pct: 99 },
+  { cityKey: "invest.market.city.barcelona" as MessageKey, value: "5.7%", pct: 78 },
+  { cityKey: "invest.market.city.athens" as MessageKey, value: "5.0%", pct: 69 },
+  { cityKey: "invest.market.city.lisbon" as MessageKey, value: "3.76%", pct: 52 },
 ];
 
 const DIPLOMACY = [
@@ -569,25 +569,44 @@ const CSS = `
   padding: clamp(48px, 6vw, 88px) 0;
 }
 .iv-market h2, .iv-process h2 {
-  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(28px, 4vw, 44px);
+  font-family: var(--display); font-weight: 600; margin: 0;
   font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12;
+}
+.iv-market-head {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.iv-market-head h2 { margin-bottom: 14px; }
+.iv-market-meta {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255,254,249,.62);
+  letter-spacing: 0.02em;
 }
 .iv-charts {
   display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px);
 }
 .iv-chart h3 { margin: 0 0 20px; font-size: 15px; font-weight: 500; color: rgba(255,254,249,.75); }
 .iv-bar-row {
-  display: grid; grid-template-columns: 90px 1fr 64px; gap: 12px; align-items: center;
+  display: grid; grid-template-columns: 90px 1fr 72px; gap: 12px; align-items: center;
   margin-bottom: 12px; font-size: 13px;
 }
 .iv-bar-track { height: 10px; background: rgba(255,254,249,.12); border-radius: 2px; overflow: hidden; }
 .iv-bar-fill { height: 100%; background: var(--green); border-radius: 2px; }
+.iv-market-note {
+  margin: clamp(22px, 3vw, 32px) 0 0;
+  max-width: 72ch;
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255,254,249,.5);
+}
 .iv-process-head {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start;
+  display: grid; grid-template-columns: 1fr; gap: 14px; align-items: start;
   margin-bottom: clamp(28px, 4vw, 44px);
+  max-width: 52ch;
 }
 .iv-process-head h2 { margin: 0; }
-.iv-process-head p { margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,254,249,.78); }
+.iv-process-head p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,254,249,.78); }
 .iv-process-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px;
 }
@@ -871,7 +890,14 @@ export default function InvestPage() {
 
       <section className="iv-market">
         <div className="iv-wrap">
-          <h2 className="rv">{t("invest.market.title")}</h2>
+          <div className="iv-market-head rv">
+            <h2>{t("invest.market.title")}</h2>
+            <p className="iv-market-meta">
+              {t("invest.market.updated")}
+              <br />
+              {t("invest.market.converted")}
+            </p>
+          </div>
           <div className="iv-charts rv">
             <div className="iv-chart">
               <h3>{t("invest.market.priceComparison")}</h3>
@@ -898,6 +924,7 @@ export default function InvestPage() {
               ))}
             </div>
           </div>
+          <p className="iv-market-note rv">{t("invest.market.sources")}</p>
         </div>
       </section>
 
