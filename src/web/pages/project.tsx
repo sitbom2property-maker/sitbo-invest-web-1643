@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Link, useParams } from "wouter";
-import { projects, resolvePaymentPlans, type Project } from "../data/projects";
+import { projects, catalogListedProjects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { PiazzaViewer } from "../components/PiazzaViewer";
 import { ParklineViewer } from "../components/ParklineViewer";
@@ -594,6 +594,7 @@ export default function ProjectPage() {
   const [linkCopied, setLinkCopied] = useState(false);
 
   const localizedList = localizeProjects(projects, language);
+  const listedList = localizeProjects(catalogListedProjects(projects), language);
   const idx    = localizedList.findIndex(p => p.slug === params.slug);
   const project = localizedList[idx];
 
@@ -664,8 +665,10 @@ export default function ProjectPage() {
             : propertyType === "apartment-aparthotel"
               ? "project.propertyType.apartmentAparthotel"
               : "project.propertyType.apartment";
-  const prev = localizedList[(idx - 1 + localizedList.length) % localizedList.length];
-  const next = localizedList[(idx + 1) % localizedList.length];
+  const listedIdx = listedList.findIndex((x) => x.slug === p.slug);
+  const navIdx = listedIdx >= 0 ? listedIdx : 0;
+  const prev = listedList[(navIdx - 1 + listedList.length) % listedList.length];
+  const next = listedList[(navIdx + 1) % listedList.length];
   const metaLabel: CSSProperties = {
     fontFamily: "Nunito, sans-serif",
     fontSize: "13px",

@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
-import { projects, type Project } from "../data/projects";
+import { projects, catalogListedProjects, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
@@ -401,7 +401,7 @@ export default function CatalogPage() {
   const t = useT();
   const { language } = useLocale();
   const localizedProjects = useMemo(
-    () => localizeProjects(projects, language),
+    () => localizeProjects(catalogListedProjects(projects), language),
     [language],
   );
 
@@ -509,7 +509,7 @@ export default function CatalogPage() {
 
           {/* City tabs + trophy filter */}
           <div style={{ display: "flex", gap: "8px", marginTop: 0, flexWrap: "wrap", alignItems: "center" }}>
-            {CITIES.map(c => (
+            {CITIES.filter(c => c === "All" || (counts[c] ?? 0) > 0).map(c => (
               <button key={c} onClick={() => setCity(c)} style={{
                 fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",

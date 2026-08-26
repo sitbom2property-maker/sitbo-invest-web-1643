@@ -77,6 +77,12 @@ export type Project = {
   };
   /** Show a “Trophy property” badge next to the project name. */
   trophyProperty?: boolean;
+  /**
+   * When false, project is kept in data (direct URL / re-enable later)
+   * but hidden from catalog and home selected-projects rails.
+   * Defaults to true when omitted.
+   */
+  listedInCatalog?: boolean;
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -543,6 +549,7 @@ export const projects: Project[] = [
   {
     name: "VR Shekvetili Forest Beach",
     slug: "shekvetili-forest-beach",
+    listedInCatalog: false,
     tag: "Black Sea · Forest & Beach",
     city: "Shekvetili",
     address: "Shekvetili, Guria · next to Paragraph Resort & Spa",
@@ -655,6 +662,7 @@ export const projects: Project[] = [
   {
     name: "Krtsanisi Resort Residence",
     slug: "krtsanisi-resort-residence",
+    listedInCatalog: false,
     tag: "Krtsanisi · City Within a City",
     city: "Tbilisi",
     address: "Grigol Volski St 7, Krtsanisi, Tbilisi",
@@ -724,6 +732,7 @@ export const projects: Project[] = [
   {
     name: "Vake Sky Tower",
     slug: "vake-sky-tower",
+    listedInCatalog: false,
     tag: "Vake · Tallest in Georgia",
     city: "Tbilisi",
     address: "49 Ilia Chavchavadze Ave, Vake, Tbilisi",
@@ -788,6 +797,7 @@ export const projects: Project[] = [
   {
     name: "Ambassadori Island",
     slug: "ambassadori-island",
+    listedInCatalog: false,
     tag: "Off-Shore Island · Marina",
     city: "Batumi",
     address: "Batumi Bay, off-shore island",
@@ -827,6 +837,7 @@ export const projects: Project[] = [
   {
     name: "Gonio Yachts & Marina",
     slug: "gonio-yachts-marina",
+    listedInCatalog: false,
     tag: "Gonio · Waterfront",
     city: "Gonio",
     address: "Gonio, 15 km from Batumi",
@@ -865,3 +876,12 @@ export const projects: Project[] = [
   },
 
 ];
+
+/** Projects visible in /catalog and public listings. */
+export function isListedInCatalog(p: Project): boolean {
+  return p.listedInCatalog !== false;
+}
+
+export function catalogListedProjects(list: Project[] = projects): Project[] {
+  return list.filter(isListedInCatalog);
+}
