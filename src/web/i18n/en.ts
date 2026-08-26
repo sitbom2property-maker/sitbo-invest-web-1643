@@ -258,7 +258,7 @@ const en = {
   "v2.plan1.result": "Quick verdict: 'Yes, let's do it' / 'No, it's too risky'",
   "v2.plan2.name": "Strategic Deep-Dive",
   "v2.plan2.for": "Ready to buy",
-  "v2.plan2.f1": "90–120 minutes + preliminary check",
+  "v2.plan2.f1": "90 minutes + preliminary check",
   "v2.plan2.f2": "Online call (WhatsApp / Google Meet)",
   "v2.plan2.f3": "Preliminary review of your documents",
   "v2.plan2.f4":
