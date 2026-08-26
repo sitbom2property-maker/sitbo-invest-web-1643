@@ -1449,6 +1449,7 @@ const en = {
     "Booking and payment go through the assistant. Choose a format — she will confirm the slot and send payment details.",
   "amina.pricing.choose": "Book via assistant",
   "amina.promo.spotsLeft": "{n} spots left",
+  "amina.doers.alt": "For doers and dreamers",
 
   "amina.how.title": "Payment, the assistant, and how I work.",
   "amina.how.lead":

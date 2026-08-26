@@ -631,6 +631,20 @@ function FaqWidget() {
   );
 }
 
+function DoersBand() {
+  const t = useT();
+  return (
+    <section className="am-doers" aria-label={t("amina.doers.alt")}>
+      <img
+        src="/amina/doers-and-dreamers.jpg"
+        alt={t("amina.doers.alt")}
+        loading="lazy"
+        decoding="async"
+      />
+    </section>
+  );
+}
+
 function AminaFooter() {
   const t = useT();
   return (
@@ -1017,6 +1031,22 @@ const STYLES = `
   display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 3vw, 36px);
 }
 
+/* doers band — full-bleed before footer */
+.am-doers {
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.am-doers img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(72vh, 720px);
+  object-fit: cover;
+  object-position: center;
+}
+
 /* footer */
 .am-footer {
   background: var(--ink); color: var(--bg);
@@ -1101,6 +1131,7 @@ export default function AminaPage() {
       <Tariffs />
       <HowItWorks />
       <FaqWidget />
+      <DoersBand />
       <AminaFooter />
     </div>
   );

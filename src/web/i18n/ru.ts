@@ -1423,6 +1423,7 @@ const ru: Record<MessageKey, string> = {
     "Запись и оплата идут через ассистента. Выберите формат — она подтвердит слот и пришлет реквизиты.",
   "amina.pricing.choose": "Записаться через ассистента",
   "amina.promo.spotsLeft": "Осталось {n} мест",
+  "amina.doers.alt": "For doers and dreamers",
 
   "amina.how.title": "Оплата, ассистент и как я работаю.",
   "amina.how.lead":
