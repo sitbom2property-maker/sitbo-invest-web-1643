@@ -190,6 +190,40 @@
   font-display: swap;
 }
 
+/* ── Noto Sans Georgian — Mkhedruli UI / headings when lang=ka ────────────── */
+@font-face {
+  font-family: 'Noto Sans Georgian';
+  src: url('/fonts/noto-sans-georgian-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+}
+@font-face {
+  font-family: 'Noto Sans Georgian';
+  src: url('/fonts/noto-sans-georgian-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+}
+@font-face {
+  font-family: 'Noto Sans Georgian';
+  src: url('/fonts/noto-sans-georgian-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+}
+@font-face {
+  font-family: 'Noto Sans Georgian';
+  src: url('/fonts/noto-sans-georgian-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -199,6 +233,50 @@ html {
 :root {
   --font-display: 'JUN', Georgia, serif;
   --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+/* Georgian UI: proper Mkhedruli face + ~2–3pt smaller type so long lines fit */
+html[lang="ka"],
+html[data-lang="ka"] {
+  zoom: 0.88;
+}
+html[lang="ka"] body,
+html[data-lang="ka"] body {
+  font-family: "Noto Sans Georgian", "Nunito", system-ui, sans-serif;
+}
+html[lang="ka"] .rd,
+html[lang="ka"] .iv,
+html[lang="ka"] .am,
+html[data-lang="ka"] .rd,
+html[data-lang="ka"] .iv,
+html[data-lang="ka"] .am {
+  --display: "Noto Sans Georgian", "JUN", Georgia, serif;
+  --body: "Noto Sans Georgian", "Nunito", sans-serif;
+}
+html[lang="ka"] h1,
+html[lang="ka"] h2,
+html[lang="ka"] h3,
+html[lang="ka"] h4,
+html[lang="ka"] .fv2-name,
+html[lang="ka"] .fv2-name-person,
+html[lang="ka"] .fv2-col-title,
+html[lang="ka"] button,
+html[lang="ka"] .am-btn,
+html[lang="ka"] .rd-btn,
+html[lang="ka"] .iv-btn,
+html[data-lang="ka"] h1,
+html[data-lang="ka"] h2,
+html[data-lang="ka"] h3,
+html[data-lang="ka"] h4,
+html[data-lang="ka"] .fv2-name,
+html[data-lang="ka"] .fv2-name-person,
+html[data-lang="ka"] .fv2-col-title,
+html[data-lang="ka"] button,
+html[data-lang="ka"] .am-btn,
+html[data-lang="ka"] .rd-btn,
+html[data-lang="ka"] .iv-btn {
+  font-family: "Noto Sans Georgian", "JUN", Georgia, serif !important;
+  letter-spacing: 0 !important;
 }
 
 * {

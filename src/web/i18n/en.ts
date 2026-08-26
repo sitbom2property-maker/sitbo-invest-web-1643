@@ -6,6 +6,7 @@ const en = {
   "locale.close": "Close",
   "locale.ratesNote": "Rates by National Bank of Georgia",
   "locale.ratesAsOf": "NBG rate as of {date}",
+  "brand.name": "Arthur Arutyunyan",
 
   // Nav
   "nav.home": "Home",
@@ -842,7 +843,8 @@ const en = {
 
   // Invest / Why Georgia page
   "invest.hero.line1": "One of Europe's",
-  "invest.hero.line2": "highest-yield property markets.",
+  "invest.hero.line2": "highest-yield property",
+  "invest.hero.line3": "markets.",
   "invest.hero.body":
     "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 12.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
   "invest.mosaic.visitorsValue": "7.8M+",
@@ -887,8 +889,9 @@ const en = {
   "invest.chain.today.body":
     "Every title check, purchase transaction, or mortgage registration is recorded in the Public Registry and automatically hashed onto the blockchain. The country is also actively adopting smart contracts for remote, instant transactions — executing payment and title transfer in a single second.",
   "invest.awards.title": "One of Europe's highest-yield property markets.",
-  "invest.awards.line1": "One of Europe's highest-yield",
-  "invest.awards.line2": "property markets.",
+  "invest.awards.line1": "One of the highest-yield",
+  "invest.awards.line2": "property markets",
+  "invest.awards.line3": "in Europe.",
   "invest.awards.alt": "Press and awards recognizing Georgia and Batumi",
   "invest.early.line1": "Still early.",
   "invest.early.line2": "Still affordable.",

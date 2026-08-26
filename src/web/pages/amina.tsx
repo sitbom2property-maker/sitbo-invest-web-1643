@@ -650,7 +650,7 @@ function AminaFooter() {
   return (
     <footer className="am-footer" role="contentinfo">
       <div className="am-wrap am-footer-grid">
-        <section className="am-footer-brand" aria-label="Arthur Arutyunyan">
+        <section className="am-footer-brand" aria-label={t("brand.name")}>
           <img
             className="am-footer-logo"
             src="/brand/sitbo-wordmark-light.png"
@@ -659,7 +659,7 @@ function AminaFooter() {
             height={14}
           />
           <h2 className="am-footer-name">
-            <span>Arthur Arutyunyan</span>
+            <span>{t("brand.name")}</span>
             <span className="am-footer-role">{t("v2.footer.role")}</span>
           </h2>
           <p className="am-footer-tag">{t("v2.footer.tagline")}</p>

@@ -325,6 +325,6 @@ export function typografDeep<T>(value: T, lang: TypografLang): T {
 export function normalizeTypografLang(language: string): TypografLang {
   const c = language.toLowerCase();
   if (c === "ru" || c.startsWith("ru-") || c.startsWith("ru_")) return "ru";
-  // Georgian uses Latin-script hanging rules poorly; EN spacing is safer
+  // Georgian has no Latin hanging-preposition rules; keep EN glue for mixed tokens
   return "en";
 }

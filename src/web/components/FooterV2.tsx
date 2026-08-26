@@ -124,7 +124,7 @@ export function FooterV2() {
 
       <div className="fv2-wrap">
         <div className="fv2-grid">
-          <section className="fv2-brand" aria-label="Arthur Arutyunyan">
+          <section className="fv2-brand" aria-label={t("brand.name")}>
             <img
               className="fv2-logo"
               src="/brand/sitbo-wordmark-light.png"
@@ -133,7 +133,7 @@ export function FooterV2() {
               height={14}
             />
             <h2 className="fv2-name">
-              <span className="fv2-name-person">Arthur Arutyunyan</span>
+              <span className="fv2-name-person">{t("brand.name")}</span>
               <span className="fv2-name-role">{t("v2.footer.role")}</span>
             </h2>
             <p className="fv2-tagline">{t("v2.footer.tagline")}</p>

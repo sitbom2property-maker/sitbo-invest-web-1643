@@ -450,7 +450,7 @@ const CSS = `
 }
 .iv-awards-head h2 {
   font-family: var(--display); font-weight: 600; margin: 0;
-  font-size: clamp(30px, 3.8vw, 52px); line-height: 1.12; max-width: 16ch;
+  font-size: clamp(30px, 3.8vw, 52px); line-height: 1.12; max-width: 22ch;
 }
 .iv-awards-marquee {
   position: relative; overflow: hidden;
@@ -720,6 +720,8 @@ export default function InvestPage() {
             {t("invest.hero.line1")}
             <br />
             {t("invest.hero.line2")}
+            <br />
+            {t("invest.hero.line3")}
           </h1>
           <p className="iv-hero-lead">{t("invest.hero.body")}</p>
         </div>
@@ -843,6 +845,8 @@ export default function InvestPage() {
             {t("invest.awards.line1")}
             <br />
             {t("invest.awards.line2")}
+            <br />
+            {t("invest.awards.line3")}
           </h2>
         </div>
         <div className="iv-awards-marquee rv" aria-label={t("invest.awards.alt")}>
