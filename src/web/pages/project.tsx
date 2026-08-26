@@ -2,8 +2,6 @@ import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Link, useParams } from "wouter";
 import { projects, catalogListedProjects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
-import { PiazzaViewer } from "../components/PiazzaViewer";
-import { ParklineViewer } from "../components/ParklineViewer";
 import { RequestModal } from "../components/RequestModal";
 import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
@@ -1152,11 +1150,6 @@ export default function ProjectPage() {
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
-                  {p.apartmentsKey && (
-                    <a href="#apartments" style={{ display: "block", width: "100%", marginTop: 10, fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: "transparent", border: "1px solid rgba(255,254,249,0.2)", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center" }}>
-                      {t("chess.chooseCta")}
-                    </a>
-                  )}
                 </div>
 
                 {(p.liveCameraUrl || p.tourUrl || p.panoramaUrl) ? (
@@ -1215,7 +1208,7 @@ export default function ProjectPage() {
                         </a>
                       )}
                       {p.tourUrl && (
-                        <a href="#apartments" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
+                        <a href={p.tourUrl} target="_blank" rel="noopener noreferrer" className="pr-reveal" style={{ transitionDelay: "200ms", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: C.light, borderRadius: "2px", padding: "20px 24px", border: "1px solid rgba(33,20,26,0.18)", textDecoration: "none", transition: "border-color 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.4)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(33,20,26,0.18)"; }}>
                           <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.dark }}>{t("chess.view3d")}</span>
                         </a>
                       )}
@@ -1237,25 +1230,6 @@ export default function ProjectPage() {
 
 
 
-{/* ── APARTMENT SELECTOR ── */}
-      {p.apartmentsKey === "piazza" && (
-        <section style={{ padding: "80px 0 0" }}>
-          <Container>
-            <div className="pr-reveal">
-              <PiazzaViewer projectName={p.name} />
-            </div>
-          </Container>
-        </section>
-      )}
-      {p.apartmentsKey === "parkline" && p.tourUrl && (
-        <section style={{ padding: "80px 0 0" }}>
-          <Container>
-            <div className="pr-reveal">
-              <ParklineViewer projectName={p.name} tourUrl={p.tourUrl} panoramaUrl={p.panoramaUrl} />
-            </div>
-          </Container>
-        </section>
-      )}
 
 {/* ── LOCATION & LIFESTYLE ── */}
       <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>

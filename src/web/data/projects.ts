@@ -161,7 +161,6 @@ export const projects: Project[] = [
     downPaymentPct: 30,
     installmentMonths: 27,
     installmentAnchorYm: "2026-08",
-    apartmentsKey: "piazza",
     developerLogo: "/projects/piazza/brand/developer-logo.png",
     constructionProgress: {
       activeIndex: 1,
@@ -261,7 +260,6 @@ export const projects: Project[] = [
     installment: "30% / 70%",
     propertyType: "apartment",
     downPaymentPct: 30,
-    apartmentsKey: "parkline",
     constructionProgress: {
       activeIndex: 0,
       stages: [
@@ -346,7 +344,6 @@ export const projects: Project[] = [
     floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
     pricePerSqm: "from $1,300/m²",
     liveCameraUrl: "https://rtsp.me/embed/NYD67ak2/",
-    tourUrl: "https://flatshow.property/ru/Parkline#/",
     panoramaUrl: "https://tour.panoee.net/69f77826c2c57195733b52a5/parkline-13-fl",
   },
   {
