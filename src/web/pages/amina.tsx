@@ -114,9 +114,35 @@ const FAQ_GROUPS: {
 const WHY_STATS: { value: string; labelKey: MessageKey; noteKey: MessageKey; tone: "gray" | "green" | "white" }[] = [
   { value: "0%", labelKey: "v2.stats.tax", noteKey: "v2.stats.taxNote", tone: "gray" },
   { value: "$150k", labelKey: "v2.stats.residency", noteKey: "v2.stats.residencyNote", tone: "green" },
+  { value: "30–70%", labelKey: "v2.stats.capital", noteKey: "v2.stats.capitalNote", tone: "white" },
   { value: "3.7M", labelKey: "v2.stats.tourists", noteKey: "v2.stats.touristsNote", tone: "gray" },
   { value: "13.2%", labelKey: "v2.stats.yield", noteKey: "v2.stats.yieldNote", tone: "green" },
 ];
+
+const AMINA_PROMO_CLIENT_KEY = "amina_promo_client_v1";
+const EXPRESS_PLAN_ID = "express-audit";
+
+type AminaPromoState = {
+  limit: number;
+  claimed: number;
+  remaining: number;
+  active: boolean;
+};
+
+function getAminaClientId(): string {
+  try {
+    const existing = localStorage.getItem(AMINA_PROMO_CLIENT_KEY);
+    if (existing) return existing;
+    const id =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `c_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+    localStorage.setItem(AMINA_PROMO_CLIENT_KEY, id);
+    return id;
+  } catch {
+    return `anon_${Date.now()}`;
+  }
+}
 
 function useReveal() {
   useEffect(() => {
@@ -331,7 +357,6 @@ function Market() {
       <div className="am-wrap am-market-grid">
         <div className="am-market-copy rv">
           <h2 className="am-h2">{t("amina.market.title")}</h2>
-          <p className="am-lead">{t("amina.market.body1")}</p>
           <p className="am-lead">{t("amina.market.body2")}</p>
         </div>
         <figure className="am-market-fig rv">
@@ -380,44 +405,100 @@ function WhyGeorgia() {
 
 function Tariffs() {
   const t = useT();
+  const [promo, setPromo] = useState<AminaPromoState | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/amina-promo")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: AminaPromoState | null) => {
+        if (!cancelled && data && typeof data.remaining === "number") setPromo(data);
+      })
+      .catch(() => {
+        /* keep null → show regular $79 */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const promoActive = Boolean(promo?.active);
+
+  const openPlan = async (plan: Plan) => {
+    let price = plan.price;
+    if (plan.id === EXPRESS_PLAN_ID && promoActive) {
+      price = "$0";
+      try {
+        const res = await fetch("/api/amina-promo/claim", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ clientId: getAminaClientId() }),
+        });
+        if (res.ok) {
+          const next = (await res.json()) as AminaPromoState;
+          setPromo(next);
+        }
+      } catch {
+        /* still open WhatsApp at $0 while promo was shown */
+      }
+    }
+    window.open(waPlanHref(t(plan.nameKey), price), "_blank", "noopener,noreferrer");
+  };
+
   return (
     <section id="tariffs" className="am-pricing">
       <div className="am-wrap">
-        <h2 className="am-h1 rv">{t("v2.pricing.title")}</h2>
+        <h2 className="am-h1 rv">
+          {t("v2.pricing.line1")}
+          <br />
+          {t("v2.pricing.line2")}
+        </h2>
         <p className="am-pricing-note rv">{t("amina.pricing.note")}</p>
 
         <div className="am-plans">
-          {PLANS.map((plan) => (
-            <div key={plan.id} className={`am-plan rv${plan.featured ? " is-featured" : ""}`}>
-              <h3>{t(plan.nameKey)}</h3>
-              <p className="am-plan-for">{t(plan.forKey)}</p>
-              <ul>
-                {plan.featureKeys.map((k) => (
-                  <li key={k}>{t(k)}</li>
-                ))}
-              </ul>
-              <div className="am-plan-block">
-                <strong>{t("v2.pricing.requestLabel")}</strong>
-                <p>{t(plan.requestKey)}</p>
+          {PLANS.map((plan) => {
+            const showPromo = plan.id === EXPRESS_PLAN_ID && promoActive;
+            return (
+              <div key={plan.id} className={`am-plan rv${plan.featured ? " is-featured" : ""}`}>
+                <h3>{t(plan.nameKey)}</h3>
+                <p className="am-plan-for">{t(plan.forKey)}</p>
+                <ul>
+                  {plan.featureKeys.map((k) => (
+                    <li key={k}>{t(k)}</li>
+                  ))}
+                </ul>
+                <div className="am-plan-block">
+                  <strong>{t("v2.pricing.requestLabel")}</strong>
+                  <p>{t(plan.requestKey)}</p>
+                </div>
+                <div className="am-plan-block">
+                  <strong>{t("v2.pricing.resultLabel")}</strong>
+                  <p>{t(plan.resultKey)}</p>
+                </div>
+                {showPromo ? (
+                  <div className="am-plan-price am-plan-price-promo">
+                    <span className="am-price-was">$79</span>
+                    <span className="am-price-now">$0</span>
+                    <span className="am-price-spots">
+                      {t("amina.promo.spotsLeft", { n: promo?.remaining ?? 10 })}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="am-plan-price">{plan.price}</div>
+                )}
+                <p className={`am-plan-note${plan.noteKey ? "" : " is-empty"}`}>
+                  {plan.noteKey ? t(plan.noteKey) : "\u00A0"}
+                </p>
+                <button
+                  type="button"
+                  className={`am-btn am-plan-cta ${plan.featured ? "am-btn-white" : "am-btn-dark"}`}
+                  onClick={() => void openPlan(plan)}
+                >
+                  {t("amina.pricing.choose")}
+                </button>
               </div>
-              <div className="am-plan-block">
-                <strong>{t("v2.pricing.resultLabel")}</strong>
-                <p>{t(plan.resultKey)}</p>
-              </div>
-              <div className="am-plan-price">{plan.price}</div>
-              <p className={`am-plan-note${plan.noteKey ? "" : " is-empty"}`}>
-                {plan.noteKey ? t(plan.noteKey) : "\u00A0"}
-              </p>
-              <a
-                className={`am-btn am-plan-cta ${plan.featured ? "am-btn-white" : "am-btn-dark"}`}
-                href={waPlanHref(t(plan.nameKey), plan.price)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("amina.pricing.choose")}
-              </a>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -773,7 +854,7 @@ const STYLES = `
   display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
   gap: clamp(28px, 5vw, 72px); align-items: center;
 }
-.am-market-copy .am-h2 { margin: 0 0 22px; max-width: 18ch; }
+.am-market-copy .am-h2 { margin: 0 0 22px; max-width: 28ch; }
 .am-market-copy .am-lead + .am-lead { margin-top: 16px; }
 .am-market-fig { margin: 0; border-radius: 2px; overflow: hidden; }
 .am-market-fig img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 320px; max-height: 560px; }
@@ -784,7 +865,7 @@ const STYLES = `
 .am-why-head .am-h2 { margin-bottom: 18px; max-width: 18ch; }
 .am-why-lead { margin-bottom: 14px; color: var(--ink); font-weight: 500; }
 .am-stats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px; margin-bottom: clamp(24px, 3vw, 40px);
 }
 .am-stat {
@@ -830,6 +911,29 @@ const STYLES = `
 .am-plan-price {
   font-family: var(--display); font-size: clamp(36px, 4vw, 52px); line-height: 1.05;
   margin: auto 0 14px; letter-spacing: -0.02em;
+}
+.am-plan-price-promo {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+}
+.am-price-was {
+  font-size: clamp(18px, 1.8vw, 22px);
+  text-decoration: line-through;
+  opacity: 0.55;
+  letter-spacing: 0;
+}
+.am-price-now {
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.am-price-spots {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.78;
+  margin-top: 4px;
 }
 .am-plan-note { font-size: 13px; line-height: 1.5; color: rgba(33,20,26,.55); margin: 0 0 18px; min-height: 5.2em; }
 .am-plan-note.is-empty { visibility: hidden; }

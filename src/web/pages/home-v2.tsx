@@ -90,7 +90,7 @@ const STATS: Stat[] = [
   { kind: "stat", value: "47.4%", labelKey: "v2.stats.women", noteKey: "v2.stats.womenNote", tone: "gray" },
   { kind: "image", src: "/home/rd-beach.jpg", alt: "Batumi" },
   { kind: "stat", value: "3.7M", labelKey: "v2.stats.tourists", noteKey: "v2.stats.touristsNote", tone: "gray" },
-  { kind: "stat", value: "$1420", labelKey: "v2.stats.price", noteKey: "v2.stats.priceNote", tone: "white" },
+  { kind: "stat", value: "30–70%", labelKey: "v2.stats.capital", noteKey: "v2.stats.capitalNote", tone: "white" },
   { kind: "stat", value: "13.2%", labelKey: "v2.stats.yield", noteKey: "v2.stats.yieldNote", tone: "green" },
 ];
 
@@ -764,7 +764,11 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
   return (
     <section id="consultation" className="rd-pricing">
       <div className="rd-wrap">
-        <h2 className="rd-h1 rv">{t("v2.pricing.title")}</h2>
+        <h2 className="rd-h1 rv">
+          {t("v2.pricing.line1")}
+          <br />
+          {t("v2.pricing.line2")}
+        </h2>
 
         <div className="rd-plans">
           {PLANS.map((plan) => (

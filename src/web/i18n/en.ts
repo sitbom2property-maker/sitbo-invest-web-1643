@@ -176,6 +176,8 @@ const en = {
   "v2.stats.priceNote": "Batumi, new build",
   "v2.stats.yield": "Max rental yield",
   "v2.stats.yieldNote": "Managed seafront units",
+  "v2.stats.capital": "Capital growth",
+  "v2.stats.capitalNote": "On selected projects",
 
   "v2.quote.eyebrow": "Global Recognition",
   "v2.quote.text":
@@ -240,6 +242,8 @@ const en = {
   "v2.fb.a7": "Maya S.",
 
   "v2.pricing.title": "Choose how you want to work with me",
+  "v2.pricing.line1": "Choose how you want",
+  "v2.pricing.line2": "to work with me",
   "v2.pricing.requestLabel": "Request",
   "v2.pricing.resultLabel": "Result",
   "v2.pricing.choose": "Choose",
@@ -1431,11 +1435,12 @@ const en = {
   "amina.hero.videoLabel": "Amina stories video",
 
   "amina.market.eyebrow": "Your person inside the market",
-  "amina.market.title": "Judgment, access, strategy — not random listings.",
+  "amina.market.title":
+    "I do not offer free consultations, random property chats or “just send me options” service.",
   "amina.market.body1":
     "My clients do not come to me for random listings. They come for judgment, access, strategy and protection from expensive mistakes.",
   "amina.market.body2":
-    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who brings together local knowledge, negotiation experience, market access and practical real estate expertise.",
+    "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who was born here, knows the market from the inside, understands the people behind the projects and can help you move faster, safer and stronger.",
 
   "amina.why.body":
     "Tax haven for investors, ease of doing business, a growing wellness industry, a major regional IT hub, rich nature and culture, a path to residency — and rental yields about twice as high as in Europe.",
@@ -1443,6 +1448,7 @@ const en = {
   "amina.pricing.note":
     "Booking and payment go through the assistant. Choose a format — she will confirm the slot and send payment details.",
   "amina.pricing.choose": "Book via assistant",
+  "amina.promo.spotsLeft": "{n} spots left",
 
   "amina.how.title": "Payment, the assistant, and how I work.",
   "amina.how.lead":
