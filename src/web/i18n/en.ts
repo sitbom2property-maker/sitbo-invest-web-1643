@@ -889,9 +889,9 @@ const en = {
   "invest.chain.today.body":
     "Every title check, purchase transaction, or mortgage registration is recorded in the Public Registry and automatically hashed onto the blockchain. The country is also actively adopting smart contracts for remote, instant transactions — executing payment and title transfer in a single second.",
   "invest.awards.title": "One of Europe's highest-yield property markets.",
-  "invest.awards.line1": "One of the highest-yield",
-  "invest.awards.line2": "property markets",
-  "invest.awards.line3": "in Europe.",
+  "invest.awards.line1": "One of Europe's",
+  "invest.awards.line2": "highest-yield property markets.",
+  "invest.awards.line3": "",
   "invest.awards.alt": "Press and awards recognizing Georgia and Batumi",
   "invest.early.line1": "Still early.",
   "invest.early.line2": "Still affordable.",
