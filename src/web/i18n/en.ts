@@ -250,7 +250,7 @@ const en = {
   "v2.pricing.choose": "Choose",
   "v2.plan1.name": "Express Audit",
   "v2.plan1.for": "Just ask",
-  "v2.plan1.f1": "45–60 minutes",
+  "v2.plan1.f1": "25 minutes",
   "v2.plan1.f2": "Online call (WhatsApp / Google Meet)",
   "v2.plan1.f3": "Real-time answers to questions",
   "v2.plan1.request":

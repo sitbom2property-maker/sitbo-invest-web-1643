@@ -247,7 +247,7 @@ const ru: Record<MessageKey, string> = {
   "v2.pricing.choose": "Выбрать",
   "v2.plan1.name": "Экспресс-аудит",
   "v2.plan1.for": "Просто спросить",
-  "v2.plan1.f1": "45–60 минут",
+  "v2.plan1.f1": "25 минут",
   "v2.plan1.f2": "Онлайн-звонок (WhatsApp / Google Meet)",
   "v2.plan1.f3": "Ответы на вопросы в реальном времени",
   "v2.plan1.request":
