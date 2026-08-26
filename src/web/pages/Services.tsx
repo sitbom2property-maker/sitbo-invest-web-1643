@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { AppLink } from "../components/app-link";
 import { RequestModal } from "../components/RequestModal";
 import { useT, type MessageKey } from "../i18n";
 
@@ -109,6 +108,16 @@ const LIMITS = [
   { titleKey: "services.limit4.title" as MessageKey, textKey: "services.limit4.text" as MessageKey },
 ];
 
+const ABOUT_FAQS: { qKey: MessageKey; aKey: MessageKey }[] = [
+  { qKey: "services.faq.q1", aKey: "services.faq.a1" },
+  { qKey: "services.faq.q2", aKey: "services.faq.a2" },
+  { qKey: "services.faq.q3", aKey: "services.faq.a3" },
+  { qKey: "services.faq.q4", aKey: "services.faq.a4" },
+  { qKey: "services.faq.q5", aKey: "services.faq.a5" },
+  { qKey: "services.faq.q6", aKey: "services.faq.a6" },
+  { qKey: "services.faq.q7", aKey: "services.faq.a7" },
+];
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".sv .rv");
@@ -179,7 +188,7 @@ const CSS = `
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 10px;
+  --radius: 2px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -219,28 +228,29 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 8vw, 110px);
   overflow: hidden;
 }
-.sv-hero-grid {
+.sv-hero-inner {
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(28px, 4vw, 64px); align-items: end;
+  max-width: min(920px, 100%);
 }
 .sv-hero h1 {
   font-family: var(--display); font-weight: 600; margin: 0 0 18px;
-  font-size: clamp(34px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -.01em;
+  font-size: clamp(30px, 4.2vw, 56px); line-height: 1.1; letter-spacing: -.01em;
+}
+.sv-hero-line { display: block; }
+@media (min-width: 720px) {
+  .sv-hero-line { white-space: nowrap; }
 }
 .sv-hero h1 em {
   font-style: normal; color: var(--white);
 }
 .sv-hero-lead {
-  font-size: clamp(15px, 1.35vw, 18px); line-height: 1.5;
-  color: var(--white); margin: 0; max-width: 420px;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.45;
+  color: rgba(255,254,249,.82);
+  margin: 0;
+  max-width: 540px;
 }
-.sv-hero-side {
-  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.55;
-  color: var(--white); margin: 0; max-width: 380px;
-  justify-self: end;
-}
-.sv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
 
 /* services list */
 .sv-list-outer {
@@ -249,7 +259,7 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-list {
-  background: var(--panel); color: var(--bg); border-radius: 10px;
+  background: var(--panel); color: var(--bg); border-radius: 2px;
   padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px);
 }
 .sv-list-head {
@@ -261,8 +271,9 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(26px, 3.2vw, 44px); line-height: 1.12; color: var(--bg);
 }
 .sv-list-head p {
-  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
-  color: rgba(33,20,26,.65); max-width: 380px; justify-self: end;
+  margin: 0; font-size: 16px; line-height: 1.5;
+  color: rgba(33,20,26,.65); max-width: 420px;
+  justify-self: end; text-align: right;
 }
 
 .sv-acc { border-bottom: 1px solid rgba(33,20,26,.12); }
@@ -312,15 +323,15 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12;
 }
 .sv-limits-head p {
-  margin: 0; font-size: 15px; line-height: 1.5; color: var(--white);
-  max-width: 360px; justify-self: end;
+  margin: 0; font-size: 16px; line-height: 1.5; color: var(--white);
+  max-width: 420px; justify-self: end; text-align: right;
 }
 .sv-limits-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 .sv-limit {
-  background: var(--card); border-radius: 10px;
+  background: #412834; border-radius: 2px;
   padding: clamp(22px, 2.4vw, 32px);
 }
 .sv-limit h3 {
@@ -331,6 +342,39 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   margin: 0; font-size: 14px; line-height: 1.5; color: var(--white);
 }
 
+/* FAQ */
+.sv-faq-outer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--gutter) clamp(40px, 5vw, 72px);
+  box-sizing: border-box;
+}
+.sv-faq-panel {
+  background: var(--panel); color: var(--bg); border-radius: 2px;
+  padding: clamp(34px, 4.4vw, 64px) clamp(22px, 4vw, 56px);
+}
+.sv-faq-panel h2 {
+  font-family: var(--display); font-weight: 600; margin: 0 0 clamp(22px, 3vw, 36px);
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; color: var(--bg);
+}
+.sv-faq { border-top: 1px solid rgba(33,20,26,.1); }
+.sv-faq:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
+.sv-faq-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: var(--bg); font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 17px); font-weight: 500; line-height: 1.35;
+}
+.sv-faq-toggle {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--bg); color: var(--white);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;
+}
+.sv-faq-body {
+  margin: 0 0 18px; max-width: 760px;
+  font-family: var(--body); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(33,20,26,.72);
+}
+
 /* cta */
 .sv-cta-outer {
   max-width: var(--max); margin: 0 auto;
@@ -338,10 +382,12 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
   box-sizing: border-box;
 }
 .sv-cta {
-  border-radius: 10px; overflow: hidden;
-  background:
-    radial-gradient(100% 140% at 90% 50%, rgba(112,60,84,.55) 0%, rgba(33,20,26,0) 55%),
-    var(--card);
+  border-radius: 2px; overflow: hidden;
+  background-color: #412834;
+  background-image: url('/images/cta-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px);
   text-align: center;
 }
@@ -356,18 +402,20 @@ a.sv-btn-outline:hover { background: var(--white); color: var(--bg); }
 
 @media (max-width: 900px) {
   .sv-hero { padding-top: 36px; }
-  .sv-hero-grid, .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
-  .sv-hero-side, .sv-list-head p, .sv-limits-head p { justify-self: start; }
+  .sv-list-head, .sv-limits-head { grid-template-columns: 1fr; }
+  .sv-list-head p, .sv-limits-head p {
+    justify-self: start; text-align: left; max-width: none;
+  }
   .sv-limits-grid { grid-template-columns: 1fr; }
   .sv-acc-body { padding-left: 0; }
   .sv-acc-head { grid-template-columns: 36px 1fr auto; gap: 10px; }
-  .sv-hero-btns .sv-btn { width: 100%; }
 }
 `;
 
 export default function ServicesPage() {
   const t = useT();
   const [openIndex, setOpenIndex] = useState(0);
+  const [faqOpenIndex, setFaqOpenIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   useReveal();
 
@@ -376,23 +424,14 @@ export default function ServicesPage() {
       <style>{CSS}</style>
 
       <section className="sv-hero">
-        <div className="sv-wrap sv-hero-grid">
-          <div className="rv">
+        <div className="sv-wrap">
+          <div className="sv-hero-inner rv">
             <h1>
-              {t("services.hero.title")}
-              <br />
-              <em>{t("services.hero.titleEm")}</em>
+              <span className="sv-hero-line">{t("services.hero.title")}</span>
+              <span className="sv-hero-line">{t("services.hero.titleEm")}</span>
             </h1>
-            <div className="sv-hero-btns">
-              <button type="button" className="sv-btn sv-btn-white" onClick={() => setModalOpen(true)}>
-                {t("services.cta.button")}
-              </button>
-              <AppLink href="/#consultation" className="sv-btn sv-btn-outline">
-                {t("nav.pricing")}
-              </AppLink>
-            </div>
+            <p className="sv-hero-lead">{t("services.hero.body")}</p>
           </div>
-          <p className="sv-hero-side rv">{t("services.hero.body")}</p>
         </div>
       </section>
 
@@ -427,6 +466,33 @@ export default function ServicesPage() {
                 <p>{t(item.textKey)}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sv-faq-outer" id="faq">
+        <div className="sv-faq-panel rv">
+          <h2>{t("services.faq.title")}</h2>
+          <div>
+            {ABOUT_FAQS.map((item, index) => {
+              const isOpen = faqOpenIndex === index;
+              return (
+                <div key={item.qKey} className={`sv-faq${isOpen ? " is-open" : ""}`}>
+                  <button
+                    type="button"
+                    className="sv-faq-head"
+                    onClick={() => setFaqOpenIndex(isOpen ? -1 : index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span>{t(item.qKey)}</span>
+                    <span className="sv-faq-toggle" aria-hidden>
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+                  {isOpen ? <p className="sv-faq-body">{t(item.aKey)}</p> : null}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -26,7 +26,7 @@ const en = {
 
   // Footer
   "footer.tagline":
-    "Premium real estate investment advisory in Batumi, Georgia. Off-market access, legal security, honest returns.",
+    "I am your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution, including turnkey renovations, asset management, and technical delivery my operations are backed by Sitbo Invest.",
   "footer.investments": "Investments",
   "footer.services": "Services",
   "footer.contact": "Contact",
@@ -40,20 +40,20 @@ const en = {
   "footer.management": "Property Management",
   "footer.residency": "Residency & Relocation",
   "footer.rights": "© 2026 Sitbo Invest. All rights reserved.",
-  "footer.review": "Leave us a Google Review ↗",
+  "footer.review": "Leave a Google Review ↗",
   "footer.legal": "Privacy Policy & Terms of Service",
 
   // Common CTAs and labels
   "cta.requestAccess": "Request Access",
   "cta.requestDetails": "Request Details",
-  "cta.seeWhatWeDo": "See What We Do",
+  "cta.seeWhatWeDo": "See What I Do",
   "cta.contact": "Contact",
   "cta.viewProject": "View Project",
   "cta.from": "From ",
   "cta.bookConsultation": "Book a Consultation",
   "cta.bookCall": "Book a Call",
   "cta.bookFreeConsultation": "Book a Free Consultation",
-  "cta.whatsappUs": "WhatsApp Us",
+  "cta.whatsappUs": "WhatsApp Me",
   "cta.learnMore": "Learn more",
   "cta.close": "Close",
   "cta.readMore": "Read More",
@@ -89,9 +89,65 @@ const en = {
   "v2.hero.ctaSecondary": "Sell with me",
   "v2.hero.scroll": "Scroll For More",
 
+  "v2.market.title": "Your person inside the Georgian property market.",
+  "v2.market.body1":
+    "Buying property in Georgia is not just about listings and beautiful developer presentations. It is about land, ownership, developers, banks, negotiations, renovation, hidden risks and people who make decisions.",
+  "v2.market.card1": "Born and raised in Georgia",
+  "v2.market.card2": "Dozens of transactions",
+  "v2.market.card3": "Hundreds of negotiations",
+  "v2.market.card4": "Real reviews and recommendations",
+
+  "v2.notes.title1": "I do not work with everyone.",
+  "v2.notes.title2": "My time and resources are limited.",
+  "v2.notes.body":
+    "I do not offer free property chats, random listing searches or unpaid calls. I work with clients who value professional guidance, respect expertise and want to make serious decisions in a foreign real estate market. If you are looking for the cheapest broker, we are probably not a match. If you want a trusted person inside the Georgian market, we should talk.",
+
   "v2.why.title": "Why investors choose Georgia?",
+  "v2.why.bodyLead": "Georgia is easy to enter.",
+  "v2.what.question": "The real question is what to buy.",
   "v2.why.body":
-    "One of the world's most accessible, low-tax, and fast-growing real estate hubs.",
+    "Before you invest, understand the taxes, residency options, rental logic, market risks and the difference between Batumi and Tbilisi.",
+  "v2.why.cta": "Read more about Georgia →",
+
+  "v2.myths.title": "Georgia real estate myths",
+  "v2.myths.subtitle":
+    "Georgia is easy to enter. The real decisions start after the beautiful presentation.",
+  "v2.myths.intro":
+    "Before looking at projects, it is important to separate sales narratives from reality. These are the myths I see buyers repeat most often.",
+  "v2.myths.reality": "Reality",
+  "v2.myths.m1": "“Rental yield in Batumi is always 12–13%”",
+  "v2.myths.r1":
+    "Only in selected cases, with the right location, entry price, management and realistic seasonality assumptions. Many buyers calculate gross yield and forget vacancy, management fees, maintenance, taxes and competition.",
+  "v2.myths.m2": "“A free broker is free”",
+  "v2.myths.r2":
+    "Someone always pays. The real question is whose interest the advisor represents. If the income depends on closing the deal, the advice may not be fully independent.",
+  "v2.myths.m3": "“Any property in Georgia is good for capital preservation”",
+  "v2.myths.r3":
+    "A bad asset in a good country is still a bad asset. Capital preservation depends on location, entry price, legal clarity, liquidity, building quality and future demand.",
+  "v2.myths.m4": "“Buying remotely is simple”",
+  "v2.myths.r4":
+    "Technically, remote purchase can be simple. Strategically, it is risky without proper checks. Photos, renders and sales presentations do not show ownership issues, land status, contract risks, real market price or local problems.",
+  "v2.myths.m5": "“New builds are always safer than resale”",
+  "v2.myths.r5":
+    "New builds can be attractive, but they come with risks: developer reliability, construction quality, delays, contract terms, building management and future oversupply. Resale can sometimes be more transparent because the asset already exists.",
+  "v2.myths.m6": "“If the developer is famous, the deal is safe”",
+  "v2.myths.r6":
+    "A strong developer name helps, but it does not replace due diligence. Every project has its own land, contract, payment schedule, construction quality, management model and resale logic.",
+  "v2.myths.m7": "“Sea view means good investment”",
+  "v2.myths.r7":
+    "Sea view can help, but it is not enough. Investors should check location, building quality, rental demand, seasonality, service fees, competition, management and resale liquidity.",
+  "v2.myths.m8": "“The cheapest entry price is the best deal”",
+  "v2.myths.r8":
+    "Cheap can become expensive if the location is weak, the building is hard to rent, the developer has problems, renovation costs are high or the property is difficult to resell.",
+  "v2.myths.m9": "“Georgia is easy, so I do not need independent advice”",
+  "v2.myths.r9":
+    "Georgia can be easy to enter, but not every property decision is simple. The registration process may be fast, but the real work is checking the property, people, documents, price, risks and long-term logic before you commit money.",
+  "v2.myths.ctaTitle": "Want to check the reality behind a property?",
+  "v2.myths.ctaBody":
+    "If you are considering a property in Georgia, I can help you review the object, developer, price, risks and negotiation position before you pay a deposit.",
+  "v2.myths.ctaPrimary": "Book a Deep Dive",
+  "v2.myths.ctaSecondary": "Not sure which format fits you? Take the consultation quiz.",
+
   "v2.stats.tax": "Purchase Tax",
   "v2.stats.taxNote": "On residential property",
   "v2.stats.residency": "Residency Permit",
@@ -107,7 +163,7 @@ const en = {
 
   "v2.quote.eyebrow": "Global Recognition",
   "v2.quote.text":
-    "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.",
+    "Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here.",
   "v2.quote.author": "Mohamed Alabbar — Eagle Hills, UAE",
   "v2.quote2.text":
     "For international buyers, Georgia combines legal clarity, residency pathways, and yields that are hard to find in Europe today.",
@@ -117,7 +173,7 @@ const en = {
   "v2.projects.title": "Selected Projects",
   "v2.projects.titleEm": "Filtered By Me",
   "v2.projects.body":
-    "I reject 85% of market listings so you only see the assets worth holding.",
+    "I reject 85% of market listings so you only\nsee the assets worth holding.",
   "v2.projects.viewAll": "View All",
 
   "v2.eco.title": "Ecosystem of",
@@ -147,27 +203,27 @@ const en = {
   "v2.fb.google": "Google Reviews 5/5",
   "v2.fb.q1":
     "Found a buyer for my apartment in just 9 days and completely handled the sale process end-to-end. True full VIP service.",
-  "v2.fb.a1": "Anastasia S. (USA)",
+  "v2.fb.a1": "Anastasia S.",
   "v2.fb.q2":
     "Helped negotiate the price and met tight deadlines for mortgage approval. The team you can rely on in Batumi.",
-  "v2.fb.a2": "Tamar Kh., Buyer (Yerevan)",
+  "v2.fb.a2": "Tamar Kh.",
   "v2.fb.q3":
     "Selected an investment project on highly favorable terms and even handled all utility setups after the deal.",
-  "v2.fb.a3": "Milana S., Investor (Russia)",
+  "v2.fb.a3": "Milana S.",
   "v2.fb.q4":
     "Seamlessly coordinated the seller, bank, developer, and public registry. Always calm, supportive, and highly professional.",
-  "v2.fb.a4": "Natalia P., Homeowner (Crimea)",
+  "v2.fb.a4": "Natalia P.",
   "v2.fb.q5":
     "The seller canceled at 10 PM. By midnight, Arthur already had me standing inside a new, even better apartment. Absolute game-changer!",
-  "v2.fb.a5": "Arman A., Buyer (Yerevan)",
+  "v2.fb.a5": "Arman A.",
   "v2.fb.q6":
     "Flew from Batumi to Tbilisi to negotiate with the developer and review every contract detail in person.",
-  "v2.fb.a6": "Teona T., Buyer (Moscow)",
+  "v2.fb.a6": "Teona T.",
   "v2.fb.q7":
     "Resolved complex developer conflicts and legal flaws instantly with complete diplomacy and expertise.",
-  "v2.fb.a7": "Maya S., Homeowner (Georgia)",
+  "v2.fb.a7": "Maya S.",
 
-  "v2.pricing.title": "It always starts with a call...",
+  "v2.pricing.title": "Choose how you want to work with me",
   "v2.pricing.requestLabel": "Request",
   "v2.pricing.resultLabel": "Result",
   "v2.pricing.choose": "Choose",
@@ -204,6 +260,35 @@ const en = {
     "*100% Refundable: The $1,999 tour fee is fully credited toward your property purchase upon deal completion.",
   "v2.plan3.cta": "Apply for Discovery Tour",
 
+  "v2.faq.title": "FAQ",
+  "v2.faq.q1": "Why is the consultation paid?",
+  "v2.faq.a1":
+    "Because you are not paying for a “conversation” — you are paying for my experience, market knowledge, access to people, the ability to verify information quickly, and to see risks a buyer from the outside may miss. I was born and raised in Georgia, I know the market from the inside, I personally know many key people in development, and I can solve issues most people will not even take on. My time and resources have a price. A paid consultation also removes the conflict of interest: my job is not to talk you into buying a property, but to help you make a strong and safe decision.",
+  "v2.faq.q2": "How are you different from a regular realtor?",
+  "v2.faq.a2":
+    "A regular realtor often earns on the deal and works around the property: show it, sell it, close it. I close your request, protect and grow capital, and become your trusted person in Georgia. I can quickly reach the right people: a director, an owner, an architect, a bank representative, a developer, or someone who knows the real situation on a project. For me, real estate in Georgia is not a catalogue of listings. It is a system of people, decisions, documents, negotiations, and risks.",
+  "v2.faq.q3": "Are you a broker, a consultant, or an agency?",
+  "v2.faq.a3":
+    "I am a private advisor and real-estate strategist in Georgia. I can take different roles depending on the task: give an independent consultation, analyse a property, help with negotiations, connect you with the right people, organise due diligence, support with the bank, renovation, or purchase accompaniment. My value is to guide you through the market from a strong position. My operating system is SITBO, because there is a digital specialist and a renovation team behind it.",
+  "v2.faq.q4": "Do you help with mortgages in Georgia?",
+  "v2.faq.a4":
+    "Yes. I can help you understand mortgage options and connect you with a bank. I have a working relationship with TBC Bank, and we are building a model for mortgage clients. The credit decision is always made by the bank, and terms depend on the client profile, documents, income, and the property.",
+  "v2.faq.q5": "Can you check documents and the registry?",
+  "v2.faq.a5":
+    "Yes. I run full due diligence on the property, the land, and the developer, based on registry data and more. At the same time, a specialised lawyer should review the contract and legal documents. I do not replace a lawyer, but I help you see where risks may sit and what needs a deeper check.",
+  "v2.faq.q6": "Can we have a free call first?",
+  "v2.faq.a6":
+    "No. I do not offer free consultations. Because of the volume of requests, I cannot review cases in chat or on free calls. You can contact my assistant to book a consultation and get answers to organisational questions: +995 510 00 27 22",
+  "v2.faq.q7": "Which plan should I choose?",
+  "v2.faq.a7":
+    "If you have one short question — Just Ask for $79. If you are already considering a purchase, choosing a city, district, or property, or want to understand the risks — Deep Dive for $279. If you are an investor or buyer who wants to go deep into the market and move toward a deal — Invest Discovery Tour for $1999.",
+  "v2.faq.q8": "Do you work with everyone?",
+  "v2.faq.a8":
+    "No. I work with clients who value a professional approach, respect time, and want to make deliberate decisions. If someone needs a free agent, chaotic messaging, or “just give me something cheaper” — we are unlikely to be a fit.",
+  "v2.faq.q9": "Can I just message the assistant with a question?",
+  "v2.faq.a9":
+    "The assistant helps with booking, payment, the questionnaire, and organisational questions. She does not advise on real estate and does not analyse properties. All expert questions are discussed only within the paid format you choose.",
+
   "v2.news.title": "Let's stay in touch",
   "v2.news.body":
     "Subscribe and get the updates that actually matter. The real numbers, the real opportunities, and the reality behind the pretty listings.",
@@ -222,9 +307,9 @@ const en = {
   "v2.modal.messagePlaceholder": "What would you like to discuss? (optional)",
   "v2.modal.direct": "Or reach out directly:",
 
-  "v2.footer.role": "Private Property Advisor",
+  "v2.footer.role": "Private Real Estate Advisor & Deal Strategist in Georgia",
   "v2.footer.tagline":
-    "Born and raised locally with 7 years of experience in Batumi. Dedicated to protecting and growing your capital, selecting only liquid properties, and eliminating risks and emotions. Full-cycle service in the buyer’s interest from due diligence to turnkey renovation, building long-term relationships.",
+    "I am your independent private real estate advisor in Batumi, guiding you personally through every acquisition. For full-cycle execution, including turnkey renovations, asset management, and technical delivery my operations are backed by Sitbo Invest.",
   "v2.footer.investment": "Investment",
   "v2.footer.contact": "Contact&Links",
   "v2.footer.properties": "Properties",
@@ -263,7 +348,7 @@ const en = {
   "home.founder.aboutHeadline": "Market Expertise.",
   "home.founder.aboutHeadlineEm": "Personal Service.",
   "home.founder.aboutBody":
-    "From confusing paperwork to 'ghost' agents, the risks are real. With hundreds of successful deals behind us, we verify the legality, assess true value, and secure your ROI. Focus on the lifestyle; let us handle the complexity.",
+    "From confusing paperwork to 'ghost' agents, the risks are real. With hundreds of successful deals behind me, I verify the legality, assess true value, and secure your ROI. Focus on the lifestyle; I handle the complexity.",
   "home.founder.pillar1.title": "Investment & Access",
   "home.founder.pillar1.desc": "Exclusive deals unavailable to the public, backed by honest projection analysis.",
   "home.founder.pillar2.title": "Legal & Residency",
@@ -323,9 +408,9 @@ const en = {
 
   // Portfolio
   "home.portfolio.headline": "Premium projects,",
-  "home.portfolio.headlineEm": "filtered by us.",
+  "home.portfolio.headlineEm": "filtered by me.",
   "home.portfolio.quote":
-    '"Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here."',
+    '"Georgia is a country with an extraordinary landscape and a promising path toward prosperity. I see immense potential here."',
   "home.portfolio.quoteAttr": "Mohamed Alabbar — Eagle Hills, UAE",
   "home.portfolio.scrollNext": "Scroll to next project",
 
@@ -362,11 +447,11 @@ const en = {
   "home.discovery.stay.title": "Premium Stay",
   "home.discovery.stay.desc": "Curated 5-star accommodation selected for your comfort",
   "home.discovery.viewings.title": "Off-Market Viewings",
-  "home.discovery.viewings.desc": "Exclusive properties not listed publicly, shown only to our clients",
+  "home.discovery.viewings.desc": "Exclusive properties not listed publicly, shown only to my clients",
   "home.discovery.gastro.title": "Gastronomic Program",
   "home.discovery.gastro.desc": "Batumi's finest restaurants and experiences, arranged for you",
   "home.discovery.briefing.title": "Investment Briefing",
-  "home.discovery.briefing.desc": "Private session with our senior advisor on market and returns",
+  "home.discovery.briefing.desc": "Private session with me on market and returns",
   "home.discovery.legal.title": "Legal Consultation",
   "home.discovery.legal.desc": "Full legal review of shortlisted properties before you decide",
   "home.discovery.deposit": "Deposit",
@@ -379,12 +464,12 @@ const en = {
   "home.payment.headlineEm": "invest in Batumi.",
   "home.payment.bank.title": "Official Bank Transfers (GEL)",
   "home.payment.bank.body":
-    "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. We provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
+    "All official property payments in Georgia are conducted in the local currency, Georgian Lari (GEL), directly to the developer's bank account. I provide full assistance with currency exchange at the most competitive market rates to ensure your USD or EUR funds are converted according to the National Bank's official daily rate.",
   "home.payment.bank.sub":
     "Secure, transparent, and 100% compliant with Georgian financial regulations.",
   "home.payment.crypto.title": "Cryptocurrency & Digital Assets",
   "home.payment.crypto.body":
-    "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. We facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
+    "Batumi is a leading hub for crypto-real estate deals. Most top-tier developers now officially accept BTC, ETH, and USDT. I facilitate the entire process, ensuring your digital assets are securely used for your purchase with full legal documentation and proof of payment.",
   "home.payment.crypto.sub": "Full legal compliance. Blockchain-verified ownership transfer.",
   "home.payment.installment.title": "Interest-Free Installments",
   "home.payment.installment.desc":
@@ -430,7 +515,7 @@ const en = {
   "home.contact.eyebrow": "Private Consultation",
   "home.contact.headline": "Let's discuss",
   "home.contact.headlineEm": "your strategy.",
-  "home.contact.body": "We take on a limited number of clients each quarter. No obligation, full transparency.",
+  "home.contact.body": "I take on a limited number of clients each quarter. No obligation, full transparency.",
   "home.contact.name": "Your Name",
   "home.contact.nameRequired": "Your Name *",
   "home.contact.namePlaceholder": "Full name",
@@ -446,7 +531,7 @@ const en = {
   "home.contact.submit": "Request Private Consultation",
   "home.contact.loading": "Sending...",
   "home.contact.disclaimer": "By submitting you agree to be contacted by a Sitbo Invest advisor. No spam, ever.",
-  "home.contact.sentTitle": "We'll be in touch shortly.",
+  "home.contact.sentTitle": "I'll be in touch shortly.",
   "home.contact.sentBody": "Your inquiry has been received. Expect a personal call from Arthur within 24 hours.",
   "home.contact.errorRequired": "Please fill in your name and contact.",
   "home.contact.errorGeneric": "Something went wrong. Please try again.",
@@ -498,7 +583,7 @@ const en = {
   // Cookie consent
   "cookie.title": "This website uses cookies",
   "cookie.body":
-    "This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.",
+    "This website uses cookies to improve user experience. By using this website you consent to all cookies in accordance with the Cookie Policy.",
   "cookie.readMore": "Read more about Cookie Policy",
   "cookie.decline": "Decline",
   "cookie.accept": "Accept",
@@ -514,16 +599,18 @@ const en = {
   "cookie.functionality": "Functionality",
   "cookie.unclassified": "Unclassified",
   "cookie.necessaryDesc": "Required for the site to work — security, language, and cookie preferences. Always on.",
-  "cookie.performanceDesc": "Help us understand how the site is used so we can improve it.",
+  "cookie.performanceDesc": "Help understand how the site is used so it can be improved.",
   "cookie.targetingDesc": "Used to deliver more relevant content and measure campaigns.",
   "cookie.functionalityDesc": "Remember choices such as currency and display preferences.",
   "cookie.unclassifiedDesc": "Cookies that have not yet been assigned to a category.",
 
   // Catalog
   "catalog.title":
-    "Curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan",
+    "Handpicked residential and investment properties across Batumi and Georgia",
+  "catalog.titleLine1": "Handpicked residential and investment",
+  "catalog.titleLine2": "properties across Batumi and Georgia",
   "catalog.subtitle":
-    "curated projects across Batumi, Chakvi, Gonio and beyond — filtered and verified by Arthur Arutyunyan.",
+    "Handpicked residential and investment properties across Batumi and Georgia.",
   "catalog.eyebrow": "Georgia Real Estate",
   "catalog.sort": "Sort",
   "catalog.sortDefault": "Featured",
@@ -533,7 +620,8 @@ const en = {
   "catalog.filterAll": "All",
   "catalog.city.batumi": "Batumi",
   "catalog.city.tbilisi": "Tbilisi",
-  "catalog.city.chakviGonio": "Chakvi / Gonio",
+  "catalog.city.chakvi": "Chakvi",
+  "catalog.city.gonio": "Gonio",
   "catalog.city.makhinjauri": "Makhinjauri",
   "catalog.city.shekvetili": "Shekvetili",
   "catalog.roi": "ROI",
@@ -545,64 +633,152 @@ const en = {
   "catalog.emptyBody": "Try adjusting your filters",
   "catalog.cta.title": "Don't see what you're looking for?",
   "catalog.cta.body":
-    "We work with off-market inventory not listed publicly. Tell us your budget and preferences — we'll find the right match.",
+    "I work with off-market inventory not listed publicly. Tell me your budget and preferences — I'll find the right match.",
   "catalog.cta.bookCall": "Book a Call",
   "catalog.bookCall.title": "Book a Call",
-  "catalog.bookCall.body": "Leave your details and we'll reach out to schedule a convenient time.",
+  "catalog.bookCall.body": "Leave your details and I'll reach out to schedule a convenient time.",
   "catalog.bookCall.name": "Your Name",
   "catalog.bookCall.phone": "Phone Number",
   "catalog.bookCall.email": "Email Address",
   "catalog.bookCall.message": "Your request (optional)",
-  "catalog.bookCall.direct": "Contact us directly at:",
+  "catalog.bookCall.direct": "Contact me directly at:",
+
+  "catalog.checklist.title": "Before paying a deposit in Georgia",
+  "catalog.checklist.subtitle":
+    "A quick checklist to see whether you have enough information before sending money, signing anything or reserving a property.",
+  "catalog.checklist.i1": "I checked the ownership",
+  "catalog.checklist.i2": "I checked the land status",
+  "catalog.checklist.i3": "I understand who the developer is",
+  "catalog.checklist.i4": "I know the real market price",
+  "catalog.checklist.i5": "I reviewed the contract terms",
+  "catalog.checklist.i6": "I understand the payment schedule",
+  "catalog.checklist.i7": "I checked the rental assumptions",
+  "catalog.checklist.i8": "I know all maintenance and management fees",
+  "catalog.checklist.i9": "I understand resale liquidity",
+  "catalog.checklist.i10": "I got independent advice before deposit",
+  "catalog.checklist.progress": "{done} / {total} checks completed",
+  "catalog.checklist.high.badge": "High risk",
+  "catalog.checklist.high.title": "Pause before paying a deposit.",
+  "catalog.checklist.high.body":
+    "You are missing several key checks that should be done before sending money or signing anything in Georgia. A deposit can be easy to pay and difficult to recover. Before moving forward, check the property, developer, documents, real price, contract terms and risks with someone independent.",
+  "catalog.checklist.high.cta": "Book a Deep Dive before deposit",
+  "catalog.checklist.review.badge": "Needs review",
+  "catalog.checklist.review.title": "You are closer, but there are still important gaps.",
+  "catalog.checklist.review.body":
+    "You have checked part of the deal, but some important areas may still be unclear. Before paying a deposit, it is better to review the missing points and understand whether the property really fits your goal, budget and risk profile.",
+  "catalog.checklist.review.cta": "Review this property with Arthur",
+  "catalog.checklist.ready.badge": "Almost ready",
+  "catalog.checklist.ready.title": "You seem better prepared — but final review still matters.",
+  "catalog.checklist.ready.body":
+    "You have covered most of the important checks. Before making the final move, make sure the documents, contract, price, developer background and investment logic are reviewed properly. A second opinion before deposit can still protect you from an expensive mistake.",
+  "catalog.checklist.ready.cta": "Get a final review before deposit",
+  "catalog.checklist.disclaimer":
+    "This checklist is not legal advice. It is a quick risk filter before making a property decision.",
 
   // Project page
   "project.overview": "Overview",
+  "project.propertyType": "Property type",
+  "project.pricePerSqm": "Price/sqm",
+  "project.propertyType.apartment": "Apartment",
+  "project.propertyType.aparthotel": "Aparthotel",
+  "project.propertyType.apartmentAparthotel": "Apartment & Aparthotel",
+  "project.propertyType.residence": "Residence",
+  "project.propertyType.villa": "Villa",
+  "project.propertyType.townhouse": "Townhouse",
+  "project.propertyType.infoAria": "Apartment vs Aparthotel explained",
+  "project.propertyType.infoTitle": "Apartment vs. Aparthotel",
+  "project.propertyType.infoClose": "Close",
+  "project.propertyType.residentialTitle": "Apartments (Residential)",
+  "project.propertyType.residentialStatus":
+    "Status: Residential property (registration & residency allowed).",
+  "project.propertyType.residentialUtilities":
+    "Utilities: Standard residential state utility tariffs.",
+  "project.propertyType.residentialTaxes":
+    "Taxes: 5% income tax on long-term/short-term rentals, 0% on resale after 2 years of ownership.",
+  "project.propertyType.commercialTitle": "Aparthotel (Commercial)",
+  "project.propertyType.commercialStatus":
+    "Status: Commercial / non-residential (no permanent residency).",
+  "project.propertyType.commercialUtilities":
+    "Utilities: Higher commercial utility rates set by management.",
+  "project.propertyType.commercialTaxes":
+    "Taxes: 20% income tax on rental yields and 20% on resale.",
   "project.developer": "Developer",
+  "project.architecture": "Architecture",
+  "project.architectPlaceholder": "TBA",
   "project.developerLogo": "Logo",
   "project.developerBody":
     "A construction company founded in 2015, which has established itself as a reliable partner in residential construction. It actively develops projects, including residential complexes in Batumi.",
-  "project.specs": "Technical Specifications",
+  "project.specs": "Property Details",
   "project.spec.area": "Area",
   "project.spec.ceilingHeight": "Ceiling Height",
   "project.spec.floors": "Floors",
   "project.spec.buildings": "Buildings",
   "project.spec.finishing": "Finishing",
-  "project.features": "Key Features",
+  "project.spec.purchaseTax": "Purchase tax",
+  "project.spec.climateAdaptation": "Climate Adaptation",
+  "project.spec.climateYes": "Yes",
+  "project.features": "Features and construction",
+  "project.features.viewAll": "View all {count} features",
+  "project.features.lot": "Lot",
+  "project.features.indoor": "Indoor",
+  "project.features.outdoor": "Outdoor",
+  "project.features.construction": "Construction",
   "project.materials": "Materials & Construction",
-  "project.payment": "Payment & Installment",
+  "project.payment": "Payment and Installment",
+  "project.payment.down": "Down Payment",
+  "project.payment.construction": "During construction for 36 months",
+  "project.payment.handover": "On key handover",
+  "project.payment.note": "Full payment and installment terms are individual and negotiable.",
+  "project.ownershipBenefits": "Ownership benefits",
+  "project.ownershipBenefits.close": "Close",
+  "project.trophyProperty": "Trophy property",
+  "catalog.trophyProperty": "Trophy property",
   "project.interested": "Interested?",
+  "project.awards": "Awards",
   "project.offerTitle": "Get a personal offer",
   "project.offerBody":
-    "We'll prepare a detailed cost estimate and floor plan selection for this project.",
+    "I'll prepare a detailed cost estimate and floor plan selection for this project.",
   "project.from": "From",
   "project.ready": "Ready",
   "project.sea": "Sea",
   "project.estRoi": "Est. ROI",
   "project.notFound": "Project not found",
   "project.backHome": "← Back to home",
+  "project.backToSearch": "Back to search",
+  "project.share": "Share",
+  "project.showAllPhotos": "Show all photos",
+  "project.linkCopied": "Link copied",
   "project.downPayment": "Down Payment",
   "project.installment": "Installment",
   "project.liveCamera": "Live Camera",
+  "project.moreActions": "More options below",
   "project.floorPlans": "Floor Plans",
   "project.availableLayouts": "Available Layouts",
   "project.layoutComingSoon": "Layout {number} — Coming Soon",
   "project.location": "Location",
+  "project.locationLifestyle": "Location & Lifestyle",
+  "project.progress.eyebrow": "{name} · Construction status",
+  "project.progress.title": "Progress & Updates",
+  "project.progress.subtitle": "Current construction status",
+  "project.progress.foundation": "Foundation",
+  "project.progress.construction": "Construction",
+  "project.progress.facade": "Facade",
+  "project.progress.handover": "Handover",
   "project.district.newBoulevard.title": "New Boulevard",
   "project.district.newBoulevard.body":
-    "A modern seaside district with developed infrastructure and a beautiful waterfront park. The property is located on the south-western edge of Batumi along the Black Sea coast, in a district that symbolizes the new, contemporary Batumi with innovative architecture and green leisure areas.",
-  "project.district.newBoulevard.body2":
-    "Batumi International Airport is only 8 minutes away, which is convenient for frequent travellers. Key social infrastructure is nearby: the school and dolphinarium are 11 minutes away by car, and the kindergarten is 12 minutes away.",
+    "The New Boulevard is Batumi’s greenest and fastest-growing seaside district. Unlike the busy old town and center, it offers a calmer, family-oriented environment featuring a new park avenue, the expansive Lech and Maria Kaczynski Park, and the nearby coastline. Cafes, shops, and sports facilities are all within easy reach, while Batumi International Airport is just an 8-minute drive.",
+  "project.district.newBoulevard.body2": "",
   "project.cta.title": "Ready to invest in",
   "project.cta.body":
-    "We'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",
+    "I'll prepare a personal offer with floor plan selection, payment schedule, and projected returns.",
   "project.otherProjects": "Other Projects",
   "project.modal.layoutPreview": "Layout preview",
   "project.offerModal.title": "Request Details",
-  "project.offerModal.body": "Tell us about your interest in {project}. We'll prepare a personalized offer.",
+  "project.offerModal.body": "Tell me about your interest in {project}. I'll prepare a personalized offer.",
   "project.offerModal.name": "Your Name",
   "project.offerModal.phone": "Phone Number",
   "project.offerModal.email": "Email Address",
-  "project.offerModal.direct": "Contact us directly at:",
+  "project.offerModal.direct": "Contact me directly at:",
 
   "chess.eyebrow": "Availability",
   "chess.title": "Choose a floor and apartment",
@@ -629,7 +805,7 @@ const en = {
   "chess.rooms": "Layout",
   "chess.priceOnRequest": "Price on request",
   "chess.request": "Request this apartment",
-  "chess.notSelectable": "This unit is not currently for sale. Pick an available cell or ask us for alternatives.",
+  "chess.notSelectable": "This unit is not currently for sale. Pick an available cell or ask me for alternatives.",
   "chess.chooseCta": "Choose an apartment",
   "chess.view3d": "360 3D view",
   "chess.view2d": "2D view",
@@ -641,42 +817,52 @@ const en = {
   "chess.noMatches": "No apartments match these filters",
   "chess.priceUsd": "Price, USD",
   "chess.priceGel": "Price, GEL",
-  "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is our chessboard.",
+  "chess.officialHint": "Official Flat.show 3D — this is how the interactive selector looks. 2D is my chessboard.",
 
-  // Invest page
-  "invest.hero.eyebrow": "Why Georgia",
+  // Invest / Why Georgia page
   "invest.hero.line1": "One of Europe's",
-  "invest.hero.line2": "highest-yield",
-  "invest.hero.line3": "property markets.",
-  "invest.hero.line4": "",
+  "invest.hero.line2": "highest-yield property markets.",
   "invest.hero.body":
-    "I help international buyers enter Georgia with a clear strategy — yield, capital growth, or residency — without the noise of a sales floor.",
-  "invest.hero.ctaConsultation": "Book a consultation",
-  "invest.hero.ctaStrategies": "View strategies",
-  "invest.hero.imageAlt": "Batumi waterfront — investment property in Georgia",
-  "invest.hero.badgeLabel": "Max rental yield",
-  "invest.why.eyebrow": "Why Georgia",
-  "invest.why.title": "The numbers come first.",
-  "invest.why.body":
-    "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 13.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
-  "invest.why.quote":
-    "“Georgia is a country with an extraordinary landscape and a promising path toward prosperity. We see immense potential here.”",
-  "invest.why.quoteAttr": "Mohamed Alabbar — Eagle Hills, UAE",
-  "invest.why.stat1": "Max rental yield on managed seafront units",
-  "invest.why.stat2": "World rank for rental profitability (Global Property Guide)",
-  "invest.why.stat3": "Purchase tax for foreign buyers",
-  "invest.why.stat4": "Title transfer via blockchain registry",
-  "invest.why.stat4Value": "1 day",
-  "invest.why.stat5": "Average price per sqm — Batumi new build",
-  "invest.why.stat6": "Tourists who visited Georgia in 2025",
-  "invest.advantage.purchaseTax.title": "0% purchase tax",
-  "invest.advantage.purchaseTax.sub": "No stamp duty, no buyer’s tax",
-  "invest.advantage.ownership.title": "Full foreign ownership",
-  "invest.advantage.ownership.sub": "Same rights as Georgian citizens",
-  "invest.advantage.registration.title": "1-day registration",
-  "invest.advantage.registration.sub": "Blockchain land registry",
-  "invest.advantage.residency.title": "Residency from $150K",
-  "invest.advantage.residency.sub": "Qualifying real estate investment",
+    "While European capitals often yield 2–4%, well-managed seafront rentals in Batumi reach up to 12.2%. Zero purchase tax, a blockchain land registry, and residency from $150,000 make Georgia structurally different from most emerging markets.",
+  "invest.mosaic.visitorsValue": "7.8M+",
+  "invest.mosaic.visitorsLabel": "Annual international visitors",
+  "invest.mosaic.visitorsSource": "GNTA; GeoStat",
+  "invest.mosaic.destination": "Top destination for digital nomads, investors, and lifestyle seekers.",
+  "invest.mosaic.yieldValue": "12.2%",
+  "invest.mosaic.yieldLabel": "Max rental yield",
+  "invest.mosaic.yearsValue": "8,000",
+  "invest.mosaic.yearsLabel": "Years of Hospitality",
+  "invest.mosaic.yearsBody": "Unmatched culture driving year-round high tourist occupancy.",
+  "invest.mosaic.horseAlt": "Horseback riding in the Georgian mountains",
+  "invest.mosaic.seaAlt": "Paddleboarding at sunset on the Black Sea",
+  "invest.mosaic.foodAlt": "Georgian khinkali",
+  "invest.mosaic.wineAlt": "Georgian wine country",
+  "invest.diplomacy.next": "Next slide",
+  "invest.diplomacy1.title": "Georgia as a Strategic Gateway between the Black Sea and Caspian Region.",
+  "invest.diplomacy1.body":
+    "Nestled at the crossroads of Europe and Asia, Georgia serves as a critical transit, trade, and investment hub connecting Eastern and Western markets.",
+  "invest.diplomacy2.title": "High Security & Institutional Protections for Foreign Investment.",
+  "invest.diplomacy2.body":
+    "Through strategic alliances, liberal economic policies, and international trade agreements, Georgia guarantees low tax friction, maximum protection of private title, and frictionless capital mobility for international buyers.",
+  "invest.diplomacy3.title": "Global Diplomatic Reach with 180+ Sovereign Partners.",
+  "invest.diplomacy3.body":
+    "Georgia maintains formal diplomatic ties with over 186 UN member states and hosts international embassies from the USA, UK, EU nations, China, Japan, and the UAE, ensuring strong political and investment safeguards.",
+  "invest.chain.title": "World's 1st Blockchain-Backed Land Registry",
+  "invest.chain.body":
+    "100% Title Security via Bitcoin Blockchain. In 2016, Georgia became the first nation to secure property titles on the Bitcoin blockchain. Every ownership certificate generates an unalterable cryptographic proof, making title fraud physically impossible and enabling seamless 1-day remote registration.",
+  "invest.chain.2016.title": "2016",
+  "invest.chain.2016.body":
+    "In partnership with tech giant Bitfury Group, the Ministry of Justice of Georgia and the National Agency of Public Registry (NAPR) launched a pilot project to migrate the real estate land registry to the Bitcoin blockchain.",
+  "invest.chain.2017.title": "2017–2018",
+  "invest.chain.2017.body":
+    "Georgia became the first country in the world to fully integrate property ownership certificates into a public blockchain.",
+  "invest.chain.today.title": "Today",
+  "invest.chain.today.body":
+    "Every title check, purchase transaction, or mortgage registration is recorded in the Public Registry and automatically hashed onto the blockchain. The country is also actively adopting smart contracts for remote, instant transactions — executing payment and title transfer in a single second.",
+  "invest.awards.title": "One of Europe's highest-yield property markets.",
+  "invest.awards.alt": "Press and awards recognizing Georgia and Batumi",
+  "invest.early.line1": "Still early.",
+  "invest.early.line2": "Still affordable.",
   "invest.strategies.eyebrow": "Investment strategies",
   "invest.strategies.title": "Four ways I grow capital here.",
   "invest.strategies.body":
@@ -717,8 +903,7 @@ const en = {
   "invest.strategy4.desc":
     "I design and deliver premium interiors that justify 20–40% above-market rents. Fixed estimates, no surprise overruns — you do not manage contractors yourself.",
   "invest.strategy4.ideal": "Owners of unfinished units who want premium positioning.",
-  "invest.market.eyebrow": "Market context",
-  "invest.market.title": "Still early. Still affordable.",
+  "invest.market.title": "Market context",
   "invest.market.priceComparison": "Price per sqm · 2025",
   "invest.market.yieldComparison": "Gross rental yield · 2025",
   "invest.market.city.barcelona": "Barcelona",
@@ -726,7 +911,6 @@ const en = {
   "invest.market.city.athens": "Athens",
   "invest.market.city.tbilisi": "Tbilisi",
   "invest.market.city.batumi": "Batumi",
-  "invest.process.eyebrow": "How it works",
   "invest.process.title": "From first call to passive income.",
   "invest.process.body":
     "I keep the path short and clear. Most clients go from first contact to a registered title in under 30 days.",
@@ -749,29 +933,40 @@ const en = {
   "invest.process6.desc":
     "Furnishing, listing and day-to-day management — monthly reports, rent collection and maintenance handled for you.",
   "invest.faq.eyebrow": "FAQ",
-  "invest.faq.title": "Common questions.",
-  "invest.faq.moreQuestions": "Still have questions?",
-  "invest.faq.talkDirectly": "Write to me directly — I answer myself.",
-  "invest.faq.body":
-    "Straight answers for non-resident buyers. No sales script.",
+  "invest.faq.title": "Common questions about buying property in Georgia.",
   "invest.faq.q1": "Can foreigners buy property in Georgia?",
   "invest.faq.a1":
-    "Yes. Foreign nationals have the same property rights as Georgian citizens — buy, own and transfer with no ownership restrictions on residential property.",
-  "invest.faq.q2": "Is rental income taxed?",
+    "Yes. Foreigners can buy apartments, houses and commercial property in Georgia with a relatively simple ownership registration process. However, there are restrictions on agricultural land, and every deal should still be checked properly: ownership, land status, developer reputation, contract terms and hidden risks. 0% tax on buying property.",
+  "invest.faq.q2": "Can foreigners get a mortgage in Georgia?",
   "invest.faq.a2":
-    "Rental income is taxed at a 5% flat rate in Georgia when declared under the simplified regime (otherwise 20%). One of the lowest rates in Europe.",
-  "invest.faq.q3": "What is the minimum budget to invest?",
+    "In some cases, yes. Foreigners may be able to get mortgage financing in Georgia, but approval depends on the bank, the client’s documents, income, residency status, property type and risk profile. Mortgage conditions for foreigners are usually more individual, so it is better to check options before choosing the property.",
+  "invest.faq.q3": "Is rental income taxed in Georgia?",
   "invest.faq.a3":
-    "Workable investments start from about $60,000–$80,000 for a studio. Residency-qualifying purchases require $150,000+.",
-  "invest.faq.q4": "Do I need to be in Georgia to buy?",
+    "Yes, rental income is taxable in Georgia. The exact tax treatment depends on how the rental is structured: long-term rent, short-term rental, individual ownership, company ownership or commercial activity. Before buying for rental income, it is important to understand not only the expected yield, but also taxes, management fees, maintenance, seasonality and vacancy periods.",
+  "invest.faq.q4": "What budget makes sense for buying property in Georgia?",
   "invest.faq.a4":
-    "No. I can run the full process remotely with a notarised power of attorney. Many clients close before their first visit.",
-  "invest.faq.q5": "What rental yield should I expect?",
+    "It depends on your goal. A smaller budget can be enough for an entry-level apartment, but a serious investment strategy usually requires looking beyond the lowest price. Location, building quality, liquidity, rental demand and exit potential matter more than just the purchase price. For most clients, I first recommend defining the goal: relocation, capital preservation, rental income or future resale.",
+  "invest.faq.q5": "Can I buy property remotely?",
   "invest.faq.a5":
-    "Well-located, professionally managed units in Batumi typically yield 9–13.2% a year. Turnkey finishes in strong locations can sit at the top of that range.",
-  "invest.faq.q6": "How long does the purchase take?",
+    "Yes, remote purchase is possible in Georgia, often through a power of attorney and proper legal representation. But buying remotely without independent due diligence is risky. Photos, renders and sales presentations do not show the full picture. Before sending a deposit, it is important to check the property, developer, documents, location, real market price and legal structure.",
+  "invest.faq.q6": "What rental yield should I realistically expect?",
   "invest.faq.a6":
-    "From signed offer to registered title: usually 1–3 business days. Selection and due diligence typically take 2–4 weeks.",
+    "It depends on the city, location, building, management, season, purchase price and rental strategy. In Batumi, short-term rental can look attractive on paper, but seasonality, competition, management fees, maintenance and vacancy periods can reduce the real return. I prefer to calculate several scenarios: optimistic, realistic and conservative.",
+  "invest.faq.q7": "How long does the purchase process take?",
+  "invest.faq.a7":
+    "The technical registration process in Georgia can be very fast, sometimes within a few business days if everything is ready. But a safe purchase takes longer because the most important part happens before signing: checking the property, seller, developer, documents, price, risks and contract terms. Fast registration does not mean you should make a fast decision.",
+  "invest.faq.q8": "What are the main risks when buying property in Georgia?",
+  "invest.faq.a8":
+    "The main risks are not always visible in the listing. They can include: unclear land or ownership status; weak developer reputation; unrealistic rental income promises; overpriced properties; poor construction quality; bad location for your goal; unclear management terms; future liquidity problems; contract details that buyers often miss. This is why independent review before purchase is important.",
+  "invest.faq.q9": "What extra costs should I expect besides the property price?",
+  "invest.faq.a9":
+    "Besides the property price, you may need to consider legal support, registration, bank fees, renovation, furniture, property management, maintenance fees, taxes and possible agency or advisory costs. For investment properties, it is especially important to calculate the full cost, not just the purchase price.",
+  "invest.faq.q10": "Is Batumi or Tbilisi better for investment?",
+  "invest.faq.a10":
+    "There is no universal answer. Batumi is often attractive for seaside property, tourism and short-term rental, but it is more seasonal and can be sensitive to oversupply. Tbilisi is more stable for long-term rental, business activity and year-round demand, but entry prices and neighborhood logic are different. The right choice depends on your budget, risk tolerance, rental strategy and exit plan. Currently, there is a shortage of 1–2‑bedroom apartments with high‑quality renovations in Batumi; they are rented out immediately for long‑term use.",
+  "invest.faq.q11": "Is Georgia a good place to preserve capital?",
+  "invest.faq.a11":
+    "Georgia can be interesting for capital preservation because of its simple property registration, relatively open market, strategic location and demand from locals, expats and investors. But capital preservation does not mean buying any apartment. The key is choosing the right property, location, legal structure and entry price. A bad object in a good country is still a bad investment.",
   "invest.cta.eyebrow": "Ready to invest?",
   "invest.cta.title": "Your first property in Georgia starts with one call.",
   "invest.cta.body":
@@ -783,7 +978,7 @@ const en = {
   "services.hero.title": "I protect your capital first,",
   "services.hero.titleEm": "then multiply it.",
   "services.hero.body":
-    "When you work with me, you get my full attention — not a call centre and not a sales floor.",
+    "Clients come to me not only because I know the market, but because I tell the truth, protect their interests and stay involved when the situation becomes difficult. You can find real reviews and recommendations from people I have worked with in public sources. For me, reputation is more important than a quick deal.",
   "services.item1.title": "Due Diligence",
   "services.item1.desc":
     "Before you buy, I run a full-layer check on the property, the developer, and the legal title. You get a written conclusion from me — not a verbal opinion.",
@@ -853,6 +1048,28 @@ const en = {
   "services.limit3.text": "I do not suggest an asset before I understand your objective, timeline, and risk tolerance.",
   "services.limit4.title": "No overloaded client roster",
   "services.limit4.text": "A limited number of mandates per quarter is a structural decision, not a marketing line.",
+  "services.faq.title": "FAQ",
+  "services.faq.q1": "Why can you be trusted?",
+  "services.faq.a1":
+    "Behind me are dozens of deals, hundreds of negotiations, and experience across different tasks on Georgia’s real estate market: purchase, investment, renovation, developers, banks, documents, and non-standard situations. I know the market not only as an intermediary. I understand property from the inside: I can assess an asset, negotiate with the right people, see the risks, and understand what happens after the purchase. I also have reviews and recommendations from real clients in open access. I have a name in the city, and I protect my reputation.",
+  "services.faq.q2": "What is your main value for the client?",
+  "services.faq.a2":
+    "I build long-term relationships and work for reputation, covering the full cycle from selection and renovation to further rental and resale. Throughout the deal I am your personal translator, psychologist, lawyer, analyst, and negotiator. Just let me do my job.",
+  "services.faq.q3": "Do you know developers and people on the market?",
+  "services.faq.a3":
+    "Yes. I was born and raised in Georgia, I have worked on this market for a long time, and I know many people in development, construction, banking, and adjacent fields. Batumi grew before my eyes — where you see 50-storey buildings, I saw untouched land. I can often reach the right person quickly: a director, an owner, an architect, a bank representative, a developer, or a contractor. That helps get information faster and understand the situation more deeply than advertising or a presentation shows.",
+  "services.faq.q4": "Do you understand renovations?",
+  "services.faq.a4":
+    "Yes. I control renovation from the inside and do it for people who notice every millimetre. I understand materials, timelines, workmanship, contractors, weak points of a property, and the real complications that start after purchase. I can assess renovation not only as a consultant, but as someone who understands the process hands-on. Renovation by my designer and crew can put your property into the city’s top 30.",
+  "services.faq.q5": "Do you help with mortgages?",
+  "services.faq.a5":
+    "Yes. I can help a client navigate mortgage options in Georgia and connect with a bank. I have a working relationship with TBC Bank for mortgage clients. The final decision on the loan, rate, and terms is always made by the bank. If there is a partner fee from the bank in the process, it is discussed transparently.",
+  "services.faq.q6": "Do you have partner terms for clients?",
+  "services.faq.a6":
+    "Yes. I am building my partner network. To learn the details, write to my assistant — they will tell you which partner options are available in your case.",
+  "services.faq.q7": "What is your working style?",
+  "services.faq.a7":
+    "Direct, fast, and practical. I speak honestly, do not sell illusions, and do not smooth over risks. If a property is weak, I explain why. If there is room to negotiate, I look for a path. I build long-term relationships and value reputation more than a quick deal. More than 80% of my clients came back to me again or recommended me to people close to them.",
   "services.cta.title": "Ready to begin?",
   "services.cta.body":
     "Write to me for a private consultation. No obligation, no pitch — just an honest assessment of your situation.",
@@ -865,23 +1082,23 @@ const en = {
   "turnkey.hero.title": "Reality matches",
   "turnkey.hero.titleEm": "the render",
   "turnkey.hero.body":
-    "We renovate for those who notice every millimetre. You don't need to mediate between the designer and the builder, or find someone to blame when the furniture doesn't fit the doorway. We take care of everything: from the first line on paper to selecting the textiles.",
+    "I renovate for those who notice every millimetre. You don't need to mediate between the designer and the builder, or find someone to blame when the furniture doesn't fit the doorway. I take care of everything: from the first line on paper to selecting the textiles.",
   "turnkey.hero.ctaSelf": "I'm Renovating For Myself",
   "turnkey.hero.ctaInvest": "I'm Renovating For Investment",
   "turnkey.forSelf.eyebrow": "For Perfectionists",
   "turnkey.forSelf.title": "A Home That Reflects Your Vision",
   "turnkey.forSelf.body":
-    "We translate your personal style into a living space of uncompromising quality. Our process is designed for those who appreciate fine details and a seamless, stress-free experience.",
+    "I translate your personal style into a living space of uncompromising quality. The process is designed for those who appreciate fine details and a seamless, stress-free experience.",
   "turnkey.forSelf.item1.label": "Bespoke Design",
   "turnkey.forSelf.item1.desc": "A unique project crafted around your lifestyle and aesthetic vision.",
   "turnkey.forSelf.item2.label": "Master Craftsmanship",
   "turnkey.forSelf.item2.desc": "Meticulous attention to every seam, joint, and finish — no compromises.",
   "turnkey.forSelf.item3.label": "Premium Materials",
-  "turnkey.forSelf.item3.desc": "We source the best materials, including Italian tile and European fittings.",
+  "turnkey.forSelf.item3.desc": "I source the best materials, including Italian tile and European fittings.",
   "turnkey.forInvestors.eyebrow": "For Investors",
   "turnkey.forInvestors.title": "A Renovation That Delivers Profit",
   "turnkey.forInvestors.body":
-    "We create high-demand, low-maintenance rental properties that maximize your ROI. Our process is optimized for speed, durability, and market appeal in Batumi.",
+    "I create high-demand, low-maintenance rental properties that maximize your ROI. The process is optimized for speed, durability, and market appeal in Batumi.",
   "turnkey.forInvestors.item1.label": "ROI-Driven Design",
   "turnkey.forInvestors.item1.desc": "A proven aesthetic that attracts premium short-term tenants in Batumi.",
   "turnkey.forInvestors.item2.label": "Speed to Market",
@@ -890,13 +1107,13 @@ const en = {
   "turnkey.forInvestors.item3.desc": "Vandal-proof, wear-resistant materials designed for Batumi's humid climate.",
   "turnkey.cta.discussProject": "Discuss My Project",
   "turnkey.cta.calculateRoi": "Calculate My ROI",
-  "turnkey.design.eyebrow": "Our Cornerstone",
+  "turnkey.design.eyebrow": "My Cornerstone",
   "turnkey.design.title": "Perfection is Planned.",
-  "turnkey.design.titleEm": "We Never Start Without a Design Project.",
+  "turnkey.design.titleEm": "I Never Start Without a Design Project.",
   "turnkey.design.body1":
-    "A complete, client-approved design project is our blueprint for success and your ultimate guarantee. It allows us to provide a 100% fixed budget and a precise timeline before a single wall is touched.",
+    "A complete, client-approved design project is my blueprint for success and your ultimate guarantee. It lets me provide a 100% fixed budget and a precise timeline before a single wall is touched.",
   "turnkey.design.body2":
-    "This eliminates unexpected costs, ensures every detail meets your expectations, and is the professional standard we proudly uphold on every project in Batumi.",
+    "This eliminates unexpected costs, ensures every detail meets your expectations, and is the professional standard I proudly uphold on every project in Batumi.",
   "turnkey.calculator.eyebrow": "Cost Estimator",
   "turnkey.calculator.title": "Get a Preliminary Estimate",
   "turnkey.calculator.body":
@@ -933,7 +1150,7 @@ const en = {
   "turnkey.remote.step3.desc": "Real-time access to all documents, floor plans, photos, and financial reports in one place.",
   "turnkey.remote.step4.title": "Live Video Calls",
   "turnkey.remote.step4.desc": "Schedule a live call from your property at any time. Inspect the work yourself, remotely.",
-  "turnkey.portfolio.eyebrow": "Our Work",
+  "turnkey.portfolio.eyebrow": "My Work",
   "turnkey.portfolio.title": "Proof of",
   "turnkey.portfolio.titleEm": "Perfection",
   "turnkey.portfolio.all": "All Projects",
@@ -966,12 +1183,12 @@ const en = {
   "turnkey.portfolio.project6.tag1": "Author Supervision",
   "turnkey.portfolio.project6.tag2": "Premium Materials",
   "turnkey.portfolio.project6.tag3": "6 Month Project",
-  "turnkey.guarantee.self.title": "We Guarantee Your Aesthetic Satisfaction",
+  "turnkey.guarantee.self.title": "I Guarantee Your Aesthetic Satisfaction",
   "turnkey.guarantee.self.body":
-    "We don't just guarantee the work — we guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, we'll redo it. That's our commitment to craftsmanship.",
+    "I don't just guarantee the work — I guarantee your satisfaction with the result. If a seam doesn't feel perfect to you, I'll redo it. That's my commitment to craftsmanship.",
   "turnkey.guarantee.invest.title": "Fixed Budget. Fixed Timeline. In the Contract.",
   "turnkey.guarantee.invest.body":
-    "We put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.",
+    "I put it in writing: penalties for every day of delay, a budget that will never grow by a dollar. Your investment has a predictable return from day one.",
   "turnkey.market.eyebrow": "Market Opportunity",
   "turnkey.market.title": "Why Batumi Works for Renovation & Rental",
   "turnkey.market.stat1.label": "Annual Tourists (2025)",
@@ -1092,9 +1309,9 @@ const en = {
   "mortgage.calculator.actualConditions": "Actual loan conditions depend on TBC Bank assessment.",
   "mortgage.calculator.yearsSuffix": "years",
   "mortgage.cta.eyebrow": "Ready to apply?",
-  "mortgage.cta.title": "We work with TBC Bank directly.",
+  "mortgage.cta.title": "I work with TBC Bank directly.",
   "mortgage.cta.body":
-    "No residency required. We guide you through the full process — documents, compliance, bank submission. Conditions change; we have live data.",
+    "No residency required. I guide you through the full process — documents, compliance, bank submission. Conditions change; I keep live data.",
 
   // History page
   "history.eyebrow": "History Timeline · Georgia",
@@ -1125,48 +1342,48 @@ const en = {
   "legal.termsTitle": "Terms of Service",
   "legal.privacy.introduction.heading": "1. Introduction",
   "legal.privacy.introduction.body":
-    "Welcome to sitboinvest.ge, operated by Sitbo Group. We are committed to protecting your privacy and ensuring that your personal data is handled securely and transparently. This Privacy Policy explains how we collect, use, and protect your information when you interact with our premium real estate platform.",
-  "legal.privacy.information.heading": "2. Information We Collect",
+    "Welcome to sitboinvest.ge, operated by Sitbo Group. Sitbo Group is committed to protecting your privacy and ensuring that personal data is handled securely and transparently. This Privacy Policy explains how information is collected, used, and protected when you interact with this premium real estate platform.",
+  "legal.privacy.information.heading": "2. Information Collected",
   "legal.privacy.information.body":
-    "We may collect personal information that you voluntarily provide to us, including but not limited to your name, contact details, and investment preferences. Additionally, we automatically collect certain technical data (such as IP addresses and browsing behavior) through cookies to enhance your experience on our site.",
-  "legal.privacy.use.heading": "3. How We Use Your Information",
-  "legal.privacy.use.body": "We utilize your data to:",
+    "Personal information that you voluntarily provide may be collected, including but not limited to your name, contact details, and investment preferences. Additionally, certain technical data (such as IP addresses and browsing behavior) may be collected automatically through cookies to enhance your experience on this site.",
+  "legal.privacy.use.heading": "3. How Your Information Is Used",
+  "legal.privacy.use.body": "Your data is used to:",
   "legal.privacy.use.list1": "Provide personalized real estate and investment recommendations in the Batumi market.",
   "legal.privacy.use.list2":
-    "Improve our website's functionality and user experience through advanced analytics and PropTech integrations.",
+    "Improve this website's functionality and user experience through advanced analytics and PropTech integrations.",
   "legal.privacy.use.list3":
     "Communicate with you regarding exclusive properties, market insights, and your inquiries.",
   "legal.privacy.use.list4": "Comply with applicable legal obligations.",
   "legal.privacy.sharing.heading": "4. Data Sharing and Security",
   "legal.privacy.sharing.body":
-    "We do not sell your personal information to third parties. We may share necessary data with trusted service providers who assist us in operating our platform, strictly under confidentiality agreements. We implement industry-standard security measures to protect your data against unauthorized access.",
+    "Personal information is not sold to third parties. Necessary data may be shared with trusted service providers who assist in operating this platform, strictly under confidentiality agreements. Industry-standard security measures are implemented to protect your data against unauthorized access.",
   "legal.privacy.rights.heading": "5. Your Rights",
   "legal.privacy.rights.body":
-    "Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You may also opt-out of marketing communications at any time. To exercise these rights, please contact us at sitboinvest@gmail.com.",
+    "Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You may also opt-out of marketing communications at any time. To exercise these rights, please contact sitboinvest@gmail.com.",
   "legal.privacy.changes.heading": "6. Changes to This Policy",
   "legal.privacy.changes.body":
-    "We may update this Privacy Policy periodically to reflect changes in our practices or regulatory requirements. The latest version will always be available on this page.",
+    "This Privacy Policy may be updated periodically to reflect changes in practices or regulatory requirements. The latest version will always be available on this page.",
   "legal.terms.acceptance.heading": "1. Acceptance of Terms",
   "legal.terms.acceptance.body":
-    "By accessing and using sitboinvest.ge, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please refrain from using our website.",
+    "By accessing and using sitboinvest.ge, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please refrain from using this website.",
   "legal.terms.services.heading": "2. Services and Content",
   "legal.terms.services.body":
     "Sitbo Group provides premium real estate consulting, investment opportunities, and property management insights in Batumi, Georgia. All information, including architectural renders, market data, and AI-driven analytics provided on this site, is for informational purposes only and does not constitute financial or legal advice.",
   "legal.terms.ip.heading": "3. Intellectual Property",
   "legal.terms.ip.body":
-    "All content, branding, designs, and materials on this website are the exclusive intellectual property of Sitbo Group. You may not copy, reproduce, distribute, or create derivative works from our content without explicit written permission.",
+    "All content, branding, designs, and materials on this website are the exclusive intellectual property of Sitbo Group. You may not copy, reproduce, distribute, or create derivative works from this content without explicit written permission.",
   "legal.terms.conduct.heading": "4. User Conduct",
   "legal.terms.conduct.body":
     "You agree to use this website only for lawful purposes. You must not engage in any activity that disrupts or interferes with the site's operations, including unauthorized data scraping, attempting to bypass security measures, or transmitting malicious code.",
   "legal.terms.liability.heading": "5. Limitation of Liability",
   "legal.terms.liability.body":
-    "While we strive for accuracy, Sitbo Group makes no warranties regarding the completeness or reliability of the information presented. Real estate investments carry inherent risks. We shall not be held liable for any direct, indirect, or consequential losses arising from your use of this website or reliance on its content.",
+    "While accuracy is a priority, Sitbo Group makes no warranties regarding the completeness or reliability of the information presented. Real estate investments carry inherent risks. Sitbo Group shall not be held liable for any direct, indirect, or consequential losses arising from your use of this website or reliance on its content.",
   "legal.terms.law.heading": "6. Governing Law",
   "legal.terms.law.body":
     "These Terms of Service are governed by and construed in accordance with the laws of Georgia. Any disputes arising from these terms or your use of the website shall be subject to the exclusive jurisdiction of the courts in Georgia.",
   "legal.terms.contact.heading": "7. Contact Information",
   "legal.terms.contact.body":
-    "If you have any questions regarding these Terms of Service, please contact us at sitboinvest@gmail.com.",
+    "If you have any questions regarding these Terms of Service, please contact sitboinvest@gmail.com.",
   "legal.backHome": "← Back to Home",
 } as const;
 

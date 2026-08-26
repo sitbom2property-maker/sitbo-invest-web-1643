@@ -4,7 +4,6 @@ import { PrivacyModal } from "../components/PrivacyModal";
 import { RequestModal } from "../components/RequestModal";
 import { AppLink } from "../components/app-link";
 import { useT, type MessageKey } from "../i18n";
-import { trackLead } from "../lib/analytics";
 
 /**
  * Homepage rebuilt from the Figma export (Desktop - 1.pdf, 1440 × 7851).
@@ -13,7 +12,7 @@ import { trackLead } from "../lib/analytics";
  *   --card-gray #463C41 · --card-green #48674D
  *   --accent-plum #703C54 (accent only, not container fill)
  *   --accent-blue #8CB2C0 at 10% mixes
- *   border-radius ≤ 10px
+ *   border-radius 2px
  */
 
 type ModalState = { open: boolean; source: string; topic?: string; title?: string };
@@ -95,6 +94,38 @@ function Hero({ onRequest }: { onRequest: (s: ModalState) => void }) {
   );
 }
 
+// ─── Your person inside the market ────────────────────────────────────────────
+
+const MARKET_CARDS: { key: MessageKey; tone: "gray" | "green" | "white" | "plum" }[] = [
+  { key: "v2.market.card1", tone: "gray" },
+  { key: "v2.market.card2", tone: "green" },
+  { key: "v2.market.card3", tone: "white" },
+  { key: "v2.market.card4", tone: "plum" },
+];
+
+function MarketPerson() {
+  const t = useT();
+  return (
+    <section className="rd-market" id="inside-market">
+      <div className="rd-wrap">
+        <div className="rd-market-head rv">
+          <h2 className="rd-h2">{t("v2.market.title")}</h2>
+          <div className="rd-market-copy">
+            <p>{t("v2.market.body1")}</p>
+          </div>
+        </div>
+        <div className="rd-market-grid rv">
+          {MARKET_CARDS.map((card) => (
+            <div key={card.key} className={`rd-market-card rd-market-card-${card.tone}`}>
+              <span>{t(card.key)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Why Georgia + stats ──────────────────────────────────────────────────────
 
 type Stat =
@@ -117,10 +148,9 @@ function WhyGeorgia() {
   return (
     <section id="why-georgia" className="rd-why">
       <div className="rd-wrap">
-        <div className="rd-split rv">
-          <h2 className="rd-h2">{t("v2.why.title")}</h2>
-          <p className="rd-lead">{t("v2.why.body")}</p>
-        </div>
+        <h2 className="rd-h2 rv" style={{ marginBottom: "clamp(28px, 4vw, 48px)", maxWidth: 720 }}>
+          {t("v2.why.title")}
+        </h2>
 
         <div className="rd-stats rv">
           {STATS.map((s, i) =>
@@ -144,6 +174,146 @@ function WhyGeorgia() {
   );
 }
 
+function WhatToBuy() {
+  const t = useT();
+  return (
+    <section className="rd-what" id="what-to-buy">
+      <div className="rd-wrap">
+        <div className="rd-what-inner rv">
+          <h2 className="rd-h2">
+            {t("v2.why.bodyLead")}
+            <br />
+            {t("v2.what.question")}
+          </h2>
+          <p className="rd-lead">{t("v2.why.body")}</p>
+          <AppLink href="/invest" className="rd-why-link">
+            {t("v2.why.cta")}
+          </AppLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const MYTHS: { mythKey: MessageKey; realityKey: MessageKey; id: string }[] = [
+  { id: "yield", mythKey: "v2.myths.m1", realityKey: "v2.myths.r1" },
+  { id: "free-broker", mythKey: "v2.myths.m2", realityKey: "v2.myths.r2" },
+  { id: "capital", mythKey: "v2.myths.m3", realityKey: "v2.myths.r3" },
+  { id: "remote", mythKey: "v2.myths.m4", realityKey: "v2.myths.r4" },
+  { id: "new-builds", mythKey: "v2.myths.m5", realityKey: "v2.myths.r5" },
+  { id: "famous-dev", mythKey: "v2.myths.m6", realityKey: "v2.myths.r6" },
+  { id: "sea-view", mythKey: "v2.myths.m7", realityKey: "v2.myths.r7" },
+  { id: "cheap", mythKey: "v2.myths.m8", realityKey: "v2.myths.r8" },
+  { id: "no-advice", mythKey: "v2.myths.m9", realityKey: "v2.myths.r9" },
+];
+
+function trackMythEvent(name: string, label?: string) {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", name, {
+      event_category: "market_myths",
+      ...(label ? { event_label: label } : {}),
+    });
+  }
+}
+
+function MarketMyths() {
+  const t = useT();
+  const [openId, setOpenId] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting) && !viewedRef.current) {
+          viewedRef.current = true;
+          trackMythEvent("market_myths_view");
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const toggle = (id: string) => {
+    setOpenId((prev) => {
+      const next = prev === id ? null : id;
+      if (next) trackMythEvent("market_myth_card_open", next);
+      return next;
+    });
+  };
+
+  return (
+    <section ref={sectionRef} className="rd-myths" id="market-myths" aria-labelledby="myths-title">
+      <div className="rd-wrap">
+        <div className="rd-myths-head rv">
+          <h2 id="myths-title" className="rd-h2">
+            {t("v2.myths.title")}
+          </h2>
+          <p className="rd-myths-sub">{t("v2.myths.subtitle")}</p>
+          <p className="rd-myths-intro">{t("v2.myths.intro")}</p>
+        </div>
+
+        <div className="rd-myths-grid rv">
+          {MYTHS.map((item) => {
+            const open = openId === item.id;
+            const panelId = `myth-panel-${item.id}`;
+            return (
+              <div key={item.id} className={`rd-myth-card${open ? " is-open" : ""}`}>
+                <button
+                  type="button"
+                  className="rd-myth-trigger"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => toggle(item.id)}
+                >
+                  <span className="rd-myth-quote">{t(item.mythKey)}</span>
+                  <span className="rd-myth-toggle" aria-hidden>
+                    {open ? "−" : "+"}
+                  </span>
+                </button>
+                <div
+                  id={panelId}
+                  className="rd-myth-panel"
+                  role="region"
+                  aria-hidden={!open}
+                >
+                  <p className="rd-myth-reality-label">{t("v2.myths.reality")}</p>
+                  <p className="rd-myth-reality-text">{t(item.realityKey)}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="rd-myths-cta rv">
+          <h3>{t("v2.myths.ctaTitle")}</h3>
+          <p>{t("v2.myths.ctaBody")}</p>
+          <div className="rd-myths-cta-actions">
+            <AppLink
+              href="/#consultation"
+              className="rd-btn rd-btn-white"
+              onNavigate={() => trackMythEvent("market_myths_deep_dive_click")}
+            >
+              {t("v2.myths.ctaPrimary")}
+            </AppLink>
+            <AppLink
+              href="/#faq"
+              className="rd-myths-secondary"
+              onNavigate={() => trackMythEvent("market_myths_quiz_click")}
+            >
+              {t("v2.myths.ctaSecondary")}
+            </AppLink>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Quote ────────────────────────────────────────────────────────────────────
 
 function Quote() {
@@ -156,7 +326,7 @@ function Quote() {
             <h2 className="rd-h2">{t("v2.quote.eyebrow")}</h2>
             <blockquote>“{t("v2.quote.text")}”</blockquote>
             <p className="rd-quote-author">{t("v2.quote.author")}</p>
-            <AppLink href="/invest#notes" className="rd-btn rd-btn-white">
+            <AppLink href="/invest#strategies" className="rd-btn rd-btn-white">
               {t("v2.quote.cta")}
             </AppLink>
           </div>
@@ -336,11 +506,12 @@ function useDragRail(cardSelector: string, gap = 12) {
 
 const PROJECTS = [
   { name: "Piazza Residence", img: "/projects/piazza/for-sale/exterior-tower.jpg", href: "/project/piazza-residence" },
+  { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-park-hero.jpg", href: "/project/artex-parkline" },
+  { name: "Rogantini Swiss Village", img: "/projects/rogantini/for-sale/ext-hero.jpg", href: "/project/rogantini-swiss-village" },
+  { name: "Silk Towers", img: "/projects/silk/for-sale/card.jpg", href: "/project/silk-towers" },
+  { name: "VR Shekvetili Forest Beach", img: "/projects/shekvetili/for-sale/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
   { name: "Krtsanisi Resort Residence", img: "/projects/krtsanisi/for-sale/ext-01.jpg", href: "/project/krtsanisi-resort-residence" },
-  { name: "Artex Parkline", img: "/projects/parkline/for-sale/ext-01.jpg", href: "/project/artex-parkline" },
-  { name: "Shekvetili Forest - Beach", img: "/projects/shekvetili/for-sale/ext-01.jpg", href: "/project/shekvetili-forest-beach" },
   { name: "Vake Sky Tower", img: "/projects/vake-sky/for-sale/ext-01.jpg", href: "/project/vake-sky-tower" },
-  { name: "Silk Towers", img: "/projects/silk/for-sale/card.png", href: "/project/silk-towers" },
 ];
 
 function SelectedProjects() {
@@ -358,7 +529,7 @@ function SelectedProjects() {
               <br />
               {t("v2.projects.titleEm")}
             </h2>
-            <p className="rd-small">{t("v2.projects.body")}</p>
+            <p className="rd-small" style={{ whiteSpace: "pre-line" }}>{t("v2.projects.body")}</p>
             <Link href="/catalog" className="rd-btn rd-btn-dark-outline">
               {t("v2.projects.viewAll")}
             </Link>
@@ -383,7 +554,9 @@ function SelectedProjects() {
                   aria-label={p.name}
                 >
                   <div className="rd-proj-img">
-                    <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
+                    {p.img ? (
+                      <img src={p.img} alt={p.name} loading="lazy" draggable={false} />
+                    ) : null}
                   </div>
                   <span className="rd-proj-name">{p.name}</span>
                 </Link>
@@ -536,11 +709,13 @@ function Feedback() {
           >
             {FEEDBACK.map((f) => (
               <figure key={f.quoteKey} className="rd-fb-card rv">
-                <blockquote>“{t(f.quoteKey)}”</blockquote>
-                <figcaption>— {t(f.authorKey)}</figcaption>
+                <div className="rd-fb-copy">
+                  <blockquote>“{t(f.quoteKey)}”</blockquote>
+                  <figcaption>— {t(f.authorKey)}</figcaption>
+                </div>
                 <div className="rd-fb-tags">
                   {f.tags.map((tag) => (
-                    <span key={tag}>{tag.replace(/^#/, "")}</span>
+                    <span key={tag}>{tag}</span>
                   ))}
                 </div>
               </figure>
@@ -657,6 +832,74 @@ function Pricing({ onRequest }: { onRequest: (s: ModalState) => void }) {
   );
 }
 
+// ─── FAQ ──────────────────────────────────────────────────────────────────────
+
+const HOME_FAQS: { qKey: MessageKey; aKey: MessageKey }[] = [
+  { qKey: "v2.faq.q1", aKey: "v2.faq.a1" },
+  { qKey: "v2.faq.q2", aKey: "v2.faq.a2" },
+  { qKey: "v2.faq.q3", aKey: "v2.faq.a3" },
+  { qKey: "v2.faq.q4", aKey: "v2.faq.a4" },
+  { qKey: "v2.faq.q5", aKey: "v2.faq.a5" },
+  { qKey: "v2.faq.q6", aKey: "v2.faq.a6" },
+  { qKey: "v2.faq.q7", aKey: "v2.faq.a7" },
+  { qKey: "v2.faq.q8", aKey: "v2.faq.a8" },
+  { qKey: "v2.faq.q9", aKey: "v2.faq.a9" },
+];
+
+function Faq() {
+  const t = useT();
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <section id="faq" className="rd-faq-outer">
+      <div className="rd-panel rd-panel-white rd-faq-panel">
+        <h2 className="rd-h2 rv">{t("v2.faq.title")}</h2>
+        <div className="rd-faq-list rv">
+          {HOME_FAQS.map((item, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div key={item.qKey} className={`rd-faq${isOpen ? " is-open" : ""}`}>
+                <button
+                  type="button"
+                  className="rd-faq-head"
+                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span>{t(item.qKey)}</span>
+                  <span className="rd-faq-toggle" aria-hidden>
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                {isOpen ? <p className="rd-faq-body">{t(item.aKey)}</p> : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Notes (selectivity) ──────────────────────────────────────────────────────
+
+function Notes() {
+  const t = useT();
+  return (
+    <section className="rd-notes" id="notes">
+      <div className="rd-wrap">
+        <div className="rd-notes-inner rv">
+          <h2 className="rd-h2">
+            {t("v2.notes.title1")}
+            <br />
+            {t("v2.notes.title2")}
+          </h2>
+          <p>{t("v2.notes.body")}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Newsletter ───────────────────────────────────────────────────────────────
 
 function Newsletter() {
@@ -689,7 +932,6 @@ function Newsletter() {
         setState("idle");
         return;
       }
-      trackLead({ source: "Newsletter subscribe" });
       setState("done");
       setEmail("");
     } catch {
@@ -762,7 +1004,7 @@ html, body { background: #21141A; }
   --card-light: #FFFEF9;
   --accent-plum: #703C54;
   --accent-blue: #8CB2C0;
-  --radius: 10px;
+  --radius: 2px;
   --bg: var(--bg-dark);
   --card: var(--card-gray);
   --green: var(--card-green);
@@ -773,8 +1015,8 @@ html, body { background: #21141A; }
   --body: 'Inter', sans-serif;
   /* One canvas: same max width + gutters as header / footer / every page */
   --rd-max: var(--site-max, 1440px);
-  --rd-gutter: var(--site-gutter, clamp(30px, 5.5vw, 80px));
-  --rd-inset: clamp(24px, 3vw, 40px);
+  --rd-gutter: var(--site-gutter, clamp(32px, 5vw, 80px));
+  --rd-inset: clamp(28px, 3.2vw, 48px);
   background: var(--bg);
   color: var(--text-light);
   overflow-x: hidden;
@@ -789,11 +1031,11 @@ html, body { background: #21141A; }
 .rd .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .rd .rv.in { opacity: 1; transform: none; }
 
-/* buttons — radius capped at 10px */
+/* buttons — radius capped at 2px */
 .rd-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--body); font-size: 15px; font-weight: 400;
-  padding: 15px 30px; border-radius: 10px; border: 1px solid transparent;
+  padding: 15px 30px; border-radius: 2px; border: 1px solid transparent;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
@@ -810,10 +1052,27 @@ html, body { background: #21141A; }
 .rd-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 4.45vw, 64px); line-height: 1.06; margin: 0; }
 .rd-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.14; margin: 0; }
 .rd-h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); line-height: 1.14; margin: 0; color: var(--text-dark); }
-.rd-lead { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.4; color: var(--text-light); margin: 0; }
+.rd-lead { font-family: var(--body); font-size: 16px; line-height: 1.45; color: var(--text-light); margin: 0; }
 .rd-small { font-family: var(--body); font-size: 16px; line-height: 1.4; color: rgba(33,20,26,.75); margin: 0; }
 .rd-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(34px, 4vw, 58px); }
-.rd-split .rd-lead { max-width: 420px; }
+.rd-split .rd-lead {
+  max-width: 420px; justify-self: end; text-align: right;
+}
+.rd-why-copy {
+  max-width: 440px; justify-self: end; text-align: left;
+  display: grid; gap: 14px;
+}
+.rd-why-lead {
+  font-family: var(--body); font-size: clamp(18px, 1.5vw, 22px); font-weight: 600;
+  line-height: 1.35; color: #FFFEF9; margin: 0;
+}
+.rd-why-copy .rd-lead { max-width: none; justify-self: start; text-align: left; color: rgba(255,254,249,.82); }
+.rd-why-link {
+  display: inline-flex; align-items: center; margin-top: 4px;
+  font-family: var(--body); font-size: 15px; font-weight: 500;
+  color: #FFFEF9; text-decoration: underline; text-underline-offset: 3px;
+}
+.rd-why-link:hover { opacity: .85; }
 
 /* hero — app shell already offsets fixed nav; center photo between nav and fold */
 .rd-hero { position: relative; padding-top: clamp(16px, 2vw, 28px); overflow: hidden; }
@@ -855,12 +1114,232 @@ html, body { background: #21141A; }
 .rd-hero-band { position: relative; line-height: 0; }
 .rd-hero-band img { width: 100%; height: clamp(280px, 58vw, 838px); object-fit: cover; display: block; }
 
+/* market person */
+.rd-market { padding: clamp(48px, 6vw, 96px) 0; background: #21141A; color: #FFFEF9; }
+.rd-market-head {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4vw, 56px); align-items: start;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.rd-market-head .rd-h2 { max-width: 640px; color: #FFFEF9; }
+.rd-market-copy {
+  display: grid; gap: 16px; max-width: 520px; justify-self: end;
+}
+.rd-market-copy p {
+  margin: 0; font-family: var(--body); font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5; color: rgba(255,254,249,.82);
+}
+.rd-market-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+}
+.rd-market-card {
+  border-radius: 2px; min-height: clamp(140px, 16vw, 180px);
+  padding: clamp(18px, 2vw, 24px);
+  display: flex; align-items: flex-end;
+  box-sizing: border-box;
+}
+.rd-market-card span {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(18px, 1.7vw, 24px); line-height: 1.2;
+}
+.rd-market-card-gray { background: #463C41; color: #FFFEF9; }
+.rd-market-card-green { background: #48674D; color: #FFFEF9; }
+.rd-market-card-white { background: #FFFEF9; color: #21141A; }
+.rd-market-card-plum { background: #703C54; color: #FFFEF9; }
+
+/* notes */
+.rd-notes { padding: clamp(48px, 6vw, 96px) 0; background: #21141A; color: #FFFEF9; }
+.rd-notes-inner { max-width: 820px; }
+.rd-notes-inner .rd-h2 { color: #FFFEF9; margin: 0 0 22px; }
+.rd-notes-inner p {
+  margin: 0; font-family: var(--body); font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.55; color: rgba(255,254,249,.82); max-width: 720px;
+}
+
+/* what to buy — bridge before projects */
+.rd-what {
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: #21141A;
+  color: #FFFEF9;
+}
+.rd-what-inner {
+  max-width: 720px;
+  display: grid;
+  gap: 16px;
+}
+.rd-what-inner .rd-h2 {
+  color: #FFFEF9;
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 48px);
+}
+.rd-what-inner .rd-lead {
+  color: rgba(255,254,249,.82);
+  max-width: 560px;
+}
+
+/* market myths */
+.rd-myths {
+  padding: clamp(48px, 6vw, 88px) 0;
+  background: #21141A;
+  color: #FFFEF9;
+}
+.rd-myths-head { max-width: 760px; margin-bottom: clamp(28px, 4vw, 44px); }
+.rd-myths-head .rd-h2 { color: #FFFEF9; margin: 0 0 14px; }
+.rd-myths-sub {
+  margin: 0 0 12px;
+  font-family: var(--body);
+  font-size: clamp(16px, 1.35vw, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #FFFEF9;
+}
+.rd-myths-intro {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5;
+  color: rgba(255,254,249,.78);
+  max-width: 640px;
+}
+.rd-myths-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+.rd-myth-card {
+  border-radius: 2px;
+  border: 1px solid rgba(255,254,249,.12);
+  background: rgba(255,254,249,.03);
+  overflow: hidden;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.rd-myth-card:hover {
+  border-color: rgba(255,254,249,.28);
+  background: rgba(255,254,249,.05);
+}
+.rd-myth-card.is-open {
+  border-color: rgba(255,254,249,.32);
+  background: rgba(255,254,249,.06);
+}
+.rd-myth-trigger {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: clamp(18px, 2vw, 22px);
+  border: none;
+  background: transparent;
+  color: #FFFEF9;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+.rd-myth-trigger:focus-visible {
+  outline: 2px solid #8CB2C0;
+  outline-offset: -2px;
+}
+.rd-myth-quote {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(17px, 1.55vw, 21px);
+  line-height: 1.25;
+}
+.rd-myth-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,254,249,.35);
+  font-size: 18px;
+  line-height: 1;
+  color: #FFFEF9;
+}
+.rd-myth-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 clamp(18px, 2vw, 22px);
+  transition: max-height .28s ease, opacity .2s ease, padding .28s ease;
+}
+.rd-myth-card.is-open .rd-myth-panel {
+  max-height: 420px;
+  opacity: 1;
+  padding: 0 clamp(18px, 2vw, 22px) clamp(18px, 2vw, 22px);
+}
+.rd-myth-reality-label {
+  margin: 0 0 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,254,249,.55);
+}
+.rd-myth-reality-text {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255,254,249,.82);
+}
+.rd-myths-cta {
+  max-width: 720px;
+  padding-top: 8px;
+}
+.rd-myths-cta h3 {
+  margin: 0 0 12px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.2;
+  color: #FFFEF9;
+}
+.rd-myths-cta p {
+  margin: 0 0 22px;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5;
+  color: rgba(255,254,249,.78);
+  max-width: 620px;
+}
+.rd-myths-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+.rd-myths-secondary {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255,254,249,.88);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rd-myths-secondary:hover { opacity: .85; }
+.rd-myths-secondary:focus-visible {
+  outline: 2px solid #8CB2C0;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rd-myth-card,
+  .rd-myth-panel {
+    transition: none;
+  }
+}
+
 /* why + stats — perfect squares; dark page section #21141A / #FFFEF9 */
 .rd-why { padding: clamp(56px, 7.6vw, 110px) 0 clamp(50px, 6vw, 90px); background: #21141A; color: #FFFEF9; }
 .rd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
 .rd-stat {
   aspect-ratio: 1 / 1; width: 100%; min-height: 0;
-  border-radius: 10px; padding: clamp(16px, 1.7vw, 26px);
+  border-radius: 2px; padding: clamp(16px, 1.7vw, 26px);
   display: flex; flex-direction: column; justify-content: space-between;
   box-sizing: border-box;
 }
@@ -868,7 +1347,7 @@ html, body { background: #21141A; }
 .rd-stat-plum { background: #463C41; color: #FFFEF9; } /* legacy alias → gray */
 .rd-stat-green { background: #48674D; color: #FFFEF9; }
 .rd-stat-white { background: #FFFEF9; color: #21141A; }
-.rd-stat-img { padding: 0; overflow: hidden; border-radius: 10px; }
+.rd-stat-img { padding: 0; overflow: hidden; border-radius: 2px; }
 .rd-stat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .rd-stat-value { display: block; font-family: var(--body); font-weight: 500; font-size: clamp(28px, 3.6vw, 56px); line-height: 1.05; }
 .rd-stat-label { display: block; font-family: var(--body); font-size: clamp(13px, 1.25vw, 20px); margin-top: 10px; color: #FFFEF9; }
@@ -896,7 +1375,7 @@ html, body { background: #21141A; }
 .rd-recog-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* panels — sit inside .rd-canvas so left content matches footer logo */
-.rd-panel { border-radius: 10px; margin: 0; }
+.rd-panel { border-radius: 2px; margin: 0; }
 .rd-panel-white { background: #FFFEF9; color: #21141A; }
 .rd-panel-light { background: #FFFEF9; color: #21141A; }
 .rd-projects-outer, .rd-fb-outer { padding-bottom: clamp(50px, 6vw, 90px); }
@@ -923,7 +1402,7 @@ html, body { background: #21141A; }
   flex: 0 0 clamp(220px, 22vw, 313px);
   text-decoration: none; color: inherit; cursor: pointer;
 }
-.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 10px; }
+.rd-proj-img { aspect-ratio: 313 / 440; overflow: hidden; background: #463C41; border-radius: 2px; }
 .rd-proj-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .6s ease; pointer-events: none; -webkit-user-drag: none;
@@ -941,7 +1420,7 @@ html, body { background: #21141A; }
 .rd-eco-row { display: flex; gap: 12px; align-items: stretch; }
 .rd-eco-card {
   position: relative; flex: 1 1 0; min-width: 0; overflow: hidden;
-  background: #463C41; border: none; border-radius: 10px; cursor: pointer;
+  background: #463C41; border: none; border-radius: 2px; cursor: pointer;
   min-height: clamp(320px, 44vw, 634px); padding: clamp(18px, 1.8vw, 28px);
   display: flex; flex-direction: column; justify-content: flex-start;
   text-align: left; color: var(--text-light); transition: flex-grow .45s ease;
@@ -1000,75 +1479,112 @@ html, body { background: #21141A; }
   --fb-size: clamp(240px, calc((100% - 32px) / 2.65), 340px);
   position: relative;
   flex: 0 0 var(--fb-size);
-  width: var(--fb-size); min-height: calc(var(--fb-size) + 20px);
+  width: var(--fb-size);
+  min-height: calc(var(--fb-size) + 120px);
   scroll-snap-align: start;
   margin: 0; box-sizing: border-box;
-  background: #412835; border-radius: 10px;
-  padding: clamp(22px, 2.2vw, 32px);
+  background: #412835; border-radius: 2px;
+  padding: clamp(28px, 2.8vw, 40px);
   display: flex; flex-direction: column; color: #FFFEF9; overflow: hidden;
   pointer-events: none;
 }
+.rd-fb-copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
 .rd-fb-card blockquote {
-  font-family: var(--body); font-weight: 700; font-size: 16px;
-  line-height: 1.35; margin: 0 0 18px; color: #FFFEF9;
+  font-family: var(--body); font-weight: 400; font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.45; margin: 0 0 16px; color: #FFFEF9;
+  text-align: left;
 }
 .rd-fb-card figcaption {
-  font-family: var(--body); font-size: clamp(13px, 1.1vw, 16px);
-  color: #FFFEF9; margin: 0 0 8px;
+  font-family: var(--body); font-size: clamp(12px, 1vw, 14px);
+  font-weight: 400; color: rgba(255,254,249,.78); margin: 0; line-height: 1.4;
+  text-align: left;
 }
-.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 18px; }
+.rd-fb-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: auto; padding-top: 28px; flex-shrink: 0; }
 .rd-fb-tags span {
-  font-family: var(--body); font-size: 16px; padding: 7px 12px; color: #FFFEF9;
-  border: 1px solid rgba(255,254,249,.55); border-radius: 10px;
-  text-transform: capitalize;
+  font-family: var(--body); font-size: 12px; line-height: 1.35;
+  padding: 0; color: rgba(255,254,249,.78);
+  border: none; border-radius: 0;
+  text-transform: none; letter-spacing: 0.01em;
 }
 .rd-fb-track { margin-top: 18px; }
 
 /* pricing — dark page section; light cards + green featured */
 .rd-pricing { padding: clamp(20px, 3vw, 44px) 0 clamp(56px, 7vw, 100px); background: #21141A; color: #FFFEF9; }
 .rd-pricing .rd-h1 { margin-bottom: clamp(28px, 3.5vw, 56px); color: #FFFEF9; }
-.rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.rd-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 24px); align-items: stretch; }
 .rd-plan {
-  /* Express Audit / Discovery Tour */
-  background: #FFFEF9; color: #21141A; border-radius: 10px;
-  padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column;
+  /* Express Audit / Discovery Tour — taller frame, more air */
+  background: #FFFEF9; color: #21141A; border-radius: 2px;
+  padding: clamp(36px, 3.4vw, 52px) clamp(28px, 2.8vw, 40px);
+  display: flex; flex-direction: column;
+  min-height: clamp(640px, 72vh, 820px);
+  box-sizing: border-box;
 }
 .rd-plan.is-featured {
   /* Strategic Deep-Dive */
   background: #48674D; color: #FFFEF9;
 }
 .rd-plan.is-featured .rd-plan-for { border-bottom-color: rgba(255,254,249,.2); }
-.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 8px; }
+.rd-plan h3 { font-family: var(--display); font-weight: 400; font-size: clamp(21px, 2.22vw, 32px); margin: 0 0 12px; }
 .rd-plan-for {
-  font-family: var(--body); font-size: 16px; line-height: 1.3; margin: 0 0 16px;
-  padding-bottom: 16px; border-bottom: 1px solid rgba(33,20,26,.15);
+  font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0 0 22px;
+  padding-bottom: 22px; border-bottom: 1px solid rgba(33,20,26,.15);
 }
-.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 28px; font-variant-numeric: tabular-nums; }
-.rd-plan ul { list-style: disc; margin: 0 0 26px; padding-left: 18px; display: grid; gap: 8px; }
-.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.35; }
-.rd-plan-block { margin-bottom: 20px; }
-.rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 6px; }
-.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.35; margin: 0; }
+.rd-plan-price { font-family: var(--body); font-weight: 400; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin-bottom: 36px; font-variant-numeric: tabular-nums; }
+.rd-plan ul { list-style: disc; margin: 0 0 36px; padding-left: 18px; display: grid; gap: 12px; }
+.rd-plan li { font-family: var(--body); font-size: 16px; line-height: 1.4; }
+.rd-plan-block { margin-bottom: 28px; }
+.rd-plan-block strong { display: block; font-family: var(--body); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+.rd-plan-block p { font-family: var(--body); font-size: 16px; line-height: 1.45; margin: 0; }
 .rd-plan-note {
-  font-family: var(--body); font-size: 13px; line-height: 1.4;
-  color: rgba(33,20,26,.55); margin: 0 0 18px;
+  font-family: var(--body); font-size: 13px; line-height: 1.45;
+  color: rgba(33,20,26,.55); margin: 4px 0 28px;
 }
 .rd-plan.is-featured .rd-plan-note { color: rgba(255,254,249,.7); }
-.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 14px 18px; border-radius: 10px; }
+.rd-plan-cta { margin-top: auto; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 2px; }
+
+/* FAQ — after pricing */
+.rd-faq-outer { padding-bottom: clamp(40px, 5vw, 72px); }
+.rd-faq-panel { padding: clamp(34px, 4.4vw, 68px) var(--rd-inset); }
+.rd-faq-panel .rd-h2 { margin: 0 0 clamp(22px, 3vw, 36px); color: #21141A; }
+.rd-faq { border-top: 1px solid rgba(33,20,26,.1); }
+.rd-faq:last-child { border-bottom: 1px solid rgba(33,20,26,.1); }
+.rd-faq-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 0; border: none; background: transparent; cursor: pointer;
+  text-align: left; color: #21141A; font-family: var(--body); font-size: clamp(15px, 1.25vw, 17px);
+  font-weight: 500; line-height: 1.35;
+}
+.rd-faq-toggle {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: #21141A; color: #FFFEF9;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;
+}
+.rd-faq-body {
+  margin: 0 0 18px; max-width: 760px;
+  font-family: var(--body); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.55;
+  color: rgba(33,20,26,.72);
+}
 
 /* newsletter CTA — image bg /images/cta-bg.jpg, fallback #21141A (no solid plum fill) */
 .rd-news-outer { padding-bottom: clamp(40px, 5vw, 70px); background: #21141A; }
 .rd-news {
-  position: relative; border-radius: 10px; overflow: hidden;
+  position: relative; border-radius: 2px; overflow: hidden;
   background-color: #21141A;
   background-image: url('/images/cta-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(780px + var(--rd-inset)); }
+.rd-news-inner { position: relative; padding: clamp(30px, 4vw, 56px) var(--rd-inset); max-width: calc(920px + var(--rd-inset)); }
 .rd-news-inner h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.35vw, 48px); margin: 0 0 18px; color: #FFFEF9; }
-.rd-news-inner > p { font-family: var(--body); font-size: clamp(15px, 1.39vw, 20px); line-height: 1.35; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
+.rd-news-inner > p { font-family: var(--body); font-size: clamp(13px, 1.15vw, 16px); line-height: 1.4; color: #FFFEF9; margin: 0 0 34px; max-width: 640px; }
 .rd-news-row {
   display: flex; align-items: flex-end; gap: 16px;
   border-bottom: 1px solid rgba(255,254,249,.4); padding-bottom: 8px;
@@ -1076,10 +1592,10 @@ html, body { background: #21141A; }
 .rd-news-row input {
   flex: 1; min-width: 0; background: transparent; border: none; outline: none;
   font-family: var(--body); font-size: 16px; color: #FFFEF9; padding: 10px 0;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 .rd-news-row input::placeholder { color: rgba(255,254,249,.6); }
-.rd-news-row .rd-btn { min-width: 171px; border-radius: 10px; }
+.rd-news-row .rd-btn { min-width: 171px; border-radius: 2px; }
 .rd-news-agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-family: var(--body); font-size: 12px; font-style: italic; color: #FFFEF9; cursor: pointer; }
 .rd-news-agree input { accent-color: #FFFEF9; margin-top: 2px; }
 .rd-news-agree a, .rd-news-privacy {
@@ -1099,6 +1615,8 @@ html, body { background: #21141A; }
   .rd-hero-photo { max-width: 420px; max-height: none; width: 100%; }
   .rd-hero-copy { margin-left: 0; padding-left: 0; }
   .rd-split { grid-template-columns: 1fr; gap: 18px; }
+  .rd-split .rd-lead { justify-self: start; text-align: left; max-width: none; }
+  .rd-why-copy { justify-self: start; max-width: none; }
   .rd-recog { grid-template-columns: 1fr; }
   .rd-recog-visual { aspect-ratio: 16 / 10; max-height: 420px; }
   .rd-stats { grid-template-columns: repeat(2, 1fr); }
@@ -1116,6 +1634,11 @@ html, body { background: #21141A; }
   .rd-eco-card .rd-eco-photo { opacity: .4; }
   .rd-eco-card .rd-eco-body { opacity: 1; max-height: none; margin-top: auto; }
   .rd-plans { grid-template-columns: 1fr; }
+  .rd-plan { min-height: 0; padding: clamp(32px, 5vw, 44px) clamp(24px, 4vw, 32px); }
+  .rd-market-head { grid-template-columns: 1fr; gap: 18px; }
+  .rd-market-copy { justify-self: start; max-width: none; }
+  .rd-market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rd-myths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   .rd-hero-circle { width: 420px; height: 420px; top: -140px; right: -140px; }
@@ -1126,6 +1649,9 @@ html, body { background: #21141A; }
   .rd-fb-card { --fb-size: min(78vw, 300px); }
   .rd-fb-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .rd-fb-rail { padding-right: 56px; }
+  .rd-market-grid { grid-template-columns: 1fr; }
+  .rd-myths-grid { grid-template-columns: 1fr; }
+  .rd-myths-cta-actions { flex-direction: column; align-items: flex-start; }
 }
 `;
 
@@ -1140,16 +1666,21 @@ export default function HomeV2() {
       <style>{CSS}</style>
 
       <Hero onRequest={setModal} />
+      <MarketPerson />
+      <Pricing onRequest={setModal} />
+      <div className="rd-canvas">
+        <Faq />
+      </div>
       <WhyGeorgia />
-      <Quote />
+      <WhatToBuy />
+      <MarketMyths />
       <div className="rd-canvas">
         <SelectedProjects />
       </div>
-      <Ecosystem />
+      <Notes />
       <div className="rd-canvas">
         <Feedback />
       </div>
-      <Pricing onRequest={setModal} />
       <div className="rd-canvas">
         <Newsletter />
       </div>

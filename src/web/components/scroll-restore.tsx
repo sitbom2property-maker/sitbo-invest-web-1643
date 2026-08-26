@@ -50,6 +50,8 @@ export function ScrollRestore() {
   }, []);
 
   useEffect(() => {
+    // Project pages always start at the top; don't jump back into apartment picker.
+    if (location.startsWith("/project")) return;
     if (window.location.hash) return;
     try {
       const raw = sessionStorage.getItem(KEY);

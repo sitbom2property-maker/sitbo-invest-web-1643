@@ -2,7 +2,7 @@ export type Project = {
   name: string;
   slug: string;
   tag: string;
-  city: "Batumi" | "Tbilisi" | "Chakvi / Gonio" | "Makhinjauri" | "Shekvetili";
+  city: "Batumi" | "Tbilisi" | "Chakvi" | "Gonio" | "Makhinjauri" | "Shekvetili";
   address: string;
   seaDistance: string;
   seaMeters: string;
@@ -10,6 +10,8 @@ export type Project = {
   desc: string;
   yield: string;
   developer: string;
+  /** Architect / architecture studio; placeholder until confirmed. */
+  architect?: string;
   priceFrom: string;
   priceUSD: number; // for sorting
   completion: string;
@@ -18,11 +20,18 @@ export type Project = {
   floors: string;
   buildings: string;
   finishing: string;
+  /** Optional; defaults to localized "Yes" in the Property Details grid. */
+  climateAdaptation?: string;
   installment: string;
   features: string[];
   materials: string;
   photos: string[];
   cardImage: string;
+  /**
+   * Optional 5-image showreel for the project-page mosaic (house / outdoor /
+   * reception / apartment mix). Lightbox always uses the full `photos` list.
+   */
+  galleryPreview?: string[];
   lat: number;
   lng: number;
   /** Google Maps search query for the embed pin; falls back to lat,lng. */
@@ -31,6 +40,8 @@ export type Project = {
   floorPlanLabels?: string[];
   floorPlanAreas?: string[];
   pricePerSqm?: string;
+  /** Defaults to apartment when omitted. */
+  propertyType?: "apartment" | "aparthotel" | "apartment-aparthotel" | "residence" | "villa" | "townhouse";
   liveCameraUrl?: string;
   tourUrl?: string;
   panoramaUrl?: string;
@@ -40,12 +51,82 @@ export type Project = {
   installmentMonths?: number;
   /** YYYY-MM when installmentMonths was the remaining term. */
   installmentAnchorYm?: string;
+  /**
+   * Optional payment schedules shown as percentage bars.
+   * When omitted, derived from downPaymentPct / installment when possible.
+   */
+  paymentPlans?: PaymentPlan[];
   developerBody?: string;
   districtTitle?: string;
   districtBody?: string;
   districtBody2?: string;
   apartmentsKey?: "piazza" | "parkline";
+  /** Optional construction timeline; when omitted, derived from completion year. */
+  constructionProgress?: ConstructionProgress;
+  /** Optional award badges shown under the sidebar offer card. */
+  awards?: { src: string; alt: string }[];
+  /**
+   * Optional ownership / loyalty benefits block (e.g. Silk Rewards).
+   * When set, shown as “Ownership benefits” with a popup for the full list.
+   */
+  ownershipBenefits?: {
+    title: string;
+    body: string;
+    linkLabel: string;
+    popupItems: string[];
+  };
+  /** Show a “Trophy property” badge next to the project name. */
+  trophyProperty?: boolean;
 };
+
+export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
+
+export type ConstructionStage = {
+  id: ConstructionStageId;
+  year: number;
+};
+
+export type ConstructionProgress = {
+  /** Last reached stage index (0-based); stages 0..activeIndex render as complete. */
+  activeIndex: number;
+  stages: ConstructionStage[];
+};
+
+export type PaymentStage = "down" | "construction" | "handover";
+
+export type PaymentSegment = {
+  pct: number;
+  stage: PaymentStage;
+};
+
+export type PaymentPlan = PaymentSegment[];
+
+/** Resolve displayable payment plans; sitewide standard is 30% / 70%. */
+export function resolvePaymentPlans(_p: Project): PaymentPlan[] {
+  return [[{ stage: "down", pct: 30 }, { stage: "construction", pct: 70 }]];
+}
+
+/** Resolve construction timeline for the Progress & Updates bar. */
+export function resolveConstructionProgress(p: Project): ConstructionProgress {
+  if (p.constructionProgress?.stages?.length) {
+    const stages = p.constructionProgress.stages;
+    const activeIndex = Math.max(0, Math.min(stages.length - 1, p.constructionProgress.activeIndex));
+    return { stages, activeIndex };
+  }
+
+  const match = p.completion.match(/20\d{2}/);
+  const handover = match ? Number(match[0]) : new Date().getFullYear() + 2;
+  const stages: ConstructionStage[] = [
+    { id: "foundation", year: handover - 3 },
+    { id: "construction", year: handover - 2 },
+    { id: "facade", year: handover - 1 },
+    { id: "handover", year: handover },
+  ];
+  const now = new Date().getFullYear();
+  let activeIndex = stages.findIndex((s) => s.year > now) - 1;
+  if (activeIndex < 0) activeIndex = stages.every((s) => s.year <= now) ? stages.length - 1 : 0;
+  return { stages, activeIndex };
+}
 
 export const projects: Project[] = [
   {
@@ -59,58 +140,83 @@ export const projects: Project[] = [
     location: "Old Batumi, Vakhtang Gorgasali 59–61 · 10 min walk to the sea",
     desc: "A landmark residence in the historic heart of Old Batumi. Architecture that reads the neighbourhood's heritage, a private piazza with Venetian fountains, and a restored 119-year cultural monument. Step outside and you are already in the city's cultural district — the seafront is a ten-minute walk.",
     yield: "10–12%",
-    developer: "Tower Group",
+    developer: "Tower Group x MOVE Development",
+    architect: "Alpha Architecture",
     priceFrom: "From $89,250",
     priceUSD: 89250,
-    completion: "Q4 2027",
+    completion: "Q4 2028",
     area: "35.1–141.3 m²",
-    ceilingHeight: "3.0 m",
-    floors: "24 floors",
-    buildings: "1 building",
+    ceilingHeight: "3 m",
+    floors: "24",
+    buildings: "1",
     finishing: "White frame",
+    climateAdaptation: "Yes",
     installment: "30% down / 0% over 27 months",
     downPaymentPct: 30,
     installmentMonths: 27,
     installmentAnchorYm: "2026-08",
     apartmentsKey: "piazza",
     developerLogo: "/projects/piazza/brand/developer-logo.png",
+    constructionProgress: {
+      activeIndex: 1,
+      stages: [
+        { id: "foundation", year: 2025 },
+        { id: "construction", year: 2026 },
+        { id: "facade", year: 2027 },
+        { id: "handover", year: 2028 },
+      ],
+    },
     developerBody:
-      "Tower Group is a Batumi developer known for Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
+      "Tower Group x MOVE Development is the partnership behind Piazza Residence — a premium complex that restores a protected historic building and adds a contemporary tower with hotel-grade infrastructure in the old town.",
     districtTitle: "Old Batumi",
     districtBody:
       "Old Batumi is the city's cultural and entertainment core: the historic Piazza, central park, restaurants, boutiques and the seaside boulevard are all within a short walk. Property here holds value because the location cannot be replicated.",
     districtBody2:
       "Schools, a university, a hospital and the main streets of the city sit around the Gorgasali / 26 May intersection. Batumi International Airport is about 15 minutes by car.",
     features: [
-      "Historic Old Batumi address",
-      "Private piazza with Venetian fountains",
-      "24/7 concierge & security",
-      "Underground parking",
-      "Coworking spaces",
-      "Children's play area",
-      "Gym",
-      "Restaurants, cafés and concept stores",
-      "Ventilated façade",
-      "Restored 119-year cultural monument",
+      "All-season infrastructure",
+      "High-yield investment",
+      "Historic center",
+      "Courtyard with fountains",
+      "Lounge areas",
+      "Terraces",
+      "Fine dining restaurants, cafes, and bars",
+      "Recreational areas",
+      "Two-level underground parking",
+      "24/7 security & service",
+      "Barrier-free environment",
     ],
     materials:
-      "Energy-efficient monolithic-frame construction with a ventilated façade and premium finishes. The project restores a 119-year-old building officially recognised as a cultural heritage monument, combining historic fabric with a contemporary residential tower.",
+      "8+ Seismic Resilience: Monolithic RC frame. Panoramic, energy-efficient glazing with sound and UV protection: Floor-to-ceiling energy packages. Glazing UV and noise protection: Aluminum double glazing. Elevators (Otis/Kone): High-speed passenger lifts. Climate systems: Central climate adaptation.",
     photos: [
-      "/projects/piazza/for-sale/exterior-tower.jpg",
-      "/projects/piazza/for-sale/exterior-entrance.jpg",
-      "/projects/piazza/marketing/piazza-cafe.jpg",
-      "/projects/piazza/marketing/lobby.jpg",
-      "/projects/piazza/interiors/interior-1.jpg",
-      "/projects/piazza/interiors/interior-2.jpg",
-      "/projects/piazza/interiors/interior-3.jpg",
-      "/projects/piazza/interiors/interior-4.jpg",
-      "/projects/piazza/interiors/interior-5.jpg",
-      "/projects/piazza/interiors/interior-6.jpg",
-      "/projects/piazza/for-sale/exterior-2.jpg",
-      "/projects/piazza/for-sale/exterior-3.jpg",
-      "/projects/piazza/marketing/render-2br.jpg",
+      // Building (render 5 first)
+      "/projects/piazza/for-sale/ext-render-5.jpg",
+      "/projects/piazza/for-sale/ext-building-1.jpg",
+      "/projects/piazza/for-sale/ext-building-3.jpg",
+      "/projects/piazza/for-sale/ext-building-4.jpg",
+      "/projects/piazza/for-sale/ext-building-6.jpg",
+      "/projects/piazza/for-sale/ext-building-7.jpg",
+      "/projects/piazza/for-sale/ext-building-10.jpg",
+      "/projects/piazza/for-sale/ext-yard-07.jpg",
+      // Reception
+      "/projects/piazza/marketing/reception-01.jpg",
+      "/projects/piazza/marketing/reception-02.jpg",
+      "/projects/piazza/marketing/reception-03.jpg",
+      "/projects/piazza/marketing/reception-04.jpg",
+      "/projects/piazza/marketing/reception-05.jpg",
+      "/projects/piazza/marketing/reception-06.jpg",
+      // Apartment
+      "/projects/piazza/interiors/apartment-01.jpg",
     ],
-    cardImage: "/projects/piazza/for-sale/card.jpg",
+    // Mosaic showreel: building → yard → reception → apartment → building
+    galleryPreview: [
+      "/projects/piazza/for-sale/ext-render-5.jpg",
+      "/projects/piazza/for-sale/ext-yard-07.jpg",
+      "/projects/piazza/marketing/reception-01.jpg",
+      "/projects/piazza/interiors/apartment-01.jpg",
+      "/projects/piazza/for-sale/ext-building-1.jpg",
+    ],
+    cardImage: "/projects/piazza/for-sale/ext-render-5.jpg",
     lat: 41.64573,
     lng: 41.63408,
     mapsQuery: "Piazza Residence, 59-61 Vakhtang Gorgasali St, Batumi",
@@ -120,9 +226,10 @@ export const projects: Project[] = [
       "/projects/piazza/floor-plans/layout-2br.jpg",
       "/projects/piazza/floor-plans/layout-3br.jpg",
     ],
-    floorPlanLabels: ["Studio", "1+1", "2+1", "3+1"],
+    floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
     floorPlanAreas: ["35.7 m²", "53.5 m²", "76.9 m²", "134 m²"],
     pricePerSqm: "from $2,450/m²",
+    propertyType: "apartment",
   },
   {
     name: "Artex Parkline",
@@ -133,65 +240,95 @@ export const projects: Project[] = [
     seaDistance: "10 minutes to the sea",
     seaMeters: "800 m",
     location: "New Boulevard, Angisa 1st lane 35b · 10 min to the sea",
-    desc: "A business-class residence on Batumi’s New Boulevard: three towers of 26–28 floors around a landscaped courtyard with a pool, spa, kindergarten and coworking. Thoughtful layouts from studios to 2+1, park-front living, and a 3D apartment selector so you can pick a unit before you fly in.",
+    desc: "Parkline by Artex is a family-oriented city-within-a-city residence on Batumi’s New Boulevard, featuring three 26–28 floor towers around a landscaped courtyard with a pool, spa, kindergarten, and coworking.",
     yield: "9–11%",
     developer: "Artex",
+    architect: "Roman Aphakidze",
     priceFrom: "From $52,480",
     priceUSD: 52480,
     completion: "Q2 2029",
-    area: "32.8–71.2 m²",
+    area: "32–71 m²",
     ceilingHeight: "2.9 m",
-    floors: "26–28 floors",
-    buildings: "3 buildings",
+    floors: "26–28",
+    buildings: "3",
     finishing: "White frame",
-    installment: "30% down / 0% over 40 months",
+    installment: "30% / 70%",
+    propertyType: "apartment",
     downPaymentPct: 30,
     apartmentsKey: "parkline",
-    developerLogo: "/projects/parkline/brand/developer-logo.svg",
+    constructionProgress: {
+      activeIndex: 0,
+      stages: [
+        { id: "foundation", year: 2026 },
+        { id: "construction", year: 2027 },
+        { id: "facade", year: 2028 },
+        { id: "handover", year: 2029 },
+      ],
+    },
+    developerLogo: "/projects/parkline/brand/developer-logo.png",
     developerBody:
       "Artex is a Batumi developer behind Parkline — a mixed-use complex on the New Boulevard with hotel-grade infrastructure, jet-grouted foundations and seismic design above the mandatory standard.",
     districtTitle: "New Boulevard",
     districtBody:
-      "The New Boulevard is Batumi’s fastest-growing seaside district: a new park avenue, the expanding waterfront and a short hop to the airport. Parkline sits at Angisa 1st lane 35b, about 800 m from the beach.",
-    districtBody2:
-      "Batumi International Airport is around 8 minutes by car. Schools, a kindergarten and everyday services are nearby, while the city’s largest park and the seafront are a 10-minute walk.",
+      "The New Boulevard is Batumi’s greenest and fastest-growing seaside district. Unlike the busy old town and center, it offers a calmer, family-oriented environment featuring a new park avenue, the expansive Lech and Maria Kaczynski Park, and the nearby coastline. Cafes, shops, and sports facilities are all within easy reach, while Batumi International Airport is just an 8-minute drive.",
     features: [
-      "Park-front New Boulevard address",
-      "Kindergarten & children’s playroom",
-      "SPA with indoor and outdoor pools",
-      "Fitness centre & coworking",
-      "Concierge 24/7",
+      "All-season infrastructure",
+      "Commercial & coworking hub",
+      "Smart living tech",
+      "24/7 security & service",
       "Underground parking for 120 cars",
+      "Indoor pool",
+      "Outdoor pool",
+      "Gym",
+      "Spa",
+      "Pharmacy",
+      "Cinema",
+      "Kindergarten",
+      "Playground",
       "Pet zone with paw-wash",
-      "Rooftop terraces",
-      "Panoramic glazing",
-      "3D apartment tour",
+      "High-yield investment",
     ],
     materials:
-      "Jet Grouting: Deep soil cementation creates Soilcrete — a rock-like formation that removes deformation risk and keeps the towers static. Moisture & corrosion protection: Grade B30 waterproof concrete shields the reinforcement and extends the building’s life. Seismic resilience: The structure is designed for an 8-magnitude earthquake, above Georgia’s mandatory 7-magnitude standard.",
+      "8+ Seismic Resilience: Monolithic RC frame. Facade & insulation: Ventilated coastal hydro/thermal facade. Glazing UV and noise protection: Aluminum double-glazed windows. Elevators (Otis/Kone): High-speed with backup power. Climate systems: Central VRV/VRF and ventilation. White frame: Screed, plaster, wiring, plumbing points.",
     photos: [
-      "/projects/parkline/for-sale/ext-01.jpg",
-      "/projects/parkline/for-sale/ext-07.jpg",
-      "/projects/parkline/for-sale/ext-13.jpg",
-      "/projects/parkline/for-sale/ext-02.jpg",
+      // Building renders
+      "/projects/parkline/for-sale/ext-park-hero.jpg",
+      "/projects/parkline/for-sale/ext-entrance-branded.jpg",
       "/projects/parkline/for-sale/ext-03.jpg",
-      "/projects/parkline/for-sale/ext-05.jpg",
-      "/projects/parkline/for-sale/ext-09.jpg",
-      "/projects/parkline/for-sale/ext-11.jpg",
-      "/projects/parkline/for-sale/ext-16.jpg",
-      "/projects/parkline/for-sale/ext-20.jpg",
+      "/projects/parkline/for-sale/ext-pool-deck.jpg",
+      "/projects/parkline/for-sale/ext-13.jpg",
       "/projects/parkline/for-sale/ext-22.jpg",
-      "/projects/parkline/for-sale/ext-23.jpg",
+      "/projects/parkline/for-sale/ext-playground.jpg",
+      "/projects/parkline/for-sale/ext-16.jpg",
+      "/projects/parkline/for-sale/ext-terrace-sunset.jpg",
+      "/projects/parkline/for-sale/ext-sunset-towers.jpg",
+      "/projects/parkline/for-sale/ext-night-aerial.jpg",
+      // Indoor pool before reception
+      "/projects/parkline/marketing/int-pool-lounge.jpg",
+      // Reception & common interiors
       "/projects/parkline/marketing/int-lobby.jpg",
       "/projects/parkline/marketing/int-lobby-2.jpg",
-      "/projects/parkline/marketing/int-reception-1.jpg",
       "/projects/parkline/marketing/int-reception-2.jpg",
+      "/projects/parkline/marketing/int-reception-1.jpg",
+      "/projects/parkline/marketing/int-kids-play.jpg",
+      // Apartments
+      "/projects/parkline/interiors/int-2br-live.jpg",
+      "/projects/parkline/interiors/int-living-wood.jpg",
       "/projects/parkline/interiors/int-studio.jpg",
       "/projects/parkline/interiors/int-1br.jpg",
-      "/projects/parkline/interiors/int-2br-live.jpg",
+      "/projects/parkline/interiors/int-kitchen.jpg",
       "/projects/parkline/interiors/int-2br-bed.jpg",
+      "/projects/parkline/interiors/int-bedroom-soft.jpg",
     ],
-    cardImage: "/projects/parkline/for-sale/card.png",
+    // Mosaic showreel: house → outdoor → reception → apartment → outdoor
+    galleryPreview: [
+      "/projects/parkline/for-sale/ext-park-hero.jpg",
+      "/projects/parkline/for-sale/ext-pool-deck.jpg",
+      "/projects/parkline/marketing/int-reception-2.jpg",
+      "/projects/parkline/interiors/int-2br-live.jpg",
+      "/projects/parkline/for-sale/ext-16.jpg",
+    ],
+    cardImage: "/projects/parkline/for-sale/ext-park-hero.jpg",
     lat: 41.6282308808277,
     lng: 41.60779103914824,
     floorPlans: [
@@ -200,11 +337,320 @@ export const projects: Project[] = [
       "/projects/parkline/floor-plans/layout-559.jpg",
       "/projects/parkline/floor-plans/layout-629.jpg",
     ],
-    floorPlanLabels: ["Studio 37.6 m²", "1+1 51.6 m²", "1+1 55.9 m²", "2+1 62.9 m²"],
+    floorPlanLabels: ["Studio", "1 BD", "2 BD", "3 BD"],
     pricePerSqm: "from $1,300/m²",
     liveCameraUrl: "https://rtsp.me/embed/NYD67ak2/",
     tourUrl: "https://flatshow.property/ru/Parkline#/",
     panoramaUrl: "https://tour.panoee.net/69f77826c2c57195733b52a5/parkline-13-fl",
+  },
+  {
+    name: "Rogantini Swiss Village",
+    slug: "rogantini-swiss-village",
+    tag: "Chakvi · Alpine Quality",
+    city: "Chakvi",
+    address: "Chakvi, suburb of Batumi · 15 minutes by car",
+    seaDistance: "5 minutes to the beach",
+    seaMeters: "400 m",
+    location: "Chakvi, suburb of Batumi · 15 minutes by car",
+    desc: "An ultra-premium boutique development by Rogantini Development, a Swiss holding founded in 1967. Set on a private 1.5-hectare hill in the pristine suburb of Chakvi, the complex offers 360° panoramic views of the Black Sea, mountains, and Batumi. The project focuses on Swiss construction precision and uncompromising climate protection.",
+    yield: "8–11%",
+    developer: "Rogantini Development",
+    architect: "Alessandro Rogantini x Valerie Gogaba",
+    priceFrom: "From €93,684",
+    priceUSD: 101400,
+    completion: "Q4 2027",
+    area: "34.1–193.6 m²",
+    ceilingHeight: "3 m",
+    floors: "2–12",
+    buildings: "3",
+    finishing: "Turnkey",
+    climateAdaptation: "Yes",
+    installment: "30% / 70%",
+    propertyType: "apartment-aparthotel",
+    developerBody:
+      "Rogantini Development is a Swiss holding founded in 1967, bringing alpine construction precision and climate protection standards to boutique residences on Georgia’s Black Sea coast.",
+    districtTitle: "Chakvi",
+    districtBody:
+      "Chakvi (a suburb of Batumi, 15 minutes by car) is a quiet, green resort area known for its pristine ecology. Unlike the bustling center of Batumi, there is no dense high‑rise development here, and the air is exceptionally fresh (AQI index around 20) thanks to the surrounding eucalyptus and citrus groves.",
+    features: [
+      "Mountain & sea panoramic views",
+      "All-season infrastructure",
+      "Clean air · 20 AQI",
+      "Wellness & SPA",
+      "Private poker room",
+      "Conference rooms",
+      "Coworking areas",
+      "24/7 security & service",
+      "Underground parking",
+      "Padel courts, children's play areas, and sports grounds",
+      "Beach shuttle service",
+      "350 m² swimming pools",
+      "Outdoor cinema",
+      "Pet area",
+      "BBQ-zone",
+    ],
+    materials:
+      "Anti-Mold Facade: Swiss climate-protection cladding. 9+ Seismic Resilience: Structural design above code. Deep foundation: Engineered hill foundations. Knauf noise insulation: Acoustic partitions. Schüco Glazing: Premium aluminum systems.",
+    photos: [
+      // Building / outdoor
+      "/projects/rogantini/for-sale/ext-hero.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-01.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-02.jpg",
+      "/projects/rogantini/for-sale/ext-view-real.jpg",
+      // Reception
+      "/projects/rogantini/marketing/reception-01.jpg",
+      "/projects/rogantini/marketing/reception-02.jpg",
+      "/projects/rogantini/marketing/reception-03.jpg",
+      // Apartments
+      "/projects/rogantini/interiors/apartment-01.jpg",
+      "/projects/rogantini/interiors/apartment-02.jpg",
+      "/projects/rogantini/interiors/apartment-03.jpg",
+      "/projects/rogantini/interiors/apartment-04.jpg",
+      "/projects/rogantini/interiors/apartment-05.jpg",
+      "/projects/rogantini/interiors/apartment-06.jpg",
+      "/projects/rogantini/interiors/apartment-07.jpg",
+      "/projects/rogantini/interiors/apartment-08.jpg",
+    ],
+    galleryPreview: [
+      "/projects/rogantini/for-sale/ext-hero.jpg",
+      "/projects/rogantini/for-sale/ext-outdoor-02.jpg",
+      "/projects/rogantini/marketing/reception-02.jpg",
+      "/projects/rogantini/interiors/apartment-01.jpg",
+      "/projects/rogantini/for-sale/ext-view-real.jpg",
+    ],
+    cardImage: "/projects/rogantini/for-sale/ext-hero.jpg",
+    lat: 41.726315131195776,
+    lng: 41.744580906746044,
+    mapsQuery: "41.726315131195776,41.744580906746044",
+    floorPlans: [],
+    floorPlanLabels: [],
+    pricePerSqm: "from €2,485–€4,735/m²",
+    awards: [
+      {
+        src: "/projects/rogantini/brand/lla-winner-2026.png",
+        alt: "Luxury Lifestyle Awards 2026 — Best Luxury Residential Development, Georgia",
+      },
+    ],
+    liveCameraUrl: undefined,
+  },
+  {
+    name: "Silk Towers",
+    slug: "silk-towers",
+    tag: "Old Batumi · First Line",
+    city: "Batumi",
+    address: "Black Sea Blvd, 1",
+    seaDistance: "1–2 minutes to the sea",
+    seaMeters: "100 m",
+    location: "Old Batumi · 100 m to the sea",
+    desc: "Silk Towers is a signature residential project by Kengo Kuma, a globally recognized architect and a leading figure among international starchitects. Located on historic land and developed by a trusted Georgian developer, the project brings together refined architecture, private waterfront lifestyle, and a complete destination ecosystem: a yacht club, a premium casino, and a large municipal park.",
+    yield: "10–13%",
+    developer: "Silk Development",
+    architect: "KKAA, Masu Planning",
+    priceFrom: "From $106,933",
+    priceUSD: 106933,
+    completion: "Q4 2029",
+    area: "27.8–72.3 m²",
+    ceilingHeight: "3 m",
+    floors: "40–47",
+    buildings: "4",
+    finishing: "Turnkey",
+    climateAdaptation: "Yes",
+    installment: "30% / 70%",
+    propertyType: "aparthotel",
+    trophyProperty: true,
+    developerLogo: "/projects/silk/brand/developer-logo.png",
+    districtTitle: "Old Batumi",
+    districtBody:
+      "Old Batumi is the city's cultural and entertainment core: the historic Piazza, central park, restaurants, boutiques and the seaside boulevard are all within a short walk. Property here holds value because the location cannot be replicated.",
+    districtBody2:
+      "Schools, a university, a hospital and the main streets of the city sit around the Gorgasali / 26 May intersection. Batumi International Airport is about 15 minutes by car.",
+    features: [
+      "Mountain & sea panoramic views",
+      "All-season infrastructure",
+      "World-class 5 star hotel",
+      "Full managed Property",
+      "KKAA masterpiece",
+      "Performance hall",
+      "Panoramic rooftop",
+      "Wellness & SPA",
+      "Gym",
+      "Private parking",
+      "24/7 security & service",
+      "Urban Park by Masu Planning",
+      "Private yacht club",
+      "Padel and tennis courts",
+      "Retail promenade, fine dinings",
+      "Children's play area",
+      "Outdoor pool",
+    ],
+    materials:
+      "Advanced Facade Protection: Coastal-grade envelope systems. 9+ Seismic Resilience: Structural design above code. Deep foundation: Engineered foundations for high-rise towers. Anti-Mold Facade: Climate-protection cladding. Noise insulation: Acoustic partitions throughout residential floors.",
+    ownershipBenefits: {
+      title: "Silk Rewards",
+      body: "When you purchase an apartment at Silk Towers, you are automatically granted Silk Rewards Gold Status. Silk Rewards is a loyalty app that offers real, everyday benefits across all Silk Hospitality venues.",
+      linkLabel: "Your benefits here",
+      popupItems: [
+        "10% cashback on every payment",
+        "Earn and redeem points across all locations",
+        "Book hotels and restaurants at the best available rates",
+        "Access exclusive offers and personalized benefits",
+        "Redeem points for a variety of services (hotel stays, restaurants, pool access, and more)",
+        "Enjoy bonuses and special gifts as a program member",
+      ],
+    },
+    photos: [
+      // Building renders
+      "/projects/silk/for-sale/ext-01.jpg",
+      "/projects/silk/for-sale/ext-02.jpg",
+      "/projects/silk/for-sale/ext-03.jpg",
+      "/projects/silk/for-sale/ext-04.jpg",
+      "/projects/silk/for-sale/ext-05.jpg",
+      "/projects/silk/for-sale/ext-06.jpg",
+      "/projects/silk/for-sale/ext-07.jpg",
+      // Outdoor
+      "/projects/silk/marketing/outdoor-01.jpg",
+      "/projects/silk/marketing/outdoor-02.jpg",
+      "/projects/silk/marketing/outdoor-03.jpg",
+      "/projects/silk/marketing/outdoor-04.jpg",
+      "/projects/silk/marketing/outdoor-05.jpg",
+      "/projects/silk/marketing/outdoor-06.jpg",
+      "/projects/silk/marketing/outdoor-07.jpg",
+      "/projects/silk/marketing/outdoor-08.jpg",
+      "/projects/silk/marketing/outdoor-09.jpg",
+      "/projects/silk/marketing/outdoor-10.jpg",
+      "/projects/silk/marketing/outdoor-11.jpg",
+      // Turnkey
+      "/projects/silk/interiors/turnkey-01.jpg",
+      "/projects/silk/interiors/turnkey-02.jpg",
+      "/projects/silk/interiors/turnkey-03.jpg",
+    ],
+    galleryPreview: [
+      "/projects/silk/for-sale/ext-01.jpg",
+      "/projects/silk/marketing/outdoor-01.jpg",
+      "/projects/silk/interiors/turnkey-01.jpg",
+      "/projects/silk/marketing/outdoor-08.jpg",
+      "/projects/silk/for-sale/ext-05.jpg",
+    ],
+    cardImage: "/projects/silk/for-sale/card.jpg",
+    lat: 41.65629557228978,
+    lng: 41.64222436579087,
+    mapsQuery: "41.65629557228978,41.64222436579087",
+    floorPlans: [],
+    floorPlanLabels: [],
+    pricePerSqm: "from $3,654/m²",
+    liveCameraUrl: undefined,
+  },
+  {
+    name: "VR Shekvetili Forest Beach",
+    slug: "shekvetili-forest-beach",
+    tag: "Black Sea · Forest & Beach",
+    city: "Shekvetili",
+    address: "Shekvetili, Guria · next to Paragraph Resort & Spa",
+    seaDistance: "1 minute to the beach",
+    seaMeters: "50 m",
+    location: "Shekvetili · 1,200 m private beach · pine forest",
+    desc: "A year-round Black Sea resort between a pine forest and 1,200 metres of private sand beach. Studios to penthouses and villas beside Paragraph Resort & Spa, with a seaside boulevard, Café del Mar beach club, wellness and cycling paths across a 40-hectare masterplan.",
+    yield: "12–15%",
+    developer: "VR Holding",
+    architect: "NS Studio",
+    priceFrom: "From $61,910",
+    priceUSD: 61910,
+    completion: "Q4 2029",
+    area: "26–161.3 m²",
+    ceilingHeight: "3 m",
+    floors: "2–11",
+    buildings: "32",
+    finishing: "Turnkey (Block A) / Green frame",
+    climateAdaptation: "Yes",
+    installment: "30% / 70%",
+    propertyType: "apartment-aparthotel",
+    developerBody:
+      "VR Holding develops destination projects on Georgia’s Black Sea coast. VR Shekvetili Forest Beach sits next to Paragraph Resort & Spa (Autograph Collection) and is positioned for both lifestyle buyers and rental investors.",
+    districtTitle: "Shekvetili",
+    districtBody:
+      "Shekvetili is a pine-forest resort strip on the Black Sea between Batumi and Kobuleti — quiet shoreline, resort hotels and growing year-round tourism infrastructure.",
+    districtBody2:
+      "Batumi International Airport is about 50 minutes by car. The project’s private beach, boulevard and forest trails create a self-contained resort environment.",
+    features: [
+      "Sea panoramic views",
+      "Cafe Del Mar",
+      "1.2 km Coastline",
+      "All-season infrastructure",
+      "Full managed Property",
+      "Pine Forest",
+      "Panoramic rooftop",
+      "Performance hall",
+      "Business Lounge",
+      "Wellness & SPA",
+      "Air Conditioned Rest Area",
+      "Indoor pool",
+      "Fitness Center",
+      "Private parking",
+      "24/7 security & service",
+      "Private yacht club",
+      "Sports area",
+      "Fine dinings",
+      "Children's play area",
+      "Cycling path",
+      "Outdoor pool",
+      "Bars & Clubs",
+    ],
+    materials:
+      "Advanced Facade Protection: Coastal-grade envelope systems. 9+ Seismic Resilience: Structural design above code. Anti-Mold Facade: Climate-protection cladding. Noise insulation: Acoustic partitions throughout residential floors.",
+    photos: [
+      // Building & outdoor
+      "/projects/shekvetili/for-sale/ext-01.jpg",
+      "/projects/shekvetili/for-sale/ext-02.jpg",
+      "/projects/shekvetili/for-sale/ext-03.jpg",
+      "/projects/shekvetili/for-sale/ext-04.jpg",
+      "/projects/shekvetili/for-sale/ext-05.jpg",
+      "/projects/shekvetili/for-sale/ext-06.jpg",
+      "/projects/shekvetili/for-sale/ext-07.jpg",
+      "/projects/shekvetili/for-sale/ext-08.jpg",
+      "/projects/shekvetili/for-sale/ext-09.jpg",
+      "/projects/shekvetili/for-sale/ext-10.jpg",
+      "/projects/shekvetili/for-sale/ext-11.jpg",
+      "/projects/shekvetili/for-sale/ext-12.jpg",
+      "/projects/shekvetili/for-sale/ext-13.jpg",
+      "/projects/shekvetili/for-sale/ext-14.jpg",
+      "/projects/shekvetili/for-sale/ext-15.jpg",
+      "/projects/shekvetili/for-sale/ext-16.jpg",
+      "/projects/shekvetili/for-sale/ext-17.jpg",
+      // Lobby & bar
+      "/projects/shekvetili/lobby/lobby-01.jpg",
+      "/projects/shekvetili/lobby/lobby-02.jpg",
+      "/projects/shekvetili/lobby/lobby-03.jpg",
+      "/projects/shekvetili/lobby/lobby-04.jpg",
+      "/projects/shekvetili/lobby/lobby-05.jpg",
+      // Turnkey
+      "/projects/shekvetili/interiors/turnkey-01.jpg",
+      "/projects/shekvetili/interiors/turnkey-02.jpg",
+      "/projects/shekvetili/interiors/turnkey-03.jpg",
+      "/projects/shekvetili/interiors/turnkey-04.jpg",
+      "/projects/shekvetili/interiors/turnkey-05.jpg",
+      "/projects/shekvetili/interiors/turnkey-06.jpg",
+    ],
+    // Mosaic: hero outdoor-1; left outdoor-4 + outdoor-16; right lobby(2) + outdoor-3
+    galleryPreview: [
+      "/projects/shekvetili/for-sale/ext-01.jpg",
+      "/projects/shekvetili/for-sale/ext-04.jpg",
+      "/projects/shekvetili/lobby/lobby-01.jpg",
+      "/projects/shekvetili/for-sale/ext-16.jpg",
+      "/projects/shekvetili/for-sale/ext-03.jpg",
+    ],
+    cardImage: "/projects/shekvetili/for-sale/card.jpg",
+    lat: 41.9273,
+    lng: 41.7684,
+    mapsQuery: "VR Shekvetili Forest Beach, Shekvetili, Georgia",
+    floorPlans: [],
+    floorPlanLabels: [],
+    pricePerSqm: "from $1,218/m²",
+    awards: [
+      {
+        src: "/projects/shekvetili/brand/epa-winner-2024-2025.svg",
+        alt: "European Property Awards 2024–2025 — Award Winner, Mixed Use Development",
+      },
+    ],
   },
   {
     name: "Krtsanisi Resort Residence",
@@ -218,15 +664,16 @@ export const projects: Project[] = [
     desc: "Tbilisi’s first resort-style “city within a city” on 20 hectares in the prestigious Krtsanisi diplomatic quarter. About 70% of the land is gardens, terraces and recreation — French, tropical and Japanese landscapes, pools and sports courts — with apartments, townhouses, penthouses and a multifunctional hotel-style building.",
     yield: "10–14%",
     developer: "VR Holding",
+    architect: "TBA",
     priceFrom: "From $100,990",
     priceUSD: 100990,
     completion: "Q3 2026",
     area: "32.6–519.7 m²",
     ceilingHeight: "3.0 m",
-    floors: "6–8 floors",
+    floors: "6–8",
     buildings: "6 phases · 20 ha",
     finishing: "Green frame",
-    installment: "30% down / 70% by schedule",
+    installment: "30% / 70%",
     developerBody:
       "VR Holding is one of Georgia’s leading developers with a multi-billion portfolio spanning Tbilisi and the Black Sea coast — including Krtsanisi Resort Residence, Vake Sky Tower and Shekvetili Forest~Beach.",
     districtTitle: "Krtsanisi",
@@ -275,71 +722,6 @@ export const projects: Project[] = [
     pricePerSqm: "from $2,050/m²",
   },
   {
-    name: "Shekvetili Forest - Beach",
-    slug: "shekvetili-forest-beach",
-    tag: "Black Sea · Forest & Beach",
-    city: "Shekvetili",
-    address: "Shekvetili, Guria · next to Paragraph Resort & Spa",
-    seaDistance: "1 minute to the beach",
-    seaMeters: "50 m",
-    location: "Shekvetili · 1,200 m private beach · pine forest",
-    desc: "A year-round Black Sea resort between a pine forest and 1,200 metres of private sand beach. Studios to penthouses and villas beside Paragraph Resort & Spa, with a seaside boulevard, Café del Mar beach club, wellness and cycling paths across a 40-hectare masterplan.",
-    yield: "12–15%",
-    developer: "VR Holding",
-    priceFrom: "From $53,430",
-    priceUSD: 53430,
-    completion: "Q3 2027",
-    area: "26.3–163 m²",
-    ceilingHeight: "3.0 m",
-    floors: "2–11 floors",
-    buildings: "Blocks A, B1, B2, C1, C2",
-    finishing: "Turnkey (Block A) / Green frame",
-    installment: "20% down / balance by schedule",
-    developerBody:
-      "VR Holding develops destination projects on Georgia’s Black Sea coast. Shekvetili Forest~Beach sits next to Paragraph Resort & Spa (Autograph Collection) and is positioned for both lifestyle buyers and rental investors.",
-    districtTitle: "Shekvetili",
-    districtBody:
-      "Shekvetili is a pine-forest resort strip on the Black Sea between Batumi and Kobuleti — quiet shoreline, resort hotels and growing year-round tourism infrastructure.",
-    districtBody2:
-      "Batumi International Airport is about 50 minutes by car. The project’s private beach, boulevard and forest trails create a self-contained resort environment.",
-    features: [
-      "1,200 m private sand beach",
-      "40-hectare forest–beach masterplan",
-      "Next to Paragraph Resort & Spa",
-      "Café del Mar beach club",
-      "Seaside boulevard & bike paths",
-      "Infinity pools & wellness",
-      "Studios to penthouses & villas",
-      "Managed resort infrastructure",
-    ],
-    materials:
-      "Coastal-grade construction with panoramic glazing. Block A is delivered turnkey; Blocks B1, B2, C1 and C2 are offered as green frame with optional furniture and appliance packages.",
-    photos: [
-      "/projects/shekvetili/for-sale/ext-01.jpg",
-      "/projects/shekvetili/for-sale/ext-02.jpg",
-      "/projects/shekvetili/for-sale/ext-03.jpg",
-      "/projects/shekvetili/for-sale/ext-04.jpg",
-      "/projects/shekvetili/for-sale/ext-05.jpg",
-      "/projects/shekvetili/marketing/beach.jpg",
-      "/projects/shekvetili/marketing/drone.jpg",
-      "/projects/shekvetili/marketing/pool.jpg",
-      "/projects/shekvetili/interiors/interior-01.jpg",
-      "/projects/shekvetili/for-sale/blocks.jpg",
-      "/projects/shekvetili/marketing/sunset.jpg",
-      "/projects/shekvetili/for-sale/genplan.jpg",
-      "/projects/shekvetili/interiors/apt-01.jpg",
-      "/projects/shekvetili/interiors/apt-02.jpg",
-      "/projects/shekvetili/interiors/apt-03.jpg",
-    ],
-    cardImage: "/projects/shekvetili/for-sale/card.jpg",
-    lat: 41.9273,
-    lng: 41.7684,
-    mapsQuery: "VR Shekvetili Forest Beach, Shekvetili, Georgia",
-    floorPlans: [],
-    floorPlanLabels: [],
-    pricePerSqm: "from $1,800/m²",
-  },
-  {
     name: "Vake Sky Tower",
     slug: "vake-sky-tower",
     tag: "Vake · Tallest in Georgia",
@@ -351,15 +733,16 @@ export const projects: Project[] = [
     desc: "Georgia’s tallest tower — about 260 m and ~70 floors — on Chavchavadze Avenue opposite Vake Park. A multifunctional landmark with branded residences, Fashion Avenue retail, a Class A business centre, spa, pools and hotel-grade services in Tbilisi’s most prestigious district.",
     yield: "8–12%",
     developer: "VR Holding",
+    architect: "TBA",
     priceFrom: "From $110,600",
     priceUSD: 110600,
     completion: "Q3 2029",
     area: "31.6–113.2 m²",
     ceilingHeight: "3.0 m",
-    floors: "70 floors · ~260 m",
-    buildings: "1 landmark tower",
+    floors: "70 · ~260 m",
+    buildings: "1",
     finishing: "Turnkey / hotel-style apartments",
-    installment: "EOI / by schedule",
+    installment: "30% / 70%",
     developerBody:
       "VR Holding is delivering Vake Sky Tower as a new economic and cultural landmark for Tbilisi — residences with hotel services, Fashion Avenue and a Class A business centre on the site of the former Sports University.",
     districtTitle: "Vake",
@@ -403,120 +786,6 @@ export const projects: Project[] = [
     pricePerSqm: "from $3,100/m²",
   },
   {
-    name: "Queen's Residence",
-    slug: "queens-residence",
-    tag: "Gated Community",
-    city: "Batumi",
-    address: "Batumi, Adlia St, 53",
-    seaDistance: "8 minutes to the sea",
-    seaMeters: "620 m",
-    location: "Batumi, Adlia St, 53",
-    desc: "The project features two 16-storey buildings (Blocks A and B), 581 premium apartments, and a diverse infrastructure designed for both comfortable living and smart investment. Queen's Residence is the recipient of two prestigious international real estate awards as the Best Development Project in Georgia — Luxury Lifestyle Awards 2024 and European Property Awards 2024.",
-    yield: "9–16%",
-    developer: "Tempo Holding",
-    priceFrom: "From $95,000",
-    priceUSD: 95000,
-    completion: "Q1 2027",
-    area: "45–130 m²",
-    ceilingHeight: "3.1 m",
-    floors: "16 floors",
-    buildings: "2 buildings",
-    finishing: "White Frame, Renovated, Turnkey",
-    installment: "30% down / 70% quarterly",
-    features: [
-      "Gated private community",
-      "5-star hotel infrastructure",
-      "Reception & concierge",
-      "Pool & wellness centre",
-      "Personal Property Manager",
-    ],
-    materials: "Premium reinforced concrete frame, Italian facade cladding, smart home pre-wiring.",
-    photos: ["/projects/queens/for-sale/1.jpg", "/projects/queens/for-sale/2.png", "/projects/queens/for-sale/3.png", "/projects/queens/for-sale/4.png", "/projects/queens/for-sale/5.jpg", "/projects/queens/for-sale/6.jpg", "/projects/queens/for-sale/7.jpg", "/projects/queens/for-sale/8.jpg", "/projects/queens/for-sale/9.jpg", "/projects/queens/for-sale/10.jpg", "/projects/queens/for-sale/11.jpg", "/projects/queens/for-sale/12.jpg", "/projects/queens/for-sale/13.jpg"],
-    cardImage: "/projects/queens/for-sale/card.png",
-    lat: 41.6518,
-    lng: 41.6372,
-    floorPlans: ["/projects/queens/floor-plans/layout-1.png", "/projects/queens/floor-plans/layout-2.png", "/projects/queens/floor-plans/layout-3.png"],
-    floorPlanLabels: ["Studio", "Junior Suite", "1+1"],
-    pricePerSqm: "Coming Soon",
-    liveCameraUrl: "https://tempoholding.ge/eng/livecamera",
-  },
-  {
-    name: "Silk Towers",
-    slug: "silk-towers",
-    tag: "First Line · Sea View",
-    city: "Batumi",
-    address: "Black Sea Blvd, 1",
-    seaDistance: "2 minutes to the beach",
-    seaMeters: "150 m",
-    location: "Black Sea Boulevard, First Line · 2 min to beach",
-    desc: "Luxury living meets ecological innovation on the historic first line. Featuring the region's grandest casino and a 20,000 m² private park by Masu Planning — the last of its kind on the Batumi coastline.",
-    yield: "10–13%",
-    developer: "Silk Road Developments",
-    priceFrom: "From $120,000",
-    priceUSD: 120000,
-    completion: "Q4 2026",
-    area: "50–200 m²",
-    ceilingHeight: "3.2 m",
-    floors: "45 floors",
-    buildings: "2 towers",
-    finishing: "White frame, Turnkey, Designer",
-    installment: "40% down / 60% quarterly",
-    features: [
-      "20,000 m² private park",
-      "Region's largest casino",
-      "Direct Black Sea access",
-      "Masu Planning landscaping",
-      "Swiss-grade construction",
-    ],
-    materials: "High-grade monolithic concrete, floor-to-ceiling glazing, Swiss engineering standards.",
-    photos: ["/projects/silk/for-sale/card.png", "/home/hero2.png", "/home/interior-bedroom.png"],
-    cardImage: "/projects/silk/for-sale/card.png",
-    lat: 41.6568,
-    lng: 41.6301,
-    floorPlans: [],
-    floorPlanLabels: [],
-    pricePerSqm: "Coming Soon",
-    liveCameraUrl: undefined,
-  },
-  {
-    name: "Rogantini Swiss Village",
-    slug: "rogantini-swiss-village",
-    tag: "Chakvi · Alpine Quality",
-    city: "Chakvi / Gonio",
-    address: "Chakvi village, 30 km from Batumi",
-    seaDistance: "5 minutes to the beach",
-    seaMeters: "400 m",
-    location: "Chakvi village, 30 km from Batumi · Mountain & Sea views",
-    desc: "A self-contained Swiss-standard village with breathtaking mountain and sea panoramas. From a private poker room and luxury spa to tennis courts and medical facilities — seclusion without compromise.",
-    yield: "8–11%",
-    developer: "Rogantini Group",
-    priceFrom: "From €55,000",
-    priceUSD: 60000,
-    completion: "Q3 2026",
-    area: "38–110 m²",
-    ceilingHeight: "2.85 m",
-    floors: "5 floors",
-    buildings: "12 buildings",
-    finishing: "White frame, Turnkey",
-    installment: "25% down / 75% quarterly",
-    features: [
-      "Swiss moisture-resistant concrete",
-      "Private poker room & luxury spa",
-      "Tennis courts & medical centre",
-      "Beach shuttle service",
-      "Mountain & sea panoramic views",
-    ],
-    materials: "Swiss-standard moisture-resistant reinforced concrete, alpine timber facade accents.",
-    photos: ["/projects/rogantini/for-sale/card.png", "/home/lifestyle-coast.png", "/home/hero3.png"],
-    cardImage: "/projects/rogantini/for-sale/card.png",
-    lat: 41.7621,
-    lng: 41.6518,
-    floorPlans: [],
-    floorPlanLabels: [],
-    pricePerSqm: "Coming Soon",
-    liveCameraUrl: undefined,
-  },
-  {
     name: "Ambassadori Island",
     slug: "ambassadori-island",
     tag: "Off-Shore Island · Marina",
@@ -528,15 +797,16 @@ export const projects: Project[] = [
     desc: "An 87-hectare man-made archipelago redefining luxury through eco-futurism. With 49% green infrastructure, a premier yacht club, and an elite private university — a sustainable sanctuary where technology meets nature.",
     yield: "12–14.5%",
     developer: "Ambassadori Holdings",
+    architect: "TBA",
     priceFrom: "From $180,000",
     priceUSD: 180000,
     completion: "Q2 2027",
     area: "60–350 m²",
     ceilingHeight: "3.3 m",
-    floors: "30 floors",
-    buildings: "8 buildings",
+    floors: "30",
+    buildings: "8",
     finishing: "White frame, Turnkey, Designer",
-    installment: "35% down / 65% quarterly",
+    installment: "30% / 70%",
     features: [
       "87-ha man-made archipelago",
       "49% green infrastructure",
@@ -558,7 +828,7 @@ export const projects: Project[] = [
     name: "Gonio Yachts & Marina",
     slug: "gonio-yachts-marina",
     tag: "Gonio · Waterfront",
-    city: "Chakvi / Gonio",
+    city: "Gonio",
     address: "Gonio, 15 km from Batumi",
     seaDistance: "Direct waterfront",
     seaMeters: "0 m",
@@ -566,15 +836,16 @@ export const projects: Project[] = [
     desc: "A private marina complex combining branded residences with resort hospitality infrastructure. Berths, a yacht club, and a waterfront promenade in one of Georgia's most scenic coastal settings.",
     yield: "11–14%",
     developer: "Marina Developments Georgia",
+    architect: "TBA",
     priceFrom: "From $150,000",
     priceUSD: 150000,
     completion: "Q1 2028",
     area: "55–180 m²",
     ceilingHeight: "3.0 m",
-    floors: "14 floors",
-    buildings: "3 buildings",
+    floors: "14",
+    buildings: "3",
     finishing: "White frame, Turnkey",
-    installment: "30% down / 70% quarterly",
+    installment: "30% / 70%",
     features: [
       "Private marina with berths",
       "Branded residences",
@@ -592,4 +863,5 @@ export const projects: Project[] = [
     pricePerSqm: "Coming Soon",
     liveCameraUrl: undefined,
   },
+
 ];

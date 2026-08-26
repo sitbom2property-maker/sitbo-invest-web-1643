@@ -291,27 +291,6 @@ export function RequestModal({
               >
                 {loading ? "…" : t("cta.sendRequest")}
               </button>
-
-              <p
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 11,
-                  lineHeight: 1.6,
-                  color: "#FFFEF9",
-                  margin: "6px 0 0",
-                  textAlign: "center",
-                }}
-              >
-                {t("v2.modal.direct")}{" "}
-                <a
-                  href="https://wa.me/995555505288"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#FFFEF9", fontWeight: 600, textDecoration: "none" }}
-                >
-                  +995 555 50 52 88
-                </a>
-              </p>
             </form>
           </>
         )}

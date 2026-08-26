@@ -80,7 +80,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
           lineHeight: 1.6,
         }}
       >
-        Thank you. We&apos;ll be in touch within 24 hours.
+        Thank you. I&apos;ll be in touch within 24 hours.
       </p>
     );
   }
