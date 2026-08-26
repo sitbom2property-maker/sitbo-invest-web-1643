@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { useT } from "../i18n";
 import { trackLead } from "../lib/analytics";
+import { openWhatsApp } from "../lib/whatsapp";
 
 export type RequestModalProps = {
   open: boolean;
@@ -76,6 +77,15 @@ export function RequestModal({
       return;
     }
     setLoading(true);
+    // Hand the request to WhatsApp in parallel with the Odoo CRM lead. Opened
+    // synchronously inside the submit gesture so the browser does not block it.
+    openWhatsApp({
+      name: form.name.trim(),
+      contact: form.contact.trim(),
+      message: form.message.trim() || undefined,
+      project: topic,
+      source,
+    });
     try {
       const res = await fetch("/api/leads", {
         method: "POST",

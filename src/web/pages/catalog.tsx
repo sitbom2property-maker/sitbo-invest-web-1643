@@ -6,6 +6,7 @@ import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
 import { trackLead } from "../lib/analytics";
+import { openWhatsApp } from "../lib/whatsapp";
 
 const C = {
   dark:      "#21141A",
@@ -133,6 +134,15 @@ export default function CatalogPage() {
       return;
     }
     setBookLoading(true);
+    // Route the request to WhatsApp alongside the Odoo CRM lead. Opened
+    // synchronously inside the submit gesture so the browser does not block it.
+    openWhatsApp({
+      name: bookForm.name.trim(),
+      phone: bookForm.phone.trim() || undefined,
+      email: bookForm.email.trim() || undefined,
+      message: bookForm.message.trim() || undefined,
+      source: "Catalog — Book a Call",
+    });
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
