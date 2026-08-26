@@ -100,7 +100,7 @@ const en = {
 
   /* Sticky storytelling chapters (home, after hero) */
   "v2.sticky1.title":
-    "My clients do not come to me\nfor random listings.\nThey come for judgment,\u00A0access,\nstrategy and protection from expensive\nmistakes. And I am very grateful.",
+    "My clients come\nto\u00A0me for\u00A0strategy\nand protection from\u00A0expensive\nmistakes, not for\u00A0random\nlistings.",
   "v2.sticky1.body1":
     "You can explore the Georgian property market on your own: talk to agents, read chats, watch videos and compare beautiful presentations. Or you can work with someone who brings together local knowledge, negotiation experience, market access and practical real estate expertise.",
   "v2.sticky1.body2":
