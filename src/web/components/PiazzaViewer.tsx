@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
+import { FlatshowFrame } from "./FlatshowFrame";
+import { RequestModal } from "./RequestModal";
 import { useLocale } from "../context/LocaleContext";
+import { useFlatshowLeadCatch } from "../hooks/useFlatshowLeadCatch";
 import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
 
@@ -39,6 +42,14 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
   );
   const src = useMemo(() => viewerSrc(ru), [ru]);
   const modalOpen = useSitboModalOpen();
+  const { open, setOpen } = useFlatshowLeadCatch();
+  const tourHash = useMemo(
+    () =>
+      typeof window !== "undefined" && window.location.hash.toLowerCase().includes("floors")
+        ? "#/floors"
+        : "#/",
+    [mode],
+  );
 
   useEffect(() => {
     const apply = () => {
@@ -89,17 +100,24 @@ export function PiazzaViewer({ projectName }: { projectName: string }) {
           {modalOpen ? (
             <div className="pz-paused" aria-hidden="true" />
           ) : (
-            <iframe
+            <FlatshowFrame
+              projectKey="piazza"
+              lang={ru ? "ru" : "en"}
+              hash={tourHash}
               title={`${projectName} — Flat.show`}
-              src={src}
-              allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
-              allowFullScreen
-              loading="eager"
-              referrerPolicy="no-referrer-when-downgrade"
+              fallbackSrc={src}
             />
           )}
         </div>
       )}
+
+      <RequestModal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={t("popup.submit")}
+        source={`Flat.show 3D — ${projectName}`}
+        topic={projectName}
+      />
 
       <style>{CSS}</style>
     </div>

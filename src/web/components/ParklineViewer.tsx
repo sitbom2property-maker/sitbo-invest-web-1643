@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApartmentChessboard } from "./ApartmentChessboard";
+import { FlatshowFrame } from "./FlatshowFrame";
+import { RequestModal } from "./RequestModal";
+import { useLocale } from "../context/LocaleContext";
+import { useFlatshowLeadCatch } from "../hooks/useFlatshowLeadCatch";
 import { useSitboModalOpen } from "../hooks/useSitboModalOpen";
 import { useT, type MessageKey } from "../i18n";
 
@@ -35,7 +39,11 @@ export function ParklineViewer({
   panoramaUrl?: string;
 }) {
   const t = useT();
+  const { language } = useLocale();
+  const ru = language.toLowerCase().startsWith("ru");
   const modalOpen = useSitboModalOpen();
+  const { open, setOpen } = useFlatshowLeadCatch();
+  const frameRef = useRef<HTMLDivElement | null>(null);
   const [mode, setMode] = useState<ViewMode>(() =>
     typeof window === "undefined" ? "3d" : hashToMode(window.location.hash) ?? "3d",
   );
@@ -88,15 +96,22 @@ export function ParklineViewer({
       {mode === "2d" ? (
         <ApartmentChessboard projectName={projectName} projectKey="parkline" embedded source="Parkline chessboard" />
       ) : (
-        <div className="pk-frame">
+        <div className="pk-frame" ref={frameRef}>
           {modalOpen ? (
             <div className="pk-paused" aria-hidden="true" />
-          ) : (
+          ) : mode === "360" && panoramaUrl ? (
             <iframe
-              src={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
-              title={mode === "360" ? `${projectName} 360` : `${projectName} 3D`}
+              src={panoramaUrl}
+              title={`${projectName} 360`}
               allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; clipboard-write"
               allowFullScreen
+            />
+          ) : (
+            <FlatshowFrame
+              projectKey="parkline"
+              lang={ru ? "ru" : "en"}
+              title={`${projectName} 3D`}
+              fallbackSrc={tourSrc}
             />
           )}
           <a
@@ -104,11 +119,29 @@ export function ParklineViewer({
             href={mode === "360" && panoramaUrl ? panoramaUrl : tourSrc}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              if (mode === "360") return;
+              e.preventDefault();
+              const node = frameRef.current;
+              if (!node) return;
+              const req =
+                node.requestFullscreen ||
+                (node as HTMLDivElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen;
+              void req?.call(node);
+            }}
           >
             {t("chess.openFullscreen")}
           </a>
         </div>
       )}
+
+      <RequestModal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={t("popup.submit")}
+        source={`Flat.show 3D — ${projectName}`}
+        topic={projectName}
+      />
 
       <style>{CSS}</style>
     </div>

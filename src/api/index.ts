@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { cors } from "hono/cors";
 import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
+import { fetchFlatshowEmbedHtml, type FlatshowEmbedKey } from "./lib/flatshow-embed";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -32,6 +33,23 @@ app.get('/apartments/:key', async (c) => {
     const data = await fetchFlatshowApartments(key as ApartmentKey);
     c.header('Cache-Control', 'public, max-age=300');
     return c.json(data);
+  } catch (err) {
+    return c.json({ error: String(err) }, 502);
+  }
+});
+
+app.get('/flatshow/embed/:key', async (c) => {
+  const key = c.req.param('key');
+  if (key !== 'piazza' && key !== 'parkline') {
+    return c.json({ error: 'Unknown project' }, 404);
+  }
+  const lang = c.req.query('lang') === 'ru' ? 'ru' : 'en';
+  try {
+    const html = await fetchFlatshowEmbedHtml(key as FlatshowEmbedKey, lang);
+    c.header('Cache-Control', 'public, max-age=300');
+    c.header('X-Robots-Tag', 'noindex, nofollow');
+    c.header('Content-Security-Policy', "frame-ancestors 'self'");
+    return c.html(html);
   } catch (err) {
     return c.json({ error: String(err) }, 502);
   }
