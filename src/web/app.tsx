@@ -5,6 +5,7 @@ import Index from "./pages/home-v2";
 import MortgagePage from "./pages/mortgage";
 import InvestPage from "./pages/invest";
 import ProjectPage from "./pages/project";
+import HisniPresalePage from "./pages/presale-hisni";
 import CatalogPage from "./pages/catalog";
 import TurnkeyPage from "./pages/turnkey";
 import ServicesPage from "./pages/Services";
@@ -76,6 +77,8 @@ function AppMain() {
 				<Route path="/history" component={HistoryPage} />
 				<Route path="/blog/:slug" component={BlogPostPage} />
 				<Route path="/blog" component={BlogPage} />
+				<Route path="/hisni-presale" component={HisniPresalePage} />
+				<Route path="/project/hisni-3rd-tower" component={HisniPresalePage} />
 				<Route path="/project/:slug" component={ProjectPage} />
 				<Route path="/catalog" component={CatalogPage} />
 				<Route path="/turnkey" component={TurnkeyPage} />

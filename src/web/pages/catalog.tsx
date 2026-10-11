@@ -341,7 +341,7 @@ function CatalogCard({ p }: { p: Project }) {
   const [hovered, setHovered] = useState(false);
   const { formatFromUSD } = useRates();
   const t = useT();
-  const priceLabel = formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
+  const priceLabel = p.presale ? p.priceFrom : formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
   return (
     <Link href={`/project/${p.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>
@@ -363,6 +363,12 @@ function CatalogCard({ p }: { p: Project }) {
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }} />
             ) : null}
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(33,20,26,0.7) 0%, transparent 55%)" }} />
+
+            {p.presale ? (
+              <div style={{ position: "absolute", top: "12px", left: "12px", background: C.wine, borderRadius: "2px", padding: "4px 10px", fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: C.light }}>
+                {p.presale}
+              </div>
+            ) : null}
 
             {/* Name over image */}
             <div style={{ position: "absolute", bottom: "14px", left: "14px", right: "14px" }}>

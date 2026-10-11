@@ -31,6 +31,7 @@ export type ProjectLocaleFields = Partial<
     | "districtBody"
     | "districtBody2"
     | "ownershipBenefits"
+    | "presale"
   >
 >;
 
@@ -43,6 +44,32 @@ function localizeCompletion(value: string): string {
 }
 
 export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
+  "hisni-3rd-tower": {
+    tag: "Пресейл · 5, 6, 7 ноября",
+    presale: "Пресейл · 5–7 ноября",
+    address: "Тбилиси",
+    seaDistance: "Тбилиси",
+    seaMeters: "Вдали от моря",
+    location: "Тбилиси",
+    desc: "Пресейл третьей башни HISNI by Biograpi — многофункционального комплекса в Тбилиси. Всего три дня, 5, 6 и 7 ноября: ограниченное количество квартир, бронь через Zoom-звонок — полностью возвратный взнос USD 1,000.",
+    priceFrom: "Цена по запросу",
+    completion: "Май 2031",
+    area: "По запросу",
+    ceilingHeight: "По запросу",
+    floors: "По запросу",
+    buildings: "3-я башня",
+    finishing: "По запросу",
+    installment: "Зависит от плана оплаты",
+    features: [
+      "25-метровый бассейн с зелёной террасой",
+      "Зелёная терраса 8 000 м²",
+      "Лобби с консьержем 24/7",
+      "Фитнес-центр и спа",
+      "Падел-корт",
+      "Торговый центр и коворкинг",
+    ],
+    materials: "Фасад из фиброцемента и терракотовых панелей — устойчив к перепадам температур и ультрафиолету, энергоэффективен и пожаробезопасен.",
+  },
   "piazza-residence": {
     tag: "Старый Батуми · Исторический центр",
     address: "ул. Вахтанга Горгасали 59–61, Старый Батуми",

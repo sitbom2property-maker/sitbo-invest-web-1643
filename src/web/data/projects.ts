@@ -83,6 +83,8 @@ export type Project = {
    * Defaults to true when omitted.
    */
   listedInCatalog?: boolean;
+  /** Pre-sale badge; the catalog card shows it and `priceFrom` instead of a USD price. */
+  presale?: string;
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -135,6 +137,53 @@ export function resolveConstructionProgress(p: Project): ConstructionProgress {
 }
 
 export const projects: Project[] = [
+  {
+    name: "HISNI 3rd Tower",
+    slug: "hisni-3rd-tower",
+    tag: "Pre-Sale · 5, 6, 7 November",
+    presale: "Pre-Sale · 5–7 Nov",
+    city: "Tbilisi",
+    address: "Tbilisi",
+    seaDistance: "Tbilisi",
+    seaMeters: "Inland",
+    location: "Tbilisi",
+    desc: "Pre-sale of the third tower of HISNI by Biograpi — a multifunctional complex in Tbilisi. Three days only, 5, 6 and 7 November: a limited number of apartments, reserved through a Zoom call with a fully refundable USD 1,000 fee.",
+    yield: "",
+    developer: "Biograpi",
+    priceFrom: "Price on request",
+    priceUSD: 0,
+    completion: "May 2031",
+    area: "On request",
+    ceilingHeight: "On request",
+    floors: "On request",
+    buildings: "3rd tower",
+    finishing: "On request",
+    installment: "Depends on the payment plan",
+    features: [
+      "25 m pool with a green terrace",
+      "8,000 m² green terrace",
+      "Lobby with 24/7 concierge",
+      "Fitness centre and spa",
+      "Padel court",
+      "Shopping centre and co-working",
+    ],
+    materials: "Façade of fibre-reinforced concrete and terracotta panels — highly resistant to temperature and UV, energy-efficient and fire-safe.",
+    photos: [
+      "/projects/hisni/hero.jpg",
+      "/projects/hisni/ext-01.jpg",
+      "/projects/hisni/ext-02.jpg",
+      "/projects/hisni/ext-03.jpg",
+      "/projects/hisni/ext-04.jpg",
+      "/projects/hisni/lobby.jpg",
+      "/projects/hisni/pool.jpg",
+      "/projects/hisni/fitness.jpg",
+      "/projects/hisni/padel.jpg",
+      "/projects/hisni/terrace.jpg",
+    ],
+    cardImage: "/projects/hisni/card.jpg",
+    lat: 41.7151,
+    lng: 44.8271,
+  },
   {
     name: "Piazza Residence",
     slug: "piazza-residence",
