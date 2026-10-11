@@ -1026,6 +1026,44 @@ export default function ProjectPage() {
               </Link>
               ) : null}
 
+{/* Available now — optional */}
+              {p.availableUnits?.length ? (
+              <>
+              <Divider />
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                  {t("project.available")}
+                </h3>
+                <div style={{ overflowX: "auto" }}>
+                  <table style={{ width: "100%", minWidth: 560, borderCollapse: "collapse", fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.85rem" : "0.95rem", color: C.dark }}>
+                    <thead>
+                      <tr>
+                        {[t("project.available.building"), t("project.unitTypes.type"), t("project.unitTypes.area"), t("project.pricePerSqm"), t("project.available.price"), t("project.available.count")].map((h) => (
+                          <th key={h} style={{ textAlign: "left", fontSize: "13px", fontWeight: 400, color: "rgba(33,20,26,0.45)", padding: "0 16px 12px 0", verticalAlign: "bottom" }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {p.availableUnits.map((u) => (
+                        <tr key={`${u.building}-${u.type}`} style={{ borderTop: "1px solid rgba(33,20,26,0.1)" }}>
+                          <td style={{ padding: "14px 16px 14px 0" }}>{u.building}</td>
+                          <td style={{ padding: "14px 16px 14px 0", fontWeight: 700 }}>{u.type}</td>
+                          <td style={{ padding: "14px 16px 14px 0" }}>{u.area}</td>
+                          <td style={{ padding: "14px 16px 14px 0" }}>{u.pricePerSqm}</td>
+                          <td style={{ padding: "14px 16px 14px 0", fontWeight: 700 }}>{u.price}</td>
+                          <td style={{ padding: "14px 0" }}>{u.count}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.84rem" : "0.9rem", color: "rgba(33,20,26,0.5)", lineHeight: 1.45, margin: "20px 0 0", maxWidth: 620 }}>
+                  {t("project.available.note", { date: p.availableUnitsAsOf ?? "" })}
+                </p>
+              </div>
+              </>
+              ) : null}
+
 {/* Apartments & prices — optional */}
               {p.unitTypes?.length ? (
               <>

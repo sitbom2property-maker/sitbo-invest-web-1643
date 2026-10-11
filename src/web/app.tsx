@@ -78,6 +78,9 @@ function AppMain() {
 				<Route path="/blog/:slug" component={BlogPostPage} />
 				<Route path="/blog" component={BlogPage} />
 				<Route path="/hisni-presale" component={HisniPresalePage} />
+				<Route path="/project/hisni-3rd-tower">
+					{() => <Redirect to="/project/hisni" />}
+				</Route>
 				<Route path="/project/:slug" component={ProjectPage} />
 				<Route path="/catalog" component={CatalogPage} />
 				<Route path="/turnkey" component={TurnkeyPage} />

@@ -36,6 +36,8 @@ export type ProjectLocaleFields = Partial<
     | "paymentPlans"
     | "paymentPlanNames"
     | "unitTypes"
+    | "availableUnits"
+    | "availableUnitsAsOf"
     | "pricePerSqm"
     | "climateAdaptation"
   >
@@ -50,26 +52,26 @@ function localizeCompletion(value: string): string {
 }
 
 export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
-  "hisni-3rd-tower": {
-    tag: "Тбилиси · Пресейл 5, 6, 7 ноября",
+  hisni: {
+    tag: "Тбилиси · Башни I–II в продаже · Пресейл башни III",
     presale: "Пресейл · 5–7 ноября",
     presaleNote: "Пресейл только 5, 6, 7 ноября, количество квартир ограничено. Бронь места — USD 1,000, полностью возвратная; бронирование лично через меня по Zoom-звонку.",
     address: "Тбилиси",
     seaDistance: "Тбилиси",
     seaMeters: "Вдали от моря",
     location: "Тбилиси",
-    desc: "Третья башня HISNI by Biograpi — многофункционального жилого комплекса в Тбилиси, где в одном месте собраны дом, офисы, магазины и отдых. Студии, квартиры с одной и двумя спальнями от 34 до 95 м², сдача в мае 2031 года. Два плана оплаты: без первого взноса — 20% за 30 месяцев, или 10% взнос, 40% во время строительства и 50% по завершении.",
+    desc: "HISNI by Biograpi — многофункциональный жилой комплекс в Тбилиси, где в одном месте собраны дом, офисы, магазины и отдых: 36-этажные башни с бассейном, спа, падел-кортом и зелёной террасой 8 000 м². Квартиры в башнях I и II продаются сейчас, от $93,450. Башня III открывается трёхдневным пресейлом 5, 6 и 7 ноября — студии, квартиры с одной и двумя спальнями от $1,800/м², сдача в мае 2031 года.",
     priceFrom: "От $67,900",
     completion: "Май 2031",
-    area: "34,4–95 м²",
-    ceilingHeight: "По запросу",
-    floors: "По запросу",
-    buildings: "3-я башня HISNI",
+    area: "34–107 м²",
+    ceilingHeight: "2,95 м (башни I–II)",
+    floors: "36 этажей (башни I–II)",
+    buildings: "3 башни",
     finishing: "По запросу",
     climateAdaptation: "По запросу",
     pricePerSqm: "от $1,800/м²",
     installment: "Без взноса: 20% за 30 месяцев, 80% на 31-й месяц · или 10% / 40% / 50%",
-    paymentPlanNames: ["План 1 — 20% за 30 месяцев", "План 2 — 10% / 40% / 50%"],
+    paymentPlanNames: ["Башня III · План 1 — 20% за 30 месяцев", "Башня III · План 2 — 10% / 40% / 50%"],
     paymentPlans: [
       [
         { stage: "construction", pct: 20, label: "За 30 месяцев, без первого взноса" },
@@ -85,6 +87,14 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
       { type: "Студия", area: "34,38–34,82 м²", prices: ["$1,975–2,195/м²", "$2,155–2,395/м²"], priceFrom: "от $67,900" },
       { type: "1 спальня", area: "62,95–67,80 м²", prices: ["$1,875–2,095/м²", "$2,045–2,285/м²"], priceFrom: "от $118,100" },
       { type: "2 спальни", area: "94–95 м²", prices: ["$1,800–2,020/м²", "$1,963–2,203/м²"], priceFrom: "от $169,200" },
+    ],
+    availableUnitsAsOf: "12 октября 2026",
+    availableUnits: [
+      { building: "Башня I", type: "1 спальня", area: "63,6–71,3 м²", pricePerSqm: "$2,300", price: "$146,326–163,898", count: 5 },
+      { building: "Башня I", type: "2 спальни", area: "102,7–106,6 м²", pricePerSqm: "$2,050", price: "$210,433–218,448", count: 26 },
+      { building: "Башня II", type: "Студия", area: "37,4 м²", pricePerSqm: "$2,500", price: "$93,450", count: 2 },
+      { building: "Башня II", type: "1 спальня", area: "64,3–69,7 м²", pricePerSqm: "$2,300", price: "$147,821–160,356", count: 25 },
+      { building: "Башня II", type: "2 спальни", area: "97,5–99,0 м²", pricePerSqm: "$2,150", price: "$209,668–212,872", count: 16 },
     ],
     features: [
       "25-метровый бассейн с зелёной террасой",

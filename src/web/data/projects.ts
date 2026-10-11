@@ -95,6 +95,9 @@ export type Project = {
   paymentPlanNames?: string[];
   /** Apartment types with price ranges per payment plan. */
   unitTypes?: UnitType[];
+  /** Units on sale now (e.g. in completed towers), with the date of the snapshot. */
+  availableUnits?: AvailableUnit[];
+  availableUnitsAsOf?: string;
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -117,6 +120,15 @@ export type PaymentSegment = {
   stage: PaymentStage;
   /** Overrides the default stage label (e.g. "Over 30 months"). */
   label?: string;
+};
+
+export type AvailableUnit = {
+  building: string;
+  type: string;
+  area: string;
+  pricePerSqm: string;
+  price: string;
+  count: number;
 };
 
 export type UnitType = {
@@ -159,9 +171,9 @@ export function resolveConstructionProgress(p: Project): ConstructionProgress {
 
 export const projects: Project[] = [
   {
-    name: "HISNI 3rd Tower",
-    slug: "hisni-3rd-tower",
-    tag: "Tbilisi · Pre-Sale 5, 6, 7 November",
+    name: "HISNI by Biograpi",
+    slug: "hisni",
+    tag: "Tbilisi · Towers I–II on sale · Tower III pre-sale",
     presale: "Pre-Sale · 5–7 Nov",
     presaleNote: "Pre-sale runs 5, 6, 7 November only, with a limited number of apartments. Reserve your place with a fully refundable USD 1,000 fee — booking goes through me personally on a Zoom call.",
     presaleUrl: "/hisni-presale",
@@ -171,21 +183,21 @@ export const projects: Project[] = [
     seaDistance: "Tbilisi",
     seaMeters: "Inland",
     location: "Tbilisi",
-    desc: "The third tower of HISNI by Biograpi — a multifunctional residential complex in Tbilisi that brings homes, offices, retail and leisure into one place. Studios, one- and two-bedroom apartments from 34 to 95 m², with completion in May 2031. Two payment plans: start with no down payment and pay 20% over 30 months, or 10% down, 40% during construction and 50% on completion.",
+    desc: "HISNI by Biograpi is a multifunctional residential complex in Tbilisi that brings homes, offices, retail and leisure into one place: 36-floor towers with a pool, spa, padel court and an 8,000 m² green terrace. Apartments in Towers I and II are on sale now, from $93,450. Tower III opens with a three-day pre-sale on 5, 6 and 7 November — studios, one- and two-bedroom apartments from $1,800/m², completion in May 2031.",
     yield: "",
     developer: "Biograpi",
     priceFrom: "From $67,900",
     priceUSD: 67900,
     completion: "May 2031",
-    area: "34.4–95 m²",
-    ceilingHeight: "On request",
-    floors: "On request",
-    buildings: "3rd tower of HISNI",
+    area: "34–107 m²",
+    ceilingHeight: "2.95 m (Towers I–II)",
+    floors: "36 floors (Towers I–II)",
+    buildings: "3 towers",
     finishing: "On request",
     climateAdaptation: "On request",
     pricePerSqm: "from $1,800/m²",
     installment: "0% down: 20% over 30 months, 80% in month 31 · or 10% / 40% / 50%",
-    paymentPlanNames: ["Plan 1 — 20% over 30 months", "Plan 2 — 10% / 40% / 50%"],
+    paymentPlanNames: ["Tower III · Plan 1 — 20% over 30 months", "Tower III · Plan 2 — 10% / 40% / 50%"],
     paymentPlans: [
       [
         { stage: "construction", pct: 20, label: "Over 30 months, no down payment" },
@@ -201,6 +213,14 @@ export const projects: Project[] = [
       { type: "Studio", area: "34.38–34.82 m²", prices: ["$1,975–2,195/m²", "$2,155–2,395/m²"], priceFrom: "from $67,900" },
       { type: "1 bedroom", area: "62.95–67.80 m²", prices: ["$1,875–2,095/m²", "$2,045–2,285/m²"], priceFrom: "from $118,100" },
       { type: "2 bedrooms", area: "94–95 m²", prices: ["$1,800–2,020/m²", "$1,963–2,203/m²"], priceFrom: "from $169,200" },
+    ],
+    availableUnitsAsOf: "12 October 2026",
+    availableUnits: [
+      { building: "Tower I", type: "1 bedroom", area: "63.6–71.3 m²", pricePerSqm: "$2,300", price: "$146,326–163,898", count: 5 },
+      { building: "Tower I", type: "2 bedrooms", area: "102.7–106.6 m²", pricePerSqm: "$2,050", price: "$210,433–218,448", count: 26 },
+      { building: "Tower II", type: "Studio", area: "37.4 m²", pricePerSqm: "$2,500", price: "$93,450", count: 2 },
+      { building: "Tower II", type: "1 bedroom", area: "64.3–69.7 m²", pricePerSqm: "$2,300", price: "$147,821–160,356", count: 25 },
+      { building: "Tower II", type: "2 bedrooms", area: "97.5–99.0 m²", pricePerSqm: "$2,150", price: "$209,668–212,872", count: 16 },
     ],
     features: [
       "25 m pool with a green terrace",

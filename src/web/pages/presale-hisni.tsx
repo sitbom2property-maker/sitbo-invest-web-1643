@@ -14,7 +14,7 @@ const C = {
   line: "rgba(33,20,26,0.12)",
 };
 
-const SLUG = "hisni-3rd-tower";
+const SLUG = "hisni";
 const TOPIC = "HISNI 3rd Tower Pre-Sale";
 
 const copy = {
