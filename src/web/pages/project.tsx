@@ -646,7 +646,9 @@ export default function ProjectPage() {
   </>);
   }
 
-  const priceLabel = formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
+  const priceLabel = project.presale
+    ? project.priceFrom
+    : formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
   const paymentPlans = resolvePaymentPlans(project);
 
   const p = project;
@@ -847,7 +849,7 @@ export default function ProjectPage() {
 
                 <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
-                  <span>{p.address} · {p.seaDistance}</span>
+                  <span>{p.presale ? p.tag : `${p.address} · ${p.seaDistance}`}</span>
                 </p>
 
                 {/* Key params: property type / price per sqm / ready */}
@@ -1009,6 +1011,30 @@ export default function ProjectPage() {
               />
               </div>
 
+{/* Pre-sale steps — optional */}
+              {p.presaleSteps?.length ? (
+              <>
+              <Divider />
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
+                  {p.presale}
+                </h3>
+                <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: isMobile ? 16 : 20, maxWidth: 720 }}>
+                  {p.presaleSteps.map((step, i) => (
+                    <li key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                      <span style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1px solid ${C.teal}`, color: C.teal, fontFamily: "Nunito, sans-serif", fontSize: 13, fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                        {i + 1}
+                      </span>
+                      <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.95rem" : "1.05rem", color: C.mutedDark, lineHeight: 1.6, margin: "3px 0 0" }}>
+                        {step}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              </>
+              ) : null}
+
 {/* Ownership benefits — optional (e.g. Silk Rewards) */}
               {p.ownershipBenefits ? (
               <>
@@ -1139,13 +1165,13 @@ export default function ProjectPage() {
 
 {/* CTA card */}
                 <div className="pr-reveal" style={{ background: C.dark, borderRadius: "2px", padding: "28px 24px" }}>
-                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{t("project.interested")}</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: C.light, marginBottom: "10px" }}>{p.presale ?? t("project.interested")}</p>
                   <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.6rem", fontWeight: 400, color: C.light, lineHeight: 1.25, marginBottom: "8px" }}>
                     {t("project.offerTitle")}
                   </h3>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: C.light, marginBottom: "16px" }}>{priceLabel}</p>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
-                    {t("project.offerBody")}
+                    {p.presaleNote ?? t("project.offerBody")}
                   </p>
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
@@ -1231,7 +1257,8 @@ export default function ProjectPage() {
 
 
 
-{/* ── LOCATION & LIFESTYLE ── */}
+{/* ── LOCATION & LIFESTYLE (hidden for pre-sales: no public address) ── */}
+      {p.presale ? <div style={{ height: "clamp(56px, 7vw, 100px)" }} /> : (
       <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>
         <Container>
           <Divider />
@@ -1280,6 +1307,7 @@ export default function ProjectPage() {
           </div>
         </Container>
       </section>
+      )}
 
 {/* ── CTA (same as About / Catalog, bg #412834) ── */}
       <section className="pr-cta-outer">
@@ -1365,7 +1393,7 @@ export default function ProjectPage() {
                     <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "1.3rem", fontWeight: 400, color: C.light, margin: 0 }}>{proj.name}</h3>
                   </div>
                   <div style={{ position: "absolute", top: "14px", right: "14px", background: C.light, borderRadius: "2px", padding: "3px 10px", fontFamily: "Nunito, sans-serif", fontSize: "0.6rem", fontWeight: 700, color: C.dark }}>
-                    {proj.yield} {t("catalog.roi")}
+                    {proj.presale ?? `${proj.yield} ${t("catalog.roi")}`}
                   </div>
                 </a>
               </Link>

@@ -32,6 +32,10 @@ export type ProjectLocaleFields = Partial<
     | "districtBody2"
     | "ownershipBenefits"
     | "presale"
+    | "presaleNote"
+    | "presaleSteps"
+    | "pricePerSqm"
+    | "climateAdaptation"
   >
 >;
 
@@ -47,6 +51,15 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
   "hisni-3rd-tower": {
     tag: "Пресейл · 5, 6, 7 ноября",
     presale: "Пресейл · 5–7 ноября",
+    presaleNote: "Всего три дня — 5, 6, 7 ноября. Ограниченное количество квартир. Бронирование лично через меня по Zoom-звонку, взнос USD 1,000 полностью возвращается.",
+    presaleSteps: [
+      "Оставьте заявку — я свяжусь с вами лично.",
+      "Созваниваемся в Zoom: рассказываю о проекте, типах квартир и планах оплаты.",
+      "Бронирую вам место на пресейле — взнос USD 1,000, полностью возвратный.",
+      "5–7 ноября бронирую выбранную вами квартиру, дальше — договор купли-продажи.",
+    ],
+    pricePerSqm: "По запросу",
+    climateAdaptation: "По запросу",
     address: "Тбилиси",
     seaDistance: "Тбилиси",
     seaMeters: "Вдали от моря",

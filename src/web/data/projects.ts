@@ -83,8 +83,15 @@ export type Project = {
    * Defaults to true when omitted.
    */
   listedInCatalog?: boolean;
-  /** Pre-sale badge; the catalog card shows it and `priceFrom` instead of a USD price. */
+  /**
+   * Pre-sale badge. When set, cards and the project page show it and
+   * `priceFrom` instead of a USD price, and the address / map are hidden.
+   */
   presale?: string;
+  /** Pre-sale terms shown in the project-page offer card. */
+  presaleNote?: string;
+  /** Numbered "how the pre-sale works" steps on the project page. */
+  presaleSteps?: string[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -110,7 +117,9 @@ export type PaymentSegment = {
 export type PaymentPlan = PaymentSegment[];
 
 /** Resolve displayable payment plans; sitewide standard is 30% / 70%. */
-export function resolvePaymentPlans(_p: Project): PaymentPlan[] {
+export function resolvePaymentPlans(p: Project): PaymentPlan[] {
+  // Pre-sale terms depend on the plan chosen on the call — no standard split.
+  if (p.presale) return [];
   return [[{ stage: "down", pct: 30 }, { stage: "construction", pct: 70 }]];
 }
 
@@ -142,6 +151,13 @@ export const projects: Project[] = [
     slug: "hisni-3rd-tower",
     tag: "Pre-Sale · 5, 6, 7 November",
     presale: "Pre-Sale · 5–7 Nov",
+    presaleNote: "Three days only — 5, 6, 7 November. A limited number of apartments. Booking goes through me personally on a Zoom call, with a USD 1,000 fully refundable reservation fee.",
+    presaleSteps: [
+      "Leave a request — I contact you personally.",
+      "We have a Zoom call: I walk you through the project, apartment types and payment plans.",
+      "I book your place in the pre-sale with the USD 1,000 fully refundable reservation fee.",
+      "On 5–7 November I reserve the specific apartment you choose, and you proceed with the purchase agreement.",
+    ],
     city: "Tbilisi",
     address: "Tbilisi",
     seaDistance: "Tbilisi",
@@ -158,6 +174,8 @@ export const projects: Project[] = [
     floors: "On request",
     buildings: "3rd tower",
     finishing: "On request",
+    climateAdaptation: "On request",
+    pricePerSqm: "On request",
     installment: "Depends on the payment plan",
     features: [
       "25 m pool with a green terrace",
@@ -179,6 +197,13 @@ export const projects: Project[] = [
       "/projects/hisni/fitness.jpg",
       "/projects/hisni/padel.jpg",
       "/projects/hisni/terrace.jpg",
+    ],
+    galleryPreview: [
+      "/projects/hisni/hero.jpg",
+      "/projects/hisni/ext-03.jpg",
+      "/projects/hisni/lobby.jpg",
+      "/projects/hisni/pool.jpg",
+      "/projects/hisni/ext-01.jpg",
     ],
     cardImage: "/projects/hisni/card.jpg",
     lat: 41.7151,
