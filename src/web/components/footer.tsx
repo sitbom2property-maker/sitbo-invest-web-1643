@@ -11,7 +11,7 @@ const C = {
 };
 
 const colTitleStyle: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 10,
   fontWeight: 500,
   letterSpacing: "0.28em",
@@ -21,7 +21,7 @@ const colTitleStyle: CSSProperties = {
 };
 
 const linkStyle: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 13,
   fontWeight: 400,
   color: C.light,
@@ -212,7 +212,7 @@ export function Footer() {
         >
           <p
             style={{
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Nunito, sans-serif",
               fontSize: 13,
               fontWeight: 400,
               lineHeight: 1.7,
@@ -246,11 +246,11 @@ export function Footer() {
           <FooterCol
             title={t("footer.services")}
             links={[
-              { label: t("footer.dueDiligence"), href: "/services#due-diligence" },
-              { label: t("footer.discoveryTour"), href: "/services#discovery-tour" },
-              { label: t("footer.mortgage"), href: "/services#mortgage" },
-              { label: t("footer.management"), href: "/services#management" },
-              { label: t("footer.residency"), href: "/services#residency" },
+              { label: t("footer.dueDiligence"), href: "/about#due-diligence" },
+              { label: t("footer.discoveryTour"), href: "/about#discovery-tour" },
+              { label: t("footer.mortgage"), href: "/about#mortgage" },
+              { label: t("footer.management"), href: "/about#management" },
+              { label: t("footer.residency"), href: "/about#residency" },
             ]}
           />
 
@@ -304,7 +304,7 @@ export function Footer() {
           alignItems: "center",
           justifyItems: isBarStacked ? "center" : undefined,
           textAlign: isBarStacked ? "center" : undefined,
-          fontFamily: "Inter, sans-serif",
+          fontFamily: "Nunito, sans-serif",
           fontSize: 11,
           fontWeight: 400,
           color: C.light,

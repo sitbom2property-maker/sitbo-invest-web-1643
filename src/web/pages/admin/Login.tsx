@@ -59,7 +59,7 @@ export default function AdminLogin() {
 			>
 				<h1
 					style={{
-						fontFamily: "Coolvetica, Inter, sans-serif",
+						fontFamily: "JUN, Georgia, serif",
 						fontSize: "1.75rem",
 						color: C.light,
 						margin: "0 0 8px",
@@ -70,7 +70,7 @@ export default function AdminLogin() {
 				</h1>
 				<p
 					style={{
-						fontFamily: "Inter, sans-serif",
+						fontFamily: "Nunito, sans-serif",
 						fontSize: "0.85rem",
 						color: "#FFFEF9",
 						margin: "0 0 28px",
@@ -82,7 +82,7 @@ export default function AdminLogin() {
 				<label
 					style={{
 						display: "block",
-						fontFamily: "Inter, sans-serif",
+						fontFamily: "Nunito, sans-serif",
 						fontSize: "0.7rem",
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
@@ -105,7 +105,7 @@ export default function AdminLogin() {
 						border: `1px solid ${C.burgundy}`,
 						borderRadius: "8px",
 						color: C.light,
-						fontFamily: "Inter, sans-serif",
+						fontFamily: "Nunito, sans-serif",
 						fontSize: "0.95rem",
 						marginBottom: "20px",
 						outline: "none",
@@ -116,7 +116,7 @@ export default function AdminLogin() {
 					<p
 						style={{
 							color: "#e88",
-							fontFamily: "Inter, sans-serif",
+							fontFamily: "Nunito, sans-serif",
 							fontSize: "0.85rem",
 							margin: "0 0 16px",
 						}}
@@ -136,7 +136,7 @@ export default function AdminLogin() {
 						color: C.light,
 						border: "none",
 						borderRadius: "8px",
-						fontFamily: "Inter, sans-serif",
+						fontFamily: "Nunito, sans-serif",
 						fontSize: "0.9rem",
 						fontWeight: 600,
 						cursor: submitting ? "wait" : "pointer",

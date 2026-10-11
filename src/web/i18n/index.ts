@@ -1,11 +1,14 @@
 import { useCallback } from "react";
 import { normalizeLanguage, useLocale, type LanguageCode } from "../context/LocaleContext";
+import { fixTypography, normalizeTypografLang } from "../lib/typograf";
 import en, { type MessageKey } from "./en";
 import ru from "./ru";
+import ka from "./ka";
 
 const catalogs: Record<LanguageCode, Record<MessageKey, string>> = {
   en,
   ru,
+  ka,
 };
 
 export type { LanguageCode };
@@ -22,7 +25,7 @@ export function translate(
       text = text.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
     }
   }
-  return text;
+  return fixTypography(text, normalizeTypografLang(lang));
 }
 
 export function useT() {

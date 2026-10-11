@@ -70,7 +70,7 @@ export function Reviews() {
   return (
     <section style={{ background: "#FFFEF9", padding: "clamp(52px,7vw,90px) 0" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 4vw, 64px)" }}>
-        <h3 style={{ margin: "0 0 30px", fontFamily: "Coolvetica, Inter, sans-serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
+        <h3 style={{ margin: "0 0 30px", fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.7rem,3.8vw,2.5rem)", fontWeight: 400, color: "#21141A", lineHeight: 1.15 }}>
           {t("reviews.headline")}
           <br />
           <em style={{ fontStyle: "italic", color: "#703C54" }}>{t("reviews.headlineEm")}</em>
@@ -104,11 +104,11 @@ export function Reviews() {
               }}
             >
               <GoogleReviewBadge />
-              <p style={{ margin: "0 0 14px", fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.65, color: "#FFFEF9", fontStyle: "italic" }}>
+              <p style={{ margin: "0 0 14px", fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", lineHeight: 1.65, color: "#FFFEF9", fontStyle: "italic" }}>
                 "{t(item.quoteKey)}"
               </p>
               <div>
-                <p style={{ margin: 0, fontFamily: "Inter, sans-serif", fontSize: "0.78rem", fontWeight: 400, color: "#FFFEF9" }}>
+                <p style={{ margin: 0, fontFamily: "Nunito, sans-serif", fontSize: "0.78rem", fontWeight: 400, color: "#FFFEF9" }}>
                   {t(item.nameKey)}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
@@ -116,7 +116,7 @@ export function Reviews() {
                     <span
                       key={tag}
                       style={{
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "Nunito, sans-serif",
                         fontSize: 12,
                         padding: "6px 12px",
                         border: "1px solid rgba(255,254,249,0.55)",
@@ -153,7 +153,7 @@ export function Reviews() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFEF9" }}>
+            <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.86rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FFFEF9" }}>
               {t("reviews.readMore")}
             </span>
           </a>

@@ -44,7 +44,7 @@ export function FloatingConsultation() {
           border-radius: 10px;
           background: #FFFEF9;
           color: #21141A;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 14px;
           font-weight: 500;
           letter-spacing: 0.01em;

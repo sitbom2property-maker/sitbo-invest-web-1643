@@ -32,17 +32,17 @@ const ARTICLE_STYLES = `
     padding: 0 var(--site-gutter);
     box-sizing: border-box;
     color: #2C1F27;
-    font-family: Inter, sans-serif;
+    font-family: Nunito, sans-serif;
   }
   .blog-article-body .blog-p {
-    font-family: Inter, sans-serif;
+    font-family: Nunito, sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #2C1F27;
     margin: 0 0 24px;
   }
   .blog-article-body .blog-h2 {
-    font-family: Coolvetica, Inter, sans-serif;
+    font-family: JUN, Georgia, serif;
     font-size: 26px;
     font-weight: 400;
     color: #2C1F27;
@@ -55,7 +55,7 @@ const ARTICLE_STYLES = `
     padding-left: 20px;
   }
   .blog-article-body .blog-li {
-    font-family: Inter, sans-serif;
+    font-family: Nunito, sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #2C1F27;
@@ -136,7 +136,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
     >
       <h2
         style={{
-          fontFamily: "Coolvetica, Inter, sans-serif",
+          fontFamily: "JUN, Georgia, serif",
           fontSize: "clamp(1.75rem,4vw,2.25rem)",
           fontWeight: 400,
           color: C.light,
@@ -148,7 +148,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
       </h2>
       <p
         style={{
-          fontFamily: "Inter, sans-serif",
+          fontFamily: "Nunito, sans-serif",
           fontSize: "0.9rem",
           color: C.light,
           lineHeight: 1.75,
@@ -176,7 +176,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
             borderRadius: "8px",
             background: C.teal,
             color: C.light,
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.82rem",
             fontWeight: 600,
             letterSpacing: "0.06em",
@@ -201,7 +201,7 @@ function CtaBlock({ isMobile }: { isMobile: boolean }) {
             background: "transparent",
             border: "1px solid rgba(255,254,249,0.5)",
             color: C.light,
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.82rem",
             fontWeight: 600,
             letterSpacing: "0.06em",
@@ -258,7 +258,7 @@ function AuthorBlock({ author }: { author: string }) {
       <div>
         <p
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.62rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",
@@ -270,7 +270,7 @@ function AuthorBlock({ author }: { author: string }) {
         </p>
         <p
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "1rem",
             fontWeight: 700,
             color: C.text,
@@ -281,7 +281,7 @@ function AuthorBlock({ author }: { author: string }) {
         </p>
         <p
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.85rem",
             color: C.muted,
             margin: "6px 0 0",
@@ -323,7 +323,7 @@ export default function BlogPostPage() {
           <div style={{ textAlign: "center", maxWidth: "480px" }}>
             <h1
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: "2rem",
                 fontWeight: 400,
                 color: C.text,
@@ -332,14 +332,14 @@ export default function BlogPostPage() {
             >
               {t("blogPost.notFoundTitle")}
             </h1>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: C.muted, margin: "0 0 24px" }}>
+            <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: C.muted, margin: "0 0 24px" }}>
               {t("blogPost.notFoundBody")}
             </p>
             <Link
               href="/blog"
               className="blog-back-link"
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.85rem",
                 fontWeight: 600,
                 color: C.teal,
@@ -364,7 +364,7 @@ export default function BlogPostPage() {
             <Link
               href="/blog"
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.78rem",
                 fontWeight: 600,
                 color: C.light,
@@ -380,7 +380,7 @@ export default function BlogPostPage() {
               <span
                 style={{
                   display: "inline-block",
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Nunito, sans-serif",
                   fontSize: "0.62rem",
                   fontWeight: 600,
                   letterSpacing: "0.12em",
@@ -396,7 +396,7 @@ export default function BlogPostPage() {
             </div>
             <h1
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
+                fontFamily: "JUN, Georgia, serif",
                 fontSize: "clamp(2rem, 5vw, 3.5rem)",
                 fontWeight: 400,
                 color: C.light,
@@ -411,7 +411,7 @@ export default function BlogPostPage() {
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "8px 16px",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.82rem",
                 color: C.light,
               }}

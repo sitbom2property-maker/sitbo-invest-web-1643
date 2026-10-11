@@ -28,5 +28,12 @@
     "ODOO_SOURCE_ID": "16",
     "ODOO_MEDIUM_ID": "7",
     "ODOO_TAG_IDS": "1"
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "AMINA_PROMO",
+      "id": "ae124dad30b24aefa0b3e7610079d7aa",
+      "preview_id": "74b325c74fd5407fb0a031e0335f946a"
+    }
+  ]
 }

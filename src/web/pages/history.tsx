@@ -112,7 +112,7 @@ export default function HistoryPage() {
         }
 
         .ht-hero h1 {
-          font-family: Coolvetica, Inter, sans-serif;
+          font-family: JUN, Georgia, serif;
           font-size: clamp(2.4rem, 7vw, 4.4rem);
           font-weight: 400;
           line-height: 1.08;
@@ -126,7 +126,7 @@ export default function HistoryPage() {
         }
 
         .ht-hero p {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: clamp(0.92rem, 2vw, 1.05rem);
           line-height: 1.75;
           color: ${C.light};
@@ -142,7 +142,7 @@ export default function HistoryPage() {
         }
 
         .ht-region-chip {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 0.72rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -185,14 +185,14 @@ export default function HistoryPage() {
         }
 
         .ht-sticky strong {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 1.35rem;
           font-weight: 600;
           color: ${C.light};
         }
 
         .ht-sticky span {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -279,7 +279,7 @@ export default function HistoryPage() {
 
         .ht-item__year {
           display: block;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.18em;
           text-transform: uppercase;
@@ -288,7 +288,7 @@ export default function HistoryPage() {
         }
 
         .ht-item__title {
-          font-family: Coolvetica, Inter, sans-serif;
+          font-family: JUN, Georgia, serif;
           font-size: clamp(1.35rem, 3.2vw, 1.9rem);
           font-weight: 400;
           line-height: 1.2;
@@ -297,7 +297,7 @@ export default function HistoryPage() {
         }
 
         .ht-item__body {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 0.92rem;
           line-height: 1.7;
           color: ${C.light};
@@ -308,7 +308,7 @@ export default function HistoryPage() {
           max-width: 520px;
           margin: 72px auto 0;
           text-align: center;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 0.88rem;
           line-height: 1.7;
           color: ${C.light};

@@ -7,6 +7,7 @@ import { LocaleSelect } from "./LocaleSelect";
 const LANGUAGE_OPTIONS = [
   { code: "en", label: "English" },
   { code: "ru", label: "Русский" },
+  { code: "ka", label: "ქართული" },
 ] as const;
 
 const CURRENCY_OPTIONS = [
@@ -20,7 +21,7 @@ const CURRENCY_OPTIONS = [
 ] as const;
 
 const FIELD_LABEL: CSSProperties = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "Nunito, sans-serif",
   fontSize: 11,
   fontWeight: 500,
   letterSpacing: "0.22em",
@@ -69,7 +70,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
 
   const handleSave = () => {
     setLocale({
-      language: draftLang as "en" | "ru",
+      language: draftLang as "en" | "ru" | "ka",
       currency: draftCurrency as typeof currency,
     });
     onClose();
@@ -116,7 +117,7 @@ export function LocaleModal({ open, onClose }: LocaleModalProps) {
             <p
               style={{
                 margin: "10px 0 0",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: 11,
                 color: "rgba(33,20,26,0.55)",
                 lineHeight: 1.45,

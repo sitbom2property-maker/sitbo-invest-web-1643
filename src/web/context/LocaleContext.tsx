@@ -10,7 +10,7 @@ import {
 
 const STORAGE_KEY = "sitbo_locale";
 
-export type LanguageCode = "en" | "ru";
+export type LanguageCode = "en" | "ru" | "ka";
 export type UnitsCode = "sqm" | "sqft";
 export type SupportedCurrency = "USD" | "EUR" | "GBP" | "GEL" | "RUB" | "AED" | "TRY";
 
@@ -21,7 +21,10 @@ export type LocaleState = {
 };
 
 export function normalizeLanguage(code: string): LanguageCode {
-  return code === "ru" ? "ru" : "en";
+  const c = (code || "en").toLowerCase();
+  if (c === "ru" || c.startsWith("ru-") || c.startsWith("ru_")) return "ru";
+  if (c === "ka" || c.startsWith("ka-") || c.startsWith("ka_")) return "ka";
+  return "en";
 }
 
 const SUPPORTED_CURRENCIES: SupportedCurrency[] = [

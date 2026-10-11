@@ -1,4 +1,4 @@
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch, useLocation, Redirect } from "wouter";
 // Redesigned homepage. To roll back to the previous design, swap this import
 // for `./pages/index` (the old page is still in the repo, untouched).
 import Index from "./pages/home-v2";
@@ -12,6 +12,7 @@ import LegalPage from "./pages/legal";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog-post";
 import HistoryPage from "./pages/history";
+import AminaPage from "./pages/amina";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PropertyForm from "./pages/admin/PropertyForm";
@@ -26,23 +27,74 @@ import { LeadPopup } from "./components/LeadPopup";
 import { FloatingConsultation } from "./components/FloatingConsultation";
 import { ScrollToHash } from "./components/scroll-to-hash";
 import { ScrollRestore } from "./components/scroll-restore";
+import { PageMeta } from "./components/PageMeta";
+import { ContentProtection } from "./components/ContentProtection";
+
+function isAminaPath(location: string) {
+	return location === "/amina" || location.startsWith("/amina/");
+}
+
+function AppNav() {
+	const [location] = useLocation();
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
+	return <Nav />;
+}
 
 function AppFooter() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <Footer />;
 }
 
 function AppLeadPopup() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <LeadPopup />;
 }
 
 function AppFloatingConsult() {
 	const [location] = useLocation();
-	if (location.startsWith("/admin")) return null;
+	if (location.startsWith("/admin") || isAminaPath(location)) return null;
 	return <FloatingConsultation />;
+}
+
+function AppMain() {
+	const [location] = useLocation();
+	const isHome = location === "/";
+	const isAmina = isAminaPath(location);
+	return (
+		<div
+			style={{
+				paddingTop: isHome || isAmina ? 0 : `var(--nav-height, ${NAV_HEIGHT}px)`,
+			}}
+		>
+			<Switch>
+				<Route path="/" component={Index} />
+				<Route path="/amina" component={AminaPage} />
+				<Route path="/mortgage" component={MortgagePage} />
+				<Route path="/invest" component={InvestPage} />
+				<Route path="/history" component={HistoryPage} />
+				<Route path="/blog/:slug" component={BlogPostPage} />
+				<Route path="/blog" component={BlogPage} />
+				<Route path="/project/:slug" component={ProjectPage} />
+				<Route path="/catalog" component={CatalogPage} />
+				<Route path="/turnkey" component={TurnkeyPage} />
+				<Route path="/about" component={ServicesPage} />
+				<Route path="/services">
+					{() => <Redirect to="/about" />}
+				</Route>
+				<Route path="/legal" component={LegalPage} />
+				<Route path="/admin/login" component={AdminLogin} />
+				<Route path="/admin/property/new">
+					{() => <PropertyForm />}
+				</Route>
+				<Route path="/admin/property/:id">
+					{(params) => <PropertyForm propertyId={params.id} />}
+				</Route>
+				<Route path="/admin" component={AdminDashboard} />
+			</Switch>
+		</div>
+	);
 }
 
 function App() {
@@ -52,30 +104,10 @@ function App() {
 		<Provider>
 			<ScrollRestore />
 			<ScrollToHash />
-			<Nav />
-			<div style={{ paddingTop: `var(--nav-height, ${NAV_HEIGHT}px)` }}>
-				<Switch>
-					<Route path="/" component={Index} />
-					<Route path="/mortgage" component={MortgagePage} />
-					<Route path="/invest" component={InvestPage} />
-					<Route path="/history" component={HistoryPage} />
-					<Route path="/blog/:slug" component={BlogPostPage} />
-					<Route path="/blog" component={BlogPage} />
-					<Route path="/project/:slug" component={ProjectPage} />
-					<Route path="/catalog" component={CatalogPage} />
-					<Route path="/turnkey" component={TurnkeyPage} />
-					<Route path="/services" component={ServicesPage} />
-					<Route path="/legal" component={LegalPage} />
-					<Route path="/admin/login" component={AdminLogin} />
-					<Route path="/admin/property/new">
-						{() => <PropertyForm />}
-					</Route>
-					<Route path="/admin/property/:id">
-						{(params) => <PropertyForm propertyId={params.id} />}
-					</Route>
-					<Route path="/admin" component={AdminDashboard} />
-				</Switch>
-			</div>
+			<PageMeta />
+			<ContentProtection />
+			<AppNav />
+			<AppMain />
 			<AppFooter />
 			<AppLeadPopup />
 			<AppFloatingConsult />

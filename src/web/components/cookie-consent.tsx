@@ -103,7 +103,7 @@ export function CookieConsent() {
                 </button>
                 {langOpen && (
                   <div className="ck-lang-menu" role="listbox" aria-label={t("cookie.language")}>
-                    {(["en", "ru"] as const).map((code) => (
+                    {(["en", "ru", "ka"] as const).map((code) => (
                       <button
                         key={code}
                         type="button"
@@ -242,11 +242,11 @@ const COOKIE_CSS = `
   z-index: 9999;
   background: #21141A;
   color: #FFFEF9;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   box-shadow: 0 -8px 32px rgba(0,0,0,.35);
 }
 .ck-inner {
-  max-width: var(--site-max, 1440px);
+  max-width: var(--site-max, 1680px);
   margin: 0 auto;
   padding: 18px var(--site-gutter, 32px) 16px;
   box-sizing: border-box;
@@ -259,7 +259,7 @@ const COOKIE_CSS = `
 }
 .ck-title {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Nunito, sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0;
@@ -352,10 +352,38 @@ const COOKIE_CSS = `
   font-weight: 400; text-transform: none; letter-spacing: 0;
 }
 @media (max-width: 720px) {
-  .ck-inner { padding: 16px var(--site-gutter, 20px) 14px; }
-  .ck-row { flex-direction: column; align-items: stretch; }
+  .ck {
+    /* Compact bottom bar — not a full-screen sheet */
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    border-radius: 14px;
+    box-shadow: 0 10px 36px rgba(0,0,0,.45);
+  }
+  .ck-inner { padding: 14px 14px 12px; }
+  .ck-title { font-size: 14px; }
+  .ck-body {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 6px 0 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    max-width: none;
+  }
+  .ck-policy { margin: 6px 0 10px; font-size: 12.5px; }
+  .ck-cats { display: none; }
+  .ck-row { flex-direction: column; align-items: stretch; gap: 10px; }
   .ck-actions { width: 100%; }
-  .ck-btn { flex: 1; text-align: center; }
-  .ck-title { font-size: 15px; }
+  .ck-btn { flex: 1; text-align: center; padding: 11px 14px; }
+  .ck-details-toggle { margin-top: 10px; }
+  .ck-details {
+    grid-template-columns: 1fr;
+    max-height: 36vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 `;

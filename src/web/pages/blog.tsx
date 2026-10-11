@@ -67,7 +67,7 @@ function ArticleCard({
           style={{
             display: "inline-block",
             alignSelf: "flex-start",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.62rem",
             fontWeight: 600,
             letterSpacing: "0.12em",
@@ -83,7 +83,7 @@ function ArticleCard({
         </span>
         <h2
           style={{
-            fontFamily: "Coolvetica, Inter, sans-serif",
+            fontFamily: "JUN, Georgia, serif",
             fontSize: "clamp(1.25rem,2.5vw,1.5rem)",
             fontWeight: 400,
             color: C.dark,
@@ -95,7 +95,7 @@ function ArticleCard({
         </h2>
         <p
           style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Nunito, sans-serif",
             fontSize: "0.88rem",
             color: C.muted,
             lineHeight: 1.75,
@@ -120,7 +120,7 @@ function ArticleCard({
               display: "flex",
               flexWrap: "wrap",
               gap: "6px 12px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Nunito, sans-serif",
               fontSize: "0.75rem",
               color: C.muted,
             }}
@@ -174,15 +174,26 @@ export default function BlogPage() {
   return (
     <>
       <div style={{ background: C.light, minHeight: "100vh" }}>
-        <section style={{ background: C.dark, width: "100%", padding: "clamp(80px,10vw,140px) 0" }}>
-          <div className="site-wrap">
+        <section
+          className="page-hero-block"
+          style={{
+            background: C.dark,
+            width: "100%",
+            minHeight: "clamp(380px, 46vh, 480px)",
+            padding: "clamp(72px, 8vw, 120px) 0",
+            display: "flex",
+            alignItems: "center",
+            boxSizing: "border-box",
+          }}
+        >
+          <div className="site-wrap" style={{ width: "100%" }}>
             <h1
               style={{
-                fontFamily: "Coolvetica, Inter, sans-serif",
-                fontSize: "clamp(2.4rem,5vw,4rem)",
+                fontFamily: "JUN, Georgia, serif",
+                fontSize: "clamp(1.85rem, 3.4vw, 2.75rem)",
                 fontWeight: 400,
                 color: C.light,
-                lineHeight: 1.05,
+                lineHeight: 1.15,
                 margin: "0 0 20px",
                 maxWidth: "720px",
               }}
@@ -191,7 +202,7 @@ export default function BlogPage() {
             </h1>
             <p
               style={{
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Nunito, sans-serif",
                 fontSize: "0.88rem",
                 color: C.light,
                 lineHeight: 1.7,

@@ -102,7 +102,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
         }
         .privacy-modal-head h2 {
           margin: 0 0 6px;
-          font-family: Coolvetica, Inter, sans-serif;
+          font-family: JUN, Georgia, serif;
           font-size: clamp(22px, 3vw, 28px);
           font-weight: 600;
           color: #FFFEF9;
@@ -110,7 +110,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
         }
         .privacy-modal-head p {
           margin: 0;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 13px;
           color: #FFFEF9;
         }
@@ -140,14 +140,14 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
         .privacy-modal-section:last-child { margin-bottom: 0; }
         .privacy-modal-section h3 {
           margin: 0 0 8px;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 15px;
           font-weight: 600;
           color: #FFFEF9;
         }
         .privacy-modal-section p {
           margin: 0;
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 14px;
           line-height: 1.55;
           color: #FFFEF9;
@@ -159,7 +159,7 @@ export function PrivacyModal({ open, onClose }: PrivacyModalProps) {
           gap: 6px;
         }
         .privacy-modal-section li {
-          font-family: Inter, sans-serif;
+          font-family: Nunito, sans-serif;
           font-size: 14px;
           line-height: 1.5;
           color: #FFFEF9;
