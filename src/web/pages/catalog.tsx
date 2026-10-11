@@ -341,7 +341,7 @@ function CatalogCard({ p }: { p: Project }) {
   const [hovered, setHovered] = useState(false);
   const { formatFromUSD } = useRates();
   const t = useT();
-  const priceLabel = p.presale ? p.priceFrom : formatFromUSD(p.priceUSD, { prefix: t("cta.from") });
+  const priceLabel = p.priceUSD ? formatFromUSD(p.priceUSD, { prefix: t("cta.from") }) : p.priceFrom;
   return (
     <Link href={`/project/${p.slug}`}>
       <a style={{ textDecoration: "none", display: "block" }}>

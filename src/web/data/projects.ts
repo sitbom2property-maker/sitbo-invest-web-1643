@@ -83,15 +83,18 @@ export type Project = {
    * Defaults to true when omitted.
    */
   listedInCatalog?: boolean;
-  /**
-   * Pre-sale badge. When set, cards and the project page show it and
-   * `priceFrom` instead of a USD price, and the address / map are hidden.
-   */
+  /** Pre-sale badge shown on catalog cards and the project page. */
   presale?: string;
-  /** Pre-sale terms shown in the project-page offer card. */
+  /** Pre-sale terms shown in the project-page offer card and banner. */
   presaleNote?: string;
-  /** Numbered "how the pre-sale works" steps on the project page. */
-  presaleSteps?: string[];
+  /** Pre-sale landing page linked from the project page. */
+  presaleUrl?: string;
+  /** Hide the street address and the location map. */
+  hideLocation?: boolean;
+  /** Payment-plan names, in the same order as `paymentPlans`. */
+  paymentPlanNames?: string[];
+  /** Apartment types with price ranges per payment plan. */
+  unitTypes?: UnitType[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -112,14 +115,23 @@ export type PaymentStage = "down" | "construction" | "handover";
 export type PaymentSegment = {
   pct: number;
   stage: PaymentStage;
+  /** Overrides the default stage label (e.g. "Over 30 months"). */
+  label?: string;
+};
+
+export type UnitType = {
+  type: string;
+  area: string;
+  /** Price-per-m² range for each payment plan, in the same order as `paymentPlans`. */
+  prices: string[];
+  priceFrom: string;
 };
 
 export type PaymentPlan = PaymentSegment[];
 
 /** Resolve displayable payment plans; sitewide standard is 30% / 70%. */
 export function resolvePaymentPlans(p: Project): PaymentPlan[] {
-  // Pre-sale terms depend on the plan chosen on the call — no standard split.
-  if (p.presale) return [];
+  if (p.paymentPlans?.length) return p.paymentPlans;
   return [[{ stage: "down", pct: 30 }, { stage: "construction", pct: 70 }]];
 }
 
@@ -149,34 +161,47 @@ export const projects: Project[] = [
   {
     name: "HISNI 3rd Tower",
     slug: "hisni-3rd-tower",
-    tag: "Pre-Sale · 5, 6, 7 November",
+    tag: "Tbilisi · Pre-Sale 5, 6, 7 November",
     presale: "Pre-Sale · 5–7 Nov",
-    presaleNote: "Three days only — 5, 6, 7 November. A limited number of apartments. Booking goes through me personally on a Zoom call, with a USD 1,000 fully refundable reservation fee.",
-    presaleSteps: [
-      "Leave a request — I contact you personally.",
-      "We have a Zoom call: I walk you through the project, apartment types and payment plans.",
-      "I book your place in the pre-sale with the USD 1,000 fully refundable reservation fee.",
-      "On 5–7 November I reserve the specific apartment you choose, and you proceed with the purchase agreement.",
-    ],
+    presaleNote: "Pre-sale runs 5, 6, 7 November only, with a limited number of apartments. Reserve your place with a fully refundable USD 1,000 fee — booking goes through me personally on a Zoom call.",
+    presaleUrl: "/hisni-presale",
+    hideLocation: true,
     city: "Tbilisi",
     address: "Tbilisi",
     seaDistance: "Tbilisi",
     seaMeters: "Inland",
     location: "Tbilisi",
-    desc: "Pre-sale of the third tower of HISNI by Biograpi — a multifunctional complex in Tbilisi. Three days only, 5, 6 and 7 November: a limited number of apartments, reserved through a Zoom call with a fully refundable USD 1,000 fee.",
+    desc: "The third tower of HISNI by Biograpi — a multifunctional residential complex in Tbilisi that brings homes, offices, retail and leisure into one place. Studios, one- and two-bedroom apartments from 34 to 95 m², with completion in May 2031. Two payment plans: start with no down payment and pay 20% over 30 months, or 10% down, 40% during construction and 50% on completion.",
     yield: "",
     developer: "Biograpi",
-    priceFrom: "Price on request",
-    priceUSD: 0,
+    priceFrom: "From $67,900",
+    priceUSD: 67900,
     completion: "May 2031",
-    area: "On request",
+    area: "34.4–95 m²",
     ceilingHeight: "On request",
     floors: "On request",
-    buildings: "3rd tower",
+    buildings: "3rd tower of HISNI",
     finishing: "On request",
     climateAdaptation: "On request",
-    pricePerSqm: "On request",
-    installment: "Depends on the payment plan",
+    pricePerSqm: "from $1,800/m²",
+    installment: "0% down: 20% over 30 months, 80% in month 31 · or 10% / 40% / 50%",
+    paymentPlanNames: ["Plan 1 — 20% over 30 months", "Plan 2 — 10% / 40% / 50%"],
+    paymentPlans: [
+      [
+        { stage: "construction", pct: 20, label: "Over 30 months, no down payment" },
+        { stage: "handover", pct: 80, label: "Month 31 (May 2029)" },
+      ],
+      [
+        { stage: "down", pct: 10, label: "Down payment" },
+        { stage: "construction", pct: 40, label: "Until completion" },
+        { stage: "handover", pct: 50, label: "On completion (May 2031)" },
+      ],
+    ],
+    unitTypes: [
+      { type: "Studio", area: "34.38–34.82 m²", prices: ["$1,975–2,195/m²", "$2,155–2,395/m²"], priceFrom: "from $67,900" },
+      { type: "1 bedroom", area: "62.95–67.80 m²", prices: ["$1,875–2,095/m²", "$2,045–2,285/m²"], priceFrom: "from $118,100" },
+      { type: "2 bedrooms", area: "94–95 m²", prices: ["$1,800–2,020/m²", "$1,963–2,203/m²"], priceFrom: "from $169,200" },
+    ],
     features: [
       "25 m pool with a green terrace",
       "8,000 m² green terrace",

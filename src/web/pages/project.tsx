@@ -646,9 +646,9 @@ export default function ProjectPage() {
   </>);
   }
 
-  const priceLabel = project.presale
-    ? project.priceFrom
-    : formatFromUSD(project.priceUSD, { prefix: t("cta.from") });
+  const priceLabel = project.priceUSD
+    ? formatFromUSD(project.priceUSD, { prefix: t("cta.from") })
+    : project.priceFrom;
   const paymentPlans = resolvePaymentPlans(project);
 
   const p = project;
@@ -849,7 +849,7 @@ export default function ProjectPage() {
 
                 <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", color: C.mutedDark, display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "20px", lineHeight: 1.5 }}>
                   <svg width="11" height="13" viewBox="0 0 12 14" fill="none" style={{ flexShrink: 0, marginTop: 2 }}><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5c-.83 0-1.5-.67-1.5-1.5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="currentColor"/></svg>
-                  <span>{p.presale ? p.tag : `${p.address} · ${p.seaDistance}`}</span>
+                  <span>{p.hideLocation ? p.tag : `${p.address} · ${p.seaDistance}`}</span>
                 </p>
 
                 {/* Key params: property type / price per sqm / ready */}
@@ -1011,26 +1011,55 @@ export default function ProjectPage() {
               />
               </div>
 
-{/* Pre-sale steps — optional */}
-              {p.presaleSteps?.length ? (
+{/* Pre-sale banner — optional */}
+              {p.presale && p.presaleUrl ? (
+              <Link href={p.presaleUrl}>
+                <a className="pr-reveal" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16, margin: isMobile ? "0 0 48px" : "0 0 64px", padding: isMobile ? "20px" : "24px 28px", background: C.teal, color: C.light, borderRadius: 2, textDecoration: "none" }}>
+                  <span style={{ display: "flex", flexDirection: "column", gap: 6, maxWidth: 620 }}>
+                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" }}>{p.presale}</span>
+                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.92rem" : "1rem", lineHeight: 1.55 }}>{p.presaleNote}</span>
+                  </span>
+                  <span aria-hidden style={{ flexShrink: 0, width: 40, height: 40, borderRadius: "50%", border: "1px solid rgba(255,254,249,0.5)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </span>
+                </a>
+              </Link>
+              ) : null}
+
+{/* Apartments & prices — optional */}
+              {p.unitTypes?.length ? (
               <>
               <Divider />
               <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
                 <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 28px" }}>
-                  {p.presale}
+                  {t("project.unitTypes")}
                 </h3>
-                <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: isMobile ? 16 : 20, maxWidth: 720 }}>
-                  {p.presaleSteps.map((step, i) => (
-                    <li key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                      <span style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1px solid ${C.teal}`, color: C.teal, fontFamily: "Nunito, sans-serif", fontSize: 13, fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                        {i + 1}
-                      </span>
-                      <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.95rem" : "1.05rem", color: C.mutedDark, lineHeight: 1.6, margin: "3px 0 0" }}>
-                        {step}
-                      </p>
-                    </li>
-                  ))}
-                </ol>
+                <div style={{ overflowX: "auto" }}>
+                  <table style={{ width: "100%", minWidth: 520, borderCollapse: "collapse", fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.85rem" : "0.95rem", color: C.dark }}>
+                    <thead>
+                      <tr>
+                        {[t("project.unitTypes.type"), t("project.unitTypes.area"), ...(p.paymentPlanNames ?? []), t("project.unitTypes.priceFrom")].map((h) => (
+                          <th key={h} style={{ textAlign: "left", fontSize: "13px", fontWeight: 400, color: "rgba(33,20,26,0.45)", padding: "0 16px 12px 0", verticalAlign: "bottom" }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {p.unitTypes.map((u) => (
+                        <tr key={u.type} style={{ borderTop: "1px solid rgba(33,20,26,0.1)" }}>
+                          <td style={{ padding: "14px 16px 14px 0", fontWeight: 700 }}>{u.type}</td>
+                          <td style={{ padding: "14px 16px 14px 0" }}>{u.area}</td>
+                          {u.prices.map((price, k) => (
+                            <td key={k} style={{ padding: "14px 16px 14px 0" }}>{price}</td>
+                          ))}
+                          <td style={{ padding: "14px 0", fontWeight: 700 }}>{u.priceFrom}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.84rem" : "0.9rem", color: "rgba(33,20,26,0.5)", lineHeight: 1.45, margin: "20px 0 0", maxWidth: 620 }}>
+                  {t("project.unitTypes.note")}
+                </p>
               </div>
               </>
               ) : null}
@@ -1096,8 +1125,13 @@ export default function ProjectPage() {
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 16 }}>
                   {paymentPlans.map((plan, planIdx) => (
+                    <div key={`plan-${planIdx}`}>
+                    {p.paymentPlanNames?.[planIdx] ? (
+                      <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.9rem" : "0.95rem", fontWeight: 700, color: C.dark, margin: "0 0 10px" }}>
+                        {p.paymentPlanNames[planIdx]}
+                      </p>
+                    ) : null}
                     <div
-                      key={`plan-${planIdx}`}
                       className="project-payment-bar"
                       style={{
                         display: "flex",
@@ -1108,12 +1142,12 @@ export default function ProjectPage() {
                     >
                       {plan.map((seg, segIdx) => {
                         const isDown = seg.stage === "down";
-                        const label =
+                        const label = seg.label ?? (
                           seg.stage === "down"
                             ? t("project.payment.down")
                             : seg.stage === "handover"
                               ? t("project.payment.handover")
-                              : t("project.payment.construction");
+                              : t("project.payment.construction"));
                         return (
                           <div
                             key={`${planIdx}-${segIdx}-${seg.stage}`}
@@ -1137,6 +1171,7 @@ export default function ProjectPage() {
                           </div>
                         );
                       })}
+                    </div>
                     </div>
                   ))}
                 </div>
@@ -1173,6 +1208,13 @@ export default function ProjectPage() {
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: C.light, lineHeight: 1.6, marginBottom: "20px" }}>
                     {p.presaleNote ?? t("project.offerBody")}
                   </p>
+                  {p.presaleUrl ? (
+                    <Link href={p.presaleUrl}>
+                      <a style={{ display: "block", marginBottom: "12px", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, border: "1px solid rgba(255,254,249,0.4)", borderRadius: "2px", padding: "13px", textDecoration: "none", textAlign: "center" }}>
+                        {p.presale} →
+                      </a>
+                    </Link>
+                  ) : null}
                   <button onClick={() => setShowOfferForm(true)} style={{ display: "block", width: "100%", fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.light, background: C.teal, border: "none", borderRadius: "2px", padding: "14px", textDecoration: "none", textAlign: "center", cursor: "pointer", transition: "opacity 0.2s" }} onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")} onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                     {t("project.offerModal.title")}
                   </button>
@@ -1257,8 +1299,8 @@ export default function ProjectPage() {
 
 
 
-{/* ── LOCATION & LIFESTYLE (hidden for pre-sales: no public address) ── */}
-      {p.presale ? <div style={{ height: "clamp(56px, 7vw, 100px)" }} /> : (
+{/* ── LOCATION & LIFESTYLE (optional: hidden when the address is not public) ── */}
+      {p.hideLocation ? <div style={{ height: "clamp(56px, 7vw, 100px)" }} /> : (
       <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>
         <Container>
           <Divider />
