@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { RequestModal } from "../components/RequestModal";
+import { GeorgiaMap } from "../components/GeorgiaMap";
 import { useT, type MessageKey } from "../i18n";
 
 /**
@@ -328,6 +329,29 @@ const CSS = `
   font-size: clamp(16px, 1.35vw, 20px); line-height: 1.35; font-weight: 500;
 }
 .iv-tile-body { font-size: 13px; line-height: 1.4; margin: 12px 0 0; opacity: .85; }
+
+/* Georgia map */
+.iv-map {
+  background: var(--bg-light);
+  padding: 0 0 clamp(56px, 7vw, 100px);
+}
+.iv-map-head {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(16px, 4vw, 64px); align-items: end;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+.iv-map-head h2 {
+  font-family: var(--display); font-weight: 600; margin: 0;
+  font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08;
+}
+.iv-map-head p {
+  margin: 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+  color: rgba(33,20,26,.78); max-width: 420px; justify-self: end;
+}
+@media (max-width: 1000px) {
+  .iv-map-head { grid-template-columns: 1fr; }
+  .iv-map-head p { justify-self: start; max-width: none; }
+}
 
 /* diplomacy slider — fixed panel size; text only */
 .iv-diplomacy {
@@ -763,6 +787,18 @@ export default function InvestPage() {
             <div className="iv-tile iv-tile-img">
               <img src="/why-georgia/img-wine.jpg" alt={t("invest.mosaic.wineAlt")} />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="iv-map" id="georgia-map">
+        <div className="iv-wrap">
+          <div className="iv-map-head rv">
+            <h2>{t("invest.map.title")}</h2>
+            <p>{t("invest.map.lead")}</p>
+          </div>
+          <div className="rv">
+            <GeorgiaMap />
           </div>
         </div>
       </section>
