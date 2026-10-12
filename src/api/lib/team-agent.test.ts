@@ -105,7 +105,28 @@ describe("webhook routing", () => {
     await handleBotUpdate(message("Гиорги, созвонимся в 5?"), env(kv), NOW, apis.fetchImpl);
     expect(apis.anthropic.length).toBe(1);
     expect(apis.telegram.filter((c) => c.method === "sendMessage").length).toBe(0);
-    expect(kv.store.has("agent:hist:-1001")).toBe(false);
+    // The message is still remembered as group context, but there is no bot answer in the log.
+    const log = JSON.parse(kv.store.get("agent:log:-1001")!);
+    expect(log.map((e: any) => [e.by, e.text, !!e.bot])).toEqual([["Nino", "Гиорги, созвонимся в 5?", false]]);
+  });
+
+  test("chat mode: a short «да» right after the bot's question reaches the model with the conversation", async () => {
+    const kv = fakeKv();
+    const apis = fakeApis([
+      { content: [{ type: "text", text: "Нашёл Маргариту. Поставить напоминание на 15.10 в 12:00?" }], stop_reason: "end_turn" },
+      { content: [{ type: "text", text: "Поставил." }], stop_reason: "end_turn" },
+    ]);
+    await handleBotUpdate(message("@SitboLeadsBot что с Маргаритой?"), env(kv), NOW, apis.fetchImpl);
+    await handleBotUpdate(message("да"), env(kv), NOW + 60_000, apis.fetchImpl);
+    expect(apis.anthropic.length).toBe(2);
+    const second = apis.anthropic[1].messages.at(-1).content as string;
+    expect(second).toContain("Ты (бот): Нашёл Маргариту. Поставить напоминание на 15.10 в 12:00?");
+    expect(second).toContain("Nino: что с Маргаритой?");
+    expect(second.endsWith("Nino: да")).toBe(true);
+
+    // Long after the bot's last message a bare «да» is ignored again.
+    await handleBotUpdate(message("да"), env(kv), NOW + 60 * 60_000, apis.fetchImpl);
+    expect(apis.anthropic.length).toBe(2);
   });
 
   test("chat mode: small talk, replies to colleagues and @colleague never reach the model", async () => {
@@ -206,8 +227,8 @@ describe("agent", () => {
     expect(toolResult.type).toBe("tool_result");
     expect(JSON.parse(toolResult.content).ok).toBe(true);
 
-    const history = JSON.parse(kv.store.get("agent:hist:-1001")!);
-    expect(history.map((m: any) => m.role)).toEqual(["user", "assistant"]);
+    const log = JSON.parse(kv.store.get("agent:log:-1001")!);
+    expect(log.map((e: any) => !!e.bot)).toEqual([false, true]);
   });
 
   test("answers project questions from the site data", async () => {
