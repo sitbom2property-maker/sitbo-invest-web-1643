@@ -465,14 +465,25 @@ async function botIdentity(env: AgentEnv, fetchImpl: Fetch): Promise<{ id: numbe
   return me;
 }
 
+/** "@SitboLeadsbot", and also the shortened "@SitboLeads" people type from the bot's display name. */
+function isBotHandle(handle: string, username: string): boolean {
+  const h = handle.replace(/^@/, "").toLowerCase();
+  const u = username.toLowerCase();
+  return h === u || (h.length >= 6 && u.startsWith(h) && /^_?bot$/.test(u.slice(h.length)));
+}
+
 export function mentionsBot(msg: TgMessage, me: { id: number; username: string }): boolean {
   const text = msg.text ?? msg.caption ?? "";
-  const handle = `@${me.username}`.toLowerCase();
   for (const e of msg.entities ?? msg.caption_entities ?? []) {
-    if (e.type === "mention" && text.slice(e.offset, e.offset + e.length).toLowerCase() === handle) return true;
+    if (e.type === "mention" && isBotHandle(text.slice(e.offset, e.offset + e.length), me.username)) return true;
     if (e.type === "text_mention" && e.user?.id === me.id) return true;
   }
-  return text.toLowerCase().includes(handle);
+  return [...text.matchAll(/@(\w+)/g)].some((m) => isBotHandle(m[1], me.username));
+}
+
+/** Remove the bot's @handle (full or shortened) from the question. */
+function stripBotHandle(text: string, username: string): string {
+  return text.replace(/@(\w+)/g, (all, h: string) => (isBotHandle(h, username) ? "" : all)).trim();
 }
 
 /** The lead whose card this message is (cards end with "#<id>"). */
@@ -538,7 +549,7 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
     return;
   }
 
-  const question = text.replace(new RegExp(`@${me.username}`, "gi"), "").trim() || "Привет! Что ты умеешь?";
+  const question = stripBotHandle(text, me.username) || "Привет! Что ты умеешь?";
   const context: string[] = [];
   if (card) context.push(`[Это ответ на карточку заявки #${card.id}]`);
   else if (msg.reply_to_message?.text && !replyToBot) {

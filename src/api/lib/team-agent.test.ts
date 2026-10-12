@@ -81,6 +81,10 @@ describe("formatting", () => {
     const text = "@sitboleadsbot сколько заявок?";
     expect(mentionsBot({ message_id: 1, chat: { id: 1 }, text, entities: [{ type: "mention", offset: 0, length: 14 }] }, BOT)).toBe(true);
     expect(mentionsBot({ message_id: 1, chat: { id: 1 }, text: "просто текст" }, BOT)).toBe(false);
+    // People often type the display name without the "bot" suffix.
+    expect(mentionsBot({ message_id: 1, chat: { id: 1 }, text: "@SitboLeads студия в hisni?" }, BOT)).toBe(true);
+    expect(mentionsBot({ message_id: 1, chat: { id: 1 }, text: "@Sitbo привет" }, BOT)).toBe(false);
+    expect(mentionsBot({ message_id: 1, chat: { id: 1 }, text: "@nino_georgia глянь" }, BOT)).toBe(false);
   });
 });
 
