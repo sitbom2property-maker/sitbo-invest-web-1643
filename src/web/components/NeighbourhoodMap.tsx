@@ -60,7 +60,7 @@ const CSS = `
 .nm { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr); gap: 16px; }
 .nm-map { position: relative; height: clamp(360px, 46vw, 560px); border-radius: 2px; overflow: hidden; background: #ECE8E1; z-index: 0; }
 .nm-map .leaflet-container { width: 100%; height: 100%; font-family: Nunito, sans-serif; background: #ECE8E1; }
-.nm-map .nm-tiles { filter: grayscale(0.85) sepia(0.18) brightness(1.04) contrast(0.92); }
+.nm-map .leaflet-tile-pane { filter: grayscale(0.85) sepia(0.18) brightness(1.04) contrast(0.92); }
 .nm-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .nm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .nm-chip {
