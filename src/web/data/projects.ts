@@ -213,6 +213,7 @@ export const projects: Project[] = [
     desc: "HISNI by Biograpi is a multifunctional residential complex in Tbilisi that brings homes, offices, retail and leisure into one place: 36-floor towers with a pool, spa, padel court and an 8,000 m² green terrace. Apartments in Towers I and II are on sale now, from $93,450. Tower III opens with a three-day pre-sale on 5, 6 and 7 November — studios, one- and two-bedroom apartments from $1,800/m², completion in May 2031.",
     yield: "",
     developer: "Biograpi",
+    architect: "Metric Architect",
     priceFrom: "From $67,900",
     priceUSD: 67900,
     completion: "2028–2031",
@@ -256,7 +257,7 @@ export const projects: Project[] = [
       },
       {
         title: "How it is built",
-        body: "Floors 1–5 hold retail and offices, floors 6–36 are residential. The frame is monolithic reinforced concrete with insulated thermal-block walls; the façade combines fibre concrete with Italian terracotta panels that resist temperature swings, UV and fire. The structure meets Georgia's seismic standard and stands on bedrock. Engineering safety is overseen by Meinhardt, acoustics and sound insulation by Acustico, and façade engineering by Germany's NBK.",
+        body: "Designed by Tbilisi studio Metric Architect, HISNI is a six-level podium (two of them underground) with four residential towers of 31 floors each rising from it. The podium holds retail on the -1st, ground and 4th floors, parking on the -2nd, -1st, 2nd and 3rd floors, and offices on the first floors of each tower; its roof at +13.2 m is a landscaped terrace with playgrounds, sports areas, walking paths and a padel court. Every tower has four lifts and two stairwells, both doubling as fire-escape routes. The frame is monolithic reinforced concrete with insulated thermal-block walls; the façade combines fibre-concrete panels, Italian terracotta and anthracite (RAL 7016) aluminium curtain walls. The structure meets Georgia's seismic standard and stands on bedrock. Engineering safety is overseen by Meinhardt, acoustics and sound insulation by Acustico, and façade engineering by Germany's NBK.",
       },
       {
         title: "What you get with the apartment",

@@ -159,8 +159,10 @@ export function towerRing(t: MapTower, steps = 72, scale = 1): [number, number][
   return ring;
 }
 
-const PODIUM_HEIGHT = 12;
-const FLOOR_HEIGHT = 3.4;
+/** Podium roof terrace (+13.20) and first residential floor (+17.05) per the architect's description. */
+const PODIUM_HEIGHT = 13.2;
+const TOWER_START = 17.05;
+const RESIDENTIAL_FLOORS = 31;
 const SLAB = 0.4;
 const WINDOW_SECTORS = 18;
 /** Dark bronze glazing and warm lit windows — the dusk look of the developer's renders. */
@@ -196,10 +198,12 @@ export function towerFeatures(t: MapTower, index = 0): TowerFeature[] {
   const centre: [number, number] = [t.lng, t.lat];
 
   poly(towerRing(t, 56, 1.3), 0, PODIUM_HEIGHT, "#F1ECE3");
-  const floors = Math.max(1, Math.round((t.height - PODIUM_HEIGHT) / FLOOR_HEIGHT));
-  const fh = (t.height - PODIUM_HEIGHT) / floors;
+  // Glazed lobby / office level between the podium terrace and the first apartments.
+  poly(towerRing(t, 56, 0.95), PODIUM_HEIGHT, TOWER_START, "#C99A62");
+  const floors = RESIDENTIAL_FLOORS;
+  const fh = (t.height - TOWER_START) / floors;
   for (let f = 0; f < floors; f++) {
-    const base = PODIUM_HEIGHT + f * fh;
+    const base = TOWER_START + f * fh;
     poly(towerRing(t, 56, 1.04), base, base + SLAB, SLAB_COLOR);
     // Window sectors: wedges from the centre, so only their outer arc shows on the façade.
     for (let k = 0; k < WINDOW_SECTORS; k++) {
