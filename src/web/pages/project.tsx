@@ -1011,6 +1011,21 @@ export default function ProjectPage() {
               />
               </div>
 
+{/* Story sections — optional (developer, history, construction) */}
+              {p.story?.map((part) => (
+                <div key={part.title}>
+                  <Divider />
+                  <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                    <h3 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)", fontWeight: 500, color: C.dark, lineHeight: 1.25, margin: "0 0 20px" }}>
+                      {part.title}
+                    </h3>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: isMobile ? "0.95rem" : "1.05rem", color: C.mutedDark, lineHeight: 1.75, margin: 0, maxWidth: 760 }}>
+                      {part.body}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
 {/* Pre-sale banner — optional */}
               {p.presale && p.presaleUrl ? (
               <Link href={p.presaleUrl}>

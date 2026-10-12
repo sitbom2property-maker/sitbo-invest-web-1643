@@ -31,6 +31,7 @@ const copy = {
       ["Completion", "May 2031"],
       ["Reservation", "USD 1,000, fully refundable"],
       ["Booking", "Personally with me, via Zoom call"],
+      ["Developer", "Biograpi Living · supported by Invia Group"],
     ],
     stepsTitle: "How the pre-sale works",
     steps: [
@@ -66,6 +67,7 @@ const copy = {
       ["Сдача", "Май 2031"],
       ["Бронь", "USD 1,000, полностью возвратная"],
       ["Бронирование", "Лично через меня, по Zoom"],
+      ["Застройщик", "Biograpi Living · при поддержке Invia Group"],
     ],
     stepsTitle: "Как проходит пресейл",
     steps: [

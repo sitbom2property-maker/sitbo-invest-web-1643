@@ -98,6 +98,8 @@ export type Project = {
   /** Units on sale now (e.g. in completed towers), with the date of the snapshot. */
   availableUnits?: AvailableUnit[];
   availableUnitsAsOf?: string;
+  /** Optional long-form sections (developer, history, construction) on the project page. */
+  story?: { title: string; body: string }[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -188,12 +190,12 @@ export const projects: Project[] = [
     developer: "Biograpi",
     priceFrom: "From $67,900",
     priceUSD: 67900,
-    completion: "May 2031",
+    completion: "2028–2031",
     area: "34–107 m²",
     ceilingHeight: "2.95 m (Towers I–II)",
     floors: "36 floors (Towers I–II)",
     buildings: "3 towers",
-    finishing: "On request",
+    finishing: "Green frame",
     climateAdaptation: "On request",
     pricePerSqm: "from $1,800/m²",
     installment: "0% down: 20% over 30 months, 80% in month 31 · or 10% / 40% / 50%",
@@ -214,6 +216,24 @@ export const projects: Project[] = [
       { type: "1 bedroom", area: "62.95–67.80 m²", prices: ["$1,875–2,095/m²", "$2,045–2,285/m²"], priceFrom: "from $118,100" },
       { type: "2 bedrooms", area: "94–95 m²", prices: ["$1,800–2,020/m²", "$1,963–2,203/m²"], priceFrom: "from $169,200" },
     ],
+    story: [
+      {
+        title: "About the developer — Biograpi Living",
+        body: "Biograpi Living is a Tbilisi developer whose projects are supported by Invia Group, a Georgian business group with more than 25 years of history across fuel (Wissol), real estate, retail and restaurants. HISNI is Biograpi's fourth project; its portfolio also includes Sakeni, Matiani, Chantan, Bare, Daira, Mozaika, Libretto and Gardani. The company is led by CEO Vasil Pkhakadze and has its own quality-control, environmental and occupational-safety teams.",
+      },
+      {
+        title: "Why it is called HISNI",
+        body: "Hisni is the Arabic word for “fortress”. In the 8th–9th centuries one of Tbilisi's oldest districts was walled with stone and a moat and became known by this name. The complex brings that history back — with views of the Old Town, the Mtkvari River and Holy Trinity Cathedral.",
+      },
+      {
+        title: "How it is built",
+        body: "Floors 1–5 hold retail and offices, floors 6–36 are residential, with an 8,000 m² green zone and children's spaces. The façade combines fibre concrete with Italian terracotta panels that resist temperature swings, UV and fire. The structure meets Georgia's seismic standard and stands on bedrock. Engineering safety is overseen by Meinhardt, acoustics and sound insulation by Acustico, and façade engineering by Germany's NBK. Apartments are delivered in green frame.",
+      },
+      {
+        title: "After you move in",
+        body: "The building is run as a serviced residence: 24-hour security and concierge, cleaning and landscaping, pool maintenance, fire-safety systems, a backup power generator, water-reservoir monitoring and a dedicated communication manager for residents.",
+      },
+    ],
     availableUnitsAsOf: "12 October 2026",
     availableUnits: [
       { building: "Tower I", type: "1 bedroom", area: "63.6–71.3 m²", pricePerSqm: "$2,300", price: "$146,326–163,898", count: 5 },
@@ -223,14 +243,17 @@ export const projects: Project[] = [
       { building: "Tower II", type: "2 bedrooms", area: "97.5–99.0 m²", pricePerSqm: "$2,150", price: "$209,668–212,872", count: 16 },
     ],
     features: [
+      "Views of the Old Town, the Mtkvari River and Holy Trinity Cathedral",
+      "8,000 m² green zone with children's spaces",
       "25 m pool with a green terrace",
-      "8,000 m² green terrace",
-      "Lobby with 24/7 concierge",
       "Fitness centre and spa",
       "Padel court",
-      "Shopping centre and co-working",
+      "Lobby with 24/7 concierge and security",
+      "Shopping centre, offices and co-working on floors 1–5",
+      "Backup power generator",
+      "Energy-efficient, sound-insulated apartments",
     ],
-    materials: "Façade of fibre-reinforced concrete and terracotta panels — highly resistant to temperature and UV, energy-efficient and fire-safe.",
+    materials: "Fibre-concrete and Italian terracotta façade (engineering by NBK, Germany); engineering safety overseen by Meinhardt; acoustics by Acustico. Seismic-standard structure on bedrock. Delivered in green frame.",
     photos: [
       "/projects/hisni/hero.jpg",
       "/projects/hisni/ext-01.jpg",
