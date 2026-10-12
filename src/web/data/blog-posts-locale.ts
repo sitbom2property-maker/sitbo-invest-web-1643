@@ -1,6 +1,8 @@
 import type { BlogPost } from "./blog-posts";
 import { blogPosts, getPostBySlug as getEn } from "./blog-posts";
 import { normalizeTypografLang, typografDeep } from "../lib/typograf";
+import { normalizeLanguage } from "../context/LocaleContext";
+import { blogPostsKa } from "./blog-posts-ka";
 
 export const blogPostsRu: BlogPost[] = [
   {
@@ -161,12 +163,19 @@ export function getPostBySlugLocalized(
     const ru = blogPostsRu.find((p) => p.slug === slug);
     if (ru) return typografDeep(ru, "ru");
   }
+  if (normalizeLanguage(language) === "ka") {
+    const ka = blogPostsKa.find((p) => p.slug === slug);
+    if (ka) return typografDeep(ka, "en");
+  }
   const en = getEn(slug);
   return en ? typografDeep(en, "en") : undefined;
 }
 
 export function getAllPostsLocalized(language: string): BlogPost[] {
   const lang = normalizeTypografLang(language);
+  if (normalizeLanguage(language) === "ka") {
+    return blogPosts.map((p) => typografDeep(blogPostsKa.find((k) => k.slug === p.slug) ?? p, "en"));
+  }
   if (lang !== "ru") return blogPosts.map((p) => typografDeep(p, "en"));
   return blogPosts.map((p) =>
     typografDeep(blogPostsRu.find((r) => r.slug === p.slug) ?? p, "ru"),

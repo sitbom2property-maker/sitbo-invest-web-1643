@@ -190,7 +190,9 @@
   font-display: swap;
 }
 
-/* ── Noto Sans Georgian — Mkhedruli UI / headings when lang=ka ────────────── */
+/* ── Noto Sans Georgian — Mkhedruli UI / headings when lang=ka ──────────────
+   size-adjust: Mkhedruli has a taller x-height than Nunito; 90% makes Georgian
+   read at the same size as Latin text without zooming the whole page. */
 @font-face {
   font-family: 'Noto Sans Georgian';
   src: url('/fonts/noto-sans-georgian-400.woff2') format('woff2');
@@ -198,6 +200,7 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+  size-adjust: 90%;
 }
 @font-face {
   font-family: 'Noto Sans Georgian';
@@ -206,6 +209,7 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+  size-adjust: 90%;
 }
 @font-face {
   font-family: 'Noto Sans Georgian';
@@ -214,6 +218,7 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+  size-adjust: 90%;
 }
 @font-face {
   font-family: 'Noto Sans Georgian';
@@ -222,6 +227,7 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F;
+  size-adjust: 90%;
 }
 
 @import "tailwindcss";
@@ -235,11 +241,7 @@ html {
   --font-body: 'Nunito', system-ui, sans-serif;
 }
 
-/* Georgian UI: proper Mkhedruli face + ~2–3pt smaller type so long lines fit */
-html[lang="ka"],
-html[data-lang="ka"] {
-  zoom: 0.88;
-}
+/* Georgian UI: proper Mkhedruli face (glyphs scaled via size-adjust above, so the layout does not jump) */
 html[lang="ka"] body,
 html[data-lang="ka"] body {
   font-family: "Noto Sans Georgian", "Nunito", system-ui, sans-serif;

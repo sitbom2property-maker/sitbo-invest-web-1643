@@ -1,6 +1,8 @@
 import { formatInstallmentLine, remainingInstallmentMonths } from "./installment";
 import type { Project } from "./projects";
 import { normalizeTypografLang, typografDeep } from "../lib/typograf";
+import { normalizeLanguage } from "../context/LocaleContext";
+import { projectKaBySlug } from "./projects-locale-ka";
 
 export type ProjectLocaleFields = Partial<
   Pick<
@@ -44,12 +46,12 @@ export type ProjectLocaleFields = Partial<
   >
 >;
 
-function localizeCompletion(value: string): string {
+function localizeCompletion(value: string, quarter: string): string {
   return value
-    .replace(/\bQ1\b/g, "I кв.")
-    .replace(/\bQ2\b/g, "II кв.")
-    .replace(/\bQ3\b/g, "III кв.")
-    .replace(/\bQ4\b/g, "IV кв.");
+    .replace(/\bQ1\b/g, `I ${quarter}`)
+    .replace(/\bQ2\b/g, `II ${quarter}`)
+    .replace(/\bQ3\b/g, `III ${quarter}`)
+    .replace(/\bQ4\b/g, `IV ${quarter}`);
 }
 
 export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
@@ -504,14 +506,15 @@ export const projectRuBySlug: Record<string, ProjectLocaleFields> = {
 
 export function localizeProject(p: Project, language: string): Project {
   const lang = normalizeTypografLang(language);
-  const ru = lang === "ru" ? projectRuBySlug[p.slug] : undefined;
-  const merged: Project = ru ? { ...p, ...ru } : { ...p };
-  if (lang === "ru" && !ru?.completion) {
-    merged.completion = localizeCompletion(merged.completion);
+  const uiLang = normalizeLanguage(language);
+  const over = uiLang === "ru" ? projectRuBySlug[p.slug] : uiLang === "ka" ? projectKaBySlug[p.slug] : undefined;
+  const merged: Project = over ? { ...p, ...over } : { ...p };
+  if (uiLang !== "en" && !over?.completion) {
+    merged.completion = localizeCompletion(merged.completion, uiLang === "ru" ? "кв." : "კვ.");
   }
   if (p.installmentMonths != null && p.installmentAnchorYm) {
     const months = remainingInstallmentMonths(p.installmentMonths, p.installmentAnchorYm);
-    merged.installment = formatInstallmentLine(p.downPaymentPct ?? 30, months, lang === "ru");
+    merged.installment = formatInstallmentLine(p.downPaymentPct ?? 30, months, uiLang);
   }
   return typografDeep(merged, lang);
 }
@@ -529,7 +532,18 @@ const CITY_RU: Record<string, string> = {
   Shekvetili: "Шекветили",
 };
 
+const CITY_KA: Record<string, string> = {
+  Batumi: "ბათუმი",
+  Tbilisi: "თბილისი",
+  Chakvi: "ჩაქვი",
+  Gonio: "გონიო",
+  Makhinjauri: "მახინჯაური",
+  Shekvetili: "შეკვეთილი",
+};
+
 export function localizeCityLabel(city: string, language: string): string {
-  if (!language.toLowerCase().startsWith("ru")) return city;
-  return CITY_RU[city] ?? city;
+  const lang = normalizeLanguage(language);
+  if (lang === "ru") return CITY_RU[city] ?? city;
+  if (lang === "ka") return CITY_KA[city] ?? city;
+  return city;
 }

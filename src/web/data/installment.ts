@@ -18,7 +18,8 @@ function monthsRu(n: number): string {
   return "месяцев";
 }
 
-export function formatInstallmentLine(downPct: number, months: number, ru: boolean): string {
-  if (ru) return `${downPct}% взнос / 0% на ${months} ${monthsRu(months)}`;
+export function formatInstallmentLine(downPct: number, months: number, lang: "en" | "ru" | "ka"): string {
+  if (lang === "ka") return `${downPct}% შენატანი / 0% ${months} თვეზე`;
+  if (lang === "ru") return `${downPct}% взнос / 0% на ${months} ${monthsRu(months)}`;
   return `${downPct}% down / 0% over ${months} month${months === 1 ? "" : "s"}`;
 }
