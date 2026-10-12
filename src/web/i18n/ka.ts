@@ -15,6 +15,7 @@ const ka: Record<MessageKey, string> = {
   "nav.contactArthur": "დაუკავშირდით ართურს",
   "float.consult": "კონსულტაცია",
   "nav.properties": "უძრავი ქონება",
+  "nav.map": "რუკა",
   "nav.pricing": "კონსულტაციები",
   "nav.services": "მომსახურება",
   "nav.whyGeorgia": "რატომ საქართველო",

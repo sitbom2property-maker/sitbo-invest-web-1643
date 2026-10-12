@@ -16,6 +16,7 @@ const ru: Record<MessageKey, string> = {
   "nav.contactArthur": "Связаться",
   "float.consult": "Консультация",
   "nav.properties": "Объекты",
+  "nav.map": "Карта",
   "nav.pricing": "Консультации",
   "nav.services": "Услуги",
   "nav.whyGeorgia": "Почему Грузия",

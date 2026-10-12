@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { Link } from "wouter";
 import { useLocale } from "../context/LocaleContext";
 import { RequestModal } from "../components/RequestModal";
+import { NeighbourhoodMap } from "../components/NeighbourhoodMap";
 import { projects, resolvePaymentPlans } from "../data/projects";
 import { localizeProject } from "../data/projects-locale";
 
@@ -50,6 +51,8 @@ const copy = {
     refundBody: "If you can't find an apartment that fits your requirements, or decide not to go ahead with the purchase for any reason, the reservation fee is returned in full.",
     galleryTitle: "The project",
     projectLink: "Full project details",
+    mapTitle: "Location",
+    mapAddress: "69 Queen Ketevan Ave, Isani, Tbilisi · 2 min walk to Isani metro",
     finalTitle: "Pre-sale runs 5, 6, 7 November only",
     finalBody: "Apartments are limited. Book your Zoom call now to take part.",
     modalTitle: "Reserve a place in the pre-sale",
@@ -87,6 +90,8 @@ const copy = {
     refundBody: "Если вы не нашли подходящую квартиру или по любой причине решили не продолжать покупку, бронь возвращается в полном объёме.",
     galleryTitle: "О проекте",
     projectLink: "Подробнее о проекте",
+    mapTitle: "Локация",
+    mapAddress: "пр. Царицы Кетеван, 69, Исани, Тбилиси · 2 минуты пешком до метро «Исани»",
     finalTitle: "Пресейл только 5, 6, 7 ноября",
     finalBody: "Количество квартир ограничено. Запишитесь на Zoom-звонок, чтобы участвовать.",
     modalTitle: "Забронировать место на пресейле",
@@ -275,6 +280,17 @@ export default function HisniPresalePage() {
           </div>
         </div>
       </section>
+
+      {/* ── LOCATION ── */}
+      {project ? (
+        <section style={section}>
+          <div className="site-wrap">
+            <h2 style={h2Style}>{t.mapTitle}</h2>
+            <p style={{ ...bodyStyle, margin: "0 0 20px" }}>{t.mapAddress}</p>
+            <NeighbourhoodMap center={{ lat: project.lat, lng: project.lng }} label="HISNI" pois={project.pois} towers={project.mapTowers} language={language} />
+          </div>
+        </section>
+      ) : null}
 
       {/* ── FINAL CTA ── */}
       <section style={{ padding: "clamp(48px, 6vw, 80px) 0" }}>

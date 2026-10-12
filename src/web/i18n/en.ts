@@ -16,6 +16,7 @@ const en = {
   "nav.contactArthur": "Contact Arthur",
   "float.consult": "Consultation",
   "nav.properties": "Properties",
+  "nav.map": "Map",
   "nav.pricing": "Consultations",
   "nav.services": "Services",
   "nav.whyGeorgia": "Why Georgia",
