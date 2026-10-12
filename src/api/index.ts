@@ -4,7 +4,13 @@ import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
 import { fetchFlatshowEmbedHtml, type FlatshowEmbedKey } from "./lib/flatshow-embed";
 import { claimAminaPromo, readAminaPromo } from "./lib/amina-promo";
-import { notifyTelegram, type CrmResult } from "./lib/telegram-leads";
+import {
+  handleUpdate,
+  parseAttribution,
+  postNewLead,
+  setupWebhook,
+  type CrmResult,
+} from "./lib/telegram-leads";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -14,7 +20,9 @@ type Bindings = {
   ODOO_USER_ID?: string;
   TELEGRAM_BOT_TOKEN?: string;
   TELEGRAM_CHAT_ID?: string;
+  TELEGRAM_WEBHOOK_SECRET?: string;
   AMINA_PROMO?: KVNamespace;
+  LEADS?: KVNamespace;
 };
 
 const app = new Hono<{ Bindings: Bindings }>().basePath("api");
@@ -142,8 +150,8 @@ app.post("/leads", async (c) => {
       crm = { ok: false, error: String(err) };
     }
 
-    // Every lead also goes to Telegram, so nothing is lost when Odoo is down.
-    const telegram = await notifyTelegram(lead, crm, c.env);
+    // Every lead also goes to the managers' Telegram chat, so nothing is lost when Odoo is down.
+    const telegram = await postNewLead(lead, parseAttribution(body.attribution), crm, c.env);
 
     return c.json({
       success: true,
@@ -156,6 +164,26 @@ app.post("/leads", async (c) => {
   } catch {
     return c.json({ error: "Invalid request" }, 400);
   }
+});
+
+// Telegram bot webhook (status buttons, commands). Telegram signs requests with our secret.
+app.post("/telegram/webhook", async (c) => {
+  const secret = c.env.TELEGRAM_WEBHOOK_SECRET;
+  if (!secret || c.req.header("X-Telegram-Bot-Api-Secret-Token") !== secret) {
+    return c.json({ error: "Forbidden" }, 403);
+  }
+  const update = await c.req.json().catch(() => null);
+  if (update) await handleUpdate(update, c.env);
+  return c.json({ ok: true });
+});
+
+// One-off: register the webhook and command menu (protected by the same secret).
+app.post("/telegram/setup", async (c) => {
+  const secret = c.env.TELEGRAM_WEBHOOK_SECRET;
+  if (!secret || c.req.header("X-Setup-Secret") !== secret) {
+    return c.json({ error: "Forbidden" }, 403);
+  }
+  return c.json(await setupWebhook(c.env, new URL(c.req.url).origin));
 });
 
 export default app;

@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type FormEvent } from "react";
+import { getAttribution } from "../lib/attribution";
 import { trackLead } from "../lib/analytics";
 
 const labelStyle: CSSProperties = {
@@ -52,6 +53,7 @@ export function ConsultationForm({ onSuccess, source = "Consultation" }: Consult
           ...form,
           source,
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
+          attribution: getAttribution(),
         }),
       });
       if (res.ok) {

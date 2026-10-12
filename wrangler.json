@@ -34,6 +34,13 @@
       "binding": "AMINA_PROMO",
       "id": "ae124dad30b24aefa0b3e7610079d7aa",
       "preview_id": "74b325c74fd5407fb0a031e0335f946a"
+    },
+    {
+      "binding": "LEADS",
+      "id": "27287845f1e8428c820707ed402b47ca"
     }
-  ]
+  ],
+  "triggers": {
+    "crons": ["*/5 * * * *", "0 5 * * *"]
+  }
 }

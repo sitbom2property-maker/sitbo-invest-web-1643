@@ -1,4 +1,5 @@
 import app from "./api/index";
+import { runReminders, sendDailySummary } from "./api/lib/telegram-leads";
 import { SITE_NAME, absolutePageMeta } from "./web/lib/seo";
 
 function applySeoMeta(response: Response, pathname: string, origin: string): Response {
@@ -116,5 +117,13 @@ export default {
     }
 
     return assetResponse;
+  },
+
+  // Cron triggers (wrangler.json): reminders every 5 minutes, daily summary at 05:00 UTC = 09:00 Tbilisi.
+  async scheduled(event: ScheduledController, env: any, ctx: ExecutionContext): Promise<void> {
+    if (event.cron === "0 5 * * *") {
+      ctx.waitUntil(sendDailySummary(env));
+    }
+    ctx.waitUntil(runReminders(env));
   },
 };

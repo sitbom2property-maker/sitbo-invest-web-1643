@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { getAttribution } from "../lib/attribution";
 import { useT } from "../i18n";
 import { trackLead } from "../lib/analytics";
 
@@ -88,6 +89,7 @@ export function RequestModal({
           project: topic,
           source,
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
+          attribution: getAttribution(),
         }),
       });
       if (!res.ok) {

@@ -1,4 +1,5 @@
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
+import { getAttribution } from "../lib/attribution";
 import { useT } from "../i18n";
 import { trackLead } from "../lib/analytics";
 
@@ -144,6 +145,7 @@ export function LeadPopup() {
           contact: form.contact.trim(),
           source: "Website popup",
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
+          attribution: getAttribution(),
         }),
       });
       if (!res.ok) {

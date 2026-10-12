@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
+import { getAttribution } from "../lib/attribution";
 import { Link } from "wouter";
 import { PrivacyModal } from "../components/PrivacyModal";
 import { RequestModal } from "../components/RequestModal";
@@ -913,6 +914,7 @@ function Newsletter() {
           contact: email.trim(),
           source: "Newsletter subscribe",
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
+          attribution: getAttribution(),
         }),
       });
       if (!res.ok) {
