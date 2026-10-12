@@ -78,6 +78,7 @@ export function resolvePageMeta(pathname: string): PageMeta {
     "/": SITE_NAME,
     "/amina": `Amina | ${SITE_NAME}`,
     "/catalog": `Catalog | ${SITE_NAME}`,
+    "/map": `Projects map | ${SITE_NAME}`,
     "/invest": `Why Georgia | ${SITE_NAME}`,
     "/mortgage": `Mortgage | ${SITE_NAME}`,
     "/turnkey": `Turnkey | ${SITE_NAME}`,

@@ -6,6 +6,7 @@ import MortgagePage from "./pages/mortgage";
 import InvestPage from "./pages/invest";
 import ProjectPage from "./pages/project";
 import HisniPresalePage from "./pages/presale-hisni";
+import ProjectsMapPage from "./pages/map";
 import CatalogPage from "./pages/catalog";
 import TurnkeyPage from "./pages/turnkey";
 import ServicesPage from "./pages/Services";
@@ -83,6 +84,7 @@ function AppMain() {
 				</Route>
 				<Route path="/project/:slug" component={ProjectPage} />
 				<Route path="/catalog" component={CatalogPage} />
+				<Route path="/map" component={ProjectsMapPage} />
 				<Route path="/turnkey" component={TurnkeyPage} />
 				<Route path="/about" component={ServicesPage} />
 				<Route path="/services">

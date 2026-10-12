@@ -65,7 +65,42 @@ const UI: Record<
   },
 };
 
-const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+/** OpenFreeMap "dark" style (no API key), restyled for an evening look in applyEveningStyle. */
+export const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/dark";
+
+/** Evening palette + 3D city buildings from OpenStreetMap heights (the dark style ships them flat). */
+export function applyEveningStyle(map: MlMap): void {
+  const paint = (layer: string, prop: string, value: unknown) => {
+    if (map.getLayer(layer)) map.setPaintProperty(layer, prop as never, value as never);
+  };
+  paint("background", "background-color", "#16111A");
+  paint("water", "fill-color", "#1A2430");
+  paint("landuse_park", "fill-color", "#1C2620");
+  paint("landcover_wood", "fill-color", "#1A231D");
+  paint("landuse_residential", "fill-color", "#1B1619");
+  if (map.getSource("openmaptiles") && !map.getLayer("city-3d")) {
+    map.addLayer(
+      {
+        id: "city-3d",
+        type: "fill-extrusion",
+        source: "openmaptiles",
+        "source-layer": "building",
+        minzoom: 13,
+        filter: ["match", ["geometry-type"], ["MultiPolygon", "Polygon"], true, false],
+        paint: {
+          "fill-extrusion-color": [
+            "interpolate", ["linear"], ["coalesce", ["get", "render_height"], 6],
+            0, "#2A2326", 30, "#352B2C", 80, "#43363A",
+          ],
+          "fill-extrusion-height": ["coalesce", ["get", "render_height"], 6],
+          "fill-extrusion-base": ["coalesce", ["get", "render_min_height"], 0],
+          "fill-extrusion-opacity": 0.92,
+        },
+      },
+      map.getLayer("aeroway-taxiway") ? "aeroway-taxiway" : undefined,
+    );
+  }
+}
 
 function langOf(language: string): Lang {
   return language === "ru" || language === "ka" ? language : "en";
@@ -101,7 +136,7 @@ export function circleRing(center: { lat: number; lng: number }, radius: number,
 }
 
 /** Closed [lng, lat] ring for a tower footprint: rotated ellipse or rounded rectangle (superellipse). */
-export function towerRing(t: MapTower, steps = 72): [number, number][] {
+export function towerRing(t: MapTower, steps = 72, scale = 1): [number, number][] {
   const rot = (t.rotation * Math.PI) / 180;
   const mLat = 1 / 111320;
   const mLng = 1 / (111320 * Math.cos((t.lat * Math.PI) / 180));
@@ -115,8 +150,8 @@ export function towerRing(t: MapTower, steps = 72): [number, number][] {
       x = Math.sign(x) * Math.sqrt(Math.abs(x));
       y = Math.sign(y) * Math.sqrt(Math.abs(y));
     }
-    const ex = x * t.rx;
-    const ny = y * t.ry;
+    const ex = x * t.rx * scale;
+    const ny = y * t.ry * scale;
     const e = ex * Math.cos(rot) - ny * Math.sin(rot);
     const n = ex * Math.sin(rot) + ny * Math.cos(rot);
     ring.push([t.lng + e * mLng, t.lat + n * mLat]);
@@ -124,10 +159,97 @@ export function towerRing(t: MapTower, steps = 72): [number, number][] {
   return ring;
 }
 
+const PODIUM_HEIGHT = 12;
+const FLOOR_HEIGHT = 3.4;
+const SLAB = 0.4;
+const WINDOW_SECTORS = 18;
+/** Dark bronze glazing and warm lit windows — the dusk look of the developer's renders. */
+const GLASS_DARK = ["#2F2622", "#3A2E27", "#33291F"];
+const GLASS_LIT = ["#E9B566", "#F2C77A", "#D99A4E", "#F6D594"];
+const SLAB_COLOR = "#EFE8DC";
+const ROOF_COLOR = "#4B4744";
+
+type TowerFeature = {
+  type: "Feature";
+  properties: { base: number; top: number; color: string };
+  geometry: { type: "Polygon"; coordinates: [number, number][][] };
+};
+
+/** Small deterministic pseudo-random number in [0, 1) so the lit windows stay put. */
+function hash01(a: number, b: number, c: number): number {
+  let h = (a * 374761393 + b * 668265263 + c * 2147483647) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+/**
+ * Builds a tower floor by floor: a light podium, thin pale slabs, and dark bronze glazing
+ * split into window sectors of which roughly a third are lit — close to the night renders.
+ */
+export function towerFeatures(t: MapTower, index = 0): TowerFeature[] {
+  const out: TowerFeature[] = [];
+  const poly = (ring: [number, number][], base: number, top: number, color: string) =>
+    out.push({ type: "Feature", properties: { base, top, color }, geometry: { type: "Polygon", coordinates: [ring] } });
+
+  const steps = WINDOW_SECTORS * 4;
+  const glassRing = towerRing(t, steps, 0.95);
+  const centre: [number, number] = [t.lng, t.lat];
+
+  poly(towerRing(t, 56, 1.3), 0, PODIUM_HEIGHT, "#F1ECE3");
+  const floors = Math.max(1, Math.round((t.height - PODIUM_HEIGHT) / FLOOR_HEIGHT));
+  const fh = (t.height - PODIUM_HEIGHT) / floors;
+  for (let f = 0; f < floors; f++) {
+    const base = PODIUM_HEIGHT + f * fh;
+    poly(towerRing(t, 56, 1.04), base, base + SLAB, SLAB_COLOR);
+    // Window sectors: wedges from the centre, so only their outer arc shows on the façade.
+    for (let k = 0; k < WINDOW_SECTORS; k++) {
+      const arc = glassRing.slice(k * 4, k * 4 + 5);
+      const r = hash01(index + 1, f + 1, k + 1);
+      const lit = r < 0.36;
+      const palette = lit ? GLASS_LIT : GLASS_DARK;
+      const color = palette[Math.floor(hash01(k + 7, f + 3, index + 11) * palette.length)];
+      poly([centre, ...arc, centre], base + SLAB, base + fh, color);
+    }
+  }
+  // Roof slab, parapet line and a rooftop plant room.
+  poly(towerRing(t, 56, 1.0), t.height, t.height + 0.8, ROOF_COLOR);
+  poly(towerRing(t, 56, 1.03), t.height + 0.8, t.height + 1.3, SLAB_COLOR);
+  poly(
+    towerRing({ ...t, rx: Math.min(t.rx, t.ry) * 0.42, ry: Math.min(t.rx, t.ry) * 0.3, shape: "rect" }, 24, 1),
+    t.height + 0.8,
+    t.height + 4.2,
+    "#5A5552",
+  );
+  return out;
+}
+
+/** Adds the detailed towers as one fill-extrusion layer. */
+export function addTowerLayer(map: MlMap, id: string, towers: MapTower[], minzoom = 0): void {
+  if (!towers.length) return;
+  map.addSource(id, {
+    type: "geojson",
+    data: { type: "FeatureCollection", features: towers.flatMap((tw, n) => towerFeatures(tw, n)) },
+  });
+  map.addLayer({
+    id,
+    type: "fill-extrusion",
+    source: id,
+    minzoom,
+    paint: {
+      "fill-extrusion-color": ["get", "color"],
+      "fill-extrusion-base": ["get", "base"],
+      "fill-extrusion-height": ["get", "top"],
+      "fill-extrusion-opacity": 1,
+      "fill-extrusion-vertical-gradient": true,
+    },
+  });
+  map.setLight({ anchor: "viewport", color: "#fff4e6", intensity: 0.32, position: [1.3, 200, 30] });
+}
+
 const CSS = `
 .nm { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr); gap: 16px; }
 .nm-map-wrap { position: relative; }
-.nm-map { position: relative; height: clamp(380px, 48vw, 600px); border-radius: 2px; overflow: hidden; background: #ECE8E1; }
+.nm-map { position: relative; height: clamp(380px, 48vw, 600px); border-radius: 2px; overflow: hidden; background: #16111A; }
 .nm-map .maplibregl-canvas { outline: none; }
 .nm-toggle {
   position: absolute; top: 12px; left: 12px; z-index: 2; display: inline-flex; border-radius: 2px; overflow: hidden;
@@ -167,8 +289,9 @@ const CSS = `
   content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
   border: 6px solid transparent; border-top-color: #703C54; border-bottom: 0;
 }
-.nm-pin { display: block; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #FFFEF9; box-shadow: 0 2px 8px rgba(33,20,26,.35); box-sizing: border-box; cursor: pointer; transition: transform .2s; }
-.nm-pin.is-active { transform: scale(1.5); }
+.nm-pin { display: block; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #FFFEF9; box-shadow: 0 2px 8px rgba(33,20,26,.35); box-sizing: border-box; cursor: pointer; transition: box-shadow .2s; }
+/* MapLibre positions markers with transform, so highlight with a ring instead of scaling. */
+.nm-pin.is-active { box-shadow: 0 0 0 5px rgba(112,60,84,.35), 0 2px 8px rgba(33,20,26,.35); }
 .nm-map .maplibregl-popup-content { font-family: Nunito, sans-serif; font-size: 13px; padding: 10px 12px; border-radius: 2px; }
 @media (max-width: 900px) {
   .nm { grid-template-columns: 1fr; }
@@ -211,7 +334,7 @@ export function NeighbourhoodMap({ center, label, pois, language, towers = [] }:
       if (cancelled || !containerRef.current || mapRef.current) return;
       const map = new maplibregl.Map({
         container: containerRef.current,
-        style: STYLE_URL,
+        style: MAP_STYLE_URL,
         center: [center.lng, center.lat],
         zoom: 15.4,
         pitch: 58,
@@ -224,11 +347,7 @@ export function NeighbourhoodMap({ center, label, pois, language, towers = [] }:
       map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
 
       map.on("load", () => {
-        // Warm, muted palette for the city's 3D buildings.
-        if (map.getLayer("building-3d")) {
-          map.setPaintProperty("building-3d", "fill-extrusion-color", "#E4DDD3");
-          map.setPaintProperty("building-3d", "fill-extrusion-opacity", 0.85);
-        }
+        applyEveningStyle(map);
 
         map.addSource("nm-rings", {
           type: "geojson",
@@ -245,39 +364,16 @@ export function NeighbourhoodMap({ center, label, pois, language, towers = [] }:
           id: "nm-rings-fill",
           type: "fill",
           source: "nm-rings",
-          paint: { "fill-color": "#703C54", "fill-opacity": ["case", ["==", ["get", "r"], 1000], 0.06, 0.025] },
+          paint: { "fill-color": "#C98BA6", "fill-opacity": ["case", ["==", ["get", "r"], 1000], 0.1, 0.04] },
         });
         map.addLayer({
           id: "nm-rings-line",
           type: "line",
           source: "nm-rings",
-          paint: { "line-color": "#703C54", "line-opacity": 0.55, "line-width": 1.5, "line-dasharray": [3, 4] },
+          paint: { "line-color": "#E3B7C9", "line-opacity": 0.7, "line-width": 1.5, "line-dasharray": [3, 4] },
         });
 
-        if (towers.length) {
-          map.addSource("nm-towers", {
-            type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: towers.map((t) => ({
-                type: "Feature",
-                properties: { height: t.height },
-                geometry: { type: "Polygon", coordinates: [towerRing(t)] },
-              })),
-            },
-          });
-          map.addLayer({
-            id: "nm-towers",
-            type: "fill-extrusion",
-            source: "nm-towers",
-            paint: {
-              "fill-extrusion-color": "#703C54",
-              "fill-extrusion-height": ["get", "height"],
-              "fill-extrusion-base": 0,
-              "fill-extrusion-opacity": 0.92,
-            },
-          });
-        }
+        addTowerLayer(map, "nm-towers", towers);
 
         // Fit nearby places (within 3 km) plus the building, keeping the tilt.
         const near = items.filter((p) => p.meters < 3000);

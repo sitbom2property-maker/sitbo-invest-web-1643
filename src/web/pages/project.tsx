@@ -938,6 +938,60 @@ export default function ProjectPage() {
                 </div>
               </div>
 
+{/* Location & lifestyle — right after the overview (hidden when the address is not public) */}
+              {p.hideLocation ? null : (
+              <>
+              <Divider />
+              <div className="pr-reveal" style={{ margin: isMobile ? "56px 0" : "72px 0" }}>
+                <h3
+                  style={{
+                    fontFamily: "JUN, Georgia, serif",
+                    fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
+                    fontWeight: 500,
+                    color: C.dark,
+                    lineHeight: 1.25,
+                    margin: "0 0 28px",
+                  }}
+                >
+                  {t("project.locationLifestyle")}
+                </h3>
+                <h4
+                  style={{
+                    fontFamily: "Nunito, sans-serif",
+                    fontSize: isMobile ? "1.15rem" : "1.25rem",
+                    fontWeight: 700,
+                    color: C.dark,
+                    lineHeight: 1.3,
+                    margin: "0 0 14px",
+                  }}
+                >
+                  {p.districtTitle ?? t("project.district.newBoulevard.title")}
+                </h4>
+                <p
+                  style={{
+                    fontFamily: "Nunito, sans-serif",
+                    fontSize: "1.05rem",
+                    color: C.mutedDark,
+                    lineHeight: 1.7,
+                    margin: "0 0 clamp(28px, 3.5vw, 40px)",
+                    maxWidth: 820,
+                  }}
+                >
+                  {[p.districtBody ?? t("project.district.newBoulevard.body"), p.districtBody2]
+                    .filter(Boolean)
+                    .join(" ")}
+                </p>
+                <div style={{ transitionDelay: "80ms" }}>
+                  {p.pois?.length ? (
+                    <NeighbourhoodMap center={{ lat: p.lat, lng: p.lng }} label={p.name.split(" ")[0]} pois={p.pois} towers={p.mapTowers} language={language} />
+                  ) : (
+                    <MapEmbed project={p} />
+                  )}
+                </div>
+              </div>
+              </>
+              )}
+
               <Divider />
 
 {/* Specs — 3×2 stacked label/value grid (no dividers) */}
@@ -1353,61 +1407,9 @@ export default function ProjectPage() {
 
 
 
-{/* ── LOCATION & LIFESTYLE (optional: hidden when the address is not public) ── */}
-      {p.hideLocation ? <div style={{ height: "clamp(56px, 7vw, 100px)" }} /> : (
-      <section style={{ padding: "0 0 clamp(56px, 7vw, 100px)" }}>
-        <Container>
-          <Divider />
-          <div className="pr-reveal" style={{ margin: isMobile ? "56px 0 0" : "72px 0 0" }}>
-            <h3
-              style={{
-                fontFamily: "JUN, Georgia, serif",
-                fontSize: "clamp(1.35rem, 2.2vw, 1.7rem)",
-                fontWeight: 500,
-                color: C.dark,
-                lineHeight: 1.25,
-                margin: "0 0 28px",
-              }}
-            >
-              {t("project.locationLifestyle")}
-            </h3>
-            <h4
-              style={{
-                fontFamily: "Nunito, sans-serif",
-                fontSize: isMobile ? "1.15rem" : "1.25rem",
-                fontWeight: 700,
-                color: C.dark,
-                lineHeight: 1.3,
-                margin: "0 0 14px",
-              }}
-            >
-              {p.districtTitle ?? t("project.district.newBoulevard.title")}
-            </h4>
-            <p
-              style={{
-                fontFamily: "Nunito, sans-serif",
-                fontSize: "1.05rem",
-                color: C.mutedDark,
-                lineHeight: 1.7,
-                margin: "0 0 clamp(28px, 3.5vw, 40px)",
-                maxWidth: 820,
-              }}
-            >
-              {[p.districtBody ?? t("project.district.newBoulevard.body"), p.districtBody2]
-                .filter(Boolean)
-                .join(" ")}
-            </p>
-            <div style={{ transitionDelay: "80ms" }}>
-              {p.pois?.length ? (
-                <NeighbourhoodMap center={{ lat: p.lat, lng: p.lng }} label={p.name.split(" ")[0]} pois={p.pois} towers={p.mapTowers} language={language} />
-              ) : (
-                <MapEmbed project={p} />
-              )}
-            </div>
-          </div>
-        </Container>
-      </section>
-      )}
+{/* bottom spacing before the CTA */}
+      <div style={{ height: "clamp(56px, 7vw, 100px)" }} />
+
 
 {/* ── CTA (same as About / Catalog, bg #412834) ── */}
       <section className="pr-cta-outer">
