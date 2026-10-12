@@ -60,6 +60,7 @@ const CSS = `
 .nm { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr); gap: 16px; }
 .nm-map { position: relative; height: clamp(360px, 46vw, 560px); border-radius: 2px; overflow: hidden; background: #ECE8E1; z-index: 0; }
 .nm-map .leaflet-container { width: 100%; height: 100%; font-family: Nunito, sans-serif; background: #ECE8E1; }
+.nm-map .nm-tiles { filter: grayscale(0.85) sepia(0.18) brightness(1.04) contrast(0.92); }
 .nm-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .nm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .nm-chip {
@@ -91,9 +92,9 @@ const CSS = `
   content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
   border: 6px solid transparent; border-top-color: #703C54; border-bottom: 0;
 }
-.nm-pin { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #FFFEF9; box-shadow: 0 2px 8px rgba(33,20,26,.35); box-sizing: border-box; transform: translate(-50%, -50%); transition: transform .2s; }
+.nm-pin { display: block; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #FFFEF9; box-shadow: 0 2px 8px rgba(33,20,26,.35); box-sizing: border-box; transform: translate(-50%, -50%); transition: transform .2s; }
 .nm-pin.is-active { transform: translate(-50%, -50%) scale(1.5); }
-.nm-ring-label { font-family: Nunito, sans-serif; font-size: 11px; font-weight: 700; color: #703C54; background: rgba(255,254,249,.85); padding: 1px 5px; border-radius: 2px; white-space: nowrap; transform: translate(-50%, -50%); }
+.nm-ring-label { display: inline-block; font-family: Nunito, sans-serif; font-size: 11px; font-weight: 700; color: #703C54; background: rgba(255,254,249,.85); padding: 1px 5px; border-radius: 2px; white-space: nowrap; transform: translate(-50%, -50%); }
 .nm-map .leaflet-popup-content { font-family: Nunito, sans-serif; font-size: 13px; margin: 10px 12px; }
 @media (max-width: 900px) {
   .nm { grid-template-columns: 1fr; }
@@ -140,11 +141,11 @@ export function NeighbourhoodMap({ center, label, pois, language }: Neighbourhoo
         attributionControl: true,
       });
       mapRef.current = map;
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      // OpenStreetMap tiles (no API key); muted with a CSS filter to match the site palette.
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        subdomains: "abcd",
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        className: "nm-tiles",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
 
       for (const [radius, text] of [
