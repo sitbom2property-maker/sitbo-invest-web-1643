@@ -32,7 +32,7 @@ const copy = {
       ["Reservation", "USD 1,000, fully refundable"],
       ["Booking", "Personally with me, via Zoom call"],
       ["Developer", "Biograpi Living · supported by Invia Group"],
-      ["Location", "69 Queen Ketevan Ave, Isani · 5 min to Isani metro"],
+      ["Location", "69 Queen Ketevan Ave, Isani · 2 min to Isani metro"],
     ],
     stepsTitle: "How the pre-sale works",
     steps: [
@@ -69,7 +69,7 @@ const copy = {
       ["Бронь", "USD 1,000, полностью возвратная"],
       ["Бронирование", "Лично через меня, по Zoom"],
       ["Застройщик", "Biograpi Living · при поддержке Invia Group"],
-      ["Адрес", "пр. Царицы Кетеван, 69, Исани · 5 минут до метро"],
+      ["Адрес", "пр. Царицы Кетеван, 69, Исани · 2 минуты до метро"],
     ],
     stepsTitle: "Как проходит пресейл",
     steps: [

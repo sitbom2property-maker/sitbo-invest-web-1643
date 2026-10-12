@@ -194,7 +194,7 @@ export const projects: Project[] = [
     presaleUrl: "/hisni-presale",
     city: "Tbilisi",
     address: "69 Queen Ketevan Ave, Isani, Tbilisi",
-    seaDistance: "5 min walk to Isani metro",
+    seaDistance: "2 min walk to Isani metro",
     seaMeters: "Inland",
     location: "Isani · 69 Queen Ketevan Ave · next to Isani metro",
     districtTitle: "Isani — Tbilisi's oldest district",
@@ -302,9 +302,10 @@ export const projects: Project[] = [
       "/projects/hisni/arches.jpg",
     ],
     cardImage: "/projects/hisni/card.jpg",
-    lat: 41.68563,
-    lng: 44.84409,
-    mapsQuery: "69 Queen Ketevan Avenue, Tbilisi",
+    // Exact site location from the developer (Google Maps pin).
+    lat: 41.685904,
+    lng: 44.838343,
+    mapsQuery: "41.685904,44.838343",
     pois: [
       { id: "isani-metro", category: "metro", name: { en: "Isani metro", ru: "Метро «Исани»", ka: "მეტრო ისანი" }, lat: 41.68663, lng: 44.83996 },
       { id: "aragveli-metro", category: "metro", name: { en: "300 Aragveli metro", ru: "Метро «300 Арагвели»", ka: "მეტრო 300 არაგველი" }, lat: 41.68799, lng: 44.82623 },
