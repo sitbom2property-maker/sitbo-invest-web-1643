@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import type { Map as MlMap, Marker, Popup } from "maplibre-gl";
 import { projects, catalogListedProjects, type Project } from "../data/projects";
 import { localizeCityLabel, localizeProjects } from "../data/projects-locale";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT } from "../i18n";
-import { MAP_STYLE_URL, addTowerLayer, applyEveningStyle } from "../components/NeighbourhoodMap";
+import { MAP_STYLE_URL, addTowerLayer, applyEveningStyle } from "./NeighbourhoodMap";
 
 const C = {
   dark: "#21141A",
@@ -17,9 +17,9 @@ const C = {
 };
 
 const CSS = `
-.pm { background: ${C.light}; }
+.pm { background: ${C.light}; scroll-margin-top: 80px; }
 .pm-head { padding: clamp(32px, 4vw, 56px) 0 clamp(20px, 2.4vw, 28px); }
-.pm-head h1 { font-family: JUN, Georgia, serif; font-weight: 400; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.15; margin: 0 0 10px; color: ${C.dark}; }
+.pm-head h2 { font-family: JUN, Georgia, serif; font-weight: 400; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.15; margin: 0 0 10px; color: ${C.dark}; }
 .pm-head p { font-family: Nunito, sans-serif; font-size: clamp(0.95rem, 1.2vw, 1.05rem); color: ${C.muted}; margin: 0; max-width: 640px; line-height: 1.6; }
 .pm-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .pm-chip { font-family: Nunito, sans-serif; font-size: 13px; padding: 7px 14px; border-radius: 999px; border: 1px solid ${C.line}; background: ${C.light}; color: ${C.dark}; cursor: pointer; }
@@ -67,7 +67,8 @@ function escapeHtml(v: string): string {
   return v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export default function ProjectsMapPage() {
+/** All catalogue projects on one evening 3D map, with a side list. Shown on the catalogue page (#map). */
+export function ProjectsMap() {
   const t = useT();
   const { language } = useLocale();
   const { formatFromUSD } = useRates();
@@ -78,6 +79,8 @@ export default function ProjectsMapPage() {
   const [city, setCity] = useState<string>("All");
   const [active, setActive] = useState<string | null>(null);
   const [is3d, setIs3d] = useState(true);
+  // Load MapLibre only when the block comes near the viewport.
+  const [inView, setInView] = useState(false);
 
   const items: Item[] = useMemo(
     () =>
@@ -91,11 +94,21 @@ export default function ProjectsMapPage() {
   const visible = items.filter((p) => city === "All" || p.city === city);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const el = containerRef.current;
+    if (!el || inView) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        setInView(true);
+        io.disconnect();
+      }
+    }, { rootMargin: "600px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [inView]);
 
   // Build the map (MapLibre is loaded lazily, shared chunk with the project page map).
   useEffect(() => {
+    if (!inView) return;
     let cancelled = false;
     const markers = markersRef.current;
     Promise.all([import("maplibre-gl"), import("maplibre-gl/dist/maplibre-gl.css")]).then(([mod]) => {
@@ -151,7 +164,7 @@ export default function ProjectsMapPage() {
     };
     // Rebuild when language or currency formatting changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  }, [items, inView]);
 
   // City filter: hide other markers and fit the visible ones.
   useEffect(() => {
@@ -192,11 +205,11 @@ export default function ProjectsMapPage() {
   };
 
   return (
-    <div className="pm">
+    <section className="pm" id="map">
       <style>{CSS}</style>
       <div className="site-wrap">
         <div className="pm-head">
-          <h1>{t("map.title")}</h1>
+          <h2>{t("map.title")}</h2>
           <p>{t("map.lead")}</p>
           <div className="pm-chips">
             {["All", ...cities].map((c) => (
@@ -204,11 +217,6 @@ export default function ProjectsMapPage() {
                 {c === "All" ? t("map.all") : localizeCityLabel(c, language)}
               </button>
             ))}
-            <Link href="/catalog">
-              <a className="pm-chip" style={{ textDecoration: "none" }}>
-                {t("map.listView")}
-              </a>
-            </Link>
           </div>
         </div>
         <div className="pm-body">
@@ -240,6 +248,6 @@ export default function ProjectsMapPage() {
           </ul>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

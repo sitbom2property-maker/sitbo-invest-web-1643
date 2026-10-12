@@ -6,6 +6,7 @@ import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
 import { useT, type MessageKey } from "../i18n";
 import { RequestModal } from "../components/RequestModal";
+import { ProjectsMap } from "../components/ProjectsMap";
 import { AppLink } from "../components/app-link";
 import { trackEvent } from "../lib/analytics";
 
@@ -528,16 +529,14 @@ export default function CatalogPage() {
                 {cityLabels[c]} {counts[c] ? <span style={{ fontWeight: 400 }}>({counts[c]})</span> : ""}
               </button>
             ))}
-            <Link href="/map">
-              <a style={{
+            <a href="#map" style={{
                 fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.06em", textTransform: "uppercase",
                 padding: "8px 18px", borderRadius: "2px", textDecoration: "none",
                 border: "1px solid rgba(255,254,249,0.15)", color: C.light,
               }}>
                 ◎ {t("catalog.mapView")}
-              </a>
-            </Link>
+            </a>
             <span
               aria-hidden
               style={{
@@ -631,6 +630,8 @@ export default function CatalogPage() {
           )}
         </Container>
       </section>
+
+      <ProjectsMap />
 
       <DepositChecklist />
 

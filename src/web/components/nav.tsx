@@ -17,7 +17,6 @@ const ALL_LINKS: { labelKey: MessageKey; href: string }[] = [
   { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.about", href: "/about" },
   { labelKey: "nav.properties", href: "/catalog" },
-  { labelKey: "nav.map", href: "/map" },
   { labelKey: "nav.whyGeorgia", href: "/invest" },
   { labelKey: "nav.notes", href: "/blog" },
   { labelKey: "nav.feedback", href: "/#feedback" },
