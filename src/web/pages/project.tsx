@@ -3,6 +3,7 @@ import { Link, useParams } from "wouter";
 import { projects, catalogListedProjects, resolvePaymentPlans, type Project } from "../data/projects";
 import { localizeProjects } from "../data/projects-locale";
 import { RequestModal } from "../components/RequestModal";
+import { NeighbourhoodMap } from "../components/NeighbourhoodMap";
 import { ProjectFeatures } from "../components/ProjectFeatures";
 import { useRates } from "../context/RatesContext";
 import { useLocale } from "../context/LocaleContext";
@@ -1397,7 +1398,11 @@ export default function ProjectPage() {
                 .join(" ")}
             </p>
             <div style={{ transitionDelay: "80ms" }}>
-              <MapEmbed project={p} />
+              {p.pois?.length ? (
+                <NeighbourhoodMap center={{ lat: p.lat, lng: p.lng }} label={p.name.split(" ")[0]} pois={p.pois} language={language} />
+              ) : (
+                <MapEmbed project={p} />
+              )}
             </div>
           </div>
         </Container>

@@ -100,6 +100,8 @@ export type Project = {
   availableUnitsAsOf?: string;
   /** Optional long-form sections (developer, history, construction) on the project page. */
   story?: { title: string; body: string }[];
+  /** Nearby places; when set, the location section shows an interactive map instead of the Google embed. */
+  pois?: Poi[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -122,6 +124,17 @@ export type PaymentSegment = {
   stage: PaymentStage;
   /** Overrides the default stage label (e.g. "Over 30 months"). */
   label?: string;
+};
+
+export type PoiCategory = "metro" | "landmark" | "shopping" | "education" | "transport";
+
+/** A nearby place shown on the project's neighbourhood map. */
+export type Poi = {
+  id: string;
+  category: PoiCategory;
+  name: { en: string; ru: string; ka: string };
+  lat: number;
+  lng: number;
 };
 
 export type AvailableUnit = {
@@ -179,12 +192,14 @@ export const projects: Project[] = [
     presale: "Pre-Sale · 5–7 Nov",
     presaleNote: "Pre-sale runs 5, 6, 7 November only, with a limited number of apartments. Reserve your place with a fully refundable USD 1,000 fee — booking goes through me personally on a Zoom call.",
     presaleUrl: "/hisni-presale",
-    hideLocation: true,
     city: "Tbilisi",
-    address: "Tbilisi",
-    seaDistance: "Tbilisi",
+    address: "69 Queen Ketevan Ave, Isani, Tbilisi",
+    seaDistance: "5 min walk to Isani metro",
     seaMeters: "Inland",
-    location: "Tbilisi",
+    location: "Isani · 69 Queen Ketevan Ave · next to Isani metro",
+    districtTitle: "Isani — Tbilisi's oldest district",
+    districtBody: "HISNI stands at 69 Queen Ketevan Avenue — one of the longest avenues in the city, following the historic road from Tbilisi to Kakheti. Isani metro is a five-minute walk away, Isani Mall is across the street, and schools, kindergartens, a university campus and clinics are all in the neighbourhood.",
+    districtBody2: "The Old Town is close: Metekhi Church, the Abanotubani sulphur baths, Narikala Fortress and Holy Trinity Cathedral are 10–15 minutes by car, and the airport is about 20 minutes away.",
     desc: "HISNI by Biograpi is a multifunctional residential complex in Tbilisi that brings homes, offices, retail and leisure into one place: 36-floor towers with a pool, spa, padel court and an 8,000 m² green terrace. Apartments in Towers I and II are on sale now, from $93,450. Tower III opens with a three-day pre-sale on 5, 6 and 7 November — studios, one- and two-bedroom apartments from $1,800/m², completion in May 2031.",
     yield: "",
     developer: "Biograpi",
@@ -255,27 +270,45 @@ export const projects: Project[] = [
     ],
     materials: "Fibre-concrete and Italian terracotta façade (engineering by NBK, Germany); engineering safety overseen by Meinhardt; acoustics by Acustico. Seismic-standard structure on bedrock. Delivered in green frame.",
     photos: [
-      "/projects/hisni/hero.jpg",
-      "/projects/hisni/ext-01.jpg",
-      "/projects/hisni/ext-02.jpg",
-      "/projects/hisni/ext-03.jpg",
-      "/projects/hisni/ext-04.jpg",
-      "/projects/hisni/lobby.jpg",
+      "/projects/hisni/towers.jpg",
+      "/projects/hisni/arches.jpg",
+      "/projects/hisni/park.jpg",
+      "/projects/hisni/dusk.jpg",
+      "/projects/hisni/garden.jpg",
       "/projects/hisni/pool.jpg",
-      "/projects/hisni/fitness.jpg",
-      "/projects/hisni/padel.jpg",
-      "/projects/hisni/terrace.jpg",
+      "/projects/hisni/interior.jpg",
+      "/projects/hisni/plan-studio.jpg",
+      "/projects/hisni/plan-1br.jpg",
+      "/projects/hisni/plan-2br.jpg",
     ],
     galleryPreview: [
-      "/projects/hisni/hero.jpg",
-      "/projects/hisni/ext-03.jpg",
-      "/projects/hisni/lobby.jpg",
+      "/projects/hisni/towers.jpg",
+      "/projects/hisni/park.jpg",
       "/projects/hisni/pool.jpg",
-      "/projects/hisni/ext-01.jpg",
+      "/projects/hisni/interior.jpg",
+      "/projects/hisni/arches.jpg",
     ],
     cardImage: "/projects/hisni/card.jpg",
-    lat: 41.7151,
-    lng: 44.8271,
+    lat: 41.68563,
+    lng: 44.84409,
+    mapsQuery: "69 Queen Ketevan Avenue, Tbilisi",
+    pois: [
+      { id: "isani-metro", category: "metro", name: { en: "Isani metro", ru: "Метро «Исани»", ka: "მეტრო ისანი" }, lat: 41.68663, lng: 44.83996 },
+      { id: "aragveli-metro", category: "metro", name: { en: "300 Aragveli metro", ru: "Метро «300 Арагвели»", ka: "მეტრო 300 არაგველი" }, lat: 41.68799, lng: 44.82623 },
+      { id: "avlabari-metro", category: "metro", name: { en: "Avlabari metro", ru: "Метро «Авлабари»", ka: "მეტრო ავლაბარი" }, lat: 41.69222, lng: 44.81482 },
+      { id: "isani-mall", category: "shopping", name: { en: "Isani Mall", ru: "ТЦ Isani Mall", ka: "ისანი მოლი" }, lat: 41.68301, lng: 44.84112 },
+      { id: "sea-plaza", category: "shopping", name: { en: "Tbilisi Sea Plaza", ru: "Tbilisi Sea Plaza", ka: "თბილისის ზღვის პლაზა" }, lat: 41.70749, lng: 44.86035 },
+      { id: "seu", category: "education", name: { en: "SEU University campus", ru: "Кампус университета SEU", ka: "SEU-ს კამპუსი" }, lat: 41.68917, lng: 44.8286 },
+      { id: "sameba", category: "landmark", name: { en: "Holy Trinity Cathedral", ru: "Собор Святой Троицы", ka: "სამების საკათედრო ტაძარი" }, lat: 41.69755, lng: 44.81652 },
+      { id: "metekhi", category: "landmark", name: { en: "Metekhi Church", ru: "Церковь Метехи", ka: "მეტეხის ტაძარი" }, lat: 41.69015, lng: 44.81125 },
+      { id: "abanotubani", category: "landmark", name: { en: "Abanotubani sulphur baths", ru: "Серные бани Абанотубани", ka: "აბანოთუბანი" }, lat: 41.68765, lng: 44.81148 },
+      { id: "narikala", category: "landmark", name: { en: "Narikala Fortress", ru: "Крепость Нарикала", ka: "ნარიყალა" }, lat: 41.68773, lng: 44.80911 },
+      { id: "rike", category: "landmark", name: { en: "Rike Park", ru: "Парк Рике", ka: "რიყის პარკი" }, lat: 41.6932, lng: 44.80999 },
+      { id: "peace-bridge", category: "landmark", name: { en: "Bridge of Peace", ru: "Мост Мира", ka: "მშვიდობის ხიდი" }, lat: 41.69298, lng: 44.80806 },
+      { id: "freedom-square", category: "landmark", name: { en: "Freedom Square", ru: "Площадь Свободы", ka: "თავისუფლების მოედანი" }, lat: 41.69365, lng: 44.80115 },
+      { id: "rail", category: "transport", name: { en: "Tbilisi Central Station", ru: "Центральный вокзал", ka: "თბილისის ცენტრალური სადგური" }, lat: 41.72164, lng: 44.79952 },
+      { id: "airport", category: "transport", name: { en: "Tbilisi International Airport", ru: "Международный аэропорт Тбилиси", ka: "თბილისის საერთაშორისო აეროპორტი" }, lat: 41.66855, lng: 44.95593 },
+    ],
   },
   {
     name: "Piazza Residence",

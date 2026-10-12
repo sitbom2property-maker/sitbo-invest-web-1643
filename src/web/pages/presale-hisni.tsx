@@ -32,6 +32,7 @@ const copy = {
       ["Reservation", "USD 1,000, fully refundable"],
       ["Booking", "Personally with me, via Zoom call"],
       ["Developer", "Biograpi Living · supported by Invia Group"],
+      ["Location", "69 Queen Ketevan Ave, Isani · 5 min to Isani metro"],
     ],
     stepsTitle: "How the pre-sale works",
     steps: [
@@ -68,6 +69,7 @@ const copy = {
       ["Бронь", "USD 1,000, полностью возвратная"],
       ["Бронирование", "Лично через меня, по Zoom"],
       ["Застройщик", "Biograpi Living · при поддержке Invia Group"],
+      ["Адрес", "пр. Царицы Кетеван, 69, Исани · 5 минут до метро"],
     ],
     stepsTitle: "Как проходит пресейл",
     steps: [
@@ -92,7 +94,7 @@ const copy = {
   },
 };
 
-const GALLERY = ["ext-01", "ext-03", "lobby", "pool", "fitness", "terrace"].map(
+const GALLERY = ["towers", "arches", "dusk", "garden", "pool", "interior"].map(
   (name) => `/projects/hisni/${name}.jpg`,
 );
 
@@ -159,7 +161,7 @@ export default function HisniPresalePage() {
   return (
     <div style={{ background: C.light, minHeight: "100vh" }}>
       {/* ── HERO ── */}
-      <section style={{ background: `linear-gradient(90deg, rgba(33,20,26,0.92) 0%, rgba(33,20,26,0.6) 60%, rgba(33,20,26,0.3) 100%), url(/projects/hisni/hero.jpg) center / cover` }}>
+      <section style={{ background: `linear-gradient(90deg, rgba(33,20,26,0.92) 0%, rgba(33,20,26,0.6) 60%, rgba(33,20,26,0.3) 100%), url(/projects/hisni/park.jpg) center / cover` }}>
         <div className="site-wrap" style={{ paddingTop: "clamp(64px, 9vw, 120px)", paddingBottom: "clamp(64px, 9vw, 120px)" }}>
           <p style={{ ...eyebrowStyle, color: C.light }}>{t.eyebrow}</p>
           <h1 style={{ fontFamily: "JUN, Georgia, serif", fontSize: "clamp(2.4rem,5.4vw,4.6rem)", fontWeight: 400, color: C.light, lineHeight: 1.02, margin: "0 0 22px" }}>
