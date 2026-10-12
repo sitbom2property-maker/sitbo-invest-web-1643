@@ -427,6 +427,7 @@ const HELP = [
   "",
   "🧠 <b>ИИ-помощник</b>: упомяните бота через @ или ответьте на его сообщение — он найдёт и обновит заявку, расскажет про проекты, напишет текст клиенту, поставит напоминание. Ответ (Reply) на карточку заявки без упоминания сохраняется как комментарий.",
   "",
+  "/ai вопрос — спросить ИИ-помощника",
   "/today — заявки за сегодня",
   "/pending — заявки без ответа",
   "/id — ID этого чата",
@@ -580,6 +581,7 @@ export async function setupWebhook(env: BotEnv, origin: string, fetchImpl: Fetch
     "setMyCommands",
     {
       commands: [
+        { command: "ai", description: "Спросить ИИ-помощника" },
         { command: "today", description: "Заявки за сегодня" },
         { command: "pending", description: "Заявки без ответа" },
         { command: "id", description: "ID этого чата" },

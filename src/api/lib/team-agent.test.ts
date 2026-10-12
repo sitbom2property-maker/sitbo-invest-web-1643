@@ -113,6 +113,14 @@ describe("webhook routing", () => {
     expect(apis.telegram.find((c) => c.method === "sendMessage")!.body.text).toContain("ANTHROPIC_API_KEY");
   });
 
+  test("/ai command reaches the agent without an @mention", async () => {
+    const kv = fakeKv();
+    const apis = fakeApis([{ content: [{ type: "text", text: "Умею многое." }], stop_reason: "end_turn" }]);
+    await handleBotUpdate(message("/ai@SitboLeadsBot что ты умеешь?"), env(kv), NOW, apis.fetchImpl);
+    expect(apis.anthropic[0].messages.at(-1).content).toBe("Nino: что ты умеешь?");
+    expect(apis.telegram.filter((c) => c.method === "sendMessage").at(-1)!.body.text).toBe("Умею многое.");
+  });
+
   test("handles a retried update only once", async () => {
     const kv = fakeKv();
     const apis = fakeApis([{ content: [{ type: "text", text: "Привет!" }], stop_reason: "end_turn" }]);

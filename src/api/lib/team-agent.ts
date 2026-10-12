@@ -504,18 +504,20 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
     await kv.put(key, "1", { expirationTtl: 3600 });
   }
   const msg: TgMessage | undefined = update?.message;
-  if (update?.callback_query || msg?.text?.startsWith("/")) {
+  // "/ai <question>" always reaches the bot, even with privacy mode on and without admin rights.
+  const aiCommand = msg?.text?.match(/^\/(?:ai|ask)(?:@\w+)?(?:\s+([\s\S]*))?$/i);
+  if (update?.callback_query || (msg?.text?.startsWith("/") && !aiCommand)) {
     await handleUpdate(update, env, now, fetchImpl);
     return;
   }
-  const text = msg?.text ?? msg?.caption;
-  if (!msg || !text || !kv || msg.from?.is_bot) return;
+  const text = aiCommand ? aiCommand[1] ?? "" : msg?.text ?? msg?.caption;
+  if (!msg || text === undefined || (!text && !aiCommand) || !kv || msg.from?.is_bot) return;
   const chatId = String(msg.chat.id);
   if (chatId !== env.TELEGRAM_CHAT_ID?.trim()) return; // lead data only in the managers' group
 
   const me = await botIdentity(env, fetchImpl);
   if (!me) return;
-  const mentioned = mentionsBot(msg, me);
+  const mentioned = !!aiCommand || mentionsBot(msg, me);
   const replyToBot = msg.reply_to_message?.from?.id === me.id;
   if (!mentioned && !replyToBot) return;
 
