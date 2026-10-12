@@ -102,6 +102,16 @@ export type Project = {
   story?: { title: string; body: string }[];
   /** Nearby places; when set, the location section shows an interactive map instead of the Google embed. */
   pois?: Poi[];
+  /** Schematic 3D towers for buildings not yet in OpenStreetMap (offsets in metres from lat/lng). */
+  mapTowers?: {
+    lat: number;
+    lng: number;
+    rx: number;
+    ry: number;
+    rotation: number;
+    height: number;
+    shape: "ellipse" | "rect";
+  }[];
 };
 
 export type ConstructionStageId = "foundation" | "construction" | "facade" | "handover";
@@ -306,6 +316,14 @@ export const projects: Project[] = [
     lat: 41.685904,
     lng: 44.838343,
     mapsQuery: "41.685904,44.838343",
+    // Tower footprints and roof levels from the developer's site plan (1:500, 24.12.2025),
+    // georeferenced on its UTM 38N grid.
+    mapTowers: [
+      { lat: 41.685994, lng: 44.837147, rx: 35, ry: 18.5, rotation: 8, height: 125, shape: "ellipse" },
+      { lat: 41.685401, lng: 44.83769, rx: 33, ry: 19, rotation: 76, height: 125, shape: "ellipse" },
+      { lat: 41.685491, lng: 44.838745, rx: 31, ry: 18.5, rotation: -56, height: 123, shape: "ellipse" },
+      { lat: 41.685849, lng: 44.839642, rx: 16.5, ry: 23, rotation: 0, height: 123, shape: "rect" },
+    ],
     pois: [
       { id: "isani-metro", category: "metro", name: { en: "Isani metro", ru: "Метро «Исани»", ka: "მეტრო ისანი" }, lat: 41.68663, lng: 44.83996 },
       { id: "aragveli-metro", category: "metro", name: { en: "300 Aragveli metro", ru: "Метро «300 Арагвели»", ka: "მეტრო 300 არაგველი" }, lat: 41.68799, lng: 44.82623 },

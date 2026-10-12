@@ -1399,7 +1399,7 @@ export default function ProjectPage() {
             </p>
             <div style={{ transitionDelay: "80ms" }}>
               {p.pois?.length ? (
-                <NeighbourhoodMap center={{ lat: p.lat, lng: p.lng }} label={p.name.split(" ")[0]} pois={p.pois} language={language} />
+                <NeighbourhoodMap center={{ lat: p.lat, lng: p.lng }} label={p.name.split(" ")[0]} pois={p.pois} towers={p.mapTowers} language={language} />
               ) : (
                 <MapEmbed project={p} />
               )}
