@@ -4,6 +4,7 @@ import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
 import { fetchFlatshowEmbedHtml, type FlatshowEmbedKey } from "./lib/flatshow-embed";
 import { claimAminaPromo, readAminaPromo } from "./lib/amina-promo";
+import { notifyTelegram, type CrmResult } from "./lib/telegram-leads";
 
 type Bindings = {
   ODOO_URL?: string;
@@ -11,6 +12,8 @@ type Bindings = {
   ODOO_LOGIN?: string;
   ODOO_API_KEY?: string;
   ODOO_USER_ID?: string;
+  TELEGRAM_BOT_TOKEN?: string;
+  TELEGRAM_CHAT_ID?: string;
   AMINA_PROMO?: KVNamespace;
 };
 
@@ -129,26 +132,27 @@ app.post("/leads", async (c) => {
 
     console.log("[Lead submitted]", lead);
 
+    let crm: CrmResult;
     try {
       const id = await createOdooLead(lead, c.env);
       console.log("[Odoo CRM] Lead created ✓ id=", id);
-      return c.json({
-        success: true,
-        message: "Lead received",
-        crm: "odoo",
-        odooId: id,
-        version: "odoo-crm-v2",
-      });
+      crm = { ok: true, odooId: id };
     } catch (err) {
       console.error("[Odoo CRM] Failed:", err);
-      return c.json({
-        success: true,
-        message: "Lead received",
-        crm: "failed",
-        error: String(err),
-        version: "odoo-crm-v2",
-      });
+      crm = { ok: false, error: String(err) };
     }
+
+    // Every lead also goes to Telegram, so nothing is lost when Odoo is down.
+    const telegram = await notifyTelegram(lead, crm, c.env);
+
+    return c.json({
+      success: true,
+      message: "Lead received",
+      crm: crm.ok ? "odoo" : "failed",
+      ...(crm.ok ? { odooId: crm.odooId } : { error: crm.error }),
+      telegram,
+      version: "odoo-crm-v2",
+    });
   } catch {
     return c.json({ error: "Invalid request" }, 400);
   }
