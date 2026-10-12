@@ -427,9 +427,11 @@ async function callClaude(env: AgentEnv, system: string, messages: Msg[], fetchI
 }
 
 /** Run the tool loop until Claude gives a final answer. */
-export async function runAgent(ctx: Ctx, history: Msg[], userContent: string): Promise<string> {
+export async function runAgent(ctx: Ctx, history: Msg[], userContent: string, extraSystem = ""): Promise<string> {
   const now = ctx.now;
-  const dynamic = `Сейчас ${tbilisiDate(now)} ${tbilisiTime(now, false)} по Тбилиси (UTC+4), ${weekday(now)}. Пишет: ${ctx.by}.`;
+  const dynamic = [`Сейчас ${tbilisiDate(now)} ${tbilisiTime(now, false)} по Тбилиси (UTC+4), ${weekday(now)}. Пишет: ${ctx.by}.`, extraSystem]
+    .filter(Boolean)
+    .join("\n\n");
   const messages: Msg[] = [...history, { role: "user", content: userContent }];
   for (let step = 0; step < MAX_STEPS; step++) {
     const { content, stopReason } = await callClaude(ctx.env, dynamic, messages, ctx.fetchImpl);
@@ -505,6 +507,40 @@ async function saveHistory(kv: KVNamespace, chatId: string, history: Msg[]): Pro
   await kv.put(`agent:hist:${chatId}`, JSON.stringify(trimmed), { expirationTtl: HISTORY_TTL });
 }
 
+export const SKIP = "<skip>";
+
+/** In chat mode the agent sees every message and stays silent on chatter between colleagues. */
+const CHAT_MODE_PROMPT = `Режим общего чата: ты видишь все сообщения группы, а не только обращённые к тебе. Отвечай, если сообщение — вопрос или просьба, с которой ты можешь помочь (заявки, проекты, цены, тексты клиентам, отчёты, напоминания), или явно обращено к тебе. Если люди переговариваются между собой, договариваются, благодарят, шутят или сообщение не требует твоего участия — ответь ровно ${SKIP} и ничего больше.`;
+
+type ChatMode = "chat" | "quiet";
+
+async function chatMode(kv: KVNamespace, chatId: string): Promise<ChatMode> {
+  return (await kv.get(`agent:mode:${chatId}`)) === "quiet" ? "quiet" : "chat";
+}
+
+/** "ок", "спасибо", "👍" and the like never need the agent. */
+export function isSmallTalk(text: string): boolean {
+  const t = text
+    .toLowerCase()
+    .replace(/[\p{Extended_Pictographic}\u{FE0F}\u{1F3FB}-\u{1F3FF}]/gu, " ")
+    .replace(/[\s.,!?)(:;"«»—-]+/g, " ")
+    .trim();
+  if (t.replace(/\s/g, "").length <= 2) return true;
+  return /^(ок|окей|ok|okay|да|нет|спасибо|спс|благодарю|понял|поняла|принято|хорошо|ага|угу|супер|отлично|класс|круто|ясно|готово|сделал|сделала|done|thanks|thank you|მადლობა|კარგი)( (ок|да|спасибо|понял|поняла|супер))*$/.test(t);
+}
+
+/** Message is a reply to, or mentions, a colleague rather than the bot. */
+function addressedToSomeoneElse(msg: TgMessage, me: { id: number; username: string }): boolean {
+  const reply = msg.reply_to_message?.from;
+  if (reply && reply.id !== me.id && !reply.is_bot) return true;
+  const text = msg.text ?? msg.caption ?? "";
+  return (msg.entities ?? msg.caption_entities ?? []).some(
+    (e) =>
+      (e.type === "mention" && !isBotHandle(text.slice(e.offset, e.offset + e.length), me.username)) ||
+      (e.type === "text_mention" && e.user?.id !== me.id),
+  );
+}
+
 /** Webhook entry point: buttons and commands go to the lead bot, conversation goes to the agent. */
 export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now(), fetchImpl: Fetch = fetch): Promise<void> {
   const kv = env.LEADS;
@@ -517,6 +553,22 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
   const msg: TgMessage | undefined = update?.message;
   // "/ai <question>" always reaches the bot, even with privacy mode on and without admin rights.
   const aiCommand = msg?.text?.match(/^\/(?:ai|ask)(?:@\w+)?(?:\s+([\s\S]*))?$/i);
+  // "/chat" — the agent reads every message; "/quiet" — only @mentions, replies and /ai.
+  const modeCommand = msg?.text?.match(/^\/(chat|quiet)(?:@\w+)?\s*$/i);
+  if (modeCommand && kv && String(msg!.chat.id) === env.TELEGRAM_CHAT_ID?.trim()) {
+    const mode = modeCommand[1].toLowerCase() as ChatMode;
+    await kv.put(`agent:mode:${msg!.chat.id}`, mode);
+    await sendText(
+      env,
+      msg!.chat.id,
+      mode === "chat"
+        ? "💬 Режим общего чата: пишите мне без @ — отвечу, когда вопрос ко мне, и промолчу, когда вы общаетесь между собой. /quiet — отвечать только по @."
+        : "🤫 Тихий режим: отвечаю только на @упоминание, ответ на моё сообщение или /ai. /chat — снова общий чат.",
+      msg!.message_id,
+      fetchImpl,
+    );
+    return;
+  }
   if (update?.callback_query || (msg?.text?.startsWith("/") && !aiCommand)) {
     await handleUpdate(update, env, now, fetchImpl);
     return;
@@ -530,7 +582,11 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
   if (!me) return;
   const mentioned = !!aiCommand || mentionsBot(msg, me);
   const replyToBot = msg.reply_to_message?.from?.id === me.id;
-  if (!mentioned && !replyToBot) return;
+  let auto = false; // the agent decides itself whether to answer
+  if (!mentioned && !replyToBot) {
+    if ((await chatMode(kv, chatId)) !== "chat" || isSmallTalk(text) || addressedToSomeoneElse(msg, me)) return;
+    auto = true;
+  }
 
   const by = personName(msg.from);
   const card = replyToBot ? await leadOfCard(kv, msg.reply_to_message) : null;
@@ -545,6 +601,7 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
   }
 
   if (!env.ANTHROPIC_API_KEY?.trim()) {
+    if (auto) return;
     await sendText(env, chatId, "🤖 ИИ-помощник ещё не подключён: нужен ключ ANTHROPIC_API_KEY в Cloudflare.", msg.message_id, fetchImpl);
     return;
   }
@@ -557,16 +614,17 @@ export async function handleBotUpdate(update: any, env: AgentEnv, now = Date.now
   }
   const userContent = [...context, `${by}: ${question}`].join("\n");
 
-  await tg(env, "sendChatAction", { chat_id: msg.chat.id, action: "typing" }, fetchImpl);
+  if (!auto) await tg(env, "sendChatAction", { chat_id: msg.chat.id, action: "typing" }, fetchImpl);
   const history = await loadHistory(kv, chatId);
   let answer: string;
   try {
-    answer = await runAgent({ env, kv, by, now, chatId, fetchImpl }, history, userContent);
+    answer = await runAgent({ env, kv, by, now, chatId, fetchImpl }, history, userContent, auto ? CHAT_MODE_PROMPT : "");
   } catch (err) {
     console.error("[Agent] error:", err);
-    await sendText(env, chatId, `⚠️ ИИ сейчас недоступен: ${String(err).slice(0, 200)}`, msg.message_id, fetchImpl);
+    if (!auto) await sendText(env, chatId, `⚠️ ИИ сейчас недоступен: ${String(err).slice(0, 200)}`, msg.message_id, fetchImpl);
     return;
   }
+  if (auto && (!answer || answer.includes(SKIP))) return; // chatter between colleagues — stay silent
   await sendText(env, chatId, answer, msg.message_id, fetchImpl);
   await saveHistory(kv, chatId, [...history, { role: "user", content: userContent }, { role: "assistant", content: answer || "…" }]);
 }

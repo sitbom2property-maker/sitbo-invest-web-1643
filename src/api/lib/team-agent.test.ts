@@ -89,12 +89,47 @@ describe("formatting", () => {
 });
 
 describe("webhook routing", () => {
-  test("ignores ordinary group chatter", async () => {
+  test("chat mode: answers a question without @", async () => {
+    const kv = fakeKv();
+    const apis = fakeApis([{ content: [{ type: "text", text: "Студии от $67,900." }], stop_reason: "end_turn" }]);
+    await handleBotUpdate(message("сколько стоит студия в hisni?"), env(kv), NOW, apis.fetchImpl);
+    expect(apis.anthropic.length).toBe(1);
+    expect(apis.anthropic[0].system[1].text).toContain("Режим общего чата");
+    expect(apis.telegram.filter((c) => c.method === "sendMessage").at(-1)!.body.text).toBe("Студии от $67,900.");
+    expect(apis.telegram.some((c) => c.method === "sendChatAction")).toBe(false);
+  });
+
+  test("chat mode: stays silent when the model decides the message is not for it", async () => {
+    const kv = fakeKv();
+    const apis = fakeApis([{ content: [{ type: "text", text: "<skip>" }], stop_reason: "end_turn" }]);
+    await handleBotUpdate(message("Гиорги, созвонимся в 5?"), env(kv), NOW, apis.fetchImpl);
+    expect(apis.anthropic.length).toBe(1);
+    expect(apis.telegram.filter((c) => c.method === "sendMessage").length).toBe(0);
+    expect(kv.store.has("agent:hist:-1001")).toBe(false);
+  });
+
+  test("chat mode: small talk, replies to colleagues and @colleague never reach the model", async () => {
     const kv = fakeKv();
     const apis = fakeApis();
-    await handleBotUpdate(message("всем привет"), env(kv), NOW, apis.fetchImpl);
+    await handleBotUpdate(message("ок, спасибо 👍"), env(kv), NOW, apis.fetchImpl);
+    const colleague = { message_id: 7, chat: { id: -1001 }, from: { id: 2, first_name: "Giorgi" }, text: "взял" };
+    await handleBotUpdate(message("отлично, а когда звонок?", { reply_to_message: colleague }), env(kv), NOW, apis.fetchImpl);
+    await handleBotUpdate(
+      message("@giorgi_m глянь заявку", { entities: [{ type: "mention", offset: 0, length: 9 }] }),
+      env(kv),
+      NOW,
+      apis.fetchImpl,
+    );
     expect(apis.anthropic.length).toBe(0);
-    expect(apis.telegram.filter((c) => c.method === "sendMessage").length).toBe(0);
+  });
+
+  test("/quiet switches back to answering only @mentions", async () => {
+    const kv = fakeKv();
+    const apis = fakeApis();
+    await handleBotUpdate(message("/quiet"), env(kv), NOW, apis.fetchImpl);
+    expect(kv.store.get("agent:mode:-1001")).toBe("quiet");
+    await handleBotUpdate(message("сколько стоит студия в hisni?"), env(kv), NOW, apis.fetchImpl);
+    expect(apis.anthropic.length).toBe(0);
   });
 
   test("a plain reply to a lead card is saved as a comment", async () => {
