@@ -1,5 +1,6 @@
 import app from "./api/index";
 import { runReminders, sendDailySummary } from "./api/lib/telegram-leads";
+import { runAgentReminders, sendAgentBriefing } from "./api/lib/team-agent";
 import { SITE_NAME, absolutePageMeta } from "./web/lib/seo";
 
 function applySeoMeta(response: Response, pathname: string, origin: string): Response {
@@ -119,11 +120,13 @@ export default {
     return assetResponse;
   },
 
-  // Cron triggers (wrangler.json): reminders every 5 minutes, daily summary at 05:00 UTC = 09:00 Tbilisi.
+  // Cron triggers (wrangler.json): reminders every 5 minutes, daily summary at 05:00 UTC = 09:00 Tbilisi,
+  // followed by the AI agent's morning review (weekly report on Mondays).
   async scheduled(event: ScheduledController, env: any, ctx: ExecutionContext): Promise<void> {
     if (event.cron === "0 5 * * *") {
-      ctx.waitUntil(sendDailySummary(env));
+      ctx.waitUntil(sendDailySummary(env).then(() => sendAgentBriefing(env)));
     }
     ctx.waitUntil(runReminders(env));
+    ctx.waitUntil(runAgentReminders(env));
   },
 };

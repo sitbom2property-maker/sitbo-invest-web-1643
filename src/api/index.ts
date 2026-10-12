@@ -4,8 +4,8 @@ import { createOdooLead, type WebsiteLead } from "./lib/odoo-crm";
 import { fetchFlatshowApartments, type ApartmentKey } from "./lib/flatshow-apartments";
 import { fetchFlatshowEmbedHtml, type FlatshowEmbedKey } from "./lib/flatshow-embed";
 import { claimAminaPromo, readAminaPromo } from "./lib/amina-promo";
+import { handleBotUpdate } from "./lib/team-agent";
 import {
-  handleUpdate,
   parseAttribution,
   postNewLead,
   setupWebhook,
@@ -21,6 +21,8 @@ type Bindings = {
   TELEGRAM_BOT_TOKEN?: string;
   TELEGRAM_CHAT_ID?: string;
   TELEGRAM_WEBHOOK_SECRET?: string;
+  ANTHROPIC_API_KEY?: string;
+  AGENT_MODEL?: string;
   AMINA_PROMO?: KVNamespace;
   LEADS?: KVNamespace;
 };
@@ -166,14 +168,14 @@ app.post("/leads", async (c) => {
   }
 });
 
-// Telegram bot webhook (status buttons, commands). Telegram signs requests with our secret.
+// Telegram bot webhook (status buttons, commands, AI agent). Telegram signs requests with our secret.
 app.post("/telegram/webhook", async (c) => {
   const secret = c.env.TELEGRAM_WEBHOOK_SECRET;
   if (!secret || c.req.header("X-Telegram-Bot-Api-Secret-Token") !== secret) {
     return c.json({ error: "Forbidden" }, 403);
   }
   const update = await c.req.json().catch(() => null);
-  if (update) await handleUpdate(update, c.env);
+  if (update) await handleBotUpdate(update, c.env);
   return c.json({ ok: true });
 });
 

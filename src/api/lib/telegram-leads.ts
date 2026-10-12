@@ -57,6 +57,10 @@ export type StoredLead = {
   chatId?: string;
   messageId?: number;
   reminders: number;
+  /** Manager responsible for the lead (set by the team or the AI agent). */
+  assignee?: string;
+  /** Comments: replies to the lead card and notes added through the agent. */
+  notes?: { text: string; by: string; at: number }[];
 };
 
 export const SITE_URL = "https://sitboinvest.ge";
@@ -157,9 +161,18 @@ export function renderLead(s: StoredLead): string {
       : `🗂 Odoo: ⚠️ не сохранено — заявка только здесь`,
   );
   lines.push("", `📌 <b>Статус: ${st.emoji} ${st.label}</b>`);
+  if (s.assignee) lines.push(`🧑‍💼 Ответственный: <b>${escapeHtml(s.assignee)}</b>`);
   for (const h of s.history) {
     const hs = STATUSES[h.status];
     lines.push(`   ${hs.emoji} ${hs.label} — ${escapeHtml(h.by)}, ${tbilisiTime(h.at)}`);
+  }
+  const notes = s.notes ?? [];
+  if (notes.length) {
+    lines.push("", `🗒 <b>Комментарии (${notes.length})</b>`);
+    for (const n of notes.slice(-3)) {
+      const text = n.text.length > 160 ? `${n.text.slice(0, 157)}…` : n.text;
+      lines.push(`   ${escapeHtml(text)} — ${escapeHtml(n.by)}, ${tbilisiTime(n.at)}`);
+    }
   }
   lines.push(`<i>#${s.id}</i>`);
   return lines.join("\n");
@@ -220,7 +233,7 @@ const leadKey = (id: string) => `lead:${id}`;
 const dayKey = (date: string, id: string) => `day:${date}:${id}`;
 const pendingKey = (id: string) => `pending:${id}`;
 
-async function saveLead(kv: KVNamespace, s: StoredLead): Promise<void> {
+export async function saveLead(kv: KVNamespace, s: StoredLead): Promise<void> {
   await kv.put(leadKey(s.id), JSON.stringify(s), { expirationTtl: TTL });
 }
 
@@ -229,7 +242,7 @@ export async function loadLead(kv: KVNamespace, id: string): Promise<StoredLead 
   return raw ? (JSON.parse(raw) as StoredLead) : null;
 }
 
-async function listKeys(kv: KVNamespace, prefix: string): Promise<string[]> {
+export async function listKeys(kv: KVNamespace, prefix: string): Promise<string[]> {
   const names: string[] = [];
   let cursor: string | undefined;
   do {
@@ -240,7 +253,7 @@ async function listKeys(kv: KVNamespace, prefix: string): Promise<string[]> {
   return names;
 }
 
-async function loadMany(kv: KVNamespace, keys: string[], idFrom: (key: string) => string): Promise<StoredLead[]> {
+export async function loadMany(kv: KVNamespace, keys: string[], idFrom: (key: string) => string): Promise<StoredLead[]> {
   const leads = await Promise.all(keys.map((k) => loadLead(kv, idFrom(k))));
   return leads.filter((l): l is StoredLead => !!l).sort((a, b) => a.createdAt - b.createdAt);
 }
@@ -300,7 +313,7 @@ export async function postNewLead(
   }
 }
 
-function personName(from: { first_name?: string; last_name?: string; username?: string } | undefined): string {
+export function personName(from: { first_name?: string; last_name?: string; username?: string } | undefined): string {
   if (!from) return "—";
   const name = [from.first_name, from.last_name].filter(Boolean).join(" ");
   return name || (from.username ? `@${from.username}` : "—");
@@ -327,6 +340,8 @@ async function setStatus(
   if (s.status !== code) {
     s.status = code;
     s.history.push({ status: code, by: personName(callback.from), at: now });
+    // Whoever takes the lead becomes responsible for it, unless someone already is.
+    if (code === "take" && !s.assignee) s.assignee = personName(callback.from);
     await saveLead(kv, s);
     if (code !== "new") await kv.delete(pendingKey(s.id));
   }
@@ -390,16 +405,16 @@ export function renderSummary(title: string, leads: StoredLead[], pending: Store
   return lines.join("\n");
 }
 
-async function pendingLeads(kv: KVNamespace): Promise<StoredLead[]> {
+export async function pendingLeads(kv: KVNamespace): Promise<StoredLead[]> {
   const leads = await loadMany(kv, await listKeys(kv, "pending:"), (k) => k.slice("pending:".length));
   return leads.filter((l) => l.status === "new");
 }
 
-async function leadsOfDay(kv: KVNamespace, date: string): Promise<StoredLead[]> {
+export async function leadsOfDay(kv: KVNamespace, date: string): Promise<StoredLead[]> {
   return loadMany(kv, await listKeys(kv, `day:${date}:`), (k) => k.split(":")[2]);
 }
 
-function formatDay(date: string): string {
+export function formatDay(date: string): string {
   const [y, m, d] = date.split("-");
   return `${d}.${m}.${y}`;
 }
@@ -409,6 +424,8 @@ const HELP = [
   "",
   "Каждая заявка приходит сюда с кнопками статусов. Нажмите «🙋 В работе», чтобы взять её — остальные увидят, кто взял.",
   "Если заявку никто не взял, бот напомнит через 15 минут и через 2 часа. Каждое утро в 9:00 — сводка за вчера.",
+  "",
+  "🧠 <b>ИИ-помощник</b>: упомяните бота через @ или ответьте на его сообщение — он найдёт и обновит заявку, расскажет про проекты, напишет текст клиенту, поставит напоминание. Ответ (Reply) на карточку заявки без упоминания сохраняется как комментарий.",
   "",
   "/today — заявки за сегодня",
   "/pending — заявки без ответа",
@@ -453,6 +470,33 @@ async function handleCommand(
     }
     await reply(lines.join("\n"));
   }
+}
+
+/** Re-render the lead card in the chat after its data changed. */
+export async function refreshLeadCard(env: BotEnv, s: StoredLead, fetchImpl: Fetch = fetch): Promise<void> {
+  if (!s.chatId || !s.messageId) return;
+  await tg(
+    env,
+    "editMessageText",
+    {
+      chat_id: s.chatId,
+      message_id: s.messageId,
+      text: renderLead(s),
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+      reply_markup: leadKeyboard(s, true),
+    },
+    fetchImpl,
+  );
+}
+
+/** Move a lead to a status on someone's behalf (used by the AI agent). The caller saves it. */
+export async function applyStatus(kv: KVNamespace, s: StoredLead, code: StatusCode, by: string, now: number): Promise<void> {
+  if (s.status === code) return;
+  s.status = code;
+  s.history.push({ status: code, by, at: now });
+  if (code === "take" && !s.assignee) s.assignee = by;
+  if (code !== "new") await kv.delete(pendingKey(s.id));
 }
 
 /** Telegram webhook entry point. */
